@@ -14,7 +14,7 @@ function getTailwindPalette(color, object) {
 }
 
 function getTailwindColors(object) {
-  Object.keys(object).reduce((acc, key) => {
+  return Object.keys(object).reduce((acc, key) => {
     const value = object[key];
     if (typeof value === 'string') {
       return {
