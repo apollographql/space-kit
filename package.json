@@ -1,6 +1,6 @@
 {
   "name": "@apollographql/spacekit",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Home base for Apollo's design system",
   "main": "index.js",
   "scripts": {
