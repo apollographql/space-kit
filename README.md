@@ -1,3 +1,8 @@
+<div align="center">
+  <img height="100" src="https://i.imgur.com/YPhoQOA.png">
+  <h1 align="center">SpaceKit</h1>
+</div>
+
 # SpaceKit
 
 Home base for Apollo's style system, upon which each the styleguide for each Apollo property is built.
