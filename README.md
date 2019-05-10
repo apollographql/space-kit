@@ -1,10 +1,9 @@
-<div style="text-align: center">
+<div align="center">
   <img height="100" src="https://i.imgur.com/YPhoQOA.png">
   <h1 align="center">SpaceKit</h1>
+  <p>The home base for Apollo's design system, SpaceKit provides essential design resources for our developers to use in the Apollo-branded interfaces that they create.</p>
   <img src="https://img.shields.io/npm/v/@apollographql/spacekit.svg">
 </div>
-
-The home base for Apollo's design system, SpaceKit provides essential design resources for our developers to use in the Apollo-branded interfaces that they create.
 
 ## Installation
 
