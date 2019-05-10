@@ -3,8 +3,6 @@
   <h1 align="center">SpaceKit</h1>
 </div>
 
-# SpaceKit
-
 Home base for Apollo's style system, upon which each the styleguide for each Apollo property is built.
 
 ## Engine UI
