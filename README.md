@@ -1,5 +1,5 @@
 <div align="center">
-  <img height="100" src="https://i.imgur.com/YPhoQOA.png">
+  <img height="80" src="https://i.imgur.com/YPhoQOA.png">
   <h1 align="center">SpaceKit</h1>
 </div>
 
