@@ -1,0 +1,24 @@
+{
+  "name": "@apollographql/spacekit",
+  "version": "0.0.0",
+  "description": "Home base for Apollo's design system",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "lessc reset.less reset.css"
+  },
+  "repository": "apollographql/spacekit",
+  "keywords": [],
+  "license": "MIT",
+  "eslintConfig": {
+    "extends": "@trevorblades"
+  },
+  "dependencies": {
+    "normalize.css": "^8.0.1"
+  },
+  "devDependencies": {
+    "@trevorblades/eslint-config": "^6.22.1",
+    "eslint": "^5.16.0",
+    "less": "^3.9.0"
+  }
+}
