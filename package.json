@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "lessc reset.less reset.css"
+    "prepare": "lessc reset.less reset.css",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "repository": "apollographql/space-kit",
   "keywords": [],
@@ -19,6 +21,12 @@
   "devDependencies": {
     "@trevorblades/eslint-config": "^6.22.1",
     "eslint": "^5.16.0",
-    "less": "^3.9.0"
+    "less": "^3.9.0",
+    "@storybook/react": "^5.0.11",
+    "@storybook/addon-actions": "^5.0.11",
+    "@storybook/addon-links": "^5.0.11",
+    "@storybook/addons": "^5.0.11",
+    "@babel/core": "^7.4.4",
+    "babel-loader": "^8.0.6"
   }
 }
