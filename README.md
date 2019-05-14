@@ -2,22 +2,22 @@
   <img height="100" src="https://i.imgur.com/YPhoQOA.png">
   <h1 align="center">Space Kit</h1>
   <p>The home base for Apollo's design system, Space Kit provides essential design resources for our developers to use in the Apollo-branded interfaces that they create.</p>
-  <img src="https://img.shields.io/npm/v/@apollo/spacekit.svg">
+  <img src="https://img.shields.io/npm/v/@apollo/space-kit.svg">
 </div>
 
 ## Installation
 
 ```shell
-npm install @apollo/spacekit
+npm install @apollo/space-kit
 ```
 
 ## Usage
 
-Import things into your JS app from the `@apollo/spacekit` package. All available exports are documented [here](#exports).
+Import things into your JS app from the `@apollo/space-kit` package. All available exports are documented [here](#exports).
 
 ```js
-import '@apollo/spacekit/reset.css'; // import this at app root
-import {colors} from '@apollo/spacekit';
+import '@apollo/space-kit/reset.css'; // import this at app root
+import {colors} from '@apollo/space-kit';
 
 function MyComponent() {
   return (
@@ -48,13 +48,13 @@ You'll probably want to include this file once in your app, ideally at the top-m
 **JS + webpack or similar**
 
 ```js
-import '@apollo/spacekit/reset.css';
+import '@apollo/space-kit/reset.css';
 ```
 
 **LESS**
 
 ```less
-@import (inline) "../node_modules/@apollo/spacekit/reset.css
+@import (inline) "../node_modules/@apollo/space-kit/reset.css
 ```
 
 ### Colors
@@ -86,7 +86,7 @@ When you access a color by name (i.e. `colors.indigo`), you'll find a palette of
 
 ```jsx
 import styled from '@emotion/styled';
-import {colors} from '@apollo/spacekit';
+import {colors} from '@apollo/space-kit';
 
 const StyledButton = styled.button({
   backgroundColor: colors.indigo.dark,

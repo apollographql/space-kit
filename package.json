@@ -1,5 +1,5 @@
 {
-  "name": "@apollo/spacekit",
+  "name": "@apollo/space-kit",
   "version": "0.0.4",
   "description": "Home base for Apollo's design system",
   "main": "index.js",
@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "lessc reset.less reset.css"
   },
-  "repository": "apollographql/spacekit",
+  "repository": "apollographql/space-kit",
   "keywords": [],
   "license": "MIT",
   "eslintConfig": {
