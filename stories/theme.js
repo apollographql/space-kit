@@ -1,5 +1,6 @@
 import colors from '../colors';
-import { create } from '@storybook/theming';
+import fonts from '../fonts';
+import {create} from '@storybook/theming';
 
 export default create({
   base: colors.silver.light,
@@ -14,8 +15,8 @@ export default create({
   appBorderRadius: 4,
 
   // Typography
-  fontBase: '"Source Sans Pro", sans-serif',
-  fontCode: '"Source Code Pro", monospace',
+  fontBase: fonts.base,
+  fontCode: fonts.code,
 
   // Text colors
   textColor: colors.black.base,

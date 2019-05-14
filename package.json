@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "lessc reset.less reset.css",
+    "prepare": "node build-reset.js",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
