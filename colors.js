@@ -28,14 +28,28 @@ const indigo = {
   lightest: '#ebe6ff'
 };
 
+const black = {
+  darker: '#12151A',
+  dark: '#14171C',
+  base: '#191C23',
+  light: '#22262E',
+  lighter: '#2F353F'
+};
+
 const grey = {
-  darkest: '#191c23',
-  darker: '#25353f',
-  dark: '#5a6270',
-  base: '#959daa',
-  light: '#cad0d8',
-  lighter: '#ebeef0',
-  lightest: '#f4f6f8'
+  darker: '#424855',
+  dark: '#5A6270',
+  base: '#777F8E',
+  light: '#959DAA',
+  lighter: '#B2B9C3'
+};
+
+const silver = {
+  darker: '#CAD0D8',
+  dark: '#DEE2E7',
+  base: '#EBEEF0',
+  light: '#F4F6F8',
+  lighter: '#FCFDFF'
 };
 
 const red = {
@@ -105,7 +119,8 @@ module.exports = {
   indigo,
   // neutrals
   grey,
-  black: '#12151a',
+  black,
+  silver,
   white: '#ffffff',
   // interface colors
   red,
