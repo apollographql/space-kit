@@ -1,5 +1,5 @@
 const pink = {
-  darkest: '#66af4e',
+  darkest: '#661f4e',
   darker: '#832363',
   dark: '#c43997',
   base: '#f25cc1',

@@ -4,6 +4,7 @@
   "description": "Home base for Apollo's design system",
   "main": "index.js",
   "scripts": {
+    "start": "npm run storybook",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "node build-reset.js",
     "storybook": "start-storybook -p 6006",
@@ -16,6 +17,7 @@
     "extends": "@trevorblades"
   },
   "dependencies": {
+    "classnames": "^2.2.6",
     "normalize.css": "^8.0.1"
   },
   "devDependencies": {
