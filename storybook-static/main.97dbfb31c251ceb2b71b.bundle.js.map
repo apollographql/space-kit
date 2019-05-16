@@ -1,0 +1,1 @@
+{"version":3,"file":"main.97dbfb31c251ceb2b71b.bundle.js","sources":["webpack:///./index.js"],"sourcesContent":["const colors = require('./exports/colors');\nconst fonts = require('./exports/fonts');\n\nexports.colors = colors;\nexports.fonts = fonts;\n"],"mappings":"AAAA","sourceRoot":""}

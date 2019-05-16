@@ -1,5 +1,5 @@
-const colors = require('./exports/colors');
-const fonts = require('./exports/fonts');
+const colors = require('./colors');
+const fonts = require('./fonts');
 
 exports.colors = colors;
 exports.fonts = fonts;
