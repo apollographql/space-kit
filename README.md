@@ -61,12 +61,14 @@ import '@apollo/space-kit/reset.css';
 
 ### Colors
 
-A JavaScript object that maps color names to palettes of hex codes for easily applying on-brand color to elements on a page. The available colors include:
+A JavaScript object that maps color names to palettes of hex codes to apply on-brand color to elements on a page. The available colors include:
 
 - `pink`
 - `teal`
 - `indigo`
+- `black`
 - `grey`
+- `silver`
 - `red`
 - `green`
 - `blue`
@@ -79,10 +81,10 @@ When you access a color by name (i.e. `colors.indigo`), you'll find a palette of
 - `base`
 - `dark`
 - `darker`
-- `darkest`
+- `darkest` (not on `black`, `grey`, or `silver`)
 - `light`
 - `lighter`
-- `lightest`
+- `lightest` (not on `black`, `grey`, or `silver`)
 
 **CSS-in-JS**
 
