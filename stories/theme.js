@@ -1,6 +1,5 @@
-import colors from '../colors';
-import fonts from '../fonts';
-import {create} from '@storybook/theming';
+import { colors, fonts } from '../index';
+import { create } from '@storybook/theming';
 
 export default create({
   base: colors.silver.light,

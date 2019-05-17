@@ -4,6 +4,7 @@ import { configure } from '@storybook/react';
 const req = require.context('../stories', true, /\.stories\.js$/);
 function loadStories() {
   require('../reset.css');
+  require('../font.css');
   req.keys().forEach(filename => req(filename));
 }
 
