@@ -5,8 +5,6 @@
   <img src="https://img.shields.io/npm/v/@apollo/space-kit.svg">
 </div>
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/d5469491-a3d2-4ee1-b31d-d7f87ae806f8/deploy-status)](https://app.netlify.com/sites/space-kit/deploys)
-
 ## Installation
 
 ```shell
@@ -114,7 +112,18 @@ function MyComponent() {
 }
 ```
 
+## Developing Space Kit
+
+Many elements of Space Kit are showcased in Storybook, which can be used for local development by running:
+```
+npm install
+npm run storybook
+```
+
+All pull requests will automatically generate deploy previews and the `master` branch is automatically deployed to https://space-kit.netlify.com.
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/d5469491-a3d2-4ee1-b31d-d7f87ae806f8/deploy-status)](https://app.netlify.com/sites/space-kit/deploys)
+
 ## Resources
-- [Sketch style guide (Zeplin)](https://app.zeplin.io/project/5c7dcb5ab4e654bca8cde54d/screen/5cd0c46bce9a42346c709328)
-- [Space Kit's style guide (Storybook)](https://space-kit.netlify.com)
+- [Space Kit's style guide (Zeplin)](https://app.zeplin.io/project/5c7dcb5ab4e654bca8cde54d/screen/5cd0c46bce9a42346c709328)
 - [Engine's style guide (Storybook)](https://storybook.apollographql.com)
