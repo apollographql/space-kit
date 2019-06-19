@@ -51,6 +51,6 @@ storiesOf('Color', module)
     <ColorStory
       title="Alternate Colors"
       description="The alternate colors are rounding out the set of colors we have in the system, but will likely not be used that often. A common use case for these colors will be data visualizations."
-      array={['orange', 'yellow', 'purple']}
+      array={['orange', 'yellow', 'purple', 'blilet']}
     />
   ));

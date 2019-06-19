@@ -112,6 +112,16 @@ const purple = {
   lightest: '#f4e6ff'
 };
 
+const blilet = {
+  darkest: '#1B2240',
+  darker: '#252E50',
+  dark: '#3C4A85',
+  base: '#5168C2',
+  light: '#7A92F0',
+  lighter: '#B0BEF7',
+  lightest: '#E6EBFF'
+};
+
 module.exports = {
   // brand colors
   pink,
@@ -129,5 +139,6 @@ module.exports = {
   // alternate colors
   orange,
   yellow,
-  purple
+  purple,
+  blilet
 };
