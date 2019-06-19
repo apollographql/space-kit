@@ -4,11 +4,11 @@
   "description": "Home base for Apollo's design system",
   "main": "index.js",
   "scripts": {
-    "start": "npm run storybook",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-storybook": "build-storybook",
     "prepare": "node build-reset.js",
+    "start": "npm run storybook",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": "apollographql/space-kit",
   "keywords": [],
