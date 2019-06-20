@@ -39,6 +39,8 @@
     "@svgr/plugin-svgo": "^4.2.0",
     "@trevorblades/eslint-config": "^6.22.1",
     "@types/react": "^16.8.21",
+    "@types/storybook__react": "^4.0.2",
+    "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.0.6",
     "eslint": "^5.16.0",
     "less": "^3.9.0",
