@@ -21,9 +21,9 @@
     "normalize.css": "^8.0.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.4",
-    "@storybook/addons": "^5.0.11",
-    "@storybook/react": "^5.0.11",
+    "@babel/core": "^7.4.5",
+    "@storybook/addons": "^5.1.9",
+    "@storybook/react": "^5.1.9",
     "@trevorblades/eslint-config": "^6.22.1",
     "babel-loader": "^8.0.6",
     "eslint": "^5.16.0",
