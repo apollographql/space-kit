@@ -16,15 +16,15 @@ npm install @apollo/space-kit
 Import things into your JS app from the `@apollo/space-kit` package. All available exports are documented [here](#exports).
 
 ```js
-import '@apollo/space-kit/reset.css'; // import this at app root
-import {colors} from '@apollo/space-kit';
+import "@apollo/space-kit/reset.css"; // import this at app root
+import { colors } from "@apollo/space-kit";
 
 function MyComponent() {
   return (
     <button
       style={{
         backgroundColor: colors.indigo.dark,
-        color: 'white',
+        color: "white",
         border: `1px solid ${colors.grey.light}`
       }}
     >
@@ -48,7 +48,7 @@ You'll probably want to include this file once in your app, ideally at the top-m
 **JS + webpack or similar**
 
 ```js
-import '@apollo/space-kit/reset.css';
+import "@apollo/space-kit/reset.css";
 ```
 
 **LESS**
@@ -87,12 +87,12 @@ When you access a color by name (i.e. `colors.indigo`), you'll find a palette of
 **CSS-in-JS**
 
 ```jsx
-import styled from '@emotion/styled';
-import {colors} from '@apollo/space-kit';
+import styled from "@emotion/styled";
+import { colors } from "@apollo/space-kit";
 
 const StyledButton = styled.button({
   backgroundColor: colors.indigo.dark,
-  color: 'white',
+  color: "white",
   border: `1px solid ${colors.grey.light}`
 });
 
@@ -115,6 +115,7 @@ function MyComponent() {
 ## Developing Space Kit
 
 Many elements of Space Kit are showcased in Storybook, which can be used for local development by running:
+
 ```
 npm install
 npm run storybook
@@ -125,5 +126,6 @@ All pull requests will automatically generate deploy previews and the `master` b
 [![Netlify Status](https://api.netlify.com/api/v1/badges/d5469491-a3d2-4ee1-b31d-d7f87ae806f8/deploy-status)](https://app.netlify.com/sites/space-kit/deploys)
 
 ## Resources
+
 - [Space Kit's style guide (Zeplin)](https://app.zeplin.io/project/5c7dcb5ab4e654bca8cde54d/screen/5cd0c46bce9a42346c709328)
 - [Engine's style guide (Storybook)](https://storybook.apollographql.com)
