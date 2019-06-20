@@ -5,6 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build-storybook": "build-storybook",
+    "icons": "run-s icons:clean icons:generate",
+    "icons:clean": "rimraf icons/*.tsx icons/*.js icons/*.js.map icons/*.d.ts",
+    "icons:generate": "node icons/src/scripts/convert.js",
     "prepare": "node build-reset.js",
     "start": "npm run storybook",
     "storybook": "start-storybook -p 6006",
