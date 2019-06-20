@@ -12,7 +12,10 @@
 - [Exports](#Exports)
   - [Stylesheet reset](#Stylesheet-reset)
   - [Colors](#Colors)
+  - [Icons](#Icons)
 - [Developing Space Kit](#Developing-Space-Kit)
+  - [Icons](#Icons-1)
+  - [TypeScript](#TypeScript)
   - [Storybook](#Storybook)
 - [Resources](#Resources)
 
@@ -49,6 +52,7 @@ function MyComponent() {
 
 - [Stylesheet reset](#stylesheet-reset)
 - [Colors](#colors)
+- [Icons](#icons)
 
 ### Stylesheet reset
 
@@ -123,7 +127,35 @@ function MyComponent() {
 }
 ```
 
+### Icons
+
+All our icons are displayed in a gallery in [Storybook](https://space-kit.netlify.com/?path=/story/space-kit--icons).
+
+All our icons are SVG files stored in [`./icons/src/svgs`](./icons/src/svgs). There are scripts set up to convert these SVGs into React components, and then to transpile those files for consumption. These conversions and transpilations are `.gitignore`'ed, so they are not mantained in source control.
+
+These icons are _not_ open source and are only licensed for use in this project. See [license](./icons/LICENSE.md) for more details.
+
+Please see [#developing-space-kit-icons](#icons-1) for instructions on adding new icons.
+
 ## Developing Space Kit
+
+### Icons
+
+To add new icons, add SVGs to [`./icons/src/svgs`](./icons/src/svgs) and open a pull request. The React components will be generated and the TypeScript will be transpiled automatically after merging to `master`.
+
+The following scripts are available:
+
+- `icons:clean`: Clean all the React components and TypeScript generated files from the `icons/` directory. This will not touch the raw svg files in `icons/src`.
+- `icons:generate`: Generate TypeScript files for each icon. These will be immediately available in Storybook.
+- `icons`: Run `icons:clean` and `icons:genreate` in series
+- `build:typescript`: Transpile TypeScript files to be consumed externally.
+- `watch`: Watch TypeScript files and automatically update.
+
+  This is useful when you've `npm link`'ed this repository and are developing against another project.
+
+### TypeScript
+
+To watch all TypeScript projects for development, run the `npm run watch` script.
 
 ### Storybook
 
