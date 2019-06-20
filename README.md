@@ -5,6 +5,16 @@
   <img src="https://img.shields.io/npm/v/@apollo/space-kit.svg">
 </div>
 
+## Table of Contents <!-- omit in toc -->
+
+- [Installation](#Installation)
+- [Usage](#Usage)
+- [Exports](#Exports)
+  - [Stylesheet reset](#Stylesheet-reset)
+  - [Colors](#Colors)
+- [Developing Space Kit](#Developing-Space-Kit)
+- [Resources](#Resources)
+
 ## Installation
 
 ```shell
