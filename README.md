@@ -13,6 +13,7 @@
   - [Stylesheet reset](#Stylesheet-reset)
   - [Colors](#Colors)
 - [Developing Space Kit](#Developing-Space-Kit)
+  - [Storybook](#Storybook)
 - [Resources](#Resources)
 
 ## Installation
@@ -123,6 +124,8 @@ function MyComponent() {
 ```
 
 ## Developing Space Kit
+
+### Storybook
 
 Many elements of Space Kit are showcased in Storybook, which can be used for local development by running:
 
