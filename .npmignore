@@ -1,3 +1,4 @@
 .storybook
 stories
 icons/src
+*.story.*
