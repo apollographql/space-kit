@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="26px" viewBox="0 0 26 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>Group</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Icons-Essentials" transform="translate(-297.000000, -233.000000)" stroke="#000000" stroke-width="1.5">
+            <g id="Group" transform="translate(298.000000, 234.000000)">
+                <path d="M12,0 C18.628,0 24,5.372 24,12 C24,18.628 18.628,24 12,24 C5.372,24 0,18.628 0,12 C0,5.372 5.372,0 12,0 Z" id="Path"></path>
+                <polyline id="Rectangle" transform="translate(12.356422, 10.356422) rotate(-315.000000) translate(-12.356422, -10.356422) " points="14.65316 5.35642155 15.1851035 15.3564215 9.52773962 15.0554818"></polyline>
+            </g>
+        </g>
+    </g>
+</svg>

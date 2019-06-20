@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>streamline-icon-time-clock-circle@24x24 copy</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+        <g id="Icons-Essentials" transform="translate(-298.000000, -846.000000)" stroke="#000000" stroke-width="1.5">
+            <g id="streamline-icon-time-clock-circle@24x24-copy" transform="translate(299.000000, 847.000000)">
+                <path d="M11,0.5 C16.799,0.5 21.5,5.201 21.5,11 C21.5,16.799 16.799,21.5 11,21.5 C5.201,21.5 0.5,16.799 0.5,11 C0.5,5.201 5.201,0.5 11,0.5 Z" id="Path" stroke-linejoin="round"></path>
+                <path d="M11,11 L11,4.5" id="Path" stroke-linejoin="round"></path>
+                <path d="M11,11 L16.5,11" id="Path-2"></path>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>streamline-icon-arrow-left@24x24 copy</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Icons-Controls" transform="translate(-297.000000, -234.000000)" stroke="#000000" stroke-width="1.5">
+            <g id="streamline-icon-arrow-left@24x24-copy" transform="translate(309.000000, 246.000000) scale(-1, 1) translate(-309.000000, -246.000000) translate(297.000000, 235.000000)">
+                <path d="M23.25,11 L0.75,11" id="Path"></path>
+                <polyline id="Path" points="11.25 0.5 0.75 11 11.25 21.5"></polyline>
+            </g>
+        </g>
+    </g>
+</svg>
