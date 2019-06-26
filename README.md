@@ -17,6 +17,8 @@
   - [Icons](#Icons-1)
   - [TypeScript](#TypeScript)
   - [Storybook](#Storybook)
+- [Releasing](#Releasing)
+  - [Beta Releases](#Beta-Releases)
 - [Resources](#Resources)
 
 ## Installation
@@ -198,6 +200,16 @@ npm run storybook
 All pull requests will automatically generate deploy previews and the `master` branch is automatically deployed to https://space-kit.netlify.com.
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/d5469491-a3d2-4ee1-b31d-d7f87ae806f8/deploy-status)](https://app.netlify.com/sites/space-kit/deploys)
+
+## Releasing
+
+To release a new version, bump the version in `package.json` and `package-lock.json` by using [`npm version`](https://docs.npmjs.com/cli/version) and then [`npm publish`](https://docs.npmjs.com/cli/publish) as the `apollo-bot` user. It's always a very good idea to perform an `npm publish` with the `--dry-run` flag to make sure you're only publishing the files you expected to.
+
+All compilation and build steps are expected to be performed automatically when running the `npm prepare` script. If you add new functionality that needs a build step, that should be executed somewhere in `npm build`; this ensures that build steps remain consistent and will allow us to eventually automatically deploy new versions to npm from CI.
+
+### Beta Releases
+
+While local development should be done with [`npm link`](https://docs.npmjs.com/cli/link),sometimes we need to release pre-release versions. This will require you use `npm version` to bump the package (prepatch, preminor, or premajor would be a smart move). Then you can use `npm publish --tag=next` (or whatever tag you want to use).
 
 ## Resources
 
