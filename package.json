@@ -4,7 +4,8 @@
   "description": "Home base for Apollo's design system",
   "main": "index.js",
   "scripts": {
-    "build": "run-s icons build:typescript",
+    "build": "run-p build:reset build:icons",
+    "build:icons": "run-s icons build:typescript",
     "build:reset": "node build-reset.js",
     "build:storybook": "build-storybook --quiet",
     "build:typescript": "tsc --build",
@@ -12,7 +13,7 @@
     "icons": "run-s icons:clean icons:generate",
     "icons:clean": "rimraf icons/*.tsx icons/*.js icons/*.js.map icons/*.d.ts",
     "icons:generate": "node icons/src/scripts/convert.js",
-    "prepare": "run-p build:reset build",
+    "prepare": "build",
     "start": "npm run storybook",
     "storybook": "start-storybook -p 6006",
     "test": "run-p test:typescript",
