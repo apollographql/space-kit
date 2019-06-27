@@ -5,3 +5,18 @@ icons/*.js
 icons/*.map
 icons/*.d.ts
 storybook-static
+
+# Colors
+colors/*.js
+colors/*.map
+colors/*.d.ts
+
+# Index
+/index.js
+/index.*.map
+/index.d.ts
+
+# Fonts
+/fonts.js
+/fonts.*.map
+/fonts.d.ts
