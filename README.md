@@ -172,7 +172,9 @@ The engine-frontend team and Apollo OSS teams have decided to not use default ex
 
 ### Icons
 
-To add new icons, add SVGs to [`./icons/src/svgs`](./icons/src/svgs) and open a pull request. The React components will be generated and the TypeScript will be transpiled automatically after merging to `master`.
+Our icons are all stored in [`icons/src/svgs`](./icons/src/svgs) in folders named for the icon category. To add new icons, add svg files to one of these category folders and open a pull request. Fill and stroke colors with values `#000` or `#000000` will be replace by `currentColor` to allow the consumer to change the colors; all other colors will be maintained and will not be configurable.
+
+All React components will be automatically generated and the TypeScript will be transpiled automatically after merging to `master`.
 
 The following scripts are available:
 
