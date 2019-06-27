@@ -1,5 +1,5 @@
-import React from 'react';
-import { colors } from '../index';
+import React from "react";
+import * as colors from "../src/colors";
 
 export const Column = ({ title, description, children }) => (
   <div
