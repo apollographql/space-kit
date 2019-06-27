@@ -6,9 +6,9 @@
   "scripts": {
     "build": "run-s icons build:typescript",
     "build:reset": "node build-reset.js",
-    "build:storybook": "build-storybook",
+    "build:storybook": "build-storybook --quiet",
     "build:typescript": "tsc --build",
-    "build-storybook": "run-p build build:storybook",
+    "build-storybook": "run-s build build:storybook",
     "icons": "run-s icons:clean icons:generate",
     "icons:clean": "rimraf icons/*.tsx icons/*.js icons/*.js.map icons/*.d.ts",
     "icons:generate": "node icons/src/scripts/convert.js",
