@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="26px" viewBox="0 0 26 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>streamline-icon-information-circle@24x24</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Icons-Essentials" transform="translate(-297.000000, -335.000000)" fill-rule="nonzero">
+            <g id="streamline-icon-information-circle@24x24" transform="translate(298.000000, 336.000000)">
+                <path d="M12,0 C5.373,0 0,5.373 0,12 C0,18.627 5.373,24 12,24 C18.627,24 24,18.627 24,12 C23.993,5.376 18.624,0.007 12,0 Z" id="Path" stroke="#000000" stroke-width="1.5"></path>
+                <path d="M12.25,5 C13.078,5 13.75,5.672 13.75,6.5 C13.75,7.328 13.078,8 12.25,8 C11.422,8 10.75,7.328 10.75,6.5 C10.75,5.672 11.422,5 12.25,5 Z" id="Path" fill="#000000"></path>
+                <path d="M14.5,18.5 L10.5,18.5 C9.948,18.5 9.5,18.052 9.5,17.5 C9.5,16.948 9.948,16.5 10.5,16.5 L11.25,16.5 C11.388,16.5 11.5,16.388 11.5,16.25 L11.5,11.75 C11.5,11.612 11.388,11.5 11.25,11.5 L10.5,11.5 C9.948,11.5 9.5,11.052 9.5,10.5 C9.5,9.948 9.948,9.5 10.5,9.5 L11.5,9.5 C12.605,9.5 13.5,10.395 13.5,11.5 L13.5,16.25 C13.5,16.388 13.612,16.5 13.75,16.5 L14.5,16.5 C15.052,16.5 15.5,16.948 15.5,17.5 C15.5,18.052 15.052,18.5 14.5,18.5 Z" id="Path" fill="#000000"></path>
+            </g>
+        </g>
+    </g>
+</svg>

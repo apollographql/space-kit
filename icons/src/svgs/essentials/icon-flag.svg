@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="22px" height="25px" viewBox="0 0 22 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>streamline-icon-flag-1@24x24</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Icons-Essentials" transform="translate(-300.000000, -1714.000000)" stroke="#000000" stroke-width="1.5">
+            <g id="streamline-icon-flag-1@24x24" transform="translate(300.000000, 1715.000000)">
+                <path d="M0.75,0.25 L0.75,23.25" id="Path"></path>
+                <path d="M0.75,0.25 L20.5,0.25 C20.914,0.25 21.25,0.587 21.249,1.001 C21.249,1.184 21.181,1.361 21.06,1.498 L17.055,6 C16.549,6.568 16.549,7.426 17.055,7.994 L21.055,12.499 C21.33,12.809 21.302,13.283 20.992,13.558 C20.855,13.68 20.678,13.747 20.495,13.747 L0.75,13.747" id="Path"></path>
+            </g>
+        </g>
+    </g>
+</svg>

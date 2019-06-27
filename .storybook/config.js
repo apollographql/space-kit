@@ -1,11 +1,19 @@
-import { configure } from '@storybook/react';
+import { configure } from "@storybook/react";
 
-// automatically import all files ending in *.stories.js
-const req = require.context('../stories', true, /\.stories\.js$/);
+function importAll(r) {
+  r.keys().forEach(r);
+}
+
 function loadStories() {
-  require('../reset.css');
-  require('../font.css');
-  req.keys().forEach(filename => req(filename));
+  importAll(
+    require.context("../icons", true, /\.(?:stories|story)\.(jsx?|tsx?)$/)
+  );
+  importAll(
+    require.context("../stories", true, /\.(?:stories|story)\.(jsx?|tsx?)$/)
+  );
+
+  require("../reset.css");
+  require("../font.css");
 }
 
 configure(loadStories, module);

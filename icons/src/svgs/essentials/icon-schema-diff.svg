@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="27px" viewBox="0 0 24 27" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>Schema-Diff</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Icons-Essentials" transform="translate(-298.000000, -1864.000000)" stroke="#000000" stroke-width="1.5">
+            <g id="Schema-Diff" transform="translate(299.000000, 1865.000000)">
+                <path d="M15.5833333,4.97159091 C16.3653333,4.97159091 17,5.68431819 17,6.5625 L17,23.2670455 C17,24.1452273 16.3653333,24.8579545 15.5833333,24.8579545 L1.41666667,24.8579545 C0.634666667,24.8579545 8.70414851e-14,24.1452273 8.70414851e-14,23.2670455 L8.70414851e-14,6.5625 C8.70414851e-14,5.68431819 0.634666667,4.97159091 1.41666667,4.97159091 L15.5833333,4.97159091 Z" id="Path"></path>
+                <path d="M5,5 C5,4.46969697 5,2.65151516 5,1.59090909 C5,0.712727273 5.63466667,-1.04805054e-13 6.41666666,-1.04805054e-13 L20.5833333,-1.04805054e-13 C21.3653333,-1.04805054e-13 22,0.712727273 22,1.59090909 L22,18.2954545 C22,19.1736364 21.3653333,19.8863636 20.5833333,19.8863636 C19.324074,19.8863636 17.6296296,19.8863636 17,19.8863636" id="Path"></path>
+                <path d="M8.5,9.94318181 L8.5,14.9147727" id="Path" stroke-linecap="round"></path>
+                <path d="M6,12.4289773 L11,12.4289773" id="Path" stroke-linecap="round"></path>
+                <path d="M6,18.3948864 L11,18.3948864" id="Path" stroke-linecap="round"></path>
+            </g>
+        </g>
+    </g>
+</svg>

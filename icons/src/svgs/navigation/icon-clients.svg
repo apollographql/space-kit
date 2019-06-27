@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="22px" viewBox="0 0 26 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>Group</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Icons-Navigation" transform="translate(-298.000000, -336.000000)" stroke="#000000" stroke-width="1.5">
+            <g id="Group" transform="translate(299.000000, 337.000000)">
+                <path d="M15,15 C11.6518519,15 9.62962963,15 2.93333333,15 C1.31315556,15 0,13.5674667 0,11.8 L0,3.2 C0,1.43253333 1.31315556,0 2.93333333,0 L17.0666667,0 C18.6868444,0 20,1.43253333 20,3.2 C20,4.44444444 20,4.37777778 20,5" id="Path"></path>
+                <path d="M10.002,15 L10.002,20" id="Path"></path>
+                <path d="M18.5555556,7 L22.4444444,7 C23.3036296,7 24,7.77595556 24,8.73333333 L24,18.2666667 C24,19.2240444 23.3036296,20 22.4444444,20 L18.5555556,20 C17.6963704,20 17,19.2240444 17,18.2666667 L17,8.73333333 C17,7.77595556 17.6963704,7 18.5555556,7 Z" id="Path"></path>
+                <path d="M17,17 L24,17" id="Path"></path>
+                <path d="M6,20 L14,20" id="Path-Copy-2"></path>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,2 +1,10 @@
 .storybook
 stories
+icons/src
+*.story.*
+storybook-static
+.eslintignore
+renovate.json
+.vscode/settings.json
+tsconfig.json
+build-reset.js
