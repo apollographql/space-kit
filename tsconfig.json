@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "declaration": true,
+    "outDir": "./",
     "jsx": "react",
     "lib": ["es2015", "dom"],
     "module": "commonjs",
@@ -15,6 +16,6 @@
     "target": "es5",
     "esModuleInterop": true
   },
-  "include": ["./icons/**/*.tsx"],
-  "exclude": ["./node_modules", "./src"]
+  "include": ["./src/*.ts", "./src/*.tsx"],
+  "exclude": ["./node_modules"]
 }

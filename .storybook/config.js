@@ -1,13 +1,15 @@
 import { configure } from "@storybook/react";
 
 function importAll(r) {
+  console.warn(r.keys());
   r.keys().forEach(r);
 }
 
 function loadStories() {
   importAll(
-    require.context("../icons", true, /\.(?:stories|story)\.(jsx?|tsx?)$/)
+    require.context("../src", true, /\.(?:stories|story)\.(jsx?|tsx?)$/)
   );
+
   importAll(
     require.context("../stories", true, /\.(?:stories|story)\.(jsx?|tsx?)$/)
   );

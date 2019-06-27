@@ -1,8 +1,9 @@
-import { colors, fonts } from '../index';
-import { create } from '@storybook/theming';
+import { create } from "@storybook/theming";
+import * as colors from "../src/colors";
+import * as fonts from "../src/fonts";
 
 export default create({
-  base: colors.silver.light,
+  base: "light",
 
   colorPrimary: colors.teal.base,
   colorSecondary: colors.blue.base,
@@ -32,8 +33,8 @@ export default create({
   inputTextColor: colors.black.base,
   inputBorderRadius: 4,
 
-  brandTitle: 'Space Kit',
-  brandUrl: 'https://github.com/apollographql/space-kit',
+  brandTitle: "Space Kit",
+  brandUrl: "https://github.com/apollographql/space-kit",
   brandImage:
-    'https://user-images.githubusercontent.com/5922187/57668515-747a8a00-75bc-11e9-9cff-207f71865c82.png'
+    "https://user-images.githubusercontent.com/5922187/57668515-747a8a00-75bc-11e9-9cff-207f71865c82.png"
 });
