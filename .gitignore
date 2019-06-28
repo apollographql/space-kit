@@ -1,27 +1,15 @@
 node_modules
 reset.css
-icons/*.tsx
-icons/*.js
-icons/*.map
-icons/*.d.ts
 storybook-static
 
-# Colors
-/colors.js
-/colors.*.map
-/colors.d.ts
-
 # Index
-/index.js
-/index.*.map
-/index.d.ts
+/index.*
+
+# Colors
+/colors.*
 
 # Fonts
-/fonts.js
-/fonts.*.map
-/fonts.d.ts
+/fonts.*
 
-# Typography
-/typography/index.js
-/typography/index.*.map
-/typography/index.d.ts
+# Icons
+/icons
