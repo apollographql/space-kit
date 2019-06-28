@@ -16,3 +16,6 @@ tsconfig.tsbuildinfo
 # Icons
 /icons
 !/icons/tsconfig.json
+
+# Typography
+/typography
