@@ -170,6 +170,10 @@ The engine-frontend team and Apollo OSS teams have decided to not use default ex
 
 ## Developing Space Kit
 
+To develop, run `npm run watch` and everything should build automatically! Use `npm link` to develop against this package.
+
+When developing a new feature of space-kit, please make sure that the `watch` script will automatically perform all setps necessary to build for development. For example, there is a `watch:typescript` script and a `watch:npmwatch` script that will watch all TypeScript files and watch all the svg icons for changes.
+
 ### Icons
 
 Our icons are all stored in [`icons/src/svgs`](./icons/src/svgs) in folders named for the icon category. To add new icons, add svg files to one of these category folders and open a pull request. Fill and stroke colors with values `#000` or `#000000` will be replace by `currentColor` to allow the consumer to change the colors; all other colors will be maintained and will not be configurable.
