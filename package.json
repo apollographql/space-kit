@@ -1,6 +1,6 @@
 {
   "name": "@apollo/space-kit",
-  "version": "0.1.0",
+  "version": "0.2.0-0",
   "description": "Home base for Apollo's design system",
   "main": "index.js",
   "scripts": {
@@ -29,8 +29,12 @@
   },
   "watch": {
     "build:icons": {
-      "extensions": ["svg"],
-      "patterns": ["src/icons/svgs"]
+      "extensions": [
+        "svg"
+      ],
+      "patterns": [
+        "src/icons/svgs"
+      ]
     }
   },
   "repository": "apollographql/space-kit",
