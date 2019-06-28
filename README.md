@@ -13,6 +13,7 @@
   - [Stylesheet reset](#Stylesheet-reset)
   - [Colors](#Colors)
   - [Icons](#Icons)
+  - [Typography](#Typography)
 - [Developing Space Kit](#Developing-Space-Kit)
   - [Icons](#Icons-1)
   - [TypeScript](#TypeScript)
@@ -140,6 +141,53 @@ All our icons are SVG files stored in [`./icons/src/svgs`](./icons/src/svgs). Th
 These icons are _not_ open source and are only licensed for use in this project. See [license](./icons/LICENSE.md) for more details.
 
 Please see [#developing-space-kit-icons](#icons-1) for instructions on adding new icons.
+
+### Typography
+
+Zeplin: https://zpl.io/V4ep7Jy
+
+We decided to export our typography style system as plain old JavaScript to allow consumers to chose how to implement the configurations. The names relate to each other and do not imply intent. For example, we did not use the names "title" or "caption" because the style system only gives the options; it's up to each consumer to chose a style guide.
+
+To consume these types with [Tailwindcss](https://tailwindcss.com/), one would create a plugin to add a [utility](https://v0.tailwindcss.com/docs/plugins#adding-utilities) to add these classnames.
+
+This example will use the original names prefixed with `space-kit-`:
+
+```js
+const typographyConfig = require("@apollo/space-kit/typography");
+
+module.exports = {
+  plugins: [
+    function spaceKitTypography({ addUtilities }) {
+      addUtilities(
+        Object.entries(typographyConfig.sans).reduce(
+          (accumulator, [name, properties]) => ({
+            ...accumulator,
+            [`space-kit-${name}`]: properties
+          }),
+          {}
+        )
+      );
+    }
+  ]
+};
+```
+
+You could also use the style system to add intent:
+
+```js
+const typographyConfig = require("@apollo/space-kit/typography");
+
+module.exports = {
+  plugins: [
+    function spaceKitTypography({ addUtilities }) {
+      addUtilities({
+        "space-kit-title:": typographyConfig.sans.xxxlarge,
+        caption: typographyConfig.sans.xsmall
+      });
+    }
+  ]
+};
+```
 
 #### Example
 
