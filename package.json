@@ -13,7 +13,7 @@
     "clean:colors": "rimraf colors.js colors.*.map colors.d.ts ./src/colors.js ./src/colors.*.map ./src/colors.d.ts",
     "clean:index": "rimraf index.js index.*.map index.d.ts",
     "clean:fonts": "rimraf fonts.js fonts.*.map fonts.d.ts ./src/fonts.js ./src/fonts.*.map ./src/fonts.d.ts",
-    "clean:icons": "rimraf icons/*.tsx icons/*.js icons/*.js.map icons/*.d.ts",
+    "clean:icons": "rimraf icons/*.tsx icons/*.js icons/*.js.map icons/*.d.ts icons/tsconfig.tsbuildinfo",
     "clean:typography": "rimraf typography/*.js typography/*.js.map typography/*.d.ts",
     "netlify": "run-s build build:storybook",
     "icons": "run-s clean:icons icons:generate",

@@ -2,6 +2,8 @@ node_modules
 reset.css
 storybook-static
 
+tsconfig.tsbuildinfo
+
 # Index
 /index.*
 
@@ -13,3 +15,4 @@ storybook-static
 
 # Icons
 /icons
+!/icons/tsconfig.json

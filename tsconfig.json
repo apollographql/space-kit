@@ -1,21 +1,7 @@
 {
-  "compilerOptions": {
-    "declaration": true,
-    "outDir": "./",
-    "jsx": "react",
-    "lib": ["es2015", "dom"],
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "importHelpers": true,
-    "inlineSources": true,
-    "noUnusedParameters": true,
-    "pretty": true,
-    "removeComments": true,
-    "sourceMap": true,
-    "strict": true,
-    "target": "es5",
-    "esModuleInterop": true
-  },
-  "include": ["./src/**/*.ts", "./src/**/*.tsx"],
-  "exclude": ["./node_modules"]
+  "extends": "./tsconfig.base.json",
+  "exclude": ["./node_modules"],
+  "references": [{ "path": "./icons" }],
+
+  "files": ["src/index.ts", "src/fonts.ts", "src/colors.ts"]
 }
