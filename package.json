@@ -6,19 +6,32 @@
   "scripts": {
     "build": "npm-run-all -p build:reset icons -s build:typescript",
     "build:icons": "run-s icons build:typescript",
-    "build:reset": "node build-reset.js",
+    "build:reset": "ts-node build-reset.ts",
     "build:storybook": "build-storybook --quiet",
     "build:typescript": "tsc --build",
+    "clean": "run-p clean:*",
+    "clean:colors": "rimraf colors.js colors.*.map colors.d.ts ./src/colors.js ./src/colors.*.map ./src/colors.d.ts",
+    "clean:index": "rimraf index.js index.*.map index.d.ts",
+    "clean:fonts": "rimraf fonts.js fonts.*.map fonts.d.ts ./src/fonts.js ./src/fonts.*.map ./src/fonts.d.ts",
+    "clean:icons": "rimraf icons/*.tsx icons/*.js icons/*.js.map icons/*.d.ts",
+    "clean:typography": "rimraf typography/*.js typography/*.js.map typography/*.d.ts",
     "netlify": "run-s build build:storybook",
-    "icons": "run-s icons:clean icons:generate",
-    "icons:clean": "rimraf icons/*.tsx icons/*.js icons/*.js.map icons/*.d.ts",
-    "icons:generate": "node icons/src/scripts/convert.js",
+    "icons": "run-s clean:icons icons:generate",
+    "icons:generate": "node src/icons/scripts/convert.js",
     "prepare": "npm run build",
     "start": "npm run storybook",
     "storybook": "start-storybook -p 6006",
     "test": "run-p test:typescript",
     "test:typescript": "tsc --noEmit",
-    "watch": "tsc --watch"
+    "watch": "run-p watch:*",
+    "watch:typescript": "tsc --watch",
+    "watch:npmwatch": "npm-watch"
+  },
+  "watch": {
+    "build:icons": {
+      "extensions": ["svg"],
+      "patterns": ["src/icons/svgs"]
+    }
   },
   "repository": "apollographql/space-kit",
   "keywords": [],
@@ -32,6 +45,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
+    "@emotion/core": "^10.0.14",
+    "@emotion/styled": "^10.0.14",
     "@storybook/addon-knobs": "^5.1.9",
     "@storybook/addons": "^5.1.9",
     "@storybook/react": "^5.1.9",
@@ -40,6 +55,7 @@
     "@svgr/plugin-prettier": "^4.2.0",
     "@svgr/plugin-svgo": "^4.2.0",
     "@trevorblades/eslint-config": "^6.22.1",
+    "@types/less": "^3.0.0",
     "@types/react": "^16.8.21",
     "@types/storybook__react": "^4.0.2",
     "awesome-typescript-loader": "^5.2.1",
@@ -47,8 +63,11 @@
     "eslint": "^5.16.0",
     "less": "^3.9.0",
     "npm-run-all": "^4.1.5",
+    "npm-watch": "^0.6.0",
     "rimraf": "^2.6.3",
+    "styled-system": "^5.0.12",
     "svgo": "^1.2.2",
+    "ts-node": "^8.3.0",
     "typescript": "^3.5.2"
   },
   "peerDependencies": {

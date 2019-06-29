@@ -1,11 +1,11 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import { withKnobs, select } from "@storybook/addon-knobs/react";
-import colors from "../../colors";
+import * as colors from "../colors";
 import camelcase from "camelcase";
 
-const req = require.context("../", true, /\.tsx$/);
-const svgsReq = require.context("../src/svgs", true, /\.svg$/);
+// const req = require.context("../../../", true, /\.tsx$/);
+const svgsReq = require.context("./svgs", true, /\.svg$/);
 
 function formatComponentName(basename) {
   return camelcase(basename.replace(/@\d+x\d+/, "").replace(/-sl$/, ""), {
@@ -122,7 +122,7 @@ storiesOf("Space Kit", module)
 
         accumulator[category].push({
           componentName,
-          Component: require(`../${componentName}.tsx`)[componentName],
+          Component: require(`../../icons/${componentName}.tsx`)[componentName],
           isStreamlineIcon: fullFilename.includes("-sl")
         });
 

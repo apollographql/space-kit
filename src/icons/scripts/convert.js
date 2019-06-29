@@ -4,10 +4,15 @@ const svgr = require("@svgr/core").default;
 const camelcase = require("camelcase");
 const { formatComponentName } = require("./formatComponentName");
 const { svgo } = require("./convertUtils/setupSvgo");
+
 const SVG_PATH = path.resolve(__dirname, "..", "svgs");
-const COMPONENT_PATH = path.resolve(__dirname, "..", "..");
+const COMPONENT_PATH = path.resolve(__dirname, "..", "..", "..", "icons");
 
 (async () => {
+  if (!fs.existsSync(COMPONENT_PATH)) {
+    fs.mkdirSync(COMPONENT_PATH);
+  }
+
   // Move all the files in corresponding component directories
   return fs
     .readdirSync(SVG_PATH)
@@ -66,6 +71,13 @@ const COMPONENT_PATH = path.resolve(__dirname, "..", "..");
               },
               { componentName }
             );
+
+            // console.log(
+            //   path.relative(
+            //     process.cwd(),
+            //     path.join(path.join(COMPONENT_PATH, `${componentName}.tsx`))
+            //   )
+            // );
 
             const outputFilename = path.join(
               COMPONENT_PATH,

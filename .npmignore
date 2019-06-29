@@ -7,4 +7,4 @@ storybook-static
 renovate.json
 .vscode/settings.json
 tsconfig.json
-build-reset.js
+build-reset.ts
