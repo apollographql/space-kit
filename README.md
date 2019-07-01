@@ -14,6 +14,7 @@
   - [Colors](#Colors)
   - [Icons](#Icons)
   - [Typography](#Typography)
+  - [Buttons](#Buttons)
 - [Developing Space Kit](#Developing-Space-Kit)
   - [Icons](#Icons-1)
   - [TypeScript](#TypeScript)
@@ -42,7 +43,7 @@ function MyComponent() {
       style={{
         backgroundColor: colors.indigo.dark,
         color: "white",
-        border: `1px solid ${colors.grey.light}`
+        border: `1px solid ${colors.grey.light}`,
       }}
     >
       ...
@@ -111,7 +112,7 @@ import { colors } from "@apollo/space-kit";
 const StyledButton = styled.button({
   backgroundColor: colors.indigo.dark,
   color: "white",
-  border: `1px solid ${colors.grey.light}`
+  border: `1px solid ${colors.grey.light}`,
 });
 
 function MyComponent() {
@@ -120,7 +121,7 @@ function MyComponent() {
       <StyledButton>Save</StyledButton>
       <StyledButton
         style={{
-          backgroundColor: colors.red.base
+          backgroundColor: colors.red.base,
         }}
       >
         Delete
@@ -162,13 +163,13 @@ module.exports = {
         Object.entries(typographyConfig.base).reduce(
           (accumulator, [name, properties]) => ({
             ...accumulator,
-            [`.space-kit-${name}`]: properties
+            [`.space-kit-${name}`]: properties,
           }),
           {}
         )
       );
-    }
-  ]
+    },
+  ],
 };
 ```
 
@@ -182,10 +183,10 @@ module.exports = {
     function spaceKitTypography({ addUtilities }) {
       addUtilities({
         ".space-kit-title": typographyConfig.base.xxxlarge,
-        '.caption': typographyConfig.base.xsmall
+        ".caption": typographyConfig.base.xsmall,
       });
-    }
-  ]
+    },
+  ],
 };
 ```
 
@@ -199,6 +200,67 @@ export const IconServiceItem: React.FC = () => (
   <div className="w-5 h-5">
     <IconServices className="w-full h-full text-teal" />
   </div>
+);
+```
+
+### Buttons
+
+Zeplin: https://zpl.io/amdN6Pr
+
+This is our style system for buttons. This is intended to be used to create your project's style guide (as opposed to using this component directly in your project).
+
+#### Gotchas
+
+- Apply colors with emotion or classNames.
+- If you want to override the disabled styles, you need to apply a class for `:disabled` _and_ `:disabled:hover` to make sure the disabled button doesn't have it's styles overriden by the `:hover` styles.
+
+#### Tailwind Example
+
+```js
+import React from "react";
+import classnames from "classnames";
+import { Button } from "@apollo/space-kit/Button";
+
+export const PrimaryButton: React.FC<ComponentProps<typeof Button>> = ({
+  children,
+  className,
+  ...otherProps
+}) => (
+  <Button
+    {...otherProps}
+    className={classnames(
+      className,
+      "bg-indigo hover:bg-indigo-dark text-white"
+    )}
+  >
+    {children}
+  </Button>
+);
+```
+
+#### Emotion Example
+
+```js
+/** @jsx jsx */
+import React from "react";
+import { Button } from "@apollo/space-kit/Button";
+import { colors } from "@apollo/space-kit/colors";
+import { jsx } from "@emotion/core";
+
+export const PrimaryButton: React.FC<ComponentProps<typeof Button>> = ({
+  children,
+  ...otherProps
+}) => (
+  <Button
+    {...otherProps}
+    css={{
+      backgroundColor: colors.indigo.dark,
+      color: "white",
+      hover: { backgroundColor: colors.indigo.darker },
+    }}
+  >
+    {children}
+  </Button>
 );
 ```
 
