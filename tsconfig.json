@@ -3,6 +3,6 @@
   "exclude": ["./node_modules"],
   "references": [{ "path": "./icons" }],
 
-  "files": ["src/index.ts", "src/fonts.ts", "src/colors.ts"],
+  "files": ["src/index.ts", "src/fonts.ts", "src/colors.ts", "src/Button.tsx"],
   "include": ["./src/typography/*.ts"]
 }
