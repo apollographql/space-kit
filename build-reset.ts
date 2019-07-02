@@ -6,7 +6,7 @@ less
   .render(fs.readFileSync("./reset.less", "utf-8"), {
     modifyVars: {
       fontBase: fonts.base,
-      fontCode: fonts.code
+      fontCode: fonts.mono
     }
   })
   .then(output => {

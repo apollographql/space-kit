@@ -16,7 +16,7 @@ export default create({
 
   // Typography
   fontBase: fonts.base,
-  fontCode: fonts.code,
+  fontCode: fonts.mono,
 
   // Text colors
   textColor: colors.black.base,

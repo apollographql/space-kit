@@ -8,3 +8,6 @@ renovate.json
 .vscode/settings.json
 tsconfig.json
 build-reset.ts
+/icons/*.tsx
+/icons/src
+/src
