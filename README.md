@@ -136,7 +136,7 @@ All our icons are displayed in a gallery in [Storybook](https://space-kit.netlif
 
 Note that there are no styles or classes applied to the SVGs by default; you'll have to add a `width` and `height` to see the icons; and apply a text color to color them.
 
-All our icons are SVG files stored in [`./icons/src/svgs`](./icons/src/svgs). There are scripts set up to convert these SVGs into React components, and then to transpile those files for consumption. These conversions and transpilations are `.gitignore`'ed, so they are not mantained in source control.
+All our icons are SVG files stored in [`./icons/src/svgs`](./icons/src/svgs). There are scripts set up to convert these SVGs into React components, and then to transpile those files for consumption. These conversions and transpilations are `.gitignore`'ed, so they are not maintained in source control.
 
 These icons are _not_ open source and are only licensed for use in this project. See [license](./icons/LICENSE.md) for more details.
 
