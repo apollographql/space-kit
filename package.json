@@ -56,6 +56,7 @@
     "@svgr/plugin-prettier": "^4.2.0",
     "@svgr/plugin-svgo": "^4.2.0",
     "@trevorblades/eslint-config": "^6.22.1",
+    "@types/classnames": "^2.2.9",
     "@types/less": "^3.0.0",
     "@types/react": "^16.8.21",
     "@types/storybook__react": "^4.0.2",
