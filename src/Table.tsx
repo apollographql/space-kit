@@ -31,36 +31,6 @@ interface Props<RowShape> {
       index: number,
       list: ReadonlyArray<RowShape>
     ) => React.ReactNode;
-
-    /**
-     * A function returning the wrapper the rendered cell content.
-     *
-     * This should _not_ render the row content, it should render the `<td>`
-     * with any customizations you give it. You should always spread the props
-     * you aren't using into the `<td>` so styles can be passed in.
-     *
-     * Example:
-     *
-     * ```js
-     * renderTd: ({ children, ...otherProps}) => (
-     *   <td
-     *     {...otherProps}
-     *     onClick={() => alert('clicked')}
-     *   />
-     * )
-     * ```
-     */
-    renderTd?: React.FC<
-      {
-        children: React.ReactNode;
-        rowData: Readonly<RowShape>;
-        index: number;
-        list: ReadonlyArray<RowShape>;
-      } & React.DetailedHTMLProps<
-        HTMLAttributes<HTMLTableDataCellElement>,
-        HTMLTableDataCellElement
-      >
-    >;
   }>;
 }
 
@@ -104,25 +74,14 @@ export function Table<RowShape>({
           <tr>
             {columns.map(
               ({
-                render,
-                renderTd = ({ children, ...otherProps }) => (
-                  <td {...otherProps}>{children}</td>
-                )
+                render
               }) => (
-                <ClassNames>
-                  {({ css }) =>
-                    React.createElement(renderTd, {
-                      className: css({
-                        borderBottom: `1px solid ${colors.silver.dark}`,
-                        padding
-                      }),
-                      rowData: item,
-                      index,
-                      list: data,
-                      children: render(item, index, data)
-                    })
-                  }
-                </ClassNames>
+                <td 
+                  css={{
+                    borderBottom: `1px solid ${colors.silver.dark}`,
+                    padding
+                  }}
+                >{render(item, index, data)}</td>
               )
             )}
           </tr>
