@@ -58,6 +58,7 @@
     "@trevorblades/eslint-config": "^6.22.1",
     "@types/less": "^3.0.0",
     "@types/react": "^16.8.21",
+    "@types/storybook__addon-knobs": "^5.0.2",
     "@types/storybook__react": "^4.0.2",
     "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.0.6",
