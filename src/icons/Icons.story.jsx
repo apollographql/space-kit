@@ -43,20 +43,18 @@ function IconRow({ children }) {
   );
 }
 
+const colorMap = {};
+Object.keys(colors).forEach(color => {
+  const shades = Object.keys(colors[color]);
+  shades.forEach(shade => {
+    colorMap[`${color}-${shade}`] = colors[color][shade];
+  });
+});
+
 storiesOf('Icons', module)
-  .addParameters({ options: { showPanel: true } })
   .addDecorator(withKnobs)
   .add('Catalog', () => {
-    const color = select(
-      'Color',
-      {
-        black: colors.black.base,
-        'teal-base': colors.teal.base,
-        'pink-base': colors.pink.base,
-        'indigo-dark': colors.indigo.dark
-      },
-      colors.black.base
-    );
+    const color = select('Color', colorMap, colors.black.base);
 
     // Organize all the icons by category. This will create an object with the keys
     // being the categories and the values being an array of {Component, componentName}.
@@ -102,7 +100,10 @@ storiesOf('Icons', module)
                 {componentArray.map(
                   ({ componentName, Component, isStreamlineIcon }) => (
                     <IconRow key={componentName}>
-                      <ComponentName>{componentName}</ComponentName>
+                      <ComponentName>
+                        {componentName}
+                        {isStreamlineIcon ? '-sl' : ''}
+                      </ComponentName>
                       <Component
                         style={{
                           width: 20,
