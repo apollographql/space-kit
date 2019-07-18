@@ -126,15 +126,20 @@ export const Button: React.FC<Props> = ({
             ? 112
             : 100,
 
-          padding: size === "small" ? `5px 8px` : size === "large" ? 8 : 7
-        },
-        {
+          padding: size === "small" ? `5px 8px` : size === "large" ? 8 : 7,
+
           ...(size === "small"
             ? base.small
             : size === "large"
             ? base.large
-            : base.base)
+            : base.base),
+
+          fontWeight: 600,
+          // Disable the outline because we're setting a custom `:active` style
+          outline: 0,
         },
+
+        // This must come after `:focus` or the `:focus` state will override `:active`
         !disabled && {
           ":hover, &[data-force-hover-state]": {
             backgroundColor: colors.silver.base,
@@ -144,23 +149,12 @@ export const Button: React.FC<Props> = ({
               boxShadow:
                 "0 5px 10px 0 rgba(18, 21, 26, 0.12), inset 0 0 0 1px rgba(18, 21, 26, 0.2), inset 0 -1px 0 0 rgba(18, 21, 26, 0.05)"
             })
-          }
-        },
-        {
-          fontWeight: 600,
-
-          // Disable the outline because we're setting a custom `:active` style
-          outline: 0,
-
+          },
           ":focus, &[data-force-focus-state]": {
             // The `box-shadow` property is copied directly from Zeplin
             boxShadow:
               "0 1px 4px 0 rgba(18, 21, 26, 0.08), 0 0 0 2px #bbdbff, inset 0 0 0 1px #2075d6, inset 0 -1px 0 0 rgba(18, 21, 26, 0.05)"
-          }
-        },
-
-        // This must come after `:focus` or the `:focus` state will override `:active`
-        !disabled && {
+          },
           "&:active, &[data-force-active-state]": {
             // The `box-shadow` property is copied directly from Zeplin
             boxShadow: "inset 0 0 0 1px rgba(18, 21, 26, 0.2), inset 0 -1px 0 0 rgba(18, 21, 26, 0.05), inset 0 2px 2px 0 rgba(18, 21, 26, 0.12)",
