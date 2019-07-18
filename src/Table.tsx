@@ -19,7 +19,7 @@ interface Props<RowShape> {
     /**
      * Title to add to the table header
      */
-    headerTitle?: string;
+    headerTitle?: string | React.ElementType;
 
     /**
      * A method that accepts the data for the row and returns the inner content for the row.
@@ -44,7 +44,8 @@ export function Table<RowShape>({
   return (
     <table
       css={{
-        borderCollapse: "collapse"
+        borderCollapse: "collapse",
+        width: "100%",
       }}
     >
       <thead>
@@ -71,7 +72,7 @@ export function Table<RowShape>({
       </thead>
       <tbody>
         {data.map((item, index) => (
-          <tr>
+          <tr key={index}>
             {columns.map(
               ({
                 render
