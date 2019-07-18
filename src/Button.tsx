@@ -26,33 +26,6 @@ interface Props
   fab?: boolean;
 
   /**
-   * Force the button to be in the active state.
-   *
-   * Useful for Storybook
-   *
-   * @ignore
-   */
-  forceActiveState?: boolean;
-
-  /**
-   * Force the button to be in the focus state.
-   *
-   * Useful for Storybook
-   *
-   * @ignore
-   */
-  forceFocusState?: boolean;
-
-  /**
-   * Force the button to be in the hover state.
-   *
-   * Useful for Storybook
-   *
-   * @ignore
-   */
-  forceHoverState?: boolean;
-
-  /**
    * Either an icon to show to the left of the button text, or on it's own
    */
   icon?: React.ReactElement;
@@ -88,9 +61,6 @@ export const Button: React.FC<Props> = ({
   children,
   disabled = false,
   fab = false,
-  forceActiveState = false,
-  forceFocusState = false,
-  forceHoverState = false,
   icon,
   size = "default",
   variant = "normal",
@@ -113,32 +83,10 @@ export const Button: React.FC<Props> = ({
     }
   }
 
-  if (forceActiveState && forceHoverState) {
-    throw new TypeError(
-      "Do not force multiple properties at once, you will get indeterminiate behavior"
-    );
-  }
-
-  /**
-   * Properties applied to for an active state.
-   *
-   * We store this so we can use it either in an `:active` style or when
-   * `forceActiveState` is set.
-   */
-  const activeProperties = {
-    // The `box-shadow` property is copied directly from Zeplin
-    boxShadow:
-      "inset 0 0 0 1px rgba(18, 21, 26, 0.2), inset 0 -1px 0 0 rgba(18, 21, 26, 0.05), inset 0 2px 2px 0 rgba(18, 21, 26, 0.12)",
-    outline: 0
-  };
-
   return (
     <button
       {...otherProps}
       disabled={disabled}
-      {...!disabled && forceActiveState && { "data-force-active-state": true }}
-      {...!disabled && forceFocusState && { "data-force-focus-state": true }}
-      {...!disabled && forceHoverState && { "data-force-hover-state": true }}
       css={[
         {
           "&[disabled]": {
@@ -212,9 +160,13 @@ export const Button: React.FC<Props> = ({
         },
 
         // This must come after `:focus` or the `:focus` state will override `:active`
-        !disabled && forceActiveState
-          ? activeProperties
-          : { ":active": activeProperties }
+        !disabled && {
+          "&:active, &[data-force-active-state]": {
+            // The `box-shadow` property is copied directly from Zeplin
+            boxShadow: "inset 0 0 0 1px rgba(18, 21, 26, 0.2), inset 0 -1px 0 0 rgba(18, 21, 26, 0.05), inset 0 2px 2px 0 rgba(18, 21, 26, 0.12)",
+            outline: 0,
+          }
+        },
       ]}
     >
       <div
