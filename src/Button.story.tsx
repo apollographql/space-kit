@@ -142,9 +142,9 @@ storiesOf("Space Kit", module)
       >
         <VerticalButtonGroup title="Example 1">
           <Button>Rest</Button>
-          <Button forceHoverState>Hover</Button>
-          <Button forceActiveState>Active</Button>
-          <Button forceFocusState>Focused</Button>
+          <Button data-force-hover-state="true">Hover</Button>
+          <Button data-force-active-state="true">Active</Button>
+          <Button data-force-focus-state="true">Focused</Button>
           <Button disabled>Disabled</Button>
         </VerticalButtonGroup>
 
@@ -159,9 +159,9 @@ storiesOf("Space Kit", module)
           }}
         >
           <Button>Rest</Button>
-          <Button forceHoverState>Hover</Button>
-          <Button forceActiveState>Active</Button>
-          <Button forceFocusState>Focused</Button>
+          <Button data-force-hover-state="true">Hover</Button>
+          <Button data-force-active-state="true">Active</Button>
+          <Button data-force-focus-state="true">Focused</Button>
           <Button disabled>Disabled</Button>
         </VerticalButtonGroup>
 
@@ -176,9 +176,9 @@ storiesOf("Space Kit", module)
           }}
         >
           <Button>Rest</Button>
-          <Button forceHoverState>Hover</Button>
-          <Button forceActiveState>Active</Button>
-          <Button forceFocusState>Focused</Button>
+          <Button data-force-hover-state="true">Hover</Button>
+          <Button data-force-active-state="true">Active</Button>
+          <Button data-force-focus-state="true">Focused</Button>
           <Button disabled>Disabled</Button>
         </VerticalButtonGroup>
       </DemoSection>
@@ -189,9 +189,9 @@ storiesOf("Space Kit", module)
       >
         <VerticalButtonGroup title="Secondary">
           <Button>Rest</Button>
-          <Button forceHoverState>Hover</Button>
-          <Button forceActiveState>Active</Button>
-          <Button forceFocusState>Focused</Button>
+          <Button data-force-hover-state="true">Hover</Button>
+          <Button data-force-active-state="true">Active</Button>
+          <Button data-force-focus-state="true">Focused</Button>
           <Button disabled>Disabled</Button>
         </VerticalButtonGroup>
 
@@ -202,9 +202,9 @@ storiesOf("Space Kit", module)
           }}
         >
           <Button>Rest</Button>
-          <Button forceHoverState>Hover</Button>
-          <Button forceActiveState>Active</Button>
-          <Button forceFocusState>Focused</Button>
+          <Button data-force-hover-state="true">Hover</Button>
+          <Button data-force-active-state="true">Active</Button>
+          <Button data-force-focus-state="true">Focused</Button>
           <Button disabled>Disabled</Button>
         </VerticalButtonGroup>
 
@@ -221,12 +221,12 @@ storiesOf("Space Kit", module)
           <React.Fragment>
             <Button
               css={{ marginRight: 6 }}
-              forceHoverState
+              data-force-hover-state="true"
               icon={iconElement}
             />
             <Button
               css={{ marginLeft: 6 }}
-              forceHoverState
+              data-force-hover-state="true"
               fab
               icon={iconElement}
             />
@@ -234,12 +234,12 @@ storiesOf("Space Kit", module)
           <React.Fragment>
             <Button
               css={{ marginRight: 6 }}
-              forceActiveState
+              data-force-active-state="true"
               icon={iconElement}
             />
             <Button
               css={{ marginLeft: 6 }}
-              forceActiveState
+              data-force-active-state="true"
               fab
               icon={iconElement}
             />
@@ -247,12 +247,12 @@ storiesOf("Space Kit", module)
           <React.Fragment>
             <Button
               css={{ marginRight: 6 }}
-              forceFocusState
+              data-force-focus-state="true"
               icon={iconElement}
             />
             <Button
               css={{ marginLeft: 6 }}
-              forceFocusState
+              data-force-focus-state="true"
               fab
               icon={iconElement}
             />
@@ -282,9 +282,9 @@ storiesOf("Space Kit", module)
           }}
         >
           <Button>Rest</Button>
-          <Button forceHoverState>Hover</Button>
-          <Button forceActiveState>Active</Button>
-          <Button forceFocusState>Focused</Button>
+          <Button data-force-hover-state="true">Hover</Button>
+          <Button data-force-active-state="true">Active</Button>
+          <Button data-force-focus-state="true">Focused</Button>
           <Button disabled>Disabled</Button>
         </VerticalButtonGroup>
 
@@ -302,9 +302,9 @@ storiesOf("Space Kit", module)
           }}
         >
           <Button>Rest</Button>
-          <Button forceHoverState>Hover</Button>
-          <Button forceActiveState>Active</Button>
-          <Button forceFocusState>Focused</Button>
+          <Button data-force-hover-state="true">Hover</Button>
+          <Button data-force-active-state="true">Active</Button>
+          <Button data-force-focus-state="true">Focused</Button>
           <Button disabled>Disabled</Button>
         </VerticalButtonGroup>
 
@@ -322,9 +322,9 @@ storiesOf("Space Kit", module)
           }}
         >
           <Button>Rest</Button>
-          <Button forceHoverState>Hover</Button>
-          <Button forceActiveState>Active</Button>
-          <Button forceFocusState>Focused</Button>
+          <Button data-force-hover-state="true">Hover</Button>
+          <Button data-force-active-state="true">Active</Button>
+          <Button data-force-focus-state="true">Focused</Button>
           <Button disabled>Disabled</Button>
         </VerticalButtonGroup>
       </DemoSection>
