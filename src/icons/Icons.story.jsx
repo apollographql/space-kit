@@ -55,7 +55,7 @@ storiesOf('Icons', module)
     return (
       <Page
         title="Icons"
-        description="Icons are an essentialy tool in visually communicating concepts to users, while also allowing users to more easily recongize and recall parts of the interface we design."
+        description="Icons are an essential tool in visually communicating concepts to users, while also allowing users to more easily recongize and recall parts of the interface we design."
       >
         {Object.entries(groupedIcons).map(([category, icons]) => (
           <Column key={category} title={category}>
