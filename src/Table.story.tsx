@@ -62,11 +62,13 @@ storiesOf("Space Kit", module)
       data={users}
       columns={[
         {
+          id:1,
           render: ({ image }) => (
             <img css={{ width: 32, height: 32 }} src={image} />
           )
         },
         {
+          id:2,
           headerTitle: "description",
           render: ({ name, email }) => (
             <React.Fragment>
@@ -83,6 +85,7 @@ storiesOf("Space Kit", module)
           )
         },
         {
+          id:3,
           headerTitle:
             <div
             css={{

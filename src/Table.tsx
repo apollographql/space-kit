@@ -20,6 +20,10 @@ interface Props<RowShape> {
      * Title to add to the table header
      */
     headerTitle?: React.ReactNode | string;
+    /**
+     * an id for the column
+     */
+    id: string | number;
 
     /**
      * A method that accepts the data for the row and returns the inner content for the row.
@@ -37,7 +41,7 @@ interface Props<RowShape> {
 export function Table<RowShape>({
   data,
   density = "standard",
-  columns
+  columns,
 }: Props<RowShape>): ReturnType<React.FC> {
   const padding = density === "standard" ? 8 : density === "condensed" ? 3 : 11;
 
@@ -54,9 +58,9 @@ export function Table<RowShape>({
             borderBottom: `1px solid ${colors.silver.dark}`
           }}
         >
-          {columns.map(({ headerTitle }, index) => (
+          {columns.map(({ headerTitle, id }) => (
             <th
-              key={index}
+              key={id}
               css={{
                 ...typography.base.xsmall,
                 textTransform: "uppercase",
@@ -76,10 +80,11 @@ export function Table<RowShape>({
           <tr key={index}>
             {columns.map(
               ({
-                render
-              }, rowIndex) => (
+                render,
+                id
+              }) => (
                 <td 
-                  key={rowIndex}
+                  key={id}
                   css={{
                     // no border on the bottom row
                     borderBottom: index === data.length-1 ? `none`: `1px solid ${colors.silver.dark}`,
