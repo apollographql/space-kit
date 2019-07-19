@@ -14,14 +14,14 @@ function Table(_a) {
         core_1.jsx("thead", null,
             core_1.jsx("tr", { css: {
                     borderBottom: "1px solid " + colors.silver.dark
-                } }, columns.map(function (_a) {
+                } }, columns.map(function (_a, index) {
                 var headerTitle = _a.headerTitle;
-                return (core_1.jsx("th", { css: tslib_1.__assign({}, typography.base.xsmall, { textTransform: "uppercase", color: colors.grey.darker, fontWeight: 600, textAlign: "left", padding: padding }) }, headerTitle));
+                return (core_1.jsx("th", { key: index, css: tslib_1.__assign({}, typography.base.xsmall, { textTransform: "uppercase", color: colors.grey.darker, fontWeight: 600, textAlign: "left", padding: padding }) }, headerTitle));
             }))),
-        core_1.jsx("tbody", null, data.map(function (item, index) { return (core_1.jsx("tr", { key: index }, columns.map(function (_a) {
+        core_1.jsx("tbody", null, data.map(function (item, index) { return (core_1.jsx("tr", { key: index }, columns.map(function (_a, rowIndex) {
             var render = _a.render;
-            return (core_1.jsx("td", { css: {
-                    borderBottom: "1px solid " + colors.silver.dark,
+            return (core_1.jsx("td", { key: rowIndex, css: {
+                    borderBottom: index === data.length - 1 ? "none" : "1px solid " + colors.silver.dark,
                     padding: padding
                 } }, render(item, index, data)));
         }))); }))));

@@ -83,7 +83,15 @@ storiesOf("Space Kit", module)
           )
         },
         {
-          headerTitle: "Date Added",
+          headerTitle:
+            <div
+            css={{
+              color: colors.blue.base,
+            }}
+            onClick={() => console.log("clicked")}
+          >
+            Date Added
+          </div>,
           render: ({ dateAdded }) => dateAdded
         }
       ]}
