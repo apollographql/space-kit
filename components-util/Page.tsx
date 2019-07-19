@@ -1,9 +1,12 @@
 import React from 'react';
 
-export const Page = ({ title, description, children }) => (
+export const Page: React.FC<{
+  title: string;
+  description: string;
+}> = ({ title, description, children }) => (
   <div style={{ overflowX: 'auto' }}>
     <div style={{ padding: '42px 22px 42px 42px', width: 'min-content' }}>
-      <div class="font-t1 font-semibold" style={{ marginBottom: 8 }}>
+      <div style={{ marginBottom: 8 }} className="font-t1 font-semibold">
         {title}
       </div>
       <div style={{ maxWidth: 460, marginBottom: 64 }}>{description}</div>
