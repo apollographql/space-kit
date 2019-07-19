@@ -1,176 +1,91 @@
-import React from "react";
-import { storiesOf } from "@storybook/react";
-import { withKnobs, select } from "@storybook/addon-knobs/react";
-import * as colors from "../colors";
-import camelcase from "camelcase";
+import React from 'react';
+import { storiesOf } from '@storybook/react';
+import { withKnobs, select } from '@storybook/addon-knobs/react';
+import * as colors from '../colors';
+import camelcase from 'camelcase';
+import { Page } from '../../components-util/Page';
+import { Column } from '../../components-util/Column';
 
-// const req = require.context("../../../", true, /\.tsx$/);
-const svgsReq = require.context("./svgs", true, /\.svg$/);
+const svgsReq = require.context('./svgs', true, /\.svg$/);
 
-function formatComponentName(basename) {
-  return camelcase(basename.replace(/@\d+x\d+/, "").replace(/-sl$/, ""), {
+const formatName = basename =>
+  camelcase(basename.replace(/@\d+x\d+/, '').replace(/-sl$/, ''), {
     pascalCase: true
   });
-}
 
-function Category({ children, name }) {
-  return (
-    <div
-      style={{
-        borderTop: `1px solid ${colors.silver.dark}`,
-        marginLeft: 10,
-        marginRight: 10,
-        width: 300,
-        paddingTop: 24
-      }}
-    >
-      <div
-        style={{
-          fontSize: 15,
-          fontWeight: "bold",
-          textTransform: "uppercase"
-        }}
-      >
-        {name}
-      </div>
-      {children}
-    </div>
-  );
-}
+const colorMap = {};
+Object.keys(colors).forEach(color => {
+  const shades = Object.keys(colors[color]);
+  shades.forEach(shade => {
+    colorMap[`${color}-${shade}`] = colors[color][shade];
+  });
+});
 
-function IconWrapper({ children }) {
-  return (
-    <div
-      style={{
-        flex: 0,
-        width: 20,
-        height: 20,
-        marginLeft: 8
-      }}
-    >
-      {children}
-    </div>
-  );
-}
+// Organize all the icons by category. This will create an object with the keys
+// being the categories and the values being an array of {Component, componentName}.
+const groupedIcons = svgsReq.keys().reduce((map, fullname) => {
+  const match = fullname.match(/^\.\/([^\/]+)\/(.+)/);
+  if (!match) {
+    console.warn('Could not match filename', fullname);
+    return map;
+  }
 
-function ComponentName({ children }) {
-  return (
-    <div
-      style={{
-        width: 180,
-        whiteSpace: "nowrap",
-        overflow: "hidden",
-        textOverflow: "ellipsis"
-      }}
-    >
-      {children}
-    </div>
-  );
-}
+  const [, category, filename] = match;
+  const basename = filename
+    .split('.')
+    .slice(0, -1)
+    .join('.');
 
-function IconRow({ children }) {
-  return (
-    <div
-      style={{
-        marginTop: 16,
-        marginBottom: 16,
-        display: "flex"
-      }}
-    >
-      {children}
-    </div>
-  );
-}
+  if (!map[category]) map[category] = [];
+  const componentName = formatName(basename);
 
-storiesOf("Space Kit", module)
-  .addParameters({ options: { showPanel: true } })
+  map[category].push({
+    basename: componentName,
+    isStreamlineIcon: fullname.includes('-sl'),
+    Component: require(`../../icons/${componentName}.tsx`)[componentName]
+  });
+
+  return map;
+}, {});
+
+storiesOf('Icons', module)
   .addDecorator(withKnobs)
-  .add("Icons", () => {
-    const color = select(
-      "Color",
-      {
-        black: colors.black.base,
-        "teal-base": colors.teal.base,
-        "pink-base": colors.pink.base,
-        "indigo-dark": colors.indigo.dark
-      },
-      colors.teal.base
-    );
-
-    // Organize all the icons by category. This will create an object with the keys
-    // being the categories and the values being an array of {Component, componentName}.
-    const categorizedComponents = svgsReq
-      .keys()
-      .reduce((accumulator, fullFilename) => {
-        const match = fullFilename.match(/^\.\/([^\/]+)\/(.+)/);
-        if (!match) {
-          console.warn("Could not match filename", fullFilename);
-
-          return accumulator;
-        }
-
-        const [, category, filename] = match;
-        const basename = filename
-          .split(".")
-          .slice(0, -1)
-          .join(".");
-
-        if (!accumulator[category]) {
-          accumulator[category] = [];
-        }
-        const componentName = formatComponentName(basename);
-
-        accumulator[category].push({
-          componentName,
-          Component: require(`../../icons/${componentName}.tsx`)[componentName],
-          isStreamlineIcon: fullFilename.includes("-sl")
-        });
-
-        return accumulator;
-      }, {});
-
+  .add('Catalog', () => {
+    const color = select('Color', colorMap, colors.black.base);
     return (
-      <div style={{ margin: 10 }}>
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            marginLeft: -10,
-            marginRight: -10
-          }}
-        >
-          {Object.entries(categorizedComponents).map(
-            ([category, componentArray]) => {
-              return (
-                <Category key={category} name={category}>
-                  {componentArray.map(
-                    ({ componentName, Component, isStreamlineIcon }) => (
-                      <IconRow key={componentName}>
-                        <ComponentName>
-                          {componentName}
-                          {isStreamlineIcon ? (
-                            <abbr title="Streamline icon">*</abbr>
-                          ) : (
-                            ""
-                          )}
-                        </ComponentName>
-                        <IconWrapper>
-                          <Component
-                            style={{
-                              width: 20,
-                              height: 20,
-                              color: color
-                            }}
-                          />
-                        </IconWrapper>
-                      </IconRow>
-                    )
+      <Page
+        title="Icons"
+        description="Icons are an essentialy tool in visually communicating concepts to users, while also allowing users to more easily recongize and recall parts of the interface we design."
+      >
+        {Object.entries(groupedIcons).map(([category, icons]) => (
+          <Column key={category} title={category}>
+            {icons.map(({ basename, isStreamlineIcon, Component }) => (
+              <div
+                key={basename}
+                style={{ marginTop: 16, marginBottom: 16, display: 'flex' }}
+              >
+                <div style={{ width: 180, textOverflow: 'ellipsis' }}>
+                  {basename}{' '}
+                  {isStreamlineIcon && (
+                    <span
+                      className="font-lbl"
+                      style={{ color: colors.silver.darker }}
+                    >
+                      sl
+                    </span>
                   )}
-                </Category>
-              );
-            }
-          )}
-        </div>
-      </div>
+                </div>
+                <Component
+                  style={{
+                    width: 20,
+                    height: 20,
+                    color: color
+                  }}
+                />
+              </div>
+            ))}
+          </Column>
+        ))}
+      </Page>
     );
   });

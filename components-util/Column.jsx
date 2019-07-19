@@ -1,15 +1,23 @@
-import React from "react";
-import * as colors from "../src/colors";
+import React from 'react';
+import * as colors from '../src/colors';
 
 export const Column = ({ title, description, children }) => (
   <div
     style={{
-      flex: 0,
       marginRight: 20,
-      borderTop: `1px solid ${colors.silver.dark}`
+      borderTop: `1px solid ${colors.silver.dark}`,
+      width: 300
     }}
   >
-    <div className="font-lbl" style={{ marginTop: 24, marginBottom: 4 }}>
+    <div
+      style={{
+        marginTop: 24,
+        marginBottom: 4,
+        fontWeight: 'bold',
+        textTransform: 'uppercase',
+        letterSpacing: 0.75
+      }}
+    >
       {title}
     </div>
     <div className="font-sm" style={{ marginBottom: 24 }}>

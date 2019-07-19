@@ -1,11 +1,13 @@
 import React from 'react';
 
 export const Page = ({ title, description, children }) => (
-  <div style={{ padding: 42 }}>
-    <div class="font-t1 font-semibold" style={{ marginBottom: 8 }}>
-      {title}
+  <div style={{ overflowX: 'auto' }}>
+    <div style={{ padding: '42px 22px 42px 42px', width: 'min-content' }}>
+      <div class="font-t1 font-semibold" style={{ marginBottom: 8 }}>
+        {title}
+      </div>
+      <div style={{ maxWidth: 460, marginBottom: 64 }}>{description}</div>
+      <div style={{ display: 'flex', width: 'min-content' }}>{children}</div>
     </div>
-    <div style={{ maxWidth: 460, marginBottom: 64 }}>{description}</div>
-    <div style={{ display: 'flex' }}>{children}</div>
   </div>
 );

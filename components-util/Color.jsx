@@ -1,13 +1,13 @@
-import React from "react";
-import classnames from "classnames";
-import * as colors from "../src/colors";
+import React from 'react';
+import classnames from 'classnames';
+import * as colors from '../src/colors';
 
 export const Flag = ({ small, light, pass }) => (
   <div
-    className={classnames("font-semibold", small ? "font-sm" : "")}
+    className={classnames('font-semibold', small ? 'font-sm' : '')}
     style={{
-      display: "inline-block",
-      textAlign: "center",
+      display: 'inline-block',
+      textAlign: 'center',
       width: 40,
       marginLeft: 10,
       color: light ? colors.white : colors.black.base
@@ -27,7 +27,7 @@ export const Tag = ({ bool }) => (
       backgroundColor: colors.black.base
     }}
   >
-    {bool ? "PASS" : "FAIL"}
+    {bool ? 'PASS' : 'FAIL'}
   </div>
 );
 
@@ -36,26 +36,25 @@ export const Patch = ({ color, label, text, flag, flags }) => (
     style={{
       backgroundColor: color,
       height: 100,
-      width: 300,
       borderRadius: 4,
       marginTop: 20,
       padding: 8,
-      display: "flex",
-      position: "relative",
-      alignItems: "flex-end",
+      display: 'flex',
+      position: 'relative',
+      alignItems: 'flex-end',
       color: text ? colors.white : colors.black.base
     }}
   >
     {flag && (
       <div
         style={{
-          position: "absolute",
+          position: 'absolute',
           top: 8,
           left: 8,
           minWidth: 40,
-          padding: "0 5px",
+          padding: '0 5px',
           borderRadius: 2,
-          textAlign: "center",
+          textAlign: 'center',
           color: colors.black.base,
           backgroundColor: colors.white
         }}
@@ -66,7 +65,7 @@ export const Patch = ({ color, label, text, flag, flags }) => (
     )}
     <div
       style={{
-        position: "absolute",
+        position: 'absolute',
         top: 8,
         right: 8
       }}
@@ -77,7 +76,7 @@ export const Patch = ({ color, label, text, flag, flags }) => (
     <div style={{ flex: 0 }} className="font-lbl font-code">
       {color}
     </div>
-    <div style={{ flex: 1, textAlign: "right" }}>
+    <div style={{ flex: 1, textAlign: 'right' }}>
       <Flag small={1} light={1} pass={flags[0]} />
       <Flag small={0} light={1} pass={flags[1]} />
       <Flag small={1} light={0} pass={flags[2]} />
