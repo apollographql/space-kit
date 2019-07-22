@@ -14,50 +14,50 @@ const defaultTypographyDefinitions: {
   fontWeight: CSS.FontWeightProperty;
 } = {
   fontFamily: fonts.base,
-  fontWeight: "normal"
+  fontWeight: "normal",
 };
 
 export const xxxlarge: TypographyDefinition = {
   ...defaultTypographyDefinitions,
   fontSize: 31,
   fontWeight: 600,
-  lineHeight: 1.35
+  lineHeight: 1.35,
 };
 
 export const xxlarge: TypographyDefinition = {
   ...defaultTypographyDefinitions,
   fontSize: 26,
   fontWeight: 600,
-  lineHeight: 1.23
+  lineHeight: 1.23,
 };
 
 export const xlarge: TypographyDefinition = {
   ...defaultTypographyDefinitions,
   fontSize: 22,
   fontWeight: 600,
-  lineHeight: 1.5
+  lineHeight: 1.5,
 };
 
 export const large: TypographyDefinition = {
   ...defaultTypographyDefinitions,
   fontSize: 18,
-  lineHeight: 1.5
+  lineHeight: 1.5,
 };
 
 export const base: TypographyDefinition = {
   ...defaultTypographyDefinitions,
   fontSize: 15,
-  lineHeight: 1.53
+  lineHeight: 1.53,
 };
 
 export const small: TypographyDefinition = {
   ...defaultTypographyDefinitions,
   fontSize: 13,
-  lineHeight: 1.54
+  lineHeight: 1.54,
 };
 
 export const xsmall: TypographyDefinition = {
   ...defaultTypographyDefinitions,
   fontSize: 11,
-  lineHeight: 1.55
+  lineHeight: 1.55,
 };

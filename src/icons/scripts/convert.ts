@@ -35,7 +35,7 @@ const COMPONENT_PATH = path.resolve(__dirname, "..", "..", "..", "icons");
             // configurable and will sometimes remove fills and strokes that we
             // don't want removed.
             const { data: svg } = await svgo.optimize(svgCode, {
-              path: path.join(fullSvgDirectory, filename)
+              path: path.join(fullSvgDirectory, filename),
             });
 
             const componentName = formatComponentName(
@@ -52,7 +52,7 @@ const COMPONENT_PATH = path.resolve(__dirname, "..", "..", "..", "icons");
                   { imports, componentName, jsx }
                 ) {
                   const typeScriptTpl = template.smart({
-                    plugins: ["typescript"]
+                    plugins: ["typescript"],
                   });
 
                   return typeScriptTpl.ast`
@@ -65,8 +65,8 @@ const COMPONENT_PATH = path.resolve(__dirname, "..", "..", "..", "icons");
                   "#000": "currentColor",
                   "#000000": "currentColor",
                   // Color used by GitHub icon 🤷‍♀️
-                  "#12151A": "currentColor"
-                }
+                  "#12151A": "currentColor",
+                },
               },
               { componentName }
             );

@@ -15,7 +15,7 @@ interface Props<RowShape> {
   /**
    * An array of column definitions
    */
-  columns: Array<{
+  columns: {
     /**
      * Title to add to the table header
      */
@@ -33,9 +33,9 @@ interface Props<RowShape> {
     render: (
       input: Readonly<RowShape>,
       index: number,
-      list: ReadonlyArray<RowShape>
+      list: readonly RowShape[]
     ) => React.ReactNode;
-  }>;
+  }[];
 
   /**
    * a field name to key rows on
@@ -50,7 +50,8 @@ export function Table<RowShape>({
   keyOn,
 }: Props<RowShape>): ReturnType<React.FC> {
   const padding = density === "standard" ? 8 : density === "condensed" ? 3 : 11;
-  const getRowKey = typeof keyOn === 'function' ? keyOn : (row: RowShape) => row[keyOn];
+  const getRowKey =
+    typeof keyOn === "function" ? keyOn : (row: RowShape) => row[keyOn];
 
   return (
     <table
@@ -62,7 +63,7 @@ export function Table<RowShape>({
       <thead>
         <tr
           css={{
-            borderBottom: `1px solid ${colors.silver.dark}`
+            borderBottom: `1px solid ${colors.silver.dark}`,
           }}
         >
           {columns.map(({ headerTitle, id }) => (
@@ -74,7 +75,7 @@ export function Table<RowShape>({
                 color: colors.grey.darker,
                 fontWeight: 600,
                 textAlign: "left",
-                padding
+                padding,
               }}
             >
               {headerTitle}
@@ -85,21 +86,21 @@ export function Table<RowShape>({
       <tbody>
         {data.map((item, index) => (
           <tr key={getRowKey(item)}>
-            {columns.map(
-              ({
-                render,
-                id
-              }) => (
-                <td 
-                  key={id}
-                  css={{
-                    // no border on the bottom row
-                    borderBottom: index === data.length-1 ? `none`: `1px solid ${colors.silver.dark}`,
-                    padding
-                  }}
-                >{render(item, index, data)}</td>
-              )
-            )}
+            {columns.map(({ render, id }) => (
+              <td
+                key={id}
+                css={{
+                  // no border on the bottom row
+                  borderBottom:
+                    index === data.length - 1
+                      ? `none`
+                      : `1px solid ${colors.silver.dark}`,
+                  padding,
+                }}
+              >
+                {render(item, index, data)}
+              </td>
+            ))}
           </tr>
         ))}
       </tbody>

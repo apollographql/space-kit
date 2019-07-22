@@ -18,7 +18,7 @@ export const pink: ColorPalette = {
   base: "#f25cc1",
   light: "#ffa3e0",
   lighter: "#ffd4f1",
-  lightest: "#ffe6f7"
+  lightest: "#ffe6f7",
 };
 
 export const teal: ColorPalette = {
@@ -28,7 +28,7 @@ export const teal: ColorPalette = {
   base: "#41d9d3",
   light: "#8bf6f2",
   lighter: "#c6fffd",
-  lightest: "#e6fffe"
+  lightest: "#e6fffe",
 };
 
 export const indigo: ColorPalette = {
@@ -38,7 +38,7 @@ export const indigo: ColorPalette = {
   base: "#7156d9",
   light: "#ad9bf6",
   lighter: "#d9cfff",
-  lightest: "#ebe6ff"
+  lightest: "#ebe6ff",
 };
 
 export const black: MonochromePalette = {
@@ -46,7 +46,7 @@ export const black: MonochromePalette = {
   dark: "#14171C",
   base: "#191C23",
   light: "#22262E",
-  lighter: "#2F353F"
+  lighter: "#2F353F",
 };
 
 export const grey: MonochromePalette = {
@@ -54,7 +54,7 @@ export const grey: MonochromePalette = {
   dark: "#5A6270",
   base: "#777F8E",
   light: "#959DAA",
-  lighter: "#B2B9C3"
+  lighter: "#B2B9C3",
 };
 
 export const silver: MonochromePalette = {
@@ -62,7 +62,7 @@ export const silver: MonochromePalette = {
   dark: "#DEE2E7",
   base: "#EBEEF0",
   light: "#F4F6F8",
-  lighter: "#FCFDFF"
+  lighter: "#FCFDFF",
 };
 
 export const red: ColorPalette = {
@@ -72,7 +72,7 @@ export const red: ColorPalette = {
   base: "#d13b3b",
   light: "#f18686",
   lighter: "#ffc3c3",
-  lightest: "#ffe6e6"
+  lightest: "#ffe6e6",
 };
 
 export const green: ColorPalette = {
@@ -82,7 +82,7 @@ export const green: ColorPalette = {
   base: "#36ad68",
   light: "#7ed9a4",
   lighter: "#bef4d5",
-  lightest: "#e6fff0"
+  lightest: "#e6fff0",
 };
 
 export const blue: ColorPalette = {
@@ -92,7 +92,7 @@ export const blue: ColorPalette = {
   base: "#2075d6",
   light: "#74b0f4",
   lighter: "#bbdbff",
-  lightest: "#f0f7ff"
+  lightest: "#f0f7ff",
 };
 
 export const orange: ColorPalette = {
@@ -102,7 +102,7 @@ export const orange: ColorPalette = {
   base: "#f59140",
   light: "#ffc18f",
   lighter: "#ffe2ca",
-  lightest: "#fff1e6"
+  lightest: "#fff1e6",
 };
 
 export const yellow: ColorPalette = {
@@ -112,7 +112,7 @@ export const yellow: ColorPalette = {
   base: "#f4d03f",
   light: "#ffe88e",
   lighter: "#fff4ca",
-  lightest: "#fffae6"
+  lightest: "#fffae6",
 };
 
 export const purple: ColorPalette = {
@@ -122,7 +122,7 @@ export const purple: ColorPalette = {
   base: "#a23df5",
   light: "#cd8fff",
   lighter: "#e8ccff",
-  lightest: "#f4e6ff"
+  lightest: "#f4e6ff",
 };
 
 export const blilet: ColorPalette = {
@@ -132,7 +132,7 @@ export const blilet: ColorPalette = {
   base: "#5168C2",
   light: "#7A92F0",
   lighter: "#B0BEF7",
-  lightest: "#E6EBFF"
+  lightest: "#E6EBFF",
 };
 
 export const white = "#ffffff";
