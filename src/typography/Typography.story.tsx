@@ -6,7 +6,7 @@ import { Page } from "../../components-util/Page";
 import { Column } from "../../components-util/Column";
 
 function round(number: number, digits: number): number {
-  const multiplier = Math.pow(10, digits);
+  const multiplier = 10 ** digits;
 
   return Math.round(number * multiplier) / multiplier;
 }

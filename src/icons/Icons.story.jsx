@@ -24,9 +24,8 @@ Object.keys(colors).forEach(color => {
 // Organize all the icons by category. This will create an object with the keys
 // being the categories and the values being an array of {Component, componentName}.
 const groupedIcons = svgsReq.keys().reduce((map, fullname) => {
-  const match = fullname.match(/^\.\/([^\/]+)\/(.+)/);
+  const match = fullname.match(/^\.\/([^/]+)\/(.+)/);
   if (!match) {
-    console.warn("Could not match filename", fullname);
     return map;
   }
 

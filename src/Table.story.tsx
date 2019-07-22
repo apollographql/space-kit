@@ -92,7 +92,6 @@ storiesOf("Space Kit", module)
               css={{
                 color: colors.blue.base,
               }}
-              onClick={() => console.log("clicked")}
             >
               Date Added
             </div>
