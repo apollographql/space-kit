@@ -51,6 +51,7 @@ storiesOf("Space Kit", module)
   .addDecorator(withKnobs)
   .add("Table", () => (
     <Table<User>
+      keyOn="name"
       css={{ color: colors.black.base }}
       density={
         select("Density", ["standard", "condensed", "relaxed"], "standard") as
@@ -62,11 +63,13 @@ storiesOf("Space Kit", module)
       data={users}
       columns={[
         {
+          id:1,
           render: ({ image }) => (
             <img css={{ width: 32, height: 32 }} src={image} />
           )
         },
         {
+          id:2,
           headerTitle: "description",
           render: ({ name, email }) => (
             <React.Fragment>
@@ -83,7 +86,16 @@ storiesOf("Space Kit", module)
           )
         },
         {
-          headerTitle: "Date Added",
+          id:3,
+          headerTitle:
+            <div
+            css={{
+              color: colors.blue.base,
+            }}
+            onClick={() => console.log("clicked")}
+          >
+            Date Added
+          </div>,
           render: ({ dateAdded }) => dateAdded
         }
       ]}

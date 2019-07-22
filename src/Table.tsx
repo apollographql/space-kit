@@ -19,7 +19,11 @@ interface Props<RowShape> {
     /**
      * Title to add to the table header
      */
-    headerTitle?: string;
+    headerTitle?: React.ReactNode | string;
+    /**
+     * an id for the column
+     */
+    id: string | number;
 
     /**
      * A method that accepts the data for the row and returns the inner content for the row.
@@ -32,19 +36,27 @@ interface Props<RowShape> {
       list: ReadonlyArray<RowShape>
     ) => React.ReactNode;
   }>;
+
+  /**
+   * a field name to key rows on
+   */
+  keyOn: keyof RowShape | ((row: RowShape) => any);
 }
 
 export function Table<RowShape>({
   data,
   density = "standard",
-  columns
+  columns,
+  keyOn,
 }: Props<RowShape>): ReturnType<React.FC> {
   const padding = density === "standard" ? 8 : density === "condensed" ? 3 : 11;
+  const getRowKey = typeof keyOn === 'function' ? keyOn : (row: RowShape) => row[keyOn];
 
   return (
     <table
       css={{
-        borderCollapse: "collapse"
+        borderCollapse: "collapse",
+        width: "100%",
       }}
     >
       <thead>
@@ -53,8 +65,9 @@ export function Table<RowShape>({
             borderBottom: `1px solid ${colors.silver.dark}`
           }}
         >
-          {columns.map(({ headerTitle }) => (
+          {columns.map(({ headerTitle, id }) => (
             <th
+              key={id}
               css={{
                 ...typography.base.xsmall,
                 textTransform: "uppercase",
@@ -71,14 +84,17 @@ export function Table<RowShape>({
       </thead>
       <tbody>
         {data.map((item, index) => (
-          <tr>
+          <tr key={getRowKey(item)}>
             {columns.map(
               ({
-                render
+                render,
+                id
               }) => (
                 <td 
+                  key={id}
                   css={{
-                    borderBottom: `1px solid ${colors.silver.dark}`,
+                    // no border on the bottom row
+                    borderBottom: index === data.length-1 ? `none`: `1px solid ${colors.silver.dark}`,
                     padding
                   }}
                 >{render(item, index, data)}</td>
