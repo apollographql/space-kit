@@ -2,8 +2,6 @@ import * as baseFont from "./base";
 import { mono as monoFontFamily } from "../fonts";
 import { TypographyDefinition } from "./TypographyDefinition";
 
-console.warn(monoFontFamily);
-
 export const large: TypographyDefinition = {
   ...baseFont.large,
   fontFamily: monoFontFamily,
