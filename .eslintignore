@@ -1,1 +1,5 @@
 icons/*.tsx
+!.eslintrc.js
+
+# Storybook
+!.storybook
