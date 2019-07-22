@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, ObjectInterpolation, css } from "@emotion/core";
+import { jsx, ObjectInterpolation } from "@emotion/core";
 import React, { ComponentProps } from "react";
 import { storiesOf } from "@storybook/react";
 import { Button } from "./Button";
@@ -9,20 +9,20 @@ import { IconShip2 } from "../icons/IconShip2.tsx";
 import { colors } from ".";
 import * as typography from "./typography";
 import { DemoSection } from "./shared/DemoSection";
-import classnames from "classnames";
 
 const iconElement = <IconShip2 css={{ width: "100%", height: "100%" }} />;
 
 // This is a clever way of allowing us to use `cloneElement` while still giving
 // us the `jsx` transform for emotion.
 // @see https://github.com/emotion-js/emotion/issues/1102#issuecomment-446887725
-const cloneElement = (element: any, props: any) =>
-  jsx(element.type, {
+const cloneElement = (element: any, props: any) => {
+  return jsx(element.type, {
     key: element.key,
     ref: element.ref,
     ...element.props,
     ...props,
   });
+};
 
 /**
  * Wrap children with a rounded border
@@ -216,7 +216,7 @@ storiesOf("Space Kit", module)
         >
           <React.Fragment>
             <Button css={{ marginRight: 6 }} icon={iconElement} />
-            <Button css={{ marginLeft: 6 }} fab icon={iconElement} />
+            <Button css={{ marginLeft: 6 }} variant="fab" icon={iconElement} />
           </React.Fragment>
           <React.Fragment>
             <Button
@@ -227,7 +227,7 @@ storiesOf("Space Kit", module)
             <Button
               css={{ marginLeft: 6 }}
               data-force-hover-state="true"
-              fab
+              variant="fab"
               icon={iconElement}
             />
           </React.Fragment>
@@ -240,7 +240,7 @@ storiesOf("Space Kit", module)
             <Button
               css={{ marginLeft: 6 }}
               data-force-active-state="true"
-              fab
+              variant="fab"
               icon={iconElement}
             />
           </React.Fragment>
@@ -253,13 +253,18 @@ storiesOf("Space Kit", module)
             <Button
               css={{ marginLeft: 6 }}
               data-force-focus-state="true"
-              fab
+              variant="fab"
               icon={iconElement}
             />
           </React.Fragment>
           <React.Fragment>
             <Button css={{ marginRight: 6 }} disabled icon={iconElement} />
-            <Button css={{ marginLeft: 6 }} disabled fab icon={iconElement} />
+            <Button
+              css={{ marginLeft: 6 }}
+              disabled
+              variant="fab"
+              icon={iconElement}
+            />
           </React.Fragment>
         </VerticalButtonGroup>
       </DemoSection>
@@ -270,7 +275,7 @@ storiesOf("Space Kit", module)
       >
         <VerticalButtonGroup
           title="Basic simple button"
-          buttonProps={{ variant: "simple" }}
+          buttonProps={{ feel: "flat" }}
           buttonCss={{
             color: colors.grey.darker,
             ":focus, &[data-force-focus-state]": {
@@ -312,7 +317,7 @@ storiesOf("Space Kit", module)
 
         <VerticalButtonGroup
           title="Simple color button"
-          buttonProps={{ variant: "simple" }}
+          buttonProps={{ feel: "flat" }}
           buttonCss={{
             color: colors.blue.base,
             ":hover, &[data-force-hover-state]": {
@@ -343,7 +348,7 @@ storiesOf("Space Kit", module)
 
         <VerticalButtonGroup
           title="Simple button with icon"
-          buttonProps={{ variant: "simple", icon: iconElement }}
+          buttonProps={{ feel: "flat", icon: iconElement }}
           buttonCss={{
             color: colors.grey.darker,
             ":focus, &[data-force-focus-state]": {

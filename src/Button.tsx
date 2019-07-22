@@ -1,9 +1,8 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import React, { ComponentProps } from "react";
 import * as colors from "./colors";
-import * as CSS from "csstype";
 import { base } from "./typography";
+import { ComponentProps } from "react";
 
 // Types that could use some improvement:
 // * Don't allow `children` and `icon` to be missing
@@ -23,7 +22,7 @@ interface Props
    * You must include an `icon` prop and you must _not_ include a `children`
    * prop for a floating action button.
    */
-  fab?: boolean;
+  variant?: "fab";
 
   /**
    * Either an icon to show to the left of the button text, or on it's own
@@ -38,15 +37,15 @@ interface Props
   size?: "default" | "small" | "large";
 
   /**
-   * Which variant to display
+   * Which feel to display
    *
    * The options are as follows:
    *
-   * - `normal`: A button with a border and a background
-   * - `simple`: No border or background (overrideable).
+   * - `raised` (default): A button with a border and a background
+   * - `flat`: No border or background (overrideable).
    *     - This will require you adding an `:active` style in addition to `:hover`
    */
-  variant?: "normal" | "simple";
+  feel?: "raised" | "flat";
 }
 
 /**
@@ -60,10 +59,10 @@ interface Props
 export const Button: React.FC<Props> = ({
   children,
   disabled = false,
-  fab = false,
+  variant,
+  feel = "raised",
   icon,
   size = "default",
-  variant = "normal",
   ...otherProps
 }) => {
   /**
@@ -75,7 +74,7 @@ export const Button: React.FC<Props> = ({
 
   const iconOnly = !children;
 
-  if (fab) {
+  if (variant === "fab") {
     if (!icon) {
       throw new TypeError("FAB buttons are required to have an `icon`");
     } else if (children) {
@@ -104,12 +103,14 @@ export const Button: React.FC<Props> = ({
           },
         },
 
-        variant === "simple" && { backgroundColor: "transparent" },
         {
-          borderRadius: fab ? "100%" : 4,
+          backgroundColor:
+            feel === "raised" ? colors.silver.light : "transparent",
+
+          borderRadius: variant === "fab" ? "100%" : 4,
 
           borderWidth: 0,
-          ...(variant === "normal" && {
+          ...(feel === "raised" && {
             boxShadow:
               "0 1px 4px 0 rgba(18, 21, 26, 0.08), inset 0 0 0 1px rgba(18, 21, 26, 0.2), inset 0 -1px 0 0 rgba(18, 21, 26, 0.05)",
           }),
@@ -135,6 +136,7 @@ export const Button: React.FC<Props> = ({
             : base.base),
 
           fontWeight: 600,
+
           // Disable the outline because we're setting a custom `:active` style
           outline: 0,
         },
@@ -144,7 +146,7 @@ export const Button: React.FC<Props> = ({
           ":hover, &[data-force-hover-state]": {
             backgroundColor: colors.silver.base,
             cursor: "pointer",
-            ...(variant === "normal" && {
+            ...(feel === "raised" && {
               // The `box-shadow` property is copied directly from Zeplin
               boxShadow:
                 "0 5px 10px 0 rgba(18, 21, 26, 0.12), inset 0 0 0 1px rgba(18, 21, 26, 0.2), inset 0 -1px 0 0 rgba(18, 21, 26, 0.05)",
@@ -155,16 +157,14 @@ export const Button: React.FC<Props> = ({
             boxShadow:
               "0 1px 4px 0 rgba(18, 21, 26, 0.08), 0 0 0 2px #bbdbff, inset 0 0 0 1px #2075d6, inset 0 -1px 0 0 rgba(18, 21, 26, 0.05)",
           },
-          "&:active, &[data-force-active-state]": [
-            variant === "normal" && {
-              // The `box-shadow` property is copied directly from Zeplin
-              boxShadow:
-                "inset 0 0 0 1px rgba(18, 21, 26, 0.2), inset 0 -1px 0 0 rgba(18, 21, 26, 0.05), inset 0 2px 2px 0 rgba(18, 21, 26, 0.12)",
-            },
-            {
-              outline: 0,
-            },
-          ],
+          "&:active, &[data-force-active-state]": {
+            // The `box-shadow` property is copied directly from Zeplin
+            boxShadow:
+              feel === "raised"
+                ? "inset 0 0 0 1px rgba(18, 21, 26, 0.2), inset 0 -1px 0 0 rgba(18, 21, 26, 0.05), inset 0 2px 2px 0 rgba(18, 21, 26, 0.12)"
+                : "none",
+            outline: "0",
+          },
         },
       ]}
     >
