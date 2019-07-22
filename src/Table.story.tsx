@@ -51,6 +51,7 @@ storiesOf("Space Kit", module)
   .addDecorator(withKnobs)
   .add("Table", () => (
     <Table<User>
+      keyOn="name"
       css={{ color: colors.black.base }}
       density={
         select("Density", ["standard", "condensed", "relaxed"], "standard") as

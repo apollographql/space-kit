@@ -36,14 +36,21 @@ interface Props<RowShape> {
       list: ReadonlyArray<RowShape>
     ) => React.ReactNode;
   }>;
+
+  /**
+   * a field name to key rows on
+   */
+  keyOn: keyof RowShape | ((row: RowShape) => any);
 }
 
 export function Table<RowShape>({
   data,
   density = "standard",
   columns,
+  keyOn,
 }: Props<RowShape>): ReturnType<React.FC> {
   const padding = density === "standard" ? 8 : density === "condensed" ? 3 : 11;
+  const getRowKey = typeof keyOn === 'function' ? keyOn : (row: RowShape) => row[keyOn];
 
   return (
     <table
@@ -77,7 +84,7 @@ export function Table<RowShape>({
       </thead>
       <tbody>
         {data.map((item, index) => (
-          <tr key={index}>
+          <tr key={getRowKey(item)}>
             {columns.map(
               ({
                 render,
