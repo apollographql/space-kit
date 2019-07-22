@@ -4,6 +4,9 @@ storybook-static
 
 tsconfig.tsbuildinfo
 
+# Eslint cache
+.eslintcache
+
 # Index
 /index.*
 
