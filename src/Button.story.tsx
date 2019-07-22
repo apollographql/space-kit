@@ -271,8 +271,30 @@ storiesOf("Space Kit", module)
         <VerticalButtonGroup
           title="Basic simple button"
           buttonProps={{ variant: "simple" }}
+          buttonCss={{
+            color: colors.grey.darker,
+            ":focus, &[data-force-focus-state]": {
+              color: colors.blue.base,
+            },
+            ":hover, &[data-force-hover-state]": {
+              backgroundColor: colors.silver.light,
+            },
+            ":active, &[data-force-active-state]": {
+              backgroundColor: colors.silver.base,
+            },
+            "&[disabled]": {
+              backgroundColor: "transparent",
+
+              ":hover": {
+                backgroundColor: "transparent",
+              },
+            },
+          }}
           darkButtonCss={{
             color: colors.grey.light,
+            ":focus, &[data-force-focus-state]": {
+              color: colors.blue.light,
+            },
             ":active, &[data-force-active-state]": {
               backgroundColor: colors.grey.darker,
             },
@@ -300,6 +322,17 @@ storiesOf("Space Kit", module)
               backgroundColor: colors.blue.lighter,
             },
           }}
+          darkButtonCss={{
+            color: colors.blue.light,
+            ":hover, &[data-force-hover-state]": {
+              backgroundColor: colors.blue.lightest,
+              color: colors.blue.base,
+            },
+            ":active, &[data-force-active-state]": {
+              color: colors.blue.base,
+              backgroundColor: colors.blue.lighter,
+            },
+          }}
         >
           <Button>Rest</Button>
           <Button data-force-hover-state="true">Hover</Button>
@@ -312,12 +345,34 @@ storiesOf("Space Kit", module)
           title="Simple button with icon"
           buttonProps={{ variant: "simple", icon: iconElement }}
           buttonCss={{
-            color: colors.grey.light,
+            color: colors.grey.darker,
+            ":focus, &[data-force-focus-state]": {
+              color: colors.blue.base,
+            },
             ":hover, &[data-force-hover-state]": {
-              backgroundColor: colors.grey.dark,
+              backgroundColor: colors.silver.light,
+            },
+            ":active, &[data-force-active-state]": {
+              backgroundColor: colors.silver.base,
+            },
+            "&[disabled]": {
+              backgroundColor: "transparent",
+
+              ":hover": {
+                backgroundColor: "transparent",
+              },
+            },
+          }}
+          darkButtonCss={{
+            color: colors.grey.light,
+            ":focus, &[data-force-focus-state]": {
+              color: colors.blue.light,
             },
             ":active, &[data-force-active-state]": {
               backgroundColor: colors.grey.darker,
+            },
+            ":hover, &[data-force-hover-state]": {
+              backgroundColor: colors.grey.dark,
             },
           }}
         >
