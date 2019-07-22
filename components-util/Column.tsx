@@ -1,5 +1,5 @@
-import React from 'react';
-import * as colors from '../src/colors';
+import React from "react";
+import * as colors from "../src/colors";
 
 export const Column: React.FC<{
   title?: string;
@@ -9,7 +9,7 @@ export const Column: React.FC<{
     style={{
       marginRight: 20,
       borderTop: `1px solid ${colors.silver.dark}`,
-      width: 300
+      width: 300,
     }}
   >
     {title && (
@@ -17,9 +17,9 @@ export const Column: React.FC<{
         style={{
           marginTop: 24,
           marginBottom: 4,
-          fontWeight: 'bold',
-          textTransform: 'uppercase',
-          letterSpacing: 0.75
+          fontWeight: "bold",
+          textTransform: "uppercase",
+          letterSpacing: 0.75,
         }}
       >
         {title}

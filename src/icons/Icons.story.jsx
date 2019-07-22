@@ -1,16 +1,16 @@
-import React from 'react';
-import { storiesOf } from '@storybook/react';
-import { withKnobs, select } from '@storybook/addon-knobs/react';
-import * as colors from '../colors';
-import camelcase from 'camelcase';
-import { Page } from '../../components-util/Page';
-import { Column } from '../../components-util/Column';
+import React from "react";
+import { storiesOf } from "@storybook/react";
+import { withKnobs, select } from "@storybook/addon-knobs/react";
+import * as colors from "../colors";
+import camelcase from "camelcase";
+import { Page } from "../../components-util/Page";
+import { Column } from "../../components-util/Column";
 
-const svgsReq = require.context('./svgs', true, /\.svg$/);
+const svgsReq = require.context("./svgs", true, /\.svg$/);
 
 const formatName = basename =>
-  camelcase(basename.replace(/@\d+x\d+/, '').replace(/-sl$/, ''), {
-    pascalCase: true
+  camelcase(basename.replace(/@\d+x\d+/, "").replace(/-sl$/, ""), {
+    pascalCase: true,
   });
 
 const colorMap = {};
@@ -26,32 +26,32 @@ Object.keys(colors).forEach(color => {
 const groupedIcons = svgsReq.keys().reduce((map, fullname) => {
   const match = fullname.match(/^\.\/([^\/]+)\/(.+)/);
   if (!match) {
-    console.warn('Could not match filename', fullname);
+    console.warn("Could not match filename", fullname);
     return map;
   }
 
   const [, category, filename] = match;
   const basename = filename
-    .split('.')
+    .split(".")
     .slice(0, -1)
-    .join('.');
+    .join(".");
 
   if (!map[category]) map[category] = [];
   const componentName = formatName(basename);
 
   map[category].push({
     basename: componentName,
-    isStreamlineIcon: fullname.includes('-sl'),
-    Component: require(`../../icons/${componentName}.tsx`)[componentName]
+    isStreamlineIcon: fullname.includes("-sl"),
+    Component: require(`../../icons/${componentName}.tsx`)[componentName],
   });
 
   return map;
 }, {});
 
-storiesOf('Icons', module)
+storiesOf("Icons", module)
   .addDecorator(withKnobs)
-  .add('Catalog', () => {
-    const color = select('Color', colorMap, colors.black.base);
+  .add("Catalog", () => {
+    const color = select("Color", colorMap, colors.black.base);
     return (
       <Page
         title="Icons"
@@ -62,10 +62,10 @@ storiesOf('Icons', module)
             {icons.map(({ basename, isStreamlineIcon, Component }) => (
               <div
                 key={basename}
-                style={{ marginTop: 16, marginBottom: 16, display: 'flex' }}
+                style={{ marginTop: 16, marginBottom: 16, display: "flex" }}
               >
-                <div style={{ width: 180, textOverflow: 'ellipsis' }}>
-                  {basename}{' '}
+                <div style={{ width: 180, textOverflow: "ellipsis" }}>
+                  {basename}{" "}
                   {isStreamlineIcon && (
                     <span
                       className="font-lbl"
@@ -79,7 +79,7 @@ storiesOf('Icons', module)
                   style={{
                     width: 20,
                     height: 20,
-                    color: color
+                    color,
                   }}
                 />
               </div>
