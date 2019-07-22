@@ -99,9 +99,9 @@ export const Button: React.FC<Props> = ({
             // disabled color.
             ":hover": {
               backgroundColor: colors.silver.dark,
-              color: colors.grey.light
-            }
-          }
+              color: colors.grey.light,
+            },
+          },
         },
 
         variant === "simple" && { backgroundColor: "transparent" },
@@ -111,7 +111,7 @@ export const Button: React.FC<Props> = ({
           borderWidth: 0,
           ...(variant === "normal" && {
             boxShadow:
-              "0 1px 4px 0 rgba(18, 21, 26, 0.08), inset 0 0 0 1px rgba(18, 21, 26, 0.2), inset 0 -1px 0 0 rgba(18, 21, 26, 0.05)"
+              "0 1px 4px 0 rgba(18, 21, 26, 0.08), inset 0 0 0 1px rgba(18, 21, 26, 0.2), inset 0 -1px 0 0 rgba(18, 21, 26, 0.05)",
           }),
 
           minWidth: iconOnly
@@ -147,19 +147,24 @@ export const Button: React.FC<Props> = ({
             ...(variant === "normal" && {
               // The `box-shadow` property is copied directly from Zeplin
               boxShadow:
-                "0 5px 10px 0 rgba(18, 21, 26, 0.12), inset 0 0 0 1px rgba(18, 21, 26, 0.2), inset 0 -1px 0 0 rgba(18, 21, 26, 0.05)"
-            })
+                "0 5px 10px 0 rgba(18, 21, 26, 0.12), inset 0 0 0 1px rgba(18, 21, 26, 0.2), inset 0 -1px 0 0 rgba(18, 21, 26, 0.05)",
+            }),
           },
           ":focus, &[data-force-focus-state]": {
             // The `box-shadow` property is copied directly from Zeplin
             boxShadow:
-              "0 1px 4px 0 rgba(18, 21, 26, 0.08), 0 0 0 2px #bbdbff, inset 0 0 0 1px #2075d6, inset 0 -1px 0 0 rgba(18, 21, 26, 0.05)"
+              "0 1px 4px 0 rgba(18, 21, 26, 0.08), 0 0 0 2px #bbdbff, inset 0 0 0 1px #2075d6, inset 0 -1px 0 0 rgba(18, 21, 26, 0.05)",
           },
-          "&:active, &[data-force-active-state]": {
-            // The `box-shadow` property is copied directly from Zeplin
-            boxShadow: "inset 0 0 0 1px rgba(18, 21, 26, 0.2), inset 0 -1px 0 0 rgba(18, 21, 26, 0.05), inset 0 2px 2px 0 rgba(18, 21, 26, 0.12)",
-            outline: 0,
-          }
+          "&:active, &[data-force-active-state]": [
+            variant === "normal" && {
+              // The `box-shadow` property is copied directly from Zeplin
+              boxShadow:
+                "inset 0 0 0 1px rgba(18, 21, 26, 0.2), inset 0 -1px 0 0 rgba(18, 21, 26, 0.05), inset 0 2px 2px 0 rgba(18, 21, 26, 0.12)",
+            },
+            {
+              outline: 0,
+            },
+          ],
         },
       ]}
     >
@@ -167,7 +172,7 @@ export const Button: React.FC<Props> = ({
         css={{
           alignItems: "center",
           display: "flex",
-          justifyContent: "center"
+          justifyContent: "center",
         }}
       >
         {icon && (
@@ -176,7 +181,7 @@ export const Button: React.FC<Props> = ({
               display: "inline-block",
               height: iconSize,
               margin: iconOnly ? "3px 0" : "0 4px 0",
-              width: iconSize
+              width: iconSize,
             }}
           >
             {icon}
