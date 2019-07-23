@@ -7,6 +7,9 @@ tsconfig.tsbuildinfo
 # Index
 /index.*
 
+# Buttons
+/Button.*
+
 # Colors
 /colors.*
 
@@ -16,6 +19,9 @@ tsconfig.tsbuildinfo
 # Icons
 /icons
 !/icons/tsconfig.json
+
+# Table
+/Table.*
 
 # Typography
 /typography

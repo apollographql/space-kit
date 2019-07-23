@@ -2,7 +2,7 @@
 
 ## Upcoming
 
-  - <First entry goes here>
+- Add buttons implementation (#10, [AP-543](https://golinks.io/j/AP-543))
 
 ## [`v0.2.0`](https://github.com/apollographql/space-kit/releases/tag/v0.2.0)
 

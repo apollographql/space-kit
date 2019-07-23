@@ -1,7 +1,6 @@
 import { configure } from "@storybook/react";
 
 function importAll(r) {
-  console.warn(r.keys());
   r.keys().forEach(r);
 }
 
