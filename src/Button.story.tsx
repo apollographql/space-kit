@@ -286,6 +286,7 @@ storiesOf("Space Kit", module)
             },
             ":active, &[data-force-active-state]": {
               backgroundColor: colors.silver.base,
+              color: colors.grey.darker,
             },
             "&[disabled]": {
               backgroundColor: "transparent",
@@ -302,6 +303,7 @@ storiesOf("Space Kit", module)
             },
             ":active, &[data-force-active-state]": {
               backgroundColor: colors.grey.darker,
+              color: colors.grey.light,
             },
             ":hover, &[data-force-hover-state]": {
               backgroundColor: colors.grey.dark,
@@ -325,6 +327,7 @@ storiesOf("Space Kit", module)
             },
             ":active, &[data-force-active-state]": {
               backgroundColor: colors.blue.lighter,
+              color: colors.blue.base,
             },
           }}
           darkButtonCss={{
@@ -359,6 +362,7 @@ storiesOf("Space Kit", module)
             },
             ":active, &[data-force-active-state]": {
               backgroundColor: colors.silver.base,
+              color: colors.grey.darker,
             },
             "&[disabled]": {
               backgroundColor: "transparent",
@@ -375,6 +379,7 @@ storiesOf("Space Kit", module)
             },
             ":active, &[data-force-active-state]": {
               backgroundColor: colors.grey.darker,
+              color: colors.grey.light,
             },
             ":hover, &[data-force-hover-state]": {
               backgroundColor: colors.grey.dark,

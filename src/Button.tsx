@@ -1,8 +1,7 @@
 /** @jsx jsx */
-import { jsx } from "@emotion/core";
 import * as colors from "./colors";
 import { base } from "./typography";
-import { ComponentProps } from "react";
+import { jsx } from "@emotion/core";
 
 // Types that could use some improvement:
 // * Don't allow `children` and `icon` to be missing
@@ -17,12 +16,16 @@ interface Props
     HTMLButtonElement
   > {
   /**
-   * Treat this button as a floating action button
+   * Which feel to display
    *
-   * You must include an `icon` prop and you must _not_ include a `children`
-   * prop for a floating action button.
+   * The options are as follows:
+   *
+   * - `"raised"` (default): A button with a border and a background
+   * - `"flat"`: No border or background (overrideable).
+   *
+   *     This will require you adding an `:active` style in addition to `:hover`
    */
-  variant?: "fab";
+  feel?: "raised" | "flat";
 
   /**
    * Either an icon to show to the left of the button text, or on it's own
@@ -37,22 +40,25 @@ interface Props
   size?: "default" | "small" | "large";
 
   /**
-   * Which feel to display
+   * Button variants
    *
    * The options are as follows:
    *
-   * - `raised` (default): A button with a border and a background
-   * - `flat`: No border or background (overrideable).
-   *     - This will require you adding an `:active` style in addition to `:hover`
+   * - `undefined` (default): A button with text and an optional icon
+   * - `"fab"`: Floating action button
+   *
+   *   You must include an `icon` prop and you must _not_ include a `children`
+   *   prop for a floating action button.
+   *
+   *   _Note: this is not type checked; it will cause a runtime error_
    */
-  feel?: "raised" | "flat";
+  variant?: "fab";
 }
 
 /**
  * Style system for Space Kit buttons
  *
  * This is intended to be used as an abstraction for your project's style guide.
- * There are way too many configuration options to use this component directly.
  *
  * @see https://zpl.io/amdN6Pr
  */
@@ -141,7 +147,6 @@ export const Button: React.FC<Props> = ({
           outline: 0,
         },
 
-        // This must come after `:focus` or the `:focus` state will override `:active`
         !disabled && {
           ":hover, &[data-force-hover-state]": {
             backgroundColor: colors.silver.base,
@@ -187,11 +192,8 @@ export const Button: React.FC<Props> = ({
             {icon}
           </span>
         )}
-        {children && <span>{children}</span>}
+        {children}
       </div>
     </button>
   );
 };
-
-export const PrimaryButton: React.FC<ComponentProps<typeof Button>> = () =>
-  null;
