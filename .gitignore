@@ -20,5 +20,8 @@ tsconfig.tsbuildinfo
 /icons
 !/icons/tsconfig.json
 
+# Table
+/Table.*
+
 # Typography
 /typography
