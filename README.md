@@ -7,21 +7,22 @@
 
 ## Table of Contents <!-- omit in toc -->
 
-- [Installation](#Installation)
-- [Usage](#Usage)
-- [Exports](#Exports)
-  - [Stylesheet reset](#Stylesheet-reset)
-  - [Colors](#Colors)
-  - [Icons](#Icons)
-  - [Typography](#Typography)
-  - [Buttons](#Buttons)
-- [Developing Space Kit](#Developing-Space-Kit)
-  - [Icons](#Icons-1)
-  - [TypeScript](#TypeScript)
-  - [Storybook](#Storybook)
-- [Releasing](#Releasing)
-  - [Beta Releases](#Beta-Releases)
-- [Resources](#Resources)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Exports](#exports)
+  - [Emotion](#emotion)
+  - [Stylesheet reset](#stylesheet-reset)
+  - [Colors](#colors)
+  - [Icons](#icons)
+  - [Typography](#typography)
+  - [Buttons](#buttons)
+- [Developing Space Kit](#developing-space-kit)
+  - [Icons](#icons-1)
+  - [TypeScript](#typescript)
+  - [Storybook](#storybook)
+- [Releasing](#releasing)
+  - [Beta Releases](#beta-releases)
+- [Resources](#resources)
 
 ## Installation
 
@@ -54,9 +55,13 @@ function MyComponent() {
 
 ## Exports
 
-- [Stylesheet reset](#stylesheet-reset)
-- [Colors](#colors)
-- [Icons](#icons)
+### Emotion
+
+Some components are styled with [emotion](https://emotion.sh) under the hood; emotion appends `<style>` tags to your `<head>` element at runtime. This may cause emotions's styles to be included _after_ your project's styules, preventing you from using your own classes to override emotion's. To get around this, add the following element where you want the emotion styles to be injected. If you don't include this, emotion's default behavior will be followed.
+
+```html
+<style id="emotionStyleContainer"></style>
+```
 
 ### Stylesheet reset
 
