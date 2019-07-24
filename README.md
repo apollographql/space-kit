@@ -57,10 +57,25 @@ function MyComponent() {
 
 ### Emotion
 
-Some components are styled with [emotion](https://emotion.sh) under the hood; emotion appends `<style>` tags to your `<head>` element at runtime. This may cause emotions's styles to be included _after_ your project's styules, preventing you from using your own classes to override emotion's. To get around this, add the following element where you want the emotion styles to be injected. If you don't include this, emotion's default behavior will be followed.
+Some components are styled with [emotion](https://emotion.sh) under the hood; emotion appends `<style>` tags to your `<head>` element at runtime. This may cause emotions's styles to be included _after_ your project's styles, preventing you from using your own classes to override emotion's. To get around this, you need to modify how emotion adds styles to the DOM. Check out the [docs](https://emotion.sh/docs/@emotion/cache). Here's an example:
 
-```html
-<style id="emotionStyleContainer"></style>
+```ts
+import React from "react";
+import { CacheProvider } from "@emotion/core";
+import createCache from "@emotion/cache";
+import { RealApp } from './RealApp';
+
+// This expects you to have added `<style id="emotionStyleContainer"></style>` somewhere to the DOM
+const emotionCache = createCache({
+  container:
+    document.querySelector<HTMLElement>("#emotionStyleContainer") || undefined,
+});
+
+export const App = (): React.FC => (
+  <CacheProvider value={emotionCache}>
+    <RealApp />
+  </CacheProvider>
+);
 ```
 
 ### Stylesheet reset
