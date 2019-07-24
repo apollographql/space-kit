@@ -25,6 +25,3 @@ tsconfig.tsbuildinfo
 
 # Typography
 /typography
-
-# EmotionWrapper
-/EmotionWrapper.*
