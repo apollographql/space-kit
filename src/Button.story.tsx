@@ -1,4 +1,5 @@
 /** @jsx jsx */
+import * as CSS from "csstype";
 import { jsx, ObjectInterpolation } from "@emotion/core";
 import React, { ComponentProps } from "react";
 import { storiesOf } from "@storybook/react";
@@ -40,16 +41,20 @@ const ButtonWrapper: React.FC = ({ children, ...otherProps }) => (
   </div>
 );
 
+// Restrict our stories to only allow customizing the color. Everything else
+// should be handled by passing the `color` prop directly to our `Button`.
+interface AllowedCss {
+  color: CSS.ColorProperty;
+}
+
 const VerticalButtonGroup: React.FC<{
-  buttonCss?: ObjectInterpolation<any>;
+  buttonCss?: AllowedCss;
   buttonProps?: Partial<Omit<ComponentProps<typeof Button>, "children">>;
   children: JSX.Element | JSX.Element[];
-  darkButtonCss?: ObjectInterpolation<any>;
-  darkButtonProps?: Partial<Omit<ComponentProps<typeof Button>, "children">>;
+  darkButtonCss?: AllowedCss;
   title: string;
 }> = ({
   buttonProps = {},
-  darkButtonProps = {},
   children,
   title,
   buttonCss = {},
@@ -81,7 +86,6 @@ const VerticalButtonGroup: React.FC<{
           <div css={{ margin: 12 }}>
             {cloneElement(child as any, {
               ...buttonProps,
-              ...darkButtonProps,
               css: buttonCss,
             })}
           </div>
@@ -97,7 +101,7 @@ const VerticalButtonGroup: React.FC<{
             <div css={{ margin: 12 }}>
               {cloneElement(child as any, {
                 ...buttonProps,
-                ...darkButtonProps,
+                theme: "dark",
                 css: { ...buttonCss, ...darkButtonCss },
               })}
             </div>
@@ -151,11 +155,10 @@ storiesOf("Space Kit", module)
         <VerticalButtonGroup
           title="Example 2"
           buttonCss={{
-            backgroundColor: colors.indigo.dark,
-            color: "white",
-            ":hover, &[data-force-hover-state]": {
-              backgroundColor: colors.indigo.darker,
-            },
+            color: colors.white,
+          }}
+          buttonProps={{
+            color: colors.indigo.dark,
           }}
         >
           <Button>Rest</Button>
@@ -168,11 +171,42 @@ storiesOf("Space Kit", module)
         <VerticalButtonGroup
           title="Example 3"
           buttonCss={{
-            backgroundColor: colors.green.base,
             color: colors.white,
-            ":hover, &[data-force-hover-state]": {
-              backgroundColor: colors.green.dark,
-            },
+          }}
+          buttonProps={{
+            color: colors.green.base,
+          }}
+        >
+          <Button>Rest</Button>
+          <Button data-force-hover-state="true">Hover</Button>
+          <Button data-force-active-state="true">Active</Button>
+          <Button data-force-focus-state="true">Focused</Button>
+          <Button disabled>Disabled</Button>
+        </VerticalButtonGroup>
+
+        <VerticalButtonGroup
+          title="Example 4"
+          buttonCss={{
+            color: colors.white,
+          }}
+          buttonProps={{
+            color: colors.red.base,
+          }}
+        >
+          <Button>Rest</Button>
+          <Button data-force-hover-state="true">Hover</Button>
+          <Button data-force-active-state="true">Active</Button>
+          <Button data-force-focus-state="true">Focused</Button>
+          <Button disabled>Disabled</Button>
+        </VerticalButtonGroup>
+
+        <VerticalButtonGroup
+          title="Example 5"
+          buttonCss={{
+            color: colors.white,
+          }}
+          buttonProps={{
+            color: colors.blue.base,
           }}
         >
           <Button>Rest</Button>
@@ -187,7 +221,10 @@ storiesOf("Space Kit", module)
         title="Secondary & Icon Buttons"
         description="Secondary buttons can be used with primary buttons or as by themselves. Icon buttons are a good way to communicate more information about the button’s action."
       >
-        <VerticalButtonGroup title="Secondary">
+        <VerticalButtonGroup
+          title="Secondary"
+          buttonProps={{ feel: "secondary" }}
+        >
           <Button>Rest</Button>
           <Button data-force-hover-state="true">Hover</Button>
           <Button data-force-active-state="true">Active</Button>
@@ -268,7 +305,6 @@ storiesOf("Space Kit", module)
           </React.Fragment>
         </VerticalButtonGroup>
       </DemoSection>
-
       <DemoSection
         title="Simple Button"
         description="As the name implies, the Simple button is a simpler approach on the standard buttons. It provides a lot of flexibility many buttons side-by-side and doesn’t clutter the interface as much as a standard button."
@@ -278,36 +314,9 @@ storiesOf("Space Kit", module)
           buttonProps={{ feel: "flat" }}
           buttonCss={{
             color: colors.grey.darker,
-            ":focus, &[data-force-focus-state]": {
-              color: colors.blue.base,
-            },
-            ":hover, &[data-force-hover-state]": {
-              backgroundColor: colors.silver.light,
-            },
-            ":active, &[data-force-active-state]": {
-              backgroundColor: colors.silver.base,
-              color: colors.grey.darker,
-            },
-            "&[disabled]": {
-              backgroundColor: "transparent",
-
-              ":hover": {
-                backgroundColor: "transparent",
-              },
-            },
           }}
           darkButtonCss={{
             color: colors.grey.light,
-            ":focus, &[data-force-focus-state]": {
-              color: colors.blue.light,
-            },
-            ":active, &[data-force-active-state]": {
-              backgroundColor: colors.grey.darker,
-              color: colors.grey.light,
-            },
-            ":hover, &[data-force-hover-state]": {
-              backgroundColor: colors.grey.dark,
-            },
           }}
         >
           <Button>Rest</Button>
@@ -319,28 +328,7 @@ storiesOf("Space Kit", module)
 
         <VerticalButtonGroup
           title="Simple color button"
-          buttonProps={{ feel: "flat" }}
-          buttonCss={{
-            color: colors.blue.base,
-            ":hover, &[data-force-hover-state]": {
-              backgroundColor: colors.blue.lightest,
-            },
-            ":active, &[data-force-active-state]": {
-              backgroundColor: colors.blue.lighter,
-              color: colors.blue.base,
-            },
-          }}
-          darkButtonCss={{
-            color: colors.blue.light,
-            ":hover, &[data-force-hover-state]": {
-              backgroundColor: colors.blue.lightest,
-              color: colors.blue.base,
-            },
-            ":active, &[data-force-active-state]": {
-              color: colors.blue.base,
-              backgroundColor: colors.blue.lighter,
-            },
-          }}
+          buttonProps={{ color: colors.blue.base, feel: "flat" }}
         >
           <Button>Rest</Button>
           <Button data-force-hover-state="true">Hover</Button>
@@ -354,36 +342,9 @@ storiesOf("Space Kit", module)
           buttonProps={{ feel: "flat", icon: iconElement }}
           buttonCss={{
             color: colors.grey.darker,
-            ":focus, &[data-force-focus-state]": {
-              color: colors.blue.base,
-            },
-            ":hover, &[data-force-hover-state]": {
-              backgroundColor: colors.silver.light,
-            },
-            ":active, &[data-force-active-state]": {
-              backgroundColor: colors.silver.base,
-              color: colors.grey.darker,
-            },
-            "&[disabled]": {
-              backgroundColor: "transparent",
-
-              ":hover": {
-                backgroundColor: "transparent",
-              },
-            },
           }}
           darkButtonCss={{
             color: colors.grey.light,
-            ":focus, &[data-force-focus-state]": {
-              color: colors.blue.light,
-            },
-            ":active, &[data-force-active-state]": {
-              backgroundColor: colors.grey.darker,
-              color: colors.grey.light,
-            },
-            ":hover, &[data-force-hover-state]": {
-              backgroundColor: colors.grey.dark,
-            },
           }}
         >
           <Button>Rest</Button>

@@ -63,7 +63,7 @@ Some components are styled with [emotion](https://emotion.sh) under the hood; em
 import React from "react";
 import { CacheProvider } from "@emotion/core";
 import createCache from "@emotion/cache";
-import { RealApp } from './RealApp';
+import { RealApp } from "./RealApp";
 
 // This expects you to have added `<style id="emotionStyleContainer"></style>` somewhere to the DOM
 const emotionCache = createCache({
@@ -227,12 +227,11 @@ export const IconServiceItem: React.FC = () => (
 
 Zeplin: https://zpl.io/amdN6Pr
 
-This is our style system for buttons. This is intended to be used to create your project's style guide (as opposed to using this component directly in your project).
+This is our style system for buttons. This is intended to be used to create your project's style guide. Configure the color by passing an optional `color` prop with a value from the space kit palette. You should use emotion or tailwind to set the text color as this will not be handled for you unless you're using a flat button.
 
-#### Gotchas
+You can use this component with no configuration as-is to use the default colors.
 
-- Apply colors with emotion or classNames.
-- If you want to override the disabled styles, you need to apply a class for `:disabled` _and_ `:disabled:hover` to make sure the disabled button doesn't have it's styles overriden by the `:hover` styles.
+You can configure anything you'd like with tailwind or emotion, but you should never have to do this.
 
 #### Tailwind Example
 
@@ -240,6 +239,7 @@ This is our style system for buttons. This is intended to be used to create your
 import React from "react";
 import classnames from "classnames";
 import { Button } from "@apollo/space-kit/Button";
+import { colors } from "@apollo/space-kit/colors";
 
 export const PrimaryButton: React.FC<ComponentProps<typeof Button>> = ({
   children,
@@ -248,10 +248,8 @@ export const PrimaryButton: React.FC<ComponentProps<typeof Button>> = ({
 }) => (
   <Button
     {...otherProps}
-    className={classnames(
-      className,
-      "bg-indigo hover:bg-indigo-dark text-white"
-    )}
+    color={colors.blue.base}
+    className={classnames(className, "text-white")}
   >
     {children}
   </Button>
@@ -273,10 +271,9 @@ export const PrimaryButton: React.FC<ComponentProps<typeof Button>> = ({
 }) => (
   <Button
     {...otherProps}
+    color={colors.indigo.dark}
     css={{
-      backgroundColor: colors.indigo.dark,
       color: "white",
-      hover: { backgroundColor: colors.indigo.darker },
     }}
   >
     {children}
