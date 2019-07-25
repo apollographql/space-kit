@@ -11,7 +11,7 @@ tsconfig.tsbuildinfo
 /Button.*
 
 # Colors
-/colors.*
+/colors
 
 # Fonts
 /fonts.*
