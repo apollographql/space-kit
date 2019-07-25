@@ -219,7 +219,7 @@ export const Button: React.FC<Props> = ({
    * Define the padding here so we can use it for both padding-right and
    * padding-left
    */
-  const paddingY = size === "small" ? 8 : size === "large" ? 8 : 7;
+  const paddingX = size === "small" ? 8 : size === "large" ? 8 : 7;
 
   return (
     <button
@@ -301,8 +301,8 @@ export const Button: React.FC<Props> = ({
             ? 112
             : 100,
 
-          paddingLeft: paddingY,
-          paddingRight: paddingY,
+          paddingLeft: paddingX,
+          paddingRight: paddingX,
 
           ...(size === "small"
             ? base.small
