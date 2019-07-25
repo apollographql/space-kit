@@ -5,102 +5,122 @@ import { withKnobs, select } from "@storybook/addon-knobs/react";
 import { Modal } from "./Modal";
 import React, { useState, useEffect, useRef } from "react";
 import * as colors from "./colors";
+import { Button } from "./Button";
 
 interface Props {
-    title: string;
-    description: string;
-    size: "small" | "standard" | "large";
+  title: string;
+  description: string;
+  size: "small" | "medium" | "large";
 }
 
-export function ModalStory({title, description, size}:Props): ReturnType<React.FC> {
-    const [visible, setVisible] = useState(false);
-    // TODO: use space kit button when it gets released
-    return(
-        <div >
-        <button type="button" css={{
-            textTransform: "uppercase",
+export function ModalStory({
+  title,
+  description,
+  size,
+}: Props): ReturnType<React.FC> {
+  const [visible, setVisible] = useState(false);
+  // TODO: use space kit button when it gets released
+  return (
+    <div>
+      <button
+        type="button"
+        css={{
+          textTransform: "uppercase",
         }}
-        onClick={()=>setVisible(true)}>{`${size} modal`}</button>
-        { visible &&
+        onClick={() => setVisible(true)}
+      >{`${size} modal`}</button>
+      {visible && (
         <Modal
-            onClose={()=>setVisible(false)}
-            size={size} 
-            title={title} 
-            description={description}>
-            <div>
-                <h3>Body</h3>
-                Click outside the body of this modal or press the esc key to exit.
-            </div>
-        </Modal>}</div>
-    )
-  };
-  
-
+          onClose={() => setVisible(false)}
+          size={size}
+          title={title}
+          description={description}
+          primaryAction={<Button>Ok</Button>}
+        >
+          <div>
+            <h3>Body</h3>
+            Click outside the body of this modal or press the esc key to exit.
+          </div>
+        </Modal>
+      )}
+    </div>
+  );
+}
 
 storiesOf("Space Kit/Modal", module)
-  .addDecorator(withKnobs)
   .add("interactive", () => (
-    <div css={{position: "absolute", left: "200px"}}>
-        <ModalStory title="Modal Title" description="modal description" size={"small"} />
-        <ModalStory title="Modal Title" description="modal description" size={"standard"} />
-        <ModalStory title="Modal Title" description="modal description" size={"large"} />
+    <div css={{ position: "absolute", left: 200 }}>
+      <ModalStory
+        title="Modal Title"
+        description="modal description"
+        size={"small"}
+      />
+      <ModalStory
+        title="Modal Title"
+        description="modal description"
+        size={"medium"}
+      />
+      <ModalStory
+        title="Modal Title"
+        description="modal description"
+        size={"large"}
+      />
     </div>
   ))
   .add("static (small)", () => (
-    <Modal 
-        onClose={()=>console.log("on close")} 
-        size="small"
-        title="Are you sure you want to remove Jeremy?"
-        description="Jeremy will no longer have access to the MGD-Private. You can always add them back to the organization later.">
-            <div css={{
-                paddingTop: "20px",
-                display: "flex",
-                justifyContent: "flex-end"
-            }}>
-                <div css={{
-                    marginRight: "12px",
-                    display: "flex"
-                }}>
-                    <button css={{
-                        padding: "8px",
-                        backgroundColor: "white"
-                    }}>Cancel</button>
-                </div>
-                <div css={{
-                    display: "flex"
-                }}>
-                    <button css={{
-                        padding: "8px",
-                        backgroundColor: "red"
-                    }}> Yes, remove
-                    </button>
-                </div>
-            </div>
-        </Modal>
-
-  ))
-  .add("static (standard)", () => (
-    <Modal 
-        onClose={()=>console.log("on close")} 
-        size="standard"
-        title="Modal Title"
-        description="Description of this modal or call to action">
-            <div css={{padding: "20px"}}>
-                <div css={{minHeight: "300px"}}/>
-            </div>        
+    <Modal
+      size="small"
+      title="Are you sure you want to remove Jeremy?"
+      primaryAction={
+        <Button
+          color={colors.red.base}
+          css={{ color: colors.white }}
+          type="button"
+        >
+          Yes, remove
+        </Button>
+      }
+      secondaryAction={
+        <Button feel="secondary" type="button">
+          Cancel
+        </Button>
+      }
+      bottomLeftText={
+        <span css={{ color: colors.blue.base }}>More info...</span>
+      }
+    >
+      Jeremy will no longer have access to the MGD-Private. You can always add
+      them back to the organization later.
     </Modal>
-
+  ))
+  .add("static (medium)", () => (
+    <Modal
+      size="medium"
+      title="Modal Title"
+      primaryAction={
+        <Button color={colors.green.base} css={{ color: colors.white }}>
+          Buy 1 Seat
+        </Button>
+      }
+      secondaryAction={<Button feel="secondary">Cancel</Button>}
+      bottomLeftText={
+        <span css={{ color: colors.blue.base }}>
+          Update Billing Information
+        </span>
+      }
+    >
+      Additional seats needed
+    </Modal>
   ))
   .add("static (large)", () => (
-    <Modal 
-        onClose={()=>console.log("on close")} 
-        size="large"
-        title="Modal Title"
-        description="Description of this modal or call to action">
-            <div css={{padding: "20px"}}>
-                <div css={{minHeight: "500px"}}/>
-            </div>
-        </Modal>
-
+    <Modal
+      size="large"
+      title="Modal Title"
+      description="Description of this modal or call to action"
+      primaryAction={<Button>Done</Button>}
+    >
+      <div css={{ minHeight: 300, backgroundColor: colors.silver.light }}>
+        content
+      </div>
+    </Modal>
   ));
-  

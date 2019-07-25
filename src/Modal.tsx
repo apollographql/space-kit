@@ -3,112 +3,176 @@ import { jsx, css } from "@emotion/core";
 import React, { useEffect } from "react";
 import * as typography from "./typography";
 import * as colors from "./colors";
+import * as CSS from "csstype";
 
 interface Props {
-    size: "small" | "standard" | "large";
-    title: string;
-    description?: string;
-    children: React.ReactElement;
-    onClose: (() => void);
+  /**
+   * Primary action, usually a button
+   *
+   * Do not apply any layout via css; this will be handled internally for consistency
+   */
+  primaryAction: React.ReactNode;
+
+  /**
+   * Optional secondary action, usually a button
+   *
+   * Do not apply any layout via css; this will be handled internally for consistency
+   */
+  secondaryAction?: React.ReactNode;
+
+  children: React.ReactNode;
+  /**
+   * Optional descrition to show of the modal
+   *
+   * This will probably be moved into a card component
+   */
+  description?: React.ReactNode;
+
+  /**
+   * Text to display in the bottom left of a modal/dialog
+   */
+  bottomLeftText?: React.ReactNode;
+
+  /**
+   * Callback to call when the modal is closed
+   */
+  onClose?: () => void;
+
+  /**
+   * Size to show the modal at
+   */
+  size: "small" | "medium" | "large";
+
+  /**
+   * Title of the modal
+   *
+   * This will probably be moved into a card component
+   */
+  title: React.ReactNode;
 }
 
 const modalBackdrop = css`
-        position: fixed;
-        top: 0px;
-        left: 0px;
-        width: 100%;
-        height: 100%;
-        
-        &:after {
-            position: fixed;
-            z-index: 10;
-            content: '';
-            background-color: ${colors.grey.lighter};
-            opacity: 0.7;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            z-index: -1;
-        }
-    `;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 
-const ESCAPE_KEY_CODE = 27;
+  &:after {
+    position: fixed;
+    z-index: 10;
+    content: "";
+    background-color: ${colors.grey.lighter};
+    opacity: 0.7;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+  }
+`;
 
-const getTitleTypography = ( size: Props["size"]) => {
-    if(size === "small") {
-        return {...typography.base.large,
-                fontWeight: 600};
-    }
-    return {...typography.base.xxlarge};
+function assertUnreachable(value: never): never {
+  throw new TypeError(`Unreachable value reached ${value}`);
 }
 
-const getModalWidth = ( size: Props["size"]) => {
-    if(size === "small") {
-        return 460;
+type TLength = string | 0 | number;
+
+const getModalWidth = (size: Props["size"]): CSS.WidthProperty<TLength> => {
+  switch (size) {
+    case "small":
+      return 460;
+    case "medium":
+      return 600;
+    case "large":
+      return 800;
+    default:
+      throw assertUnreachable(size);
+  }
+};
+
+export function Modal({
+  title,
+  description,
+  children,
+  onClose,
+  size,
+  bottomLeftText: helperText,
+  primaryAction,
+  secondaryAction,
+}: Props): ReturnType<React.FC> {
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.code === "Escape" && onClose) {
+        onClose();
+      }
     }
-    else if(size === "standard") {
-        return 600;
-    }
-    return 800;
-}
 
-export function Modal({title, description, children, onClose, size}:Props): ReturnType<React.FC> {
+    // add an event listener for all clicks
+    document.addEventListener("keydown", handleKeyDown);
 
-    useEffect(() => {
-        function handleKeyDown(e: KeyboardEvent) {
-            if (e.keyCode === ESCAPE_KEY_CODE) {
-              onClose();
-            }
-        }
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  });
 
-        // add an event listener for all clicks
-        document.addEventListener('keydown', handleKeyDown);
-    
-        return () => document.removeEventListener('keydown', handleKeyDown);
-    });
-
-    function handleChildClick(event: any) {
-        // only close the modal if you click on the parent div, not the modal body
-        event.stopPropagation();
-    }
-
-    return (
-        <div 
-        onClick={onClose}
-        css={modalBackdrop}>
-          <div onClick={handleChildClick} css={{
-              width: getModalWidth(size),
-              opacity: 1,
-              backgroundColor: "white",
-              padding: size === "large" ? "40px" : "32px",
-              borderRadius: 12,
-              position: "absolute",
-              left: "50%",
-              top: "20%",
-              transform: "translate(-50%)",
-              minWidth: 400,
-              maxHeight: "100%",
-              overflowY: "scroll",
-              zIndex: 11,
-              boxShadow: `0 16px 32px 0 rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(18, 21, 26, 0.04)`,
-          }}>
-            <div css={{
-                textAlign: size === "large" ? "center" : "left",
-                paddingBottom: "24px"
-            }}>
-                {title &&
-              <div>
-                <div css={{
-                        ...getTitleTypography(size),
-                        marginBottom: "4px",
-                        color: colors.black.base,
-                    }}>{title}</div>
-              </div>}
-              {description && <div css={{...typography.base.base, color: colors.black.base}}>{description}</div>}
+  return (
+    <div onClick={onClose} css={modalBackdrop}>
+      <div
+        onClick={event => event.stopPropagation()}
+        css={{
+          backgroundColor: "white",
+          borderRadius: 12,
+          boxShadow: `0 16px 32px 0 rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(18, 21, 26, 0.04)`,
+          left: "50%",
+          maxHeight: "100%",
+          minWidth: 400,
+          opacity: 1,
+          overflowY: "scroll",
+          padding: size === "large" ? "40px" : "32px",
+          position: "absolute",
+          top: "20%",
+          transform: "translate(-50%)",
+          width: getModalWidth(size),
+          zIndex: 11,
+        }}
+      >
+        <div>
+          {title && (
+            <div>
+              <div
+                css={{
+                  color: colors.black.base,
+                  marginBottom: 10,
+                  ...(size === "small"
+                    ? { ...typography.base.large, fontWeight: 600 }
+                    : typography.base.xxlarge),
+                }}
+              >
+                {title}
+              </div>
             </div>
-            {children}
-          </div>
+          )}
+          {description && (
+            <div css={{ ...typography.base.base, color: colors.black.base }}>
+              {description}
+            </div>
+          )}
         </div>
-      );
+        <div css={{ marginTop: 12 }}>{children}</div>
+        <div
+          css={{
+            alignItems: "baseline",
+            display: "flex",
+            justifyContent: "flex-end",
+            marginTop: 24,
+          }}
+        >
+          {helperText && <div css={{ marginRight: "auto" }}>{helperText}</div>}
+          {secondaryAction && (
+            <div css={{ marginRight: 12 }}>{secondaryAction}</div>
+          )}
+          <div>{primaryAction}</div>
+        </div>
+      </div>
+    </div>
+  );
 }
