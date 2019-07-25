@@ -7,11 +7,11 @@ import * as CSS from "csstype";
 
 interface Props {
   /**
-   * Primary action, usually a button
+   * Optional primary action, usually a button
    *
    * Do not apply any layout via css; this will be handled internally for consistency
    */
-  primaryAction: React.ReactNode;
+  primaryAction?: React.ReactNode;
 
   /**
    * Optional secondary action, usually a button
@@ -97,7 +97,7 @@ export function Modal({
   children,
   onClose,
   size,
-  bottomLeftText: helperText,
+  bottomLeftText,
   primaryAction,
   secondaryAction,
 }: Props): ReturnType<React.FC> {
@@ -158,20 +158,24 @@ export function Modal({
           )}
         </div>
         <div css={{ marginTop: 12 }}>{children}</div>
-        <div
-          css={{
-            alignItems: "baseline",
-            display: "flex",
-            justifyContent: "flex-end",
-            marginTop: 24,
-          }}
-        >
-          {helperText && <div css={{ marginRight: "auto" }}>{helperText}</div>}
-          {secondaryAction && (
-            <div css={{ marginRight: 12 }}>{secondaryAction}</div>
-          )}
-          <div>{primaryAction}</div>
-        </div>
+        {primaryAction && secondaryAction && bottomLeftText && (
+          <div
+            css={{
+              alignItems: "baseline",
+              display: "flex",
+              justifyContent: "flex-end",
+              marginTop: 24,
+            }}
+          >
+            {bottomLeftText && (
+              <div css={{ marginRight: "auto" }}>{bottomLeftText}</div>
+            )}
+            {secondaryAction && (
+              <div css={{ marginRight: 12 }}>{secondaryAction}</div>
+            )}
+            {primaryAction && <div>{primaryAction}</div>}
+          </div>
+        )}
       </div>
     </div>
   );
