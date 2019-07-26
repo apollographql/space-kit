@@ -1,9 +1,8 @@
-const fs = require("fs");
-const path = require("path");
-const svgr = require("@svgr/core").default;
-const camelcase = require("camelcase");
-const { formatComponentName } = require("./formatComponentName");
-const { svgo } = require("./convertUtils/setupSvgo");
+import fs from "fs";
+import path from "path";
+import svgr from "@svgr/core";
+import { formatComponentName } from "./formatComponentName";
+import { svgo } from "./convertUtils/setupSvgo";
 
 const SVG_PATH = path.resolve(__dirname, "..", "svgs");
 const COMPONENT_PATH = path.resolve(__dirname, "..", "..", "..", "icons");
@@ -49,7 +48,7 @@ const COMPONENT_PATH = path.resolve(__dirname, "..", "..", "..", "icons");
                 dimensions: false,
                 template: function svgrTemplate(
                   { template },
-                  opts,
+                  _opts,
                   { imports, componentName, jsx }
                 ) {
                   const typeScriptTpl = template.smart({
