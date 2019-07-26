@@ -329,6 +329,7 @@ export const Button: React.FC<Props> = ({
           ":focus, &[data-force-focus-state]": {
             ...(feel === "flat" && {
               backgroundColor: theme === "light" ? colors.white : "#000",
+              color: theme === "light" ? colors.blue.base : colors.blue.light,
             }),
             // The `box-shadow` property is copied directly from Zeplin for the
             // light theme. For the dark theme we use a variant of the color to
