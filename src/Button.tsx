@@ -265,9 +265,7 @@ export const Button: React.FC<Props> = ({
                   : colors.grey.light,
             },
           },
-        },
 
-        {
           backgroundColor:
             feel === "raised"
               ? color
