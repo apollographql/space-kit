@@ -2,6 +2,8 @@
 
 ## Upcoming
 
+- Convert all remaining files to TypeScript (#27)
+
 ## [`v0.6.2`](https://github.com/apollographql/space-kit/releases/tag/v0.6.2)
 
 - Remove tsconfig.buildinfo from builds (#30)
