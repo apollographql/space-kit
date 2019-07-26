@@ -1,8 +1,8 @@
-import { addParameters, storiesOf } from "@storybook/react";
+import { addParameters } from "@storybook/react";
 import theme from "./theme";
 
 addParameters({
   options: {
-    theme
-  }
+    theme,
+  },
 });
