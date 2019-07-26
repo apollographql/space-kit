@@ -26,9 +26,9 @@ function getTextColor({
   theme,
   mode,
 }: {
-  color: NonNullable<React.ComponentProps<typeof Button>["color"]>;
-  feel: NonNullable<React.ComponentProps<typeof Button>["feel"]>;
-  theme: NonNullable<React.ComponentProps<typeof Button>["theme"]>;
+  color: NonNullable<Props["color"]>;
+  feel: NonNullable<Props["feel"]>;
+  theme: NonNullable<Props["theme"]>;
   mode?: CSS.SimplePseudos;
 }): CSS.ColorProperty | undefined {
   switch (feel) {
@@ -60,7 +60,7 @@ function getTextColor({
 function getHeight({
   size,
 }: {
-  size: NonNullable<React.ComponentProps<typeof Button>["size"]>;
+  size: NonNullable<Props["size"]>;
 }): CSS.HeightProperty<TLength> {
   switch (size) {
     case "small":
@@ -82,9 +82,9 @@ function getHoverBackgroundColor({
   feel,
   theme,
 }: {
-  color: NonNullable<React.ComponentProps<typeof Button>["color"]>;
-  feel: NonNullable<React.ComponentProps<typeof Button>["feel"]>;
-  theme: NonNullable<React.ComponentProps<typeof Button>["theme"]>;
+  color: NonNullable<Props["color"]>;
+  feel: NonNullable<Props["feel"]>;
+  theme: NonNullable<Props["theme"]>;
 }): CSS.BackgroundColorProperty {
   switch (feel) {
     case "secondary":

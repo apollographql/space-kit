@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import * as CSS from "csstype";
-import { jsx, ObjectInterpolation } from "@emotion/core";
+import { jsx } from "@emotion/core";
 import React, { ComponentProps } from "react";
 import { storiesOf } from "@storybook/react";
 import { Button } from "./Button";
