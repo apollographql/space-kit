@@ -2,6 +2,8 @@
 
 ## Upcoming
 
+- Remove tsconfig.buildinfo from builds (#30)
+
 ## [`v0.6.1`](https://github.com/apollographql/space-kit/releases/tag/v0.6.1)
 
 - Roll back changes for custom css injection point in favor of documentation on how todo it yourself (#xx, [AP-543](https://golinks.io/j/AP-543))

@@ -11,3 +11,4 @@ build-reset.ts
 /icons/*.tsx
 /icons/src
 /src
+**/tsconfig.tsbuildinfo
