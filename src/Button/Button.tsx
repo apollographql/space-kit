@@ -1,9 +1,9 @@
 /** @jsx jsx */
-import * as colors from "./colors";
+import * as colors from "../colors";
 import * as CSS from "csstype";
-import { base } from "./typography";
+import { base } from "../typography";
 import { jsx } from "@emotion/core";
-import { getOffsetInPalette } from "./colors/utils/getOffsetInPalette";
+import { getOffsetInPalette } from "../colors/utils/getOffsetInPalette";
 
 type TLength = string | 0 | number;
 
