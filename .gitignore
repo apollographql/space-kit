@@ -10,8 +10,11 @@ tsconfig.tsbuildinfo
 # Buttons
 /Button.*
 
+# Modals
+/Modal.*
+
 # Colors
-/colors.*
+/colors
 
 # Fonts
 /fonts.*
