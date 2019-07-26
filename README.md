@@ -281,6 +281,42 @@ export const PrimaryButton: React.FC<ComponentProps<typeof Button>> = ({
 );
 ```
 
+### Modals
+
+### Emotion Example
+
+```js
+/** @jsx jsx */
+import React from "react";
+import { Modal } from "@apollo/space-kit/Modal";
+import { Button } from "@apollo/space-kit/Button";
+import { colors } from "@apollo/space-kit/colors";
+import { jsx } from "@emotion/core";
+
+export const SmallModal: React.FC<ComponentProps<typeof Modal>> = ({
+  children, 
+  ...otherProps 
+}) => (
+    <Modal
+    {...otherProps}
+      size="small"
+      title="Are you sure you want to remove Jeremy?"
+      primaryAction={
+        <Button
+          color={colors.red.base}
+          css={{ color: colors.white }}
+          type="button"
+        >
+          Yes, remove
+        </Button>
+      }
+    >
+      Jeremy will no longer have access to the MGD-Private. You can always add
+      them back to the organization later.
+    </Modal>
+);
+```
+
 #### FAQ
 
 ##### My icons aren't showing up in the UI

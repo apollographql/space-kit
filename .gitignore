@@ -10,6 +10,9 @@ tsconfig.tsbuildinfo
 # Buttons
 /Button.*
 
+# Modals
+/Modal.*
+
 # Colors
 /colors
 
