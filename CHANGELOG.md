@@ -2,7 +2,7 @@
 
 ## Upcoming
 
-## [`v0.6.0`](https://github.com/apollographql/space-kit/releases/tag/v0.6.0)
+## [`v0.6.1`](https://github.com/apollographql/space-kit/releases/tag/v0.6.1)
 
 - Roll back changes for custom css injection point in favor of documentation on how todo it yourself (#xx, [AP-543](https://golinks.io/j/AP-543))
 - Move `@emotion/core` to `dependencies` so consumers will install it automatically (#xx, [AP-543](https://golinks.io/j/AP-543))
