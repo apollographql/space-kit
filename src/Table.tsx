@@ -1,6 +1,6 @@
 /** @jsx jsx */
-import { jsx, ClassNames } from "@emotion/core";
-import React, { HTMLAttributes } from "react";
+import { jsx } from "@emotion/core";
+import React from "react";
 import * as typography from "./typography";
 import * as colors from "./colors";
 
