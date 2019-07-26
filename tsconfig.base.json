@@ -2,18 +2,27 @@
   "compilerOptions": {
     "declaration": true,
     "jsx": "react",
-    "lib": ["es2015", "dom"],
-    "module": "commonjs",
-    "moduleResolution": "node",
+    "lib": [
+      "es2015",
+      "dom"
+    ],
+    "esModuleInterop": true,
     "importHelpers": true,
     "inlineSources": true,
-    "noUnusedParameters": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "outDir": ".",
     "pretty": true,
     "removeComments": true,
     "sourceMap": true,
     "strict": true,
+    "strictNullChecks": true,
     "target": "es5",
-    "esModuleInterop": true,
-    "outDir": "."
+    "typeRoots": [
+      "./typings",
+      "./node_modules/@types"
+    ]
   }
 }

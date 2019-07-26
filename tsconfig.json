@@ -1,8 +1,11 @@
 {
   "extends": "./tsconfig.base.json",
   "exclude": ["./node_modules"],
-  "references": [{ "path": "./icons" }],
-
+  "references": [
+    {
+      "path": "./icons"
+    }
+  ],
   "files": ["src/index.ts", "src/fonts.ts", "src/Button.tsx"],
   "include": ["./src/typography/*.ts", "./src/colors/**/*.ts"]
 }
