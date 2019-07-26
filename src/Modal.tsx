@@ -20,7 +20,7 @@ interface Props {
    */
   secondaryAction?: React.ReactNode;
 
-  children: React.ReactNode;
+  children?: React.ReactNode;
   /**
    * Optional descrition to show of the modal
    *
@@ -158,7 +158,7 @@ export function Modal({
           )}
         </div>
         <div css={{ marginTop: 12 }}>{children}</div>
-        {primaryAction && secondaryAction && bottomLeftText && (
+        {(primaryAction || secondaryAction || bottomLeftText) && (
           <div
             css={{
               alignItems: "baseline",

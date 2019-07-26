@@ -67,7 +67,7 @@ storiesOf("Space Kit/Modal", module)
       />
     </div>
   ))
-  .add("static (small)", () => (
+  .add("static (small) (✅ primaryAction, ✅ secondaryAction, ✅ bottomLeftText)", () => (
     <Modal
       size="small"
       title="Are you sure you want to remove Jeremy?"
@@ -93,7 +93,46 @@ storiesOf("Space Kit/Modal", module)
       them back to the organization later.
     </Modal>
   ))
-  .add("static (medium)", () => (
+  .add("static (small) (✅ primaryAction, ❌ secondaryAction, ✅ bottomLeftText)", () => (
+    <Modal
+      size="small"
+      title="Are you sure you want to remove Jeremy?"
+      primaryAction={
+        <Button
+          color={colors.red.base}
+          css={{ color: colors.white }}
+          type="button"
+        >
+          Yes, remove
+        </Button>
+      }
+      bottomLeftText={
+        <span css={{ color: colors.blue.base }}>More info...</span>
+      }
+    >
+      Jeremy will no longer have access to the MGD-Private. You can always add
+      them back to the organization later.
+    </Modal>
+  ))
+  .add("static (small) (✅ primaryAction, ❌ secondaryAction, ❌ bottomLeftText)", () => (
+    <Modal
+      size="small"
+      title="Are you sure you want to remove Jeremy?"
+      primaryAction={
+        <Button
+          color={colors.red.base}
+          css={{ color: colors.white }}
+          type="button"
+        >
+          Yes, remove
+        </Button>
+      }
+    >
+      Jeremy will no longer have access to the MGD-Private. You can always add
+      them back to the organization later.
+    </Modal>
+  ))
+  .add("static (medium) (✅ primaryAction, ✅ secondaryAction, ✅ bottomLeftText)", () => (
     <Modal
       size="medium"
       title="Modal Title"
@@ -112,7 +151,7 @@ storiesOf("Space Kit/Modal", module)
       Additional seats needed
     </Modal>
   ))
-  .add("static (large)", () => (
+  .add("static (large) (❌ primaryAction, ❌ secondaryAction, ❌ bottomLeftText) ", () => (
     <Modal
       size="large"
       title="Modal Title"

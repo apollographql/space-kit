@@ -1,8 +1,9 @@
-import * as colors from "./colors";
-import * as fonts from "./fonts";
+import * as colors from './colors';
+import * as fonts from './fonts';
 
-export { colors };
-export { fonts };
+export {colors};
+export {fonts};
 
-export { Table } from "./Table";
-export { Button } from "./Button";
+export {Table} from './Table';
+export {Button} from './Button';
+export {Modal} from './Modal';
