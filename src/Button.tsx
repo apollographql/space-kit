@@ -215,12 +215,6 @@ export const Button: React.FC<Props> = ({
     }
   }
 
-  /**
-   * Define the padding here so we can use it for both padding-right and
-   * padding-left
-   */
-  const paddingX = size === "small" ? 8 : size === "large" ? 8 : 7;
-
   return (
     <button
       {...otherProps}
@@ -285,6 +279,10 @@ export const Button: React.FC<Props> = ({
 
           color: getTextColor({ color, feel, theme }),
 
+          // Vertically center children
+          display: "inline-flex",
+          justifyContent: "center",
+
           height: getHeight({ size }),
 
           minWidth: iconOnly
@@ -299,8 +297,9 @@ export const Button: React.FC<Props> = ({
             ? 112
             : 100,
 
-          paddingLeft: paddingX,
-          paddingRight: paddingX,
+          // We have to set the Y padding because browsers (at least Chrome) has
+          // a non-symmetrical vertical padding applied by default.
+          padding: `0 ${size === "small" ? 8 : size === "large" ? 8 : 7}px`,
 
           ...(size === "small"
             ? base.small
@@ -382,9 +381,12 @@ export const Button: React.FC<Props> = ({
         {icon && (
           <span
             css={{
-              display: "inline-block",
+              // This needs to be `inline-flex` and not the default of
+              // `inline-block` to vertically center the icon automatically
+              display: "inline-flex",
               height: iconSize,
-              margin: iconOnly ? "3px 0" : "0 4px 0",
+              // The `4px` will be on the right to separate the icon from the text
+              margin: iconOnly ? 0 : "0 4px 0",
               width: iconSize,
             }}
           >
