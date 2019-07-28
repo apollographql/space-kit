@@ -4,6 +4,9 @@ storybook-static
 
 tsconfig.tsbuildinfo
 
+# Coverage
+/coverage
+
 # Eslint cache
 .eslintcache
 
