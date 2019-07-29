@@ -1,4 +1,6 @@
 declare module "@svgr/core" {
+  import { JSXElement } from "@babel/types";
+
   export interface Config {
     /**
      * Specify a custom config file.
@@ -78,7 +80,7 @@ declare module "@svgr/core" {
         props: object;
         imports: any;
         exports: any;
-        jsx: any;
+        jsx: JSXElement;
       }
     ) => any;
 

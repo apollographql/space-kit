@@ -51,6 +51,8 @@ storiesOf("Icons", module)
   .addDecorator(withKnobs)
   .add("Catalog", () => {
     const color = select("Color", colorMap, colors.black.base);
+    const weight = select("Weight", ["normal", "heavy"], "normal");
+
     return (
       <Page
         title="Icons"
@@ -75,6 +77,7 @@ storiesOf("Icons", module)
                   )}
                 </div>
                 <Component
+                  weight={weight}
                   style={{
                     width: 20,
                     height: 20,
