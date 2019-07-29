@@ -10,7 +10,7 @@ interface Props<RowShape> {
    *
    * The shape of the data will be inferred from here
    */
-  data: RowShape[];
+  data: ReadonlyArray<RowShape>;
 
   /**
    * How dense the table should be
@@ -22,7 +22,7 @@ interface Props<RowShape> {
   /**
    * Definition of how each column will be rendered
    */
-  columns: {
+  columns: readonly {
     /**
      * Column's title
      */
