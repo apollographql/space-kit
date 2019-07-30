@@ -31,6 +31,3 @@ tsconfig.tsbuildinfo
 
 # Typography
 /typography
-
-# Netlify build
-.out
