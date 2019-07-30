@@ -3,6 +3,7 @@
 ## Upcoming
 
 - Convert all remaining files to TypeScript (#27)
+- Move all `src` files to live in paths (#31)
 
 ## [`v0.6.2`](https://github.com/apollographql/space-kit/releases/tag/v0.6.2)
 

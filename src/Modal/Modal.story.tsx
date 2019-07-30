@@ -1,10 +1,10 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import { storiesOf } from "@storybook/react";
-import { Modal } from "./Modal";
+import { Modal } from "../Modal";
 import React, { useState } from "react";
-import * as colors from "./colors";
-import { Button } from "./Button";
+import * as colors from "../colors";
+import { Button } from "../Button";
 
 interface Props {
   title: string;

@@ -1,8 +1,8 @@
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
 import React, { useEffect } from "react";
-import * as typography from "./typography";
-import * as colors from "./colors";
+import * as typography from "../typography";
+import * as colors from "../colors";
 import * as CSS from "csstype";
 
 interface Props {

@@ -6,10 +6,10 @@ import { storiesOf } from "@storybook/react";
 import { Button } from "./Button";
 // @ts-ignore We need to use `.tsx` because this will live next to the
 // transpiled files that we can't import.
-import { IconShip2 } from "../icons/IconShip2.tsx";
-import { colors } from ".";
-import * as typography from "./typography";
-import { DemoSection } from "./shared/DemoSection";
+import { IconShip2 } from "../../icons/IconShip2.tsx";
+import * as colors from "../colors";
+import * as typography from "../typography";
+import { DemoSection } from "../shared/DemoSection";
 
 const iconElement = <IconShip2 css={{ width: "100%", height: "100%" }} />;
 
