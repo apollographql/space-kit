@@ -82,7 +82,7 @@ storiesOf("Modal", module)
           </Button>
         }
         secondaryAction={
-          <Button feel="secondary" type="button">
+          <Button color={colors.white} type="button">
             Cancel
           </Button>
         }
@@ -151,7 +151,7 @@ storiesOf("Modal", module)
             Buy 1 Seat
           </Button>
         }
-        secondaryAction={<Button feel="secondary">Cancel</Button>}
+        secondaryAction={<Button color={colors.white}>Cancel</Button>}
         bottomLeftText={
           <span css={{ color: colors.blue.base }}>
             Update Billing Information

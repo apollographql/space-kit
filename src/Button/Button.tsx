@@ -32,17 +32,20 @@ function getTextColor({
   theme: NonNullable<Props["theme"]>;
   mode?: CSS.SimplePseudos;
 }): CSS.ColorProperty | undefined {
+  // Text color will always be the same for secondary buttons
+  if (color === colors.white) {
+    return colors.grey.darker;
+  }
+
   switch (feel) {
     case "raised":
-    case "secondary":
-      // Set the base (meaning no pseudo-selectors) text color for raised and
-      // secondary buttons. Otherwise return `undefined` to not change the
-      // color.
+      // Set the base (meaning no pseudo-selectors) text color for raised
+      // buttons. Otherwise return `undefined` to not change the color.
       //
-      // We have some special logic for the raised and secondary color; set the
-      // text color to be what is most readable between white and the default
-      // text color and the _hover_ color's background. This is overrideable by
-      // the user, but it shouldn't need to be.
+      // We have some special logic for the raised color; set the text color to
+      // be what is most readable between white and the default text color and
+      // the _hover_ color's background. This is overrideable by the user, but
+      // it shouldn't need to be.
       return !mode
         ? tinycolor
             .mostReadable(
@@ -104,10 +107,12 @@ function getHoverBackgroundColor({
   feel: NonNullable<Props["feel"]>;
   theme: NonNullable<Props["theme"]>;
 }): CSS.BackgroundColorProperty {
+  if (color === colors.white) {
+    // Special case for secondary buttons
+    return colors.silver.light;
+  }
+
   switch (feel) {
-    case "secondary":
-      // Hardcode (special case)
-      return colors.silver.light;
     case "flat":
       // Hardcode if we're using the default color (special case), otherwise get
       // the next lightest color.
@@ -142,10 +147,9 @@ interface Props
    * This has a special meaning for buttons with a "flat" feel; this will change
    * the text color as well as the background colors.
    *
-   * This has no meaning with a feel of "secondary", so this component will
-   * `throw` if you pass a color for a secondary button.
+   * Pass `colors.white` to treat this button as a secondary button
    */
-  color?: PaletteColor;
+  color?: PaletteColor | typeof colors["white"];
 
   /**
    * Which feel to display
@@ -154,9 +158,8 @@ interface Props
    *
    * - `"raised"` (default): A button with a border and a background
    * - `"flat"`: No background or border
-   * - `"secondary"`: Similar to a raised button, but it's white
    */
-  feel?: "raised" | "flat" | "secondary";
+  feel?: "raised" | "flat";
 
   /**
    * Either an icon to show to the left of the button text, or on it's own
@@ -279,10 +282,10 @@ export const Button: React.FC<Props> = ({
           },
 
           backgroundColor:
-            feel === "raised"
-              ? color
-              : feel === "secondary"
+            color === colors.white
               ? colors.white
+              : feel === "raised"
+              ? color
               : "transparent",
 
           borderRadius: variant === "fab" ? "100%" : 4,
@@ -353,11 +356,13 @@ export const Button: React.FC<Props> = ({
             // light theme. For the dark theme we use a variant of the color to
             // make the borders sharp.
             boxShadow: `0 1px 4px 0 rgba(18, 21, 26, 0.08), 0 0 0 2px ${
-              theme === "light" || color === defaultColor
+              theme === "light" ||
+              color === defaultColor ||
+              color === colors.white
                 ? "#bbdbff"
                 : getOffsetInPalette(Infinity, "lighter", color)
             }, inset 0 0 0 1px ${
-              color === defaultColor
+              color === defaultColor || color === colors.white
                 ? "#2075d6"
                 : getOffsetInPalette(1, "darker", color)
             }, inset 0 -1px 0 0 rgba(18, 21, 26, 0.05)`,
@@ -368,10 +373,10 @@ export const Button: React.FC<Props> = ({
             }),
 
             backgroundColor:
-              feel === "raised"
-                ? color
-                : feel === "secondary"
+              color === colors.white
                 ? colors.white
+                : feel === "raised"
+                ? color
                 : color === defaultColor
                 ? theme === "dark"
                   ? colors.grey.darker
