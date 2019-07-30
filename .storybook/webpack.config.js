@@ -7,6 +7,7 @@ module.exports = ({ config }) => {
         options: {
           compilerOptions: {
             declaration: false,
+            module: "es2015",
           },
         },
       },
