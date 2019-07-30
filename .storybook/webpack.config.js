@@ -7,7 +7,8 @@ module.exports = ({ config }) => {
         options: {
           compilerOptions: {
             declaration: false,
-            module: "es2015",
+            // module: "es2015",
+            target: "esnext",
           },
         },
       },
