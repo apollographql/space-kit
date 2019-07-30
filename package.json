@@ -7,7 +7,7 @@
     "build": "npm-run-all -p build:reset icons -s build:typescript",
     "build:icons": "run-s icons build:typescript",
     "build:reset": "ts-node build-reset.ts",
-    "build:storybook": "build-storybook --quiet -c .storybook -o .out",
+    "build:storybook": "build-storybook --quiet",
     "build:typescript": "tsc --build",
     "clean": "run-p clean:*",
     "clean:colors": "rimraf colors.js colors.*.map colors.d.ts ./src/colors.js ./src/colors.*.map ./src/colors.d.ts",
