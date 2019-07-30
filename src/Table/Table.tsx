@@ -2,7 +2,7 @@
 import { jsx } from "@emotion/core";
 import React from "react";
 import * as typography from "../typography";
-import * as colors from "../colors";
+import { colors } from "../colors";
 
 interface Props<RowShape> {
   /**

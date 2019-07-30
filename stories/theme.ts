@@ -1,5 +1,5 @@
 import { create } from "@storybook/theming";
-import * as colors from "../src/colors";
+import { colors } from "../src/colors";
 import * as fonts from "../src/fonts";
 
 export default create({

@@ -1,6 +1,6 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import * as colors from "../src/colors";
+import { colors } from "../src/colors";
 import { Page } from "../components-util/Page";
 import { Column } from "../components-util/Column";
 import { Patch } from "../components-util/Color";

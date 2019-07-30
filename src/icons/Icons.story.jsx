@@ -1,7 +1,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import { withKnobs, select } from "@storybook/addon-knobs/react";
-import * as colors from "../colors";
+import { colors } from "../colors";
 import camelcase from "camelcase";
 import { Page } from "../../components-util/Page";
 import { Column } from "../../components-util/Column";
