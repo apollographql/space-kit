@@ -19,32 +19,32 @@ const users: User[] = [
     name: "Alice Howell",
     email: "alice@starkindustries.net",
     image: require("./table.story/alice-howell.png"),
-    dateAdded: "05/25/2019"
+    dateAdded: "05/25/2019",
   },
   {
     name: "Benjamin Lawrence",
     email: "Ben@starkindustries.net",
     image: require("./table.story/benjamin-lawrence.png"),
-    dateAdded: "05/25/2019"
+    dateAdded: "05/25/2019",
   },
   {
     name: "Cynthia Bowman",
     email: "cbowman@starkindustries.net",
     image: require("./table.story/cynthia-bowman.png"),
-    dateAdded: "05/25/2019"
+    dateAdded: "05/25/2019",
   },
   {
     name: "Jeremy Jacobs",
     email: "jj@starkindustries.net",
     image: require("./table.story/jeremy-jacobs.png"),
-    dateAdded: "05/25/2019"
+    dateAdded: "05/25/2019",
   },
   {
     name: "Jeremy Griffin",
     email: "jgriffin@starkindustries.net",
     image: require("./table.story/jeremy-griffin.png"),
-    dateAdded: "05/25/2019"
-  }
+    dateAdded: "05/25/2019",
+  },
 ];
 
 storiesOf("Space Kit", module)
@@ -63,13 +63,13 @@ storiesOf("Space Kit", module)
       data={users}
       columns={[
         {
-          id:1,
+          id: 1,
           render: ({ image }) => (
             <img css={{ width: 32, height: 32 }} src={image} />
-          )
+          ),
         },
         {
-          id:2,
+          id: 2,
           headerTitle: "description",
           render: ({ name, email }) => (
             <React.Fragment>
@@ -77,27 +77,27 @@ storiesOf("Space Kit", module)
               <div
                 css={{
                   color: colors.grey.base,
-                  ...typography.base.small
+                  ...typography.base.small,
                 }}
               >
                 {email}
               </div>
             </React.Fragment>
-          )
+          ),
         },
         {
-          id:3,
-          headerTitle:
+          id: 3,
+          headerTitle: (
             <div
-            css={{
-              color: colors.blue.base,
-            }}
-            onClick={() => console.log("clicked")}
-          >
-            Date Added
-          </div>,
-          render: ({ dateAdded }) => dateAdded
-        }
+              css={{
+                color: colors.blue.base,
+              }}
+            >
+              Date Added
+            </div>
+          ),
+          render: ({ dateAdded }) => dateAdded,
+        },
       ]}
     />
   ));

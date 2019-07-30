@@ -36,5 +36,5 @@ export default create({
   brandTitle: "Space Kit",
   brandUrl: "https://github.com/apollographql/space-kit",
   brandImage:
-    "https://user-images.githubusercontent.com/5922187/57668515-747a8a00-75bc-11e9-9cff-207f71865c82.png"
+    "https://user-images.githubusercontent.com/5922187/57668515-747a8a00-75bc-11e9-9cff-207f71865c82.png",
 });

@@ -1,12 +1,12 @@
-import React from 'react';
-import { storiesOf } from '@storybook/react';
-import * as typographyDefinitions from './index';
-import * as colors from '../colors';
-import { Page } from '../../components-util/Page';
-import { Column } from '../../components-util/Column';
+import React from "react";
+import { storiesOf } from "@storybook/react";
+import * as typographyDefinitions from "./index";
+import * as colors from "../colors";
+import { Page } from "../../components-util/Page";
+import { Column } from "../../components-util/Column";
 
 function round(number: number, digits: number): number {
-  const multiplier = Math.pow(10, digits);
+  const multiplier = 10 ** digits;
 
   return Math.round(number * multiplier) / multiplier;
 }
@@ -20,22 +20,22 @@ const TypographyDefs: React.FC<{
     style={{
       color,
       backgroundColor,
-      padding: '16px 42px',
-      marginTop: 24
+      padding: "16px 42px",
+      marginTop: 24,
     }}
   >
     {Object.entries(definitions).map(([name, properties]) => (
-      <div key={name} style={{ margin: '15px 0' }}>
+      <div key={name} style={{ margin: "15px 0" }}>
         <div style={properties}>{name}</div>
         <div style={typographyDefinitions.base.small}>
-          {typeof properties.fontSize === 'number'
+          {typeof properties.fontSize === "number"
             ? round(properties.fontSize / 15, 4)
             : properties.fontSize}
           em • {properties.fontSize}
-          {typeof properties.fontSize === 'number' &&
-          typeof properties.lineHeight === 'number'
+          {typeof properties.fontSize === "number" &&
+          typeof properties.lineHeight === "number"
             ? ` / ${Math.round(properties.fontSize * properties.lineHeight)}`
-            : ''}{' '}
+            : ""}{" "}
           • {properties.fontWeight}
         </div>
       </div>
@@ -43,8 +43,8 @@ const TypographyDefs: React.FC<{
   </div>
 );
 
-storiesOf('Typography', module)
-  .add('Source Sans Pro', () => {
+storiesOf("Typography", module)
+  .add("Source Sans Pro", () => {
     return (
       <Page
         title="Source Sans Pro"
@@ -67,7 +67,7 @@ storiesOf('Typography', module)
       </Page>
     );
   })
-  .add('Source Code Pro', () => {
+  .add("Source Code Pro", () => {
     return (
       <Page
         title="Source Code Pro"
