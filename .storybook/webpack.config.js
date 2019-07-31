@@ -27,5 +27,10 @@ module.exports = ({ config }) => {
   // Disable terser. DOn't merge this
   config.optimization.minimizer = [];
 
+  config.stats = {
+    ...config.stats,
+    warningsFilter: /export .* was not found in/,
+  };
+
   return config;
 };
