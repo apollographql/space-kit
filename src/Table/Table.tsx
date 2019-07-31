@@ -24,6 +24,17 @@ interface Props<RowShape> {
      * an id for the column
      */
     id: string | number;
+    /**
+     * Properties to be applied to `col` elements nested below the `table`'s single
+     * `<colgroup>`.
+     *
+     * This allows you to apply styles to columns by setting a class on a single
+     * element instead of _all_ elements in a table's row
+     */
+    colProps?: React.DetailedHTMLProps<
+      React.ColHTMLAttributes<HTMLTableColElement>,
+      HTMLTableColElement
+    >;
 
     /**
      * A method that accepts the data for the row and returns the inner content for the row.
@@ -60,6 +71,12 @@ export function Table<RowShape>({
         width: "100%",
       }}
     >
+      <colgroup>
+        {columns.map(({ colProps, id }) => (
+          <col key={id} {...colProps} />
+        ))}
+      </colgroup>
+
       <thead>
         <tr
           css={{
