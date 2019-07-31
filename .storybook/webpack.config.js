@@ -3,14 +3,19 @@ module.exports = ({ config }) => {
     test: /\.(ts|tsx)$/,
     use: [
       {
-        loader: require.resolve("ts-loader"),
+        // loader: require.resolve("ts-loader"),
+        loader: require.resolve("awesome-typescript-loader"),
         options: {
-          compilerOptions: {
-            declaration: false,
-            module: "umd",
-            target: "es5",
-          },
+          declaration: false,
+          useCache: true,
         },
+        // options: {
+        //   compilerOptions: {
+        //     declaration: false,
+        //     module: "umd",
+        //     target: "es5",
+        //   },
+        // },
       },
     ],
   });
