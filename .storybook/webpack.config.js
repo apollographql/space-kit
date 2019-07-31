@@ -6,6 +6,7 @@ module.exports = ({ config }) => {
         loader: require.resolve("ts-loader"),
         options: {
           onlyCompileBundledFiles: true,
+          transpileOnly: false,
           compilerOptions: {
             declaration: false,
             module: "esnext",
