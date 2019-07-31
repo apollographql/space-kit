@@ -5,5 +5,5 @@
   publish = "storybook-static"
 
   # Default build command.
-  command = "npm run build:storybook"
+  command = "npm run netlify"
   

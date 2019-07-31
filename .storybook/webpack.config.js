@@ -5,10 +5,11 @@ module.exports = ({ config }) => {
       {
         loader: require.resolve("ts-loader"),
         options: {
+          onlyCompileBundledFiles: true,
           compilerOptions: {
             declaration: false,
             module: "esnext",
-            target: "esnext",
+            target: "es5",
           },
         },
       },
