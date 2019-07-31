@@ -1,10 +1,19 @@
 {
   "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
     "declaration": true,
     "jsx": "react",
     "esModuleInterop": true,
     "importHelpers": true,
     "inlineSources": true,
+    "lib": [
+      "es5",
+      "es6",
+      "es7",
+      "es2017",
+      "dom"
+    ],
+    "module": "commonjs",
     "moduleResolution": "node",
     "noImplicitAny": true,
     "noUnusedLocals": true,
@@ -14,8 +23,7 @@
     "sourceMap": true,
     "strict": true,
     "strictNullChecks": true,
-    "module": "commonjs",
-    "target": "esnext",
+    "target": "es5",
     "typeRoots": [
       "./typings",
       "./node_modules/@types"
