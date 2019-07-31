@@ -21,5 +21,9 @@ module.exports = ({ config }) => {
     maxAssetSize: Infinity,
     maxEntrypointSize: Infinity,
   };
+
+  // Disable terser. DOn't merge this
+  config.optimization.minimizer = [];
+
   return config;
 };
