@@ -5,11 +5,10 @@ module.exports = ({ config }) => {
       {
         loader: require.resolve("ts-loader"),
         options: {
-          transpileOnly: true,
           compilerOptions: {
             declaration: false,
-            module: "esnext",
-            target: "esnext",
+            module: "umd",
+            target: "es5",
           },
         },
       },

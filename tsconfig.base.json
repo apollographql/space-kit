@@ -14,7 +14,8 @@
     "sourceMap": true,
     "strict": true,
     "strictNullChecks": true,
-    "target": "es5",
+    "module": "commonjs",
+    "target": "esnext",
     "typeRoots": [
       "./typings",
       "./node_modules/@types"

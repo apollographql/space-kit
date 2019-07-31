@@ -7,27 +7,16 @@ tsconfig.tsbuildinfo
 # Eslint cache
 .eslintcache
 
-# Index
-/index.*
-
-# Buttons
-/Button.*
-
-# Modals
-/Modal.*
-
-# Colors
+# Other modules
+/Button
 /colors
-
-# Fonts
-/fonts.*
-
-# Icons
+/fonts
 /icons
-!/icons/tsconfig.json
-
-# Table
-/Table.*
-
-# Typography
+/Modal
+/shared
+/Table
 /typography
+
+# Exclusions
+
+!/icons/tsconfig.json

@@ -2,8 +2,10 @@
   "extends": "./tsconfig.base.json",
   "exclude": [
     "./node_modules",
-    "*.spec.*",
-    "*.story.*",
+    "**/*.spec.*",
+    "**/*.story.*",
+    "**/*.stories.*",
+    "src/icons/scripts/**"
   ],
   "references": [
     {
@@ -12,5 +14,5 @@
   ],
   "include": [
     "./src/**/*"
-  ]
+  ],
 }
