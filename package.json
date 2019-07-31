@@ -15,7 +15,7 @@
     "clean:fonts": "rimraf fonts.js fonts.*.map fonts.d.ts ./src/fonts.js ./src/fonts.*.map ./src/fonts.d.ts",
     "clean:icons": "rimraf icons/*.tsx icons/*.js icons/*.js.map icons/*.d.ts icons/tsconfig.tsbuildinfo",
     "clean:typography": "rimraf typography",
-    "netlify": "run-s build build:storybook",
+    "netlify": "run-s clean icons build:storybook",
     "icons": "run-s clean:icons icons:generate",
     "icons:generate": "ts-node src/icons/scripts/convert",
     "lint": "eslint --max-warnings 0 --cache --ext .js,.jsx,.ts,.tsx .eslintrc.js build-reset.ts components-util/ .storybook/ stories/ src/",
