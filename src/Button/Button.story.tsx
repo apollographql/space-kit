@@ -112,13 +112,13 @@ const VerticalButtonGroup: React.FC<{
   </div>
 );
 
-storiesOf("Space Kit", module)
+storiesOf("Button", module)
   .addParameters({
     options: {
       showPanel: false,
     },
   })
-  .add("Button", () => (
+  .add("Catalog", () => (
     <div css={{ color: colors.black.base }}>
       <DemoSection
         title="Button Sizes"

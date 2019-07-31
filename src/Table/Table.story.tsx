@@ -47,9 +47,9 @@ const users: User[] = [
   },
 ];
 
-storiesOf("Space Kit", module)
+storiesOf("Table", module)
   .addDecorator(withKnobs)
-  .add("Table", () => (
+  .add("User Example", () => (
     <Table<User>
       keyOn="name"
       css={{ color: colors.black.base }}
