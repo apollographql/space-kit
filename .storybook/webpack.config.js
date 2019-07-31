@@ -4,6 +4,9 @@ module.exports = ({ config }) => {
     use: [
       {
         loader: require.resolve("awesome-typescript-loader"),
+        options: {
+          declaration: false,
+        },
       },
     ],
   });
