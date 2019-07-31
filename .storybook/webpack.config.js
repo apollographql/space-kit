@@ -5,17 +5,17 @@ module.exports = ({ config }) => {
       {
         loader: require.resolve("ts-loader"),
         options: {
-          onlyCompileBundledFiles: true,
-          transpileOnly: false,
+          transpileOnly: true,
           compilerOptions: {
             declaration: false,
             module: "esnext",
-            target: "es5",
+            target: "esnext",
           },
         },
       },
     ],
   });
+
   config.resolve.extensions.push(".ts", ".tsx");
   config.performance = {
     ...config.performance,
