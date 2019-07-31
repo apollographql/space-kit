@@ -46,7 +46,7 @@ export function ModalStory({
   );
 }
 
-storiesOf("Space Kit/Modal", module)
+storiesOf("Modal", module)
   .add("interactive", () => (
     <div css={{ position: "absolute", left: 200 }}>
       <ModalStory
