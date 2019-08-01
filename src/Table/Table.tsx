@@ -103,7 +103,7 @@ export function Table<RowShape>({
       <tbody>
         {data.map((item, index) => (
           <tr key={getRowKey(item)}>
-            {columns.map(({ render, id }) => (
+            {columns.map(({ render, id }, colIndex) => (
               <td
                 key={id}
                 css={{
@@ -113,6 +113,8 @@ export function Table<RowShape>({
                       ? `none`
                       : `1px solid ${colors.silver.dark}`,
                   padding,
+                  paddingLeft: colIndex === 0 ? 0 : padding,
+                  paddingRight: colIndex === columns.length - 1 ? 0 : padding,
                 }}
               >
                 {render(item, index, data)}
