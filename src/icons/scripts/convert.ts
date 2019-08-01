@@ -1,8 +1,10 @@
 import fs from "fs";
 import path from "path";
+import update from "immutability-helper";
 import svgr from "@svgr/core";
 import { formatComponentName } from "./formatComponentName";
 import { svgo } from "./convertUtils/setupSvgo";
+import { JSXElement } from "@babel/types";
 
 const SVG_PATH = path.resolve(__dirname, "..", "svgs");
 const COMPONENT_PATH = path.resolve(__dirname, "..", "..", "..", "icons");
@@ -42,6 +44,43 @@ const COMPONENT_PATH = path.resolve(__dirname, "..", "..", "..", "icons");
               path.basename(filename, path.extname(filename))
             );
 
+            function makeClassName() {
+              const css =
+                "*{vector-effect: non-scaling-stroke} overflow: visible";
+
+              return {
+                type: "JSXAttribute",
+                name: {
+                  type: "JSXIdentifier",
+                  name: "css",
+                },
+                value: {
+                  type: "JSXExpressionContainer",
+                  expression: {
+                    type: "TaggedTemplateExpression",
+                    tag: {
+                      type: "Identifier",
+                      name: "css",
+                    },
+                    quasi: {
+                      type: "TemplateLiteral",
+                      expressions: [],
+                      quasis: [
+                        {
+                          type: "TemplateElement",
+                          tail: true,
+                          value: {
+                            raw: css,
+                            cooked: css,
+                          },
+                        },
+                      ],
+                    },
+                  },
+                },
+              };
+            }
+
             const componentSource = await svgr(
               svg,
               {
@@ -55,9 +94,90 @@ const COMPONENT_PATH = path.resolve(__dirname, "..", "..", "..", "icons");
                     plugins: ["typescript"],
                   });
 
+                  // We need to add '/** @jsx jsx */' to the top of the file,
+                  // but this implementation will strip it out. We add it
+                  // manually when we write the file to disk.
                   return typeScriptTpl.ast`
+                  /** @jsx jsx */ /* <- this is stripped out by svgr :( so we manually add it when we write to disk */
                   ${imports}
-                  export const ${componentName} = (props: React.SVGProps<SVGSVGElement>) => ${jsx};
+                  import { css, jsx } from '@emotion/core';
+                  
+                  interface Props extends React.SVGProps<SVGSVGElement> {
+                    /**
+                     * Weight to render the SVG in. Defaults to "normal"
+                     */
+                    weight?: "normal" | "heavy";
+                  }
+
+                  export const ${componentName} = ({ weight = "normal", ...props }: Props) => ${update(
+                    jsx as JSXElement,
+                    {
+                      children: {
+                        $apply: (children: JSXElement["children"]) =>
+                          children.map(child =>
+                            update(child, {
+                              openingElement: {
+                                attributes: {
+                                  $apply: (
+                                    attributes: JSXElement["openingElement"]["attributes"]
+                                  ) =>
+                                    attributes.map(attribute => {
+                                      if (
+                                        attribute.type === "JSXAttribute" &&
+                                        attribute.name.name === "strokeWidth" &&
+                                        typeof attribute.value === "object" &&
+                                        attribute.value != null &&
+                                        attribute.value.type ===
+                                          "JSXExpressionContainer" &&
+                                        attribute.value.expression.type ===
+                                          "NumericLiteral"
+                                      ) {
+                                        return update(attribute, {
+                                          value: {
+                                            $set: {
+                                              type: "JSXExpressionContainer",
+                                              expression: {
+                                                type: "ConditionalExpression",
+                                                test: {
+                                                  type: "BinaryExpression",
+                                                  left: {
+                                                    type: "Identifier",
+                                                    name: "weight",
+                                                  },
+                                                  operator: "===",
+                                                  right: {
+                                                    type: "StringLiteral",
+                                                    value: "normal",
+                                                  },
+                                                },
+                                                consequent: {
+                                                  type: "NumericLiteral",
+                                                  value: 1.5,
+                                                },
+                                                alternate: {
+                                                  type: "NumericLiteral",
+                                                  value: 2,
+                                                },
+                                              },
+                                            },
+                                          },
+                                        } as any);
+                                      }
+
+                                      return attribute;
+                                    }),
+                                },
+                              },
+                            })
+                          ),
+                      },
+                      openingElement: {
+                        attributes: {
+                          $push: [makeClassName() as any],
+                        },
+                      },
+                    }
+                  )};
                 `;
                 },
                 plugins: ["@svgr/plugin-jsx", "@svgr/plugin-prettier"],
@@ -83,7 +203,13 @@ const COMPONENT_PATH = path.resolve(__dirname, "..", "..", "..", "icons");
               `${componentName}.tsx`
             );
 
-            fs.writeFileSync(outputFilename, componentSource, "utf-8");
+            // This is hacky because I haven't figured out how to make `svgr`'s
+            // template function retain comments.
+            fs.writeFileSync(
+              outputFilename,
+              `/** @jsx jsx */\n${componentSource}`,
+              "utf-8"
+            );
           })
       );
     });
