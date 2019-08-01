@@ -3,6 +3,7 @@ import { jsx } from "@emotion/core";
 import React from "react";
 import * as typography from "../typography";
 import { colors } from "../colors";
+import { EmotionCacheProvider } from "../shared/EmotionCacheProvider";
 
 interface Props<RowShape> {
   /**
@@ -54,56 +55,58 @@ export function Table<RowShape>({
     typeof keyOn === "function" ? keyOn : (row: RowShape) => row[keyOn];
 
   return (
-    <table
-      css={{
-        borderCollapse: "collapse",
-        width: "100%",
-      }}
-    >
-      <thead>
-        <tr
-          css={{
-            borderBottom: `1px solid ${colors.silver.dark}`,
-          }}
-        >
-          {columns.map(({ headerTitle, id }) => (
-            <th
-              key={id}
-              css={{
-                ...typography.base.xsmall,
-                textTransform: "uppercase",
-                color: colors.grey.darker,
-                fontWeight: 600,
-                textAlign: "left",
-                padding,
-              }}
-            >
-              {headerTitle}
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {data.map((item, index) => (
-          <tr key={getRowKey(item)}>
-            {columns.map(({ render, id }) => (
-              <td
+    <EmotionCacheProvider>
+      <table
+        css={{
+          borderCollapse: "collapse",
+          width: "100%",
+        }}
+      >
+        <thead>
+          <tr
+            css={{
+              borderBottom: `1px solid ${colors.silver.dark}`,
+            }}
+          >
+            {columns.map(({ headerTitle, id }) => (
+              <th
                 key={id}
                 css={{
-                  // no border on the bottom row
-                  borderBottom:
-                    index === data.length - 1
-                      ? `none`
-                      : `1px solid ${colors.silver.dark}`,
+                  ...typography.base.xsmall,
+                  textTransform: "uppercase",
+                  color: colors.grey.darker,
+                  fontWeight: 600,
+                  textAlign: "left",
                   padding,
                 }}
               >
-                {render(item, index, data)}
-              </td>
+                {headerTitle}
+              </th>
             ))}
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {data.map((item, index) => (
+            <tr key={getRowKey(item)}>
+              {columns.map(({ render, id }) => (
+                <td
+                  key={id}
+                  css={{
+                    // no border on the bottom row
+                    borderBottom:
+                      index === data.length - 1
+                        ? `none`
+                        : `1px solid ${colors.silver.dark}`,
+                    padding,
+                  }}
+                >
+                  {render(item, index, data)}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </EmotionCacheProvider>
   );
 }

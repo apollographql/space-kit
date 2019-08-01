@@ -4,6 +4,7 @@ import * as CSS from "csstype";
 import { base } from "../typography";
 import { jsx } from "@emotion/core";
 import { getOffsetInPalette } from "../colors/utils/getOffsetInPalette";
+import { EmotionCacheProvider } from "../shared/EmotionCacheProvider";
 
 type TLength = string | 0 | number;
 
@@ -216,37 +217,22 @@ export const Button: React.FC<Props> = ({
   }
 
   return (
-    <button
-      {...otherProps}
-      disabled={disabled}
-      onClick={event => {
-        if (onClick) {
-          onClick(event);
-        }
+    <EmotionCacheProvider>
+      <button
+        {...otherProps}
+        disabled={disabled}
+        onClick={event => {
+          if (onClick) {
+            onClick(event);
+          }
 
-        // We want to hide the blue border around a button after we've clicked
-        // on it.
-        event.currentTarget.blur();
-      }}
-      css={[
-        {
-          "&[disabled]": {
-            backgroundColor:
-              feel === "flat"
-                ? "transparent"
-                : theme === "light"
-                ? colors.silver.dark
-                : colors.grey.dark,
-            color:
-              feel === "flat" && theme === "dark"
-                ? colors.grey.dark
-                : colors.grey.light,
-
-            // We need to also set the `:hover` on `:disabled` so it has a higher
-            // specificity than any `:hover` classes passed in. This also means
-            // that both of these need to be overriden if we want to use a custom
-            // disabled color.
-            ":hover": {
+          // We want to hide the blue border around a button after we've clicked
+          // on it.
+          event.currentTarget.blur();
+        }}
+        css={[
+          {
+            "&[disabled]": {
               backgroundColor:
                 feel === "flat"
                   ? "transparent"
@@ -257,145 +243,162 @@ export const Button: React.FC<Props> = ({
                 feel === "flat" && theme === "dark"
                   ? colors.grey.dark
                   : colors.grey.light,
+
+              // We need to also set the `:hover` on `:disabled` so it has a higher
+              // specificity than any `:hover` classes passed in. This also means
+              // that both of these need to be overriden if we want to use a custom
+              // disabled color.
+              ":hover": {
+                backgroundColor:
+                  feel === "flat"
+                    ? "transparent"
+                    : theme === "light"
+                    ? colors.silver.dark
+                    : colors.grey.dark,
+                color:
+                  feel === "flat" && theme === "dark"
+                    ? colors.grey.dark
+                    : colors.grey.light,
+              },
             },
-          },
-
-          backgroundColor:
-            feel === "raised"
-              ? color
-              : feel === "secondary"
-              ? colors.white
-              : "transparent",
-
-          borderRadius: variant === "fab" ? "100%" : 4,
-
-          borderWidth: 0,
-          ...(feel !== "flat" && {
-            boxShadow:
-              theme === "light"
-                ? "0 1px 4px 0 rgba(18, 21, 26, 0.08), inset 0 0 0 1px rgba(18, 21, 26, 0.2), inset 0 -1px 0 0 rgba(18, 21, 26, 0.05)"
-                : "0 0 0 1px rgba(18, 21, 26, 0.2), 0 1px 4px 0 rgba(18, 21, 26, 0.08), 0 1px 0 0 rgba(18, 21, 26, 0.05)",
-          }),
-
-          color: getTextColor({ color, feel, theme }),
-
-          // Vertically center children
-          display: "inline-flex",
-          justifyContent: "center",
-
-          height: getHeight({ size }),
-
-          minWidth: iconOnly
-            ? size === "small"
-              ? 28
-              : size === "large"
-              ? 42
-              : 36
-            : size === "small"
-            ? 76
-            : size === "large"
-            ? 112
-            : 100,
-
-          // We have to set the Y padding because browsers (at least Chrome) has
-          // a non-symmetrical vertical padding applied by default.
-          padding: `0 ${size === "small" ? 8 : size === "large" ? 8 : 7}px`,
-
-          ...(size === "small"
-            ? base.small
-            : size === "large"
-            ? base.large
-            : base.base),
-
-          fontWeight: 600,
-
-          // Disable the outline because we're setting a custom `:active` style
-          outline: 0,
-        },
-
-        !disabled && {
-          ":hover, &[data-force-hover-state]": {
-            backgroundColor: getHoverBackgroundColor({ color, feel, theme }),
-            color: getTextColor({ color, feel, theme, mode: ":hover" }),
-            cursor: "pointer",
-            ...(feel !== "flat" && {
-              // The `box-shadow` property is copied directly from Zeplin
-              boxShadow:
-                theme === "light"
-                  ? "0 5px 10px 0 rgba(18, 21, 26, 0.12), inset 0 0 0 1px rgba(18, 21, 26, 0.2), inset 0 -1px 0 0 rgba(18, 21, 26, 0.05)"
-                  : "0 0 0 1px rgba(18, 21, 26, 0.2), 0 5px 10px 0 rgba(18, 21, 26, 0.12), 0 1px 0 0 rgba(18, 21, 26, 0.05)",
-            }),
-          },
-          ":focus, &[data-force-focus-state]": {
-            ...(feel === "flat" && {
-              backgroundColor: theme === "light" ? colors.white : "#000",
-              color: theme === "light" ? colors.blue.base : colors.blue.light,
-            }),
-            // The `box-shadow` property is copied directly from Zeplin for the
-            // light theme. For the dark theme we use a variant of the color to
-            // make the borders sharp.
-            boxShadow: `0 1px 4px 0 rgba(18, 21, 26, 0.08), 0 0 0 2px ${
-              theme === "light" || color === defaultColor
-                ? "#bbdbff"
-                : getOffsetInPalette(Infinity, "lighter", color)
-            }, inset 0 0 0 1px ${
-              color === defaultColor
-                ? "#2075d6"
-                : getOffsetInPalette(1, "darker", color)
-            }, inset 0 -1px 0 0 rgba(18, 21, 26, 0.05)`,
-          },
-          "&:active, &[data-force-active-state]": {
-            ...(getTextColor({ color, feel, theme, mode: ":hover" }) && {
-              color: getTextColor({ color, feel, theme, mode: ":active" }),
-            }),
 
             backgroundColor:
               feel === "raised"
                 ? color
                 : feel === "secondary"
                 ? colors.white
-                : color === defaultColor
-                ? theme === "dark"
-                  ? colors.grey.darker
-                  : colors.silver.base
-                : getOffsetInPalette(2, "lighter", color),
+                : "transparent",
 
-            // The `box-shadow` properties are copied directly from Zeplin
-            boxShadow:
-              feel !== "flat"
-                ? theme === "light"
-                  ? "inset 0 0 0 1px rgba(18, 21, 26, 0.2), inset 0 -1px 0 0 rgba(18, 21, 26, 0.05), inset 0 2px 2px 0 rgba(18, 21, 26, 0.12)"
-                  : "0 0 0 1px rgba(18, 21, 26, 0.2), 0 1px 4px 0 rgba(18, 21, 26, 0.08), 0 -1px 0 0 rgba(18, 21, 26, 0.16), inset 0 1px 2px 0 rgba(18, 21, 26, 0.42)"
-                : "none",
-            outline: "0",
+            borderRadius: variant === "fab" ? "100%" : 4,
+
+            borderWidth: 0,
+            ...(feel !== "flat" && {
+              boxShadow:
+                theme === "light"
+                  ? "0 1px 4px 0 rgba(18, 21, 26, 0.08), inset 0 0 0 1px rgba(18, 21, 26, 0.2), inset 0 -1px 0 0 rgba(18, 21, 26, 0.05)"
+                  : "0 0 0 1px rgba(18, 21, 26, 0.2), 0 1px 4px 0 rgba(18, 21, 26, 0.08), 0 1px 0 0 rgba(18, 21, 26, 0.05)",
+            }),
+
+            color: getTextColor({ color, feel, theme }),
+
+            // Vertically center children
+            display: "inline-flex",
+            justifyContent: "center",
+
+            height: getHeight({ size }),
+
+            minWidth: iconOnly
+              ? size === "small"
+                ? 28
+                : size === "large"
+                ? 42
+                : 36
+              : size === "small"
+              ? 76
+              : size === "large"
+              ? 112
+              : 100,
+
+            // We have to set the Y padding because browsers (at least Chrome) has
+            // a non-symmetrical vertical padding applied by default.
+            padding: `0 ${size === "small" ? 8 : size === "large" ? 8 : 7}px`,
+
+            ...(size === "small"
+              ? base.small
+              : size === "large"
+              ? base.large
+              : base.base),
+
+            fontWeight: 600,
+
+            // Disable the outline because we're setting a custom `:active` style
+            outline: 0,
           },
-        },
-      ]}
-    >
-      <div
-        css={{
-          alignItems: "center",
-          display: "flex",
-          justifyContent: "center",
-        }}
+
+          !disabled && {
+            ":hover, &[data-force-hover-state]": {
+              backgroundColor: getHoverBackgroundColor({ color, feel, theme }),
+              color: getTextColor({ color, feel, theme, mode: ":hover" }),
+              cursor: "pointer",
+              ...(feel !== "flat" && {
+                // The `box-shadow` property is copied directly from Zeplin
+                boxShadow:
+                  theme === "light"
+                    ? "0 5px 10px 0 rgba(18, 21, 26, 0.12), inset 0 0 0 1px rgba(18, 21, 26, 0.2), inset 0 -1px 0 0 rgba(18, 21, 26, 0.05)"
+                    : "0 0 0 1px rgba(18, 21, 26, 0.2), 0 5px 10px 0 rgba(18, 21, 26, 0.12), 0 1px 0 0 rgba(18, 21, 26, 0.05)",
+              }),
+            },
+            ":focus, &[data-force-focus-state]": {
+              ...(feel === "flat" && {
+                backgroundColor: theme === "light" ? colors.white : "#000",
+                color: theme === "light" ? colors.blue.base : colors.blue.light,
+              }),
+              // The `box-shadow` property is copied directly from Zeplin for the
+              // light theme. For the dark theme we use a variant of the color to
+              // make the borders sharp.
+              boxShadow: `0 1px 4px 0 rgba(18, 21, 26, 0.08), 0 0 0 2px ${
+                theme === "light" || color === defaultColor
+                  ? "#bbdbff"
+                  : getOffsetInPalette(Infinity, "lighter", color)
+              }, inset 0 0 0 1px ${
+                color === defaultColor
+                  ? "#2075d6"
+                  : getOffsetInPalette(1, "darker", color)
+              }, inset 0 -1px 0 0 rgba(18, 21, 26, 0.05)`,
+            },
+            "&:active, &[data-force-active-state]": {
+              ...(getTextColor({ color, feel, theme, mode: ":hover" }) && {
+                color: getTextColor({ color, feel, theme, mode: ":active" }),
+              }),
+
+              backgroundColor:
+                feel === "raised"
+                  ? color
+                  : feel === "secondary"
+                  ? colors.white
+                  : color === defaultColor
+                  ? theme === "dark"
+                    ? colors.grey.darker
+                    : colors.silver.base
+                  : getOffsetInPalette(2, "lighter", color),
+
+              // The `box-shadow` properties are copied directly from Zeplin
+              boxShadow:
+                feel !== "flat"
+                  ? theme === "light"
+                    ? "inset 0 0 0 1px rgba(18, 21, 26, 0.2), inset 0 -1px 0 0 rgba(18, 21, 26, 0.05), inset 0 2px 2px 0 rgba(18, 21, 26, 0.12)"
+                    : "0 0 0 1px rgba(18, 21, 26, 0.2), 0 1px 4px 0 rgba(18, 21, 26, 0.08), 0 -1px 0 0 rgba(18, 21, 26, 0.16), inset 0 1px 2px 0 rgba(18, 21, 26, 0.42)"
+                  : "none",
+              outline: "0",
+            },
+          },
+        ]}
       >
-        {icon && (
-          <span
-            css={{
-              // This needs to be `inline-flex` and not the default of
-              // `inline-block` to vertically center the icon automatically
-              display: "inline-flex",
-              height: iconSize,
-              // The `4px` will be on the right to separate the icon from the text
-              margin: iconOnly ? 0 : "0 4px 0",
-              width: iconSize,
-            }}
-          >
-            {icon}
-          </span>
-        )}
-        {children}
-      </div>
-    </button>
+        <div
+          css={{
+            alignItems: "center",
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          {icon && (
+            <span
+              css={{
+                // This needs to be `inline-flex` and not the default of
+                // `inline-block` to vertically center the icon automatically
+                display: "inline-flex",
+                height: iconSize,
+                // The `4px` will be on the right to separate the icon from the text
+                margin: iconOnly ? 0 : "0 4px 0",
+                width: iconSize,
+              }}
+            >
+              {icon}
+            </span>
+          )}
+          {children}
+        </div>
+      </button>
+    </EmotionCacheProvider>
   );
 };

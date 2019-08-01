@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import * as typography from "../typography";
 import { colors } from "../colors";
 import * as CSS from "csstype";
+import { EmotionCacheProvider } from "../shared/EmotionCacheProvider";
 
 interface Props {
   /**
@@ -111,74 +112,76 @@ export function Modal({
   });
 
   return (
-    <div onClick={onClose} css={modalBackdrop}>
-      <div
-        onClick={event => event.stopPropagation()}
-        css={{
-          backgroundColor: "white",
-          borderRadius: 12,
-          boxShadow: `0 16px 32px 0 rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(18, 21, 26, 0.04)`,
-          left: "50%",
-          maxHeight: "100%",
-          minWidth: 400,
-          opacity: 1,
-          overflowY: "scroll",
-          padding: size === "large" ? "40px" : "32px",
-          position: "absolute",
-          top: "20%",
-          transform: "translate(-50%)",
-          width: getModalWidth(size),
-          zIndex: 11,
-        }}
-      >
-        <div>
-          {title && (
-            <div>
-              <div
-                css={{
-                  color: colors.black.base,
-                  marginBottom: 10,
-                  ...(size === "small"
-                    ? { ...typography.base.large, fontWeight: 600 }
-                    : typography.base.xxlarge),
-                }}
-              >
-                {title}
-              </div>
-            </div>
-          )}
-          {description && (
-            <div css={{ ...typography.base.base, color: colors.black.base }}>
-              {description}
-            </div>
-          )}
-        </div>
+    <EmotionCacheProvider>
+      <div onClick={onClose} css={modalBackdrop}>
         <div
+          onClick={event => event.stopPropagation()}
           css={{
-            marginTop: size === "large" ? 24 : size === "medium" ? 16 : 12,
+            backgroundColor: "white",
+            borderRadius: 12,
+            boxShadow: `0 16px 32px 0 rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(18, 21, 26, 0.04)`,
+            left: "50%",
+            maxHeight: "100%",
+            minWidth: 400,
+            opacity: 1,
+            overflowY: "scroll",
+            padding: size === "large" ? "40px" : "32px",
+            position: "absolute",
+            top: "20%",
+            transform: "translate(-50%)",
+            width: getModalWidth(size),
+            zIndex: 11,
           }}
         >
-          {children}
-        </div>
-        {(primaryAction || secondaryAction || bottomLeftText) && (
+          <div>
+            {title && (
+              <div>
+                <div
+                  css={{
+                    color: colors.black.base,
+                    marginBottom: 10,
+                    ...(size === "small"
+                      ? { ...typography.base.large, fontWeight: 600 }
+                      : typography.base.xxlarge),
+                  }}
+                >
+                  {title}
+                </div>
+              </div>
+            )}
+            {description && (
+              <div css={{ ...typography.base.base, color: colors.black.base }}>
+                {description}
+              </div>
+            )}
+          </div>
           <div
             css={{
-              alignItems: "baseline",
-              display: "flex",
-              justifyContent: "flex-end",
-              marginTop: 24,
+              marginTop: size === "large" ? 24 : size === "medium" ? 16 : 12,
             }}
           >
-            {bottomLeftText && (
-              <div css={{ marginRight: "auto" }}>{bottomLeftText}</div>
-            )}
-            {secondaryAction && (
-              <div css={{ marginRight: 12 }}>{secondaryAction}</div>
-            )}
-            {primaryAction && <div>{primaryAction}</div>}
+            {children}
           </div>
-        )}
+          {(primaryAction || secondaryAction || bottomLeftText) && (
+            <div
+              css={{
+                alignItems: "baseline",
+                display: "flex",
+                justifyContent: "flex-end",
+                marginTop: 24,
+              }}
+            >
+              {bottomLeftText && (
+                <div css={{ marginRight: "auto" }}>{bottomLeftText}</div>
+              )}
+              {secondaryAction && (
+                <div css={{ marginRight: 12 }}>{secondaryAction}</div>
+              )}
+              {primaryAction && <div>{primaryAction}</div>}
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </EmotionCacheProvider>
   );
 }
