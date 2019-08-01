@@ -6,12 +6,41 @@ import React from "react";
 import PropTypes from "prop-types";
 
 interface Props {
+  /**
+   * The content of the card,
+   * appears below the title and description
+   */
   children?: React.ReactNode;
+  /**
+   * the title of the card
+   */
   title?: React.ReactNode;
+  /**
+   * extra class names
+   * applied to the outer most div
+   */
   className?: string;
+  /**
+   * the description for this card
+   * appears in grey below the title
+   */
   description?: React.ReactNode;
+  /**
+   * titleChildren could be a button
+   * or a tooltip or anything the card should display
+   * aligned with the title on the right
+   */
   titleChildren?: React.ReactNode;
+  /**
+   * pass forceNoChildPadding={true} if your card will have hidden children
+   * for example, a card with a drawer will read as having children,
+   * but you don't want the padding associated with a child
+   */
   forceNoChildPadding?: boolean;
+  /**
+   * cards can be standard (18px text, larger padding)
+   * or large (24px text, smaller padding)
+   */
   size?: "standard" | "large";
 }
 
