@@ -12,6 +12,7 @@ tsconfig.tsbuildinfo
 /colors
 /fonts
 /icons
+/Form
 /Modal
 /Card
 /shared

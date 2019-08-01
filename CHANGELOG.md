@@ -61,6 +61,7 @@ _From #57_
 - Edit Modal prop descriptions, fix margin top on children [#41](https://github.com/apollographql/space-kit/pull/41)
 - Export constant from `colors` instead of requiring `import * as colors` (#35)
 - Add Card component (#34)
+- Text Inputs and Steppers [(#45)](https://github.com/apollographql/space-kit/pull/45)
 
 ## [`v0.6.2`](https://github.com/apollographql/space-kit/releases/tag/v0.6.2)
 
