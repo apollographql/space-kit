@@ -69,50 +69,54 @@ export const Card: React.FunctionComponent<Props> = ({
       paddingBottom: size === "large" ? 16 : 28,
     }}
   >
-    <div css={{ display: "flex" }}>
-      <div css={{ flex: "1 1 0%" }}>
-        <div css={{ display: "block" }}>
-          {title && (
-            <div
-              css={{
-                display: "flex",
-                color: colors.black.base,
-                ...(size === "large" ? base.xxlarge : base.large),
-              }}
-            >
-              <span
+    <div
+      css={{
+        paddingBottom: -!!children && !forceNoChildPadding ? 24 : "",
+      }}
+    >
+      <div css={{ display: "flex" }}>
+        <div css={{ flex: "1 1 0%" }}>
+          <div css={{ display: "block" }}>
+            {title && (
+              <div
                 css={{
-                  fontWeight: 600,
-                  flex: "1 1 0%",
-                  lineHeight: 1.5,
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  whiteSpace: "nowrap",
-                  paddingRight: "1rem",
+                  display: "flex",
+                  color: colors.black.base,
+                  ...(size === "large" ? base.xxlarge : base.large),
                 }}
               >
-                {title}
-              </span>
-            </div>
-          )}
-          {description && (
-            <div
-              css={{
-                ...base.base,
-                color: colors.grey.base,
-                maxWidth: titleChildren ? "42rem" : "",
-                paddingBottom:
-                  !!children && !forceNoChildPadding ? "1.5rem" : "",
-              }}
-            >
-              {description}
-            </div>
-          )}
+                <span
+                  css={{
+                    fontWeight: 600,
+                    flex: "1 1 0%",
+                    lineHeight: 1.5,
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
+                    paddingRight: 24,
+                  }}
+                >
+                  {title}
+                </span>
+              </div>
+            )}
+            {description && (
+              <div
+                css={{
+                  ...base.base,
+                  color: colors.grey.base,
+                  maxWidth: titleChildren ? "42rem" : "",
+                }}
+              >
+                {description}
+              </div>
+            )}
+          </div>
         </div>
+        {titleChildren && (
+          <div css={{ flex: "none", marginLeft: "1rem" }}>{titleChildren}</div>
+        )}
       </div>
-      {titleChildren && (
-        <div css={{ flex: "none", marginLeft: "1rem" }}>{titleChildren}</div>
-      )}
     </div>
     {children}
   </div>
@@ -126,4 +130,74 @@ Card.propTypes = {
   titleChildren: PropTypes.node,
   forceNoChildPadding: PropTypes.bool,
   size: PropTypes.oneOf<Props["size"]>(["standard", "large"]),
+};
+
+interface SectionProps {
+  border?: boolean;
+}
+
+export const CardSection: React.FunctionComponent<Props & SectionProps> = ({
+  title,
+  description,
+  titleChildren,
+  border,
+}) => (
+  <div
+    css={{
+      display: "flex",
+      paddingTop: 24,
+      border: border ? "1px" : "",
+      borderColor: colors.silver.base,
+    }}
+  >
+    <div css={{ flex: "1 1 0%" }}>
+      <div css={{ display: "block" }}>
+        {title && (
+          <div
+            css={{
+              display: "flex",
+              color: colors.black.base,
+              ...base.base,
+            }}
+          >
+            <span
+              css={{
+                fontWeight: 600,
+                flex: "1 1 0%",
+                lineHeight: 1.5,
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
+                paddingRight: 24,
+              }}
+            >
+              {title}
+            </span>
+          </div>
+        )}
+        {description && (
+          <div
+            css={{
+              ...base.base,
+              color: colors.grey.base,
+              maxWidth: titleChildren ? "42rem" : "",
+            }}
+          >
+            {description}
+          </div>
+        )}
+      </div>
+    </div>
+    {titleChildren && (
+      <div css={{ flex: "none", marginLeft: "1rem" }}>{titleChildren}</div>
+    )}
+  </div>
+);
+
+CardSection.propTypes = {
+  title: PropTypes.node,
+  description: PropTypes.node,
+  titleChildren: PropTypes.node,
+  forceNoChildPadding: PropTypes.bool,
+  border: PropTypes.bool,
 };

@@ -2,7 +2,7 @@
 import { jsx } from "@emotion/core";
 import { useState } from "react";
 import { storiesOf } from "@storybook/react";
-import { Card } from "./Card";
+import { Card, CardSection } from "./Card";
 import { Button } from "../Button";
 import * as colors from "../colors";
 
@@ -104,5 +104,40 @@ storiesOf("Card", module)
       }}
     >
       <CardWithDrawer />
+    </div>
+  ))
+  .add("multiple sections", () => (
+    <div
+      css={{
+        backgroundColor: colors.silver.light,
+        padding: "40px",
+        height: "100vh",
+      }}
+    >
+      <Card
+        title="Card Title"
+        description="description goes here"
+        titleChildren={
+          <Button color={colors.red.base}>
+            <div css={{ color: colors.white }}>Click</div>
+          </Button>
+        }
+        forceNoChildPadding={true}
+      >
+        <CardSection
+          title="Members"
+          description="You have 7 members in your organization"
+        />
+        <CardSection
+          title="Members"
+          description="You have 7 members in your organization"
+          border={true}
+          titleChildren={
+            <Button color={colors.red.base}>
+              <div css={{ color: colors.white }}>Edit</div>
+            </Button>
+          }
+        />
+      </Card>
     </div>
   ));
