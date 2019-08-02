@@ -12,3 +12,5 @@ build-reset.ts
 /icons/src
 /src
 **/tsconfig.tsbuildinfo
+
+.awcache
