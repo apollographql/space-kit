@@ -3,7 +3,7 @@
 ## Upcoming
 
 
-## [`v0.7.1`](https://github.com/apollographql/space-kit/releases/tag/v0.7.1)
+## [`v0.7.3`](https://github.com/apollographql/space-kit/releases/tag/v0.7.3)
 
 - Remove `.awcache` from releases
 - Remove eslint cache and config from releases
