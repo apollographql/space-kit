@@ -5,6 +5,8 @@ import { jsx } from "@emotion/core";
 import React from "react";
 import PropTypes from "prop-types";
 
+const descriptionMaxWidth = 650;
+
 interface Props
   extends React.DetailedHTMLProps<
     React.HTMLAttributes<HTMLDivElement>,
@@ -31,14 +33,10 @@ interface Props
    */
   actions?: React.ReactNode;
 
-  /**
-   * cards can be standard (18px text, larger padding)
-   * or large (24px text, smaller padding)
-   */
   size?: "standard" | "large";
 }
 
-export const Card: React.FunctionComponent<Props> = ({
+export const Card: React.FC<Props> = ({
   children,
   heading,
   actions,
@@ -69,7 +67,7 @@ export const Card: React.FunctionComponent<Props> = ({
           marginRight: "auto",
         }}
       >
-        <div css={{ display: "block" }}>
+        <div>
           {heading && (
             <div
               css={{
@@ -82,7 +80,6 @@ export const Card: React.FunctionComponent<Props> = ({
                 css={{
                   fontWeight: 600,
                   flex: "1 1 0%",
-                  lineHeight: 1.5,
                   overflow: "hidden",
                   textOverflow: "ellipsis",
                   whiteSpace: "nowrap",
@@ -98,7 +95,7 @@ export const Card: React.FunctionComponent<Props> = ({
               css={{
                 ...base.base,
                 color: colors.grey.base,
-                maxWidth: actions ? 650 : "",
+                maxWidth: actions ? descriptionMaxWidth : "",
               }}
             >
               {description}
@@ -120,7 +117,7 @@ Card.propTypes = {
   size: PropTypes.oneOf<Props["size"]>(["standard", "large"]),
 };
 
-export const CardSection: React.FunctionComponent<Props> = ({
+export const CardSection: React.FC<Props> = ({
   heading,
   description,
   actions,
@@ -132,7 +129,7 @@ export const CardSection: React.FunctionComponent<Props> = ({
     }}
   >
     <div css={{ flex: "1 1 0%", marginRight: "auto" }}>
-      <div css={{ display: "block" }}>
+      <div>
         {heading && (
           <div
             css={{
@@ -145,7 +142,6 @@ export const CardSection: React.FunctionComponent<Props> = ({
               css={{
                 fontWeight: 600,
                 flex: "1 1 0%",
-                lineHeight: 1.5,
                 overflow: "hidden",
                 textOverflow: "ellipsis",
                 whiteSpace: "nowrap",
@@ -161,7 +157,7 @@ export const CardSection: React.FunctionComponent<Props> = ({
             css={{
               ...base.base,
               color: colors.grey.base,
-              maxWidth: actions ? 650 : "",
+              maxWidth: actions ? descriptionMaxWidth : "",
             }}
           >
             {description}
@@ -179,9 +175,12 @@ CardSection.propTypes = {
   actions: PropTypes.node,
 };
 
-export const CardSeperator: React.FunctionComponent = () => (
+/**
+ * A border line that can go between two card sections, with appropriate margin applied
+ */
+export const CardSeperator: React.FC = () => (
   <hr
-    style={{
+    css={{
       height: 1,
       borderWidth: 0,
       backgroundColor: colors.silver.dark,

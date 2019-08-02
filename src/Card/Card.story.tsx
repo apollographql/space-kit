@@ -3,10 +3,21 @@ import { jsx } from "@emotion/core";
 import { storiesOf } from "@storybook/react";
 import { Card, CardSection, CardSeperator } from "./Card";
 import { Button } from "../Button";
-import * as colors from "../colors";
+import { colors } from "../colors";
 
 storiesOf("Card", module)
   .add("default", () => (
+    <div
+      css={{
+        backgroundColor: colors.silver.light,
+        padding: "40px",
+        height: "100vh",
+      }}
+    >
+      <Card />
+    </div>
+  ))
+  .add("default, heading, description", () => (
     <div
       css={{
         backgroundColor: colors.silver.light,
