@@ -22,9 +22,7 @@ interface Props {
 
   children?: React.ReactNode;
   /**
-   * Optional descrition to show of the modal
-   *
-   * This will probably be moved into a card component
+   * Optional description to show of the modal
    */
   description?: React.ReactNode;
 
@@ -45,8 +43,6 @@ interface Props {
 
   /**
    * Title of the modal
-   *
-   * This will probably be moved into a card component
    */
   title: React.ReactNode;
 }
@@ -157,7 +153,13 @@ export function Modal({
             </div>
           )}
         </div>
-        <div css={{ marginTop: 12 }}>{children}</div>
+        <div
+          css={{
+            marginTop: size === "large" ? 24 : size === "medium" ? 16 : 12,
+          }}
+        >
+          {children}
+        </div>
         {(primaryAction || secondaryAction || bottomLeftText) && (
           <div
             css={{

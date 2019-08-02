@@ -7,6 +7,7 @@
 - Fix broken storybook (#39)
 - Remove top level Space Kit namespace in Storybook (#38)
 - Make Icon weight configurable (#33)
+- Edit Modal prop descriptions, fix margin top on children [#41](https://github.com/apollographql/space-kit/pull/41)
 
 ## [`v0.6.2`](https://github.com/apollographql/space-kit/releases/tag/v0.6.2)
 
