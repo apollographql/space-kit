@@ -20,3 +20,5 @@ tsconfig.tsbuildinfo
 # Exclusions
 
 !/icons/tsconfig.json
+
+.awcache
