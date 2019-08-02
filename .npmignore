@@ -14,3 +14,7 @@ build-reset.ts
 **/tsconfig.tsbuildinfo
 
 .awcache
+
+# ESLint stuff
+.eslintcache
+.eslintrc.js
