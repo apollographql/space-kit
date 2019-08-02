@@ -1,42 +1,36 @@
 /** @jsx jsx */
-import * as colors from "../colors";
+import { colors } from "../colors";
 import { base } from "../typography";
 import { jsx } from "@emotion/core";
 import React from "react";
 import PropTypes from "prop-types";
 
-interface Props {
+interface Props
+  extends React.DetailedHTMLProps<
+    React.HTMLAttributes<HTMLDivElement>,
+    HTMLDivElement
+  > {
   /**
    * The content of the card,
    * appears below the title and description
    */
   children?: React.ReactNode;
-  /**
-   * the title of the card
-   */
-  title?: React.ReactNode;
-  /**
-   * extra class names
-   * applied to the outer most div
-   */
-  className?: string;
+
+  heading?: React.ReactNode;
+
   /**
    * the description for this card
    * appears in grey below the title
    */
   description?: React.ReactNode;
+
   /**
-   * titleChildren could be a button
+   * actions could be a button
    * or a tooltip or anything the card should display
    * aligned with the title on the right
    */
-  titleChildren?: React.ReactNode;
-  /**
-   * pass forceNoChildPadding={true} if your card will have hidden children
-   * for example, a card with a drawer will read as having children,
-   * but you don't want the padding associated with a child
-   */
-  forceNoChildPadding?: boolean;
+  actions?: React.ReactNode;
+
   /**
    * cards can be standard (18px text, larger padding)
    * or large (24px text, smaller padding)
@@ -46,9 +40,8 @@ interface Props {
 
 export const Card: React.FunctionComponent<Props> = ({
   children,
-  forceNoChildPadding,
-  title,
-  titleChildren,
+  heading,
+  actions,
   description,
   size,
   ...otherProps
@@ -59,100 +52,82 @@ export const Card: React.FunctionComponent<Props> = ({
       backgroundColor: colors.white,
       color: colors.black.base,
       boxShadow: `0 4px 8px 0 rgba(0, 0, 0, .04)`,
-      borderRadius: `0.5rem`,
+      borderStyle: "solid",
+      borderRadius: 8,
       borderWidth: 1,
       borderColor: colors.silver.dark,
       paddingLeft: 24,
       paddingRight: 24,
-      margin: "2rem",
       paddingTop: size === "large" ? 16 : 28,
       paddingBottom: size === "large" ? 16 : 28,
     }}
   >
-    <div
-      css={{
-        paddingBottom: -!!children && !forceNoChildPadding ? 24 : "",
-      }}
-    >
-      <div css={{ display: "flex" }}>
-        <div css={{ flex: "1 1 0%" }}>
-          <div css={{ display: "block" }}>
-            {title && (
-              <div
+    <div css={{ display: "flex" }}>
+      <div css={{ flex: "1 1 0%", marginRight: "auto" }}>
+        <div css={{ display: "block" }}>
+          {heading && (
+            <div
+              css={{
+                display: "flex",
+                color: colors.black.base,
+                ...(size === "large" ? base.xxlarge : base.large),
+              }}
+            >
+              <span
                 css={{
-                  display: "flex",
-                  color: colors.black.base,
-                  ...(size === "large" ? base.xxlarge : base.large),
+                  fontWeight: 600,
+                  flex: "1 1 0%",
+                  lineHeight: 1.5,
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  whiteSpace: "nowrap",
+                  paddingRight: 24,
                 }}
               >
-                <span
-                  css={{
-                    fontWeight: 600,
-                    flex: "1 1 0%",
-                    lineHeight: 1.5,
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    whiteSpace: "nowrap",
-                    paddingRight: 24,
-                  }}
-                >
-                  {title}
-                </span>
-              </div>
-            )}
-            {description && (
-              <div
-                css={{
-                  ...base.base,
-                  color: colors.grey.base,
-                  maxWidth: titleChildren ? "42rem" : "",
-                }}
-              >
-                {description}
-              </div>
-            )}
-          </div>
+                {heading}
+              </span>
+            </div>
+          )}
+          {description && (
+            <div
+              css={{
+                ...base.base,
+                color: colors.grey.base,
+                maxWidth: actions ? 650 : "",
+              }}
+            >
+              {description}
+            </div>
+          )}
         </div>
-        {titleChildren && (
-          <div css={{ flex: "none", marginLeft: "1rem" }}>{titleChildren}</div>
-        )}
       </div>
+      {actions && <div css={{ marginLeft: 16 }}>{actions}</div>}
     </div>
-    {children}
+    {children && <div css={{ paddingTop: 24 }}>{children} </div>}
   </div>
 );
 
 Card.propTypes = {
   children: PropTypes.node,
-  title: PropTypes.node,
-  className: PropTypes.string,
+  heading: PropTypes.node,
   description: PropTypes.node,
-  titleChildren: PropTypes.node,
-  forceNoChildPadding: PropTypes.bool,
+  actions: PropTypes.node,
   size: PropTypes.oneOf<Props["size"]>(["standard", "large"]),
 };
 
-interface SectionProps {
-  border?: boolean;
-}
-
-export const CardSection: React.FunctionComponent<Props & SectionProps> = ({
-  title,
+export const CardSection: React.FunctionComponent<Props> = ({
+  heading,
   description,
-  titleChildren,
-  border,
+  actions,
 }) => (
   <div
     css={{
       display: "flex",
-      paddingTop: 24,
-      border: border ? "1px" : "",
-      borderColor: colors.silver.base,
     }}
   >
-    <div css={{ flex: "1 1 0%" }}>
+    <div css={{ flex: "1 1 0%", marginRight: "auto" }}>
       <div css={{ display: "block" }}>
-        {title && (
+        {heading && (
           <div
             css={{
               display: "flex",
@@ -171,7 +146,7 @@ export const CardSection: React.FunctionComponent<Props & SectionProps> = ({
                 paddingRight: 24,
               }}
             >
-              {title}
+              {heading}
             </span>
           </div>
         )}
@@ -180,7 +155,7 @@ export const CardSection: React.FunctionComponent<Props & SectionProps> = ({
             css={{
               ...base.base,
               color: colors.grey.base,
-              maxWidth: titleChildren ? "42rem" : "",
+              maxWidth: actions ? 650 : "",
             }}
           >
             {description}
@@ -188,16 +163,24 @@ export const CardSection: React.FunctionComponent<Props & SectionProps> = ({
         )}
       </div>
     </div>
-    {titleChildren && (
-      <div css={{ flex: "none", marginLeft: "1rem" }}>{titleChildren}</div>
-    )}
+    {actions && <div css={{ marginLeft: 16 }}>{actions}</div>}
   </div>
 );
 
 CardSection.propTypes = {
-  title: PropTypes.node,
+  heading: PropTypes.node,
   description: PropTypes.node,
-  titleChildren: PropTypes.node,
-  forceNoChildPadding: PropTypes.bool,
-  border: PropTypes.bool,
+  actions: PropTypes.node,
 };
+
+export const CardSeperator: React.FunctionComponent = () => (
+  <hr
+    style={{
+      height: 1,
+      borderWidth: 0,
+      backgroundColor: colors.silver.dark,
+      marginTop: 24,
+      marginBottom: 24,
+    }}
+  />
+);

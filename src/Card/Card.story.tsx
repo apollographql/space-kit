@@ -1,42 +1,9 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import { useState } from "react";
 import { storiesOf } from "@storybook/react";
-import { Card, CardSection } from "./Card";
+import { Card, CardSection, CardSeperator } from "./Card";
 import { Button } from "../Button";
 import * as colors from "../colors";
-
-const CardWithDrawer = () => {
-  const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
-  return (
-    <Card
-      title="Card Title"
-      description="description goes here"
-      forceNoChildPadding={true}
-      titleChildren={
-        <Button
-          color={colors.red.base}
-          onClick={() => setDrawerOpen(!drawerOpen)}
-        >
-          <div css={{ color: colors.white }}>Click</div>
-        </Button>
-      }
-    >
-      {drawerOpen && (
-        <div
-          css={{
-            height: "2.5rem",
-            backgroundColor: colors.black.base,
-            color: colors.white,
-            padding: 20,
-          }}
-        >
-          card content
-        </div>
-      )}
-    </Card>
-  );
-};
 
 storiesOf("Card", module)
   .add("default", () => (
@@ -47,7 +14,7 @@ storiesOf("Card", module)
         height: "100vh",
       }}
     >
-      <Card title="Card Title" description="description goes here">
+      <Card heading="Card heading" description="description goes here">
         <div>card content</div>
       </Card>
     </div>
@@ -62,9 +29,9 @@ storiesOf("Card", module)
     >
       <Card
         size="large"
-        title="Card Title"
+        heading="Card heading"
         description="description goes here"
-        titleChildren={
+        actions={
           <Button color={colors.red.base}>
             <div css={{ color: colors.white }}>Click</div>
           </Button>
@@ -74,7 +41,7 @@ storiesOf("Card", module)
       </Card>
     </div>
   ))
-  .add("with title children - button", () => (
+  .add("with actions - button", () => (
     <div
       css={{
         backgroundColor: colors.silver.light,
@@ -83,9 +50,9 @@ storiesOf("Card", module)
       }}
     >
       <Card
-        title="Card Title"
-        description="description goes here"
-        titleChildren={
+        heading="Card heading"
+        description="description goes here. This could be a really long description like so. If its really long it should leave space for the title actions like this red button."
+        actions={
           <Button color={colors.red.base}>
             <div css={{ color: colors.white }}>Click</div>
           </Button>
@@ -93,17 +60,6 @@ storiesOf("Card", module)
       >
         <div>card content</div>
       </Card>
-    </div>
-  ))
-  .add("force no child padding (use for drawers)", () => (
-    <div
-      css={{
-        backgroundColor: colors.silver.light,
-        padding: "40px",
-        height: "100vh",
-      }}
-    >
-      <CardWithDrawer />
     </div>
   ))
   .add("multiple sections", () => (
@@ -115,24 +71,23 @@ storiesOf("Card", module)
       }}
     >
       <Card
-        title="Card Title"
-        description="description goes here"
-        titleChildren={
+        heading="Card heading"
+        description="Description"
+        actions={
           <Button color={colors.red.base}>
             <div css={{ color: colors.white }}>Click</div>
           </Button>
         }
-        forceNoChildPadding={true}
       >
         <CardSection
-          title="Members"
+          heading="Members"
           description="You have 7 members in your organization"
         />
+        <CardSeperator />
         <CardSection
-          title="Members"
+          heading="Members"
           description="You have 7 members in your organization"
-          border={true}
-          titleChildren={
+          actions={
             <Button color={colors.red.base}>
               <div css={{ color: colors.white }}>Edit</div>
             </Button>
