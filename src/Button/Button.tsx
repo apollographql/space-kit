@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import * as colors from "../colors";
+import { colors, PaletteColor } from "../colors";
 import * as CSS from "csstype";
 import { base } from "../typography";
 import { jsx } from "@emotion/core";
@@ -127,7 +127,7 @@ interface Props
    * This has no meaning with a feel of "secondary", so this component will
    * `throw` if you pass a color for a secondary button.
    */
-  color?: colors.PaletteColor;
+  color?: PaletteColor;
 
   /**
    * Which feel to display

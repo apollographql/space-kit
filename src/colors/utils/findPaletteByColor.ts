@@ -1,8 +1,13 @@
-import * as colors from "../index";
+import {
+  colors,
+  ColorPalette,
+  MonochromePalette,
+  PaletteColor,
+} from "../index";
 
 export function findPaletteByColor(
-  searchColor: colors.PaletteColor
-): colors.MonochromePalette | colors.ColorPalette {
+  searchColor: PaletteColor
+): MonochromePalette | ColorPalette {
   const result = Object.values(colors)
     .filter(color => typeof color !== "string")
     .find(
@@ -23,5 +28,5 @@ export function findPaletteByColor(
   // We know that the interface conforms to one of these, but we can't infer
   // this because we defined all the palettes `as const` so we can restrict
   // input to only values in those palettes.
-  return result as (colors.MonochromePalette | colors.ColorPalette);
+  return result as (MonochromePalette | ColorPalette);
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import classnames from "classnames";
-import * as colors from "../src/colors";
+import { colors } from "../src/colors";
 
 export const Flag = ({ small, light, pass }) => (
   <div

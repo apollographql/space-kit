@@ -2,7 +2,7 @@
 import { jsx } from "@emotion/core";
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import * as colors from "../colors";
+import { colors } from "../colors";
 import * as typography from "../typography";
 import { Table } from "./Table";
 import { withKnobs, select } from "@storybook/addon-knobs/react";

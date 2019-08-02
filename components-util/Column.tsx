@@ -1,5 +1,5 @@
 import React from "react";
-import * as colors from "../src/colors";
+import { colors } from "../src/colors";
 
 export const Column: React.FC<{
   title?: string;

@@ -1,7 +1,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import * as typographyDefinitions from "./index";
-import * as colors from "../colors";
+import { colors } from "../colors";
 import { Page } from "../../components-util/Page";
 import { Column } from "../../components-util/Column";
 
