@@ -62,8 +62,13 @@ export const Card: React.FunctionComponent<Props> = ({
       paddingBottom: size === "large" ? 16 : 28,
     }}
   >
-    <div css={{ display: "flex" }}>
-      <div css={{ flex: "1 1 0%", marginRight: "auto" }}>
+    <div css={{ display: "flex", marginBottom: children ? 24 : 0 }}>
+      <div
+        css={{
+          flex: "1 1 0%",
+          marginRight: "auto",
+        }}
+      >
         <div css={{ display: "block" }}>
           {heading && (
             <div
@@ -103,7 +108,7 @@ export const Card: React.FunctionComponent<Props> = ({
       </div>
       {actions && <div css={{ marginLeft: 16 }}>{actions}</div>}
     </div>
-    {children && <div css={{ paddingTop: 24 }}>{children} </div>}
+    {children}
   </div>
 );
 
@@ -123,6 +128,7 @@ export const CardSection: React.FunctionComponent<Props> = ({
   <div
     css={{
       display: "flex",
+      marginTop: 24,
     }}
   >
     <div css={{ flex: "1 1 0%", marginRight: "auto" }}>
