@@ -2,6 +2,8 @@
 
 ## Upcoming
 
+## [`v0.7.0`](https://github.com/apollographql/space-kit/releases/tag/v0.7.0)
+
 - Convert all remaining files to TypeScript (#27)
 - Move all `src` files to live in paths (#31)
 - Fix broken storybook (#39)
