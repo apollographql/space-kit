@@ -5,7 +5,7 @@ import { storiesOf } from "@storybook/react";
 import { colors } from "../colors";
 import * as typography from "../typography";
 import { Table } from "./Table";
-import { withKnobs, select } from "@storybook/addon-knobs/react";
+import { withKnobs, select, number } from "@storybook/addon-knobs/react";
 
 interface User {
   name: string;
@@ -104,64 +104,73 @@ storiesOf("Table", module)
 
 storiesOf("Table", module)
   .addDecorator(withKnobs)
-  .add("User Example Set Column Widths", () => (
-    <Table<User>
-      keyOn="name"
-      css={{ color: colors.black.base }}
-      density={
-        select("Density", ["standard", "condensed", "relaxed"], "standard") as
-          | "standard"
-          | "condensed"
-          | "relaxed"
-      }
-      // data is an array of type user (defined as a generic)
-      data={users}
-      columns={[
-        {
-          id: 1,
-          colProps: {
-            width: "10%",
+  .add("User Example Set Column Widths", () => {
+    const descriptionWidth = number("Description Width", 30, {
+      range: true,
+      min: 30,
+      max: 70,
+      step: 5,
+    });
+    return (
+      <Table<User>
+        keyOn="name"
+        css={{ color: colors.black.base }}
+        density={
+          select(
+            "Density",
+            ["standard", "condensed", "relaxed"],
+            "standard"
+          ) as "standard" | "condensed" | "relaxed"
+        }
+        // data is an array of type user (defined as a generic)
+        data={users}
+        columns={[
+          {
+            id: 1,
+            colProps: {
+              width: "10%",
+            },
+            render: ({ image }) => (
+              <img css={{ width: 32, height: 32 }} src={image} />
+            ),
           },
-          render: ({ image }) => (
-            <img css={{ width: 32, height: 32 }} src={image} />
-          ),
-        },
-        {
-          id: 2,
-          headerTitle: "description",
-          colProps: {
-            width: "30%",
+          {
+            id: 2,
+            headerTitle: "description",
+            colProps: {
+              width: `${descriptionWidth}%`,
+            },
+            render: ({ name, email }) => (
+              <React.Fragment>
+                <div>{name}</div>
+                <div
+                  css={{
+                    color: colors.grey.base,
+                    ...typography.base.small,
+                  }}
+                >
+                  {email}
+                </div>
+              </React.Fragment>
+            ),
           },
-          render: ({ name, email }) => (
-            <React.Fragment>
-              <div>{name}</div>
+          {
+            id: 3,
+            headerTitle: (
               <div
                 css={{
-                  color: colors.grey.base,
-                  ...typography.base.small,
+                  color: colors.blue.base,
                 }}
               >
-                {email}
+                Date Added
               </div>
-            </React.Fragment>
-          ),
-        },
-        {
-          id: 3,
-          headerTitle: (
-            <div
-              css={{
-                color: colors.blue.base,
-              }}
-            >
-              Date Added
-            </div>
-          ),
-          colProps: {
-            width: "60%",
+            ),
+            colProps: {
+              width: `${90 - descriptionWidth}%`,
+            },
+            render: ({ dateAdded }) => dateAdded,
           },
-          render: ({ dateAdded }) => dateAdded,
-        },
-      ]}
-    />
-  ));
+        ]}
+      />
+    );
+  });
