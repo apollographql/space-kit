@@ -134,6 +134,18 @@ function updateStrokeWidths(node: JSXOpeningElement) {
                       )
                     )
                   );
+
+                  // Wrap the element with `EmotionCacheProvider`
+                  jsx = jsxElement(
+                    jsxOpeningElement(
+                      jsxIdentifier("EmotionCacheProvider"),
+                      []
+                    ),
+                    jsxClosingElement(jsxIdentifier("EmotionCacheProvider")),
+                    [jsx],
+                    false
+                  );
+
                   // We need to add '/** @jsx jsx */' to the top of the file,
                   // but this implementation will strip it out. We add it
                   // manually when we write the file to disk.
@@ -141,6 +153,7 @@ function updateStrokeWidths(node: JSXOpeningElement) {
                   /** @jsx jsx */ /* <- this is stripped out by svgr :( so we manually add it when we write to disk */
                   ${imports}
                   import { css, jsx } from '@emotion/core';
+                  import { EmotionCacheProvider } from "../shared/EmotionCacheProvider";
                   
                   interface Props extends React.SVGProps<SVGSVGElement> {
                     /**
