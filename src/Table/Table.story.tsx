@@ -101,3 +101,67 @@ storiesOf("Table", module)
       ]}
     />
   ));
+
+storiesOf("Table", module)
+  .addDecorator(withKnobs)
+  .add("User Example Set Column Widths", () => (
+    <Table<User>
+      keyOn="name"
+      css={{ color: colors.black.base }}
+      density={
+        select("Density", ["standard", "condensed", "relaxed"], "standard") as
+          | "standard"
+          | "condensed"
+          | "relaxed"
+      }
+      // data is an array of type user (defined as a generic)
+      data={users}
+      columns={[
+        {
+          id: 1,
+          colProps: {
+            width: "10%",
+          },
+          render: ({ image }) => (
+            <img css={{ width: 32, height: 32 }} src={image} />
+          ),
+        },
+        {
+          id: 2,
+          headerTitle: "description",
+          colProps: {
+            width: "30%",
+          },
+          render: ({ name, email }) => (
+            <React.Fragment>
+              <div>{name}</div>
+              <div
+                css={{
+                  color: colors.grey.base,
+                  ...typography.base.small,
+                }}
+              >
+                {email}
+              </div>
+            </React.Fragment>
+          ),
+        },
+        {
+          id: 3,
+          headerTitle: (
+            <div
+              css={{
+                color: colors.blue.base,
+              }}
+            >
+              Date Added
+            </div>
+          ),
+          colProps: {
+            width: "60%",
+          },
+          render: ({ dateAdded }) => dateAdded,
+        },
+      ]}
+    />
+  ));

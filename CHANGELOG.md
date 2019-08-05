@@ -2,6 +2,7 @@
 
 ## Upcoming
 
+- Added colProps property to the table columns [#32](https://github.com/apollographql/space-kit/pull/32)
 
 ## [`v0.7.3`](https://github.com/apollographql/space-kit/releases/tag/v0.7.3)
 
