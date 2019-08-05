@@ -1,13 +1,75 @@
 import fs from "fs";
 import path from "path";
-import update from "immutability-helper";
 import svgr from "@svgr/core";
 import { formatComponentName } from "./formatComponentName";
 import { svgo } from "./convertUtils/setupSvgo";
-import { JSXElement } from "@babel/types";
+import {
+  binaryExpression,
+  conditionalExpression,
+  identifier,
+  jsxAttribute,
+  JSXElement,
+  jsxExpressionContainer,
+  jsxIdentifier,
+  JSXOpeningElement,
+  numericLiteral,
+  stringLiteral,
+  taggedTemplateExpression,
+  templateElement,
+  templateLiteral,
+  JSXAttribute,
+} from "@babel/types";
+import traverse from "@babel/traverse";
 
 const SVG_PATH = path.resolve(__dirname, "..", "svgs");
 const COMPONENT_PATH = path.resolve(__dirname, "..", "..", "..", "icons");
+
+function updateStrokeWidths(node: JSXOpeningElement) {
+  node.attributes.forEach(attribute => {
+    if (
+      attribute.type === "JSXAttribute" &&
+      attribute.name.type === "JSXIdentifier" &&
+      attribute.name.name === "strokeWidth" &&
+      attribute.value &&
+      attribute.value.type === "JSXExpressionContainer"
+    ) {
+      attribute.value = jsxExpressionContainer(
+        conditionalExpression(
+          binaryExpression(
+            "===",
+            identifier("weight"),
+            stringLiteral("normal")
+          ),
+          numericLiteral(1.5),
+          numericLiteral(2)
+        )
+      );
+    }
+  });
+}
+
+function createCSSAttribute(css: string): JSXAttribute {
+  return jsxAttribute(
+    jsxIdentifier("css"),
+    jsxExpressionContainer(
+      taggedTemplateExpression(
+        identifier("css"),
+        templateLiteral(
+          [
+            templateElement(
+              {
+                raw: css,
+                cooked: css,
+              },
+              true
+            ),
+          ],
+          []
+        )
+      )
+    )
+  );
+}
 
 (async () => {
   if (!fs.existsSync(COMPONENT_PATH)) {
@@ -44,43 +106,6 @@ const COMPONENT_PATH = path.resolve(__dirname, "..", "..", "..", "icons");
               path.basename(filename, path.extname(filename))
             );
 
-            function makeClassName() {
-              const css =
-                "*{vector-effect: non-scaling-stroke} overflow: visible";
-
-              return {
-                type: "JSXAttribute",
-                name: {
-                  type: "JSXIdentifier",
-                  name: "css",
-                },
-                value: {
-                  type: "JSXExpressionContainer",
-                  expression: {
-                    type: "TaggedTemplateExpression",
-                    tag: {
-                      type: "Identifier",
-                      name: "css",
-                    },
-                    quasi: {
-                      type: "TemplateLiteral",
-                      expressions: [],
-                      quasis: [
-                        {
-                          type: "TemplateElement",
-                          tail: true,
-                          value: {
-                            raw: css,
-                            cooked: css,
-                          },
-                        },
-                      ],
-                    },
-                  },
-                },
-              };
-            }
-
             const componentSource = await svgr(
               svg,
               {
@@ -88,12 +113,29 @@ const COMPONENT_PATH = path.resolve(__dirname, "..", "..", "..", "icons");
                 template: function svgrTemplate(
                   { template },
                   _opts,
-                  { imports, componentName, jsx }
+                  {
+                    imports,
+                    componentName,
+                    jsx,
+                  }: { imports: any; componentName: string; jsx: JSXElement }
                 ) {
                   const typeScriptTpl = template.smart({
                     plugins: ["typescript"],
                   });
 
+                  traverse(jsx, {
+                    noScope: true,
+                    JSXOpeningElement({ node }) {
+                      updateStrokeWidths(node);
+                    },
+                  });
+
+                  // Add css template literal
+                  jsx.openingElement.attributes.push(
+                    createCSSAttribute(
+                      "*{vector-effect: non-scaling-stroke} overflow: visible; width: 20px; height: 20px"
+                    )
+                  );
                   // We need to add '/** @jsx jsx */' to the top of the file,
                   // but this implementation will strip it out. We add it
                   // manually when we write the file to disk.
@@ -109,75 +151,7 @@ const COMPONENT_PATH = path.resolve(__dirname, "..", "..", "..", "icons");
                     weight?: "normal" | "heavy";
                   }
 
-                  export const ${componentName} = ({ weight = "normal", ...props }: Props) => ${update(
-                    jsx as JSXElement,
-                    {
-                      children: {
-                        $apply: (children: JSXElement["children"]) =>
-                          children.map(child =>
-                            update(child, {
-                              openingElement: {
-                                attributes: {
-                                  $apply: (
-                                    attributes: JSXElement["openingElement"]["attributes"]
-                                  ) =>
-                                    attributes.map(attribute => {
-                                      if (
-                                        attribute.type === "JSXAttribute" &&
-                                        attribute.name.name === "strokeWidth" &&
-                                        typeof attribute.value === "object" &&
-                                        attribute.value != null &&
-                                        attribute.value.type ===
-                                          "JSXExpressionContainer" &&
-                                        attribute.value.expression.type ===
-                                          "NumericLiteral"
-                                      ) {
-                                        return update(attribute, {
-                                          value: {
-                                            $set: {
-                                              type: "JSXExpressionContainer",
-                                              expression: {
-                                                type: "ConditionalExpression",
-                                                test: {
-                                                  type: "BinaryExpression",
-                                                  left: {
-                                                    type: "Identifier",
-                                                    name: "weight",
-                                                  },
-                                                  operator: "===",
-                                                  right: {
-                                                    type: "StringLiteral",
-                                                    value: "normal",
-                                                  },
-                                                },
-                                                consequent: {
-                                                  type: "NumericLiteral",
-                                                  value: 1.5,
-                                                },
-                                                alternate: {
-                                                  type: "NumericLiteral",
-                                                  value: 2,
-                                                },
-                                              },
-                                            },
-                                          },
-                                        } as any);
-                                      }
-
-                                      return attribute;
-                                    }),
-                                },
-                              },
-                            })
-                          ),
-                      },
-                      openingElement: {
-                        attributes: {
-                          $push: [makeClassName() as any],
-                        },
-                      },
-                    }
-                  )};
+                  export const ${componentName} = ({ weight = "normal", ...props }: Props) => ${jsx}
                 `;
                 },
                 plugins: ["@svgr/plugin-jsx", "@svgr/plugin-prettier"],
