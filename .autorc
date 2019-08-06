@@ -1,0 +1,7 @@
+{
+  "owner": "Justin Anastos <justin@apollographql.com>",
+  "plugins": [
+    "npm",
+    "released"
+  ]
+}

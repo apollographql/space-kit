@@ -16,11 +16,13 @@
   - [Icons](#icons)
   - [Typography](#typography)
   - [Buttons](#buttons)
+  - [Modals](#modals)
+  - [Emotion Example](#emotion-example)
 - [Developing Space Kit](#developing-space-kit)
+  - [Releases](#releases)
   - [Icons](#icons-1)
   - [TypeScript](#typescript)
   - [Storybook](#storybook)
-- [Releasing](#releasing)
   - [Beta Releases](#beta-releases)
 - [Resources](#resources)
 
@@ -337,6 +339,29 @@ To develop, run `npm run watch` and everything should build automatically! Use `
 
 When developing a new feature of space-kit, please make sure that the `watch` script will automatically perform all setps necessary to build for development. For example, there is a `watch:typescript` script and a `watch:npmwatch` script that will watch all TypeScript files and watch all the svg icons for changes.
 
+
+### Releases
+
+Releases are handled automatically after merging PRs by [`intuit/auto`](https://github.com/intuit/auto). You can split PRs into a feature branch and then send that as a PR to master; that'll use all the different PRs to create the changelog.
+
+#### Semver
+
+Each PR needs to have a SemVer lable in GitHub so `auto` knows how to . Available labels are:
+
+* `patch` - Increment the patch version when merged
+* `minor` - Increment the minor version when merged
+* `major` - Increment the major version when merged
+* `prerelease` - Create a pre-release version when merged
+* `skip-release` - Preserve the current version when merged
+* `internal` - Changes only affect the internal API
+* `documentation` - Changes only affect the documentation
+
+Use `skip-release` if you don't want an automatic release with your PR.
+
+#### Changelog
+
+The changelog will be updated automatically with the title of your PR used as the line item in the changelog. The sections of the changelog will decided by the labels you gave your PR. If you want to add more information for the changelog, add a `## Release Notes` section in your PR description. https://intuit.github.io/auto/pages/auto-changelog.html#additional-release-notes
+
 ### Icons
 
 Our icons are all stored in [`icons/src/svgs`](./icons/src/svgs) in folders named for the icon category. To add new icons, add svg files to one of these category folders and open a pull request. Fill and stroke colors with values `#000` or `#000000` will be replace by `currentColor` to allow the consumer to change the colors; all other colors will be maintained and will not be configurable.
@@ -369,12 +394,6 @@ npm run storybook
 All pull requests will automatically generate deploy previews and the `master` branch is automatically deployed to https://space-kit.netlify.com.
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/d5469491-a3d2-4ee1-b31d-d7f87ae806f8/deploy-status)](https://app.netlify.com/sites/space-kit/deploys)
-
-## Releasing
-
-To release a new version, bump the version in `package.json` and `package-lock.json` by using [`npm version`](https://docs.npmjs.com/cli/version) and then [`npm publish`](https://docs.npmjs.com/cli/publish) as the `apollo-bot` user. It's always a very good idea to perform an `npm publish` with the `--dry-run` flag to make sure you're only publishing the files you expected to.
-
-All compilation and build steps are expected to be performed automatically when running the `npm prepare` script. If you add new functionality that needs a build step, that should be executed somewhere in `npm build`; this ensures that build steps remain consistent and will allow us to eventually automatically deploy new versions to npm from CI.
 
 ### Beta Releases
 

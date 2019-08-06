@@ -10,18 +10,9 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - restore_cache:
-          name: Attempt to restore node_modules cache (keyed on package-lock.json and circle config)
-          keys:
-            - node-modules-cache--{{ checksum "package-lock.json" }}--{{ checksum ".circleci/config.yml" }}
       - run:
-          name: Install npm dependencies if cache missed (`npm ci`)
-          command: if [ ! -d "./node_modules" ]; then npm ci; fi
-      - save_cache:
-          name: Save node_modules cache (keyed on package-lock.json and circle config)
-          key: node-modules-cache--{{ checksum "package-lock.json" }}--{{ checksum ".circleci/config.yml" }}
-          paths:
-            - node_modules
+          name: Install npm dependencies
+          command: npm ci
       - run:
           name: Ensure output directory exists
           command: mkdir -p /tmp/test-reports/eslint
@@ -31,22 +22,35 @@ jobs:
       - store_test_results:
           path: /tmp/test-reports
 
+  check-label:
+    <<: *defaults
+    steps:
+      - checkout
+      - run:
+          name: Install npm dependencies
+          command: npm ci
+      - run:
+          name: Check labels
+          command: npx auto pr-check --pr ${CIRCLE_PULL_REQUEST##*/} --url ${CIRCLE_BUILD_URL}
+
+  release:
+    <<: *defaults
+    steps:
+      - checkout
+      - run:
+          name: Install npm dependencies
+          command: npm ci
+      - run:
+          name: Release
+          command: npm run release
+
   typescript:
     <<: *defaults
     steps:
       - checkout
-      - restore_cache:
-          name: Attempt to restore node_modules cache (keyed on package-lock.json and circle config)
-          keys:
-            - node-modules-cache--{{ checksum "package-lock.json" }}--{{ checksum ".circleci/config.yml" }}
       - run:
-          name: Install npm dependencies if cache missed (`npm ci`)
-          command: if [ ! -d "./node_modules" ]; then npm ci; fi
-      - save_cache:
-          name: Save node_modules cache (keyed on package-lock.json and circle config)
-          key: node-modules-cache--{{ checksum "package-lock.json" }}--{{ checksum ".circleci/config.yml" }}
-          paths:
-            - node_modules
+          name: Install npm dependencies
+          command: npm ci
       - run:
           name: TypeScript
           command: npm run test:typescript
@@ -57,3 +61,17 @@ workflows:
     jobs:
       - eslint
       - typescript
+      - check-label:
+          filters:
+            branches:
+              ignore:
+                - master
+      - release:
+          requires:
+            - eslint
+            - typescript
+          filters:
+            branches:
+              only:
+                - master
+
