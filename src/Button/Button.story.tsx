@@ -4,9 +4,7 @@ import { jsx } from "@emotion/core";
 import React, { ComponentProps } from "react";
 import { storiesOf } from "@storybook/react";
 import { Button } from "./Button";
-// @ts-ignore We need to use `.tsx` because this will live next to the
-// transpiled files that we can't import.
-import { IconShip2 } from "../../icons/IconShip2.tsx";
+import { IconShip2 } from "../icons/IconShip2";
 import { colors } from "../colors";
 import * as typography from "../typography";
 import { DemoSection } from "../shared/DemoSection";
