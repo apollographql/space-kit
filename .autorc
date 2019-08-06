@@ -1,4 +1,6 @@
 {
+  "name": "Apollo GraphQL",
+  "email": "opensource@apollographql.com",
   "owner": "Justin Anastos <justin@apollographql.com>",
   "plugins": [
     "npm",
