@@ -22,3 +22,5 @@ tsconfig.tsbuildinfo
 !/icons/tsconfig.json
 
 .awcache
+
+.envrc
