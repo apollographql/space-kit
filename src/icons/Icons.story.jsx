@@ -41,7 +41,7 @@ const groupedIcons = svgsReq.keys().reduce((map, fullname) => {
   map[category].push({
     basename: componentName,
     isStreamlineIcon: fullname.includes("-sl"),
-    Component: require(`../../icons/${componentName}.tsx`)[componentName],
+    Component: require(`../icons/${componentName}.tsx`)[componentName],
   });
 
   return map;

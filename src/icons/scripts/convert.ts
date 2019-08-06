@@ -22,7 +22,7 @@ import {
 import traverse from "@babel/traverse";
 
 const SVG_PATH = path.resolve(__dirname, "..", "svgs");
-const COMPONENT_PATH = path.resolve(__dirname, "..", "..", "..", "icons");
+const COMPONENT_PATH = path.resolve(__dirname, "..");
 
 function updateStrokeWidths(node: JSXOpeningElement) {
   node.attributes.forEach(attribute => {

@@ -16,6 +16,7 @@
     "outDir": ".",
     "pretty": true,
     "removeComments": true,
+    "rootDir": "src",
     "sourceMap": true,
     "strict": true,
     "strictNullChecks": true,
@@ -24,5 +25,15 @@
       "./typings",
       "./node_modules/@types"
     ]
-  }
+  },
+  "exclude": [
+    "./node_modules",
+    "**/*.spec.*",
+    "**/*.story.*",
+    "**/*.stories.*",
+    "src/icons/scripts/**"
+  ],
+  "include": [
+    "./src/**/*"
+  ]
 }
