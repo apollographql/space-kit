@@ -5,38 +5,27 @@ import { jsx } from "@emotion/core";
 import React from "react";
 import PropTypes from "prop-types";
 
-const descriptionMaxWidth = 650;
+const descriptionMaxWidth = 640;
 
-interface Props
+interface CardProps
   extends React.DetailedHTMLProps<
-    React.HTMLAttributes<HTMLDivElement>,
-    HTMLDivElement
-  > {
+      React.HTMLAttributes<HTMLDivElement>,
+      HTMLDivElement
+    >,
+    CardSectionProps {
   /**
    * The content of the card,
    * appears below the title and description
    */
   children?: React.ReactNode;
 
-  heading?: React.ReactNode;
-
   /**
-   * the description for this card
-   * appears in grey below the title
+   * large has bigger heading & smaller padding than standard
    */
-  description?: React.ReactNode;
-
-  /**
-   * actions could be a button
-   * or a tooltip or anything the card should display
-   * aligned with the title on the right
-   */
-  actions?: React.ReactNode;
-
   size?: "standard" | "large";
 }
 
-export const Card: React.FC<Props> = ({
+export const Card: React.FC<CardProps> = ({
   children,
   heading,
   actions,
@@ -114,10 +103,27 @@ Card.propTypes = {
   heading: PropTypes.node,
   description: PropTypes.node,
   actions: PropTypes.node,
-  size: PropTypes.oneOf<Props["size"]>(["standard", "large"]),
+  size: PropTypes.oneOf<CardProps["size"]>(["standard", "large"]),
 };
 
-export const CardSection: React.FC<Props> = ({
+interface CardSectionProps {
+  heading?: React.ReactNode;
+
+  /**
+   * the description for this card
+   * appears in grey below the title
+   */
+  description?: React.ReactNode;
+
+  /**
+   * actions could be a button
+   * or a tooltip or anything the card should display
+   * aligned with the title on the right
+   */
+  actions?: React.ReactNode;
+}
+
+export const CardSection: React.FC<CardSectionProps> = ({
   heading,
   description,
   actions,
