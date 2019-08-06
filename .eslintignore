@@ -1,4 +1,4 @@
-icons/*.tsx
+src/icons/*.tsx
 !.eslintrc.js
 
 # Storybook
