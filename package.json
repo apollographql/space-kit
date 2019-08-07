@@ -42,6 +42,10 @@
       ]
     }
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
   "repository": "apollographql/space-kit",
   "keywords": [],
   "license": "MIT",
