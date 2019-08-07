@@ -1,6 +1,6 @@
 {
   "name": "@apollo/space-kit",
-  "version": "1.0.0",
+  "version": "0.8.0",
   "description": "Home base for Apollo's design system",
   "main": "index.js",
   "scripts": {
@@ -22,7 +22,6 @@
     "icons": "run-s clean:icons icons:generate",
     "icons:generate": "ts-node src/icons/scripts/convert",
     "lint": "eslint --max-warnings 0 --cache --ext .js,.jsx,.ts,.tsx .eslintrc.js build-reset.ts components-util/ .storybook/ stories/ src/",
-    "postpublish": "git push --follow-tags --set-upstream origin $branch && auto release",
     "prepare": "npm run build",
     "release": "./scripts/release.sh",
     "start": "npm run storybook",
