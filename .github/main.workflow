@@ -14,3 +14,13 @@ action "fire check-label" {
   secrets = ["CIRCLE_API_TOKEN"]
   args = ["-v", "-a=${CIRCLE_API_TOKEN}:", "POST", "https://circleci.com/api/v1.1/project/github/apollographql/space-kit/tree/${GITHUB_REF#*refs/heads/}", "build_parameters:='{\"CIRCLE_JOB\": \"check-label\"}'"]
 }
+
+workflow "Automatic Rebase" {
+  on = "issue_comment"
+  resolves = "Rebase"
+}
+
+action "Rebase" {
+  uses = "docker://cirrusactions/rebase:latest"
+  secrets = ["GITHUB_TOKEN"]
+}
