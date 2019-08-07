@@ -35,6 +35,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Add NPM_TOKEN to `.npmrc`
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/space-kit/.npmrc
+      - run:
           name: Install npm dependencies
           command: npm ci
       - run:
