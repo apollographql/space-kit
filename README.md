@@ -358,6 +358,8 @@ Each PR needs to have a SemVer lable in GitHub so `auto` knows how to . Availabl
 
 Use `skip-release` if you don't want an automatic release with your PR.
 
+There is a CircleCI job that checks that an appropriate label is on the PR. It will always fail initially. GitHub actions are set up to re-run the CI check when labels are added or removed. it can be found in [`.github/main.workflow`](./.github/main.workflow).
+
 #### Changelog
 
 The changelog will be updated automatically with the title of your PR used as the line item in the changelog. The sections of the changelog will decided by the labels you gave your PR. If you want to add more information for the changelog, add a `## Release Notes` section in your PR description. https://intuit.github.io/auto/pages/auto-changelog.html#additional-release-notes
