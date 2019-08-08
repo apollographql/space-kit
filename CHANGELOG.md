@@ -1,3 +1,21 @@
+# v1.0.4 (Thu Aug 08 2019)
+
+#### 🐛  Bug Fix
+
+- Test automatic releases [#56](https://github.com/apollographql/space-kit/pull/56) ([@justinanastos](https://github.com/justinanastos))
+
+#### ⚠️  Pushed to master
+
+- 1.0.3  ([@justinanastos](https://github.com/justinanastos))
+- Use read-write key for deploys  ([@justinanastos](https://github.com/justinanastos))
+- still working on automatic releases  ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # Changelog
 
 ## Upcoming
