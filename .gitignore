@@ -18,9 +18,8 @@ tsconfig.tsbuildinfo
 /Table
 /typography
 
-# Exclusions
-
-!/icons/tsconfig.json
+# Generated icons stored in src directory 
+src/icons/*.tsx
 
 .awcache
 
