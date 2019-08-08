@@ -1,3 +1,27 @@
+# v1.0.5 (Thu Aug 08 2019)
+
+### Release Notes
+
+_From #57_
+
+* Refactor icon conversion script to use `@babel/types` instead of `immutability-helper` and trying to craft AST by hand. That was too opaque and it wasn't type safe. Now we're safe and it's as concise as it's going to get.
+
+* Move intermediate icon files to `src/icons`
+
+    This makes them accessible from anywhere else _and_ gives them access to other modules. We _were_ going to use this for the `EmotionProvider`, but now we aren't. This is less elegant and clever, but makes more sense and will make our code actually work.
+
+---
+
+#### 🐛  Bug Fix
+
+- Refactor icon generation [#57](https://github.com/apollographql/space-kit/pull/57) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v1.0.4 (Thu Aug 08 2019)
 
 #### 🐛  Bug Fix
