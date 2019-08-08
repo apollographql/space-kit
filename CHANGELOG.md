@@ -1,3 +1,39 @@
+# v1.0.1 (Thu Aug 08 2019)
+
+### Release Notes
+
+_From #54_
+
+We have a CircleCI job that will validate that each pull request has valid labels. This will always fail when the PR is initially created because there are no labels.
+
+This creates a GitHub Action that will re-run the CI step whenever labels are added or removed from a PR.
+
+_From #52_
+
+Safari doesn't understand using a height of `100%` for `position: fixed` elements. This will use `100vh` instead of `100%` to match the viewport height.
+
+---
+
+#### 🐛  Bug Fix
+
+- Fix release script [#55](https://github.com/apollographql/space-kit/pull/55) ([@justinanastos](https://github.com/justinanastos))
+- Speed up `check-labels` task by not installing dependencies [#53](https://github.com/apollographql/space-kit/pull/53) ([@justinanastos](https://github.com/justinanastos))
+- Fix modals sizes in Safari [#52](https://github.com/apollographql/space-kit/pull/52) ([@justinanastos](https://github.com/justinanastos))
+
+#### ⚠️  Pushed to master
+
+- 🚧 work in progress: try to add publishConfig  ([@justinanastos](https://github.com/justinanastos))
+- remove .npmrc because it breaks builds  ([@justinanastos](https://github.com/justinanastos))
+- Add /rebase action to GitHub Actions  ([@justinanastos](https://github.com/justinanastos))
+- use .npmrc  ([@justinanastos](https://github.com/justinanastos))
+- 1.0.0  ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # Changelog
 
 ## Upcoming
