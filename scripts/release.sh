@@ -13,7 +13,7 @@ if [ ! -z "$VERSION" ]; then
 
   ## Create GitHub Release
   echo "***** push to $branch"
-  git push --follow-tags --set-upstream origin $branch
+  git push --verbose --follow-tags --set-upstream origin $branch
   echo "***** run auto release"
   auto release -w
 fi
