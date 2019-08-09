@@ -1,3 +1,24 @@
+# v1.0.6 (Fri Aug 09 2019)
+
+### Release Notes
+
+_From #58_
+
+There's no easy way to override the classes that we're putting on our Space Kit components until https://github.com/apollographql/space-kit/pull/46 lands. We can't put default sizes on icons because they can't be overridden yet.
+
+---
+
+#### 🐛  Bug Fix
+
+- Change `Icon` to have `thin` and `normal` weights [#59](https://github.com/apollographql/space-kit/pull/59) ([@justinanastos](https://github.com/justinanastos))
+- remove default size on icons [#58](https://github.com/apollographql/space-kit/pull/58) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v1.0.5 (Thu Aug 08 2019)
 
 ### Release Notes
