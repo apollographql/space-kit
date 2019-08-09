@@ -41,7 +41,7 @@ function updateStrokeWidths(node: JSXOpeningElement) {
             stringLiteral("normal")
           ),
           numericLiteral(1.5),
-          numericLiteral(2)
+          numericLiteral(1)
         )
       );
     }
@@ -148,7 +148,7 @@ function createCSSAttribute(css: string): JSXAttribute {
                     /**
                      * Weight to render the SVG in. Defaults to "normal"
                      */
-                    weight?: "normal" | "heavy";
+                    weight?: "thin" | "normal";
                   }
 
                   export const ${componentName} = ({ weight = "normal", ...props }: Props) => ${jsx}

@@ -51,7 +51,7 @@ storiesOf("Icons", module)
   .addDecorator(withKnobs)
   .add("Catalog", () => {
     const color = select("Color", colorMap, colors.black.base);
-    const weight = select("Weight", ["normal", "heavy"], "normal");
+    const weight = select("Weight", ["thin", "normal"], "normal");
 
     return (
       <Page
