@@ -29,7 +29,7 @@
     "test": "run-p test:typescript",
     "test:typescript": "tsc --noEmit",
     "watch": "run-p watch:*",
-    "watch:typescript": "tsc --watch",
+    "watch:typescript": "tsc tsconfig.build.json --watch",
     "watch:npmwatch": "npm-watch"
   },
   "watch": {
