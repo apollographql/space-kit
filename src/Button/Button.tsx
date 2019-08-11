@@ -382,10 +382,12 @@ export const Button: React.FC<Props> = ({
         {icon && (
           <span
             css={{
+              alignItems: "center",
               // This needs to be `inline-flex` and not the default of
               // `inline-block` to vertically center the icon automatically
               display: "inline-flex",
               height: iconSize,
+              justifyContent: "center",
               // The `4px` will be on the right to separate the icon from the text
               margin: iconOnly ? 0 : "0 4px 0",
               width: iconSize,
