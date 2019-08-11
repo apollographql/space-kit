@@ -10,6 +10,7 @@ tsconfig.tsbuildinfo
 # Other modules
 /Button
 /colors
+/emotionCacheProviderFactory
 /fonts
 /icons
 /Modal
