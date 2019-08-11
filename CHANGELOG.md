@@ -1,3 +1,15 @@
+# v1.1.0 (Sun Aug 11 2019)
+
+#### 🚀  Enhancement
+
+- AP-700 Export `emotionCacheProviderFactory` so allow consumers to… [#46](https://github.com/apollographql/space-kit/pull/46) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v1.0.6 (Fri Aug 09 2019)
 
 ### Release Notes
