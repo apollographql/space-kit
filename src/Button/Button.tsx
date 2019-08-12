@@ -4,6 +4,7 @@ import * as CSS from "csstype";
 import { base } from "../typography";
 import { jsx } from "@emotion/core";
 import { getOffsetInPalette } from "../colors/utils/getOffsetInPalette";
+import tinycolor from "tinycolor2";
 
 type TLength = string | 0 | number;
 
@@ -35,8 +36,25 @@ function getTextColor({
     case "raised":
     case "secondary":
       // Set the base (meaning no pseudo-selectors) text color for raised and
-      // secondary button. Otherwise return `undefined` to not change the color
-      return !mode ? colors.grey.darker : undefined;
+      // secondary buttons. Otherwise return `undefined` to not change the
+      // color.
+      //
+      // We have some special logic for the raised and secondary color; set the
+      // text color to be what is most readable between white and the default
+      // text color and the _hover_ color's background. This is overrideable by
+      // the user, but it shouldn't need to be.
+      return !mode
+        ? tinycolor
+            .mostReadable(
+              getHoverBackgroundColor({ color, feel, theme }),
+              [colors.white, colors.grey.darker],
+              {
+                level: "AA",
+                size: "small",
+              }
+            )
+            .toString()
+        : undefined;
     case "flat":
       if (color === defaultColor) {
         return theme === "dark" ? colors.grey.light : colors.grey.darker;

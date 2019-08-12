@@ -152,9 +152,6 @@ storiesOf("Button", module)
 
         <VerticalButtonGroup
           title="Example 2"
-          buttonCss={{
-            color: colors.white,
-          }}
           buttonProps={{
             color: colors.indigo.dark,
           }}
@@ -168,9 +165,6 @@ storiesOf("Button", module)
 
         <VerticalButtonGroup
           title="Example 3"
-          buttonCss={{
-            color: colors.white,
-          }}
           buttonProps={{
             color: colors.green.base,
           }}
@@ -184,9 +178,6 @@ storiesOf("Button", module)
 
         <VerticalButtonGroup
           title="Example 4"
-          buttonCss={{
-            color: colors.white,
-          }}
           buttonProps={{
             color: colors.red.base,
           }}
@@ -200,9 +191,6 @@ storiesOf("Button", module)
 
         <VerticalButtonGroup
           title="Example 5"
-          buttonCss={{
-            color: colors.white,
-          }}
           buttonProps={{
             color: colors.blue.base,
           }}
