@@ -1,3 +1,15 @@
+# v1.3.0 (Mon Aug 12 2019)
+
+#### 🚀  Enhancement
+
+- feat(button): Replace feel="secondary" with color={colors.white} [#65](https://github.com/apollographql/space-kit/pull/65) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v1.2.0 (Mon Aug 12 2019)
 
 #### 🚀  Enhancement
