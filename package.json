@@ -50,7 +50,9 @@
   },
   "dependencies": {
     "@emotion/cache": "^10.0.15",
-    "@emotion/core": "^10.0.15"
+    "@emotion/core": "^10.0.15",
+    "@types/tinycolor2": "^1.4.2",
+    "tinycolor2": "^1.4.1"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
