@@ -49,12 +49,12 @@
     "extends": "@trevorblades"
   },
   "dependencies": {
-    "@emotion/core": "^10.0.14"
+    "@emotion/cache": "^10.0.15",
+    "@emotion/core": "^10.0.15"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/traverse": "^7.5.5",
-    "@emotion/cache": "^10.0.15",
     "@storybook/addon-knobs": "^5.1.9",
     "@storybook/addons": "^5.1.9",
     "@storybook/react": "^5.1.9",
