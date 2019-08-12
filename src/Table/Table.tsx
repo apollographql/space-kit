@@ -83,7 +83,7 @@ export function Table<RowShape>({
             borderBottom: `1px solid ${colors.silver.dark}`,
           }}
         >
-          {columns.map(({ headerTitle, id }) => (
+          {columns.map(({ headerTitle, id }, colIndex) => (
             <th
               key={id}
               css={{
@@ -93,6 +93,8 @@ export function Table<RowShape>({
                 fontWeight: 600,
                 textAlign: "left",
                 padding,
+                paddingLeft: colIndex === 0 ? 0 : padding,
+                paddingRight: colIndex === columns.length - 1 ? 0 : padding,
               }}
             >
               {headerTitle}
