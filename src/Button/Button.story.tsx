@@ -209,7 +209,7 @@ storiesOf("Button", module)
       >
         <VerticalButtonGroup
           title="Secondary"
-          buttonProps={{ feel: "secondary" }}
+          buttonProps={{ color: colors.white }}
         >
           <Button>Rest</Button>
           <Button data-force-hover-state="true">Hover</Button>
