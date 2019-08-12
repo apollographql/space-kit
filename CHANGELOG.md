@@ -1,3 +1,16 @@
+# v1.1.1 (Mon Aug 12 2019)
+
+#### 🐛  Bug Fix
+
+- install emotion dependencies in dependencies [#62](https://github.com/apollographql/space-kit/pull/62) ([@justinanastos](https://github.com/justinanastos))
+- fix(button): center icons [#63](https://github.com/apollographql/space-kit/pull/63) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v1.1.0 (Sun Aug 11 2019)
 
 #### 🚀  Enhancement
