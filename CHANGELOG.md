@@ -1,3 +1,15 @@
+# v1.2.0 (Mon Aug 12 2019)
+
+#### 🚀  Enhancement
+
+- Automatically calculate button text color [#64](https://github.com/apollographql/space-kit/pull/64) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v1.1.1 (Mon Aug 12 2019)
 
 #### 🐛  Bug Fix
