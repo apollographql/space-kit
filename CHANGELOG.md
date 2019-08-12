@@ -1,3 +1,15 @@
+# v1.3.1 (Mon Aug 12 2019)
+
+#### 🐛  Bug Fix
+
+- removed table header margins to match table body [#66](https://github.com/apollographql/space-kit/pull/66) (monsalve@mit.edu)
+
+#### Authors: 1
+
+- monsalve@mit.edu
+
+---
+
 # v1.3.0 (Mon Aug 12 2019)
 
 #### 🚀  Enhancement
