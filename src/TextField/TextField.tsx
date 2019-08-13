@@ -54,7 +54,7 @@ interface Props {
   /**
    * Visible title
    */
-  label: React.ReactNode;
+  label?: React.ReactNode;
 
   /**
    * A short hint that describes the expected value of the input field
@@ -111,7 +111,7 @@ export const TextField: React.FC<Props> = ({
           fontWeight: 600,
         }}
       >
-        <div css={{ marginBottom: 4 }}>{label}</div>
+        {label != null && <div css={{ marginBottom: 4 }}>{label}</div>}
         {description != null && (
           <div
             css={{
