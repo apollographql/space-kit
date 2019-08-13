@@ -5,7 +5,7 @@ import { jsx } from "@emotion/core";
 import React from "react";
 import PropTypes from "prop-types";
 
-const descriptionMaxWidth = 640;
+const descriptionMaxWidth = 760;
 
 interface CardProps
   extends React.DetailedHTMLProps<

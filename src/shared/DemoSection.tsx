@@ -5,8 +5,8 @@ import * as typography from "../typography";
 
 export const DemoSection: React.FC<{
   children: React.ReactNode;
-  description: string;
-  title: string;
+  description?: string;
+  title?: string;
 }> = ({ children, description, title, ...otherProps }) => (
   <div {...otherProps} css={{ margin: 42 }}>
     <div css={{ ...typography.base.xxlarge, marginBottom: ".5em" }}>
