@@ -13,6 +13,11 @@ interface Props {
   className?: string;
 
   /**
+   * Class name that will be applied to the inner `input`
+   */
+  inputClassName?: string;
+
+  /**
    * Value an uncontrolled input will default to
    */
   defaultValue?: string;
@@ -82,6 +87,7 @@ interface Props {
  */
 export const TextField: React.FC<Props> = ({
   className,
+  inputClassName,
   defaultValue,
   description,
   disabled,
@@ -138,6 +144,7 @@ export const TextField: React.FC<Props> = ({
 
           <input
             {...otherProps}
+            className={inputClassName}
             defaultValue={defaultValue}
             disabled={disabled}
             onChange={onChange}
