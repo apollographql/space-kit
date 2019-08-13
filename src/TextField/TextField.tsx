@@ -6,7 +6,10 @@ import { colors } from "../colors";
 import { IconAlertSolid } from "../icons/IconAlertSolid";
 import { IconInfoSolid } from "../icons/IconInfoSolid";
 
-interface Props {
+interface Props extends Omit<React.DetailedHTMLProps<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  HTMLInputElement
+>, "size"> {
   /**
    * Class name that will be applied to the wrapping `div` around the component
    */
