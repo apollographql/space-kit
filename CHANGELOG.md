@@ -1,3 +1,16 @@
+# v1.4.0 (Tue Aug 13 2019)
+
+#### 🚀  Enhancement
+
+- AP-544 Implement Text Inputs [#45](https://github.com/apollographql/space-kit/pull/45) ([@mayakoneval](https://github.com/mayakoneval) [@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 2
+
+- [@mayakoneval](https://github.com/mayakoneval)
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v1.3.1 (Mon Aug 12 2019)
 
 #### 🐛  Bug Fix
