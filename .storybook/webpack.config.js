@@ -6,6 +6,7 @@ module.exports = ({ config }) => {
         loader: require.resolve("awesome-typescript-loader"),
         options: {
           declaration: false,
+          transpileOnly: true,
         },
       },
     ],
