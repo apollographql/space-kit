@@ -6,19 +6,11 @@ import { colors } from "../colors";
 import { IconAlertSolid } from "../icons/IconAlertSolid";
 import { IconInfoSolid } from "../icons/IconInfoSolid";
 
-interface Props extends Omit<React.DetailedHTMLProps<
-  React.InputHTMLAttributes<HTMLInputElement>,
-  HTMLInputElement
->, "size"> {
+interface Props {
   /**
    * Class name that will be applied to the wrapping `div` around the component
    */
   className?: string;
-
-  /**
-   * Class name that will be applied to the inner `input`
-   */
-  inputClassName?: string;
 
   /**
    * Value an uncontrolled input will default to
@@ -82,6 +74,16 @@ interface Props extends Omit<React.DetailedHTMLProps<
    * Value of a controlled input
    */
   value?: string | number;
+
+  /**
+   * Name to give the input
+   */
+  name?: string;
+
+  /**
+   * Type of input field
+   */
+  type?: string;
 }
 
 /**
@@ -90,7 +92,6 @@ interface Props extends Omit<React.DetailedHTMLProps<
  */
 export const TextField: React.FC<Props> = ({
   className,
-  inputClassName,
   defaultValue,
   description,
   disabled,
@@ -147,7 +148,6 @@ export const TextField: React.FC<Props> = ({
 
           <input
             {...otherProps}
-            className={inputClassName}
             defaultValue={defaultValue}
             disabled={disabled}
             onChange={onChange}
