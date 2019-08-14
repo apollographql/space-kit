@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import * as CSS from "csstype";
-import { jsx } from "@emotion/core";
+import { ClassNames, jsx } from "@emotion/core";
 import React, { ComponentProps } from "react";
 import { storiesOf } from "@storybook/react";
 import { Button } from "./Button";
@@ -51,12 +51,14 @@ const VerticalButtonGroup: React.FC<{
   children: JSX.Element | JSX.Element[];
   darkButtonCss?: AllowedCss;
   title: string;
+  description?: string;
 }> = ({
   buttonProps = {},
   children,
   title,
   buttonCss = {},
   darkButtonCss = {},
+  description,
   ...otherProps
 }) => (
   <div {...otherProps} css={{ margin: "0 20px", width: 300 }}>
@@ -78,6 +80,18 @@ const VerticalButtonGroup: React.FC<{
     >
       {title}
     </div>
+
+    {description && (
+      <div
+        css={{
+          ...typography.base.small,
+          margin: 6,
+        }}
+      >
+        {description}
+      </div>
+    )}
+
     <div css={{ display: "flex", flexWrap: "wrap" }}>
       <ButtonWrapper>
         {React.Children.map(children, child => (
@@ -110,6 +124,11 @@ const VerticalButtonGroup: React.FC<{
   </div>
 );
 
+const DummyNavLink: React.FC<{ to: string; className?: string }> = ({
+  to,
+  ...otherProps
+}) => <a {...otherProps} href={to} />;
+
 storiesOf("Button", module)
   .addParameters({
     options: {
@@ -135,6 +154,67 @@ storiesOf("Button", module)
         <VerticalButtonGroup title="Large">
           <Button size="large">Large</Button>
           <Button size="large" icon={iconElement} />
+        </VerticalButtonGroup>
+      </DemoSection>
+      <DemoSection
+        title="Render as"
+        description='You can use `as` to add a custom render to your button. As accepts a string (`keyof JSX.IntrinsicElements`) representing the dom node you want to render, "button" for example, or a React element, `<Link to="/" />`. All props that we include as part of our implementation will be automatically spread onro your element and your classNames will be merged.'
+      >
+        <VerticalButtonGroup
+          title="anchor via string"
+          description='You can pass a string representing the element you want to render. It will be passed as the first argument to `React.createElement`. The props required by `Button` are inferred by the value of `as`. For example, if you use `as="a"`, then `href` will be a valid prop and will be typed on `Button`'
+        >
+          <ClassNames>
+            {({ css, cx }) => (
+              <Button
+                as="a"
+                className={cx(css({ color: colors.blue.base }))}
+                href="#"
+              >
+                Default
+              </Button>
+            )}
+          </ClassNames>
+        </VerticalButtonGroup>
+
+        <VerticalButtonGroup
+          title="anchor with element"
+          description='You can pass a React element to the Button component, `as={<a href="#" />}` for example. Props that are usually added to the root element by `Button` will be spread onto your element via `React.cloneElement` and `className`s will be merged. No props besides the stock `Button` props can be passed to `Button` when using an element, instead pass them directly to your element.'
+        >
+          <ClassNames>
+            {({ css, cx }) => (
+              <Button
+                as={
+                  <a
+                    className={cx(css({ color: colors.orange.base }))}
+                    href="#"
+                  />
+                }
+              >
+                Default
+              </Button>
+            )}
+          </ClassNames>
+        </VerticalButtonGroup>
+
+        <VerticalButtonGroup
+          title="anchor with component"
+          description="If you want to use a custom component, then you must use a React element beacuse we haven't yet figured out the types."
+        >
+          <ClassNames>
+            {({ css, cx }) => (
+              <Button
+                as={
+                  <DummyNavLink
+                    to="#"
+                    className={cx(css({ color: colors.red.base }))}
+                  />
+                }
+              >
+                Default
+              </Button>
+            )}
+          </ClassNames>
         </VerticalButtonGroup>
       </DemoSection>
 
@@ -229,66 +309,6 @@ storiesOf("Button", module)
           <Button data-force-active-state="true">Active</Button>
           <Button data-force-focus-state="true">Focused</Button>
           <Button disabled>Disabled</Button>
-        </VerticalButtonGroup>
-
-        <VerticalButtonGroup
-          title="Icon only"
-          buttonProps={{
-            icon: iconElement,
-          }}
-        >
-          <React.Fragment>
-            <Button css={{ marginRight: 6 }} icon={iconElement} />
-            <Button css={{ marginLeft: 6 }} variant="fab" icon={iconElement} />
-          </React.Fragment>
-          <React.Fragment>
-            <Button
-              css={{ marginRight: 6 }}
-              data-force-hover-state="true"
-              icon={iconElement}
-            />
-            <Button
-              css={{ marginLeft: 6 }}
-              data-force-hover-state="true"
-              variant="fab"
-              icon={iconElement}
-            />
-          </React.Fragment>
-          <React.Fragment>
-            <Button
-              css={{ marginRight: 6 }}
-              data-force-active-state="true"
-              icon={iconElement}
-            />
-            <Button
-              css={{ marginLeft: 6 }}
-              data-force-active-state="true"
-              variant="fab"
-              icon={iconElement}
-            />
-          </React.Fragment>
-          <React.Fragment>
-            <Button
-              css={{ marginRight: 6 }}
-              data-force-focus-state="true"
-              icon={iconElement}
-            />
-            <Button
-              css={{ marginLeft: 6 }}
-              data-force-focus-state="true"
-              variant="fab"
-              icon={iconElement}
-            />
-          </React.Fragment>
-          <React.Fragment>
-            <Button css={{ marginRight: 6 }} disabled icon={iconElement} />
-            <Button
-              css={{ marginLeft: 6 }}
-              disabled
-              variant="fab"
-              icon={iconElement}
-            />
-          </React.Fragment>
         </VerticalButtonGroup>
       </DemoSection>
       <DemoSection
