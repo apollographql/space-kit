@@ -139,6 +139,23 @@ storiesOf("Button", module)
       </DemoSection>
 
       <DemoSection
+        title="Render as"
+        description="You can use `as` to add a custom render to your button. Use this if you want to render a <Link> instead of a button"
+      >
+        <VerticalButtonGroup title="anchor via string">
+          <Button as="a">Default</Button>
+        </VerticalButtonGroup>
+
+        <VerticalButtonGroup title="anchor with element">
+          <Button as={<a href="#test" />}>Default</Button>
+        </VerticalButtonGroup>
+
+        <VerticalButtonGroup title="anchor with component">
+          <Button as={props => <a {...props} href="#test" />}>Default</Button>
+        </VerticalButtonGroup>
+      </DemoSection>
+
+      <DemoSection
         title="Buttons Examples"
         description="Examples on how to configure buttons. Inspect these buttons with the React DevTools to understand usage"
       >
