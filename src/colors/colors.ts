@@ -158,4 +158,5 @@ export type PaletteColor =
   | typeof colors["orange"][keyof typeof colors["orange"]]
   | typeof colors["yellow"][keyof typeof colors["yellow"]]
   | typeof colors["purple"][keyof typeof colors["purple"]]
-  | typeof colors["blilet"][keyof typeof colors["blilet"]];
+  | typeof colors["blilet"][keyof typeof colors["blilet"]]
+  | typeof colors["white"][keyof typeof colors["white"]];
