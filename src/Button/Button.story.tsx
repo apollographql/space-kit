@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import * as CSS from "csstype";
-import { jsx } from "@emotion/core";
+import { css, jsx } from "@emotion/core";
 import React, { ComponentProps } from "react";
 import { storiesOf } from "@storybook/react";
 import { Button } from "./Button";
@@ -135,6 +135,54 @@ storiesOf("Button", module)
         <VerticalButtonGroup title="Large">
           <Button size="large">Large</Button>
           <Button size="large" icon={iconElement} />
+        </VerticalButtonGroup>
+      </DemoSection>
+
+      <DemoSection
+        title="Render as"
+        description="You can use `as` to add a custom render to your button. Use this if you want to render a <Link> instead of a button"
+      >
+        <VerticalButtonGroup title="anchor via string">
+          <Button as="a">Default</Button>
+          <Button as="a" icon={iconElement} />
+        </VerticalButtonGroup>
+
+        <VerticalButtonGroup title="anchor via render prop">
+          <Button as={props => <a {...props} href="#test" />}>Default</Button>
+          <Button
+            as={props => <a {...props} href="#test" />}
+            icon={iconElement}
+          />
+        </VerticalButtonGroup>
+
+        <VerticalButtonGroup title="anchor via render prop with css">
+          <Button
+            as={props => (
+              <a
+                {...props}
+                css={css`
+                  ${props.css ? props.css.styles : null};
+                  background-color: ${colors.red.base};
+                `}
+                href="#test"
+              />
+            )}
+          >
+            Default
+          </Button>
+          <Button
+            icon={iconElement}
+            as={props => (
+              <a
+                {...props}
+                css={css`
+                  ${props.css ? props.css.styles : null};
+                  background-color: ${colors.red.base};
+                `}
+                href="#test"
+              />
+            )}
+          />
         </VerticalButtonGroup>
       </DemoSection>
 
