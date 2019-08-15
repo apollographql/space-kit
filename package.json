@@ -13,7 +13,7 @@
     "clean:button": "rimraf Button",
     "clean:colors": "rimraf colors",
     "clean:fonts": "rimraf fonts",
-    "clean:formField": "rimraf FormField",
+    "clean:textField": "rimraf TextField",
     "clean:icons": "rimraf icons src/icons/*.tsx",
     "clean:modal": "rimraf Modal",
     "clean:shared": "rimraf shared",
