@@ -1,3 +1,23 @@
+# v1.5.1 (Thu Aug 15 2019)
+
+### Release Notes
+
+_From #69_
+
+@justinanastos made an update to the TextField logic and didn't update the clean script. This fixes it.
+
+---
+
+#### 🐛  Bug Fix
+
+- Correct npm script for cleaning TextField, make labels optional [#69](https://github.com/apollographql/space-kit/pull/69) ([@mayakoneval](https://github.com/mayakoneval))
+
+#### Authors: 1
+
+- [@mayakoneval](https://github.com/mayakoneval)
+
+---
+
 # v1.5.0 (Thu Aug 15 2019)
 
 #### 🚀  Enhancement
