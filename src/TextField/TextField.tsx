@@ -49,7 +49,7 @@ interface Props {
   /**
    * Visible title
    */
-  label: React.ReactNode;
+  label?: React.ReactNode;
 
   /**
    * A short hint that describes the expected value of the input field
@@ -74,6 +74,16 @@ interface Props {
    * Value of a controlled input
    */
   value?: string | number;
+
+  /**
+   * Name to give the input
+   */
+  name?: string;
+
+  /**
+   * Type of input field
+   */
+  type?: string;
 }
 
 /**
@@ -105,7 +115,7 @@ export const TextField: React.FC<Props> = ({
           fontWeight: 600,
         }}
       >
-        <div css={{ marginBottom: 4 }}>{label}</div>
+        {label != null && <div css={{ marginBottom: 4 }}>{label}</div>}
         {description != null && (
           <div
             css={{
