@@ -1,3 +1,15 @@
+# v1.5.0 (Thu Aug 15 2019)
+
+#### 🚀  Enhancement
+
+- Small text field fixes [#67](https://github.com/apollographql/space-kit/pull/67) ([@jgzuke](https://github.com/jgzuke))
+
+#### Authors: 1
+
+- Jason Zukewich ([@jgzuke](https://github.com/jgzuke))
+
+---
+
 # v1.4.0 (Tue Aug 13 2019)
 
 #### 🚀  Enhancement
