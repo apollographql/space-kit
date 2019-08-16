@@ -231,7 +231,7 @@ interface ButtonProps {
 
 type SwappableComponent<OriginalComponentProps> = <SwappedInComponentProps>(
   props: PropsWithChildren<
-    { as: React.ComponentType<SwappedInComponentProps> } & OriginalComponentProps &
+    { as?: string | React.ComponentType<SwappedInComponentProps> | React.ReactElement } & OriginalComponentProps &
       SwappedInComponentProps
   >
 ) => React.ReactElement
@@ -245,7 +245,6 @@ type SwappableComponent<OriginalComponentProps> = <SwappedInComponentProps>(
  */
 export const Button: SwappableComponent<ButtonProps> = props => {
   const {
-    as = "button",
     children,
     color = defaultColor,
     disabled = false,
@@ -463,9 +462,17 @@ export const Button: SwappableComponent<ButtonProps> = props => {
     ),
   };
 
-  return typeof as === "string" ? (
-    jsx(as, { ...propsToPass })
-  ) : (
-    <props.as {...propsToPass} />
-  );
+  if (!props.as) {
+    return jsx('button', { ...propsToPass })
+  }
+
+  if (typeof props.as === 'string') {
+    return jsx(props.as, { ...propsToPass })
+  }
+
+  if (React.isValidElement(props.as)) {
+    return props.as
+  }
+
+  return <props.as {...propsToPass} />;
 };
