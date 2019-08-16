@@ -5,7 +5,7 @@ import { base } from "../typography";
 import { jsx, css } from "@emotion/core";
 import { getOffsetInPalette } from "../colors/utils/getOffsetInPalette";
 import tinycolor from "tinycolor2";
-import React from "react";
+import React, { PropsWithChildren } from "react";
 
 type TLength = string | 0 | number;
 
@@ -28,9 +28,9 @@ function getTextColor({
   theme,
   mode,
 }: {
-  color: NonNullable<Props["color"]>;
-  feel: NonNullable<Props["feel"]>;
-  theme: NonNullable<Props["theme"]>;
+  color: NonNullable<ButtonProps["color"]>;
+  feel: NonNullable<ButtonProps["feel"]>;
+  theme: NonNullable<ButtonProps["theme"]>;
   mode?: CSS.SimplePseudos;
 }): CSS.ColorProperty | undefined {
   // Text color will always be the same for secondary buttons
@@ -82,7 +82,7 @@ function getTextColor({
 function getHeight({
   size,
 }: {
-  size: NonNullable<Props["size"]>;
+  size: NonNullable<ButtonProps["size"]>;
 }): CSS.HeightProperty<TLength> {
   switch (size) {
     case "small":
@@ -104,9 +104,9 @@ function getHoverBackgroundColor({
   feel,
   theme,
 }: {
-  color: NonNullable<Props["color"]>;
-  feel: NonNullable<Props["feel"]>;
-  theme: NonNullable<Props["theme"]>;
+  color: NonNullable<ButtonProps["color"]>;
+  feel: NonNullable<ButtonProps["feel"]>;
+  theme: NonNullable<ButtonProps["theme"]>;
 }): CSS.BackgroundColorProperty {
   if (color === colors.white) {
     // Special case for secondary buttons
@@ -137,7 +137,7 @@ function getHoverBackgroundColor({
 // I was able to get guarantees to work, but only with very cryptic errors. I
 // decided it'd be best, for the time being, to `throw` if we use things
 // incorrectly.
-interface Props {
+interface ButtonProps {
   /**
    * Lets you customize how you're going to render this component. You can
    * either one of two things:
@@ -150,7 +150,7 @@ interface Props {
    *
    * @default "button"
    */
-  as?: string | ((props: any) => ReturnType<React.FC>);
+  // as?: string |  React.ComponentType<Props>;
 
   /**
    * Base color to calculate all other colors with
@@ -236,19 +236,22 @@ interface Props {
  *
  * @see https://zpl.io/amdN6Pr
  */
-export const Button: React.FC<Props> = ({
-  as = "button",
-  children,
-  color = defaultColor,
-  disabled = false,
-  variant,
-  feel = "raised",
-  icon,
-  onClick,
-  size = "default",
-  theme = "light",
-  ...otherProps
-}) => {
+export const Button: <WhateverComponentProps>(
+  props: PropsWithChildren<{ as: React.ComponentType<WhateverComponentProps> } & ButtonProps>
+) => React.ReactElement = (props) => {
+  const {
+    as = "button",
+    children,
+    color = defaultColor,
+    disabled = false,
+    variant,
+    feel = "raised",
+    icon,
+    onClick,
+    size = "default",
+    theme = "light",
+    ...otherProps
+  } = props;
   /**
    * Icon size in pixels
    *
@@ -456,5 +459,11 @@ export const Button: React.FC<Props> = ({
     ),
   };
 
-  return typeof as === "string" ? jsx(as, asProps) : as(asProps);
+  return typeof as === "string" ? jsx(as, asProps) : <props.as {...props} />;
 };
+
+const NavLink: React.FC<{ to: string }> = ({ to }) => {
+  return <div />;
+};
+
+const asdf = <Button as={NavLink} to="/" />;
