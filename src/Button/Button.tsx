@@ -237,8 +237,11 @@ interface ButtonProps {
  * @see https://zpl.io/amdN6Pr
  */
 export const Button: <WhateverComponentProps>(
-  props: PropsWithChildren<{ as: React.ComponentType<WhateverComponentProps> } & ButtonProps>
-) => React.ReactElement = (props) => {
+  props: PropsWithChildren<
+    { as: React.ComponentType<WhateverComponentProps> } & ButtonProps &
+      WhateverComponentProps
+  >
+) => React.ReactElement = props => {
   const {
     as = "button",
     children,
@@ -250,7 +253,6 @@ export const Button: <WhateverComponentProps>(
     onClick,
     size = "default",
     theme = "light",
-    ...otherProps
   } = props;
   /**
    * Icon size in pixels
@@ -269,8 +271,8 @@ export const Button: <WhateverComponentProps>(
     }
   }
 
-  const asProps = {
-    ...otherProps,
+  const propsToPass = {
+    ...props,
     css: css([
       {
         "&[disabled]": {
@@ -459,11 +461,9 @@ export const Button: <WhateverComponentProps>(
     ),
   };
 
-  return typeof as === "string" ? jsx(as, asProps) : <props.as {...props} />;
+  return typeof as === "string" ? (
+    jsx(as, { ...propsToPass })
+  ) : (
+    <props.as {...propsToPass} />
+  );
 };
-
-const NavLink: React.FC<{ to: string }> = ({ to }) => {
-  return <div />;
-};
-
-const asdf = <Button as={NavLink} to="/" />;
