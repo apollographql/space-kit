@@ -37,7 +37,7 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             # see https://circleci.com/gh/apollographql/space-kit/edit#checkout
-            - "f1:1b:f6:69:2b:c3:8c:86:9e:41:43:ea:2b:b6:a7:ef"
+            - "81:5a:2f:22:7e:92:6a:dc:95:08:87:a3:2e:3a:61:bf"
       - run:
           name: Add NPM_TOKEN to `.npmrc`
           command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/space-kit/.npmrc
