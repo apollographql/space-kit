@@ -229,6 +229,13 @@ interface ButtonProps {
   variant?: "fab";
 }
 
+type SwappableComponent<OriginalComponentProps> = <SwappedInComponentProps>(
+  props: PropsWithChildren<
+    { as: React.ComponentType<SwappedInComponentProps> } & OriginalComponentProps &
+      SwappedInComponentProps
+  >
+) => React.ReactElement
+
 /**
  * Style system for Space Kit buttons
  *
@@ -236,12 +243,7 @@ interface ButtonProps {
  *
  * @see https://zpl.io/amdN6Pr
  */
-export const Button: <WhateverComponentProps>(
-  props: PropsWithChildren<
-    { as: React.ComponentType<WhateverComponentProps> } & ButtonProps &
-      WhateverComponentProps
-  >
-) => React.ReactElement = props => {
+export const Button: SwappableComponent<ButtonProps> = props => {
   const {
     as = "button",
     children,
