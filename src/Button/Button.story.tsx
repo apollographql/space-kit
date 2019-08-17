@@ -110,6 +110,10 @@ const VerticalButtonGroup: React.FC<{
   </div>
 );
 
+const DummyNavLink: React.FC<{ to: string }> = ({ to, ...otherProps }) => (
+  <a {...otherProps} href={to} />
+);
+
 storiesOf("Button", module)
   .addParameters({
     options: {
@@ -151,7 +155,9 @@ storiesOf("Button", module)
         </VerticalButtonGroup>
 
         <VerticalButtonGroup title="anchor with component">
-          <Button as={props => <a {...props} href="#test" />}>Default</Button>
+          <Button as={DummyNavLink} to="/">
+            Default
+          </Button>
         </VerticalButtonGroup>
       </DemoSection>
 

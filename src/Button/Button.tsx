@@ -2,11 +2,10 @@
 import { colors, PaletteColor } from "../colors";
 import * as CSS from "csstype";
 import { base } from "../typography";
-import { ClassNames, jsx } from "@emotion/core";
+import { jsx, css } from "@emotion/core";
 import { getOffsetInPalette } from "../colors/utils/getOffsetInPalette";
 import tinycolor from "tinycolor2";
-import React from "react";
-import classnames from "classnames";
+import React, { PropsWithChildren } from "react";
 
 type TLength = string | 0 | number;
 
@@ -155,7 +154,7 @@ interface Props
    *
    * @default "button"
    */
-  as?: string | React.ReactElement;
+  // as?: string |  React.ComponentType<Props>;
 
   /**
    * Base color to calculate all other colors with
@@ -234,6 +233,18 @@ interface Props
   variant?: "fab";
 }
 
+type SwappableComponent<OriginalComponentProps> = <SwappedInComponentProps>(
+  props: PropsWithChildren<
+    {
+      as?:
+        | string
+        | React.ComponentType<SwappedInComponentProps>
+        | React.ReactElement;
+    } & OriginalComponentProps &
+      SwappedInComponentProps
+  >
+) => React.ReactElement;
+
 /**
  * Style system for Space Kit buttons
  *
@@ -241,7 +252,7 @@ interface Props
  *
  * @see https://zpl.io/amdN6Pr
  */
-export const Button: React.FC<Props> = ({
+export const Button: SwappableComponent<Props> = ({
   as = "button",
   children,
   color = defaultColor,
@@ -254,261 +265,227 @@ export const Button: React.FC<Props> = ({
   theme = "light",
   ...otherProps
 }) => {
-  return (
-    <ClassNames>
-      {({ css, cx }) => {
-        /**
-         * Icon size in pixels
-         *
-         * This is stored so we can use the same value for `height` and `width`
-         */
-        const iconSize = size === "small" ? 12 : size === "large" ? 24 : 16;
+  /**
+   * Icon size in pixels
+   *
+   * This is stored so we can use the same value for `height` and `width`
+   */
+  const iconSize = size === "small" ? 12 : size === "large" ? 24 : 16;
 
-        const iconOnly = !children;
+  const iconOnly = !children;
 
-        if (variant === "fab") {
-          if (!icon) {
-            throw new TypeError("FAB buttons are required to have an `icon`");
-          } else if (children) {
-            throw new TypeError(
-              "FAB buttons cannot have children, only an `icon`"
-            );
-          }
-        }
+  if (variant === "fab") {
+    if (!icon) {
+      throw new TypeError("FAB buttons are required to have an `icon`");
+    } else if (children) {
+      throw new TypeError("FAB buttons cannot have children, only an `icon`");
+    }
+  }
 
-        console.warn(otherProps);
+  const propsToPass = {
+    ...otherProps,
+    css: css([
+      {
+        "&[disabled]": {
+          backgroundColor:
+            feel === "flat"
+              ? "transparent"
+              : theme === "light"
+              ? colors.silver.dark
+              : colors.grey.dark,
+          color:
+            feel === "flat" && theme === "dark"
+              ? colors.grey.dark
+              : colors.grey.light,
 
-        const asProps = {
-          ...otherProps,
-          className: classnames(
-            otherProps.className,
-            cx(
-              css([
-                {
-                  "&[disabled]": {
-                    backgroundColor:
-                      feel === "flat"
-                        ? "transparent"
-                        : theme === "light"
-                        ? colors.silver.dark
-                        : colors.grey.dark,
-                    color:
-                      feel === "flat" && theme === "dark"
-                        ? colors.grey.dark
-                        : colors.grey.light,
-
-                    // We need to also set the `:hover` on `:disabled` so it has a higher
-                    // specificity than any `:hover` classes passed in. This also means
-                    // that both of these need to be overriden if we want to use a custom
-                    // disabled color.
-                    ":hover": {
-                      backgroundColor:
-                        feel === "flat"
-                          ? "transparent"
-                          : theme === "light"
-                          ? colors.silver.dark
-                          : colors.grey.dark,
-                      color:
-                        feel === "flat" && theme === "dark"
-                          ? colors.grey.dark
-                          : colors.grey.light,
-                    },
-                  },
-
-                  backgroundColor:
-                    color === colors.white
-                      ? colors.white
-                      : feel === "raised"
-                      ? color
-                      : "transparent",
-
-                  borderRadius: variant === "fab" ? "100%" : 4,
-
-                  borderWidth: 0,
-                  ...(feel !== "flat" && {
-                    boxShadow:
-                      theme === "light"
-                        ? "0 1px 4px 0 rgba(18, 21, 26, 0.08), inset 0 0 0 1px rgba(18, 21, 26, 0.2), inset 0 -1px 0 0 rgba(18, 21, 26, 0.05)"
-                        : "0 0 0 1px rgba(18, 21, 26, 0.2), 0 1px 4px 0 rgba(18, 21, 26, 0.08), 0 1px 0 0 rgba(18, 21, 26, 0.05)",
-                  }),
-
-                  color: getTextColor({ color, feel, theme }),
-
-                  // Vertically center children
-                  display: "inline-flex",
-                  justifyContent: "center",
-
-                  height: getHeight({ size }),
-
-                  minWidth: iconOnly
-                    ? size === "small"
-                      ? 28
-                      : size === "large"
-                      ? 42
-                      : 36
-                    : size === "small"
-                    ? 76
-                    : size === "large"
-                    ? 112
-                    : 100,
-
-                  // We have to set the Y padding because browsers (at least Chrome) has
-                  // a non-symmetrical vertical padding applied by default.
-                  padding: `0 ${
-                    size === "small" ? 8 : size === "large" ? 8 : 7
-                  }px`,
-
-                  ...(size === "small"
-                    ? base.small
-                    : size === "large"
-                    ? base.large
-                    : base.base),
-
-                  fontWeight: 600,
-
-                  // Disable the outline because we're setting a custom `:active` style
-                  outline: 0,
-
-                  textDecoration: "none",
-                },
-
-                !disabled && {
-                  ":hover, &[data-force-hover-state]": {
-                    backgroundColor: getHoverBackgroundColor({
-                      color,
-                      feel,
-                      theme,
-                    }),
-                    color: getTextColor({ color, feel, theme, mode: ":hover" }),
-                    cursor: "pointer",
-                    ...(feel !== "flat" && {
-                      // The `box-shadow` property is copied directly from Zeplin
-                      boxShadow:
-                        theme === "light"
-                          ? "0 5px 10px 0 rgba(18, 21, 26, 0.12), inset 0 0 0 1px rgba(18, 21, 26, 0.2), inset 0 -1px 0 0 rgba(18, 21, 26, 0.05)"
-                          : "0 0 0 1px rgba(18, 21, 26, 0.2), 0 5px 10px 0 rgba(18, 21, 26, 0.12), 0 1px 0 0 rgba(18, 21, 26, 0.05)",
-                    }),
-                  },
-                  ":focus, &[data-force-focus-state]": {
-                    ...(feel === "flat" && {
-                      backgroundColor:
-                        theme === "light" ? colors.white : "#000",
-                      color:
-                        theme === "light"
-                          ? colors.blue.base
-                          : colors.blue.light,
-                    }),
-                    // The `box-shadow` property is copied directly from Zeplin for the
-                    // light theme. For the dark theme we use a variant of the color to
-                    // make the borders sharp.
-                    boxShadow: `0 1px 4px 0 rgba(18, 21, 26, 0.08), 0 0 0 2px ${
-                      theme === "light" ||
-                      color === defaultColor ||
-                      color === colors.white
-                        ? "#bbdbff"
-                        : getOffsetInPalette(Infinity, "lighter", color)
-                    }, inset 0 0 0 1px ${
-                      color === defaultColor || color === colors.white
-                        ? "#2075d6"
-                        : getOffsetInPalette(1, "darker", color)
-                    }, inset 0 -1px 0 0 rgba(18, 21, 26, 0.05)`,
-                  },
-                  "&:active, &[data-force-active-state]": {
-                    ...(getTextColor({
-                      color,
-                      feel,
-                      theme,
-                      mode: ":hover",
-                    }) && {
-                      color: getTextColor({
-                        color,
-                        feel,
-                        theme,
-                        mode: ":active",
-                      }),
-                    }),
-
-                    backgroundColor:
-                      color === colors.white
-                        ? colors.white
-                        : feel === "raised"
-                        ? color
-                        : color === defaultColor
-                        ? theme === "dark"
-                          ? colors.grey.darker
-                          : colors.silver.base
-                        : getOffsetInPalette(2, "lighter", color),
-
-                    // The `box-shadow` properties are copied directly from Zeplin
-                    boxShadow:
-                      feel !== "flat"
-                        ? theme === "light"
-                          ? "inset 0 0 0 1px rgba(18, 21, 26, 0.2), inset 0 -1px 0 0 rgba(18, 21, 26, 0.05), inset 0 2px 2px 0 rgba(18, 21, 26, 0.12)"
-                          : "0 0 0 1px rgba(18, 21, 26, 0.2), 0 1px 4px 0 rgba(18, 21, 26, 0.08), 0 -1px 0 0 rgba(18, 21, 26, 0.16), inset 0 1px 2px 0 rgba(18, 21, 26, 0.42)"
-                        : "none",
-                    outline: "0",
-                  },
-                },
-              ])
-            )
-          ),
-          disabled,
-          onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-            if (onClick) {
-              onClick(event);
-            }
-
-            // We want to hide the blue border around a button after we've clicked
-            // on it.
-            event.currentTarget.blur();
+          // We need to also set the `:hover` on `:disabled` so it has a higher
+          // specificity than any `:hover` classes passed in. This also means
+          // that both of these need to be overriden if we want to use a custom
+          // disabled color.
+          ":hover": {
+            backgroundColor:
+              feel === "flat"
+                ? "transparent"
+                : theme === "light"
+                ? colors.silver.dark
+                : colors.grey.dark,
+            color:
+              feel === "flat" && theme === "dark"
+                ? colors.grey.dark
+                : colors.grey.light,
           },
+        },
 
-          children: (
-            <div
-              css={{
-                alignItems: "center",
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
-              {icon && (
-                <span
-                  css={{
-                    alignItems: "center",
-                    // This needs to be `inline-flex` and not the default of
-                    // `inline-block` to vertically center the icon automatically
-                    display: "inline-flex",
-                    height: iconSize,
-                    justifyContent: "center",
-                    // The `4px` will be on the right to separate the icon from the text
-                    margin: iconOnly ? 0 : "0 4px 0",
-                    width: iconSize,
-                  }}
-                >
-                  {icon}
-                </span>
-              )}
-              {children}
-            </div>
-          ),
-        };
+        backgroundColor:
+          color === colors.white
+            ? colors.white
+            : feel === "raised"
+            ? color
+            : "transparent",
 
-        return React.isValidElement(as)
-          ? React.cloneElement(as, {
-              ...asProps,
-              className: classnames(
-                asProps.className,
-                as.props.className,
-                // If the parent component is using emotion with the jsx pragma,
-                // we have to get fancy and intercept the styles to use with the
-                // `ClassNames` wrapper.
-                as.props.css ? css(as.props.css.styles) : null
-              ),
-            })
-          : React.createElement(as, asProps);
-      }}
-    </ClassNames>
-  );
+        borderRadius: variant === "fab" ? "100%" : 4,
+
+        borderWidth: 0,
+        ...(feel !== "flat" && {
+          boxShadow:
+            theme === "light"
+              ? "0 1px 4px 0 rgba(18, 21, 26, 0.08), inset 0 0 0 1px rgba(18, 21, 26, 0.2), inset 0 -1px 0 0 rgba(18, 21, 26, 0.05)"
+              : "0 0 0 1px rgba(18, 21, 26, 0.2), 0 1px 4px 0 rgba(18, 21, 26, 0.08), 0 1px 0 0 rgba(18, 21, 26, 0.05)",
+        }),
+
+        color: getTextColor({ color, feel, theme }),
+
+        // Vertically center children
+        display: "inline-flex",
+        justifyContent: "center",
+
+        height: getHeight({ size }),
+
+        minWidth: iconOnly
+          ? size === "small"
+            ? 28
+            : size === "large"
+            ? 42
+            : 36
+          : size === "small"
+          ? 76
+          : size === "large"
+          ? 112
+          : 100,
+
+        // We have to set the Y padding because browsers (at least Chrome) has
+        // a non-symmetrical vertical padding applied by default.
+        padding: `0 ${size === "small" ? 8 : size === "large" ? 8 : 7}px`,
+
+        ...(size === "small"
+          ? base.small
+          : size === "large"
+          ? base.large
+          : base.base),
+
+        fontWeight: 600,
+
+        // Disable the outline because we're setting a custom `:active` style
+        outline: 0,
+
+        textDecoration: "none",
+      },
+
+      !disabled && {
+        ":hover, &[data-force-hover-state]": {
+          backgroundColor: getHoverBackgroundColor({ color, feel, theme }),
+          color: getTextColor({ color, feel, theme, mode: ":hover" }),
+          cursor: "pointer",
+          ...(feel !== "flat" && {
+            // The `box-shadow` property is copied directly from Zeplin
+            boxShadow:
+              theme === "light"
+                ? "0 5px 10px 0 rgba(18, 21, 26, 0.12), inset 0 0 0 1px rgba(18, 21, 26, 0.2), inset 0 -1px 0 0 rgba(18, 21, 26, 0.05)"
+                : "0 0 0 1px rgba(18, 21, 26, 0.2), 0 5px 10px 0 rgba(18, 21, 26, 0.12), 0 1px 0 0 rgba(18, 21, 26, 0.05)",
+          }),
+        },
+        ":focus, &[data-force-focus-state]": {
+          ...(feel === "flat" && {
+            backgroundColor: theme === "light" ? colors.white : "#000",
+            color: theme === "light" ? colors.blue.base : colors.blue.light,
+          }),
+          // The `box-shadow` property is copied directly from Zeplin for the
+          // light theme. For the dark theme we use a variant of the color to
+          // make the borders sharp.
+          boxShadow: `0 1px 4px 0 rgba(18, 21, 26, 0.08), 0 0 0 2px ${
+            theme === "light" ||
+            color === defaultColor ||
+            color === colors.white
+              ? "#bbdbff"
+              : getOffsetInPalette(Infinity, "lighter", color)
+          }, inset 0 0 0 1px ${
+            color === defaultColor || color === colors.white
+              ? "#2075d6"
+              : getOffsetInPalette(1, "darker", color)
+          }, inset 0 -1px 0 0 rgba(18, 21, 26, 0.05)`,
+        },
+        "&:active, &[data-force-active-state]": {
+          ...(getTextColor({ color, feel, theme, mode: ":hover" }) && {
+            color: getTextColor({ color, feel, theme, mode: ":active" }),
+          }),
+
+          backgroundColor:
+            color === colors.white
+              ? colors.white
+              : feel === "raised"
+              ? color
+              : color === defaultColor
+              ? theme === "dark"
+                ? colors.grey.darker
+                : colors.silver.base
+              : getOffsetInPalette(2, "lighter", color),
+
+          // The `box-shadow` properties are copied directly from Zeplin
+          boxShadow:
+            feel !== "flat"
+              ? theme === "light"
+                ? "inset 0 0 0 1px rgba(18, 21, 26, 0.2), inset 0 -1px 0 0 rgba(18, 21, 26, 0.05), inset 0 2px 2px 0 rgba(18, 21, 26, 0.12)"
+                : "0 0 0 1px rgba(18, 21, 26, 0.2), 0 1px 4px 0 rgba(18, 21, 26, 0.08), 0 -1px 0 0 rgba(18, 21, 26, 0.16), inset 0 1px 2px 0 rgba(18, 21, 26, 0.42)"
+              : "none",
+          outline: "0",
+        },
+      },
+    ]),
+    disabled,
+    onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      if (onClick) {
+        onClick(event);
+      }
+
+      // We want to hide the blue border around a button after we've clicked
+      // on it.
+      event.currentTarget.blur();
+    },
+
+    children: (
+      <div
+        css={{
+          alignItems: "center",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        {icon && (
+          <span
+            css={{
+              alignItems: "center",
+              // This needs to be `inline-flex` and not the default of
+              // `inline-block` to vertically center the icon automatically
+              display: "inline-flex",
+              height: iconSize,
+              justifyContent: "center",
+              // The `4px` will be on the right to separate the icon from the text
+              margin: iconOnly ? 0 : "0 4px 0",
+              width: iconSize,
+            }}
+          >
+            {icon}
+          </span>
+        )}
+        {children}
+      </div>
+    ),
+  };
+
+  return React.isValidElement(as)
+    ? React.cloneElement(as, {
+        ...propsToPass,
+        className: classnames(
+          propsToPass.className,
+          as.props.className,
+          // If the parent component is using emotion with the jsx pragma,
+          // we have to get fancy and intercept the styles to use with the
+          // `ClassNames` wrapper.
+          as.props.css ? css(as.props.css.styles) : null
+        ),
+      })
+    : React.createElement(as, propsToPass);
+  //     }}
+  //   </ClassNames>
+  // );
 };
-
-Button.displayName = "Button";
