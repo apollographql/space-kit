@@ -6,6 +6,7 @@ import { jsx, css } from "@emotion/core";
 import { getOffsetInPalette } from "../colors/utils/getOffsetInPalette";
 import tinycolor from "tinycolor2";
 import React, { PropsWithChildren } from "react";
+import classnames from "classnames";
 
 type TLength = string | 0 | number;
 
@@ -233,17 +234,18 @@ interface Props
   variant?: "fab";
 }
 
-type SwappableComponent<OriginalComponentProps> = <SwappedInComponentProps>(
-  props: PropsWithChildren<
-    {
-      as?:
-        | string
-        | React.ComponentType<SwappedInComponentProps>
-        | React.ReactElement;
-    } & OriginalComponentProps &
-      SwappedInComponentProps
-  >
-) => React.ReactElement;
+type SwappableComponent<
+  OriginalComponentProps
+> = <
+SwappedInComponentProps>React.FC<
+  {
+    as?:
+      | string
+      | React.ComponentType<SwappedInComponentProps>
+      | React.ReactElement;
+  } & OriginalComponentProps &
+    SwappedInComponentProps
+>;
 
 /**
  * Style system for Space Kit buttons
@@ -470,7 +472,11 @@ export const Button: SwappableComponent<Props> = ({
         {children}
       </div>
     ),
-  };
+  } as const;
+
+  if (typeof as === "string") {
+    return null;
+  }
 
   return React.isValidElement(as)
     ? React.cloneElement(as, {
