@@ -128,7 +128,7 @@ storiesOf("Button", module)
       >
         <VerticalButtonGroup title="Standard / Default">
           <Button type="fake">Default</Button>
-          <Button as="a" href={false} icon={iconElement} />
+          <Button as="a" icon={iconElement} />
         </VerticalButtonGroup>
 
         <VerticalButtonGroup title="Small">

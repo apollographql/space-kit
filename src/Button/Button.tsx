@@ -213,19 +213,11 @@ interface Props {
 // ) => ReturnType<React.FC>;
 
 type SwappableComponent<OriginalComponentProps> = <
-  As extends ("a" | "button") | undefined,
-  SwappedInComponentProps extends As extends undefined
-    ? JSX.IntrinsicElements["button"]
-    : { resolved: "** AS WAS DEFINED **"; asValue: As }
+  As extends keyof JSX.IntrinsicElements,
+  SwappedInComponentProps extends JSX.IntrinsicElements[As]
 >(
   props: PropsWithChildren<
-    (
-      | {
-          as?: never;
-        }
-      | { as: As }) &
-      OriginalComponentProps &
-      SwappedInComponentProps
+    ({ as?: As }) & OriginalComponentProps & SwappedInComponentProps
   >
 ) => ReturnType<React.FC>;
 
