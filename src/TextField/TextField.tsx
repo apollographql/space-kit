@@ -1,10 +1,11 @@
 /** @jsx jsx */
-import { jsx } from "@emotion/core";
+import { ClassNames, jsx } from "@emotion/core";
 import React from "react";
 import * as typography from "../typography";
 import { colors } from "../colors";
 import { IconAlertSolid } from "../icons/IconAlertSolid";
 import { IconInfoSolid } from "../icons/IconInfoSolid";
+import classnames from "classnames";
 
 interface Props {
   /**
@@ -43,6 +44,15 @@ interface Props {
    * Icon to have at the left of the input
    */
   icon?: React.ReactNode;
+
+  /**
+   * Override how the `input` is rendered. You can pass either an intrinisic jsx element as a string (like "input") or a react element (`<input />`)
+   *
+   * If you pass a react element, props that we add are spread onto the input.
+   *
+   * @default "input"
+   */
+  inputAs?: React.ReactElement | keyof JSX.IntrinsicElements;
 
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 
@@ -94,6 +104,7 @@ export const TextField: React.FC<Props> = ({
   className,
   defaultValue,
   description,
+  inputAs = "input",
   disabled,
   error,
   helper,
@@ -104,139 +115,155 @@ export const TextField: React.FC<Props> = ({
   showInfoIcon,
   size = "standard",
   value,
-  ...otherProps
-}) => {
-  return (
-    <div className={className}>
-      <label
-        css={{
-          paddingBottom: 8,
-          ...typography.base.base,
-          fontWeight: 600,
-        }}
-      >
-        {label != null && <div css={{ marginBottom: 4 }}>{label}</div>}
-        {description != null && (
-          <div
-            css={{
-              ...typography.base.base,
-              color: colors.black.base,
-            }}
+}) => (
+  <ClassNames>
+    {({ css, cx }) => {
+      const inputProps = {
+        defaultValue,
+        disabled,
+        onChange,
+        placeholder,
+        value,
+        className: cx(
+          css({
+            backgroundColor: disabled ? colors.silver.light : colors.white,
+            border: "solid 1px",
+            borderColor: error ? colors.red.base : colors.silver.darker,
+            "::placeholder": {
+              color: disabled ? colors.grey.lighter : colors.grey.light,
+              opacity: 1,
+            },
+            borderRadius: 4,
+            flex: 1,
+            height: size === "standard" ? 36 : size === "small" ? 28 : 42,
+            ...(size === "small"
+              ? typography.base.small
+              : typography.base.base),
+            marginRight: icon ? -30 : 0,
+            paddingLeft: icon ? 34 : size === "small" ? 8 : 12,
+            paddingRight: size === "small" ? 8 : 12,
+            width: "100%",
+            ":hover,  &[data-force-hover-state]": {
+              borderColor:
+                !disabled && !error
+                  ? colors.grey.light
+                  : error
+                  ? colors.red.base
+                  : colors.silver.darker,
+            },
+            ":focus, &[data-force-focus-state]": {
+              borderColor:
+                !disabled && !error
+                  ? colors.blue.light
+                  : error
+                  ? colors.red.base
+                  : colors.silver.darker,
+              outline: "none",
+            },
+          })
+        ),
+      };
+
+      return (
+        <div className={className}>
+          <label
+            className={cx(
+              css({
+                paddingBottom: 8,
+                ...typography.base.base,
+                fontWeight: 600,
+              })
+            )}
           >
-            {description}
-          </div>
-        )}
-        <div
-          css={{
-            marginTop: 8,
-            position: "relative",
-          }}
-        >
-          {icon && (
+            {label != null && <div css={{ marginBottom: 4 }}>{label}</div>}
+            {description != null && (
+              <div
+                css={{
+                  ...typography.base.base,
+                  color: colors.black.base,
+                }}
+              >
+                {description}
+              </div>
+            )}
             <div
               css={{
-                position: "absolute",
-                display: "inline-flex",
-                left: 12,
-                top: "50%",
-                transform: "translateY(-50%)",
+                marginTop: 8,
+                position: "relative",
               }}
             >
-              {icon}
-            </div>
-          )}
+              {icon && (
+                <div
+                  css={{
+                    position: "absolute",
+                    display: "inline-flex",
+                    left: 12,
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                  }}
+                >
+                  {icon}
+                </div>
+              )}
 
-          <input
-            {...otherProps}
-            defaultValue={defaultValue}
-            disabled={disabled}
-            onChange={onChange}
-            placeholder={placeholder}
-            value={value}
-            css={{
-              backgroundColor: disabled ? colors.silver.light : colors.white,
-              border: "solid 1px",
-              borderColor: error ? colors.red.base : colors.silver.darker,
-              "::placeholder": {
-                color: disabled ? colors.grey.lighter : colors.grey.light,
-                opacity: 1,
-              },
-              borderRadius: 4,
-              flex: 1,
-              height: size === "standard" ? 36 : size === "small" ? 28 : 42,
-              ...(size === "small"
-                ? typography.base.small
-                : typography.base.base),
-              marginRight: icon ? -30 : 0,
-              paddingLeft: icon ? 34 : size === "small" ? 8 : 12,
-              paddingRight: size === "small" ? 8 : 12,
-              width: "100%",
-              ":hover,  &[data-force-hover-state]": {
-                borderColor:
-                  !disabled && !error
-                    ? colors.grey.light
-                    : error
-                    ? colors.red.base
-                    : colors.silver.darker,
-              },
-              ":focus, &[data-force-focus-state]": {
-                borderColor:
-                  !disabled && !error
-                    ? colors.blue.light
-                    : error
-                    ? colors.red.base
-                    : colors.silver.darker,
-                outline: "none",
-              },
-            }}
-          />
-        </div>
-      </label>
-      <div
-        css={{
-          marginTop: 8,
-          alignItems: "center",
-          position: "relative",
-        }}
-      >
-        {(helper || error) && (
+              {React.isValidElement(inputAs)
+                ? React.cloneElement(inputAs, {
+                    ...inputProps,
+                    className: classnames(
+                      inputProps.className,
+                      inputAs.props.className
+                    ),
+                  })
+                : React.createElement(inputAs, inputProps)}
+            </div>
+          </label>
           <div
             css={{
-              ...typography.base.small,
-              color: error ? colors.red.base : colors.grey.base,
-              display: "flex",
-              marginRight: 8,
               marginTop: 8,
-              paddingLeft: size === "small" ? 8 : 12,
+              alignItems: "center",
+              position: "relative",
             }}
           >
-            {error ? (
-              <IconAlertSolid
+            {(helper || error) && (
+              <div
                 css={{
-                  height: 15,
+                  ...typography.base.small,
+                  color: error ? colors.red.base : colors.grey.base,
+                  display: "flex",
                   marginRight: 8,
-                  position: "relative",
-                  top: 2,
-                  width: 15,
+                  marginTop: 8,
+                  paddingLeft: size === "small" ? 8 : 12,
                 }}
-              />
-            ) : showInfoIcon && helper ? (
-              <IconInfoSolid
-                css={{
-                  color: colors.blue.base,
-                  height: 15,
-                  marginRight: 8,
-                  position: "relative",
-                  top: 2,
-                  width: 15,
-                }}
-              />
-            ) : null}
+              >
+                {error ? (
+                  <IconAlertSolid
+                    css={{
+                      height: 15,
+                      marginRight: 8,
+                      position: "relative",
+                      top: 2,
+                      width: 15,
+                    }}
+                  />
+                ) : showInfoIcon && helper ? (
+                  <IconInfoSolid
+                    css={{
+                      color: colors.blue.base,
+                      height: 15,
+                      marginRight: 8,
+                      position: "relative",
+                      top: 2,
+                      width: 15,
+                    }}
+                  />
+                ) : null}
 
-            <div>{error || helper}</div>
+                <div>{error || helper}</div>
+              </div>
+            )}
           </div>
-        )}
-      </div>
-    </div>
-  );
-};
+        </div>
+      );
+    }}
+  </ClassNames>
+);
