@@ -138,25 +138,7 @@ function getHoverBackgroundColor({
 // I was able to get guarantees to work, but only with very cryptic errors. I
 // decided it'd be best, for the time being, to `throw` if we use things
 // incorrectly.
-interface Props
-  extends React.DetailedHTMLProps<
-    React.ButtonHTMLAttributes<HTMLButtonElement>,
-    HTMLButtonElement
-  > {
-  /**
-   * Lets you customize how you're going to render this component. You can
-   * either one of two things:
-   *
-   * 1. A string representing the type of element you want rendered, or
-   * 2. A render function. The render function will be called with the props
-   *    that need to be passed to the element. You can use this to change the
-   *    element being rendered or to add your own props that aren't included in
-   *    this component.
-   *
-   * @default "button"
-   */
-  // as?: string |  React.ComponentType<Props>;
-
+interface Props {
   /**
    * Base color to calculate all other colors with
    *
@@ -166,11 +148,6 @@ interface Props
    * Pass `colors.white` to treat this button as a secondary button
    */
   color?: PaletteColor | typeof colors["white"];
-
-  /**
-   * Disable the button
-   */
-  disabled?: boolean;
 
   /**
    * Which feel to display
@@ -186,11 +163,6 @@ interface Props
    * Either an icon to show to the left of the button text, or on it's own
    */
   icon?: React.ReactElement;
-
-  /**
-   * Callback for when the button is clicked. Passes through native react event
-   */
-  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 
   /**
    * Size of the button
@@ -211,14 +183,6 @@ interface Props
   theme?: "light" | "dark";
 
   /**
-   * Type of the button
-   */
-  type?: React.DetailedHTMLProps<
-    React.ButtonHTMLAttributes<HTMLButtonElement>,
-    HTMLButtonElement
-  >["type"];
-
-  /**
    * Button variants
    *
    * The options are as follows:
@@ -234,18 +198,17 @@ interface Props
   variant?: "fab";
 }
 
-type SwappableComponent<
-  OriginalComponentProps
-> = <
-SwappedInComponentProps>React.FC<
-  {
-    as?:
-      | string
-      | React.ComponentType<SwappedInComponentProps>
-      | React.ReactElement;
-  } & OriginalComponentProps &
-    SwappedInComponentProps
->;
+type SwappableComponent<OriginalComponentProps> = <
+  As extends keyof JSX.IntrinsicElements,
+  SwappedInComponentProps extends JSX.IntrinsicElements[As]
+>(
+  props: PropsWithChildren<
+    {
+      as?: As;
+    } & OriginalComponentProps &
+      SwappedInComponentProps
+  >
+) => any;
 
 /**
  * Style system for Space Kit buttons
