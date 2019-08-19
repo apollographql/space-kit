@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx } from "@emotion/core";
+import { jsx, ClassNames } from "@emotion/core";
 import { storiesOf } from "@storybook/react";
 import { TextField } from "./TextField";
 import { DemoSection } from "../shared/DemoSection";
@@ -85,6 +85,30 @@ storiesOf("TextField", module).add("Catalog", () => (
           size="large"
           label="Large input"
         />
+      </VerticalTextFieldGroup>
+    </DemoSection>
+    <DemoSection>
+      <VerticalTextFieldGroup
+        title="Custom Input via inputAs"
+        description="You can use the `inputAs` prop to customize what elmement or how you render the underlying input component"
+      >
+        <ClassNames>
+          {({ cx, css }) => (
+            <TextField
+              inputAs={
+                <input
+                  className={cx(
+                    css({
+                      "&, :focus, :hover": { border: "1px solid blue" },
+                    })
+                  )}
+                />
+              }
+              placeholder="Placeholder text"
+              label="Blue border input"
+            />
+          )}
+        </ClassNames>
       </VerticalTextFieldGroup>
     </DemoSection>
     <DemoSection>
