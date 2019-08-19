@@ -139,7 +139,9 @@ storiesOf("Button", module)
         </VerticalButtonGroup>
 
         <VerticalButtonGroup title="Large">
-          <Button size="large">Large</Button>
+          <Button as={undefined} size="large">
+            Large
+          </Button>
           <Button size="large" icon={iconElement} />
         </VerticalButtonGroup>
       </DemoSection>

@@ -198,16 +198,33 @@ interface Props {
   variant?: "fab";
 }
 
+// type SwappableComponent<OriginalComponentProps> = <
+//   As extends (keyof JSX.IntrinsicElements) | undefined,
+//   SwappedInComponentProps extends As extends keyof JSX.IntrinsicElements
+//     ? JSX.IntrinsicElements[As]
+//     : JSX.IntrinsicElements["button"]
+// >(
+//   props: PropsWithChildren<
+//     {
+//       as?: As;
+//     } & OriginalComponentProps &
+//       SwappedInComponentProps
+//   >
+// ) => ReturnType<React.FC>;
+
 type SwappableComponent<OriginalComponentProps> = <
-  As extends undefined | keyof JSX.IntrinsicElements,
-  SwappedInComponentProps extends As extends keyof JSX.IntrinsicElements
-    ? JSX.IntrinsicElements[As]
-    : JSX.IntrinsicElements["button"]
+  As extends ("a" | "button") | undefined,
+  SwappedInComponentProps extends As extends undefined
+    ? JSX.IntrinsicElements["button"]
+    : { resolved: "** AS WAS DEFINED **"; asValue: As }
 >(
   props: PropsWithChildren<
-    {
-      as?: As;
-    } & OriginalComponentProps &
+    (
+      | {
+          as?: never;
+        }
+      | { as: As }) &
+      OriginalComponentProps &
       SwappedInComponentProps
   >
 ) => ReturnType<React.FC>;
