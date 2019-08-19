@@ -199,8 +199,10 @@ interface Props {
 }
 
 type SwappableComponent<OriginalComponentProps> = <
-  As extends keyof JSX.IntrinsicElements,
-  SwappedInComponentProps extends JSX.IntrinsicElements[As]
+  As extends undefined | keyof JSX.IntrinsicElements,
+  SwappedInComponentProps extends As extends keyof JSX.IntrinsicElements
+    ? JSX.IntrinsicElements[As]
+    : JSX.IntrinsicElements["button"]
 >(
   props: PropsWithChildren<
     {
@@ -208,7 +210,7 @@ type SwappableComponent<OriginalComponentProps> = <
     } & OriginalComponentProps &
       SwappedInComponentProps
   >
-) => any;
+) => ReturnType<React.FC>;
 
 /**
  * Style system for Space Kit buttons

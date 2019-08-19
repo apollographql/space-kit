@@ -127,12 +127,14 @@ storiesOf("Button", module)
         description="There are three different sizes of buttons, with the most common button being the default size. Small and large buttons are avialble for specific settings."
       >
         <VerticalButtonGroup title="Standard / Default">
-          <Button>Default</Button>
-          <Button as="div" href={true} icon={iconElement} />
+          <Button type="fake">Default</Button>
+          <Button as="a" href={false} icon={iconElement} />
         </VerticalButtonGroup>
 
         <VerticalButtonGroup title="Small">
-          <Button size="small">Small</Button>
+          <Button as="button" type="fake" size="small">
+            Small
+          </Button>
           <Button size="small" icon={iconElement} />
         </VerticalButtonGroup>
 
