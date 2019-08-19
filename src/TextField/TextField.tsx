@@ -54,6 +54,7 @@ interface Props {
    */
   inputAs?: React.ReactElement | keyof JSX.IntrinsicElements;
 
+  onBlur?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 
   /**
@@ -110,6 +111,7 @@ export const TextField: React.FC<Props> = ({
   helper,
   icon,
   label,
+  onBlur,
   onChange,
   placeholder,
   showInfoIcon,
@@ -121,6 +123,7 @@ export const TextField: React.FC<Props> = ({
       const inputProps = {
         defaultValue,
         disabled,
+        onBlur,
         onChange,
         placeholder,
         value,
