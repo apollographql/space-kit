@@ -260,7 +260,11 @@ export const Button: ComponentWithAs<Props, "button"> = ({
           cx(
             css([
               {
-                "&[disabled]": {
+                // We need to also set the `:hover` on `:disabled` so it has a
+                // higher specificity than any `:hover` classes passed in. This
+                // also means that both of these need to be overriden if we want
+                // to use a custom disabled color.
+                "&[disabled], &[disabled]:hover": {
                   backgroundColor:
                     feel === "flat"
                       ? "transparent"
@@ -271,23 +275,6 @@ export const Button: ComponentWithAs<Props, "button"> = ({
                     feel === "flat" && theme === "dark"
                       ? colors.grey.dark
                       : colors.grey.light,
-
-                  // We need to also set the `:hover` on `:disabled` so it has a higher
-                  // specificity than any `:hover` classes passed in. This also means
-                  // that both of these need to be overriden if we want to use a custom
-                  // disabled color.
-                  ":hover": {
-                    backgroundColor:
-                      feel === "flat"
-                        ? "transparent"
-                        : theme === "light"
-                        ? colors.silver.dark
-                        : colors.grey.dark,
-                    color:
-                      feel === "flat" && theme === "dark"
-                        ? colors.grey.dark
-                        : colors.grey.light,
-                  },
                 },
 
                 backgroundColor:
