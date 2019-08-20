@@ -269,8 +269,9 @@ export const Button: ComponentWithAs<Props, "button"> = ({
                     feel === "flat"
                       ? "transparent"
                       : theme === "light"
-                      ? colors.silver.dark
+                      ? colors.silver.light
                       : colors.grey.dark,
+                  boxShadow: "none",
                   color:
                     feel === "flat" && theme === "dark"
                       ? colors.grey.dark
