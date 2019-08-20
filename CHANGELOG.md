@@ -1,3 +1,15 @@
+# v1.6.0 (Tue Aug 20 2019)
+
+#### 🚀  Enhancement
+
+- Add `as` prop to `Button` [#70](https://github.com/apollographql/space-kit/pull/70) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v1.5.1 (Thu Aug 15 2019)
 
 ### Release Notes
