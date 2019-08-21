@@ -3,12 +3,13 @@ import React from "react";
 import { jsx, keyframes } from "@emotion/core";
 import { colors } from "../colors";
 
+export type Size = "large" | "medium" | "small" | "tiny" | "icon";
 interface Props {
   darkBackground?: boolean;
-  size?: "large" | "medium" | "small" | "tiny" | "icon";
+  size?: Size;
 }
 
-// The whole thing is exactly 5 seconds long.
+// The whole animation is exactly 5 seconds long.
 // Each rotation is 450 degrees, with a deceleration at
 // 420 degrees, and a reduced speed between 420-450.
 // 1st rotation: 60 deg and 90 deg
@@ -27,10 +28,10 @@ const SIZE_MAP = {
   medium: 64,
   small: 48,
   tiny: 32,
-  icon: 14,
-}
+  icon: 16,
+};
 
-export const LoadingIcon: React.FC<Props> = ({
+export const LoadingSpinner: React.FC<Props> = ({
   darkBackground = false,
   size = "medium",
   ...props
