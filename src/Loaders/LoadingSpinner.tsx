@@ -4,8 +4,21 @@ import { jsx, keyframes } from "@emotion/core";
 import { colors } from "../colors";
 
 export type Size = "large" | "medium" | "small" | "tiny" | "icon";
+export type Theme = "light" | "dark";
 interface Props {
-  darkBackground?: boolean;
+  /**
+   * Class name that will be applied to the svg
+   */
+  className?: string;
+
+  /**
+   * Theme for the spinner
+   */
+  theme?: Theme;
+
+  /**
+   * Size of the spinner
+   */
   size?: Size;
 }
 
@@ -31,21 +44,34 @@ const SIZE_MAP = {
   icon: 16,
 };
 
+const THEME_MAP = {
+  light: {
+    orbitColor: colors.silver.light,
+    orbitOpacity: 1,
+    asteroidColor: colors.blue.base,
+  },
+  dark: {
+    orbitColor: colors.white,
+    orbitOpacity: 0.5,
+    asteroidColor: colors.white,
+  },
+};
+
 export const LoadingSpinner: React.FC<Props> = ({
-  darkBackground = false,
+  theme = "light",
   size = "medium",
+  className,
   ...props
 }) => {
-  const orbitColor = darkBackground ? colors.white : colors.silver.light;
-  const orbitOpacity = darkBackground ? 0.5 : 1;
-  const asteroidColor = darkBackground ? colors.white : colors.blue.base;
+  const { orbitColor, orbitOpacity, asteroidColor } = THEME_MAP[theme];
 
   const pixelSize = SIZE_MAP[size];
 
   return (
     <svg
+      className={className}
       viewBox="0 0 100 100"
-      style={{
+      css={{
         width: pixelSize,
         height: pixelSize,
       }}

@@ -72,7 +72,7 @@ storiesOf("Loaders", module)
                   {size}
                 </span>
                 <LoadingSpinner
-                  darkBackground
+                  theme="dark"
                   css={{ display: "block" }}
                   size={size}
                 />
@@ -86,7 +86,7 @@ storiesOf("Loaders", module)
         >
           <Button
             color={colors.blue.base}
-            icon={<LoadingSpinner darkBackground size="icon" />}
+            icon={<LoadingSpinner theme="dark" size="icon" />}
             css={{ width: "100%", marginTop: 6, marginBottom: 20 }}
           >
             Submit
