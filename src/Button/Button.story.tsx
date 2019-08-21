@@ -6,8 +6,7 @@ import { storiesOf } from "@storybook/react";
 import { Button } from "./Button";
 import { IconShip2 } from "../icons/IconShip2";
 import { colors } from "../colors";
-import * as typography from "../typography";
-import { DemoSection } from "../shared/DemoSection";
+import { DemoSection, DemoGroup, DemoGroupProps } from "../shared/DemoSection";
 
 const iconElement = <IconShip2 css={{ width: "100%", height: "100%" }} />;
 
@@ -45,83 +44,49 @@ interface AllowedCss {
   color: CSS.ColorProperty;
 }
 
-const VerticalButtonGroup: React.FC<{
-  buttonCss?: AllowedCss;
-  buttonProps?: Partial<Omit<ComponentProps<typeof Button>, "children">>;
-  children: JSX.Element | JSX.Element[];
-  darkButtonCss?: AllowedCss;
-  title: string;
-  description?: string;
-}> = ({
+const VerticalButtonGroup: React.FC<
+  {
+    buttonCss?: AllowedCss;
+    buttonProps?: Partial<Omit<ComponentProps<typeof Button>, "children">>;
+    darkButtonCss?: AllowedCss;
+  } & DemoGroupProps
+> = ({
   buttonProps = {},
   children,
-  title,
   buttonCss = {},
   darkButtonCss = {},
   description,
   ...otherProps
 }) => (
-  <div {...otherProps} css={{ margin: "0 20px", width: 300 }}>
-    <hr
-      style={{
-        height: 1,
-        borderWidth: 0,
-        backgroundColor: colors.silver.dark,
-        marginBottom: 24,
-      }}
-    />
-    <div
+  <DemoGroup {...otherProps}>
+    <ButtonWrapper>
+      {React.Children.map(children, child => (
+        <div css={{ margin: 12 }}>
+          {cloneElement(child as any, {
+            ...buttonProps,
+            css: buttonCss,
+          })}
+        </div>
+      ))}
+    </ButtonWrapper>
+    <ButtonWrapper
       css={{
-        ...typography.base.base,
-        textTransform: "uppercase",
-        fontWeight: 600,
-        margin: 6,
+        backgroundColor: colors.black.base,
       }}
     >
-      {title}
-    </div>
-
-    {description && (
-      <div
-        css={{
-          ...typography.base.small,
-          margin: 6,
-        }}
-      >
-        {description}
-      </div>
-    )}
-
-    <div css={{ display: "flex", flexWrap: "wrap" }}>
-      <ButtonWrapper>
-        {React.Children.map(children, child => (
+      {React.Children.map(children, child => {
+        return (
           <div css={{ margin: 12 }}>
             {cloneElement(child as any, {
               ...buttonProps,
-              css: buttonCss,
+              theme: "dark",
+              css: { ...buttonCss, ...darkButtonCss },
             })}
           </div>
-        ))}
-      </ButtonWrapper>
-      <ButtonWrapper
-        css={{
-          backgroundColor: colors.black.base,
-        }}
-      >
-        {React.Children.map(children, child => {
-          return (
-            <div css={{ margin: 12 }}>
-              {cloneElement(child as any, {
-                ...buttonProps,
-                theme: "dark",
-                css: { ...buttonCss, ...darkButtonCss },
-              })}
-            </div>
-          );
-        })}
-      </ButtonWrapper>
-    </div>
-  </div>
+        );
+      })}
+    </ButtonWrapper>
+  </DemoGroup>
 );
 
 const DummyNavLink: React.FC<{ to: string; className?: string }> = ({
