@@ -55,7 +55,6 @@ const VerticalButtonGroup: React.FC<
   children,
   buttonCss = {},
   darkButtonCss = {},
-  description,
   ...otherProps
 }) => (
   <DemoGroup {...otherProps}>

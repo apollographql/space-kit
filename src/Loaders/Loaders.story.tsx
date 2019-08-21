@@ -34,7 +34,7 @@ storiesOf("Loaders", module)
             }}
           >
             {SPINNER_SIZES.map(size => (
-              <div css={{ margin: 20 }}>
+              <div key={size} css={{ margin: 20 }}>
                 <span
                   css={{
                     ...typography.base.small,
@@ -59,7 +59,7 @@ storiesOf("Loaders", module)
             }}
           >
             {SPINNER_SIZES.map(size => (
-              <div css={{ margin: 20 }}>
+              <div key={size} css={{ margin: 20 }}>
                 <span
                   css={{
                     ...typography.base.small,
