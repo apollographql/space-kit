@@ -52,9 +52,9 @@ export const LoadingSpinner: React.FC<Props> = ({
       {...props}
     >
       <circle
-        stroke-width="8"
+        strokeWidth="8"
         stroke={orbitColor}
-        stroke-opacity={orbitOpacity}
+        strokeOpacity={orbitOpacity}
         fill="transparent"
         r="41"
         cx="50"
