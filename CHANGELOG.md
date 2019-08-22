@@ -1,3 +1,15 @@
+# v1.7.2 (Thu Aug 22 2019)
+
+#### 🐛  Bug Fix
+
+- fix(TextField): Pass `name` and `type` to `<input>` [#76](https://github.com/apollographql/space-kit/pull/76) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v1.7.0 (Thu Aug 22 2019)
 
 #### 🚀  Enhancement
