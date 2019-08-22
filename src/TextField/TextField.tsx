@@ -105,17 +105,19 @@ export const TextField: React.FC<Props> = ({
   className,
   defaultValue,
   description,
-  inputAs = "input",
   disabled,
   error,
   helper,
   icon,
+  inputAs = "input",
   label,
+  name,
   onBlur,
   onChange,
   placeholder,
   showInfoIcon,
   size = "standard",
+  type,
   value,
 }) => (
   <ClassNames>
@@ -123,9 +125,11 @@ export const TextField: React.FC<Props> = ({
       const inputProps = {
         defaultValue,
         disabled,
+        name,
         onBlur,
         onChange,
         placeholder,
+        type,
         value,
         className: cx(
           css({
