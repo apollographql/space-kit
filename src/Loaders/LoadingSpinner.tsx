@@ -1,5 +1,6 @@
 /** @jsx jsx */
 import React from "react";
+import * as CSS from "csstype";
 import { jsx, keyframes } from "@emotion/core";
 import { colors } from "../colors";
 
@@ -36,7 +37,7 @@ const SPIN = keyframes`
   100% { transform: rotate(1800deg) }
 `;
 
-const SIZE_MAP = {
+const SIZE_MAP: Record<Size, number> = {
   large: 90,
   medium: 64,
   small: 48,
@@ -44,7 +45,14 @@ const SIZE_MAP = {
   icon: 16,
 };
 
-const THEME_MAP = {
+const THEME_MAP: Record<
+  Theme,
+  {
+    orbitColor: CSS.ColorProperty;
+    orbitOpacity: CSS.GlobalsNumber;
+    asteroidColor: CSS.ColorProperty;
+  }
+> = {
   light: {
     orbitColor: colors.silver.light,
     orbitOpacity: 1,

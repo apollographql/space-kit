@@ -51,7 +51,7 @@ storiesOf("Loaders", module)
           </div>
           <div
             css={{
-              backgroundColor: colors.blilet.darker,
+              backgroundColor: colors.black.base,
               flex: "1 1 0%",
               border: `1px solid ${colors.silver.dark}`,
               borderRadius: 8,
