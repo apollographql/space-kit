@@ -141,7 +141,7 @@ storiesOf("TextField", module).add("Catalog", () => (
           size="standard"
         />
         <TextField
-          disabled
+          disabled={true}
           label="Disabled"
           placeholder="Placeholder text"
           size="standard"
@@ -250,7 +250,7 @@ storiesOf("TextField", module).add("Catalog", () => (
           }
         />
         <TextField
-          disabled
+          disabled={true}
           label="Disabled"
           icon={
             <IconSearch

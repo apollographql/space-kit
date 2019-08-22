@@ -227,7 +227,7 @@ storiesOf("Button", module)
           <Button data-force-hover-state="true">Hover</Button>
           <Button data-force-active-state="true">Active</Button>
           <Button data-force-focus-state="true">Focused</Button>
-          <Button disabled>Disabled</Button>
+          <Button disabled={true}>Disabled</Button>
         </VerticalButtonGroup>
 
         <VerticalButtonGroup
@@ -240,7 +240,7 @@ storiesOf("Button", module)
           <Button data-force-hover-state="true">Hover</Button>
           <Button data-force-active-state="true">Active</Button>
           <Button data-force-focus-state="true">Focused</Button>
-          <Button disabled>Disabled</Button>
+          <Button disabled={true}>Disabled</Button>
         </VerticalButtonGroup>
 
         <VerticalButtonGroup
@@ -253,7 +253,7 @@ storiesOf("Button", module)
           <Button data-force-hover-state="true">Hover</Button>
           <Button data-force-active-state="true">Active</Button>
           <Button data-force-focus-state="true">Focused</Button>
-          <Button disabled>Disabled</Button>
+          <Button disabled={true}>Disabled</Button>
         </VerticalButtonGroup>
 
         <VerticalButtonGroup
@@ -266,7 +266,7 @@ storiesOf("Button", module)
           <Button data-force-hover-state="true">Hover</Button>
           <Button data-force-active-state="true">Active</Button>
           <Button data-force-focus-state="true">Focused</Button>
-          <Button disabled>Disabled</Button>
+          <Button disabled={true}>Disabled</Button>
         </VerticalButtonGroup>
 
         <VerticalButtonGroup
@@ -279,7 +279,7 @@ storiesOf("Button", module)
           <Button data-force-hover-state="true">Hover</Button>
           <Button data-force-active-state="true">Active</Button>
           <Button data-force-focus-state="true">Focused</Button>
-          <Button disabled>Disabled</Button>
+          <Button disabled={true}>Disabled</Button>
         </VerticalButtonGroup>
       </DemoSection>
 
@@ -295,7 +295,7 @@ storiesOf("Button", module)
           <Button data-force-hover-state="true">Hover</Button>
           <Button data-force-active-state="true">Active</Button>
           <Button data-force-focus-state="true">Focused</Button>
-          <Button disabled>Disabled</Button>
+          <Button disabled={true}>Disabled</Button>
         </VerticalButtonGroup>
 
         <VerticalButtonGroup
@@ -308,7 +308,7 @@ storiesOf("Button", module)
           <Button data-force-hover-state="true">Hover</Button>
           <Button data-force-active-state="true">Active</Button>
           <Button data-force-focus-state="true">Focused</Button>
-          <Button disabled>Disabled</Button>
+          <Button disabled={true}>Disabled</Button>
         </VerticalButtonGroup>
       </DemoSection>
       <DemoSection
@@ -329,7 +329,7 @@ storiesOf("Button", module)
           <Button data-force-hover-state="true">Hover</Button>
           <Button data-force-active-state="true">Active</Button>
           <Button data-force-focus-state="true">Focused</Button>
-          <Button disabled>Disabled</Button>
+          <Button disabled={true}>Disabled</Button>
         </VerticalButtonGroup>
 
         <VerticalButtonGroup
@@ -340,7 +340,7 @@ storiesOf("Button", module)
           <Button data-force-hover-state="true">Hover</Button>
           <Button data-force-active-state="true">Active</Button>
           <Button data-force-focus-state="true">Focused</Button>
-          <Button disabled>Disabled</Button>
+          <Button disabled={true}>Disabled</Button>
         </VerticalButtonGroup>
 
         <VerticalButtonGroup
@@ -357,7 +357,7 @@ storiesOf("Button", module)
           <Button data-force-hover-state="true">Hover</Button>
           <Button data-force-active-state="true">Active</Button>
           <Button data-force-focus-state="true">Focused</Button>
-          <Button disabled>Disabled</Button>
+          <Button disabled={true}>Disabled</Button>
         </VerticalButtonGroup>
       </DemoSection>
     </div>
