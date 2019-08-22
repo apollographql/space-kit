@@ -346,9 +346,7 @@ export const Button: React.FC<Props> = ({
 
                 // We have to set the Y padding because browsers (at least Chrome) has
                 // a non-symmetrical vertical padding applied by default.
-                padding: `0 ${
-                  size === "small" ? 8 : size === "large" ? 8 : 7
-                }px`,
+                padding: `0 ${iconOnly ? 0 : 12}px`,
 
                 ...(size === "small"
                   ? base.small
