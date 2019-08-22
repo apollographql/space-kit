@@ -139,21 +139,24 @@ storiesOf("Button", module)
     <div css={{ color: colors.black.base }}>
       <DemoSection
         title="Button Sizes"
-        description="There are three different sizes of buttons, with the most common button being the default size. Small and large buttons are avialble for specific settings."
+        description="There are three different sizes of buttons, with the most common button being the default size. Small and large buttons are avialble for specific settings. Buttons will expand to fill their content."
       >
         <VerticalButtonGroup title="Standard / Default">
           <Button>Default</Button>
           <Button icon={iconElement} />
+          <Button>Default: Expanded</Button>
         </VerticalButtonGroup>
 
         <VerticalButtonGroup title="Small">
           <Button size="small">Small</Button>
           <Button size="small" icon={iconElement} />
+          <Button size="small">Small: Expanded</Button>
         </VerticalButtonGroup>
 
         <VerticalButtonGroup title="Large">
           <Button size="large">Large</Button>
           <Button size="large" icon={iconElement} />
+          <Button size="large">Large: Expanded</Button>
         </VerticalButtonGroup>
       </DemoSection>
       <DemoSection

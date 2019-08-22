@@ -425,6 +425,8 @@ export const Button: ComponentWithAs<Props, "button"> = ({
                 alignItems: "center",
                 display: "flex",
                 justifyContent: "center",
+                paddingLeft: "12px",
+                paddingRight: "12px",
               })
             )}
           >
