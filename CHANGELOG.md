@@ -1,3 +1,32 @@
+# v1.7.0 (Thu Aug 22 2019)
+
+#### 🚀  Enhancement
+
+- Add `inputAs` prop to `TextField` to customize how the underlying… [#72](https://github.com/apollographql/space-kit/pull/72) ([@justinanastos](https://github.com/justinanastos))
+
+#### ⚠️  Pushed to master
+
+- 1.6.0  ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+# v1.6.0 (Tue Aug 20 2019)
+
+#### 🚀  Enhancement
+
+- Add `as` prop to `Button` [#70](https://github.com/apollographql/space-kit/pull/70) ([@justinanastos](https://github.com/justinanastos))
+
+#### 🐛 Bug Fix
+
+- fix(button): fix disabled button style #70 ([@justinanastos](https://github.com/justinanastos))
+- build: update ssh fingerprint to release through `apollo-bot2` #74 ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
 # v1.5.1 (Thu Aug 15 2019)
 
 ### Release Notes
