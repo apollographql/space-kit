@@ -111,11 +111,13 @@ export const TextField: React.FC<Props> = ({
   icon,
   inputAs = "input",
   label,
+  name,
   onBlur,
   onChange,
   placeholder,
   showInfoIcon,
   size = "standard",
+  type,
   value,
 }) => (
   <ClassNames>
@@ -123,9 +125,11 @@ export const TextField: React.FC<Props> = ({
       const inputProps = {
         defaultValue,
         disabled,
+        name,
         onBlur,
         onChange,
         placeholder,
+        type,
         value,
         className: cx(
           css({
