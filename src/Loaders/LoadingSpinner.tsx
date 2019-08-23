@@ -4,7 +4,7 @@ import * as CSS from "csstype";
 import { jsx, keyframes } from "@emotion/core";
 import { colors } from "../colors";
 
-export type Size = "large" | "medium" | "small" | "tiny" | "icon";
+export type Size = "large" | "medium" | "small" | "xsmall" | "2xsmall";
 export type Theme = "light" | "dark";
 interface Props {
   /**
@@ -14,11 +14,13 @@ interface Props {
 
   /**
    * Theme for the spinner
+   * @default "light"
    */
   theme?: Theme;
 
   /**
    * Size of the spinner
+   * @default "medium"
    */
   size?: Size;
 }
@@ -41,8 +43,8 @@ const SIZE_MAP: Record<Size, number> = {
   large: 90,
   medium: 64,
   small: 48,
-  tiny: 32,
-  icon: 16,
+  xsmall: 32,
+  '2xsmall': 16,
 };
 
 const THEME_MAP: Record<
