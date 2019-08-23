@@ -1,3 +1,15 @@
+# v1.8.0 (Fri Aug 23 2019)
+
+#### 🚀  Enhancement
+
+- Add loading spinner [#75](https://github.com/apollographql/space-kit/pull/75) ([@jgzuke](https://github.com/jgzuke))
+
+#### Authors: 1
+
+- Jason Zukewich ([@jgzuke](https://github.com/jgzuke))
+
+---
+
 # v1.7.2 (Thu Aug 22 2019)
 
 #### 🐛  Bug Fix
