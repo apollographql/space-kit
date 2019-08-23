@@ -168,7 +168,7 @@ export function Modal({
               alignItems: "baseline",
               display: "flex",
               justifyContent: "flex-end",
-              marginTop: 24,
+              marginTop: size === "medium" ? 32 : 24,
             }}
           >
             {bottomLeftText && (
