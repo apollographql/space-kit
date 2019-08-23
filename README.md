@@ -17,6 +17,8 @@
   - [Typography](#typography)
   - [Buttons](#buttons)
   - [Modals](#modals)
+  - [Loaders](#loaders)
+    - [Spinners](#spinners)
   - [Emotion Example](#emotion-example)
 - [Developing Space Kit](#developing-space-kit)
   - [Releases](#releases)
@@ -291,6 +293,34 @@ export const PrimaryButton: React.FC<ComponentProps<typeof Button>> = ({
 ```
 
 ### Modals
+
+### Loaders
+
+Zeplin: https://app.zeplin.io/project/5c7dcb5ab4e654bca8cde54d/screen/5d56d40acf2df541b112fc57
+
+#### Spinners
+
+Spinners are used when we are unable to determine loading time. Ideally, they should appear as briefly and infrequently as possible.
+
+Spinners can be configured through their `theme` and `size` props. By default a loading spinner will have a 'light' theme and 'medium' size.
+
+You can configure anything you'd like with tailwind or emotion, but you should never have to do this.
+
+#### Example
+
+```js
+import React from "react";
+import { LoadingSpinner } from "@apollo/space-kit/Loaders";
+
+export const LoadingPage: React.FC<Props> = (otherProps) => (
+  <div {...otherProps} >
+    <LoadingSpinner
+      theme="light"
+      size="medium"
+    />
+  </div>
+);
+```
 
 ### Emotion Example
 

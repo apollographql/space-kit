@@ -1,13 +1,13 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import { storiesOf } from "@storybook/react";
-import { LoadingSpinner, Size } from "./LoadingSpinner";
+import { LoadingSpinner, Size } from "./index";
 import { Button } from "../Button";
 import { colors } from "../colors";
 import * as typography from "../typography";
 import { DemoSection, DemoGroup } from "../shared/DemoSection";
 
-const SPINNER_SIZES: Size[] = ["large", "medium", "small", "tiny", "icon"];
+const SPINNER_SIZES: Size[] = ["large", "medium", "small", "xsmall", "2xsmall"];
 
 storiesOf("Loaders", module)
   .addParameters({
@@ -86,7 +86,7 @@ storiesOf("Loaders", module)
         >
           <Button
             color={colors.blue.base}
-            icon={<LoadingSpinner theme="dark" size="icon" />}
+            icon={<LoadingSpinner theme="dark" size="2xsmall" />}
             css={{ width: "100%", marginTop: 6, marginBottom: 20 }}
           >
             Submit
@@ -94,14 +94,14 @@ storiesOf("Loaders", module)
           <Button
             color={colors.blue.base}
             disabled
-            icon={<LoadingSpinner size="icon" />}
+            icon={<LoadingSpinner size="2xsmall" />}
             css={{ width: "100%", marginBottom: 20 }}
           >
             Submit
           </Button>
           <Button
             feel="flat"
-            icon={<LoadingSpinner size="icon" />}
+            icon={<LoadingSpinner size="2xsmall" />}
             css={{ width: "100%" }}
           >
             Submit
