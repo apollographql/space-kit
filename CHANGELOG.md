@@ -1,3 +1,15 @@
+# v2.0.0 (Fri Aug 23 2019)
+
+#### 💥  Breaking Change
+
+- Change `Button` `as` prop to only accept `React.ReactElement` [#80](https://github.com/apollographql/space-kit/pull/80) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v1.8.0 (Fri Aug 23 2019)
 
 #### 🚀  Enhancement
