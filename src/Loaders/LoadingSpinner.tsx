@@ -44,7 +44,7 @@ const SIZE_MAP: Record<Size, number> = {
   medium: 64,
   small: 48,
   xsmall: 32,
-  '2xsmall': 16,
+  "2xsmall": 16,
 };
 
 const THEME_MAP: Record<
