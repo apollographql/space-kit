@@ -146,6 +146,8 @@ interface Props {
    * the text color as well as the background colors.
    *
    * Pass `colors.white` to treat this button as a secondary button
+   *
+   * @default colors.silver.light
    */
   color?: PaletteColor | typeof colors["white"];
 
@@ -156,6 +158,8 @@ interface Props {
    *
    * - `"raised"` (default): A button with a border and a background
    * - `"flat"`: No background or border
+   *
+   * @default "raised"
    */
   feel?: "raised" | "flat";
 
@@ -167,7 +171,7 @@ interface Props {
   /**
    * Size of the button
    *
-   * Defaults to "default"
+   * @default "default"
    */
   size?: "default" | "small" | "large";
 
@@ -179,6 +183,8 @@ interface Props {
    *
    * - `"light"` (default)
    * - `"dark"`
+   *
+   * @default "light"
    */
   theme?: "light" | "dark";
 
