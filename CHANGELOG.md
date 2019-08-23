@@ -1,3 +1,15 @@
+# v2.0.1 (Fri Aug 23 2019)
+
+#### 🐛  Bug Fix
+
+- medium modals should have 32 px above actions [#78](https://github.com/apollographql/space-kit/pull/78) ([@mayakoneval](https://github.com/mayakoneval))
+
+#### Authors: 1
+
+- [@mayakoneval](https://github.com/mayakoneval)
+
+---
+
 # v2.0.0 (Fri Aug 23 2019)
 
 #### 💥  Breaking Change
