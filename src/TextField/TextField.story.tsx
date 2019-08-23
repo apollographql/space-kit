@@ -2,52 +2,22 @@
 import { jsx, ClassNames } from "@emotion/core";
 import { storiesOf } from "@storybook/react";
 import { TextField } from "./TextField";
-import { DemoSection } from "../shared/DemoSection";
+import { DemoSection, DemoGroup, DemoGroupProps } from "../shared/DemoSection";
 import React, { ComponentProps } from "react";
-import * as typography from "../typography";
 import { colors } from "../colors";
 import { IconSearch } from "../icons/IconSearch";
 
-const VerticalTextFieldGroup: React.FC<{
-  inputProps?: Partial<Omit<ComponentProps<typeof TextField>, "children">>;
-  children: JSX.Element | JSX.Element[];
-  title: string;
-  description: string;
-  width?: number;
-}> = ({ children, description, title, width, ...otherProps }) => (
-  <div {...otherProps} css={{ margin: "0 20px", width: width || 300 }}>
-    <hr
-      style={{
-        height: 1,
-        borderWidth: 0,
-        backgroundColor: colors.silver.dark,
-        marginBottom: 24,
-      }}
-    />
-    <div
-      css={{
-        ...typography.base.base,
-        textTransform: "uppercase",
-        fontWeight: 600,
-        margin: 6,
-      }}
-    >
-      {title}
-    </div>
-    <div
-      css={{
-        ...typography.base.small,
-        margin: 6,
-      }}
-    >
-      {description}
-    </div>
-    <div css={{ display: "flex", flexWrap: "wrap" }}>
-      {React.Children.map(children, child => (
-        <div css={{ margin: 6, width: "100%" }}>{child}</div>
-      ))}
-    </div>
-  </div>
+const VerticalTextFieldGroup: React.FC<
+  {
+    inputProps?: Partial<Omit<ComponentProps<typeof TextField>, "children">>;
+    children: JSX.Element | JSX.Element[];
+  } & DemoGroupProps
+> = ({ children, ...otherProps }) => (
+  <DemoGroup {...otherProps}>
+    {React.Children.map(children, child => (
+      <div css={{ margin: 6, width: "100%" }}>{child}</div>
+    ))}
+  </DemoGroup>
 );
 
 storiesOf("TextField", module).add("Catalog", () => (
