@@ -131,9 +131,8 @@ storiesOf("Button", module)
           <ClassNames>
             {({ css, cx }) => (
               <Button
-                as="a"
+                as={<a href="#" />}
                 className={cx(css({ color: colors.blue.base }))}
-                href="#"
               >
                 Default
               </Button>

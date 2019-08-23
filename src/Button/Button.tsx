@@ -6,7 +6,6 @@ import { getOffsetInPalette } from "../colors/utils/getOffsetInPalette";
 import tinycolor from "tinycolor2";
 import React from "react";
 import classnames from "classnames";
-import { ComponentWithAs } from "../shared/ComponentWithAs";
 
 type TLength = string | 0 | number;
 
@@ -138,7 +137,21 @@ function getHoverBackgroundColor({
 // I was able to get guarantees to work, but only with very cryptic errors. I
 // decided it'd be best, for the time being, to `throw` if we use things
 // incorrectly.
-interface Props {
+interface Props
+  extends React.DetailedHTMLProps<
+    React.HTMLAttributes<HTMLElement>,
+    HTMLElement
+  > {
+  /**
+   * Override the the default element used to render a button
+   *
+   * All props provided will be merged with props that `Button` adds, including
+   * `className`s being merged.
+   *
+   * @default <button />
+   */
+  as?: React.ReactElement;
+
   /**
    * Base color to calculate all other colors with
    *
@@ -146,8 +159,20 @@ interface Props {
    * the text color as well as the background colors.
    *
    * Pass `colors.white` to treat this button as a secondary button
+   *
+   * @default colors.silver.light
    */
   color?: PaletteColor | typeof colors["white"];
+
+  /**
+   * If the button will appear and behave disabled.
+   *
+   * This prop is explicitly here and not granted by extension because it
+   * doesn't exist on HTMLAttributes, but is essential to rendering correctly.
+   *
+   * @default false
+   */
+  disabled?: boolean;
 
   /**
    * Which feel to display
@@ -156,6 +181,8 @@ interface Props {
    *
    * - `"raised"` (default): A button with a border and a background
    * - `"flat"`: No background or border
+   *
+   * @default "raised"
    */
   feel?: "raised" | "flat";
 
@@ -167,7 +194,7 @@ interface Props {
   /**
    * Size of the button
    *
-   * Defaults to "default"
+   * @default "default"
    */
   size?: "default" | "small" | "large";
 
@@ -179,8 +206,20 @@ interface Props {
    *
    * - `"light"` (default)
    * - `"dark"`
+   *
+   * @default "light"
    */
   theme?: "light" | "dark";
+
+  /**
+   * The type of the button
+   *
+   * This isn't included in HTMLAttributes but it's a very common property
+   * passed to a button, so we're including it here. If you pass `type` prop
+   * when using any element besides `<button>` you will get React warnings about
+   * passing unrecognized props to an element.
+   */
+  type?: "button" | "submit" | "reset" | undefined;
 
   /**
    * Button variants
@@ -205,10 +244,11 @@ interface Props {
  *
  * @see https://zpl.io/amdN6Pr
  */
-export const Button: ComponentWithAs<Props, "button"> = ({
-  as = "button",
+export const Button: React.FC<Props> = ({
+  as = <button />,
   children,
   color = defaultColor,
+  disabled: disabledProps = false,
   variant,
   feel = "raised",
   icon,
@@ -218,19 +258,9 @@ export const Button: ComponentWithAs<Props, "button"> = ({
 }) => (
   <ClassNames>
     {({ cx, css }) => {
-      const onClick:
-        | ((event: React.MouseEvent<HTMLElement, MouseEvent>) => void)
-        | undefined = React.isValidElement(as)
-        ? as.props.onClick
-        : "onClick" in otherProps
-        ? (otherProps as any).onClick
-        : undefined;
-
-      const disabled: boolean | undefined = React.isValidElement(as)
-        ? as.props.disabled
-        : "disabled" in otherProps
-        ? (otherProps as any).disabled
-        : undefined;
+      const onClick: Props["onClick"] = as.props.onClick;
+      const disabled: boolean =
+        as.props.disabled != null ? as.props.disabled : disabledProps;
 
       /**
        * Icon size in pixels
@@ -452,24 +482,17 @@ export const Button: ComponentWithAs<Props, "button"> = ({
         ),
       };
 
-      return React.isValidElement(as)
-        ? React.cloneElement(as, {
-            ...propsToPass,
-            className: classnames(
-              propsToPass.className,
-              as.props.className,
-              // If the parent component is using emotion with the jsx pragma,
-              // we have to get fancy and intercept the styles to use with the
-              // `ClassNames` wrapper.
-              as.props.css ? css(as.props.css.styles) : null
-            ),
-          })
-        : // We have to live dangerously because otherwise we'd have to
-          // guarantee that all `as` values can accept all the props in
-          // `propsToPass`. The inputs for this component will be statically
-          // typed, so we have _some_ safety here. Also, this will show react
-          // warnings instead of crashing the application.
-          React.createElement(as as any, propsToPass);
+      return React.cloneElement(as, {
+        ...propsToPass,
+        className: classnames(
+          propsToPass.className,
+          as.props.className,
+          // If the parent component is using emotion with the jsx pragma, we
+          // have to get fancy and intercept the styles to use with the
+          // `ClassNames` wrapper.
+          as.props.css ? css(as.props.css.styles) : null
+        ),
+      });
     }}
   </ClassNames>
 );
