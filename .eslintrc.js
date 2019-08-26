@@ -24,6 +24,7 @@ module.exports = {
     "prettier/flowtype",
     "prettier/react",
     "prettier/standard",
+    "plugin:mdx/recommended",
   ],
   plugins: ["prettier", "react", "react-hooks"],
   rules: {
@@ -74,6 +75,13 @@ module.exports = {
       files: ["**/*.story.*", ".storybook/**", "stories/**"],
       env: {
         node: true,
+      },
+    },
+    {
+      files: ["*.mdx"],
+      extends: ["plugin:mdx/overrides"],
+      env: {
+        commonjs: true,
       },
     },
   ],
