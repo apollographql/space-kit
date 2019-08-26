@@ -1,6 +1,5 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import { withKnobs, select } from "@storybook/addon-knobs/react";
 import { colors } from "../colors";
 import camelcase from "camelcase";
 import { Page } from "../../components-util/Page";
@@ -47,47 +46,67 @@ const groupedIcons = svgsReq.keys().reduce((map, fullname) => {
   return map;
 }, {});
 
-storiesOf("Icons", module)
-  .addDecorator(withKnobs)
-  .add("Catalog", () => {
-    const color = select("Color", colorMap, colors.black.base);
-    const weight = select("Weight", ["thin", "normal"], "normal");
+const StreamlineIndicator: React.FC = () => (
+  <span className="font-lbl" style={{ color: colors.silver.darker }}>
+    sl
+  </span>
+);
 
+/**
+ * Render all icons in columns and pass through props to each icon
+ */
+const AllIcons: React.FC = ({ color, ...otherProps }) =>
+  Object.entries(groupedIcons).map(([category, icons]) => (
+    <Column key={category} title={category}>
+      {icons.map(({ basename, isStreamlineIcon, Component }) => (
+        <div
+          key={basename}
+          style={{ marginTop: 16, marginBottom: 16, display: "flex" }}
+        >
+          <div style={{ width: 180, textOverflow: "ellipsis" }}>
+            {basename} {isStreamlineIcon && <StreamlineIndicator />}
+          </div>
+          <Component
+            {...otherProps}
+            style={{
+              width: 20,
+              height: 20,
+              color,
+            }}
+          />
+        </div>
+      ))}
+    </Column>
+  ));
+
+storiesOf("Icons", module)
+  .add("default", () => {
     return (
       <Page
         title="Icons"
         description="Icons are an essential tool in visually communicating concepts to users, while also allowing users to more easily recongize and recall parts of the interface we design."
       >
-        {Object.entries(groupedIcons).map(([category, icons]) => (
-          <Column key={category} title={category}>
-            {icons.map(({ basename, isStreamlineIcon, Component }) => (
-              <div
-                key={basename}
-                style={{ marginTop: 16, marginBottom: 16, display: "flex" }}
-              >
-                <div style={{ width: 180, textOverflow: "ellipsis" }}>
-                  {basename}{" "}
-                  {isStreamlineIcon && (
-                    <span
-                      className="font-lbl"
-                      style={{ color: colors.silver.darker }}
-                    >
-                      sl
-                    </span>
-                  )}
-                </div>
-                <Component
-                  weight={weight}
-                  style={{
-                    width: 20,
-                    height: 20,
-                    color,
-                  }}
-                />
-              </div>
-            ))}
-          </Column>
-        ))}
+        <AllIcons weight="normal" />
+      </Page>
+    );
+  })
+  .add("thin weight", () => {
+    return (
+      <Page
+        title="Icons"
+        description="Icons are an essential tool in visually communicating concepts to users, while also allowing users to more easily recongize and recall parts of the interface we design."
+      >
+        <AllIcons weight="thin" />
+      </Page>
+    );
+  })
+  .add("teal", () => {
+    return (
+      <Page
+        title="Icons"
+        description="Icons are an essential tool in visually communicating concepts to users, while also allowing users to more easily recongize and recall parts of the interface we design."
+      >
+        <AllIcons color={colors.teal.base} />
       </Page>
     );
   });
