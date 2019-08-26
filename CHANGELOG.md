@@ -1,3 +1,15 @@
+# v2.0.3 (Mon Aug 26 2019)
+
+#### 🐛  Bug Fix
+
+- fix(button): fix broken button clicks [#83](https://github.com/apollographql/space-kit/pull/83) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v2.0.1 (Fri Aug 23 2019)
 
 #### 🐛  Bug Fix
