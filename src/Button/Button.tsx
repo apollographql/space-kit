@@ -258,7 +258,6 @@ export const Button: React.FC<Props> = ({
 }) => (
   <ClassNames>
     {({ cx, css }) => {
-      const onClick: Props["onClick"] = as.props.onClick;
       const disabled: boolean =
         as.props.disabled != null ? as.props.disabled : disabledProps;
 
@@ -439,8 +438,12 @@ export const Button: React.FC<Props> = ({
         ),
         disabled,
         onClick: (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
-          if (onClick) {
-            onClick(event);
+          if (otherProps.onClick) {
+            otherProps.onClick(event);
+          }
+
+          if (as.props.onClick) {
+            as.props.onClick(Event);
           }
 
           // We want to hide the blue border around a button after we've clicked
