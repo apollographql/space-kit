@@ -1,15 +1,14 @@
-/** @jsx jsx */
-import { jsx } from "@emotion/core";
 import { storiesOf } from "@storybook/react";
 import { Card, CardSection, CardSeperator } from "./Card";
 import { Button } from "../Button";
 import { colors } from "../colors";
+import React from "react";
 
 storiesOf("Card", module)
   .addParameters({ component: Card })
   .add("default", () => (
     <div
-      css={{
+      style={{
         backgroundColor: colors.silver.light,
         padding: "40px",
         height: "100vh",
@@ -20,7 +19,7 @@ storiesOf("Card", module)
   ))
   .add("default, heading, description", () => (
     <div
-      css={{
+      style={{
         backgroundColor: colors.silver.light,
         padding: "40px",
         height: "100vh",
@@ -33,7 +32,7 @@ storiesOf("Card", module)
   ))
   .add("large", () => (
     <div
-      css={{
+      style={{
         backgroundColor: colors.silver.light,
         padding: "40px",
         height: "100vh",
@@ -45,7 +44,7 @@ storiesOf("Card", module)
         description="description goes here"
         actions={
           <Button color={colors.red.base}>
-            <div css={{ color: colors.white }}>Click</div>
+            <div style={{ color: colors.white }}>Click</div>
           </Button>
         }
       >
@@ -55,7 +54,7 @@ storiesOf("Card", module)
   ))
   .add("with actions - button", () => (
     <div
-      css={{
+      style={{
         backgroundColor: colors.silver.light,
         padding: "40px",
         height: "100vh",
@@ -66,7 +65,7 @@ storiesOf("Card", module)
         description="description goes here. This could be a really long description like so. If its really long it should leave space for the title actions like this red button."
         actions={
           <Button color={colors.red.base}>
-            <div css={{ color: colors.white }}>Click</div>
+            <div style={{ color: colors.white }}>Click</div>
           </Button>
         }
       >
@@ -76,7 +75,7 @@ storiesOf("Card", module)
   ))
   .add("multiple sections", () => (
     <div
-      css={{
+      style={{
         backgroundColor: colors.silver.light,
         padding: "40px",
         height: "100vh",
@@ -87,7 +86,7 @@ storiesOf("Card", module)
         description="Description"
         actions={
           <Button color={colors.red.base}>
-            <div css={{ color: colors.white }}>Click</div>
+            <div style={{ color: colors.white }}>Click</div>
           </Button>
         }
       >
@@ -101,7 +100,7 @@ storiesOf("Card", module)
           description="You have 7 members in your organization"
           actions={
             <Button color={colors.red.base}>
-              <div css={{ color: colors.white }}>Edit</div>
+              <div style={{ color: colors.white }}>Edit</div>
             </Button>
           }
         />
