@@ -97,6 +97,7 @@ const Demo: React.FC<{
 );
 
 storiesOf("Table", module)
+  .addParameters({ component: Table })
   .add("default", () => <Demo />)
   .add("relaxed", () => <Demo density="relaxed" />)
   .add("condensed", () => <Demo density="condensed" />);

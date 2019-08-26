@@ -10,6 +10,7 @@ import { DemoSection, DemoGroup } from "../shared/DemoSection";
 const SPINNER_SIZES: Size[] = ["large", "medium", "small", "xsmall", "2xsmall"];
 
 storiesOf("Loaders", module)
+  .addParameters({ component: LoadingSpinner })
   .addParameters({
     options: {
       showPanel: false,

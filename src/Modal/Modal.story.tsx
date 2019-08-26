@@ -47,6 +47,7 @@ export function ModalStory({
 }
 
 storiesOf("Modal", module)
+  .addParameters({ component: Modal })
   .add("interactive", () => (
     <div css={{ position: "absolute", left: 200 }}>
       <ModalStory

@@ -107,6 +107,7 @@ const DummyNavLink: React.FC<{ to: string; className?: string }> = ({
 }) => <a {...otherProps} href={to} />;
 
 storiesOf("Button", module)
+  .addParameters({ component: Button })
   .addParameters({
     options: {
       showPanel: false,

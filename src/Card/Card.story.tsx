@@ -6,6 +6,7 @@ import { Button } from "../Button";
 import { colors } from "../colors";
 
 storiesOf("Card", module)
+  .addParameters({ component: Card })
   .add("default", () => (
     <div
       css={{
