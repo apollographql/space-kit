@@ -1,41 +1,42 @@
-/** @jsx jsx */
 import * as CSS from "csstype";
-import { ClassNames, jsx } from "@emotion/core";
+import { ClassNames } from "@emotion/core";
 import React, { ComponentProps } from "react";
 import { storiesOf } from "@storybook/react";
 import { Button } from "./Button";
 import { IconShip2 } from "../icons/IconShip2";
 import { colors } from "../colors";
 import { DemoSection, DemoGroup, DemoGroupProps } from "../shared/DemoSection";
+import classnames from "classnames";
 
-const iconElement = <IconShip2 css={{ width: "100%", height: "100%" }} />;
-
-// This is a clever way of allowing us to use `cloneElement` while still giving
-// us the `jsx` transform for emotion.
-// @see https://github.com/emotion-js/emotion/issues/1102#issuecomment-446887725
-const cloneElement = (element: any, props: any) => {
-  return jsx(element.type, {
-    key: element.key,
-    ref: element.ref,
-    ...element.props,
-    ...props,
-  });
-};
+const iconElement = <IconShip2 style={{ width: "100%", height: "100%" }} />;
 
 /**
  * Wrap children with a rounded border
  */
-const ButtonWrapper: React.FC = ({ children, ...otherProps }) => (
-  <div
-    {...otherProps}
-    css={{
-      border: `1px solid ${colors.silver.dark}`,
-      borderRadius: 8,
-      margin: 6,
-    }}
-  >
-    {children}
-  </div>
+const ButtonWrapper: React.FC<{ className?: string }> = ({
+  children,
+  className,
+  ...otherProps
+}) => (
+  <ClassNames>
+    {({ css, cx }) => (
+      <div
+        {...otherProps}
+        className={classnames(
+          className,
+          cx(
+            css({
+              border: `1px solid ${colors.silver.dark}`,
+              borderRadius: 8,
+              margin: 6,
+            })
+          )
+        )}
+      >
+        {children}
+      </div>
+    )}
+  </ClassNames>
 );
 
 // Restrict our stories to only allow customizing the color. Everything else
@@ -57,35 +58,47 @@ const VerticalButtonGroup: React.FC<
   darkButtonCss = {},
   ...otherProps
 }) => (
-  <DemoGroup {...otherProps}>
-    <ButtonWrapper>
-      {React.Children.map(children, child => (
-        <div css={{ margin: 12 }}>
-          {cloneElement(child as any, {
-            ...buttonProps,
-            css: buttonCss,
+  <ClassNames>
+    {({ css, cx }) => (
+      <DemoGroup {...otherProps}>
+        <ButtonWrapper>
+          {React.Children.map(children, child => (
+            <div style={{ margin: 12 }}>
+              {React.cloneElement(child as any, {
+                ...buttonProps,
+                calssName: classnames(
+                  buttonProps.className,
+                  cx(css({ ...buttonCss }))
+                ),
+              })}
+            </div>
+          ))}
+        </ButtonWrapper>
+        <ButtonWrapper
+          className={cx(
+            css({
+              backgroundColor: colors.black.base,
+            })
+          )}
+        >
+          {React.Children.map(children, child => {
+            return (
+              <div className={cx(css({ margin: 12 }))}>
+                {React.cloneElement(child as any, {
+                  ...buttonProps,
+                  className: classnames(
+                    buttonProps.className,
+                    cx(css({ ...buttonCss, ...darkButtonCss }))
+                  ),
+                  theme: "dark",
+                })}
+              </div>
+            );
           })}
-        </div>
-      ))}
-    </ButtonWrapper>
-    <ButtonWrapper
-      css={{
-        backgroundColor: colors.black.base,
-      }}
-    >
-      {React.Children.map(children, child => {
-        return (
-          <div css={{ margin: 12 }}>
-            {cloneElement(child as any, {
-              ...buttonProps,
-              theme: "dark",
-              css: { ...buttonCss, ...darkButtonCss },
-            })}
-          </div>
-        );
-      })}
-    </ButtonWrapper>
-  </DemoGroup>
+        </ButtonWrapper>
+      </DemoGroup>
+    )}
+  </ClassNames>
 );
 
 const DummyNavLink: React.FC<{ to: string; className?: string }> = ({
@@ -100,7 +113,7 @@ storiesOf("Button", module)
     },
   })
   .add("Catalog", () => (
-    <div css={{ color: colors.black.base }}>
+    <div style={{ color: colors.black.base }}>
       <DemoSection
         title="Button Sizes"
         description="There are three different sizes of buttons, with the most common button being the default size. Small and large buttons are avialble for specific settings. Buttons will expand to fill their content."
