@@ -1,3 +1,15 @@
+# v2.1.0 (Tue Aug 27 2019)
+
+#### 🚀  Enhancement
+
+- Add onFocus prop to TextField type [#84](https://github.com/apollographql/space-kit/pull/84) ([@jgzuke](https://github.com/jgzuke))
+
+#### Authors: 1
+
+- Jason Zukewich ([@jgzuke](https://github.com/jgzuke))
+
+---
+
 # v2.0.3 (Mon Aug 26 2019)
 
 #### 🐛  Bug Fix
