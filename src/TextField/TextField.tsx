@@ -54,8 +54,8 @@ interface Props {
    */
   inputAs?: React.ReactElement | keyof JSX.IntrinsicElements;
 
-  onFocus?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onFocus?: React.FocusEventHandler<HTMLInputElement>;
+  onBlur?: React.FocusEventHandler<HTMLInputElement>;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 
   /**
