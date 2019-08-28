@@ -1,0 +1,23 @@
+{
+  "editor.rulers": [80],
+  "eslint.autoFixOnSave": true,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "graphql",
+    {
+      "language": "mdx",
+      "autoFix": true
+    },
+    {
+      "language": "typescript",
+      "autoFix": true
+    },
+    {
+      "language": "typescriptreact",
+      "autoFix": true
+    }
+  ],
+  "markdown.extension.toc.githubCompatibility": true,
+  "typescript.tsdk": "node_modules/typescript/lib"
+}
