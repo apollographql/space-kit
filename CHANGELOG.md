@@ -1,3 +1,15 @@
+# v2.2.0 (Wed Aug 28 2019)
+
+#### 🚀  Enhancement
+
+- Remove font weight from smaller fonts [#87](https://github.com/apollographql/space-kit/pull/87) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v2.1.2 (Wed Aug 28 2019)
 
 #### 🐛  Bug Fix
