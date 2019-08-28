@@ -1,3 +1,15 @@
+# v2.1.1 (Wed Aug 28 2019)
+
+#### 🐛  Bug Fix
+
+- Button: add 12px padding and expanded content example [#79](https://github.com/apollographql/space-kit/pull/79) ([@evans](https://github.com/evans))
+
+#### Authors: 1
+
+- Evans Hauser ([@evans](https://github.com/evans))
+
+---
+
 # v2.1.0 (Tue Aug 27 2019)
 
 #### 🚀  Enhancement
