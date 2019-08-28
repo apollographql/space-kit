@@ -62,7 +62,7 @@ export const Card: React.FC<CardProps> = ({
               css={{
                 display: "flex",
                 color: colors.black.base,
-                ...(size === "large" ? base.xxlarge : base.large),
+                ...(size === "large" ? base.xlarge : base.large),
               }}
             >
               <span
