@@ -1,6 +1,6 @@
 {
   "name": "@apollo/space-kit",
-  "version": "2.1.2",
+  "version": "2.2.0",
   "description": "Home base for Apollo's design system",
   "main": "index.js",
   "scripts": {
