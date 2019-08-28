@@ -1,3 +1,15 @@
+# v2.1.2 (Wed Aug 28 2019)
+
+#### 🐛  Bug Fix
+
+- fix(Card): Change font size for large card heading [#86](https://github.com/apollographql/space-kit/pull/86) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v2.1.1 (Wed Aug 28 2019)
 
 #### 🐛  Bug Fix
