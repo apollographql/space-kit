@@ -7,7 +7,7 @@
     "build": "npm-run-all -p build:reset icons -s build:typescript",
     "build:icons": "run-s icons build:typescript",
     "build:reset": "ts-node build-reset.ts",
-    "build:storybook": "build-storybook --quiet",
+    "build:storybook": "node --max-old-space-size=4096 $(npm bin)/build-storybook --quiet",
     "build:typescript": "tsc --build tsconfig.build.json",
     "clean": "run-p clean:*",
     "clean:components": "rimraf Button colors fonts Loaders TextField Modal shared Table typography",
