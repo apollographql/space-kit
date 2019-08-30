@@ -18,7 +18,7 @@ const colorPaletteKeys: ReadonlyArray<keyof ColorPalette> = [
 function isColorPalette(
   palette: MonochromePalette | ColorPalette
 ): palette is ColorPalette {
-  return palette.hasOwnProperty("darkest");
+  return Object.prototype.hasOwnProperty.call(palette, "darkest");
 }
 
 /**
