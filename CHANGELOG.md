@@ -1,3 +1,15 @@
+# v2.2.1 (Fri Aug 30 2019)
+
+#### 🐛  Bug Fix
+
+- AP-783 set modal `max-height` to 60% [#89](https://github.com/apollographql/space-kit/pull/89) ([@cheapsteak](https://github.com/cheapsteak))
+
+#### Authors: 1
+
+- Chang Wang ([@cheapsteak](https://github.com/cheapsteak))
+
+---
+
 # v2.2.0 (Wed Aug 28 2019)
 
 #### 🚀  Enhancement
