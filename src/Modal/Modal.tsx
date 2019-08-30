@@ -53,6 +53,9 @@ const modalBackdrop = css`
   left: 0;
   width: 100vw;
   height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   &:after {
     position: fixed;
@@ -120,15 +123,11 @@ export function Modal({
           backgroundColor: "white",
           borderRadius: 12,
           boxShadow: `0 16px 32px 0 rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(18, 21, 26, 0.04)`,
-          left: "50%",
           maxHeight: "100%",
           minWidth: 400,
           opacity: 1,
           overflowY: "scroll",
           padding: size === "large" ? "40px" : "32px",
-          position: "absolute",
-          top: "20%",
-          transform: "translate(-50%)",
           width: getModalWidth(size),
           zIndex: 11,
         }}
