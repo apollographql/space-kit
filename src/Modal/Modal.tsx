@@ -121,7 +121,7 @@ export function Modal({
           borderRadius: 12,
           boxShadow: `0 16px 32px 0 rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(18, 21, 26, 0.04)`,
           left: "50%",
-          maxHeight: "100%",
+          maxHeight: "60%",
           minWidth: 400,
           opacity: 1,
           overflowY: "scroll",
