@@ -1,0 +1,168 @@
+import { Table } from "./Table";
+import {
+  Description,
+  Meta,
+  Story,
+  Props,
+  Preview,
+} from "@storybook/addon-docs/blocks";
+
+<Meta title="Components|Table" />
+
+# Table
+
+<Description
+  of={Table}
+  markdown="Tables provide a structure to data and a visual grid making it easier to see relationships and are one of the most useful tools and formats for organizing and communiting structured data."
+/>
+
+## Columns
+
+The `columns` prop defines how the table will be rendered. The props table below shows it's options. Look at the source code in [`Table.tsx`](https://github.com/apollographql/space-kit/blob/master/src/Table/Table.tsx) for documentation on `columns`'s configuration.
+
+Future docs writers: please do not attempt to reproduce the `columns` config here, it'll be out of date as soon as we change something.
+
+## Density
+
+Table density is an important characteristic when considering how to present information, which includes things like information density, alignment, grouped tables, etc. Consider the information and how someone might want to read the content. For example, a spreadsheet of numbers will benefit from density compared to presenting a list of users with avatars might benefit for a little more visual space.
+
+### standard (default)
+
+<Preview>
+  <Story name="standard density">
+    <Table
+      keyOn="name"
+      data={[
+        {
+          name: "Alice Howell",
+          image: require("./table.stories/alice-howell.png"),
+        },
+        {
+          name: "Benjamin Lawrence",
+          image: require("./table.stories/benjamin-lawrence.png"),
+        },
+        {
+          name: "Cynthia Bowman",
+          image: require("./table.stories/cynthia-bowman.png"),
+        },
+        {
+          name: "Jeremy Jacobs",
+          image: require("./table.stories/jeremy-jacobs.png"),
+        },
+        {
+          name: "Jeremy Griffin",
+          image: require("./table.stories/jeremy-griffin.png"),
+        },
+      ]}
+      columns={[
+        {
+          id: "image",
+          render: ({ image }) => (
+            <img style={{ width: 24, height: 24 }} src={image} />
+          ),
+        },
+        {
+          id: "name",
+          headerTitle: "name",
+          render: ({ name }) => <>{name}</>,
+        },
+      ]}
+    />
+  </Story>
+</Preview>
+
+### relaxed
+
+<Preview>
+  <Story name="relaxed density">
+    <Table
+      density="relaxed"
+      keyOn="name"
+      data={[
+        {
+          name: "Alice Howell",
+          image: require("./table.stories/alice-howell.png"),
+        },
+        {
+          name: "Benjamin Lawrence",
+          image: require("./table.stories/benjamin-lawrence.png"),
+        },
+        {
+          name: "Cynthia Bowman",
+          image: require("./table.stories/cynthia-bowman.png"),
+        },
+        {
+          name: "Jeremy Jacobs",
+          image: require("./table.stories/jeremy-jacobs.png"),
+        },
+        {
+          name: "Jeremy Griffin",
+          image: require("./table.stories/jeremy-griffin.png"),
+        },
+      ]}
+      columns={[
+        {
+          id: "image",
+          render: ({ image }) => (
+            <img style={{ width: 24, height: 24 }} src={image} />
+          ),
+        },
+        {
+          id: "name",
+          headerTitle: "name",
+          render: ({ name }) => <>{name}</>,
+        },
+      ]}
+    />
+  </Story>
+</Preview>
+
+### condensed
+
+<Preview>
+  <Story name="condensed density">
+    <Table
+      density="condensed"
+      keyOn="name"
+      data={[
+        {
+          name: "Alice Howell",
+          image: require("./table.stories/alice-howell.png"),
+        },
+        {
+          name: "Benjamin Lawrence",
+          image: require("./table.stories/benjamin-lawrence.png"),
+        },
+        {
+          name: "Cynthia Bowman",
+          image: require("./table.stories/cynthia-bowman.png"),
+        },
+        {
+          name: "Jeremy Jacobs",
+          image: require("./table.stories/jeremy-jacobs.png"),
+        },
+        {
+          name: "Jeremy Griffin",
+          image: require("./table.stories/jeremy-griffin.png"),
+        },
+      ]}
+      columns={[
+        {
+          id: "image",
+          render: ({ image }) => (
+            <img style={{ width: 24, height: 24 }} src={image} />
+          ),
+        },
+        {
+          id: "name",
+          headerTitle: "name",
+          render: ({ name }) => <>{name}</>,
+        },
+      ]}
+    />
+  </Story>
+</Preview>
+
+## Props
+
+<Props of={Table} />
