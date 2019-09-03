@@ -6,27 +6,38 @@ import { colors } from "../colors";
 
 interface Props<RowShape> {
   /**
-   * All the data for the component. Should be stored in an array of objects
+   * Component data
+   *
+   * The shape of the data will be inferred from here
    */
   data: RowShape[];
 
+  /**
+   * How dense the table should be
+   *
+   * @default "standard"
+   */
   density?: "standard" | "condensed" | "relaxed";
 
   /**
-   * An array of column definitions
+   * Definition of how each column will be rendered
    */
   columns: {
     /**
-     * Title to add to the table header
+     * Column's title
      */
     headerTitle?: React.ReactNode | string;
+
     /**
-     * an id for the column
+     * Unique identifier for the column
+     *
+     * Initially, we'll just be using this for the `key` attribute on cells and
+     * `col`s
      */
     id: string | number;
     /**
-     * Properties to be applied to `col` elements nested below the `table`'s single
-     * `<colgroup>`.
+     * Properties to be applied to `col` elements nested below the `table`'s
+     * single `<colgroup>`.
      *
      * This allows you to apply styles to columns by setting a class on a single
      * element instead of _all_ elements in a table's row
@@ -37,9 +48,14 @@ interface Props<RowShape> {
     >;
 
     /**
-     * A method that accepts the data for the row and returns the inner content for the row.
+     * Render function that renders the content for the column to be placed
+     * inside the `<td>`
      *
-     * Do not include a `<tr>` or a `<td>`, these are handled automatically
+     * Since this is a render function, `React.createElement` will _not_ be
+     * called, nor will propTypes be checked. This is to prevent mounting and
+     * unmounting on each render
+     *
+     * Note: the signature of the method is the same as a `map` function
      */
     render: (
       input: Readonly<RowShape>,
@@ -49,11 +65,25 @@ interface Props<RowShape> {
   }[];
 
   /**
-   * a field name to key rows on
+   * String or method to calculate the `key` for each row
+   *
+   * When re-ordering rows (by sorting or any other means), this will ensure
+   * that DOM elements are reused correctly.
+   *
+   * Can be a string representing a field in `RowData` (inferred from `data` or
+   * included as a generic to `<Table<RowData>>`) or a function that takes the
+   * row data and returns a key
    */
   keyOn: keyof RowShape | ((row: RowShape) => any);
 }
 
+/**
+ * Tables provide a structure to data and a visual grid making it easier to see
+ * relationships and are one of the most useful tools and formats for organizing
+ * and communiting structured data.
+ *
+ * @see https://zpl.io/bAlrjJe
+ */
 export function Table<RowShape>({
   data,
   density = "standard",

@@ -1,0 +1,715 @@
+import { Button } from "./Button";
+import {
+  Description,
+  Meta,
+  Story,
+  Props,
+  Preview,
+} from "@storybook/addon-docs/blocks";
+import { IconShip2 } from "../icons/IconShip2";
+import { ButtonLayout } from "./button.stories/ButtonLayout";
+import { colors } from "../colors";
+
+export const SampleIcon = () => (
+  <IconShip2 style={{ height: "100%", width: "100%" }} />
+);
+
+<Meta title="Components|Button" />
+
+# Button
+
+<Description
+  of={Button}
+  markdown="**Buttons** are the one of the most common way users interact with our interface and expose the most common actions they can take within our product."
+/>
+
+## Sizes
+
+There are three different sizes of buttons, with the most common button being the default size. Small and large buttons are available for specific settings.
+
+<Preview>
+  <Story inline name="default size">
+    <Button>Rest click</Button>
+  </Story>
+  <Story inline name="default size icon">
+    <Button icon={<SampleIcon />} />
+  </Story>
+  <Story inline name="small">
+    <Button size="small">Rest</Button>
+  </Story>
+  <Story inline name="small icon">
+    <Button size="small" icon={<SampleIcon />} />
+  </Story>
+  <Story inline name="large">
+    <Button size="large">Rest</Button>
+  </Story>
+  <Story inline name="large icon">
+    <Button size="large" icon={<SampleIcon />} />
+  </Story>
+</Preview>
+
+## Colors
+
+The states for our buttons are formulaic. You pass a `color` (from the Space Kit palette) and a `theme` (light or dark) and the button states will be automatically configured to show hover states, borders, focus borders, and disabled state.
+
+<Preview>
+  <Story inline name="color">
+    <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <Button>Default</Button>
+      <Button color={colors.white}>White</Button>
+      <Button color={colors.indigo.dark}>Indigo</Button>
+      <Button color={colors.red.base}>Red</Button>
+      <Button color={colors.green.base}>Green</Button>
+      <Button color={colors.blue.base}>Blue</Button>
+    </div>
+  </Story>
+</Preview>
+
+## Buttons and States
+
+The states for our buttons are formulaic. You pass a `color` (from the Space Kit palette) and a `theme` (light or dark) and the button states will be automatically configured to show hover states, borders, focus borders, and disabled state.
+
+### Light Theme
+
+Light themed buttons have a border. The hover state is a shade darker than the rest color.
+
+<Preview>
+  <Story inline name="button states light">
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+      }}
+    >
+      <ButtonLayout theme="light">
+        <Button theme="light">Rest</Button>
+        <Button theme="light" data-force-hover-state="true">
+          Hover
+        </Button>
+        <Button theme="light" data-force-active-state="true">
+          Active
+        </Button>
+        <Button theme="light" data-force-focus-state="true">
+          Focused
+        </Button>
+        <Button theme="light" disabled>
+          Disabled
+        </Button>
+      </ButtonLayout>
+      <ButtonLayout theme="light">
+        <Button color={colors.indigo.dark} theme="light">
+          Rest
+        </Button>
+        <Button
+          color={colors.indigo.dark}
+          theme="light"
+          data-force-hover-state="true"
+        >
+          Hover
+        </Button>
+        <Button
+          color={colors.indigo.dark}
+          theme="light"
+          data-force-active-state="true"
+        >
+          Active
+        </Button>
+        <Button
+          color={colors.indigo.dark}
+          theme="light"
+          data-force-focus-state="true"
+        >
+          Focused
+        </Button>
+        <Button color={colors.indigo.dark} theme="light" disabled>
+          Disabled
+        </Button>
+      </ButtonLayout>
+      <ButtonLayout theme="light">
+        <Button color={colors.green.base} theme="light">
+          Rest
+        </Button>
+        <Button
+          color={colors.green.base}
+          theme="light"
+          data-force-hover-state="true"
+        >
+          Hover
+        </Button>
+        <Button
+          color={colors.green.base}
+          theme="light"
+          data-force-active-state="true"
+        >
+          Active
+        </Button>
+        <Button
+          color={colors.green.base}
+          theme="light"
+          data-force-focus-state="true"
+        >
+          Focused
+        </Button>
+        <Button color={colors.green.base} theme="light" disabled>
+          Disabled
+        </Button>
+      </ButtonLayout>
+      <ButtonLayout theme="light">
+        <Button color={colors.red.base} theme="light">
+          Rest
+        </Button>
+        <Button
+          color={colors.red.base}
+          theme="light"
+          data-force-hover-state="true"
+        >
+          Hover
+        </Button>
+        <Button
+          color={colors.red.base}
+          theme="light"
+          data-force-active-state="true"
+        >
+          Active
+        </Button>
+        <Button
+          color={colors.red.base}
+          theme="light"
+          data-force-focus-state="true"
+        >
+          Focused
+        </Button>
+        <Button color={colors.red.base} theme="light" disabled>
+          Disabled
+        </Button>
+      </ButtonLayout>
+      <ButtonLayout theme="light">
+        <Button color={colors.blue.base} theme="light">
+          Rest
+        </Button>
+        <Button
+          color={colors.blue.base}
+          theme="light"
+          data-force-hover-state="true"
+        >
+          Hover
+        </Button>
+        <Button
+          color={colors.blue.base}
+          theme="light"
+          data-force-active-state="true"
+        >
+          Active
+        </Button>
+        <Button
+          color={colors.blue.base}
+          theme="light"
+          data-force-focus-state="true"
+        >
+          Focused
+        </Button>
+        <Button color={colors.blue.base} theme="light" disabled>
+          Disabled
+        </Button>
+      </ButtonLayout>
+    </div>
+  </Story>
+</Preview>
+
+### Dark Theme
+
+For dark themed buttons, the borders are completely removed to make the colors look sharper on the background. The focus state border is same color as the button and reduced to it's lighest shade.
+
+<Preview>
+  <Story inline name="button states dark">
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "space-between",
+      }}
+    >
+      <ButtonLayout theme="dark">
+        <Button theme="dark">Rest</Button>
+        <Button theme="dark" data-force-hover-state="true">
+          Hover
+        </Button>
+        <Button theme="dark" data-force-active-state="true">
+          Active
+        </Button>
+        <Button theme="dark" data-force-focus-state="true">
+          Focused
+        </Button>
+        <Button theme="dark" disabled>
+          Disabled
+        </Button>
+      </ButtonLayout>
+      <ButtonLayout theme="dark">
+        <Button color={colors.indigo.dark} theme="dark">
+          sweet
+        </Button>
+        <Button
+          color={colors.indigo.dark}
+          theme="dark"
+          data-force-hover-state="true"
+        >
+          Hover
+        </Button>
+        <Button
+          color={colors.indigo.dark}
+          theme="dark"
+          data-force-active-state="true"
+        >
+          Active
+        </Button>
+        <Button
+          color={colors.indigo.dark}
+          theme="dark"
+          data-force-focus-state="true"
+        >
+          Focused
+        </Button>
+        <Button color={colors.indigo.dark} theme="dark" disabled>
+          Disabled
+        </Button>
+      </ButtonLayout>
+      <ButtonLayout theme="dark">
+        <Button color={colors.green.base} theme="dark">
+          Rest
+        </Button>
+        <Button
+          color={colors.green.base}
+          theme="dark"
+          data-force-hover-state="true"
+        >
+          Hover
+        </Button>
+        <Button
+          color={colors.green.base}
+          theme="dark"
+          data-force-active-state="true"
+        >
+          Active
+        </Button>
+        <Button
+          color={colors.green.base}
+          theme="dark"
+          data-force-focus-state="true"
+        >
+          Focused
+        </Button>
+        <Button color={colors.green.base} theme="dark" disabled>
+          Disabled
+        </Button>
+      </ButtonLayout>
+      <ButtonLayout theme="dark">
+        <Button color={colors.red.base} theme="dark">
+          Rest
+        </Button>
+        <Button
+          color={colors.red.base}
+          theme="dark"
+          data-force-hover-state="true"
+        >
+          Hover
+        </Button>
+        <Button
+          color={colors.red.base}
+          theme="dark"
+          data-force-active-state="true"
+        >
+          Active
+        </Button>
+        <Button
+          color={colors.red.base}
+          theme="dark"
+          data-force-focus-state="true"
+        >
+          Focused
+        </Button>
+        <Button color={colors.red.base} theme="dark" disabled>
+          Disabled
+        </Button>
+      </ButtonLayout>
+      <ButtonLayout theme="dark">
+        <Button color={colors.blue.base} theme="dark">
+          Rest
+        </Button>
+        <Button
+          color={colors.blue.base}
+          theme="dark"
+          data-force-hover-state="true"
+        >
+          Hover
+        </Button>
+        <Button
+          color={colors.blue.base}
+          theme="dark"
+          data-force-active-state="true"
+        >
+          Active
+        </Button>
+        <Button
+          color={colors.blue.base}
+          theme="dark"
+          data-force-focus-state="true"
+        >
+          Focused
+        </Button>
+        <Button color={colors.blue.base} theme="dark" disabled>
+          Disabled
+        </Button>
+      </ButtonLayout>
+    </div>
+  </Story>
+</Preview>
+
+## Icon Buttons
+
+Icon buttons are a good way to communicate more information about the button’s action.
+
+### Buttons with icons
+
+Pass a `React.ReactElement` to the `icon` prop alongside `children` to render an icon to the left of a button.
+
+<Preview>
+  <Story inline name="light with icon">
+    <ButtonLayout theme="light">
+      <Button icon={<SampleIcon />}>Rest</Button>
+    </ButtonLayout>
+  </Story>
+  <Story inline name="dark with icon">
+    <ButtonLayout theme="dark">
+      <Button theme="dark" icon={<SampleIcon />}>
+        Rest
+      </Button>
+    </ButtonLayout>
+  </Story>
+</Preview>
+
+### Icons only
+
+Pass a `React.ReactElement` to the `icon` prop and no `children` to render an icon-only button.
+
+<Preview>
+  <Story inline name="light icon-only">
+    <ButtonLayout theme="light">
+      <Button icon={<SampleIcon />} />
+    </ButtonLayout>
+  </Story>
+  <Story inline name="dark icon-only">
+    <ButtonLayout theme="dark">
+      <Button theme="dark" icon={<SampleIcon />} />
+    </ButtonLayout>
+  </Story>
+</Preview>
+
+### Floating Action Buttons
+
+In space constrained places or for floating action buttons (FAB), we can show an icon in button form.
+
+<Preview>
+  <Story inline name="light fab">
+    <ButtonLayout theme="light">
+      <Button icon={<SampleIcon />} variant="fab" />
+    </ButtonLayout>
+  </Story>
+  <Story inline name="dark fab">
+    <ButtonLayout theme="dark">
+      <Button theme="dark" icon={<SampleIcon />} variant="fab" />
+    </ButtonLayout>
+  </Story>
+</Preview>
+
+## Flat Buttons
+
+As the name implies, the flat button is a simpler approach on the standard buttons. It provides a lot of flexibility many buttons side-by-side and doesn’t clutter the interface as much as a standard button.
+
+### Basic Flat Button
+
+Showing how we could potentially use color with the simple button.
+
+<Preview>
+  <Story inline name="flat">
+    <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+      <ButtonLayout theme="light">
+        <Button feel="flat" theme="light">
+          Rest
+        </Button>
+      </ButtonLayout>
+      <ButtonLayout theme="dark">
+        <Button feel="flat" theme="dark">
+          Rest
+        </Button>
+      </ButtonLayout>
+    </div>
+  </Story>
+</Preview>
+
+<Preview>
+  <Story inline name="flat all states">
+    <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+      <ButtonLayout theme="light">
+        <Button feel="flat" theme="light">
+          Rest
+        </Button>
+        <Button feel="flat" theme="light" data-force-hover-state="true">
+          Hover
+        </Button>
+        <Button feel="flat" theme="light" data-force-active-state="true">
+          Active
+        </Button>
+        <Button feel="flat" theme="light" data-force-focus-state="true">
+          Focused
+        </Button>
+        <Button feel="flat" theme="light" disabled>
+          Disabled
+        </Button>
+      </ButtonLayout>
+      <ButtonLayout theme="dark">
+        <Button feel="flat" theme="dark">
+          Rest
+        </Button>
+        <Button feel="flat" theme="dark" data-force-hover-state="true">
+          Hover
+        </Button>
+        <Button feel="flat" theme="dark" data-force-active-state="true">
+          Active
+        </Button>
+        <Button feel="flat" theme="dark" data-force-focus-state="true">
+          Focused
+        </Button>
+        <Button feel="flat" theme="dark" disabled>
+          Disabled
+        </Button>
+      </ButtonLayout>
+    </div>
+  </Story>
+</Preview>
+
+### Flat Color Button
+
+Showing how we could potentially use color with the simple button.
+
+<Preview>
+  <Story inline name="flat color">
+    <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+      <ButtonLayout theme="light">
+        <Button color={colors.blue.base} feel="flat" theme="light">
+          Rest
+        </Button>
+      </ButtonLayout>
+      <ButtonLayout theme="dark">
+        <Button color={colors.blue.base} feel="flat" theme="dark">
+          Rest
+        </Button>
+      </ButtonLayout>
+    </div>
+  </Story>
+</Preview>
+
+<Preview>
+  <Story inline name="flat color all states">
+    <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+      <ButtonLayout theme="light">
+        <Button color={colors.blue.base} feel="flat" theme="light">
+          Rest
+        </Button>
+        <Button
+          color={colors.blue.base}
+          feel="flat"
+          theme="light"
+          data-force-hover-state="true"
+        >
+          Hover
+        </Button>
+        <Button
+          color={colors.blue.base}
+          feel="flat"
+          theme="light"
+          data-force-active-state="true"
+        >
+          Active
+        </Button>
+        <Button
+          color={colors.blue.base}
+          feel="flat"
+          theme="light"
+          data-force-focus-state="true"
+        >
+          Focused
+        </Button>
+        <Button color={colors.blue.base} feel="flat" theme="light" disabled>
+          Disabled
+        </Button>
+      </ButtonLayout>
+      <ButtonLayout theme="dark">
+        <Button color={colors.blue.base} feel="flat" theme="dark">
+          Rest
+        </Button>
+        <Button
+          color={colors.blue.base}
+          feel="flat"
+          theme="dark"
+          data-force-hover-state="true"
+        >
+          Hover
+        </Button>
+        <Button
+          color={colors.blue.base}
+          feel="flat"
+          theme="dark"
+          data-force-active-state="true"
+        >
+          Active
+        </Button>
+        <Button
+          color={colors.blue.base}
+          feel="flat"
+          theme="dark"
+          data-force-focus-state="true"
+        >
+          Focused
+        </Button>
+        <Button color={colors.blue.base} feel="flat" theme="dark" disabled>
+          Disabled
+        </Button>
+      </ButtonLayout>
+    </div>
+  </Story>
+</Preview>
+
+### Flat Color Button with Icon
+
+Showing how we could potentially use color with the simple button.
+
+<Preview>
+  <Story inline name="flat icon color">
+    <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+      <ButtonLayout theme="light">
+        <Button
+          icon={<SampleIcon />}
+          color={colors.blue.base}
+          feel="flat"
+          theme="light"
+        >
+          Rest
+        </Button>
+      </ButtonLayout>
+      <ButtonLayout theme="dark">
+        <Button
+          icon={<SampleIcon />}
+          color={colors.blue.base}
+          feel="flat"
+          theme="dark"
+        >
+          Rest
+        </Button>
+      </ButtonLayout>
+    </div>
+  </Story>
+</Preview>
+
+<Preview>
+  <Story inline name="flat color icon all states">
+    <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+      <ButtonLayout theme="light">
+        <Button
+          icon={<SampleIcon />}
+          color={colors.blue.base}
+          feel="flat"
+          theme="light"
+        >
+          Rest
+        </Button>
+        <Button
+          icon={<SampleIcon />}
+          color={colors.blue.base}
+          feel="flat"
+          theme="light"
+          data-force-hover-state="true"
+        >
+          Hover
+        </Button>
+        <Button
+          icon={<SampleIcon />}
+          color={colors.blue.base}
+          feel="flat"
+          theme="light"
+          data-force-active-state="true"
+        >
+          Active
+        </Button>
+        <Button
+          icon={<SampleIcon />}
+          color={colors.blue.base}
+          feel="flat"
+          theme="light"
+          data-force-focus-state="true"
+        >
+          Focused
+        </Button>
+        <Button
+          icon={<SampleIcon />}
+          color={colors.blue.base}
+          feel="flat"
+          theme="light"
+          disabled
+        >
+          Disabled
+        </Button>
+      </ButtonLayout>
+      <ButtonLayout theme="dark">
+        <Button
+          icon={<SampleIcon />}
+          color={colors.blue.base}
+          feel="flat"
+          theme="dark"
+        >
+          Rest
+        </Button>
+        <Button
+          icon={<SampleIcon />}
+          color={colors.blue.base}
+          feel="flat"
+          theme="dark"
+          data-force-hover-state="true"
+        >
+          Hover
+        </Button>
+        <Button
+          icon={<SampleIcon />}
+          color={colors.blue.base}
+          feel="flat"
+          theme="dark"
+          data-force-active-state="true"
+        >
+          Active
+        </Button>
+        <Button
+          icon={<SampleIcon />}
+          color={colors.blue.base}
+          feel="flat"
+          theme="dark"
+          data-force-focus-state="true"
+        >
+          Focused
+        </Button>
+        <Button
+          icon={<SampleIcon />}
+          color={colors.blue.base}
+          feel="flat"
+          theme="dark"
+          disabled
+        >
+          Disabled
+        </Button>
+      </ButtonLayout>
+    </div>
+  </Story>
+</Preview>
+
+## Props
+
+This component extends `HTMLElement` so that most props you'd want to pass to any element can be passed to this component.
+
+<Props of={Button} />

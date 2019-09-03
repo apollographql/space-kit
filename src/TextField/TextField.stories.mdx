@@ -1,0 +1,104 @@
+import { TextField } from "./TextField";
+import {
+  Description,
+  Meta,
+  Story,
+  Props,
+  Preview,
+} from "@storybook/addon-docs/blocks";
+import { IconShip2 } from "../icons/IconShip2";
+import { colors } from "../colors";
+
+export const SampleIcon = () => (
+  <IconShip2 style={{ height: "100%", width: "100%" }} />
+);
+
+<Meta title="Components|TextField" />
+
+# TextField
+
+<Description
+  of={TextField}
+  markdown="TextField is a layout component intended to abstract away an input field, its label, its helper text, and its error state."
+/>
+
+## Sizes
+
+<Preview>
+  <Story inline name="standard">
+    <TextField label="Small input" size="small" />
+  </Story>
+  <Story inline name="small">
+    <TextField label="Standard input" size="standard" />
+  </Story>
+  <Story inline name="large">
+    <TextField label="Large input" size="large" />
+  </Story>
+</Preview>
+
+## Customizing Segments
+
+You can override the `input` render by providing a `React.ReactElement`. Props added by `TextField` will be merged with the props you provide and `className`s will be merged. You can use this to add any custom props you want passed to the `input` element.
+
+<Preview>
+  <Story inline name="inputAs blue">
+    <TextField
+      label="Blue border input"
+      inputAs={<input style={{ border: `1px solid ${colors.blue.base}` }} />}
+    />
+  </Story>
+</Preview>
+
+## Input states
+
+Inputs automatically handle their input states
+
+<Preview>
+  <Story inline name="state resting">
+    <TextField label="Resting" />
+  </Story>
+  <Story inline name="state focus">
+    <TextField label="Hover" inputAs={<input data-force-hover-state />} />
+  </Story>
+  <Story inline name="state hover">
+    <TextField label="Focused" inputAs={<input data-force-focus-state />} />
+  </Story>
+  <Story inline name="state focus typing">
+    <TextField
+      label="Focused and typing"
+      inputAs={<input data-force-focus-state />}
+      value="Focused and typing"
+    />
+  </Story>
+  <Story inline name="state disabled">
+    <TextField disabled label="Disabled" />
+  </Story>
+</Preview>
+
+## Anatomy
+
+Anatomy of a complete form field. A label is required (or at the very least, it should be very clear why a label might not be needed). Description, placeholder text, and helper text are all optional.
+
+<Preview>
+  <Story inline name="placeholder labels description helper text">
+    <TextField
+      description="Keep it simple, your organization ID is a unique identifier. Don’t worry, you can always change it later."
+      helper="Your organization ID can’t contain any special characters or spaces."
+      label="Input Label"
+      placeholder="Ex. stark-industries or wayne-enterprises"
+    />
+  </Story>
+  <Story inline name="placeholder labels description helper text showInfoIcon">
+    <TextField
+      description="Keep it simple, your organization ID is a unique identifier. Don’t worry, you can always change it later."
+      helper="Your organization ID can’t contain any special characters or spaces."
+      label="Input Label with info icon"
+      placeholder="Ex. stark-industries or wayne-enterprises"
+      showInfoIcon
+    />
+  </Story>
+</Preview>
+
+## Props
+
+<Props of={TextField} />

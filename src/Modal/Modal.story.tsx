@@ -1,5 +1,3 @@
-/** @jsx jsx */
-import { jsx } from "@emotion/core";
 import { storiesOf } from "@storybook/react";
 import { Modal } from "../Modal";
 import React, { useState } from "react";
@@ -23,7 +21,7 @@ export function ModalStory({
     <div>
       <button
         type="button"
-        css={{
+        style={{
           textTransform: "uppercase",
         }}
         onClick={() => setVisible(true)}
@@ -47,8 +45,9 @@ export function ModalStory({
 }
 
 storiesOf("Modal", module)
+  .addParameters({ component: Modal })
   .add("interactive", () => (
-    <div css={{ position: "absolute", left: 200 }}>
+    <div style={{ position: "absolute", left: 200 }}>
       <ModalStory
         title="Modal Title"
         description="modal description"
@@ -75,7 +74,7 @@ storiesOf("Modal", module)
         primaryAction={
           <Button
             color={colors.red.base}
-            css={{ color: colors.white }}
+            style={{ color: colors.white }}
             type="button"
           >
             Yes, remove
@@ -87,7 +86,7 @@ storiesOf("Modal", module)
           </Button>
         }
         bottomLeftText={
-          <span css={{ color: colors.blue.base }}>More info...</span>
+          <span style={{ color: colors.blue.base }}>More info...</span>
         }
       >
         Jeremy will no longer have access to the MGD-Private. You can always add
@@ -104,14 +103,14 @@ storiesOf("Modal", module)
         primaryAction={
           <Button
             color={colors.red.base}
-            css={{ color: colors.white }}
+            style={{ color: colors.white }}
             type="button"
           >
             Yes, remove
           </Button>
         }
         bottomLeftText={
-          <span css={{ color: colors.blue.base }}>More info...</span>
+          <span style={{ color: colors.blue.base }}>More info...</span>
         }
       >
         Jeremy will no longer have access to the MGD-Private. You can always add
@@ -128,7 +127,7 @@ storiesOf("Modal", module)
         primaryAction={
           <Button
             color={colors.red.base}
-            css={{ color: colors.white }}
+            style={{ color: colors.white }}
             type="button"
           >
             Yes, remove
@@ -147,13 +146,13 @@ storiesOf("Modal", module)
         size="medium"
         title="Modal Title"
         primaryAction={
-          <Button color={colors.green.base} css={{ color: colors.white }}>
+          <Button color={colors.green.base} style={{ color: colors.white }}>
             Buy 1 Seat
           </Button>
         }
         secondaryAction={<Button color={colors.white}>Cancel</Button>}
         bottomLeftText={
-          <span css={{ color: colors.blue.base }}>
+          <span style={{ color: colors.blue.base }}>
             Update Billing Information
           </span>
         }
@@ -171,7 +170,7 @@ storiesOf("Modal", module)
         description="Description of this modal or call to action"
         primaryAction={<Button>Done</Button>}
       >
-        <div css={{ minHeight: 300, backgroundColor: colors.silver.light }}>
+        <div style={{ minHeight: 300, backgroundColor: colors.silver.light }}>
           content
         </div>
       </Modal>
