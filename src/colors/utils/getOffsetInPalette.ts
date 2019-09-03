@@ -42,7 +42,7 @@ export function getOffsetInPalette(
   offset: number,
   offsetDirection: "lighter" | "darker",
   color: PaletteColor
-): string {
+): PaletteColor {
   /**
    * Palette this color belongs to
    */
@@ -60,10 +60,6 @@ export function getOffsetInPalette(
       paletteKey => palette[paletteKey as keyof ColorPalette] === color
     );
 
-    if (!index) {
-      throw new TypeError("The color provided was not found in this palette");
-    }
-
     // Use `max` to prevent a negative number. We explicitly do not throw an
     // error here.
     return palette[
@@ -73,16 +69,12 @@ export function getOffsetInPalette(
           Math.max(0, index + effectiveOffset)
         )
       ]
-    ];
+    ] as PaletteColor;
   }
 
   const index = Object.keys(palette).findIndex(
     paletteKey => palette[paletteKey as keyof MonochromePalette] === color
   );
-
-  if (!index) {
-    throw new TypeError("The color provided was not found in this palette");
-  }
 
   // Use `max` to prevent a negative number. We explicitly do not throw an
   // error here.
@@ -93,5 +85,5 @@ export function getOffsetInPalette(
         Math.max(0, index + effectiveOffset)
       )
     ]
-  ];
+  ] as PaletteColor;
 }
