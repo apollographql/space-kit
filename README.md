@@ -10,7 +10,6 @@
 - [Installation](#installation)
 - [Usage](#usage)
 - [Exports](#exports)
-  - [Emotion](#emotion)
   - [Stylesheet reset](#stylesheet-reset)
   - [Colors](#colors)
   - [Icons](#icons)
@@ -18,7 +17,6 @@
   - [Buttons](#buttons)
   - [Modals](#modals)
   - [Loaders](#loaders)
-    - [Spinners](#spinners)
   - [Emotion Example](#emotion-example)
 - [Developing Space Kit](#developing-space-kit)
   - [Releases](#releases)
@@ -58,36 +56,6 @@ function MyComponent() {
 ```
 
 ## Exports
-
-### Emotion
-
-Some components are styled with [emotion](https://emotion.sh) under the hood; emotion appends `<style>` tags to your `<head>` element at runtime. This may cause emotions's styles to be included _after_ your project's styules, preventing you from using your own classes to override emotion's. 
-
-Ideally we'd be able to use Emotion's `<CacheProvider>` to control where Space Kit's styles would be injected, but an emotion bug ([emotion-js/emotion#1386](https://github.com/emotion-js/emotion/issues/1386)) causes `CacheProvider`s to not be recognized for bundled components.
-
-To get around this issue, we export the `emotionCacheProviderFactor` factory that you can use to create a cache provider that will work.
-
-Example:
-
-```tsx
-import { emotionCacheProviderFactory } from '@apollo/space-kit/emotionCacheProviderFactory`;
-
-const CacheProvider = emotionCacheProviderFactor(document.queryElement('#spaceKitEmotionStyleContainer'));
-
-const App = (
-  <CacheProvider>
-    <AppCode />
-  </Cache>
-);
-```
-
-This expects the following to exist somewhere in the DOM:
-
-```html
-<style id="spaceKitEmotionStyleContainer"></style>
-```
-
-All styles will be placed inside of that component.
 
 ### Stylesheet reset
 
