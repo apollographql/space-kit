@@ -1,3 +1,15 @@
+# v2.3.0 (Wed Sep 04 2019)
+
+#### 🚀  Enhancement
+
+- AP-703: Write integration tests (AP-780) [#34](https://github.com/apollographql/space-kit/pull/34) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v2.2.1 (Fri Aug 30 2019)
 
 #### 🐛  Bug Fix
