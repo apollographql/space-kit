@@ -70,6 +70,7 @@ const modalBackdrop = css`
   }
 `;
 
+/* istanbul ignore next */
 function assertUnreachable(value: never): never {
   throw new TypeError(`Unreachable value reached ${value}`);
 }
@@ -84,6 +85,7 @@ const getModalWidth = (size: Props["size"]): CSS.WidthProperty<TLength> => {
       return 600;
     case "large":
       return 800;
+    /* istanbul ignore next */
     default:
       throw assertUnreachable(size);
   }

@@ -48,6 +48,20 @@ jobs:
           name: Release
           command: npm run release
 
+  test:
+    <<: *defaults
+    steps:
+      - checkout
+      - run:
+          name: Install npm dependencies
+          command: npm ci
+      - run:
+          name: Test
+          command: npm run test:unit:coverage -- --silent
+      - store_artifacts:
+          name: Store coverage artifacts
+          path: coverage
+
   typescript:
     <<: *defaults
     steps:
@@ -65,6 +79,7 @@ workflows:
     jobs:
       - eslint
       - typescript
+      - test
       - check-label:
           filters:
             branches:
@@ -74,6 +89,7 @@ workflows:
           requires:
             - eslint
             - typescript
+            - test
           filters:
             branches:
               only:

@@ -19,6 +19,7 @@
   - [Loaders](#loaders)
   - [Emotion Example](#emotion-example)
 - [Developing Space Kit](#developing-space-kit)
+  - [Tests](#tests)
   - [Releases](#releases)
   - [Icons](#icons-1)
   - [TypeScript](#typescript)
@@ -344,6 +345,30 @@ To develop, run `npm run watch` and everything should build automatically! Use `
 
 When developing a new feature of space-kit, please make sure that the `watch` script will automatically perform all setps necessary to build for development. For example, there is a `watch:typescript` script and a `watch:npmwatch` script that will watch all TypeScript files and watch all the svg icons for changes.
 
+### Tests
+
+We use `jest` and `testing-library` for unit/integration tests and will soon use [Chromatic](https://www.chromaticqa.com/) for visual regression testing.
+
+#### Integration Tests
+
+The hardest part about writing tests is knowing what should be tested and what shouldn't. Test interactions: test whatever you'd  test by hand that would give you release confidence.
+
+A few dos and don'ts:
+
+- DO: Test interactions
+- DON'T: test anything that doesn't give you more confidence
+
+    In other words, _do not_ add tests to increase code-coverage.
+
+- DO: [Write test names that explain what is being tested, what input is being given, and what is expected](https://github.com/goldbergyoni/javascript-testing-best-practices#-%EF%B8%8F-11-include-3-parts-in-each-test-name)
+- DO: [Write simple tests with no abstractions](https://github.com/goldbergyoni/javascript-testing-best-practices#%EF%B8%8F-0-the-golden-rule-design-for-lean-testing)
+
+Some resources on testing:
+
+- [JavaScript Testing Best Practices](https://github.com/goldbergyoni/javascript-testing-best-practices)
+- https://kentcdodds.com/blog/
+    - [Avoid nesting when you're testing](https://kentcdodds.com/blog/avoid-nesting-when-youre-testing)
+    - [Write fewer, longer tests](https://kentcdodds.com/blog/write-fewer-longer-tests)
 
 ### Releases
 

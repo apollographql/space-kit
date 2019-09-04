@@ -9,6 +9,7 @@ import classnames from "classnames";
 
 type TLength = string | 0 | number;
 
+/* istanbul ignore next */
 function assertUnreachable(value: never): never {
   throw new TypeError(`Unreachable value reached ${value}`);
 }
@@ -71,6 +72,7 @@ function getTextColor({
       }
 
       return color;
+    /* istanbul ignore next */
     default:
       throw assertUnreachable(feel);
   }
@@ -91,6 +93,7 @@ function getHeight({
       return 36;
     case "large":
       return 42;
+    /* istanbul ignore next */
     default:
       throw assertUnreachable(size);
   }
@@ -125,6 +128,7 @@ function getHoverBackgroundColor({
     case "raised":
       // One shade darker
       return getOffsetInPalette(1, "darker", color);
+    /* istanbul ignore next */
     default:
       throw assertUnreachable(feel);
   }
@@ -436,6 +440,8 @@ export const Button: React.FC<Props> = ({
         ),
         disabled,
         onClick: (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+          // if (disabled) return event.preventDefault();
+
           if (otherProps.onClick) {
             otherProps.onClick(event);
           }
@@ -444,8 +450,7 @@ export const Button: React.FC<Props> = ({
             as.props.onClick(Event);
           }
 
-          // We want to hide the blue border around a button after we've clicked
-          // on it.
+          // Remove the focus
           event.currentTarget.blur();
         },
 
