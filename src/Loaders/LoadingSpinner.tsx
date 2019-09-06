@@ -5,7 +5,7 @@ import { jsx, keyframes } from "@emotion/core";
 import { colors } from "../colors";
 
 export type Size = "large" | "medium" | "small" | "xsmall" | "2xsmall";
-export type Theme = "light" | "dark";
+export type Theme = "light" | "dark" | "grayscale";
 interface Props {
   /**
    * Class name that will be applied to the svg
@@ -25,18 +25,9 @@ interface Props {
   size?: Size;
 }
 
-// The whole animation is exactly 5 seconds long.
-// Each rotation is 450 degrees, with a deceleration at
-// 420 degrees, and a reduced speed between 420-450.
-// 1st rotation: 60 deg and 90 deg
-// 2nd rotation: 150 deg and 180 deg
-// 3rd rotation: 240 deg and 270 deg
-// 4th rotation: 330 deg and 360 deg (restart loop)
 const SPIN = keyframes`
-  25% { transform: rotate(450deg) }
-  50% { transform: rotate(900deg) }
-  75% { transform: rotate(1350deg) }
-  100% { transform: rotate(1800deg) }
+  0% { transform: rotate(0) }
+  100% { transform: rotate(360deg) }
 `;
 
 const SIZE_MAP: Record<Size, number> = {
@@ -64,6 +55,11 @@ const THEME_MAP: Record<
     orbitColor: colors.white,
     orbitOpacity: 0.5,
     asteroidColor: colors.white,
+  },
+  grayscale: {
+    orbitColor: colors.silver.darker,
+    orbitOpacity: 1,
+    asteroidColor: colors.grey.light,
   },
 };
 
@@ -99,7 +95,7 @@ export const LoadingSpinner: React.FC<Props> = ({
       <g transform="translate(50 50)">
         <circle
           css={{
-            animation: `${SPIN} 5s cubic-bezier(0.6, 0.22, 0.44, 0.8) infinite`,
+            animation: `${SPIN} 540ms linear infinite`,
           }}
           fill={asteroidColor}
           r="10"
