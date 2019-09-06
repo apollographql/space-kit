@@ -1,4 +1,5 @@
 /** @jsx jsx */
+import * as CSS from "csstype";
 import { jsx } from "@emotion/core";
 import React from "react";
 import * as typography from "../typography";
@@ -23,6 +24,11 @@ interface Props<RowShape> {
    * Definition of how each column will be rendered
    */
   columns: readonly {
+    /**
+     * Apply text-align all the cells in this column
+     */
+    align?: CSS.TextAlignProperty;
+
     /**
      * Column's title
      */
@@ -135,10 +141,11 @@ export function Table<RowShape>({
       <tbody>
         {data.map((item, index) => (
           <tr key={getRowKey(item)}>
-            {columns.map(({ render, id }, colIndex) => (
+            {columns.map(({ align, render, id }, colIndex) => (
               <td
                 key={id}
                 css={{
+                  textAlign: align,
                   // no border on the bottom row
                   borderBottom:
                     index === data.length - 1
