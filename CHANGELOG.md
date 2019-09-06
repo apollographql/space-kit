@@ -1,3 +1,15 @@
+# v2.5.0 (Fri Sep 06 2019)
+
+#### 🚀  Enhancement
+
+- AP-808: passthrough `autoFocus` prop to underlying `input` in `Te… [#95](https://github.com/apollographql/space-kit/pull/95) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v2.4.0 (Fri Sep 06 2019)
 
 ### Release Notes
