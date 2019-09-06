@@ -96,6 +96,7 @@ export const LoadingSpinner: React.FC<Props> = ({
         <circle
           css={{
             animation: `${SPIN} 540ms linear infinite`,
+            willChange: "transform",
           }}
           fill={asteroidColor}
           r="10"
