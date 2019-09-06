@@ -1,0 +1,68 @@
+import { LoadingSpinner } from "./LoadingSpinner";
+import {
+  Description,
+  Meta,
+  Story,
+  Props,
+  Preview,
+} from "@storybook/addon-docs/blocks";
+import { colors } from "../colors";
+
+<Meta title="Components|LoadingSpinner" />
+
+# LoadingSpinner
+
+<Description
+  of={LoadingSpinner}
+  markdown="Spinners are used when we are unable to determine loading time. Ideally, they should appear as briefly and infrequently as possible."
+/>
+
+## Sizes
+
+<Preview>
+  <Story name="size large">
+    <LoadingSpinner size="large" />
+  </Story>
+  <Story name="size medium">
+    <LoadingSpinner size="medium" />
+  </Story>
+  <Story name="size small">
+    <LoadingSpinner size="small" />
+  </Story>
+  <Story name="size xsmall">
+    <LoadingSpinner size="xsmall" />
+  </Story>
+  <Story name="size 2xsmall">
+    <LoadingSpinner size="2xsmall" />
+  </Story>
+</Preview>
+
+## Themes
+
+export const ThemeWrapper = ({ backgroundColor = colors.white, children }) => (
+  <div style={{ backgroundColor, padding: 12, height: 61, width: 61 }}>
+    {children}
+  </div>
+);
+
+<Preview>
+  <Story name="theme light">
+    <ThemeWrapper>
+      <LoadingSpinner size="xsmall" theme="light" />
+    </ThemeWrapper>
+  </Story>
+  <Story name="theme dark">
+    <ThemeWrapper backgroundColor={colors.black.base}>
+      <LoadingSpinner size="xsmall" theme="dark" />
+    </ThemeWrapper>
+  </Story>
+  <Story name="theme grayscale">
+    <ThemeWrapper backgroundColor={colors.silver.light}>
+      <LoadingSpinner size="xsmall" theme="grayscale" />
+    </ThemeWrapper>
+  </Story>
+</Preview>
+
+## Props
+
+<Props of={LoadingSpinner} />
