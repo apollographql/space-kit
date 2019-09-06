@@ -9,6 +9,11 @@ import classnames from "classnames";
 
 interface Props {
   /**
+   * Passed through to the underlying `input`
+   */
+  autoFocus?: boolean;
+
+  /**
    * Class name that will be applied to the wrapping `div` around the component
    */
   className?: string;
@@ -103,6 +108,7 @@ interface Props {
  * text, and error text.
  */
 export const TextField: React.FC<Props> = ({
+  autoFocus,
   className,
   defaultValue,
   description,
@@ -125,6 +131,7 @@ export const TextField: React.FC<Props> = ({
   <ClassNames>
     {({ css, cx }) => {
       const inputProps = {
+        autoFocus,
         defaultValue,
         disabled,
         name,
