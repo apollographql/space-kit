@@ -167,7 +167,7 @@ export function Modal({
         {(primaryAction || secondaryAction || bottomLeftText) && (
           <div
             css={{
-              alignItems: "baseline",
+              alignItems: "center",
               display: "flex",
               justifyContent: "flex-end",
               marginTop: size === "medium" ? 32 : 24,
