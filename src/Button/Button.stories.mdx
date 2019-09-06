@@ -420,6 +420,25 @@ In space constrained places or for floating action buttons (FAB), we can show an
   </Story>
 </Preview>
 
+### Loading
+
+You can specify that a button is in a loading state with the `loading` prop
+
+<Preview>
+  <Story name="light loading">
+    <ButtonLayout theme="light">
+      <Button loading>Submit</Button>
+    </ButtonLayout>
+  </Story>
+  <Story name="dark loading">
+    <ButtonLayout theme="dark">
+      <Button loading theme="dark">
+        Submit
+      </Button>
+    </ButtonLayout>
+  </Story>
+</Preview>
+
 ## Flat Buttons
 
 As the name implies, the flat button is a simpler approach on the standard buttons. It provides a lot of flexibility many buttons side-by-side and doesn’t clutter the interface as much as a standard button.

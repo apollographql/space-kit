@@ -6,6 +6,7 @@ import { getOffsetInPalette } from "../colors/utils/getOffsetInPalette";
 import tinycolor from "tinycolor2";
 import React from "react";
 import classnames from "classnames";
+import { LoadingSpinner } from "../Loaders";
 
 type TLength = string | 0 | number;
 
@@ -196,6 +197,13 @@ interface Props
   icon?: React.ReactElement;
 
   /**
+   * Show a loading spinner in place of the original icon on this button
+   *
+   * Automatically disables the button as well
+   */
+  loading?: boolean;
+
+  /**
    * Size of the button
    *
    * @default "default"
@@ -255,15 +263,30 @@ export const Button: React.FC<Props> = ({
   disabled: disabledProps = false,
   variant,
   feel = "raised",
-  icon,
+  icon: iconProp,
+  loading,
   size = "default",
   theme = "light",
   ...otherProps
 }) => (
   <ClassNames>
     {({ cx, css }) => {
+      /**
+       * If the button is in a `loading` state, then always treat it as
+       * disabled. Otherwise, try to use `as.props`. Finally, use `props`
+       */
       const disabled: boolean =
-        as.props.disabled != null ? as.props.disabled : disabledProps;
+        loading ||
+        (as.props.disabled != null ? as.props.disabled : disabledProps);
+
+      const icon = loading ? (
+        <LoadingSpinner
+          size="2xsmall"
+          theme={theme === "light" ? "grayscale" : "dark"}
+        />
+      ) : (
+        iconProp
+      );
 
       /**
        * Icon size in pixels
