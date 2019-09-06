@@ -1,3 +1,28 @@
+# v2.4.0 (Fri Sep 06 2019)
+
+### Release Notes
+
+_From #92_
+
+- Add `loading` prop to `Button`
+- Add `theme="grayscale"` option to `LoadingSpinner`
+- Make `LoadingSpinner` motion linear
+- Write preliminary docs page for `LoadingSpinner`
+
+Contributes to issue https://apollographql.atlassian.net/browse/AP-809
+
+---
+
+#### 🚀  Enhancement
+
+- AP-809 Add loading state to button [#92](https://github.com/apollographql/space-kit/pull/92) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v2.3.0 (Wed Sep 04 2019)
 
 #### 🚀  Enhancement
