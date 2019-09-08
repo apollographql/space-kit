@@ -1,3 +1,15 @@
+# v2.6.0 (Sun Sep 08 2019)
+
+#### 🚀  Enhancement
+
+- AP-808 Add `as` prop to `Modal` [#96](https://github.com/apollographql/space-kit/pull/96) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v2.5.1 (Sat Sep 07 2019)
 
 #### 🐛  Bug Fix
