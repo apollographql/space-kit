@@ -1,3 +1,15 @@
+# v2.6.1 (Mon Sep 09 2019)
+
+#### 🐛  Bug Fix
+
+- AP-801 Show appropriate cursor for `Button`'s `loading` and `disa… [#97](https://github.com/apollographql/space-kit/pull/97) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v2.6.0 (Sun Sep 08 2019)
 
 #### 🚀  Enhancement
