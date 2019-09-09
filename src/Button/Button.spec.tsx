@@ -64,6 +64,29 @@ test("when disabled, button does not call click handlers", () => {
   expect(rootElementOnClick).not.toHaveBeenCalled();
 });
 
+test("when loading, button does not call click handlers", () => {
+  const rootElementOnClick = jest.fn();
+  const asElementOnClick = jest.fn();
+
+  const { getByTestId } = render(
+    <Button
+      as={<button onClick={asElementOnClick} />}
+      data-testid="button"
+      loading
+      onClick={rootElementOnClick}
+    >
+      submit
+    </Button>
+  );
+
+  // act
+  getByTestId("button").click();
+
+  // assert
+  expect(asElementOnClick).not.toHaveBeenCalled();
+  expect(rootElementOnClick).not.toHaveBeenCalled();
+});
+
 test("when clicked should remove focus from itself", () => {
   const { getByTestId } = render(<Button data-testid="button">submit</Button>);
   const button = getByTestId("button");
