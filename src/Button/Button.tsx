@@ -353,6 +353,8 @@ export const Button: React.FC<Props> = ({
 
                 color: getTextColor({ color, feel, theme }),
 
+                cursor: loading || disabled ? "default" : "pointer",
+
                 // Vertically center children
                 display: "inline-flex",
                 justifyContent: "center",
@@ -397,7 +399,6 @@ export const Button: React.FC<Props> = ({
                     theme,
                   }),
                   color: getTextColor({ color, feel, theme, mode: ":hover" }),
-                  cursor: "pointer",
                   ...(feel !== "flat" && {
                     // The `box-shadow` property is copied directly from Zeplin
                     boxShadow:
