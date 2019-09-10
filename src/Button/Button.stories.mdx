@@ -363,6 +363,31 @@ For dark themed buttons, the borders are completely removed to make the colors l
   </Story>
 </Preview>
 
+## Custom element
+
+You can customize the element rendered by `Button`. This is helpful when you want to render a link that looks like a button.
+
+<Preview>
+  <Story name="as link">
+    <Button as={<a href="#" />}>Link</Button>
+  </Story>
+  <Story name="as red link">
+    <Button as={<a href="#" />} color={colors.red.base}>
+      Link
+    </Button>
+  </Story>
+  <Story name="as flat blue link">
+    <Button as={<a href="#" />} color={colors.blue.base} feel="flat">
+      Link
+    </Button>
+  </Story>
+  <Story name="as white link">
+    <Button as={<a href="#" />} color={colors.white}>
+      Link
+    </Button>
+  </Story>
+</Preview>
+
 ## Icon Buttons
 
 Icon buttons are a good way to communicate more information about the button’s action.
