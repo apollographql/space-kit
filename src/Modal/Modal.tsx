@@ -131,7 +131,7 @@ export const Modal: React.FC<Props> = ({
     <ClassNames>
       {({ css, cx }) => {
         const propsToPass = {
-          onClick: onClose,
+          onMouseDown: onClose,
           className: classnames(
             cx(css(modalBackdrop)),
             as.props.className,
@@ -142,7 +142,7 @@ export const Modal: React.FC<Props> = ({
           ),
           children: (
             <div
-              onClick={event => event.stopPropagation()}
+              onMouseDown={event => event.stopPropagation()}
               css={{
                 backgroundColor: "white",
                 borderRadius: 12,
