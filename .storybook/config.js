@@ -1,3 +1,5 @@
+import "storybook-chromatic";
+
 import "../reset.css";
 import "../font.css";
 

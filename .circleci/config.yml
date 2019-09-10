@@ -6,6 +6,28 @@ defaults: &defaults
   working_directory: ~/space-kit
 
 jobs:
+  chromatic:
+    <<: *defaults
+    steps:
+      - checkout
+      - run:
+          name: Install npm dependencies
+          command: npm ci
+      - restore_cache:
+          name: Restore storybook cache
+          keys:
+            - storybook-cache--{{ .Branch }}--{{ checksum ".circleci/config.yml" }}
+            - storybook-cache--master--{{ checksum ".circleci/config.yml" }}
+      - run:
+          name: Run Chromatic
+          command: npm run chromatic
+          environment:
+            CI: 1
+      - save_cache:
+          name: Save chromatic cache
+          key: storybook-cache--{{ .Branch }}--{{ checksum ".circleci/config.yml" }}--{{ epoch }}
+          paths:
+            - node_modules/.cache/storybook
   eslint:
     <<: *defaults
     steps:
@@ -77,6 +99,7 @@ workflows:
   version: 2
   test:
     jobs:
+      - chromatic
       - eslint
       - typescript
       - test
@@ -94,4 +117,3 @@ workflows:
             branches:
               only:
                 - master
-
