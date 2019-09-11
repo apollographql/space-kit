@@ -20,7 +20,7 @@ jobs:
             - storybook-cache--master--{{ checksum ".circleci/config.yml" }}
       - run:
           name: Run Chromatic
-          command: npm run chromatic
+          command: npm run chromatic -- --exit-zero-on-changes --auto-accept-changes=master
           environment:
             CI: 1
       - save_cache:
