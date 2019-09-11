@@ -1,3 +1,15 @@
+# v2.7.0 (Wed Sep 11 2019)
+
+#### 🚀  Enhancement
+
+- Add the layout-module icon [#104](https://github.com/apollographql/space-kit/pull/104) ([@trevorblades](https://github.com/trevorblades))
+
+#### Authors: 1
+
+- Trevor Blades ([@trevorblades](https://github.com/trevorblades))
+
+---
+
 # v2.6.1 (Mon Sep 09 2019)
 
 #### 🐛  Bug Fix
