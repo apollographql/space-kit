@@ -1,3 +1,15 @@
+# v2.8.0 (Thu Sep 12 2019)
+
+#### 🚀  Enhancement
+
+- Add className to Modals [#103](https://github.com/apollographql/space-kit/pull/103) ([@jgzuke](https://github.com/jgzuke))
+
+#### Authors: 1
+
+- Jason Zukewich ([@jgzuke](https://github.com/jgzuke))
+
+---
+
 # v2.7.0 (Wed Sep 11 2019)
 
 #### 🚀  Enhancement
