@@ -8,6 +8,12 @@ import classnames from "classnames";
 
 interface Props {
   /**
+   * Class name that will be applied to the wrapping `div` around the component,
+   * or the component passed as the `as` prop.
+   */
+  className?: string;
+
+  /**
    * Override the the default element used to render the outermost component
    *
    * All props provided will be merged with props that this component adds,
@@ -105,6 +111,7 @@ const getModalWidth = (size: Props["size"]): CSS.WidthProperty<TLength> => {
 
 export const Modal: React.FC<Props> = ({
   as = <div />,
+  className,
   title,
   description,
   children,
@@ -133,6 +140,7 @@ export const Modal: React.FC<Props> = ({
         const propsToPass = {
           onClick: onClose,
           className: classnames(
+            className,
             cx(css(modalBackdrop)),
             as.props.className,
             // If the parent component is using emotion with the jsx pragma, we
