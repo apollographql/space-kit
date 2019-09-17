@@ -1,0 +1,18 @@
+on: pull_request
+name: Re-run check-label when label changes
+jobs:
+  action-filter:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: action-filter
+      uses: actions/bin/filter@master
+      with:
+        args: action 'labeled|unlabeled'
+    - name: fire check-label
+      uses: swinton/httpie.action@69125d73caa2c6821f6a41a86112777a37adc171
+      env:
+        CIRCLE_API_TOKEN: ${{ secrets.CIRCLE_API_TOKEN }}
+      with:
+        args: '-v -a=${CIRCLE_API_TOKEN}: POST https://circleci.com/api/v1.1/project/github/apollographql/space-kit/tree/${GITHUB_REF#*refs/heads/}
+          "build_parameters:=''{\"CIRCLE_JOB\": \"check-label\"}''"'
