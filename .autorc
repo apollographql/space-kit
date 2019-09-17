@@ -5,5 +5,20 @@
   "plugins": [
     "npm",
     "released"
-  ]
+  ],
+  "labels": {
+    "patch": [
+      {
+        "label": "patch",
+        "title": "🐛  Bug Fix",
+        "description": "Increment the patch version when merged"
+      },
+      {
+        "label": "renovate",
+        "title": "⬆  Renovate Dependency Upgrade",
+        "description": "Automatic PR created by renovate for dependency upgrades",
+        "color": "yellow"
+      }
+    ]
+  }
 }
