@@ -1,9 +1,0 @@
-{
-  "extends": [
-    "config:base"
-  ],
-  "automerge": true,
-  "automergeType": "pr",
-  "labels": ["renovate"],
-  "rebaseStalePrs": true
-}
