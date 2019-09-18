@@ -83,7 +83,7 @@
     "auto": "7.6.0",
     "babel-loader": "8.0.6",
     "btoa": "1.2.1",
-    "eslint": "6.2.2",
+    "eslint": "6.4.0",
     "eslint-config-prettier": "6.1.0",
     "eslint-config-problems": "3.0.1",
     "eslint-plugin-mdx": "1.4.0",
