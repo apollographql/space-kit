@@ -1,3 +1,20 @@
+# v2.9.0 (Wed Sep 18 2019)
+
+#### 🚀  Enhancement
+
+- Imcrease modal max height and center contents [#120](https://github.com/apollographql/space-kit/pull/120) ([@jgzuke](https://github.com/jgzuke))
+
+#### 🐛  Bug Fix
+
+- Remove renovate [#119](https://github.com/apollographql/space-kit/pull/119) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 2
+
+- Jason Zukewich ([@jgzuke](https://github.com/jgzuke))
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v2.8.1 (Wed Sep 18 2019)
 
 ### Release Notes
