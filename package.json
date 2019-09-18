@@ -66,7 +66,7 @@
     "@storybook/preset-typescript": "1.1.0",
     "@storybook/react": "5.2.0-rc.10",
     "@svgr/core": "4.3.0",
-    "@svgr/plugin-jsx": "4.3.0",
+    "@svgr/plugin-jsx": "4.3.2",
     "@svgr/plugin-prettier": "4.2.0",
     "@svgr/plugin-svgo": "4.2.0",
     "@testing-library/jest-dom": "4.1.0",
