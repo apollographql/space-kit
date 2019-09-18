@@ -65,7 +65,7 @@
     "@storybook/addons": "5.2.0-rc.10",
     "@storybook/preset-typescript": "1.1.0",
     "@storybook/react": "5.2.0-rc.10",
-    "@svgr/core": "4.3.0",
+    "@svgr/core": "4.3.2",
     "@svgr/plugin-jsx": "4.3.0",
     "@svgr/plugin-prettier": "4.2.0",
     "@svgr/plugin-svgo": "4.2.0",
