@@ -1,3 +1,31 @@
+# v2.8.1 (Wed Sep 18 2019)
+
+### Release Notes
+
+_From #106_
+
+* GitHub actions are deprecating HCL syntax on September 30. This ensure that automatic release will continue to work while I'm on vacation.
+
+* Convert our long-running task that re-runs `check-label` to "modern" JavaScript implementation with minimal custom logic
+
+---
+
+#### 🐛  Bug Fix
+
+- AP-704 Setup and configure renovate [#105](https://github.com/apollographql/space-kit/pull/105) ([@justinanastos](https://github.com/justinanastos))
+- AP-829 converted main.workflow to Actions V2 yml files [#106](https://github.com/apollographql/space-kit/pull/106) ([@justinanastos](https://github.com/justinanastos))
+
+#### ⬆  Renovate Dependency Upgrade
+
+- Pin dependencies [#91](https://github.com/apollographql/space-kit/pull/91) ([@renovate-bot](https://github.com/renovate-bot))
+
+#### Authors: 2
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+- Renovate Bot ([@renovate-bot](https://github.com/renovate-bot))
+
+---
+
 # v2.8.0 (Thu Sep 12 2019)
 
 #### 🚀  Enhancement
