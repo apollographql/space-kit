@@ -58,8 +58,8 @@
   "devDependencies": {
     "@actions/core": "1.1.0",
     "@actions/github": "1.1.0",
-    "@babel/core": "7.4.5",
-    "@babel/traverse": "7.5.5",
+    "@babel/core": "7.6.0",
+    "@babel/traverse": "7.6.0",
     "@storybook/addon-actions": "5.2.0-rc.10",
     "@storybook/addon-docs": "5.2.0-rc.10",
     "@storybook/addons": "5.2.0-rc.10",
