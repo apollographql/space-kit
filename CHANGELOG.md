@@ -1,3 +1,15 @@
+# v2.10.0 (Tue Sep 24 2019)
+
+#### 🚀  Enhancement
+
+- Add copy icon [#121](https://github.com/apollographql/space-kit/pull/121) ([@jgzuke](https://github.com/jgzuke))
+
+#### Authors: 1
+
+- Jason Zukewich ([@jgzuke](https://github.com/jgzuke))
+
+---
+
 # v2.9.0 (Wed Sep 18 2019)
 
 #### 🚀  Enhancement
