@@ -464,7 +464,7 @@ export const Button: React.FC<Props> = ({
         ),
         disabled,
         onClick: (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
-          // if (disabled) return event.preventDefault();
+          if (disabled) return event.preventDefault();
 
           if (otherProps.onClick) {
             otherProps.onClick(event);
