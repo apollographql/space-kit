@@ -1,3 +1,20 @@
+# v2.11.0 (Wed Oct 02 2019)
+
+#### 🚀  Enhancement
+
+- [AP-1011](https://apollographql.atlassian.net/AP-1011): Stop wrapping long text in Buttons [#125](https://github.com/apollographql/space-kit/pull/125) ([@justinanastos](https://github.com/justinanastos))
+
+#### 🐛  Bug Fix
+
+- Update auto to add Jira links [#124](https://github.com/apollographql/space-kit/pull/124) ([@justinanastos](https://github.com/justinanastos))
+- Upgrade storybook to production v5.2.1 [#123](https://github.com/apollographql/space-kit/pull/123) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v2.10.0 (Tue Sep 24 2019)
 
 #### 🚀  Enhancement
