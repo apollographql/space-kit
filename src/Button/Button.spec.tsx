@@ -64,7 +64,7 @@ test("when disabled, button does not call click handlers", () => {
   expect(rootElementOnClick).not.toHaveBeenCalled();
 });
 
-test("when disabled, button with 'as={}' does not call click handlers", () => {
+test("when disabled, button with 'as=' set to not a button element does not call click handlers", () => {
   const rootElementOnClick = jest.fn();
   const asElementOnClick = jest.fn();
 
