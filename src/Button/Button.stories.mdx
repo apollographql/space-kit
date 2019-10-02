@@ -757,3 +757,16 @@ Showing how we could potentially use color with the simple button.
 This component extends `HTMLElement` so that most props you'd want to pass to any element can be passed to this component.
 
 <Props of={Button} />
+
+## Special Cases
+
+These stories are intended for Chromatic and aren't intended for documentation.
+
+<Story name="long wrap">
+  <div style={{ width: 100 }}>
+    <Button>
+      I am some really long text that will be wrapped if we don&apos;t set this
+      up correctly
+    </Button>
+  </div>
+</Story>

@@ -389,6 +389,8 @@ export const Button: React.FC<Props> = ({
                 outline: 0,
 
                 textDecoration: "none",
+
+                whiteSpace: "nowrap",
               },
 
               !disabled && {
