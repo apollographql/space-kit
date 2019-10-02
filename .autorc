@@ -4,7 +4,8 @@
   "owner": "Justin Anastos <justin@apollographql.com>",
   "plugins": [
     "npm",
-    "released"
+    "released",
+    ["jira", { "url": "https://apollographql.atlassian.net" }]
   ],
   "labels": {
     "patch": [
