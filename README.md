@@ -19,6 +19,7 @@
   - [Loaders](#loaders)
   - [Emotion Example](#emotion-example)
 - [Developing Space Kit](#developing-space-kit)
+  - [`npm link`](#npm-link)
   - [Tests](#tests)
   - [Releases](#releases)
   - [Icons](#icons-1)
@@ -341,9 +342,39 @@ The engine-frontend team and Apollo OSS teams have decided to not use default ex
 
 ## Developing Space Kit
 
-To develop, run `npm run watch` and everything should build automatically! Use `npm link` to develop against this package.
+Developing locally against Storybook is easy; run `npm run storybook`.
 
-When developing a new feature of space-kit, please make sure that the `watch` script will automatically perform all setps necessary to build for development. For example, there is a `watch:typescript` script and a `watch:npmwatch` script that will watch all TypeScript files and watch all the svg icons for changes.
+### `npm link`
+
+You can use `npm link` to develop Space Kit features directly inside another project with a little bit of work. `npm link` does not work out of the box, however, because of React hooks. We must use the same instance of `React` both in this project and in your consuming project, so you must use the following process or you will get errors about react hooks:
+
+* Link the consuming package's react package into space kit
+    
+    Run the following from the space kit directory:
+
+    ```shell
+    npm link ../engine-frontend/node_modules/react
+    ```
+
+* Use development build of space kit
+
+    Run `npm run watch` and everything should build automatically
+
+    Note: When developing a new feature of space-kit, please make sure that the `watch` script will automatically perform all setps necessary to build for development. For example, there is a `watch:typescript` script and a `watch:npmwatch` script that will watch all TypeScript files and watch all the svg icons for changes.
+
+* Link space kit
+
+    Run the following from the space kit directory:
+
+    ```shell
+    npm link
+    ```
+
+    Then run the following form the consuming package's directory:
+
+    ```shell
+    npm link @apollo/space-kit
+    ```
 
 ### Tests
 
