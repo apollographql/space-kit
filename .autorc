@@ -5,7 +5,7 @@
   "plugins": [
     "npm",
     "released",
-    ["jira", { "url": "https://apollographql.atlassian.net" }]
+    ["jira", { "url": "https://apollographql.atlassian.net/browse" }]
   ],
   "labels": {
     "patch": [
