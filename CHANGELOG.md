@@ -1,3 +1,20 @@
+# v2.13.0 (Thu Oct 03 2019)
+
+#### 🚀  Enhancement
+
+- Add framer-motion as peer-dep; animate modal [AP-812](https://apollographql.atlassian.net/browse/AP-812) [#126](https://github.com/apollographql/space-kit/pull/126) ([@cheapsteak](https://github.com/cheapsteak))
+
+#### 🐛  Bug Fix
+
+- Fix changelog configuration for adding jira links [#127](https://github.com/apollographql/space-kit/pull/127) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 2
+
+- Chang Wang ([@cheapsteak](https://github.com/cheapsteak))
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v2.12.0 (Thu Oct 03 2019)
 
 #### 🚀  Enhancement
