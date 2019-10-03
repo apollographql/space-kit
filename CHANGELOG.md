@@ -1,3 +1,15 @@
+# v2.12.0 (Thu Oct 03 2019)
+
+#### 🚀  Enhancement
+
+- [AP-919](https://apollographql.atlassian.net/AP-919): Stop propagation of clicks when disabled using input as [#122](https://github.com/apollographql/space-kit/pull/122) ([@jgzuke](https://github.com/jgzuke))
+
+#### Authors: 1
+
+- Jason Zukewich ([@jgzuke](https://github.com/jgzuke))
+
+---
+
 # v2.11.0 (Wed Oct 02 2019)
 
 #### 🚀  Enhancement
