@@ -8,9 +8,21 @@
     ["jira", { "url": "https://apollographql.atlassian.net/browse" }]
   ],
   "labels": {
+    "skip-release":[
+      {
+        "description": "Internal changes not meriting a release",
+        "name": "🏗 internal",
+        "title": "🏗  Internal"
+      },
+      {
+        "description": "Changes only affect the documentation, will not perform a release",
+        "name": "📚 documentation",
+        "title": "📚  Documentation"
+      }
+    ],
     "patch": [
       {
-        "name": "patch",
+        "name": "🐛 bug fix",
         "title": "🐛  Bug Fix",
         "description": "Increment the patch version when merged"
       },
