@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx, css, ClassNames } from "@emotion/core";
 import React, { useEffect } from "react";
+import { motion } from "framer-motion";
 import * as typography from "../typography";
 import { colors } from "../colors";
 import * as CSS from "csstype";
@@ -151,22 +152,35 @@ export const Modal: React.FC<Props> = ({
             as.props.css ? css(as.props.css.styles) : null
           ),
           children: (
-            <div
+            <motion.div
+              animate={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              transition={{
+                scale: {
+                  type: "spring",
+                  stiffness: 150,
+                  damping: 200,
+                  mass: 0.2,
+                  velocity: 8,
+                },
+              }}
               onClick={event => event.stopPropagation()}
               css={{
                 backgroundColor: "white",
                 borderRadius: 12,
                 boxShadow: `0 16px 32px 0 rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(18, 21, 26, 0.04)`,
-                left: "50%",
                 maxHeight: "80%",
                 minWidth: 400,
                 opacity: 1,
                 overflowY: "scroll",
                 padding: size === "large" ? "40px" : "32px",
                 position: "absolute",
-                transform: "translate(-50%)",
                 width: getModalWidth(size),
                 zIndex: 11,
+                marginLeft: "auto",
+                marginRight: "auto",
+                left: 0,
+                right: 0,
               }}
             >
               <div>
@@ -219,7 +233,7 @@ export const Modal: React.FC<Props> = ({
                   {primaryAction && <div>{primaryAction}</div>}
                 </div>
               )}
-            </div>
+            </motion.div>
           ),
         };
 
