@@ -363,28 +363,32 @@ For dark themed buttons, the borders are completely removed to make the colors l
   </Story>
 </Preview>
 
-## Custom element
+## `as`
 
-You can customize the element rendered by `Button`. This is helpful when you want to render a link that looks like a button.
+Specify the element used to render the button with the `as` prop. The default is `<button />`.
+
+All props added to the `as` element will be merged with the props added by the `Button` component. `classNames`, `styles`, and `css` will be intelligently merged.
 
 <Preview>
-  <Story name="as link">
-    <Button as={<a href="#" />}>Link</Button>
-  </Story>
-  <Story name="as red link">
-    <Button as={<a href="#" />} color={colors.red.base}>
-      Link
-    </Button>
-  </Story>
-  <Story name="as flat blue link">
-    <Button as={<a href="#" />} color={colors.blue.base} feel="flat">
-      Link
-    </Button>
-  </Story>
-  <Story name="as white link">
-    <Button as={<a href="#" />} color={colors.white}>
-      Link
-    </Button>
+  <Story name="as a">
+    <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <Button as={<a href="google.com" />}>Default</Button>
+      <Button color={colors.white} as={<a href="google.com" />}>
+        White
+      </Button>
+      <Button color={colors.indigo.dark} as={<a href="google.com" />}>
+        Indigo
+      </Button>
+      <Button color={colors.red.base} as={<a href="google.com" />}>
+        Red
+      </Button>
+      <Button color={colors.green.base} as={<a href="google.com" />}>
+        Green
+      </Button>
+      <Button color={colors.blue.base} as={<a href="google.com" />}>
+        Blue
+      </Button>
+    </div>
   </Story>
 </Preview>
 
