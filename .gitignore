@@ -16,6 +16,7 @@ tsconfig.tsbuildinfo
 /emotionCacheProviderFactory
 /fonts
 /icons
+/illustrations
 /Loaders
 /TextField
 /Modal
@@ -26,6 +27,10 @@ tsconfig.tsbuildinfo
 
 # Generated icons stored in src directory 
 src/icons/*.tsx
+
+# Generated illustrations stored in src directory (we also generate the story)
+src/illustrations/*.tsx
+src/illustrations/Illustrations.story.mdx
 
 .awcache
 
