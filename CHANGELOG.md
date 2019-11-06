@@ -1,3 +1,20 @@
+# v2.14.0 (Wed Nov 06 2019)
+
+#### 🚀  Enhancement
+
+- [AP-1099](https://apollographql.atlassian.net/browse/AP-1099): Set default size of icons to be 20px by 20px [#132](https://github.com/apollographql/space-kit/pull/132) ([@justinanastos](https://github.com/justinanastos))
+
+#### 📚  Documentation
+
+- 📚 improve documentation for `as` prop in `Button` [#129](https://github.com/apollographql/space-kit/pull/129) ([@justinanastos](https://github.com/justinanastos))
+- [AP-1071](https://apollographql.atlassian.net/browse/AP-1071): Write docs on how to use `npm link` with consuming libra… [#128](https://github.com/apollographql/space-kit/pull/128) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v2.13.0 (Thu Oct 03 2019)
 
 #### 🚀  Enhancement
