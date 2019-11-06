@@ -133,7 +133,7 @@ function createCSSAttribute(css: string): JSXAttribute {
                   // Add css template literal
                   jsx.openingElement.attributes.push(
                     createCSSAttribute(
-                      "*{vector-effect: non-scaling-stroke} overflow: visible;"
+                      "*{vector-effect: non-scaling-stroke} overflow: visible; width: 20px; height: 20px;"
                     )
                   );
                   // We need to add '/** @jsx jsx */' to the top of the file,
