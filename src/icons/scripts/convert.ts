@@ -9,6 +9,32 @@ import traverse from "@babel/traverse";
 const SVG_PATH = path.resolve(__dirname, "..", "svgs");
 const COMPONENT_PATH = path.resolve(__dirname, "..");
 
+/**
+ * Get the height from the `viewbox` attribute of a `JSXOpeningElement` node
+ * @param node Node to get the `viewbox` from
+ */
+function getHeightFromViewbox(node: types.JSXOpeningElement) {
+  const viewBoxAttribute = node.attributes.find(
+    attribute =>
+      attribute.type === "JSXAttribute" &&
+      attribute.name.type === "JSXIdentifier" &&
+      attribute.name.name === "viewBox"
+  );
+
+  if (
+    !viewBoxAttribute ||
+    viewBoxAttribute.type !== "JSXAttribute" ||
+    !viewBoxAttribute.value ||
+    viewBoxAttribute.value.type !== "StringLiteral"
+  ) {
+    return;
+  }
+
+  const [, , , height] = viewBoxAttribute.value.value.split(/\s+/);
+
+  return height;
+}
+
 function updateStrokeWidths(node: types.JSXOpeningElement) {
   node.attributes.forEach(attribute => {
     if (
@@ -122,7 +148,9 @@ function createCSSAttribute(css: string): types.JSXAttribute {
                   // Add css template literal
                   jsx.openingElement.attributes.push(
                     createCSSAttribute(
-                      "*{vector-effect: non-scaling-stroke} overflow: visible; width: 20px; height: 20px;"
+                      `*{vector-effect: non-scaling-stroke}
+                      overflow: visible;
+                      height: ${getHeightFromViewbox(jsx.openingElement)}px;`
                     )
                   );
                   // We need to add '/** @jsx jsx */' to the top of the file,
