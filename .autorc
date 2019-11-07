@@ -22,9 +22,10 @@
     ],
     "patch": [
       {
-        "name": "🐛 bug fix",
+        "name": "bug fix",
         "title": "🐛  Bug Fix",
-        "description": "Increment the patch version when merged"
+        "description": "Increment the patch version when merged",
+        "color": "#38e153"
       },
       {
         "name": "renovate",
