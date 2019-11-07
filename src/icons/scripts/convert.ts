@@ -1,30 +1,15 @@
+import * as types from "@babel/types";
 import fs from "fs";
 import path from "path";
 import svgr from "@svgr/core";
 import { formatComponentName } from "./formatComponentName";
 import { svgo } from "./convertUtils/setupSvgo";
-import {
-  binaryExpression,
-  conditionalExpression,
-  identifier,
-  jsxAttribute,
-  JSXElement,
-  jsxExpressionContainer,
-  jsxIdentifier,
-  JSXOpeningElement,
-  numericLiteral,
-  stringLiteral,
-  taggedTemplateExpression,
-  templateElement,
-  templateLiteral,
-  JSXAttribute,
-} from "@babel/types";
 import traverse from "@babel/traverse";
 
 const SVG_PATH = path.resolve(__dirname, "..", "svgs");
 const COMPONENT_PATH = path.resolve(__dirname, "..");
 
-function updateStrokeWidths(node: JSXOpeningElement) {
+function updateStrokeWidths(node: types.JSXOpeningElement) {
   node.attributes.forEach(attribute => {
     if (
       attribute.type === "JSXAttribute" &&
@@ -33,30 +18,30 @@ function updateStrokeWidths(node: JSXOpeningElement) {
       attribute.value &&
       attribute.value.type === "JSXExpressionContainer"
     ) {
-      attribute.value = jsxExpressionContainer(
-        conditionalExpression(
-          binaryExpression(
+      attribute.value = types.jsxExpressionContainer(
+        types.conditionalExpression(
+          types.binaryExpression(
             "===",
-            identifier("weight"),
-            stringLiteral("normal")
+            types.identifier("weight"),
+            types.stringLiteral("normal")
           ),
-          numericLiteral(1.5),
-          numericLiteral(1)
+          types.numericLiteral(1.5),
+          types.numericLiteral(1)
         )
       );
     }
   });
 }
 
-function createCSSAttribute(css: string): JSXAttribute {
-  return jsxAttribute(
-    jsxIdentifier("css"),
-    jsxExpressionContainer(
-      taggedTemplateExpression(
-        identifier("css"),
-        templateLiteral(
+function createCSSAttribute(css: string): types.JSXAttribute {
+  return types.jsxAttribute(
+    types.jsxIdentifier("css"),
+    types.jsxExpressionContainer(
+      types.taggedTemplateExpression(
+        types.identifier("css"),
+        types.templateLiteral(
           [
-            templateElement(
+            types.templateElement(
               {
                 raw: css,
                 cooked: css,
@@ -117,7 +102,11 @@ function createCSSAttribute(css: string): JSXAttribute {
                     imports,
                     componentName,
                     jsx,
-                  }: { imports: any; componentName: string; jsx: JSXElement }
+                  }: {
+                    imports: any;
+                    componentName: string;
+                    jsx: types.JSXElement;
+                  }
                 ) {
                   const typeScriptTpl = template.smart({
                     plugins: ["typescript"],
