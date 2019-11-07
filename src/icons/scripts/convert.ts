@@ -1,30 +1,41 @@
+import * as types from "@babel/types";
 import fs from "fs";
 import path from "path";
 import svgr from "@svgr/core";
 import { formatComponentName } from "./formatComponentName";
 import { svgo } from "./convertUtils/setupSvgo";
-import {
-  binaryExpression,
-  conditionalExpression,
-  identifier,
-  jsxAttribute,
-  JSXElement,
-  jsxExpressionContainer,
-  jsxIdentifier,
-  JSXOpeningElement,
-  numericLiteral,
-  stringLiteral,
-  taggedTemplateExpression,
-  templateElement,
-  templateLiteral,
-  JSXAttribute,
-} from "@babel/types";
 import traverse from "@babel/traverse";
 
 const SVG_PATH = path.resolve(__dirname, "..", "svgs");
 const COMPONENT_PATH = path.resolve(__dirname, "..");
 
-function updateStrokeWidths(node: JSXOpeningElement) {
+/**
+ * Get the height from the `viewbox` attribute of a `JSXOpeningElement` node
+ * @param node Node to get the `viewbox` from
+ */
+function getHeightFromViewbox(node: types.JSXOpeningElement) {
+  const viewBoxAttribute = node.attributes.find(
+    attribute =>
+      attribute.type === "JSXAttribute" &&
+      attribute.name.type === "JSXIdentifier" &&
+      attribute.name.name === "viewBox"
+  );
+
+  if (
+    !viewBoxAttribute ||
+    viewBoxAttribute.type !== "JSXAttribute" ||
+    !viewBoxAttribute.value ||
+    viewBoxAttribute.value.type !== "StringLiteral"
+  ) {
+    return;
+  }
+
+  const [, , , height] = viewBoxAttribute.value.value.split(/\s+/);
+
+  return height;
+}
+
+function updateStrokeWidths(node: types.JSXOpeningElement) {
   node.attributes.forEach(attribute => {
     if (
       attribute.type === "JSXAttribute" &&
@@ -33,30 +44,30 @@ function updateStrokeWidths(node: JSXOpeningElement) {
       attribute.value &&
       attribute.value.type === "JSXExpressionContainer"
     ) {
-      attribute.value = jsxExpressionContainer(
-        conditionalExpression(
-          binaryExpression(
+      attribute.value = types.jsxExpressionContainer(
+        types.conditionalExpression(
+          types.binaryExpression(
             "===",
-            identifier("weight"),
-            stringLiteral("normal")
+            types.identifier("weight"),
+            types.stringLiteral("normal")
           ),
-          numericLiteral(1.5),
-          numericLiteral(1)
+          types.numericLiteral(1.5),
+          types.numericLiteral(1)
         )
       );
     }
   });
 }
 
-function createCSSAttribute(css: string): JSXAttribute {
-  return jsxAttribute(
-    jsxIdentifier("css"),
-    jsxExpressionContainer(
-      taggedTemplateExpression(
-        identifier("css"),
-        templateLiteral(
+function createCSSAttribute(css: string): types.JSXAttribute {
+  return types.jsxAttribute(
+    types.jsxIdentifier("css"),
+    types.jsxExpressionContainer(
+      types.taggedTemplateExpression(
+        types.identifier("css"),
+        types.templateLiteral(
           [
-            templateElement(
+            types.templateElement(
               {
                 raw: css,
                 cooked: css,
@@ -117,7 +128,11 @@ function createCSSAttribute(css: string): JSXAttribute {
                     imports,
                     componentName,
                     jsx,
-                  }: { imports: any; componentName: string; jsx: JSXElement }
+                  }: {
+                    imports: any;
+                    componentName: string;
+                    jsx: types.JSXElement;
+                  }
                 ) {
                   const typeScriptTpl = template.smart({
                     plugins: ["typescript"],
@@ -133,7 +148,9 @@ function createCSSAttribute(css: string): JSXAttribute {
                   // Add css template literal
                   jsx.openingElement.attributes.push(
                     createCSSAttribute(
-                      "*{vector-effect: non-scaling-stroke} overflow: visible; width: 20px; height: 20px;"
+                      `*{vector-effect: non-scaling-stroke}
+                      overflow: visible;
+                      height: ${getHeightFromViewbox(jsx.openingElement)}px;`
                     )
                   );
                   // We need to add '/** @jsx jsx */' to the top of the file,
