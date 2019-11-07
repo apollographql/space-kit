@@ -1,3 +1,27 @@
+# v2.14.1 (Thu Nov 07 2019)
+
+### Release Notes
+
+_From #134_
+
+We tried setting a default height and width for icons, but this ran into issues with rectangular icons where we were required to set a width and a height. Per @daniman 's suggestion we'll just set the height. I chose to set it to the viewbox height and users can override this if they want to.
+
+---
+
+#### 🐛  Bug Fix
+
+- [AP-1099](https://apollographql.atlassian.net/browse/AP-1099): Remove default width on icons [#134](https://github.com/apollographql/space-kit/pull/134) ([@justinanastos](https://github.com/justinanastos))
+
+#### 🏗  Internal
+
+- Improve `TextField` tests [#133](https://github.com/apollographql/space-kit/pull/133) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v2.14.0 (Wed Nov 06 2019)
 
 #### 🚀  Enhancement
