@@ -1,3 +1,15 @@
+# v2.14.2 (Mon Nov 11 2019)
+
+#### 🏠  Internal
+
+- [AP-1165](https://apollographql.atlassian.net/browse/AP-1165): Disable label checks for PRs [#136](https://github.com/apollographql/space-kit/pull/136) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v2.14.1 (Thu Nov 07 2019)
 
 ### Release Notes
