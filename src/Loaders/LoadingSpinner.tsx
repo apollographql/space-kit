@@ -73,6 +73,9 @@ export const LoadingSpinner: React.FC<Props> = ({
 
   const pixelSize = SIZE_MAP[size];
 
+  const mountTime = React.useRef(Date.now());
+  const mountDelay = -(mountTime.current % 540);
+
   return (
     <svg
       className={className}
@@ -97,6 +100,7 @@ export const LoadingSpinner: React.FC<Props> = ({
           css={{
             animation: `${SPIN} 540ms linear infinite`,
             willChange: "transform",
+            animationDelay: `${mountDelay}ms`,
           }}
           fill={asteroidColor}
           r="10"
