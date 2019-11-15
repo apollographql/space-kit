@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import React from "react";
 import * as CSS from "csstype";
+import isChromatic from "storybook-chromatic/isChromatic";
 import { jsx, keyframes } from "@emotion/core";
 import { colors } from "../colors";
 
@@ -74,7 +75,7 @@ export const LoadingSpinner: React.FC<Props> = ({
   const pixelSize = SIZE_MAP[size];
 
   const mountTime = React.useRef(Date.now());
-  const mountDelay = -(mountTime.current % 540);
+  const mountDelay = isChromatic() ? 0 : -(mountTime.current % 540);
 
   return (
     <svg
