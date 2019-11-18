@@ -26,6 +26,9 @@ interface Props {
   size?: Size;
 }
 
+// Length of animation
+const DURATION = 750;
+
 const SPIN = keyframes`
   0% { transform: rotate(0) }
   100% { transform: rotate(360deg) }
@@ -75,7 +78,7 @@ export const LoadingSpinner: React.FC<Props> = ({
   const pixelSize = SIZE_MAP[size];
 
   const mountTime = React.useRef(Date.now());
-  const mountDelay = isChromatic() ? 0 : -(mountTime.current % 540);
+  const mountDelay = isChromatic() ? 0 : -(mountTime.current % DURATION);
 
   return (
     <svg
@@ -99,7 +102,7 @@ export const LoadingSpinner: React.FC<Props> = ({
       <g transform="translate(50 50)">
         <circle
           css={{
-            animation: `${SPIN} 540ms linear infinite`,
+            animation: `${SPIN} ${DURATION}ms linear infinite`,
             willChange: "transform",
             animationDelay: `${mountDelay}ms`,
           }}
