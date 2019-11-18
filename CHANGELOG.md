@@ -1,3 +1,15 @@
+# v2.15.0 (Mon Nov 18 2019)
+
+#### 🚀  Enhancement
+
+- [AP-786](https://apollographql.atlassian.net/browse/AP-786): ✨ add illustrations [#131](https://github.com/apollographql/space-kit/pull/131) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v2.14.3 (Mon Nov 18 2019)
 
 #### 🐛  Bug Fix
