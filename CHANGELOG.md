@@ -1,3 +1,20 @@
+# v2.14.3 (Mon Nov 18 2019)
+
+#### 🐛  Bug Fix
+
+- remove unnecessary scrollbar [#139](https://github.com/apollographql/space-kit/pull/139) ([@cheapsteak](https://github.com/cheapsteak))
+
+#### 🏗  Internal
+
+- Stop CI trying to run `check-label` [#138](https://github.com/apollographql/space-kit/pull/138) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 2
+
+- Chang Wang ([@cheapsteak](https://github.com/cheapsteak))
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v2.14.2 (Mon Nov 11 2019)
 
 #### 🏠  Internal
