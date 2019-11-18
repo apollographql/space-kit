@@ -1,3 +1,15 @@
+# v2.16.0 (Mon Nov 18 2019)
+
+#### 🚀  Enhancement
+
+- [AP-1075](https://apollographql.atlassian.net/browse/AP-1075): Fix spinner remounting restarts [#137](https://github.com/apollographql/space-kit/pull/137) ([@jgzuke](https://github.com/jgzuke))
+
+#### Authors: 1
+
+- Jason Zukewich ([@jgzuke](https://github.com/jgzuke))
+
+---
+
 # v2.15.0 (Mon Nov 18 2019)
 
 #### 🚀  Enhancement
