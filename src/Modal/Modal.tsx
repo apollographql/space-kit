@@ -172,7 +172,7 @@ export const Modal: React.FC<Props> = ({
                 maxHeight: "80%",
                 minWidth: 400,
                 opacity: 1,
-                overflowY: "scroll",
+                overflowY: "auto",
                 padding: size === "large" ? "40px" : "32px",
                 position: "absolute",
                 width: getModalWidth(size),
