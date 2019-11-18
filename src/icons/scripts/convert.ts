@@ -168,7 +168,7 @@ function createCSSAttribute(css: string): types.JSXAttribute {
                     weight?: "thin" | "normal";
                   }
 
-                  export const ${componentName} = ({ weight = "normal", ...props }: Props) => ${jsx}
+                  export const ${componentName} = ({ weight = "normal", ...props }) => ${jsx}
                 `;
                 },
                 plugins: ["@svgr/plugin-jsx", "@svgr/plugin-prettier"],
@@ -182,13 +182,6 @@ function createCSSAttribute(css: string): types.JSXAttribute {
               { componentName }
             );
 
-            // console.log(
-            //   path.relative(
-            //     process.cwd(),
-            //     path.join(path.join(COMPONENT_PATH, `${componentName}.tsx`))
-            //   )
-            // );
-
             const outputFilename = path.join(
               COMPONENT_PATH,
               `${componentName}.tsx`
@@ -198,7 +191,10 @@ function createCSSAttribute(css: string): types.JSXAttribute {
             // template function retain comments.
             fs.writeFileSync(
               outputFilename,
-              `/** @jsx jsx */\n${componentSource}`,
+              `/** @jsx jsx */\n${componentSource.replace(
+                /( = \(\{ weight = "normal", \.\.\.props \}\))/,
+                ": React.FC<Props>$1"
+              )}`,
               "utf-8"
             );
           })
