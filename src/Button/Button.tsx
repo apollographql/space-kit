@@ -283,6 +283,7 @@ export const Button: React.FC<Props> = ({
         <LoadingSpinner
           size="2xsmall"
           theme={theme === "light" ? "grayscale" : "dark"}
+          syncAnimationRestarts={false}
         />
       ) : (
         iconProp

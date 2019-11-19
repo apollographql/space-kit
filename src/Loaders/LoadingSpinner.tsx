@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import React from "react";
 import * as CSS from "csstype";
-import isChromatic from "storybook-chromatic/isChromatic";
 import { jsx, keyframes } from "@emotion/core";
 import { colors } from "../colors";
 
@@ -24,11 +23,18 @@ interface Props {
    * @default "medium"
    */
   size?: Size;
+
+  /**
+   * Whether or not to sync the animation when the
+   * component is remounted, defaults to true
+   */
+  syncAnimationRestarts?: boolean;
 }
 
 export const LoadingSpinner: React.FC<Props> = ({
   theme = "light",
   size = "medium",
+  syncAnimationRestarts = true,
   className,
   ...props
 }) => {
@@ -78,7 +84,9 @@ export const LoadingSpinner: React.FC<Props> = ({
   const pixelSize = SIZE_MAP[size];
 
   const mountTime = React.useRef(Date.now());
-  const mountDelay = isChromatic() ? 0 : -(mountTime.current % DURATION);
+  const mountDelay = syncAnimationRestarts
+    ? 0
+    : -(mountTime.current % DURATION);
 
   return (
     <svg
