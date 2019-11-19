@@ -1,3 +1,15 @@
+# v2.17.0 (Tue Nov 19 2019)
+
+#### 🚀  Enhancement
+
+- Change loader spin duration to 750ms [#140](https://github.com/apollographql/space-kit/pull/140) ([@jgzuke](https://github.com/jgzuke))
+
+#### Authors: 1
+
+- Jason Zukewich ([@jgzuke](https://github.com/jgzuke))
+
+---
+
 # v2.16.0 (Mon Nov 18 2019)
 
 #### 🚀  Enhancement
