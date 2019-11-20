@@ -85,8 +85,8 @@ export const LoadingSpinner: React.FC<Props> = ({
 
   const mountTime = React.useRef(Date.now());
   const mountDelay = syncAnimationRestarts
-    ? 0
-    : -(mountTime.current % DURATION);
+    ? -(mountTime.current % DURATION)
+    : 0;
 
   return (
     <svg
