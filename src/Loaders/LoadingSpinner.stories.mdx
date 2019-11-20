@@ -48,17 +48,29 @@ export const ThemeWrapper = ({ backgroundColor = colors.white, children }) => (
 <Preview>
   <Story name="theme light">
     <ThemeWrapper>
-      <LoadingSpinner size="xsmall" theme="light" syncAnimationRestarts={false} />
+      <LoadingSpinner
+        size="xsmall"
+        theme="light"
+        syncAnimationRestarts={false}
+      />
     </ThemeWrapper>
   </Story>
   <Story name="theme dark">
     <ThemeWrapper backgroundColor={colors.black.base}>
-      <LoadingSpinner size="xsmall" theme="dark" syncAnimationRestarts={false} />
+      <LoadingSpinner
+        size="xsmall"
+        theme="dark"
+        syncAnimationRestarts={false}
+      />
     </ThemeWrapper>
   </Story>
   <Story name="theme grayscale">
     <ThemeWrapper backgroundColor={colors.silver.light}>
-      <LoadingSpinner size="xsmall" theme="grayscale" syncAnimationRestarts={false} />
+      <LoadingSpinner
+        size="xsmall"
+        theme="grayscale"
+        syncAnimationRestarts={false}
+      />
     </ThemeWrapper>
   </Story>
 </Preview>
