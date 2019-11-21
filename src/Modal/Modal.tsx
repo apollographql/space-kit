@@ -6,6 +6,7 @@ import * as typography from "../typography";
 import { colors } from "../colors";
 import * as CSS from "csstype";
 import classnames from "classnames";
+import { useSpaceKitProvider } from "../SpaceKitProvider";
 
 interface Props {
   /**
@@ -124,6 +125,8 @@ export const Modal: React.FC<Props> = ({
   primaryAction,
   secondaryAction,
 }) => {
+  const { disableAnimations } = useSpaceKitProvider();
+
   useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {
       if (event.code === "Escape" && onClose) {
@@ -154,7 +157,7 @@ export const Modal: React.FC<Props> = ({
           children: (
             <motion.div
               animate={{ opacity: 1, scale: 1 }}
-              initial={{ opacity: 0, scale: 0.9 }}
+              initial={disableAnimations ? false : { opacity: 0, scale: 0.9 }}
               transition={{
                 scale: {
                   type: "spring",

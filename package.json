@@ -106,7 +106,7 @@
     "npm-watch": "^0.6.0",
     "react-docgen-typescript-loader": "^3.1.1",
     "rimraf": "^2.6.3",
-    "storybook-chromatic": "^2.2.2",
+    "storybook-chromatic": "^3.1.0",
     "styled-system": "^5.0.12",
     "svgo": "^1.2.2",
     "ts-jest": "^24.0.2",
