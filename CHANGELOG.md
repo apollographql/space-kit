@@ -1,3 +1,15 @@
+# v2.17.1 (Thu Nov 21 2019)
+
+#### 🐛  Bug Fix
+
+- Stop stripping comments from TypeScript builds [#143](https://github.com/apollographql/space-kit/pull/143) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v2.17.0 (Tue Nov 19 2019)
 
 #### 🚀  Enhancement
