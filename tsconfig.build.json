@@ -15,7 +15,6 @@
     "noUnusedLocals": true,
     "outDir": ".",
     "pretty": true,
-    "removeComments": true,
     "rootDir": "src",
     "sourceMap": true,
     "strict": true,
