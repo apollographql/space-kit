@@ -1,3 +1,15 @@
+# v2.18.0 (Thu Nov 21 2019)
+
+#### 🚀  Enhancement
+
+- [AP-1222](https://apollographql.atlassian.net/browse/AP-1222): Add option to disable Modal animations [#142](https://github.com/apollographql/space-kit/pull/142) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v2.17.1 (Thu Nov 21 2019)
 
 #### 🐛  Bug Fix
