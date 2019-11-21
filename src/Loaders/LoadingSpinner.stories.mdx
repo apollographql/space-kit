@@ -21,19 +21,19 @@ import { colors } from "../colors";
 
 <Preview>
   <Story name="size large">
-    <LoadingSpinner size="large" syncAnimationRestarts={false} />
+    <LoadingSpinner size="large" />
   </Story>
   <Story name="size medium">
-    <LoadingSpinner size="medium" syncAnimationRestarts={false} />
+    <LoadingSpinner size="medium" />
   </Story>
   <Story name="size small">
-    <LoadingSpinner size="small" syncAnimationRestarts={false} />
+    <LoadingSpinner size="small" />
   </Story>
   <Story name="size xsmall">
-    <LoadingSpinner size="xsmall" syncAnimationRestarts={false} />
+    <LoadingSpinner size="xsmall" />
   </Story>
   <Story name="size 2xsmall">
-    <LoadingSpinner size="2xsmall" syncAnimationRestarts={false} />
+    <LoadingSpinner size="2xsmall" />
   </Story>
 </Preview>
 
@@ -48,29 +48,17 @@ export const ThemeWrapper = ({ backgroundColor = colors.white, children }) => (
 <Preview>
   <Story name="theme light">
     <ThemeWrapper>
-      <LoadingSpinner
-        size="xsmall"
-        theme="light"
-        syncAnimationRestarts={false}
-      />
+      <LoadingSpinner size="xsmall" theme="light" />
     </ThemeWrapper>
   </Story>
   <Story name="theme dark">
     <ThemeWrapper backgroundColor={colors.black.base}>
-      <LoadingSpinner
-        size="xsmall"
-        theme="dark"
-        syncAnimationRestarts={false}
-      />
+      <LoadingSpinner size="xsmall" theme="dark" />
     </ThemeWrapper>
   </Story>
   <Story name="theme grayscale">
     <ThemeWrapper backgroundColor={colors.silver.light}>
-      <LoadingSpinner
-        size="xsmall"
-        theme="grayscale"
-        syncAnimationRestarts={false}
-      />
+      <LoadingSpinner size="xsmall" theme="grayscale" />
     </ThemeWrapper>
   </Story>
 </Preview>
