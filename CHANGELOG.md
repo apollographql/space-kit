@@ -1,3 +1,15 @@
+# v2.19.0 (Fri Nov 22 2019)
+
+#### 🚀  Enhancement
+
+- Turn off syncAnimationRestarts for chromatic and buttons [#141](https://github.com/apollographql/space-kit/pull/141) ([@jgzuke](https://github.com/jgzuke))
+
+#### Authors: 1
+
+- Jason Zukewich ([@jgzuke](https://github.com/jgzuke))
+
+---
+
 # v2.18.0 (Thu Nov 21 2019)
 
 #### 🚀  Enhancement
