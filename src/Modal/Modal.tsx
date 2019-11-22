@@ -92,6 +92,17 @@ const modalBackdrop = css`
   }
 `;
 
+const modalContents = (size: Props["size"]) => css`
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 16px 32px 0 rgba(0, 0, 0, 0.12),
+    0 0 0 1px rgba(18, 21, 26, 0.04);
+  max-height: 80%;
+  overflow-y: auto;
+  padding: ${size === "large" ? "40px" : "32px"};
+  width: ${getModalWidth(size)}px;
+`;
+
 /* istanbul ignore next */
 function assertUnreachable(value: never): never {
   throw new TypeError(`Unreachable value reached ${value}`);
@@ -144,10 +155,9 @@ export const Modal: React.FC<Props> = ({
     <ClassNames>
       {({ css, cx }) => {
         const propsToPass = {
-          onClick: onClose,
+          onClick: (event: React.MouseEvent) => event.stopPropagation(),
           className: classnames(
-            className,
-            cx(css(modalBackdrop)),
+            cx(css(modalContents(size))),
             as.props.className,
             // If the parent component is using emotion with the jsx pragma, we
             // have to get fancy and intercept the styles to use with the
@@ -155,37 +165,7 @@ export const Modal: React.FC<Props> = ({
             as.props.css ? css(as.props.css.styles) : null
           ),
           children: (
-            <motion.div
-              animate={{ opacity: 1, scale: 1 }}
-              initial={disableAnimations ? false : { opacity: 0, scale: 0.9 }}
-              transition={{
-                scale: {
-                  type: "spring",
-                  stiffness: 150,
-                  damping: 200,
-                  mass: 0.2,
-                  velocity: 8,
-                },
-              }}
-              onClick={event => event.stopPropagation()}
-              css={{
-                backgroundColor: "white",
-                borderRadius: 12,
-                boxShadow: `0 16px 32px 0 rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(18, 21, 26, 0.04)`,
-                maxHeight: "80%",
-                minWidth: 400,
-                opacity: 1,
-                overflowY: "auto",
-                padding: size === "large" ? "40px" : "32px",
-                position: "absolute",
-                width: getModalWidth(size),
-                zIndex: 11,
-                marginLeft: "auto",
-                marginRight: "auto",
-                left: 0,
-                right: 0,
-              }}
-            >
+            <div>
               <div>
                 {title && (
                   <div>
@@ -204,7 +184,10 @@ export const Modal: React.FC<Props> = ({
                 )}
                 {description && (
                   <div
-                    css={{ ...typography.base.base, color: colors.black.base }}
+                    css={{
+                      ...typography.base.base,
+                      color: colors.black.base,
+                    }}
                   >
                     {description}
                   </div>
@@ -236,11 +219,43 @@ export const Modal: React.FC<Props> = ({
                   {primaryAction && <div>{primaryAction}</div>}
                 </div>
               )}
-            </motion.div>
+            </div>
           ),
         };
 
-        return React.cloneElement(as, propsToPass);
+        return (
+          <div
+            onClick={onClose}
+            className={classnames(className, cx(css(modalBackdrop)))}
+          >
+            <motion.div
+              animate={{ opacity: 1, scale: 1 }}
+              initial={disableAnimations ? false : { opacity: 0, scale: 0.9 }}
+              transition={{
+                scale: {
+                  type: "spring",
+                  stiffness: 150,
+                  damping: 200,
+                  mass: 0.2,
+                  velocity: 8,
+                },
+              }}
+              css={{
+                minWidth: 400,
+                opacity: 1,
+                position: "absolute",
+                width: "fit-content",
+                zIndex: 11,
+                marginLeft: "auto",
+                marginRight: "auto",
+                left: 0,
+                right: 0,
+              }}
+            >
+              {React.cloneElement(as, propsToPass)}
+            </motion.div>
+          </div>
+        );
       }}
     </ClassNames>
   );

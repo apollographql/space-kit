@@ -1,4 +1,6 @@
+/** @jsx jsx */
 import { storiesOf } from "@storybook/react";
+import { css, jsx } from "@emotion/core";
 import { Modal } from "../Modal";
 import React, { useState } from "react";
 import { colors } from "../colors";
@@ -64,6 +66,36 @@ storiesOf("Modal", module)
         size={"large"}
       />
     </div>
+  ))
+  .add("using as=", () => (
+    <Modal
+      as={
+        <div
+          css={css`
+            background-color: ${colors.red.lightest};
+            width: 80vw;
+          `}
+        />
+      }
+      size="large"
+      title="Example Title"
+      primaryAction={
+        <Button
+          color={colors.red.base}
+          style={{ color: colors.white }}
+          type="button"
+        >
+          Accept
+        </Button>
+      }
+      secondaryAction={
+        <Button color={colors.white} type="button">
+          Cancel
+        </Button>
+      }
+    >
+      Inner text
+    </Modal>
   ))
   .add(
     "static (small) (✅ primaryAction, ✅ secondaryAction, ✅ bottomLeftText)",
