@@ -1,9 +1,9 @@
 /** @jsx jsx */
 import React from "react";
 import * as CSS from "csstype";
-import isChromatic from "storybook-chromatic/isChromatic";
 import { jsx, keyframes } from "@emotion/core";
 import { colors } from "../colors";
+import { useSpaceKitProvider } from "../SpaceKitProvider";
 
 export type Size = "large" | "medium" | "small" | "xsmall" | "2xsmall";
 export type Theme = "light" | "dark" | "grayscale";
@@ -73,12 +73,14 @@ export const LoadingSpinner: React.FC<Props> = ({
     },
   };
 
+  const { disableAnimations } = useSpaceKitProvider();
+
   const { orbitColor, orbitOpacity, asteroidColor } = THEME_MAP[theme];
 
   const pixelSize = SIZE_MAP[size];
 
   const mountTime = React.useRef(Date.now());
-  const mountDelay = isChromatic() ? 0 : -(mountTime.current % DURATION);
+  const mountDelay = disableAnimations ? 0 : -(mountTime.current % DURATION);
 
   return (
     <svg
