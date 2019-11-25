@@ -54,6 +54,7 @@ export const Card: React.FC<CardProps> = ({
         css={{
           flex: "1 1 0%",
           marginRight: "auto",
+          overflow: "hidden",
         }}
       >
         <div>
