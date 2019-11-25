@@ -106,4 +106,37 @@ storiesOf("Card", module)
         />
       </Card>
     </div>
+  ))
+  .add("Narrow card with really wide nested content", () => (
+    <div
+      style={{
+        backgroundColor: colors.silver.light,
+        padding: "40px",
+        height: "100vh",
+        width: "500px",
+      }}
+    >
+      <Card
+        heading="Card heading"
+        description={
+          <div style={{ whiteSpace: "nowrap", display: "flex" }}>
+            <span>some short text&nbsp;</span>
+            <span
+              style={{
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
+              }}
+            >
+              https://engine-staging.apollographql.com/account/gh.mdg-private/invite/c7b3eec0-4eab-4c8d-80a7-ea22cae89de1
+            </span>
+          </div>
+        }
+        actions={
+          <Button color={colors.red.base}>
+            <div style={{ color: colors.white }}>Click</div>
+          </Button>
+        }
+      />
+    </div>
   ));
