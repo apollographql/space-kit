@@ -1,3 +1,15 @@
+# v2.20.0 (Mon Nov 25 2019)
+
+#### 🚀  Enhancement
+
+- Fix: avoid descriptions pushing actions off-screen - [AP-1138](https://apollographql.atlassian.net/browse/AP-1138) [#145](https://github.com/apollographql/space-kit/pull/145) ([@cheapsteak](https://github.com/cheapsteak))
+
+#### Authors: 1
+
+- Chang Wang ([@cheapsteak](https://github.com/cheapsteak))
+
+---
+
 # v2.19.0 (Fri Nov 22 2019)
 
 #### 🚀  Enhancement
