@@ -28,5 +28,5 @@ export function findPaletteByColor(
   // We know that the interface conforms to one of these, but we can't infer
   // this because we defined all the palettes `as const` so we can restrict
   // input to only values in those palettes.
-  return result as (MonochromePalette | ColorPalette);
+  return result as MonochromePalette | ColorPalette;
 }

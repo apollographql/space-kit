@@ -15,8 +15,7 @@ export type ComponentWithAs<
   As extends AsType = DefaultAs
 >(
   props: React.PropsWithChildren<
-    ({ as?: As }) &
-      OriginalComponentProps &
+    { as?: As } & OriginalComponentProps &
       (As extends keyof JSX.IntrinsicElements
         ? JSX.IntrinsicElements[As]
         : As extends React.ReactElement
