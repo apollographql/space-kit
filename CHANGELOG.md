@@ -1,3 +1,16 @@
+# v2.21.0 (Wed Dec 04 2019)
+
+#### 🚀  Enhancement
+
+- [AP-1215](https://apollographql.atlassian.net/browse/AP-1215): Add `as` prop to `Modal` [#146](https://github.com/apollographql/space-kit/pull/146) ([@justinanastos](https://github.com/justinanastos) [@jgzuke](https://github.com/jgzuke))
+
+#### Authors: 2
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+- Jason Zukewich ([@jgzuke](https://github.com/jgzuke))
+
+---
+
 # v2.20.0 (Mon Nov 25 2019)
 
 #### 🚀  Enhancement
