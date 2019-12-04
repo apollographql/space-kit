@@ -3,6 +3,7 @@ import { fireEvent, render, cleanup } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import { Modal } from "./Modal";
 import { Button } from "../Button";
+import * as faker from "faker";
 
 afterEach(cleanup);
 
@@ -164,4 +165,27 @@ test("when content area is clicked, `onClose` should not be called", () => {
   getByText("title").click();
 
   expect(onClose).not.toHaveBeenCalled();
+});
+
+test("when passed `as` prop, props should be merged", () => {
+  const testId = faker.lorem.word();
+  const className = faker.lorem.word();
+
+  const { getByTestId } = render(
+    <Modal
+      as={
+        <form
+          data-testid={testId}
+          className={className}
+          style={{ fontWeight: "bold" }}
+        />
+      }
+      size="small"
+      title={faker.lorem.word()}
+    />
+  );
+
+  expect(getByTestId(testId)).toHaveClass(className);
+  expect(getByTestId(testId).localName).toBe("form");
+  expect(getByTestId(testId)).toHaveStyle("font-weight: bold");
 });

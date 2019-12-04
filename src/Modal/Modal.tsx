@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-ignore */
 /** @jsx jsx */
 import { jsx, css, ClassNames } from "@emotion/core";
 import React, { useEffect } from "react";
@@ -10,8 +11,8 @@ import { useSpaceKitProvider } from "../SpaceKitProvider";
 
 interface Props {
   /**
-   * Class name that will be applied to the wrapping `div` around the component,
-   * or the component passed as the `as` prop.
+   * Class name that will be applied to the content `div`, or the component
+   * passed as the `as` prop.
    */
   className?: string;
 
@@ -24,7 +25,7 @@ interface Props {
    *
    * @default `<div />`
    */
-  as?: React.ReactElement;
+  as?: React.ReactElement<any, keyof typeof motion>;
 
   /**
    * Optional primary action, usually a button
@@ -99,7 +100,7 @@ function assertUnreachable(value: never): never {
 
 type TLength = string | 0 | number;
 
-const getModalWidth = (size: Props["size"]): CSS.WidthProperty<TLength> => {
+function getModalWidth(size: Props["size"]): CSS.WidthProperty<TLength> {
   switch (size) {
     case "small":
       return 460;
@@ -111,7 +112,7 @@ const getModalWidth = (size: Props["size"]): CSS.WidthProperty<TLength> => {
     default:
       throw assertUnreachable(size);
   }
-};
+}
 
 export const Modal: React.FC<Props> = ({
   as = <div />,
@@ -138,24 +139,30 @@ export const Modal: React.FC<Props> = ({
     document.addEventListener("keydown", handleKeyDown);
 
     return () => document.removeEventListener("keydown", handleKeyDown);
-  });
+  }, [onClose]);
+
+  const type: keyof typeof motion = as.type;
+  if (!type || type === "custom") {
+    // TypeScript will give us some protection here, but we need to guarantee
+    // that `as` is an element that `motion` supports
+    throw new TypeError(
+      "`as` must be an element with a corresponding element in `Framer.motion`"
+    );
+  }
+
+  /**
+   * Framer motion component to render. The type will be taken from the `as`
+   * prop
+   */
+  const MotionComponent = motion[type];
 
   return (
     <ClassNames>
       {({ css, cx }) => {
-        const propsToPass = {
-          onClick: onClose,
-          className: classnames(
-            className,
-            cx(css(modalBackdrop)),
-            as.props.className,
-            // If the parent component is using emotion with the jsx pragma, we
-            // have to get fancy and intercept the styles to use with the
-            // `ClassNames` wrapper.
-            as.props.css ? css(as.props.css.styles) : null
-          ),
-          children: (
-            <motion.div
+        return (
+          <div onClick={onClose} className={cx(css(modalBackdrop))}>
+            <MotionComponent
+              {...as.props}
               animate={{ opacity: 1, scale: 1 }}
               initial={disableAnimations ? false : { opacity: 0, scale: 0.9 }}
               transition={{
@@ -167,24 +174,45 @@ export const Modal: React.FC<Props> = ({
                   velocity: 8,
                 },
               }}
-              onClick={event => event.stopPropagation()}
-              css={{
-                backgroundColor: "white",
-                borderRadius: 12,
-                boxShadow: `0 16px 32px 0 rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(18, 21, 26, 0.04)`,
-                maxHeight: "80%",
-                minWidth: 400,
-                opacity: 1,
-                overflowY: "auto",
-                padding: size === "large" ? "40px" : "32px",
-                position: "absolute",
-                width: getModalWidth(size),
-                zIndex: 11,
-                marginLeft: "auto",
-                marginRight: "auto",
-                left: 0,
-                right: 0,
-              }}
+              onClick={
+                // Ignore the type of `event` because the React.MouseEvent
+                // generic will be a union of 170 different DOM elements;
+                // TypeScript can't handle that.
+                //
+                // @ts-ignore
+                (event: React.MouseEvent<any>) => {
+                  event.stopPropagation();
+
+                  as.props.onClick?.(event);
+                }
+              }
+              className={classnames(
+                className,
+                cx(
+                  css({
+                    backgroundColor: "white",
+                    borderRadius: 12,
+                    boxShadow: `0 16px 32px 0 rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(18, 21, 26, 0.04)`,
+                    maxHeight: "80%",
+                    minWidth: 400,
+                    opacity: 1,
+                    overflowY: "auto",
+                    padding: size === "large" ? "40px" : "32px",
+                    position: "absolute",
+                    width: getModalWidth(size),
+                    zIndex: 11,
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                    left: 0,
+                    right: 0,
+                  })
+                ),
+                as.props.className,
+                // If the parent component is using emotion with the jsx pragma, we
+                // have to get fancy and intercept the styles to use with the
+                // `ClassNames` wrapper.
+                as.props.css ? css(as.props.css.styles) : null
+              )}
             >
               <div>
                 {title && (
@@ -236,11 +264,9 @@ export const Modal: React.FC<Props> = ({
                   {primaryAction && <div>{primaryAction}</div>}
                 </div>
               )}
-            </motion.div>
-          ),
-        };
-
-        return React.cloneElement(as, propsToPass);
+            </MotionComponent>
+          </div>
+        );
       }}
     </ClassNames>
   );
