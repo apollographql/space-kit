@@ -11,6 +11,7 @@ tsconfig.tsbuildinfo
 .eslintcache
 
 # Other modules
+/*-????????.js*
 /Button
 /colors
 /emotionCacheProviderFactory
