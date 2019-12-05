@@ -1,3 +1,15 @@
+# v2.21.1 (Thu Dec 05 2019)
+
+#### 🐛  Bug Fix
+
+- Make tslib a proper dep [#147](https://github.com/apollographql/space-kit/pull/147) ([@jgzuke](https://github.com/jgzuke))
+
+#### Authors: 1
+
+- Jason Zukewich ([@jgzuke](https://github.com/jgzuke))
+
+---
+
 # v2.21.0 (Wed Dec 04 2019)
 
 #### 🚀  Enhancement
