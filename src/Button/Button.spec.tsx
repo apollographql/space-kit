@@ -1,4 +1,5 @@
 import "@testing-library/jest-dom/extend-expect";
+import * as faker from "faker";
 import { Button } from "./Button";
 import { cleanup, fireEvent, render } from "@testing-library/react";
 import { IconShip2 } from "../icons/IconShip2";
@@ -172,4 +173,17 @@ test("when passed a type, should render it in the dom", () => {
   );
 
   expect(getByTestId("button")).toHaveAttribute("type", "button");
+});
+
+test("ref is forwarded", () => {
+  const ref = React.createRef<HTMLElement>();
+  const testId = faker.lorem.word();
+
+  const { getByTestId } = render(
+    <Button data-testid={testId} ref={ref}>
+      {faker.lorem.word()}
+    </Button>
+  );
+
+  expect(ref.current).toBe(getByTestId(testId));
 });
