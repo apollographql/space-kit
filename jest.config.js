@@ -14,6 +14,7 @@ module.exports = {
       "<rootDir>/__mocks__/fileMock.js",
   },
   preset: "ts-jest",
+  setupFilesAfterEnv: ["<rootDir>jest/setup.js"],
   snapshotSerializers: ["jest-emotion"],
   globals: {
     "ts-jest": {
