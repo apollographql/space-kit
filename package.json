@@ -122,6 +122,7 @@
     "rimraf": "^2.6.3",
     "rollup": "^1.27.8",
     "rollup-plugin-multi-input": "^1.0.3",
+    "rollup-plugin-postcss": "^2.0.3",
     "rollup-plugin-typescript2": "^0.25.3",
     "storybook-chromatic": "^3.1.0",
     "styled-system": "^5.0.12",
