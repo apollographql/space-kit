@@ -26,6 +26,7 @@ tsconfig.tsbuildinfo
 /shared
 /SpaceKitProvider
 /Table
+/Tooltip
 /typography
 
 # Generated icons stored in src directory 
