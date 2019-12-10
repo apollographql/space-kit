@@ -43,6 +43,7 @@ function CJS() {
     external: [
       "@emotion/cache",
       "@emotion/core",
+      "@tippy.js/react",
       "classnames",
       "framer-motion",
       "prop-types",
