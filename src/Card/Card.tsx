@@ -1,9 +1,10 @@
 /** @jsx jsx */
 import { colors } from "../colors";
 import { base } from "../typography";
-import { jsx } from "@emotion/core";
+import { jsx, ClassNames } from "@emotion/core";
 import React from "react";
 import PropTypes from "prop-types";
+import classnames from "classnames";
 
 const descriptionMaxWidth = 760;
 
@@ -20,6 +21,16 @@ interface CardProps
   children?: React.ReactNode;
 
   /**
+   * Override how the `header` is rendered. You can pass either an intrinisic
+   * jsx element as a string (like "h1") or a react element (`<h1 />`)
+   *
+   * If you pass a react element, props that we add are spread onto the input.
+   *
+   * @default "h2"
+   */
+  headingAs?: React.ReactElement | keyof JSX.IntrinsicElements;
+
+  /**
    * large has bigger heading & smaller padding than standard
    */
   size?: "standard" | "large";
@@ -30,10 +41,11 @@ export const Card: React.FC<CardProps> = ({
   heading,
   actions,
   description,
+  headingAs = "h2",
   size,
   ...otherProps
 }) => (
-  <div
+  <section
     {...otherProps}
     css={{
       backgroundColor: colors.white,
@@ -59,26 +71,33 @@ export const Card: React.FC<CardProps> = ({
       >
         <div>
           {heading && (
-            <div
-              css={{
-                display: "flex",
-                color: colors.black.base,
-                ...(size === "large" ? base.xlarge : base.large),
+            <ClassNames>
+              {({ css, cx }) => {
+                const headingProps = {
+                  className: cx(
+                    css({
+                      color: colors.black.base,
+                      display: "flex",
+                      fontWeight: 600,
+                      marginBottom: 0,
+                      marginTop: 0,
+                      ...(size === "large" ? base.xlarge : base.large),
+                    })
+                  ),
+                  children: heading,
+                };
+
+                return React.isValidElement(headingAs)
+                  ? React.cloneElement(headingAs, {
+                      ...headingProps,
+                      className: classnames(
+                        headingProps.className,
+                        headingAs.props.className
+                      ),
+                    })
+                  : React.createElement(headingAs, headingProps);
               }}
-            >
-              <span
-                css={{
-                  fontWeight: 600,
-                  flex: "1 1 0%",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  whiteSpace: "nowrap",
-                  paddingRight: 24,
-                }}
-              >
-                {heading}
-              </span>
-            </div>
+            </ClassNames>
           )}
           {description && (
             <div
@@ -96,7 +115,7 @@ export const Card: React.FC<CardProps> = ({
       {actions && <div css={{ marginLeft: 16 }}>{actions}</div>}
     </div>
     {children}
-  </div>
+  </section>
 );
 
 Card.propTypes = {
@@ -129,7 +148,7 @@ export const CardSection: React.FC<CardSectionProps> = ({
   description,
   actions,
 }) => (
-  <div
+  <section
     css={{
       display: "flex",
       marginTop: 24,
@@ -173,7 +192,7 @@ export const CardSection: React.FC<CardSectionProps> = ({
       </div>
     </div>
     {actions && <div css={{ marginLeft: 16 }}>{actions}</div>}
-  </div>
+  </section>
 );
 
 CardSection.propTypes = {
