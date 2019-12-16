@@ -85,6 +85,7 @@ export const LoadingSpinner: React.FC<Props> = ({
   return (
     <svg
       className={className}
+      role="progressbar"
       viewBox="0 0 100 100"
       css={{
         width: pixelSize,
