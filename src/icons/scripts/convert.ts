@@ -5,6 +5,7 @@ import svgr from "@svgr/core";
 import { formatComponentName } from "./formatComponentName";
 import { svgo } from "./convertUtils/setupSvgo";
 import traverse from "@babel/traverse";
+import prettier from "prettier";
 
 const SVG_PATH = path.resolve(__dirname, "..", "svgs");
 const COMPONENT_PATH = path.resolve(__dirname, "..");
@@ -87,6 +88,8 @@ function createCSSAttribute(css: string): types.JSXAttribute {
     fs.mkdirSync(COMPONENT_PATH);
   }
 
+  const prettierConfig = await prettier.resolveConfig(COMPONENT_PATH);
+
   // Move all the files in corresponding component directories
   return fs
     .readdirSync(SVG_PATH)
@@ -138,6 +141,13 @@ function createCSSAttribute(css: string): types.JSXAttribute {
                     plugins: ["typescript"],
                   });
 
+                  jsx.openingElement.attributes.push(
+                    types.jsxAttribute(
+                      types.jsxIdentifier("ref"),
+                      types.jsxExpressionContainer(types.identifier("ref"))
+                    )
+                  );
+
                   traverse(jsx, {
                     noScope: true,
                     JSXOpeningElement({ node }) {
@@ -153,25 +163,28 @@ function createCSSAttribute(css: string): types.JSXAttribute {
                       height: ${getHeightFromViewbox(jsx.openingElement)}px;`
                     )
                   );
+
                   // We need to add '/** @jsx jsx */' to the top of the file,
                   // but this implementation will strip it out. We add it
                   // manually when we write the file to disk.
                   return typeScriptTpl.ast`
-                  /** @jsx jsx */ /* <- this is stripped out by svgr :( so we manually add it when we write to disk */
-                  ${imports}
-                  import { css, jsx } from '@emotion/core';
-                  
-                  interface Props extends React.SVGProps<SVGSVGElement> {
-                    /**
-                     * Weight to render the SVG in. Defaults to "normal"
-                     */
-                    weight?: "thin" | "normal";
-                  }
+                    ${imports}
+                    import { jsx, css } from '@emotion/core';
+                    
+                    interface Props extends Omit<React.SVGProps<SVGSVGElement>, "css"> {
+                      /**
+                       * Weight to render the SVG in. Defaults to "normal"
+                       */
+                      weight?: "thin" | "normal";
+                    }
 
-                  export const ${componentName} = ({ weight = "normal", ...props }) => ${jsx}
-                `;
+                    export const ${componentName} = React.forwardRef<SVGSVGElement, Props>(
+                      ({ weight = "normal", ...props }, ref) => 
+                        ${jsx}
+                      )
+                  `;
                 },
-                plugins: ["@svgr/plugin-jsx", "@svgr/plugin-prettier"],
+                plugins: ["@svgr/plugin-jsx"],
                 replaceAttrValues: {
                   "#000": "currentColor",
                   "#000000": "currentColor",
@@ -191,10 +204,10 @@ function createCSSAttribute(css: string): types.JSXAttribute {
             // template function retain comments.
             fs.writeFileSync(
               outputFilename,
-              `/** @jsx jsx */\n${componentSource.replace(
-                /( = \(\{ weight = "normal", \.\.\.props \}\))/,
-                ": React.FC<Props>$1"
-              )}`,
+              prettier.format(`/** @jsx jsx */\n${componentSource}`, {
+                ...prettierConfig,
+                parser: "typescript",
+              }),
               "utf-8"
             );
           })
