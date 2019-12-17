@@ -38,12 +38,18 @@
     "watch:npmwatch": "npm-watch"
   },
   "watch": {
-    "build:icons": {
-      "extensions": [
-        "svg"
-      ],
+    "icons:generate": {
+      "extensions": "svg,spec.tsx,.ts",
       "patterns": [
-        "src/icons/svgs"
+        "src/icons/svgs",
+        "src/icons/scripts/convert.ts"
+      ]
+    },
+    "illustrations:generate": {
+      "extensions": "svg,spec.tsx,.ts",
+      "patterns": [
+        "src/illustrations/svgs",
+        "src/illustrations/scripts/convert.ts"
       ]
     }
   },
