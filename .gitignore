@@ -29,9 +29,11 @@ tsconfig.tsbuildinfo
 
 # Generated icons stored in src directory 
 src/icons/*.tsx
+!src/icons/*.spec.tsx
 
 # Generated illustrations stored in src directory (we also generate the story)
 src/illustrations/*.tsx
+!src/illustrations/*spec.tsx
 src/illustrations/Illustrations.story.mdx
 
 .awcache
