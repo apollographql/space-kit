@@ -2,6 +2,7 @@
 const path = require("path");
 
 module.exports = [
+  path.resolve(path.join(__dirname, "privatePresets/ignoreTestFilesPreset.js")),
   {
     name: "@storybook/preset-typescript",
     options: {
