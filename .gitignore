@@ -12,6 +12,7 @@ tsconfig.tsbuildinfo
 
 # Other modules
 /*-????????.js*
+/AbstractTooltip
 /Button
 /colors
 /emotionCacheProviderFactory
