@@ -1,3 +1,19 @@
+# v2.22.0 (Fri Dec 20 2019)
+
+#### 🚀  Enhancement
+
+- feat(LoadingSpinner): Add `progressbar` role [#151](https://github.com/apollographql/space-kit/pull/151) ([@justinanastos](https://github.com/justinanastos))
+
+#### 🏗  Internal
+
+- [AP-1023](https://apollographql.atlassian.net/browse/AP-1023): Use rollup to bundle library [#149](https://github.com/apollographql/space-kit/pull/149) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v2.21.1 (Thu Dec 05 2019)
 
 #### 🐛  Bug Fix
