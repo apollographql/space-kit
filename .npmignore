@@ -18,3 +18,21 @@ build-reset.ts
 # ESLint stuff
 .eslintcache
 .eslintrc.js
+
+# Everything else
+__mocks__/
+.autorc
+.circleci/config.yml
+.envrc
+.gitattributes
+.prettierrc.toml
+CHANGELOG.md
+components-util
+coverage
+jest.config.js
+netlify.toml
+README.md
+rollup.config.js
+scripts
+tsconfig.build.json
+typings
