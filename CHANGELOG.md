@@ -1,3 +1,15 @@
+# v2.23.0 (Tue Jan 14 2020)
+
+#### 🚀  Enhancement
+
+- Add address icon [#152](https://github.com/apollographql/space-kit/pull/152) ([@jgzuke](https://github.com/jgzuke))
+
+#### Authors: 1
+
+- Jason Zukewich ([@jgzuke](https://github.com/jgzuke))
+
+---
+
 # v2.22.0 (Fri Dec 20 2019)
 
 #### 🚀  Enhancement
