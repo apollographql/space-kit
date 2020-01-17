@@ -1,3 +1,15 @@
+# v2.24.0 (Fri Jan 17 2020)
+
+#### 🚀  Enhancement
+
+- [AP-1023,AP-1312](https://apollographql.atlassian.net/browse/AP-1023/AP-1312): AP-1312 Implement `Tooltip` and `ConfirmationTooltip` [#150](https://github.com/apollographql/space-kit/pull/150) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v2.23.0 (Tue Jan 14 2020)
 
 #### 🚀  Enhancement
