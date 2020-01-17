@@ -5,8 +5,6 @@ import { jsx } from "@emotion/core";
 import React from "react";
 import PropTypes from "prop-types";
 
-const descriptionMaxWidth = 760;
-
 interface CardProps
   extends React.DetailedHTMLProps<
       React.HTMLAttributes<HTMLDivElement>,
@@ -85,7 +83,6 @@ export const Card: React.FC<CardProps> = ({
               css={{
                 ...base.base,
                 color: colors.grey.base,
-                maxWidth: actions ? descriptionMaxWidth : "",
               }}
             >
               {description}
@@ -164,7 +161,6 @@ export const CardSection: React.FC<CardSectionProps> = ({
             css={{
               ...base.base,
               color: colors.grey.base,
-              maxWidth: actions ? descriptionMaxWidth : "",
             }}
           >
             {description}
