@@ -6,6 +6,7 @@ import { svgo } from "./convertUtils/setupSvgo";
 import * as types from "@babel/types";
 import traverse from "@babel/traverse";
 import { colors } from "../../colors";
+import prettier from "prettier";
 
 const SVG_PATH = path.resolve(__dirname, "..", "svgs");
 const COMPONENT_PATH = path.resolve(__dirname, "..");
@@ -128,6 +129,8 @@ All illustration components extends \`SVGSVGElement\` so that most props you'd w
     fs.mkdirSync(COMPONENT_PATH);
   }
 
+  const prettierConfig = await prettier.resolveConfig(COMPONENT_PATH);
+
   generateStorybookStory(
     fs
       .readdirSync(SVG_PATH)
@@ -172,6 +175,13 @@ All illustration components extends \`SVGSVGElement\` so that most props you'd w
               plugins: ["typescript"],
             });
 
+            jsx.openingElement.attributes.push(
+              types.jsxAttribute(
+                types.jsxIdentifier("ref"),
+                types.jsxExpressionContainer(types.identifier("ref"))
+              )
+            );
+
             traverse(jsx, {
               noScope: true,
               JSXOpeningElement({ node }) {
@@ -182,11 +192,13 @@ All illustration components extends \`SVGSVGElement\` so that most props you'd w
             return typeScriptTpl.ast`
               ${imports}
               import { jsx } from '@emotion/core';
-              
-              export const ${componentName} = (props) => ${jsx}
+
+              export const ${componentName} = React.forwardRef<SVGSVGElement, Omit<React.SVGProps<SVGSVGElement>, "css">>(
+                (props, ref) => ${jsx}
+              )
             `;
           },
-          plugins: ["@svgr/plugin-jsx", "@svgr/plugin-prettier"],
+          plugins: ["@svgr/plugin-jsx"],
           replaceAttrValues: {
             "#F4F6F8": "currentColor",
           },
@@ -200,10 +212,10 @@ All illustration components extends \`SVGSVGElement\` so that most props you'd w
       // template function retain comments.
       fs.writeFileSync(
         outputFilename,
-        `/** @jsx jsx */\n${componentSource.replace(
-          " = props",
-          ": React.FC<React.SVGProps<SVGSVGElement>> = props"
-        )}`,
+        prettier.format(`/** @jsx jsx */\n${componentSource}`, {
+          ...prettierConfig,
+          parser: "typescript",
+        }),
         "utf-8"
       );
     });

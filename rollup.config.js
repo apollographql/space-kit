@@ -3,6 +3,7 @@ import typescript from "rollup-plugin-typescript2";
 import multiInput from "rollup-plugin-multi-input";
 import fs from "fs";
 import path from "path";
+import postcss from "rollup-plugin-postcss";
 
 /**
  * Recursively read files from `rootPath`. `rootPath` and `options` are passed
@@ -38,11 +39,13 @@ function CJS() {
             path.join("src", "icons", "scripts"),
             path.join("src", "illustrations", "scripts"),
             path.join("src", "shared"),
+            path.join("src", "AbstractTooltip"),
           ].some(excludedPathname => filename.includes(excludedPathname))
       ),
     external: [
       "@emotion/cache",
       "@emotion/core",
+      "@tippy.js/react",
       "classnames",
       "framer-motion",
       "prop-types",
@@ -63,6 +66,9 @@ function CJS() {
       }),
       multiInput({
         relative: "src/",
+      }),
+      postcss({
+        extensions: [".css"],
       }),
     ],
   };

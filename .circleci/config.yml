@@ -80,7 +80,7 @@ jobs:
           command: npm ci
       - run:
           name: Test
-          command: npm run test:unit:coverage -- --silent
+          command: npm run test:unit:coverage -- --silent --maxWorkers=2 --ci
       - store_artifacts:
           name: Store coverage artifacts
           path: coverage

@@ -30,6 +30,7 @@ CHANGELOG.md
 components-util
 coverage
 jest.config.js
+jest/setup.js
 netlify.toml
 README.md
 rollup.config.js
