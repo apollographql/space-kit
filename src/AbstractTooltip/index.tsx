@@ -44,8 +44,8 @@ export const AbstractTooltip: React.FC<Props> = ({
         hideOnClick={forceVisibleForTestingOnly ? false : hideOnClick}
         trigger={forceVisibleForTestingOnly ? "manual" : trigger}
         visible={forceVisibleForTestingOnly ? true : undefined}
-        {...props}
         theme="space-kit"
+        {...props}
         className={classnames(className, {
           "space-kit-relaxed": padding === "relaxed",
         })}
