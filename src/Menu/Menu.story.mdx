@@ -1,0 +1,272 @@
+import userEvent from "@testing-library/user-event";
+import { findByText } from "@testing-library/dom";
+import { Button } from "../Button";
+import { colors } from "../colors";
+import { Menu } from "../Menu";
+import { PerformUserInteraction } from "./menuStory/PerformUserInteraction";
+import { MenuItem } from "../MenuItem";
+import { MenuDivider } from "../MenuDivider";
+import { MenuHeading } from "../MenuHeading";
+import {
+  Description,
+  Meta,
+  Story,
+  Props,
+  Preview,
+} from "@storybook/addon-docs/blocks";
+import { IconAstronaut1 } from "../icons/IconAstronaut1";
+import { IconAstronaut2 } from "../icons/IconAstronaut2";
+import { IconAstronaut3 } from "../icons/IconAstronaut3";
+import { IconLander } from "../icons/IconLander";
+import { IconPlanet3 } from "../icons/IconPlanet3";
+import { IconShip3 } from "../icons/IconShip3";
+import { IconCheck } from "../icons/IconCheck";
+
+<Meta title="Components|Menu" />
+
+# Menu
+
+<Description
+  of={Menu}
+  markdown="**Menus** provide a way for sures to interact with the application by selecting from a set of options. While that’s simple in theory, menus can be complex and not eveything is detailed below. Menus can emerge from Select buttons or a simple button."
+/>
+
+## Simple Menu
+
+The simple menu provides a list of options for a user to choose from and updates the button or select button with the choice the user has selected.
+
+<Preview>
+  <Story name="basic">
+    <PerformUserInteraction
+      callback={async () => {
+        userEvent.click(await findByText(document.body, /open menu/i));
+      }}
+    >
+      <Menu
+        placement="bottom-start"
+        content={
+          <React.Fragment>
+            <MenuItem>Root</MenuItem>
+            <MenuItem selected>Objects</MenuItem>
+            <MenuItem>Inputs</MenuItem>
+            <MenuItem>Interfaces</MenuItem>
+            <MenuItem>Unions</MenuItem>
+            <MenuItem>Scalars and Enums</MenuItem>
+          </React.Fragment>
+        }
+      >
+        <Button>Open Menu</Button>
+      </Menu>
+    </PerformUserInteraction>
+  </Story>
+</Preview>
+
+## Segmented Menu
+
+The segmented menu provides a way to group related options. This can be achieved
+by a divider and in other cases, headers can be used to group similar
+information and provide a nice visual grouping.
+
+<Preview>
+  <Story name="divided">
+    <PerformUserInteraction
+      callback={async () => {
+        userEvent.click(await findByText(document.body, /open menu/i));
+      }}
+    >
+      <Menu
+        placement="bottom-start"
+        content={
+          <React.Fragment>
+            <MenuItem>All Types</MenuItem>
+            <MenuDivider />
+            <MenuItem>Root</MenuItem>
+            <MenuItem>Objects</MenuItem>
+            <MenuItem>Inputs</MenuItem>
+            <MenuItem>Interfaces</MenuItem>
+            <MenuItem>Unions</MenuItem>
+            <MenuItem>Scalars and Enums</MenuItem>
+            <MenuDivider />
+            <MenuItem>Deprecations</MenuItem>
+          </React.Fragment>
+        }
+      >
+        <Button>Open Menu</Button>
+      </Menu>
+    </PerformUserInteraction>
+  </Story>
+</Preview>
+
+## Header
+
+<Preview>
+  <Story name="heading">
+    <PerformUserInteraction
+      callback={async () => {
+        userEvent.click(await findByText(document.body, /open menu/i));
+      }}
+    >
+      <Menu
+        placement="bottom-start"
+        content={
+          <React.Fragment>
+            <MenuHeading count={5}>Filter by</MenuHeading>
+            <MenuItem>Root</MenuItem>
+            <MenuItem>Objects</MenuItem>
+            <MenuItem>Inputs</MenuItem>
+            <MenuItem>Interfaces</MenuItem>
+            <MenuItem>Unions</MenuItem>
+            <MenuItem>Scalars and Enums</MenuItem>
+          </React.Fragment>
+        }
+      >
+        <Button>Open Menu</Button>
+      </Menu>
+    </PerformUserInteraction>
+  </Story>
+</Preview>
+
+## Icons
+
+<Preview>
+  <Story name="icons">
+    <PerformUserInteraction
+      callback={async () => {
+        userEvent.click(await findByText(document.body, /open menu/i));
+      }}
+    >
+      <Menu
+        placement="bottom-start"
+        content={
+          <React.Fragment>
+            <MenuItem
+              icon={
+                <IconAstronaut1
+                  style={{ width: "100%", height: "100%" }}
+                  weight="thin"
+                />
+              }
+            >
+              Cones
+            </MenuItem>
+            <MenuItem
+              icon={
+                <IconAstronaut2
+                  style={{ width: "100%", height: "100%" }}
+                  weight="thin"
+                />
+              }
+            >
+              Rhomboid
+            </MenuItem>
+            <MenuItem
+              icon={
+                <IconAstronaut3
+                  style={{ width: "100%", height: "100%" }}
+                  weight="thin"
+                />
+              }
+            >
+              Cubes
+            </MenuItem>
+            <MenuItem
+              icon={
+                <IconLander
+                  style={{ width: "100%", height: "100%" }}
+                  weight="thin"
+                />
+              }
+            >
+              Diamonds
+            </MenuItem>
+            <MenuItem
+              icon={
+                <IconPlanet3
+                  style={{ width: "100%", height: "100%" }}
+                  weight="thin"
+                />
+              }
+            >
+              Cylinders
+            </MenuItem>
+            <MenuItem
+              icon={
+                <IconShip3
+                  style={{ width: "100%", height: "100%" }}
+                  weight="thin"
+                />
+              }
+            >
+              Pyramids
+            </MenuItem>
+          </React.Fragment>
+        }
+      >
+        <Button>Open Menu</Button>
+      </Menu>
+    </PerformUserInteraction>
+  </Story>
+</Preview>
+
+## Icons with custom sizes
+
+<Preview>
+  <Story name="menu-icon-size">
+    <PerformUserInteraction
+      callback={async () => {
+        userEvent.click(await findByText(document.body, /open menu/i));
+      }}
+    >
+      <Menu
+        placement="bottom-start"
+        iconSize="small"
+        maxWidth={280}
+        content={
+          <React.Fragment>
+            <MenuHeading icon={null}>mdg-private-graphs</MenuHeading>
+            <MenuItem icon={null}>apollo-day-nyc</MenuItem>
+            <MenuItem icon={null} selected>
+              engine
+            </MenuItem>
+            <MenuItem icon={null}>galaxy-eu-west</MenuItem>
+            <MenuItem
+              icon={
+                <IconCheck
+                  style={{
+                    color: colors.blue.base,
+                    width: "100%",
+                    height: "100%",
+                  }}
+                />
+              }
+            >
+              galaxy-ties
+            </MenuItem>
+            <MenuItem icon={null}>space-explorer</MenuItem>
+            <MenuItem icon={null}>z-end-to-end-ingestion-20</MenuItem>
+          </React.Fragment>
+        }
+      >
+        <Button>Open Menu</Button>
+      </Menu>
+    </PerformUserInteraction>
+  </Story>
+</Preview>
+
+## Props
+
+### `Menu`
+
+<Props of={Menu} />
+
+### `MenuItem`
+
+<Props of={MenuItem} />
+
+### `MenuHeading`
+
+<Props of={MenuHeading} />
+
+### `MenuDivider`
+
+<Props of={MenuDivider} />
