@@ -1,3 +1,27 @@
+# v2.25.0 (Tue Feb 04 2020)
+
+### Release Notes
+
+_From #153_
+
+Create new `Menu` component and supporting components `MenuItem`, `MenuHeader`, and `MenuDivider`.
+
+See https://zpl.io/adX0ELe for the original designs and the storybook docs page for usage instructions and examples.
+
+This does not include any tests because I didn't know what to test. Any tests or ideas for tests would be most welcome!
+
+---
+
+#### 🚀  Enhancement
+
+- [AP-1335](https://apollographql.atlassian.net/browse/AP-1335): Implement Menus [#153](https://github.com/apollographql/space-kit/pull/153) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v2.24.0 (Fri Jan 17 2020)
 
 #### 🚀  Enhancement
