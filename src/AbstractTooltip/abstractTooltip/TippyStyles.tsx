@@ -7,30 +7,32 @@ import { Global, css } from "@emotion/core";
 export const TippyStyles: React.FC = () => (
   <Global
     styles={css({
-      ".tippy-tooltip.space-kit-theme": {
-        ...base.small,
-        backgroundColor: colors.black.base,
-        opacity: 0.95,
+      ".tippy-tooltip": {
+        "&.space-kit-theme": {
+          ...base.small,
+          backgroundColor: colors.black.base,
+          opacity: 0.95,
 
-        '&[data-placement^="top"] > .tippy-arrow': {
-          borderTopColor: colors.black.base,
-        },
-        '&[data-placement^="bottom"] > .tippy-arrow': {
-          borderBottomColor: colors.black.base,
-        },
-        '&[data-placement^="right"] > .tippy-arrow': {
-          borderRightColor: colors.black.base,
-        },
-        '&[data-placement^="left"] > .tippy-arrow': {
-          borderLeftColor: colors.black.base,
-        },
+          '&[data-placement^="top"] > .tippy-arrow': {
+            borderTopColor: colors.black.base,
+          },
+          '&[data-placement^="bottom"] > .tippy-arrow': {
+            borderBottomColor: colors.black.base,
+          },
+          '&[data-placement^="right"] > .tippy-arrow': {
+            borderRightColor: colors.black.base,
+          },
+          '&[data-placement^="left"] > .tippy-arrow': {
+            borderLeftColor: colors.black.base,
+          },
 
-        ".tippy-content": {
-          padding: "4px 8px",
-        },
+          ".tippy-content": {
+            padding: "4px 8px",
+          },
 
-        "&.space-kit-relaxed .tippy-content": {
-          padding: "8px 12px",
+          "&.space-kit-relaxed .tippy-content": {
+            padding: "8px 12px",
+          },
         },
       },
     })}

@@ -28,6 +28,7 @@ tsconfig.tsbuildinfo
 /SpaceKitProvider
 /Table
 /Tooltip
+/Menu*
 /typography
 
 # Generated icons stored in src directory 
