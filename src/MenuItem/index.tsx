@@ -5,6 +5,7 @@ import React from "react";
 import { css, jsx } from "@emotion/core";
 import { colors } from "../colors";
 import { useMenuIconSize } from "../MenuIconSize";
+import { useMenuItemClickListener } from "../MenuItemClickListener";
 
 /* istanbul ignore next */
 function assertUnreachable(value: never): never {
@@ -78,46 +79,67 @@ interface Props
 export const MenuItem = React.forwardRef<
   HTMLDivElement,
   React.PropsWithChildren<Props>
->(({ children, interactive = true, icon, selected = false, ...props }, ref) => {
-  const iconSize = useMenuIconSize();
+>(
+  (
+    { children, interactive = true, icon, onClick, selected = false, ...props },
+    ref
+  ) => {
+    const iconSize = useMenuIconSize();
+    const menuItemClickListener = useMenuItemClickListener();
 
-  const selectedStyles = interactive && {
-    backgroundColor: colors.blue.base,
-    color: colors.white,
-  };
+    const selectedStyles = interactive && {
+      backgroundColor: colors.blue.base,
+      color: colors.white,
+    };
 
-  return (
-    <div
-      {...props}
-      css={css({
-        ...(selected && selectedStyles),
-        "&:hover": selectedStyles,
-        color:
-          selected && selectedStyles ? selectedStyles.color : colors.black.base,
-        cursor: interactive ? "pointer" : undefined,
-        borderRadius: 4,
-        display: "flex",
-        paddingLeft: 12,
-        paddingRight: 12,
-        paddingTop: 4,
-        paddingBottom: 4,
-      })}
-      ref={ref}
-    >
-      {typeof icon !== "undefined" && (
-        <div
-          css={css({
-            flex: "none",
-            height: 20,
-            marginLeft: getIconMarginLeft(iconSize),
-            marginRight: getIconHorizontalPadding(iconSize),
-            width: getIconSize(iconSize),
-          })}
-        >
-          {icon}
-        </div>
-      )}
-      {children}
-    </div>
-  );
-});
+    /**
+     * Handler to call `onClick` handler passed in props and also handler passed
+     * via context
+     */
+    const delegatingOnClick = React.useCallback<React.MouseEventHandler<any>>(
+      event => {
+        if (onClick) onClick(event);
+        if (menuItemClickListener) menuItemClickListener(event);
+      },
+      [menuItemClickListener, onClick]
+    );
+
+    return (
+      <div
+        {...props}
+        onClick={delegatingOnClick}
+        css={css({
+          ...(selected && selectedStyles),
+          "&:hover": selectedStyles,
+          color:
+            selected && selectedStyles
+              ? selectedStyles.color
+              : colors.black.base,
+          cursor: interactive ? "pointer" : undefined,
+          borderRadius: 4,
+          display: "flex",
+          paddingLeft: 12,
+          paddingRight: 12,
+          paddingTop: 4,
+          paddingBottom: 4,
+        })}
+        ref={ref}
+      >
+        {typeof icon !== "undefined" && (
+          <div
+            css={css({
+              flex: "none",
+              height: 20,
+              marginLeft: getIconMarginLeft(iconSize),
+              marginRight: getIconHorizontalPadding(iconSize),
+              width: getIconSize(iconSize),
+            })}
+          >
+            {icon}
+          </div>
+        )}
+        {children}
+      </div>
+    );
+  }
+);

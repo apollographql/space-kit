@@ -8,6 +8,10 @@ import {
   useMenuIconSize,
 } from "../MenuIconSize";
 import { Instance, ReferenceElement } from "tippy.js";
+import {
+  MenuItemClickListenerProvider,
+  useMenuItemClickListener,
+} from "../MenuItemClickListener";
 
 interface Props
   extends Pick<
@@ -24,6 +28,13 @@ interface Props
   className?: string;
 
   /**
+   * Close menu automatically when a `MenuItem` is clicked
+   *
+   * @default true
+   */
+  closeOnMenuItemClick?: boolean;
+
+  /**
    * Optionally set the icon size to use for all `MenuItem` descendents. This
    * value will automatically be passed down via context and can be overriden by
    * child `Menu` components
@@ -33,27 +44,6 @@ interface Props
    * @default "normal"
    */
   iconSize?: IconSize;
-
-  /**
-   * Popper instance reference
-   *
-   * You'll need this to be able to call methods on the popper instance itself,
-   * such as wishing to hide the menu when a user clicks something.
-   *
-   * When using TypeScript, use this to create your own refs:
-   *
-   * ```tsx
-   * const menuInstanceRef = React.useRef<
-   *   NonNullable<React.ComponentProps<typeof Menu>['instanceRef']>['current']
-   * >()
-   * ```
-   */
-  instanceRef?: React.MutableRefObject<
-    | Parameters<
-        NonNullable<React.ComponentProps<typeof AbstractTooltip>["onCreate"]>
-      >[0]
-    | undefined
-  >;
 
   /**
    * Determines if the content should be given a max-height so it can be
@@ -108,12 +98,38 @@ function isReferenceObject(reference: any): reference is ReferenceElement {
  */
 export const Menu: React.FC<Props> = ({
   children,
+  closeOnMenuItemClick = true,
   iconSize,
-  instanceRef,
   scrollableContent = false,
+  content,
   ...props
 }) => {
+  const instanceRef = React.useRef<
+    Parameters<
+      NonNullable<React.ComponentProps<typeof AbstractTooltip>["onCreate"]>
+    >[0]
+  >();
+  const inheritedMenuItemClickListener = useMenuItemClickListener();
   const inheritedIconSize = useMenuIconSize();
+
+  /**
+   * Callback to handle descendeant `MenuItem` clicks.
+   *
+   * When we have nested menus and toggle menus we might need to change how this
+   * behaves.
+   */
+  const onMenuItemClick = React.useCallback<React.MouseEventHandler>(
+    event => {
+      if (inheritedMenuItemClickListener) {
+        inheritedMenuItemClickListener(event);
+      }
+
+      if (closeOnMenuItemClick) {
+        instanceRef.current?.hide();
+      }
+    },
+    [closeOnMenuItemClick, inheritedMenuItemClickListener, instanceRef]
+  );
 
   return (
     <MenuIconSizeProvider iconSize={iconSize ?? inheritedIconSize}>
@@ -121,10 +137,13 @@ export const Menu: React.FC<Props> = ({
       <AbstractTooltip
         appendTo="parent"
         onCreate={instance => {
-          if (instanceRef) {
-            instanceRef.current = instance;
-          }
+          instanceRef.current = instance;
         }}
+        content={
+          <MenuItemClickListenerProvider onClick={onMenuItemClick}>
+            {content}
+          </MenuItemClickListenerProvider>
+        }
         hideOnClick
         theme="space-kit-menu"
         trigger="mousedown"
