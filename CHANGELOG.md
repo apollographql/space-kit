@@ -1,3 +1,15 @@
+# v2.25.1 (Fri Feb 07 2020)
+
+#### 🐛  Bug Fix
+
+- [AP-1335](https://apollographql.atlassian.net/browse/AP-1335): Fix animations not being disabled by `SpaceKitProvider` [#155](https://github.com/apollographql/space-kit/pull/155) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v2.25.0 (Tue Feb 04 2020)
 
 ### Release Notes
