@@ -206,6 +206,166 @@ information and provide a nice visual grouping.
       </Menu>
     </PerformUserInteraction>
   </Story>
+  <Story name="end-icons">
+    <PerformUserInteraction
+      callback={async () => {
+        userEvent.click(await findByText(document.body, /open menu/i));
+      }}
+    >
+      <Menu
+        placement="bottom-start"
+        content={
+          <React.Fragment>
+            <MenuItem
+              endIcon={
+                <IconAstronaut1
+                  style={{ width: "100%", height: "100%" }}
+                  weight="thin"
+                />
+              }
+            >
+              Cones
+            </MenuItem>
+            <MenuItem
+              endIcon={
+                <IconAstronaut2
+                  style={{ width: "100%", height: "100%" }}
+                  weight="thin"
+                />
+              }
+            >
+              Rhomboid
+            </MenuItem>
+            <MenuItem
+              endIcon={
+                <IconAstronaut3
+                  style={{ width: "100%", height: "100%" }}
+                  weight="thin"
+                />
+              }
+            >
+              Cubes
+            </MenuItem>
+            <MenuItem
+              endIcon={
+                <IconLander
+                  style={{ width: "100%", height: "100%" }}
+                  weight="thin"
+                />
+              }
+            >
+              Diamonds
+            </MenuItem>
+            <MenuItem
+              endIcon={
+                <IconPlanet3
+                  style={{ width: "100%", height: "100%" }}
+                  weight="thin"
+                />
+              }
+            >
+              Cylinders
+            </MenuItem>
+            <MenuItem
+              endIcon={
+                <IconShip3
+                  style={{ width: "100%", height: "100%" }}
+                  weight="thin"
+                />
+              }
+            >
+              Pyramids
+            </MenuItem>
+          </React.Fragment>
+        }
+      >
+        <Button>Open Menu</Button>
+      </Menu>
+    </PerformUserInteraction>
+  </Story>
+  <Story name="multiline-end-icons">
+    <PerformUserInteraction
+      callback={async () => {
+        userEvent.click(await findByText(document.body, /open menu/i));
+      }}
+    >
+      <Menu
+        placement="bottom-start"
+        iconSize="small"
+        content={
+          <React.Fragment>
+            <MenuItem
+              endIcon={
+                <IconAstronaut1
+                  style={{ width: "100%", height: "100%" }}
+                  weight="thin"
+                />
+              }
+            >
+              <div>Cones</div>
+              <div>subtext</div>
+            </MenuItem>
+            <MenuItem
+              endIcon={
+                <IconAstronaut2
+                  style={{ width: "100%", height: "100%" }}
+                  weight="thin"
+                />
+              }
+            >
+              <div>Rhomboid</div>
+              <div>subtext</div>
+            </MenuItem>
+            <MenuItem
+              endIcon={
+                <IconAstronaut3
+                  style={{ width: "100%", height: "100%" }}
+                  weight="thin"
+                />
+              }
+            >
+              <div>Cubes</div>
+              <div>subtext</div>
+            </MenuItem>
+            <MenuItem
+              endIcon={
+                <IconLander
+                  style={{ width: "100%", height: "100%" }}
+                  weight="thin"
+                />
+              }
+            >
+              <div>Diamonds</div>
+              <div>subtext</div>
+            </MenuItem>
+            <MenuItem
+              endIcon={
+                <IconPlanet3
+                  style={{ width: "100%", height: "100%" }}
+                  weight="thin"
+                />
+              }
+            >
+              <div>Cylinders</div>
+              <div>subtext</div>
+            </MenuItem>
+            <MenuItem
+              endIcon={
+                <IconShip3
+                  style={{ width: "100%", height: "100%" }}
+                  weight="thin"
+                />
+              }
+            >
+              Pyramids
+            </MenuItem>
+          </React.Fragment>
+        }
+      >
+        <Button>Open Menu</Button>
+      </Menu>
+    </PerformUserInteraction>
+  </Story>
 </Preview>
 
 ## Icons with custom sizes

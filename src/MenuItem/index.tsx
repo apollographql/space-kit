@@ -60,6 +60,12 @@ interface Props
     "onClick"
   > {
   className?: string;
+  /** Icon to display at the end of a menu item.
+   *
+   * This element will always be rendered unless the value is `undefined`. If
+   * you want an empty node, a spacer for example, use `null`
+   */
+  endIcon?: React.ReactNode;
   /**
    * Indicates if this menu item can be itneracted with. Defaults to `true`. If
    * set to `false`, there will be no hover effects.
@@ -83,6 +89,7 @@ export const MenuItem = React.forwardRef<
   (
     {
       children,
+      endIcon,
       interactive = true,
       onClick,
       selected = false,
@@ -145,7 +152,25 @@ export const MenuItem = React.forwardRef<
             {startIcon}
           </div>
         )}
-        {children}
+        <div
+          css={css({
+            flex: "1",
+          })}
+        >
+          {children}
+        </div>
+        {typeof endIcon !== "undefined" && (
+          <div
+            css={css({
+              flex: "none",
+              height: 20,
+              marginLeft: getIconHorizontalPadding(iconSize),
+              width: getIconSize(iconSize),
+            })}
+          >
+            {endIcon}
+          </div>
+        )}
       </div>
     );
   }
