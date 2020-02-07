@@ -129,7 +129,7 @@ information and provide a nice visual grouping.
 ## Icons
 
 <Preview>
-  <Story name="icons">
+  <Story name="start-icons">
     <PerformUserInteraction
       callback={async () => {
         userEvent.click(await findByText(document.body, /open menu/i));
@@ -140,7 +140,7 @@ information and provide a nice visual grouping.
         content={
           <React.Fragment>
             <MenuItem
-              icon={
+              startIcon={
                 <IconAstronaut1
                   style={{ width: "100%", height: "100%" }}
                   weight="thin"
@@ -150,7 +150,7 @@ information and provide a nice visual grouping.
               Cones
             </MenuItem>
             <MenuItem
-              icon={
+              startIcon={
                 <IconAstronaut2
                   style={{ width: "100%", height: "100%" }}
                   weight="thin"
@@ -160,7 +160,7 @@ information and provide a nice visual grouping.
               Rhomboid
             </MenuItem>
             <MenuItem
-              icon={
+              startIcon={
                 <IconAstronaut3
                   style={{ width: "100%", height: "100%" }}
                   weight="thin"
@@ -170,7 +170,7 @@ information and provide a nice visual grouping.
               Cubes
             </MenuItem>
             <MenuItem
-              icon={
+              startIcon={
                 <IconLander
                   style={{ width: "100%", height: "100%" }}
                   weight="thin"
@@ -180,7 +180,7 @@ information and provide a nice visual grouping.
               Diamonds
             </MenuItem>
             <MenuItem
-              icon={
+              startIcon={
                 <IconPlanet3
                   style={{ width: "100%", height: "100%" }}
                   weight="thin"
@@ -190,7 +190,7 @@ information and provide a nice visual grouping.
               Cylinders
             </MenuItem>
             <MenuItem
-              icon={
+              startIcon={
                 <IconShip3
                   style={{ width: "100%", height: "100%" }}
                   weight="thin"
@@ -223,14 +223,14 @@ information and provide a nice visual grouping.
         maxWidth={280}
         content={
           <React.Fragment>
-            <MenuHeading icon={null}>mdg-private-graphs</MenuHeading>
-            <MenuItem icon={null}>apollo-day-nyc</MenuItem>
-            <MenuItem icon={null} selected>
+            <MenuHeading startIcon={null}>mdg-private-graphs</MenuHeading>
+            <MenuItem startIcon={null}>apollo-day-nyc</MenuItem>
+            <MenuItem startIcon={null} selected>
               engine
             </MenuItem>
-            <MenuItem icon={null}>galaxy-eu-west</MenuItem>
+            <MenuItem startIcon={null}>galaxy-eu-west</MenuItem>
             <MenuItem
-              icon={
+              startIcon={
                 <IconCheck
                   style={{
                     color: colors.blue.base,
@@ -242,8 +242,8 @@ information and provide a nice visual grouping.
             >
               galaxy-ties
             </MenuItem>
-            <MenuItem icon={null}>space-explorer</MenuItem>
-            <MenuItem icon={null}>z-end-to-end-ingestion-20</MenuItem>
+            <MenuItem startIcon={null}>space-explorer</MenuItem>
+            <MenuItem startIcon={null}>z-end-to-end-ingestion-20</MenuItem>
           </React.Fragment>
         }
       >

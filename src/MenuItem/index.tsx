@@ -60,13 +60,6 @@ interface Props
     "onClick"
   > {
   className?: string;
-  /** Icon to display to the left of the menu item.
-   *
-   * This element will always be rendered unless the value is `undefined`. If
-   * you want an empty node, a spacer for example, use `null`
-   */
-  icon?: React.ReactNode;
-  selected?: boolean;
   /**
    * Indicates if this menu item can be itneracted with. Defaults to `true`. If
    * set to `false`, there will be no hover effects.
@@ -74,6 +67,13 @@ interface Props
    * This is _not_ the same as `disabled`
    */
   interactive?: boolean;
+  selected?: boolean;
+  /** Icon to display at the start of a menu item.
+   *
+   * This element will always be rendered unless the value is `undefined`. If
+   * you want an empty node, a spacer for example, use `null`
+   */
+  startIcon?: React.ReactNode;
 }
 
 export const MenuItem = React.forwardRef<
@@ -81,7 +81,14 @@ export const MenuItem = React.forwardRef<
   React.PropsWithChildren<Props>
 >(
   (
-    { children, interactive = true, icon, onClick, selected = false, ...props },
+    {
+      children,
+      interactive = true,
+      onClick,
+      selected = false,
+      startIcon,
+      ...props
+    },
     ref
   ) => {
     const iconSize = useMenuIconSize();
@@ -125,7 +132,7 @@ export const MenuItem = React.forwardRef<
         })}
         ref={ref}
       >
-        {typeof icon !== "undefined" && (
+        {typeof startIcon !== "undefined" && (
           <div
             css={css({
               flex: "none",
@@ -135,7 +142,7 @@ export const MenuItem = React.forwardRef<
               width: getIconSize(iconSize),
             })}
           >
-            {icon}
+            {startIcon}
           </div>
         )}
         {children}
