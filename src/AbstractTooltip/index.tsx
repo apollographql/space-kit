@@ -32,14 +32,17 @@ export const AbstractTooltip: React.FC<Props> = ({
   hideOnClick,
   ...props
 }) => {
-  const { disableAnimations } = useSpaceKitProvider();
+  const {
+    disableAnimations: disableAnimationsFromProvider,
+  } = useSpaceKitProvider();
+  const disableAnimations =
+    disableAnimationsFromProvider || forceVisibleForTestingOnly;
 
-  // TODO: Change cursor to
   return (
     <>
       <TippyStyles />
       <Tippy
-        animation={!disableAnimations ? "shift-away" : undefined}
+        animation="shift-away"
         arrow={false}
         hideOnClick={forceVisibleForTestingOnly ? false : hideOnClick}
         trigger={forceVisibleForTestingOnly ? "manual" : trigger}
@@ -49,6 +52,8 @@ export const AbstractTooltip: React.FC<Props> = ({
         className={classnames(className, {
           "space-kit-relaxed": padding === "relaxed",
         })}
+        duration={disableAnimations ? 0 : props.duration}
+        updateDuration={disableAnimations ? 0 : props.updateDuration}
       >
         {children}
       </Tippy>
