@@ -1,6 +1,6 @@
 import "../../node_modules/tippy.js/animations/shift-away.css";
 import React from "react";
-import Tippy from "@tippy.js/react";
+import Tippy, { tippy } from "@tippy.js/react";
 import { TippyStyles } from "./abstractTooltip/TippyStyles";
 import { useSpaceKitProvider } from "../SpaceKitProvider";
 import classnames from "classnames";
@@ -52,8 +52,14 @@ export const AbstractTooltip: React.FC<Props> = ({
         className={classnames(className, {
           "space-kit-relaxed": padding === "relaxed",
         })}
-        duration={disableAnimations ? 0 : props.duration}
-        updateDuration={disableAnimations ? 0 : props.updateDuration}
+        duration={
+          disableAnimations ? 0 : props.duration ?? tippy.defaultProps.duration
+        }
+        updateDuration={
+          disableAnimations
+            ? 0
+            : props.updateDuration ?? tippy.defaultProps.updateDuration
+        }
       >
         {children}
       </Tippy>
