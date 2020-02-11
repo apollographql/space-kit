@@ -1,3 +1,15 @@
+# v2.25.2 (Tue Feb 11 2020)
+
+#### 🐛  Bug Fix
+
+- [AP-1335](https://apollographql.atlassian.net/browse/AP-1335): Fix broken animations again [#157](https://github.com/apollographql/space-kit/pull/157) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v2.25.1 (Fri Feb 07 2020)
 
 #### 🐛  Bug Fix
