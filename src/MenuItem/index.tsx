@@ -4,7 +4,7 @@ import * as CSS from "csstype";
 import React from "react";
 import { css, jsx } from "@emotion/core";
 import { colors } from "../colors";
-import { useMenuIconSize } from "../MenuIconSize";
+import { useMenuIconSize } from "../MenuConfig";
 import { useMenuItemClickListener } from "../MenuItemClickListener";
 
 /* istanbul ignore next */

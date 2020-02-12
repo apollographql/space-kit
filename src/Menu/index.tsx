@@ -2,11 +2,7 @@
 import React from "react";
 import { AbstractTooltip } from "../AbstractTooltip";
 import { TippyMenuStyles } from "./menu/TippyMenuStyles";
-import {
-  IconSize,
-  MenuIconSizeProvider,
-  useMenuIconSize,
-} from "../MenuIconSize";
+import { MenuConfigProvider, useMenuIconSize } from "../MenuConfig";
 import { Instance, ReferenceElement } from "tippy.js";
 import {
   MenuItemClickListenerProvider,
@@ -15,16 +11,17 @@ import {
 
 interface Props
   extends Pick<
-    React.ComponentProps<typeof AbstractTooltip>,
-    | "children"
-    | "content"
-    | "flip"
-    | "flipBehavior"
-    | "flipOnUpdate"
-    | "maxWidth"
-    | "placement"
-    | "trigger"
-  > {
+      React.ComponentProps<typeof AbstractTooltip>,
+      | "children"
+      | "content"
+      | "flip"
+      | "flipBehavior"
+      | "flipOnUpdate"
+      | "maxWidth"
+      | "placement"
+      | "trigger"
+    >,
+    Omit<React.ComponentProps<typeof MenuConfigProvider>, "children"> {
   className?: string;
 
   /**
@@ -33,17 +30,6 @@ interface Props
    * @default true
    */
   closeOnMenuItemClick?: boolean;
-
-  /**
-   * Optionally set the icon size to use for all `MenuItem` descendents. This
-   * value will automatically be passed down via context and can be overriden by
-   * child `Menu` components
-   *
-   * Is inherited by antecedent definitions
-   *
-   * @default "normal"
-   */
-  iconSize?: IconSize;
 
   /**
    * Determines if the content should be given a max-height so it can be
@@ -132,7 +118,7 @@ export const Menu: React.FC<Props> = ({
   );
 
   return (
-    <MenuIconSizeProvider iconSize={iconSize ?? inheritedIconSize}>
+    <MenuConfigProvider iconSize={iconSize ?? inheritedIconSize}>
       <TippyMenuStyles />
       <AbstractTooltip
         appendTo="parent"
@@ -177,6 +163,6 @@ export const Menu: React.FC<Props> = ({
       >
         {children}
       </AbstractTooltip>
-    </MenuIconSizeProvider>
+    </MenuConfigProvider>
   );
 };
