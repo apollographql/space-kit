@@ -413,6 +413,90 @@ information and provide a nice visual grouping.
   </Story>
 </Preview>
 
+## Truncation
+
+Items should be truncated properly
+
+export const MenuItemWithContentHuggingSides = ({
+  startContent,
+  endContent,
+}) => {
+  return (
+    <div style={{ width: "100%", display: "flex" }}>
+      <span
+        style={{
+          flex: 1,
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+          whiteSpace: "nowrap",
+        }}
+      >
+        {startContent}
+      </span>
+      <span
+        style={{
+          marginLeft: ".5rem",
+          flex: "none",
+          color: colors.grey.light,
+        }}
+      >
+        {endContent}
+      </span>
+    </div>
+  );
+};
+
+<Preview>
+  <Story name="flexbox truncation">
+    <PerformUserInteraction
+      callback={async () => {
+        userEvent.click(await findByText(document.body, /open menu/i));
+      }}
+    >
+      <Menu
+        placement="bottom-start"
+        iconSize="small"
+        maxWidth={280}
+        content={
+          <React.Fragment>
+            <MenuHeading startIcon={null}>mdg-private-graphs</MenuHeading>
+            <MenuItem startIcon={null}>
+              <MenuItemWithContentHuggingSides
+                startContent="really_long_test_name_really_long_test_name"
+                endContent="0 rpm"
+              />
+            </MenuItem>
+            <MenuItem startIcon={null} selected>
+              <MenuItemWithContentHuggingSides
+                startContent="engine"
+                endContent="1.9k rm"
+              />
+            </MenuItem>
+            <MenuItem
+              startIcon={
+                <IconCheck
+                  style={{
+                    color: colors.blue.base,
+                    width: "100%",
+                    height: "100%",
+                  }}
+                />
+              }
+            >
+              <MenuItemWithContentHuggingSides
+                startContent="galaxy-eu-west"
+                endContent="0 rm"
+              />
+            </MenuItem>
+          </React.Fragment>
+        }
+      >
+        <Button>Open Menu</Button>
+      </Menu>
+    </PerformUserInteraction>
+  </Story>
+</Preview>
+
 ## Props
 
 ### `Menu`
