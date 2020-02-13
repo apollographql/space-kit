@@ -1,3 +1,26 @@
+# v3.0.0 (Thu Feb 13 2020)
+
+### Release Notes
+
+_From #156_
+
+- Remove `instanceRef` prop on `Menu` (💥 breaking change)
+- Replace `icon` with `startIcon` in `MenuItem` (💥 breaking change)
+- Add `endIcon` to `MenuItem`
+- Add `closeOnMenuItemClick` prop, defaulted to `true`, on `Menu`
+
+---
+
+#### 💥  Breaking Change
+
+- [AP-1335](https://apollographql.atlassian.net/browse/AP-1335): Remove `Menu` `instanceRef` prop and add `closeOnMenuItemClick` [#156](https://github.com/apollographql/space-kit/pull/156) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v2.25.2 (Tue Feb 11 2020)
 
 #### 🐛  Bug Fix
