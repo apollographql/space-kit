@@ -4,7 +4,8 @@ import * as CSS from "csstype";
 import React from "react";
 import { css, jsx } from "@emotion/core";
 import { colors } from "../colors";
-import { useMenuIconSize } from "../MenuIconSize";
+import { useMenuIconSize } from "../MenuConfig";
+import { useMenuItemClickListener } from "../MenuItemClickListener";
 
 /* istanbul ignore next */
 function assertUnreachable(value: never): never {
@@ -59,13 +60,12 @@ interface Props
     "onClick"
   > {
   className?: string;
-  /** Icon to display to the left of the menu item.
+  /** Icon to display at the end of a menu item.
    *
    * This element will always be rendered unless the value is `undefined`. If
    * you want an empty node, a spacer for example, use `null`
    */
-  icon?: React.ReactNode;
-  selected?: boolean;
+  endIcon?: React.ReactNode;
   /**
    * Indicates if this menu item can be itneracted with. Defaults to `true`. If
    * set to `false`, there will be no hover effects.
@@ -73,51 +73,105 @@ interface Props
    * This is _not_ the same as `disabled`
    */
   interactive?: boolean;
+  selected?: boolean;
+  /** Icon to display at the start of a menu item.
+   *
+   * This element will always be rendered unless the value is `undefined`. If
+   * you want an empty node, a spacer for example, use `null`
+   */
+  startIcon?: React.ReactNode;
 }
 
 export const MenuItem = React.forwardRef<
   HTMLDivElement,
   React.PropsWithChildren<Props>
->(({ children, interactive = true, icon, selected = false, ...props }, ref) => {
-  const iconSize = useMenuIconSize();
+>(
+  (
+    {
+      children,
+      endIcon,
+      interactive = true,
+      onClick,
+      selected = false,
+      startIcon,
+      ...props
+    },
+    ref
+  ) => {
+    const iconSize = useMenuIconSize();
+    const menuItemClickListener = useMenuItemClickListener();
 
-  const selectedStyles = interactive && {
-    backgroundColor: colors.blue.base,
-    color: colors.white,
-  };
+    const selectedStyles = interactive && {
+      backgroundColor: colors.blue.base,
+      color: colors.white,
+    };
 
-  return (
-    <div
-      {...props}
-      css={css({
-        ...(selected && selectedStyles),
-        "&:hover": selectedStyles,
-        color:
-          selected && selectedStyles ? selectedStyles.color : colors.black.base,
-        cursor: interactive ? "pointer" : undefined,
-        borderRadius: 4,
-        display: "flex",
-        paddingLeft: 12,
-        paddingRight: 12,
-        paddingTop: 4,
-        paddingBottom: 4,
-      })}
-      ref={ref}
-    >
-      {typeof icon !== "undefined" && (
+    /**
+     * Handler to call `onClick` handler passed in props and also handler passed
+     * via context
+     */
+    const delegatingOnClick = React.useCallback<React.MouseEventHandler<any>>(
+      event => {
+        if (onClick) onClick(event);
+        if (menuItemClickListener) menuItemClickListener(event);
+      },
+      [menuItemClickListener, onClick]
+    );
+
+    return (
+      <div
+        {...props}
+        onClick={delegatingOnClick}
+        css={css({
+          ...(selected && selectedStyles),
+          "&:hover": selectedStyles,
+          color:
+            selected && selectedStyles
+              ? selectedStyles.color
+              : colors.black.base,
+          cursor: interactive ? "pointer" : undefined,
+          borderRadius: 4,
+          display: "flex",
+          paddingLeft: 12,
+          paddingRight: 12,
+          paddingTop: 4,
+          paddingBottom: 4,
+        })}
+        ref={ref}
+      >
+        {typeof startIcon !== "undefined" && (
+          <div
+            css={css({
+              flex: "none",
+              height: 20,
+              marginLeft: getIconMarginLeft(iconSize),
+              marginRight: getIconHorizontalPadding(iconSize),
+              width: getIconSize(iconSize),
+            })}
+          >
+            {startIcon}
+          </div>
+        )}
         <div
           css={css({
-            flex: "none",
-            height: 20,
-            marginLeft: getIconMarginLeft(iconSize),
-            marginRight: getIconHorizontalPadding(iconSize),
-            width: getIconSize(iconSize),
+            flex: "1",
           })}
         >
-          {icon}
+          {children}
         </div>
-      )}
-      {children}
-    </div>
-  );
-});
+        {typeof endIcon !== "undefined" && (
+          <div
+            css={css({
+              flex: "none",
+              height: 20,
+              marginLeft: getIconHorizontalPadding(iconSize),
+              width: getIconSize(iconSize),
+            })}
+          >
+            {endIcon}
+          </div>
+        )}
+      </div>
+    );
+  }
+);
