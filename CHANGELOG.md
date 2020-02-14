@@ -1,3 +1,15 @@
+# v3.0.1 (Fri Feb 14 2020)
+
+#### 🐛  Bug Fix
+
+- [AP-1335](https://apollographql.atlassian.net/browse/AP-1335): Fix `MenuItem`s not being truncated properly [#158](https://github.com/apollographql/space-kit/pull/158) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v3.0.0 (Thu Feb 13 2020)
 
 ### Release Notes
