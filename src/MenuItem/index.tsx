@@ -155,6 +155,8 @@ export const MenuItem = React.forwardRef<
         <div
           css={css({
             flex: "1",
+            /* This is weird but it's necessary to truncate menu items */
+            minWidth: 0,
           })}
         >
           {children}
