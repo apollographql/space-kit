@@ -22,6 +22,30 @@ test("when passed an icon, text and icon are rendered", () => {
   expect(getByTestId("icon")).toBeInTheDocument();
 });
 
+test("when passed an endIcon and text, both are rendered", () => {
+  const { getByText, getByTestId } = render(
+    <Button endIcon={<IconShip2 data-testid="icon" />}>submit</Button>
+  );
+
+  getByText("submit");
+  getByTestId("icon");
+});
+
+test("when passed an icon, endIcon, and text; all are rendered", () => {
+  const { getByText, getByTestId } = render(
+    <Button
+      endIcon={<IconShip2 data-testid="endIcon" />}
+      icon={<IconShip2 data-testid="icon" />}
+    >
+      submit
+    </Button>
+  );
+
+  getByText("submit");
+  getByTestId("icon");
+  getByTestId("endIcon");
+});
+
 test("wyhen passed an icon and no children, should render an icon and no text content", () => {
   const { container, getByTestId } = render(
     <Button icon={<IconShip2 data-testid="icon" />} />

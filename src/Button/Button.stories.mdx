@@ -6,9 +6,14 @@ import {
   Props,
   Preview,
 } from "@storybook/addon-docs/blocks";
+import { IconExpandList } from "../icons/IconExpandList";
 import { IconShip2 } from "../icons/IconShip2";
 import { ButtonLayout } from "./button.stories/ButtonLayout";
 import { colors } from "../colors";
+
+export const ExpandIcon = () => (
+  <IconExpandList style={{ height: 12, width: 12, color: colors.grey.light }} />
+);
 
 export const SampleIcon = () => (
   <IconShip2 style={{ height: "100%", width: "100%" }} />
@@ -445,6 +450,25 @@ In space constrained places or for floating action buttons (FAB), we can show an
   <Story inline name="dark fab">
     <ButtonLayout theme="dark">
       <Button theme="dark" icon={<SampleIcon />} variant="fab" />
+    </ButtonLayout>
+  </Story>
+</Preview>
+
+### End Icons
+
+You can specify that a button has an additional icon at the end of the row
+
+<Preview>
+  <Story name="light end icon">
+    <ButtonLayout theme="light">
+      <Button endIcon={<ExpandIcon />}>Submit</Button>
+    </ButtonLayout>
+  </Story>
+  <Story name="dark end icon">
+    <ButtonLayout theme="dark">
+      <Button theme="dark" endIcon={<ExpandIcon />}>
+        Submit
+      </Button>
     </ButtonLayout>
   </Story>
 </Preview>
