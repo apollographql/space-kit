@@ -55,9 +55,6 @@
   "repository": "apollographql/space-kit",
   "keywords": [],
   "license": "MIT",
-  "eslintConfig": {
-    "extends": "@trevorblades"
-  },
   "dependencies": {
     "@emotion/cache": "^10.0.15",
     "@emotion/core": "^10.0.15",
