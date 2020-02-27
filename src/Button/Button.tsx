@@ -362,6 +362,7 @@ export const Button = React.forwardRef<HTMLElement, Props>(
 
                   // Vertically center children
                   display: "inline-flex",
+                  alignItems: "center",
                   justifyContent: "center",
 
                   height: getHeight({ size }),
@@ -494,15 +495,7 @@ export const Button = React.forwardRef<HTMLElement, Props>(
           },
 
           children: (
-            <div
-              className={cx(
-                css({
-                  alignItems: "center",
-                  display: "flex",
-                  justifyContent: "center",
-                })
-              )}
-            >
+            <>
               {icon && (
                 <span
                   className={cx(
@@ -523,7 +516,7 @@ export const Button = React.forwardRef<HTMLElement, Props>(
                 </span>
               )}
               {children}
-            </div>
+            </>
           ),
         };
 
