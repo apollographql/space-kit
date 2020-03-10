@@ -180,6 +180,13 @@ interface Props
   disabled?: boolean;
 
   /**
+   * Icon to use at the end of a button
+   *
+   * The size of icons will be automatically determined, but can be overriden
+   */
+  endIcon?: React.ReactElement;
+
+  /**
    * Which feel to display
    *
    * The options are as follows:
@@ -264,6 +271,7 @@ export const Button = React.forwardRef<HTMLElement, Props>(
       color = defaultColor,
       disabled: disabledProps = false,
       variant,
+      endIcon,
       feel = "raised",
       icon: iconProp,
       loading,
@@ -362,6 +370,7 @@ export const Button = React.forwardRef<HTMLElement, Props>(
 
                   // Vertically center children
                   display: "inline-flex",
+                  alignItems: "center",
                   justifyContent: "center",
 
                   height: getHeight({ size }),
@@ -494,15 +503,7 @@ export const Button = React.forwardRef<HTMLElement, Props>(
           },
 
           children: (
-            <div
-              className={cx(
-                css({
-                  alignItems: "center",
-                  display: "flex",
-                  justifyContent: "center",
-                })
-              )}
-            >
+            <>
               {icon && (
                 <span
                   className={cx(
@@ -523,7 +524,26 @@ export const Button = React.forwardRef<HTMLElement, Props>(
                 </span>
               )}
               {children}
-            </div>
+              {endIcon && !loading && (
+                <span
+                  className={cx(
+                    css({
+                      alignItems: "center",
+                      // This needs to be `inline-flex` and not the default of
+                      // `inline-block` to vertically center the icon automatically
+                      display: "inline-flex",
+                      height: iconSize,
+                      justifyContent: "center",
+                      // The `4px` will be on the right to separate the icon from the text
+                      margin: iconOnly ? 0 : "0 0 0 4px",
+                      width: iconSize,
+                    })
+                  )}
+                >
+                  {endIcon}
+                </span>
+              )}
+            </>
           ),
         };
 
