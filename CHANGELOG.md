@@ -1,3 +1,15 @@
+# v3.1.0 (Tue Mar 10 2020)
+
+#### 🚀  Enhancement
+
+- [AP-1393](https://apollographql.atlassian.net/browse/AP-1393): Add `endIcon` prop to `Button` [#159](https://github.com/apollographql/space-kit/pull/159) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v3.0.1 (Fri Feb 14 2020)
 
 #### 🐛  Bug Fix
