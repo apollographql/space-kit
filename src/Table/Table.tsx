@@ -40,7 +40,16 @@ interface Props<RowShape> {
      * single `<colgroup>`.
      *
      * This allows you to apply styles to columns by setting a class on a single
-     * element instead of _all_ elements in a table's row
+     * element instead of _all_ elements in a table's row.
+     *
+     * Note that, per the [column
+     * spec](https://www.w3.org/TR/CSS2/tables.html#columns), there is a very
+     * limited set of style properties that can be applied to a column (via
+     * `style` or `className`):
+     * * `background`
+     * * `border`
+     * * `visiblity`
+     * * `width`
      */
     colProps?: React.DetailedHTMLProps<
       React.ColHTMLAttributes<HTMLTableColElement>,
