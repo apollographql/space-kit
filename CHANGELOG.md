@@ -1,3 +1,15 @@
+# v3.1.1 (Wed Mar 11 2020)
+
+#### 🐛  Bug Fix
+
+- 📚 Table: expand `colProps` docs to explain applicable styles [#160](https://github.com/apollographql/space-kit/pull/160) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v3.1.0 (Tue Mar 10 2020)
 
 #### 🚀  Enhancement
