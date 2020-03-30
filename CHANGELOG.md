@@ -1,3 +1,15 @@
+# v3.1.2 (Mon Mar 30 2020)
+
+#### 🐛  Bug Fix
+
+- Fix: Minor typo in Emotion description [#161](https://github.com/apollographql/space-kit/pull/161) ([@AlexanderMann](https://github.com/AlexanderMann))
+
+#### Authors: 1
+
+- Alexander Mann ([@AlexanderMann](https://github.com/AlexanderMann))
+
+---
+
 # v3.1.1 (Wed Mar 11 2020)
 
 #### 🐛  Bug Fix
