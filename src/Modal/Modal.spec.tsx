@@ -189,3 +189,26 @@ test("when passed `as` prop, props should be merged", () => {
   expect(getByTestId(testId).localName).toBe("form");
   expect(getByTestId(testId)).toHaveStyle("font-weight: bold");
 });
+
+test("when passed `containerAs` prop, props should be merged", () => {
+  const testId = faker.lorem.word();
+  const className = faker.lorem.word();
+
+  const { getByTestId } = render(
+    <Modal
+      containerAs={
+        <span
+          className={className}
+          data-testid={testId}
+          style={{ fontWeight: "bold" }}
+        />
+      }
+      size="small"
+      title={faker.lorem.word()}
+    />
+  );
+
+  expect(getByTestId(testId)).toHaveClass(className);
+  expect(getByTestId(testId).localName).toBe("span");
+  expect(getByTestId(testId)).toHaveStyle("font-weight: bold");
+});
