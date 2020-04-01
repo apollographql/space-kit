@@ -1,3 +1,15 @@
+# v3.2.0 (Wed Apr 01 2020)
+
+#### 🚀  Enhancement
+
+- Add `containerAs` prop to Modal [#162](https://github.com/apollographql/space-kit/pull/162) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v3.1.2 (Mon Mar 30 2020)
 
 #### 🐛  Bug Fix
