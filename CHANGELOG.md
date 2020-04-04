@@ -1,3 +1,15 @@
+# v3.3.0 (Sat Apr 04 2020)
+
+#### 🚀  Enhancement
+
+- Add run icon [#163](https://github.com/apollographql/space-kit/pull/163) ([@jgzuke](https://github.com/jgzuke))
+
+#### Authors: 1
+
+- Jason Zukewich ([@jgzuke](https://github.com/jgzuke))
+
+---
+
 # v3.2.0 (Wed Apr 01 2020)
 
 #### 🚀  Enhancement
