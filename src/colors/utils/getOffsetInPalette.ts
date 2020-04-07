@@ -57,7 +57,7 @@ export function getOffsetInPalette(
 
   if (isColorPalette(palette)) {
     const index = Object.keys(palette).findIndex(
-      paletteKey => palette[paletteKey as keyof ColorPalette] === color
+      (paletteKey) => palette[paletteKey as keyof ColorPalette] === color
     );
 
     // Use `max` to prevent a negative number. We explicitly do not throw an
@@ -73,7 +73,7 @@ export function getOffsetInPalette(
   }
 
   const index = Object.keys(palette).findIndex(
-    paletteKey => palette[paletteKey as keyof MonochromePalette] === color
+    (paletteKey) => palette[paletteKey as keyof MonochromePalette] === color
   );
 
   // Use `max` to prevent a negative number. We explicitly do not throw an

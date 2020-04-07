@@ -8,13 +8,13 @@ import metadata from "./Color.metadata.js";
 
 const ColorStory = ({ title, description, array }) => (
   <Page title={title} description={description}>
-    {array.map(color => (
+    {array.map((color) => (
       <Column
         key={color}
         title={metadata[color].title}
         description={metadata[color].description}
       >
-        {Object.keys(colors[color]).map(shade => {
+        {Object.keys(colors[color]).map((shade) => {
           return (
             <Patch
               key={shade}

@@ -62,7 +62,7 @@ export const WithMenuIconSize: React.FC<withMenuIconSizeProps> = ({
   children,
 }) => (
   <MenuConfigContext.Consumer>
-    {config => children({ iconSize: config?.iconSize ?? "normal" })}
+    {(config) => children({ iconSize: config?.iconSize ?? "normal" })}
   </MenuConfigContext.Consumer>
 );
 

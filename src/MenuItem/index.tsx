@@ -111,7 +111,7 @@ export const MenuItem = React.forwardRef<
      * via context
      */
     const delegatingOnClick = React.useCallback<React.MouseEventHandler<any>>(
-      event => {
+      (event) => {
         if (onClick) onClick(event);
         if (menuItemClickListener) menuItemClickListener(event);
       },

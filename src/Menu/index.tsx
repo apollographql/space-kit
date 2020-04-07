@@ -105,7 +105,7 @@ export const Menu: React.FC<Props> = ({
    * behaves.
    */
   const onMenuItemClick = React.useCallback<React.MouseEventHandler>(
-    event => {
+    (event) => {
       if (inheritedMenuItemClickListener) {
         inheritedMenuItemClickListener(event);
       }
@@ -122,7 +122,7 @@ export const Menu: React.FC<Props> = ({
       <TippyMenuStyles />
       <AbstractTooltip
         appendTo="parent"
-        onCreate={instance => {
+        onCreate={(instance) => {
           instanceRef.current = instance;
         }}
         content={
@@ -146,7 +146,7 @@ export const Menu: React.FC<Props> = ({
             setMaxHeight: {
               enabled: scrollableContent,
               order: 0,
-              fn: data => {
+              fn: (data) => {
                 const reference = data.instance.reference;
                 if (isReferenceObject(reference) && reference._tippy) {
                   const tippy = reference._tippy;
