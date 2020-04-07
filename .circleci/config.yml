@@ -103,11 +103,11 @@ workflows:
       - eslint
       - typescript
       - test
-      # - check-label:
-      #     filters:
-      #       branches:
-      #         ignore:
-      #           - master
+      - check-label:
+          filters:
+            branches:
+              ignore:
+                - master
       - release:
           requires:
             - eslint
