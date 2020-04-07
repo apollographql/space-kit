@@ -95,7 +95,7 @@
     "@types/svgo": "^1.2.1",
     "@typescript-eslint/eslint-plugin": "^2.10.0",
     "@typescript-eslint/parser": "^2.10.0",
-    "auto": "^7.6.2",
+    "auto": "^9.26.5",
     "babel-loader": "^8.0.6",
     "btoa": "^1.2.1",
     "eslint": "^6.7.2",
