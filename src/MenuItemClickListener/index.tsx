@@ -41,7 +41,7 @@ export const WithMenuIconSize: React.FC<withMenuItemClickListenerProps> = ({
   children,
 }) => (
   <MenuItemClickListenerContext.Consumer>
-    {onClick => children({ onClick })}
+    {(onClick) => children({ onClick })}
   </MenuItemClickListenerContext.Consumer>
 );
 

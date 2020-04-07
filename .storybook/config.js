@@ -6,7 +6,7 @@ import { SpaceKitProvider } from "../src/SpaceKitProvider";
 import "../reset.css";
 import "../font.css";
 
-addDecorator(story => (
+addDecorator((story) => (
   <SpaceKitProvider disableAnimations={isChromatic()}>
     {story()}
   </SpaceKitProvider>

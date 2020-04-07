@@ -9,7 +9,7 @@
  */
 
 module.exports.webpackFinal = function webpackFinal(config) {
-  config.module.rules.forEach(rule => {
+  config.module.rules.forEach((rule) => {
     if (!rule.exclude) {
       rule.exclude = [];
     } else if (!Array.isArray(rule.exclude)) {

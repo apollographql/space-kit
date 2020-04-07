@@ -108,7 +108,7 @@ test("when `closeOnMenuItemClick` is `false`, menu doesn't close when `MenuItem`
   // _need_ this 100ms delay. If someone changes the test setup, then this can
   // start giving false passes. I'd rather slow down the test by 100ms than give
   // accidental false passes, so I left this artificial delay.
-  await new Promise(resolve => setTimeout(resolve, 100));
+  await new Promise((resolve) => setTimeout(resolve, 100));
 
   expect(getByText(menuItemText)).toBeInTheDocument();
 });

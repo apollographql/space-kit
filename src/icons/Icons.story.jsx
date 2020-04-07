@@ -7,15 +7,15 @@ import { Column } from "../../components-util/Column";
 
 const svgsReq = require.context("./svgs", true, /\.svg$/);
 
-const formatName = basename =>
+const formatName = (basename) =>
   camelcase(basename.replace(/@\d+x\d+/, "").replace(/-sl$/, ""), {
     pascalCase: true,
   });
 
 const colorMap = {};
-Object.keys(colors).forEach(color => {
+Object.keys(colors).forEach((color) => {
   const shades = Object.keys(colors[color]);
-  shades.forEach(shade => {
+  shades.forEach((shade) => {
     colorMap[`${color}-${shade}`] = colors[color][shade];
   });
 });
@@ -29,10 +29,7 @@ const groupedIcons = svgsReq.keys().reduce((map, fullname) => {
   }
 
   const [, category, filename] = match;
-  const basename = filename
-    .split(".")
-    .slice(0, -1)
-    .join(".");
+  const basename = filename.split(".").slice(0, -1).join(".");
 
   if (!map[category]) map[category] = [];
   const componentName = formatName(basename);

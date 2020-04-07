@@ -13,10 +13,10 @@ afterEach(cleanup);
 function getComponentFiles(): ReadonlyArray<string> {
   return fs
     .readdirSync(path.resolve(__dirname))
-    .map(filename => path.join(__dirname, filename))
-    .filter(filename => fs.statSync(filename).isFile())
-    .filter(filename => !filename.match(/(story|spec)/))
-    .filter(filename => path.extname(filename) === ".tsx");
+    .map((filename) => path.join(__dirname, filename))
+    .filter((filename) => fs.statSync(filename).isFile())
+    .filter((filename) => !filename.match(/(story|spec)/))
+    .filter((filename) => path.extname(filename) === ".tsx");
 }
 
 test("should have svg components already built", () => {
@@ -29,7 +29,7 @@ describe("all components should passthrough refs", () => {
    */
   const componentFiles = getComponentFiles();
 
-  componentFiles.forEach(componentFile => {
+  componentFiles.forEach((componentFile) => {
     test(path.relative(".", componentFile), async () => {
       /**
        * Ref to send to the component

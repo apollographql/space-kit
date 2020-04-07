@@ -16,7 +16,7 @@ const COMPONENT_PATH = path.resolve(__dirname, "..");
  */
 function getHeightFromViewbox(node: types.JSXOpeningElement) {
   const viewBoxAttribute = node.attributes.find(
-    attribute =>
+    (attribute) =>
       attribute.type === "JSXAttribute" &&
       attribute.name.type === "JSXIdentifier" &&
       attribute.name.name === "viewBox"
@@ -37,7 +37,7 @@ function getHeightFromViewbox(node: types.JSXOpeningElement) {
 }
 
 function updateStrokeWidths(node: types.JSXOpeningElement) {
-  node.attributes.forEach(attribute => {
+  node.attributes.forEach((attribute) => {
     if (
       attribute.type === "JSXAttribute" &&
       attribute.name.type === "JSXIdentifier" &&
@@ -93,17 +93,17 @@ function createCSSAttribute(css: string): types.JSXAttribute {
   // Move all the files in corresponding component directories
   return fs
     .readdirSync(SVG_PATH)
-    .filter(svgPathFilename =>
+    .filter((svgPathFilename) =>
       fs.lstatSync(path.join(SVG_PATH, svgPathFilename)).isDirectory()
     )
-    .map(async svgPathDirectory => {
+    .map(async (svgPathDirectory) => {
       const fullSvgDirectory = path.join(SVG_PATH, svgPathDirectory);
 
       return Promise.all(
         fs
           .readdirSync(fullSvgDirectory)
-          .filter(filename => path.extname(filename) === ".svg")
-          .map(async filename => {
+          .filter((filename) => path.extname(filename) === ".svg")
+          .map(async (filename) => {
             const svgCode = fs.readFileSync(
               path.join(fullSvgDirectory, filename),
               "utf-8"

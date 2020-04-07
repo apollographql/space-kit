@@ -17,7 +17,7 @@ function addDimensions(node: types.JSXOpeningElement) {
   }
 
   const viewBoxAttribute = node.attributes.find(
-    attribute =>
+    (attribute) =>
       attribute.type === "JSXAttribute" &&
       attribute.name.type === "JSXIdentifier" &&
       attribute.name.name === "viewBox"
@@ -60,7 +60,8 @@ function addDimensions(node: types.JSXOpeningElement) {
 function generateStorybookStory(componentNames: string[]) {
   const content = `${componentNames
     .map(
-      componentName => `import { ${componentName} } from "./${componentName}";`
+      (componentName) =>
+        `import { ${componentName} } from "./${componentName}";`
     )
     .join("\n")}
 import { colors } from "../colors";
@@ -84,7 +85,7 @@ https://zpl.io/VOA3E0P
 
 ${componentNames
   .map(
-    componentName =>
+    (componentName) =>
       `## ${componentName}
 
 <Preview>
@@ -102,7 +103,7 @@ All backgrounds are customizable using \`color\`
 <Preview>
 ${componentNames
   .map(
-    componentName =>
+    (componentName) =>
       `  <Story name="${componentName}-silver-base">
     <${componentName} style={{ color: colors.silver.base }} />
   </Story>`
@@ -134,8 +135,8 @@ All illustration components extends \`SVGSVGElement\` so that most props you'd w
   generateStorybookStory(
     fs
       .readdirSync(SVG_PATH)
-      .filter(filename => path.extname(filename) === ".svg")
-      .map(filename => {
+      .filter((filename) => path.extname(filename) === ".svg")
+      .map((filename) => {
         return formatComponentName(
           path.basename(filename, path.extname(filename))
         );
@@ -143,8 +144,8 @@ All illustration components extends \`SVGSVGElement\` so that most props you'd w
   );
 
   fs.readdirSync(SVG_PATH)
-    .filter(filename => path.extname(filename) === ".svg")
-    .map(async filename => {
+    .filter((filename) => path.extname(filename) === ".svg")
+    .map(async (filename) => {
       const svgCode = fs.readFileSync(path.join(SVG_PATH, filename), "utf-8");
 
       // We have to use a custom svgo setup because the `svgr` one isn't

@@ -8,7 +8,7 @@ afterEach(cleanup);
 test("when passed headers in `columns`, should render them, even with no data", () => {
   const { container, getByText } = render(
     <Table
-      keyOn={user => user.name}
+      keyOn={(user) => user.name}
       data={[
         {
           name: "Mason",
@@ -45,7 +45,7 @@ test("when passed headers in `columns`, should render them, even with no data", 
 test("should render content", () => {
   const { getAllByText, getByText } = render(
     <Table
-      keyOn={user => user.name}
+      keyOn={(user) => user.name}
       data={[
         {
           name: "Mason",
@@ -82,7 +82,7 @@ test("should render content", () => {
 test("when passed col for columns, should render them", () => {
   const { container } = render(
     <Table
-      keyOn={user => user.name}
+      keyOn={(user) => user.name}
       data={[
         {
           name: "Mason",

@@ -36,7 +36,7 @@ export const ConfirmationTooltip: React.FC<Props> = ({
     <AbstractTooltip
       trigger="click"
       {...props}
-      onShow={instance => {
+      onShow={(instance) => {
         if (timeoutRef.current) {
           window.clearTimeout(timeoutRef.current);
         }

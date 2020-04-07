@@ -9,6 +9,6 @@ less
       fontCode: fonts.mono,
     },
   })
-  .then(output => {
+  .then((output) => {
     fs.writeFileSync("reset.css", output.css);
   });
