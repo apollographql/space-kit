@@ -1,3 +1,15 @@
+# v3.4.0 (Tue Apr 07 2020)
+
+#### 🚀  Enhancement
+
+- Add warning and book icons [#164](https://github.com/apollographql/space-kit/pull/164) ([@jgzuke](https://github.com/jgzuke))
+
+#### Authors: 1
+
+- Jason Zukewich ([@jgzuke](https://github.com/jgzuke))
+
+---
+
 # v3.3.0 (Sat Apr 04 2020)
 
 #### 🚀  Enhancement
