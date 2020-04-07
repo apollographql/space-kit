@@ -44,14 +44,13 @@ jobs:
       - store_test_results:
           path: /tmp/test-reports
 
-  # This is disabled until we can figure out how to re-run the job when a PR is labeled or unlabeled. We were using GitHub Actions, but those are no longer available to us.
-  # check-label:
-  #   <<: *defaults
-  #   steps:
-  #     - checkout
-  #     - run:
-  #         name: Check labels
-  #         command: npx auto pr-check --pr ${CIRCLE_PULL_REQUEST##*/} --url ${CIRCLE_BUILD_URL}
+  check-label:
+    <<: *defaults
+    steps:
+      - checkout
+      - run:
+          name: Check labels
+          command: npx auto pr-check --pr ${CIRCLE_PULL_REQUEST##*/} --url ${CIRCLE_BUILD_URL}
 
   release:
     <<: *defaults
