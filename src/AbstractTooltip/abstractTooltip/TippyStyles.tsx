@@ -7,8 +7,8 @@ import { Global, css } from "@emotion/core";
 export const TippyStyles: React.FC = () => (
   <Global
     styles={css({
-      ".tippy-tooltip": {
-        "&.space-kit-theme": {
+      ".tippy-box": {
+        "&[data-theme=space-kit]": {
           ...base.small,
           backgroundColor: colors.black.base,
           opacity: 0.95,

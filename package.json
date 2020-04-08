@@ -58,7 +58,7 @@
   "dependencies": {
     "@emotion/cache": "^10.0.15",
     "@emotion/core": "^10.0.15",
-    "@tippy.js/react": "^3.1.1",
+    "@tippyjs/react": "^4.0.0-alpha.4",
     "@types/classnames": "^2.2.9",
     "@types/tinycolor2": "^1.4.2",
     "classnames": "^2.2.6",
