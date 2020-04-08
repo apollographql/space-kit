@@ -3,7 +3,7 @@ import React from "react";
 import { AbstractTooltip } from "../AbstractTooltip";
 import { TippyMenuStyles } from "./menu/TippyMenuStyles";
 import { MenuConfigProvider, useMenuIconSize } from "../MenuConfig";
-import { Instance, ReferenceElement } from "tippy.js";
+// import { Instance, ReferenceElement } from "tippy.js";
 import {
   MenuItemClickListenerProvider,
   useMenuItemClickListener,
@@ -12,14 +12,7 @@ import {
 interface Props
   extends Pick<
       React.ComponentProps<typeof AbstractTooltip>,
-      | "children"
-      | "content"
-      | "flip"
-      | "flipBehavior"
-      | "flipOnUpdate"
-      | "maxWidth"
-      | "placement"
-      | "trigger"
+      "children" | "content" | "maxWidth" | "placement" | "trigger"
     >,
     Omit<React.ComponentProps<typeof MenuConfigProvider>, "children"> {
   className?: string;
@@ -43,41 +36,45 @@ interface Props
 /**
  * Given an popper `Instance`, calculate the maximum height popper can take
  */
-function calculateMaxHeight(instance: Instance) {
-  const parentHeight =
-    instance.props.appendTo === "parent"
-      ? (instance.reference as any).offsetParent.offsetHeight
-      : document.body.clientHeight;
+// function calculateMaxHeight(instance: Instance) {
+//   const parentHeight =
+//     instance.props.appendTo === "parent"
+//       ? (instance.reference as any).offsetParent.offsetHeight
+//       : document.body.clientHeight;
 
-  const {
-    height: referenceHeight,
-    top: referenceTop,
-  } = instance.reference.getBoundingClientRect();
+//   const {
+//     height: referenceHeight,
+//     top: referenceTop,
+//   } = instance.reference.getBoundingClientRect();
 
-  const {
-    height: arrowHeight,
-  } = instance.popperChildren.arrow?.getBoundingClientRect() ?? { height: 0 };
+//   // TODO: Verify we can actually get the height of the arrow
+//   const {
+//     height: arrowHeight,
+//   } = instance.popper.firstElementChild
+//     ?.querySelector("arrow")
+//     ?.getBoundingClientRect() ?? { height: 0 };
+//   debugger;
 
-  const { distance } = instance.props;
+//   const { distance } = instance.props;
 
-  return (
-    parentHeight -
-    referenceTop -
-    referenceHeight -
-    arrowHeight -
-    parseFloat(getComputedStyle(instance.popperChildren.tooltip).paddingTop) -
-    parseFloat(
-      getComputedStyle(instance.popperChildren.tooltip).paddingBottom
-    ) -
-    (typeof distance === "number" ? distance : 0) -
-    // Margin from bottom of the page
-    5
-  );
-}
+//   return (
+//     parentHeight -
+//     referenceTop -
+//     referenceHeight -
+//     arrowHeight -
+//     parseFloat(getComputedStyle(instance.popperChildren.tooltip).paddingTop) -
+//     parseFloat(
+//       getComputedStyle(instance.popperChildren.tooltip).paddingBottom
+//     ) -
+//     (typeof distance === "number" ? distance : 0) -
+//     // Margin from bottom of the page
+//     5
+//   );
+// }
 
-function isReferenceObject(reference: any): reference is ReferenceElement {
-  return typeof (reference as ReferenceElement)._tippy !== "undefined";
-}
+// function isReferenceObject(reference: any): reference is ReferenceElement {
+//   return typeof (reference as ReferenceElement)._tippy !== "undefined";
+// }
 
 /**
  * Menu element
@@ -134,29 +131,37 @@ export const Menu: React.FC<Props> = ({
         theme="space-kit-menu"
         trigger="mousedown"
         popperOptions={{
-          positionFixed: true,
-          modifiers: {
-            preventOverflow: {
-              boundariesElement: "window",
-              // This will ensure that the menu is correctly placed when a
-              // parent is using an overflow container @see
-              // https://github.com/popperjs/popper-core/issues/535#issuecomment-361628222
-              escapeWithReference: true,
+          strategy: "fixed",
+          modifiers: [
+            {
+              name: "preventOverflow",
+              // TODO: Check overfowing
+              // preventOverflow: {
+              //   boundariesElement: "window",
+              //   // This will ensure that the menu is correctly placed when a
+              //   // parent is using an overflow container @see
+              //   // https://github.com/popperjs/popper-core/issues/535#issuecomment-361628222
+              //   escapeWithReference: true,
+              // },
             },
-            setMaxHeight: {
-              enabled: scrollableContent,
-              order: 0,
-              fn: (data) => {
-                const reference = data.instance.reference;
-                if (isReferenceObject(reference) && reference._tippy) {
-                  const tippy = reference._tippy;
-                  const calculatedMaxHeight = calculateMaxHeight(tippy);
-                  tippy.popperChildren.content.style.maxHeight = `${calculatedMaxHeight}px`;
-                }
-                return data;
-              },
-            },
-          },
+            // {
+            // TODO: Check `setMaxHeight`
+            //   name: 'setMaxHeight',
+            //   // setMaxHeight: {
+            //   //   enabled: scrollableContent,
+            //   //   order: 0,
+            //   //   fn: (data) => {
+            //   //     const reference = data.instance.reference;
+            //   //     if (isReferenceObject(reference) && reference._tippy) {
+            //   //       const tippy = reference._tippy;
+            //   //       const calculatedMaxHeight = calculateMaxHeight(tippy);
+            //   //       tippy.popperChildren.content.style.maxHeight = `${calculatedMaxHeight}px`;
+            //   //     }
+            //   //     return data;
+            //   //   },
+            //   // },
+            // }
+          ],
         }}
         {...props}
         interactive
