@@ -497,6 +497,51 @@ export const MenuItemWithContentHuggingSides = ({
   </Story>
 </Preview>
 
+<Preview>
+  <Story name="max height">
+    <div
+      className="sk-scroll-container"
+      style={{
+        height: 200,
+        width: 200,
+        border: "1px solid red",
+        overflow: "hidden",
+        position: "relative",
+      }}
+    >
+      <PerformUserInteraction
+        callback={async () => {
+          userEvent.click(await findByText(document.body, /open menu/i));
+        }}
+      >
+        <Menu
+          placement="bottom-start"
+          fallbackPlacements={["top-start"]}
+          iconSize="small"
+          maxWidth={280}
+          content={
+            <React.Fragment>
+              <MenuHeading>mdg-private-graphs</MenuHeading>
+              <MenuItem>space-kit</MenuItem>
+              <MenuItem>space-kit</MenuItem>
+              <MenuItem>space-kit</MenuItem>
+              <MenuItem>space-kit</MenuItem>
+              <MenuItem>space-kit</MenuItem>
+              <MenuItem>space-kit</MenuItem>
+              <MenuItem>space-kit</MenuItem>
+              <MenuItem>space-kit</MenuItem>
+              <MenuItem>space-kit</MenuItem>
+              <MenuItem>space-kit</MenuItem>
+            </React.Fragment>
+          }
+        >
+          <Button>Open Menu</Button>
+        </Menu>
+      </PerformUserInteraction>
+    </div>
+  </Story>
+</Preview>
+
 ## Props
 
 ### `Menu`

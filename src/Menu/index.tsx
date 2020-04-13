@@ -8,11 +8,17 @@ import {
   MenuItemClickListenerProvider,
   useMenuItemClickListener,
 } from "../MenuItemClickListener";
+import { sizeModifier } from "./menu/sizeModifier";
 
 interface Props
   extends Pick<
       React.ComponentProps<typeof AbstractTooltip>,
-      "children" | "content" | "maxWidth" | "placement" | "trigger"
+      | "children"
+      | "content"
+      | "maxWidth"
+      | "placement"
+      | "trigger"
+      | "fallbackPlacements"
     >,
     Omit<React.ComponentProps<typeof MenuConfigProvider>, "children"> {
   className?: string;
@@ -131,19 +137,20 @@ export const Menu: React.FC<Props> = ({
         theme="space-kit-menu"
         trigger="mousedown"
         popperOptions={{
-          strategy: "fixed",
+          // strategy: "fixed",
           modifiers: [
-            {
-              name: "preventOverflow",
-              // TODO: Check overfowing
-              // preventOverflow: {
-              //   boundariesElement: "window",
-              //   // This will ensure that the menu is correctly placed when a
-              //   // parent is using an overflow container @see
-              //   // https://github.com/popperjs/popper-core/issues/535#issuecomment-361628222
-              //   escapeWithReference: true,
-              // },
-            },
+            sizeModifier,
+            // {
+            //   name: "preventOverflow",
+            //   // TODO: Check overfowing
+            //   // preventOverflow: {
+            //   //   boundariesElement: "window",
+            //   //   // This will ensure that the menu is correctly placed when a
+            //   //   // parent is using an overflow container @see
+            //   //   // https://github.com/popperjs/popper-core/issues/535#issuecomment-361628222
+            //   //   escapeWithReference: true,
+            //   // },
+            // },
             // {
             // TODO: Check `setMaxHeight`
             //   name: 'setMaxHeight',
