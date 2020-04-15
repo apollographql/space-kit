@@ -1,6 +1,7 @@
 import "../../node_modules/tippy.js/animations/shift-away.css";
 import React from "react";
 import Tippy from "@tippyjs/react";
+import { Placement } from "tippy.js";
 import { TippyStyles } from "./abstractTooltip/TippyStyles";
 import { useSpaceKitProvider } from "../SpaceKitProvider";
 import classnames from "classnames";
@@ -8,6 +9,13 @@ import classnames from "classnames";
 type TippyProps = React.ComponentProps<typeof Tippy>;
 
 export interface AbstractTooltipProps {
+  /**
+   * Fallback placements to use if the default placement clips the content.
+   *
+   * @see https://popper.js.org/docs/v2/modifiers/flip/#fallbackplacements
+   */
+  fallbackPlacements?: readonly Placement[];
+
   /**
    * Force the tooltip to be visible. Only use this for testing purposes; don't
    * use this to programatically control the component
@@ -27,10 +35,12 @@ export const AbstractTooltip: React.FC<Props> = ({
   animation = "shift-away",
   children,
   className,
+  fallbackPlacements,
   forceVisibleForTestingOnly,
   padding = "normal",
   trigger,
   hideOnClick,
+  popperOptions = {},
   ...props
 }) => {
   const {
@@ -49,13 +59,25 @@ export const AbstractTooltip: React.FC<Props> = ({
         trigger={forceVisibleForTestingOnly ? "manual" : trigger}
         visible={forceVisibleForTestingOnly ? true : undefined}
         theme="space-kit"
+        popperOptions={{
+          ...popperOptions,
+          modifiers: [
+            {
+              name: "flip",
+              options: {
+                fallbackPlacements,
+              },
+            },
+            // This must be at the end because later modifiers override earlier
+            // ones. @see
+            // https://popper.js.org/docs/v2/faq/#how-do-i-set-modifier-defaults-and-allow-them-to-be-overridden
+            ...(popperOptions.modifiers || []),
+          ],
+        }}
         {...props}
         className={classnames(className, {
           "space-kit-relaxed": padding === "relaxed",
         })}
-        // duration={
-        //   disableAnimations ? 0 : props.duration ?? tippy.defaultProps.duration
-        // }
       >
         {children}
       </Tippy>

@@ -3,16 +3,22 @@ import React from "react";
 import { AbstractTooltip } from "../AbstractTooltip";
 import { TippyMenuStyles } from "./menu/TippyMenuStyles";
 import { MenuConfigProvider, useMenuIconSize } from "../MenuConfig";
-// import { Instance, ReferenceElement } from "tippy.js";
 import {
   MenuItemClickListenerProvider,
   useMenuItemClickListener,
 } from "../MenuItemClickListener";
+import { sizeModifier } from "./menu/sizeModifier";
 
 interface Props
   extends Pick<
       React.ComponentProps<typeof AbstractTooltip>,
-      "children" | "content" | "maxWidth" | "placement" | "trigger"
+      | "children"
+      | "content"
+      | "maxWidth"
+      | "placement"
+      | "trigger"
+      | "fallbackPlacements"
+      | "popperOptions"
     >,
     Omit<React.ComponentProps<typeof MenuConfigProvider>, "children"> {
   className?: string;
@@ -24,57 +30,8 @@ interface Props
    */
   closeOnMenuItemClick?: boolean;
 
-  /**
-   * Determines if the content should be given a max-height so it can be
-   * scrolled
-   */
-  scrollableContent?: boolean;
-
   style?: React.CSSProperties;
 }
-
-/**
- * Given an popper `Instance`, calculate the maximum height popper can take
- */
-// function calculateMaxHeight(instance: Instance) {
-//   const parentHeight =
-//     instance.props.appendTo === "parent"
-//       ? (instance.reference as any).offsetParent.offsetHeight
-//       : document.body.clientHeight;
-
-//   const {
-//     height: referenceHeight,
-//     top: referenceTop,
-//   } = instance.reference.getBoundingClientRect();
-
-//   // TODO: Verify we can actually get the height of the arrow
-//   const {
-//     height: arrowHeight,
-//   } = instance.popper.firstElementChild
-//     ?.querySelector("arrow")
-//     ?.getBoundingClientRect() ?? { height: 0 };
-//   debugger;
-
-//   const { distance } = instance.props;
-
-//   return (
-//     parentHeight -
-//     referenceTop -
-//     referenceHeight -
-//     arrowHeight -
-//     parseFloat(getComputedStyle(instance.popperChildren.tooltip).paddingTop) -
-//     parseFloat(
-//       getComputedStyle(instance.popperChildren.tooltip).paddingBottom
-//     ) -
-//     (typeof distance === "number" ? distance : 0) -
-//     // Margin from bottom of the page
-//     5
-//   );
-// }
-
-// function isReferenceObject(reference: any): reference is ReferenceElement {
-//   return typeof (reference as ReferenceElement)._tippy !== "undefined";
-// }
 
 /**
  * Menu element
@@ -82,9 +39,10 @@ interface Props
 export const Menu: React.FC<Props> = ({
   children,
   closeOnMenuItemClick = true,
+  fallbackPlacements,
   iconSize,
-  scrollableContent = false,
   content,
+  popperOptions,
   ...props
 }) => {
   const instanceRef = React.useRef<
@@ -132,35 +90,58 @@ export const Menu: React.FC<Props> = ({
         trigger="mousedown"
         popperOptions={{
           strategy: "fixed",
+          ...popperOptions,
           modifiers: [
+            // Disable `flip` because we're using our new version
+            { name: "flip", enabled: false },
             {
-              name: "preventOverflow",
-              // TODO: Check overfowing
-              // preventOverflow: {
-              //   boundariesElement: "window",
-              //   // This will ensure that the menu is correctly placed when a
-              //   // parent is using an overflow container @see
-              //   // https://github.com/popperjs/popper-core/issues/535#issuecomment-361628222
-              //   escapeWithReference: true,
-              // },
+              name: "findTippyBox",
+              phase: "read",
+              enabled: true,
+              fn({ name, state }) {
+                const element = state.elements.popper.querySelector<
+                  HTMLElement
+                >(".tippy-box");
+
+                state.modifiersData[name].boxElement = element;
+              },
             },
-            // {
-            // TODO: Check `setMaxHeight`
-            //   name: 'setMaxHeight',
-            //   // setMaxHeight: {
-            //   //   enabled: scrollableContent,
-            //   //   order: 0,
-            //   //   fn: (data) => {
-            //   //     const reference = data.instance.reference;
-            //   //     if (isReferenceObject(reference) && reference._tippy) {
-            //   //       const tippy = reference._tippy;
-            //   //       const calculatedMaxHeight = calculateMaxHeight(tippy);
-            //   //       tippy.popperChildren.content.style.maxHeight = `${calculatedMaxHeight}px`;
-            //   //     }
-            //   //     return data;
-            //   //   },
-            //   // },
-            // }
+            sizeModifier,
+            {
+              name: "maxSize",
+              requires: ["findTippyBox"],
+              options: { padding: 7, fallbackPlacements },
+            },
+            {
+              name: "applyMaxSize",
+              enabled: true,
+              phase: "beforeWrite",
+              requires: ["maxSize", "findTippyBox"],
+              fn({ state }) {
+                const maxHeight = state.modifiersData.maxSize.height;
+
+                /**
+                 * We read this element in the `findTippyBox` phase. We need to
+                 * use some custom logic here to apply the style to the tippy
+                 * box because usually that's not made available. We _could_
+                 * apply these styles directly to the `popper` element and, but
+                 * then the border will be swallowed by the overflow. If we put
+                 * the border on `popper`, then the border will not be animated
+                 * because animations are applied to `.tippy-box`.
+                 */
+                const element: HTMLElement | null =
+                  state.modifiersData.findTippyBox.boxElement;
+
+                if (element) {
+                  element.style.maxHeight = `${maxHeight}px`;
+                  element.style.overflow = "auto";
+                }
+              },
+            },
+            // Modifiers later in the list override modifiers earlier in the
+            // list, so we have to place this at the end so user-defined
+            // modifiers can override space kit defined modifier configurations.
+            ...(popperOptions?.modifiers || []),
           ],
         }}
         {...props}

@@ -3,7 +3,7 @@ import * as faker from "faker";
 import React from "react";
 import userEvent from "@testing-library/user-event";
 import { Button } from "../Button";
-import { cleanup, render } from "@testing-library/react";
+import { cleanup, render, waitForElement } from "@testing-library/react";
 import { Menu } from "../Menu";
 import { MenuItem } from "../MenuItem";
 import { SpaceKitProvider } from "../SpaceKitProvider";
@@ -58,11 +58,11 @@ test("when `closeOnMenuItemClick` is `false`, `onClick` callback is called when 
   expect(onClick).toHaveBeenCalledTimes(1);
 });
 
-test("when `closeOnMenuItemClick` is `true`, menu closes when `MenuItem` in `content` is clicked", () => {
+test("when `closeOnMenuItemClick` is `true`, menu closes when `MenuItem` in `content` is clicked", async () => {
   const menuItemText = faker.random.word();
   const triggerText = faker.random.word();
 
-  const { getByText, queryByText } = render(
+  const { container, getByText, queryByText } = render(
     <SpaceKitProvider disableAnimations>
       <Menu
         content={
@@ -77,6 +77,7 @@ test("when `closeOnMenuItemClick` is `true`, menu closes when `MenuItem` in `con
   );
 
   userEvent.click(getByText(triggerText));
+  await waitForElement(() => container.querySelector("*[aria-expanded=true]"));
   userEvent.click(getByText(menuItemText));
   expect(queryByText(menuItemText)).not.toBeInTheDocument();
 });
