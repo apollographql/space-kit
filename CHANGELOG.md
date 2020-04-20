@@ -1,3 +1,15 @@
+# v4.1.0 (Mon Apr 20 2020)
+
+#### 🚀 Enhancement
+
+- adds another operations icon [#168](https://github.com/apollographql/space-kit/pull/168) ([@caydie-tran](https://github.com/caydie-tran))
+
+#### Authors: 1
+
+- Caydie Tran ([@caydie-tran](https://github.com/caydie-tran))
+
+---
+
 # v4.0.0 (Mon Apr 20 2020)
 
 ### Release Notes
