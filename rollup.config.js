@@ -12,17 +12,17 @@ import postcss from "rollup-plugin-postcss";
 function recursiveReaddirSync(rootPath, options) {
   const files = fs
     .readdirSync(rootPath, options)
-    .map(filename => {
+    .map((filename) => {
       const fullFilename = path.join(rootPath, filename);
       return fs.statSync(fullFilename).isDirectory()
         ? recursiveReaddirSync(fullFilename, options)
         : fullFilename;
     })
     .flat()
-    .filter(filename =>
+    .filter((filename) =>
       [".ts", ".tsx", ".js", ".jsx"].includes(path.extname(filename))
     )
-    .map(filename => path.relative(process.cwd(), filename));
+    .map((filename) => path.relative(process.cwd(), filename));
 
   return files;
 }
@@ -31,10 +31,10 @@ function CJS() {
   return {
     input: recursiveReaddirSync(path.resolve("src"))
       // Don't build tests or storybook stories
-      .filter(filename => !/\.(?:spec|story|stories)/.test(filename))
+      .filter((filename) => !/\.(?:spec|story|stories)/.test(filename))
       // Exclude specific directories
       .filter(
-        filename =>
+        (filename) =>
           ![
             path.join("src", "icons", "scripts"),
             path.join("src", "illustrations", "scripts"),
@@ -42,12 +42,17 @@ function CJS() {
             path.join("src", "AbstractTooltip"),
             path.join("src", "MenuItemClickListener"),
             path.join("src", "MenuConfig"),
-          ].some(excludedPathname => filename.includes(excludedPathname))
+          ].some((excludedPathname) => filename.includes(excludedPathname))
       ),
     external: [
       "@emotion/cache",
       "@emotion/core",
-      "@tippy.js/react",
+      "@tippyjs/react",
+      "@popperjs/core",
+      "@popperjs/core/lib/utils/computeAutoPlacement",
+      "@popperjs/core/lib/utils/detectOverflow",
+      "@popperjs/core/lib/utils/getOppositePlacement",
+      "@popperjs/core/lib/utils/getOppositeVariationPlacement",
       "classnames",
       "framer-motion",
       "prop-types",
@@ -76,6 +81,6 @@ function CJS() {
   };
 }
 
-export default function() {
+export default function () {
   return [CJS()];
 }

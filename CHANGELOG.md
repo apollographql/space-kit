@@ -1,3 +1,38 @@
+# v4.0.0 (Mon Apr 20 2020)
+
+### Release Notes
+
+_From #166_
+
+* Upgrade `@tippyjs/react` library to v4
+
+    This includes the new popper v2, greatly simplifying how we modify the default behavior of popups, tooltips, and menus
+
+* Upgrade Menu flip logic to attempt to flip the menu to somewhere it'll fix on the window, and if it doesn't, to pick the placement to show the maximum amount of content while enabling scrolling
+
+* Animations can now be disabled out of the box
+
+    Hopefully this will stop our Chromatic story thrashing. We'll see 🤷‍♂️ 
+
+* [Breaking change] Remove `flip` and `scrollableContent` props, they are always enabled now
+
+---
+
+#### 💥 Breaking Change
+
+- [AR-1541](https://apollographql.atlassian.net/browse/AR-1541): Upgrade underlying dependencies and logic in menus and tooltips [#166](https://github.com/apollographql/space-kit/pull/166) ([@justinanastos](https://github.com/justinanastos))
+
+#### 🏠 Internal
+
+- Fix broken release process [#169](https://github.com/apollographql/space-kit/pull/169) ([@justinanastos](https://github.com/justinanastos))
+- Restore CI check to require a label be applied before merging a PR [#165](https://github.com/apollographql/space-kit/pull/165) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v3.4.0 (Tue Apr 07 2020)
 
 #### 🚀  Enhancement
