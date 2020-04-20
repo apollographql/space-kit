@@ -58,7 +58,7 @@
   "dependencies": {
     "@emotion/cache": "^10.0.15",
     "@emotion/core": "^10.0.15",
-    "@tippy.js/react": "^3.1.1",
+    "@tippyjs/react": "^4.0.0",
     "@types/classnames": "^2.2.9",
     "@types/tinycolor2": "^1.4.2",
     "classnames": "^2.2.6",
@@ -70,6 +70,7 @@
     "@actions/github": "^1.1.0",
     "@auto-it/jira": "^7.6.2",
     "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.9.5",
     "@babel/traverse": "^7.5.5",
     "@storybook/addon-actions": "^5.2.1",
     "@storybook/addon-docs": "^5.2.1",
