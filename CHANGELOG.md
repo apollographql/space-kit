@@ -1,3 +1,15 @@
+# v4.2.0 (Wed Apr 22 2020)
+
+#### 🚀 Enhancement
+
+- Add success solid icon [#170](https://github.com/apollographql/space-kit/pull/170) ([@jgzuke](https://github.com/jgzuke))
+
+#### Authors: 1
+
+- Jason Zukewich ([@jgzuke](https://github.com/jgzuke))
+
+---
+
 # v4.1.0 (Mon Apr 20 2020)
 
 #### 🚀 Enhancement
