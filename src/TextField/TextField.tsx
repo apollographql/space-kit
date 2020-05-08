@@ -3,7 +3,7 @@ import { ClassNames, jsx } from "@emotion/core";
 import React from "react";
 import * as typography from "../typography";
 import { colors } from "../colors";
-import { IconAlertSolid } from "../icons/IconAlertSolid";
+import { IconWarningSolid } from "../icons/IconWarningSolid";
 import { IconInfoSolid } from "../icons/IconInfoSolid";
 import classnames from "classnames";
 
@@ -253,7 +253,7 @@ export const TextField: React.FC<Props> = ({
                 }}
               >
                 {error ? (
-                  <IconAlertSolid
+                  <IconWarningSolid
                     css={{
                       height: 15,
                       marginRight: 8,
