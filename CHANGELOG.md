@@ -1,3 +1,15 @@
+# v5.0.0 (Fri May 08 2020)
+
+#### 💥 Breaking Change
+
+- Align icons with upcoming alert designs [#172](https://github.com/apollographql/space-kit/pull/172) ([@Jephuff](https://github.com/Jephuff))
+
+#### Authors: 1
+
+- Jeffrey Burt ([@Jephuff](https://github.com/Jephuff))
+
+---
+
 # v4.2.0 (Wed Apr 22 2020)
 
 #### 🚀 Enhancement
