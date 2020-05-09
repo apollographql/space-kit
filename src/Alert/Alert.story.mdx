@@ -1,0 +1,89 @@
+import { colors } from "../colors";
+import { Alert } from "../Alert";
+import { Button } from "../Button";
+import {
+  Description,
+  Meta,
+  Story,
+  Props,
+  Preview,
+} from "@storybook/addon-docs/blocks";
+
+<Meta title="Components|Alert" />
+
+# Alert
+
+<Description
+  of={Alert}
+  markdown="**Alerts** provide a way to display short, important message in a way that attracts the user's attention without interrupting the user's task."
+/>
+
+## Info Alert
+
+Informational alerts present general info about something you are doing or working with. It is neutral and conveys no implications of success or failure.
+
+<Preview>
+  <Story name="info">
+    <Alert onClose={() => undefined} level="info" heading="Informational alert">
+      This is a general informational message telling you about something. Learn
+      more
+    </Alert>
+  </Story>
+</Preview>
+
+## Warning Alert
+
+Warning alerts present information about the action that is about to be taken that alerts the user to consequences of the action and asks for confirmation that the action still be taken in light of the consequences.
+
+<Preview>
+  <Story name="warning">
+    <Alert
+      onClose={() => undefined}
+      level="warn"
+      heading="Warning alert"
+      actions={
+        <Button size="small" color={colors.silver.light}>
+          Confirm
+        </Button>
+      }
+    >
+      exceededSubLimitAt is a deprecated field. You can use it but it may not
+      work as expected.
+    </Alert>
+  </Story>
+</Preview>
+
+## Error Alert
+
+Error alerts let the user know that something has gone wrong or is blocked in the given workflow they are trying to complete. When possible, error alerts should contain helpful information about what has happened to help unblock the user (such as steps to resolve or a link to a docs article).
+
+<Preview>
+  <Story name="error">
+    <Alert
+      onClose={() => undefined}
+      level="error"
+      heading="Error alert"
+      style={{ marginBottom: 20 }}
+    >
+      Something is broken. You cannot perform this action at this time.
+    </Alert>
+  </Story>
+</Preview>
+
+## Success Alert
+
+Success alerts are confirmation that the action the user was trying to take has succeeded.
+
+<Preview>
+  <Story name="success">
+    <Alert onClose={() => undefined} level="success" heading="Success alert">
+      A new schema registry has been created by timbotnik.
+    </Alert>
+  </Story>
+</Preview>
+
+## Props
+
+### `Alert`
+
+<Props of={Alert} />

@@ -13,6 +13,7 @@ tsconfig.tsbuildinfo
 # Other modules
 /*-????????.js*
 /AbstractTooltip
+/Alert
 /Button
 /colors
 /ConfirmationTooltip

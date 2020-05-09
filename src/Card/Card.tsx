@@ -8,7 +8,7 @@ import classnames from "classnames";
 
 const descriptionMaxWidth = 760;
 
-interface CardProps
+export interface CardProps
   extends React.DetailedHTMLProps<
       React.HTMLAttributes<HTMLDivElement>,
       HTMLDivElement
@@ -204,8 +204,11 @@ CardSection.propTypes = {
 /**
  * A border line that can go between two card sections, with appropriate margin applied
  */
-export const CardSeperator: React.FC = () => (
+export const CardSeperator: React.FC<{ className?: string }> = ({
+  className,
+}) => (
   <hr
+    className={className}
     css={{
       height: 1,
       borderWidth: 0,
