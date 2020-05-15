@@ -3,7 +3,7 @@ import * as faker from "faker";
 import React from "react";
 import userEvent from "@testing-library/user-event";
 import { Button } from "../Button";
-import { cleanup, render, waitForElement } from "@testing-library/react";
+import { cleanup, render, waitFor } from "@testing-library/react";
 import { Menu } from "../Menu";
 import { MenuItem } from "../MenuItem";
 import { SpaceKitProvider } from "../SpaceKitProvider";
@@ -77,7 +77,7 @@ test("when `closeOnMenuItemClick` is `true`, menu closes when `MenuItem` in `con
   );
 
   userEvent.click(getByText(triggerText));
-  await waitForElement(() => container.querySelector("*[aria-expanded=true]"));
+  await waitFor(() => container.querySelector("*[aria-expanded=true]"));
   userEvent.click(getByText(menuItemText));
   expect(queryByText(menuItemText)).not.toBeInTheDocument();
 });
