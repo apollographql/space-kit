@@ -3,12 +3,10 @@ import * as faker from "faker";
 import React from "react";
 import userEvent from "@testing-library/user-event";
 import { Button } from "../Button";
-import { cleanup, render, waitFor } from "@testing-library/react";
+import { render, waitFor } from "@testing-library/react";
 import { Menu } from "../Menu";
 import { MenuItem } from "../MenuItem";
 import { SpaceKitProvider } from "../SpaceKitProvider";
-
-afterEach(cleanup);
 
 test("when child of `Menu` is clicked, menu is shown", () => {
   const menuItemText = faker.random.word();

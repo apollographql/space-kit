@@ -1,9 +1,7 @@
 import React from "react";
-import { render, cleanup } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import { Table } from "./Table";
-
-afterEach(cleanup);
 
 test("when passed headers in `columns`, should render them, even with no data", () => {
   const { container, getByText } = render(

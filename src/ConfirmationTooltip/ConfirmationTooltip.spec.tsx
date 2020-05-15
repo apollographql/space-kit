@@ -2,12 +2,10 @@
 import "@testing-library/jest-dom/extend-expect";
 import faker from "faker";
 import React from "react";
-import { cleanup, render } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import { ConfirmationTooltip } from "../ConfirmationTooltip";
 import { SpaceKitProvider } from "../SpaceKitProvider";
 import userEvent from "@testing-library/user-event";
-
-afterEach(cleanup);
 
 test("when child element is clicked, the tooltip is shown", () => {
   jest.useFakeTimers();

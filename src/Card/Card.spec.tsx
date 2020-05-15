@@ -1,9 +1,7 @@
-import { cleanup, render } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import React from "react";
 import { Card } from "./Card";
 import * as faker from "faker";
-
-afterEach(cleanup);
 
 test("when passed `headerAs` with a string, correct header is rendered", () => {
   const heading = faker.lorem.word();

@@ -1,10 +1,8 @@
 import "@testing-library/jest-dom/extend-expect";
 import React from "react";
 import userEvent from "@testing-library/user-event";
-import { cleanup, render } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import { TextField } from "./TextField";
-
-afterEach(cleanup);
 
 test("when passed a label, renders it", () => {
   const { getByText } = render(<TextField label="label text" />);
