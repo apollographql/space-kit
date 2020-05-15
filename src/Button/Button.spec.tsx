@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import * as faker from "faker";
 import { Button } from "./Button";
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { IconShip2 } from "../icons/IconShip2";
 import React from "react";
 
@@ -208,4 +208,32 @@ test("ref is forwarded", () => {
   );
 
   expect(ref.current).toBe(getByTestId(testId));
+});
+
+test("when mouseOut event occurs and button is pressed, button isn't focused", () => {
+  render(<Button>{faker.lorem.word()}</Button>);
+
+  const button = screen.getByRole("button");
+
+  // This is hacky. We are really just testing that the focus is removed when
+  // there's a mouseout event with a button pressed.
+  button.focus();
+
+  fireEvent(
+    button,
+    new MouseEvent("mouseout", {
+      buttons: 1,
+      bubbles: true,
+      cancelable: true,
+    })
+  );
+  fireEvent(
+    button,
+    new MouseEvent("mouseup", {
+      buttons: 1,
+      bubbles: true,
+      cancelable: true,
+    })
+  );
+  expect(button).not.toHaveFocus();
 });
