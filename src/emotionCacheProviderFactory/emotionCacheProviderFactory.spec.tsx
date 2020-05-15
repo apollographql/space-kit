@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom";
 import { emotionCacheProviderFactory } from "./index";
 import { jsx } from "@emotion/core";
 import { render } from "@testing-library/react";

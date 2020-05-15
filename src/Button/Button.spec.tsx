@@ -1,4 +1,4 @@
-import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom";
 import * as faker from "faker";
 import { Button } from "./Button";
 import { fireEvent, render } from "@testing-library/react";

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom";
 import faker from "faker";
 import React from "react";
 import { render } from "@testing-library/react";
