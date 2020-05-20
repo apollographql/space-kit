@@ -1,8 +1,6 @@
-import { cleanup, render } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import React from "react";
 import { useSpaceKitProvider, SpaceKitProvider } from "../SpaceKitProvider";
-
-afterEach(cleanup);
 
 it("when provider has `disableAnimation` set to `true`, that value will be set in consumer", () => {
   const textDisableAnimationsTrue = "disableAnimationsTrue";

@@ -1,10 +1,8 @@
-import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom";
 import faker from "faker";
 import React from "react";
-import { cleanup, render } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import { Tooltip } from "../Tooltip";
-
-afterEach(cleanup);
 
 test("when hovered, the tooltip is shown afer a delay", async () => {
   jest.useFakeTimers();

@@ -1,11 +1,9 @@
 import React from "react";
-import { fireEvent, render, cleanup } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
+import { fireEvent, render } from "@testing-library/react";
+import "@testing-library/jest-dom";
 import { Modal } from "./Modal";
 import { Button } from "../Button";
 import * as faker from "faker";
-
-afterEach(cleanup);
 
 test("should render without crashing", () => {
   expect(() => {
