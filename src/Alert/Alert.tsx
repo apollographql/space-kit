@@ -34,7 +34,7 @@ export const Alert: React.FC<AlertProps> = ({
       case "info":
         return { color: colors.blue, Icon: IconInfoSolid };
       case "warn":
-        return { color: colors.yellow, Icon: IconWarningSolid };
+        return { color: colors.orange, Icon: IconWarningSolid };
       case "error":
         return { color: colors.red, Icon: IconErrorSolid };
       case "success":
