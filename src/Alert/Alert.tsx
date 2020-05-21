@@ -17,12 +17,13 @@ interface AlertProps {
   theme?: "light" | "dark";
 
   /**
-   * The color used for the heading and icon, the heading text will be 2 shades darker
+   * The color used for the heading icon, the heading text will be 2 shades
+   * darker if light theme and 2 shaders lighter if a dark theme
    */
   color: PaletteColor;
 
   /**
-   * The icon displayed to the left of the heading
+   * The icon displayed to the left of the heading text
    */
   Icon: React.ComponentType<{ className?: string }>;
 
@@ -30,14 +31,12 @@ interface AlertProps {
 
   /**
    * actions could be a button
-   * or a tooltip or anything the card should display
-   * aligned with the title on the right
+   * or a tooltip or anything the Alert should display after the children
    */
   actions?: React.ReactNode;
 
   /**
-   * The content of the card,
-   * appears below the title and description
+   * The content of the card, appears below the title
    */
   children?: React.ReactNode;
 
@@ -55,6 +54,7 @@ interface AlertProps {
    * callback for handling the clicks on the close button.
    */
   onClose: () => void;
+
   className?: string;
   style?: CSSProperties;
 }
@@ -107,12 +107,7 @@ export const Alert: React.FC<AlertProps> = ({
               children: (
                 <Fragment>
                   <Icon
-                    css={{
-                      width: 20,
-                      height: 20,
-                      color,
-                      marginRight: 13,
-                    }}
+                    css={{ width: 20, height: 20, color, marginRight: 13 }}
                   />
                   {heading}
                 </Fragment>
