@@ -166,9 +166,9 @@ Alert.propTypes = {
   heading: PropTypes.node.isRequired,
   actions: PropTypes.node,
   color: PropTypes.oneOf(
-    (Object.values(colors)
+    Object.values(colors)
       .map((color) => Object.values(color))
-      .reduce((a, b) => a.concat(b)) as any) as PaletteColor[]
+      .reduce((a, b) => a.concat(b)) as PaletteColor[]
   ).isRequired,
   Icon: PropTypes.func.isRequired,
 };
