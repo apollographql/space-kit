@@ -1,10 +1,8 @@
 /** @jsx jsx */
-import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom";
 import { emotionCacheProviderFactory } from "./index";
 import { jsx } from "@emotion/core";
-import { cleanup, render } from "@testing-library/react";
-
-afterEach(cleanup);
+import { render } from "@testing-library/react";
 
 test("when given no element, emotion should render classes into head", () => {
   const CacheProvider = emotionCacheProviderFactory();
