@@ -27,11 +27,23 @@ import {
 Informational alerts present general info about something you are doing or working with. It is neutral and conveys no implications of success or failure.
 
 <Preview>
-  <Story name="info">
+  <Story name="info light">
     <Alert
       onClose={() => undefined}
       color={colors.blue.base}
       Icon={IconInfoSolid}
+      heading="Informational alert"
+    >
+      This is a general informational message telling you about something. Learn
+      more
+    </Alert>
+  </Story>
+  <Story name="info dark">
+    <Alert
+      onClose={() => undefined}
+      color={colors.blue.base}
+      Icon={IconInfoSolid}
+      theme="dark"
       heading="Informational alert"
     >
       This is a general informational message telling you about something. Learn
@@ -45,12 +57,29 @@ Informational alerts present general info about something you are doing or worki
 Warning alerts present information about the action that is about to be taken that alerts the user to consequences of the action and asks for confirmation that the action still be taken in light of the consequences.
 
 <Preview>
-  <Story name="warning">
+  <Story name="warning light">
     <Alert
       onClose={() => undefined}
       color={colors.orange.base}
       Icon={IconWarningSolid}
       heading="Warning alert"
+      actions={
+        <Button size="small" color={colors.silver.light}>
+          Confirm
+        </Button>
+      }
+    >
+      exceededSubLimitAt is a deprecated field. You can use it but it may not
+      work as expected.
+    </Alert>
+  </Story>
+  <Story name="warning dark">
+    <Alert
+      onClose={() => undefined}
+      color={colors.orange.base}
+      Icon={IconWarningSolid}
+      heading="Warning alert"
+      theme="dark"
       actions={
         <Button size="small" color={colors.silver.light}>
           Confirm
@@ -68,12 +97,24 @@ Warning alerts present information about the action that is about to be taken th
 Error alerts let the user know that something has gone wrong or is blocked in the given workflow they are trying to complete. When possible, error alerts should contain helpful information about what has happened to help unblock the user (such as steps to resolve or a link to a docs article).
 
 <Preview>
-  <Story name="error">
+  <Story name="error light">
     <Alert
       onClose={() => undefined}
       color={colors.red.base}
       Icon={IconErrorSolid}
       heading="Error alert"
+      style={{ marginBottom: 20 }}
+    >
+      Something is broken. You cannot perform this action at this time.
+    </Alert>
+  </Story>
+  <Story name="error dark">
+    <Alert
+      onClose={() => undefined}
+      color={colors.red.base}
+      Icon={IconErrorSolid}
+      heading="Error alert"
+      theme="dark"
       style={{ marginBottom: 20 }}
     >
       Something is broken. You cannot perform this action at this time.
@@ -86,11 +127,22 @@ Error alerts let the user know that something has gone wrong or is blocked in th
 Success alerts are confirmation that the action the user was trying to take has succeeded.
 
 <Preview>
-  <Story name="success">
+  <Story name="success light">
     <Alert
       onClose={() => undefined}
       color={colors.green.base}
       Icon={IconSuccessSolid}
+      heading="Success alert"
+    >
+      A new schema registry has been created by timbotnik.
+    </Alert>
+  </Story>
+  <Story name="success dark">
+    <Alert
+      onClose={() => undefined}
+      color={colors.green.base}
+      Icon={IconSuccessSolid}
+      theme="dark"
       heading="Success alert"
     >
       A new schema registry has been created by timbotnik.

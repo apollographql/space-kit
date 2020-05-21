@@ -11,6 +11,12 @@ import { getOffsetInPalette } from "../colors/utils/getOffsetInPalette";
 
 interface AlertProps {
   /**
+   * color theme for alert
+   * @default "light"
+   */
+  theme?: "light" | "dark";
+
+  /**
    * The color used for the heading and icon, the heading text will be 2 shades darker
    */
   color: PaletteColor;
@@ -61,33 +67,20 @@ export const Alert: React.FC<AlertProps> = ({
   children,
   color,
   Icon,
+  theme = "light",
   ...otherProps
 }) => {
-  // const { Icon, color } = useMemo(() => {
-  //   switch (level) {
-  //     case "info":
-  //       return { color: colors.blue, Icon: IconInfoSolid };
-  //     case "warn":
-  //       return { color: colors.orange, Icon: IconWarningSolid };
-  //     case "error":
-  //       return { color: colors.red, Icon: IconErrorSolid };
-  //     case "success":
-  //       return { color: colors.green, Icon: IconSuccessSolid };
-  //     default:
-  //       return {};
-  //   }
-  // }, []);
-
   return (
     <section
       {...otherProps}
       css={{
-        backgroundColor: colors.white,
-        color: colors.black.base,
+        backgroundColor:
+          theme === "light" ? colors.white : colors.black.lighter,
+        color: theme === "light" ? colors.black.base : colors.white,
         boxShadow: `0 4px 8px 0 rgba(0, 0, 0, .04)`,
         borderStyle: "solid",
         borderRadius: 4,
-        borderWidth: 1,
+        borderWidth: theme === "light" ? 1 : 0,
         borderColor: colors.silver.dark,
         padding: 15,
       }}
@@ -103,7 +96,11 @@ export const Alert: React.FC<AlertProps> = ({
                   marginTop: 0,
                   width: "100%",
                   display: "flex",
-                  color: getOffsetInPalette(2, "darker", color),
+                  color: getOffsetInPalette(
+                    2,
+                    theme === "light" ? "darker" : "lighter",
+                    color
+                  ),
                   ...base.base,
                 })
               ),
@@ -170,4 +167,13 @@ export const Alert: React.FC<AlertProps> = ({
 
 Alert.propTypes = {
   onClose: PropTypes.func.isRequired,
+  children: PropTypes.node,
+  heading: PropTypes.node.isRequired,
+  actions: PropTypes.node,
+  color: PropTypes.oneOf(
+    (Object.values(colors)
+      .map((color) => Object.values(color))
+      .reduce((a, b) => a.concat(b)) as any) as PaletteColor[]
+  ).isRequired,
+  Icon: PropTypes.func.isRequired,
 };
