@@ -1,21 +1,26 @@
 /** @jsx jsx */
 import { jsx, ClassNames } from "@emotion/core";
-import React, { useMemo, CSSProperties, Fragment } from "react";
+import React, { CSSProperties, Fragment } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 
 import { base } from "../typography";
-import { IconErrorSolid } from "../icons/IconErrorSolid";
-import { IconInfoSolid } from "../icons/IconInfoSolid";
-import { IconWarningSolid } from "../icons/IconWarningSolid";
-import { IconSuccessSolid } from "../icons/IconSuccessSolid";
 import { IconClose } from "../icons/IconClose";
-import { colors } from "../colors";
-
-type AlertLevel = "info" | "warn" | "error" | "success";
+import { colors, PaletteColor } from "../colors";
+import { getOffsetInPalette } from "../colors/utils/getOffsetInPalette";
 
 interface AlertProps {
-  heading?: React.ReactNode;
+  /**
+   * The color used for the heading and icon, the heading text will be 2 shades darker
+   */
+  color: PaletteColor;
+
+  /**
+   * The icon displayed to the left of the heading
+   */
+  Icon: React.ComponentType<{ className?: string }>;
+
+  heading: React.ReactNode;
 
   /**
    * actions could be a button
@@ -40,7 +45,6 @@ interface AlertProps {
    */
   headingAs?: React.ReactElement | keyof JSX.IntrinsicElements;
 
-  level: AlertLevel;
   /**
    * callback for handling the clicks on the close button.
    */
@@ -50,28 +54,29 @@ interface AlertProps {
 }
 
 export const Alert: React.FC<AlertProps> = ({
-  level,
   heading,
   onClose,
   actions,
   headingAs = "h2",
   children,
+  color,
+  Icon,
   ...otherProps
 }) => {
-  const { Icon, color } = useMemo(() => {
-    switch (level) {
-      case "info":
-        return { color: colors.blue, Icon: IconInfoSolid };
-      case "warn":
-        return { color: colors.orange, Icon: IconWarningSolid };
-      case "error":
-        return { color: colors.red, Icon: IconErrorSolid };
-      case "success":
-        return { color: colors.green, Icon: IconSuccessSolid };
-      default:
-        return {};
-    }
-  }, [level]);
+  // const { Icon, color } = useMemo(() => {
+  //   switch (level) {
+  //     case "info":
+  //       return { color: colors.blue, Icon: IconInfoSolid };
+  //     case "warn":
+  //       return { color: colors.orange, Icon: IconWarningSolid };
+  //     case "error":
+  //       return { color: colors.red, Icon: IconErrorSolid };
+  //     case "success":
+  //       return { color: colors.green, Icon: IconSuccessSolid };
+  //     default:
+  //       return {};
+  //   }
+  // }, []);
 
   return (
     <section
@@ -98,22 +103,20 @@ export const Alert: React.FC<AlertProps> = ({
                   marginTop: 0,
                   width: "100%",
                   display: "flex",
-                  color: color?.darker,
+                  color: getOffsetInPalette(2, "darker", color),
                   ...base.base,
                 })
               ),
               children: (
                 <Fragment>
-                  {Icon && (
-                    <Icon
-                      css={{
-                        width: 20,
-                        height: 20,
-                        color: color?.base,
-                        marginRight: 13,
-                      }}
-                    />
-                  )}
+                  <Icon
+                    css={{
+                      width: 20,
+                      height: 20,
+                      color,
+                      marginRight: 13,
+                    }}
+                  />
                   {heading}
                 </Fragment>
               ),
@@ -166,7 +169,5 @@ export const Alert: React.FC<AlertProps> = ({
 };
 
 Alert.propTypes = {
-  level: PropTypes.oneOf(["info", "warn", "error", "success"] as AlertLevel[])
-    .isRequired,
   onClose: PropTypes.func.isRequired,
 };

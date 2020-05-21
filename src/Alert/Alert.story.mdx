@@ -1,6 +1,10 @@
 import { colors } from "../colors";
 import { Alert } from "../Alert";
 import { Button } from "../Button";
+import { IconInfoSolid } from "../icons/IconInfoSolid";
+import { IconErrorSolid } from "../icons/IconErrorSolid";
+import { IconWarningSolid } from "../icons/IconWarningSolid";
+import { IconSuccessSolid } from "../icons/IconSuccessSolid";
 import {
   Description,
   Meta,
@@ -24,7 +28,12 @@ Informational alerts present general info about something you are doing or worki
 
 <Preview>
   <Story name="info">
-    <Alert onClose={() => undefined} level="info" heading="Informational alert">
+    <Alert
+      onClose={() => undefined}
+      color={colors.blue.base}
+      Icon={IconInfoSolid}
+      heading="Informational alert"
+    >
       This is a general informational message telling you about something. Learn
       more
     </Alert>
@@ -39,7 +48,8 @@ Warning alerts present information about the action that is about to be taken th
   <Story name="warning">
     <Alert
       onClose={() => undefined}
-      level="warn"
+      color={colors.orange.base}
+      Icon={IconWarningSolid}
       heading="Warning alert"
       actions={
         <Button size="small" color={colors.silver.light}>
@@ -61,7 +71,8 @@ Error alerts let the user know that something has gone wrong or is blocked in th
   <Story name="error">
     <Alert
       onClose={() => undefined}
-      level="error"
+      color={colors.red.base}
+      Icon={IconErrorSolid}
       heading="Error alert"
       style={{ marginBottom: 20 }}
     >
@@ -76,7 +87,12 @@ Success alerts are confirmation that the action the user was trying to take has 
 
 <Preview>
   <Story name="success">
-    <Alert onClose={() => undefined} level="success" heading="Success alert">
+    <Alert
+      onClose={() => undefined}
+      color={colors.green.base}
+      Icon={IconSuccessSolid}
+      heading="Success alert"
+    >
       A new schema registry has been created by timbotnik.
     </Alert>
   </Story>
