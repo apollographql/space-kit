@@ -52,6 +52,36 @@ Informational alerts present general info about something you are doing or worki
   </Story>
 </Preview>
 
+### Extended
+
+<Preview>
+  <Story name="info light extended">
+    <Alert
+      onClose={() => undefined}
+      color={colors.blue.base}
+      Icon={IconInfoSolid}
+      heading="Informational alert"
+      extended={true}
+    >
+      This is a general informational message telling you about something. Learn
+      more
+    </Alert>
+  </Story>
+  <Story name="info dark extended">
+    <Alert
+      onClose={() => undefined}
+      color={colors.blue.base}
+      Icon={IconInfoSolid}
+      theme="dark"
+      heading="Informational alert"
+      extended={true}
+    >
+      This is a general informational message telling you about something. Learn
+      more
+    </Alert>
+  </Story>
+</Preview>
+
 ## Warning Alert
 
 Warning alerts present information about the action that is about to be taken that alerts the user to consequences of the action and asks for confirmation that the action still be taken in light of the consequences.
@@ -63,11 +93,7 @@ Warning alerts present information about the action that is about to be taken th
       color={colors.orange.base}
       Icon={IconWarningSolid}
       heading="Warning alert"
-      actions={
-        <Button size="small" color={colors.silver.light}>
-          Confirm
-        </Button>
-      }
+      actions={<Button size="small">Confirm</Button>}
     >
       exceededSubLimitAt is a deprecated field. You can use it but it may not
       work as expected.
@@ -81,7 +107,7 @@ Warning alerts present information about the action that is about to be taken th
       heading="Warning alert"
       theme="dark"
       actions={
-        <Button size="small" color={colors.silver.light}>
+        <Button theme="dark" size="small">
           Confirm
         </Button>
       }

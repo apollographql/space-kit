@@ -55,6 +55,13 @@ interface AlertProps {
    */
   onClose: () => void;
 
+  /**
+   * layout for longer content
+   *
+   * @default false
+   */
+  extended?: boolean;
+
   className?: string;
   style?: CSSProperties;
 }
@@ -68,6 +75,7 @@ export const Alert: React.FC<AlertProps> = ({
   color,
   Icon,
   theme = "light",
+  extended = false,
   ...otherProps
 }) => {
   return (
@@ -85,7 +93,13 @@ export const Alert: React.FC<AlertProps> = ({
         padding: 15,
       }}
     >
-      <div css={{ marginBottom: 14, overflow: "hidden", display: "flex" }}>
+      <div
+        css={{
+          marginBottom: extended ? 14 : 6,
+          overflow: "hidden",
+          display: "flex",
+        }}
+      >
         <ClassNames>
           {({ css, cx }) => {
             const headingProps = {
@@ -136,31 +150,37 @@ export const Alert: React.FC<AlertProps> = ({
         />
       </div>
 
-      <hr
-        css={{
-          height: 1,
-          borderWidth: 0,
-          backgroundColor: colors.silver.dark,
-          marginTop: 14,
-          marginBottom: 14,
-        }}
-      />
+      {extended && (
+        <hr
+          css={{
+            height: 1,
+            borderWidth: 0,
+            backgroundColor:
+              theme === "dark" ? colors.grey.dark : colors.silver.dark,
+            marginTop: 14,
+            marginBottom: 14,
+          }}
+        />
+      )}
+      <div css={{ marginLeft: extended ? 0 : 33 }}>
+        <div
+          css={{
+            fontSize: 13,
+            lineHeight: "1.5",
+            marginBottom: actions ? 13 : 0,
+          }}
+        >
+          {children}
+        </div>
 
-      <div
-        css={{
-          fontSize: 13,
-          lineHeight: "1.5",
-          marginBottom: actions ? 13 : 0,
-        }}
-      >
-        {children}
+        {actions}
       </div>
-      {actions}
     </section>
   );
 };
 
 Alert.propTypes = {
+  extended: PropTypes.bool,
   onClose: PropTypes.func.isRequired,
   children: PropTypes.node,
   heading: PropTypes.node.isRequired,
