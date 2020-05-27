@@ -6,11 +6,7 @@ import { css, jsx } from "@emotion/core";
 import { colors } from "../colors";
 import { useMenuIconSize } from "../MenuConfig";
 import { useMenuItemClickListener } from "../MenuItemClickListener";
-
-/* istanbul ignore next */
-function assertUnreachable(value: never): never {
-  throw new TypeError(`Unreachable value reached ${value}`);
-}
+import { assertUnreachable } from "../shared/assertUnreachable";
 
 function getIconHorizontalPadding(
   iconSize: ReturnType<typeof useMenuIconSize>

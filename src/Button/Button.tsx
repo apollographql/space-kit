@@ -7,13 +7,9 @@ import tinycolor from "tinycolor2";
 import React from "react";
 import classnames from "classnames";
 import { LoadingSpinner } from "../Loaders";
+import { assertUnreachable } from "../shared/assertUnreachable";
 
 type TLength = string | 0 | number;
-
-/* istanbul ignore next */
-function assertUnreachable(value: never): never {
-  throw new TypeError(`Unreachable value reached ${value}`);
-}
 
 /**
  * Save a default color so we can check if we used the default or not. The

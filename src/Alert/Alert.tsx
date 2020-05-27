@@ -8,6 +8,7 @@ import { base } from "../typography";
 import { IconClose } from "../icons/IconClose";
 import { colors, PaletteColor } from "../colors";
 import { getOffsetInPalette } from "../colors/utils/getOffsetInPalette";
+import { assertUnreachable } from "../shared/assertUnreachable";
 
 interface AlertProps {
   /**
@@ -83,8 +84,17 @@ export const Alert: React.FC<AlertProps> = ({
       {...otherProps}
       css={{
         backgroundColor:
-          theme === "light" ? colors.white : colors.black.lighter,
-        color: theme === "light" ? colors.black.base : colors.white,
+          theme === "light"
+            ? colors.white
+            : theme === "dark"
+            ? colors.black.lighter
+            : assertUnreachable(theme),
+        color:
+          theme === "light"
+            ? colors.black.base
+            : theme === "dark"
+            ? colors.white
+            : assertUnreachable(theme),
         boxShadow: `0 4px 8px 0 rgba(0, 0, 0, .04)`,
         borderStyle: "solid",
         borderRadius: 4,
