@@ -25,7 +25,7 @@ interface AlertProps {
   /**
    * The icon displayed to the left of the heading text
    */
-  Icon: React.ComponentType<{ className?: string }>;
+  icon: React.ReactElement<{ className?: string }>;
 
   heading: React.ReactNode;
 
@@ -73,7 +73,7 @@ export const Alert: React.FC<AlertProps> = ({
   headingAs = "h2",
   children,
   color,
-  Icon,
+  icon,
   theme = "light",
   extended = false,
   ...otherProps
@@ -120,9 +120,23 @@ export const Alert: React.FC<AlertProps> = ({
               ),
               children: (
                 <Fragment>
-                  <Icon
-                    css={{ width: 20, height: 20, color, marginRight: 13 }}
-                  />
+                  <ClassNames>
+                    {({ css, cx }) =>
+                      React.cloneElement(icon, {
+                        className: classnames(
+                          icon.props.className,
+                          cx(
+                            css({
+                              width: 20,
+                              height: 20,
+                              color,
+                              marginRight: 13,
+                            })
+                          )
+                        ),
+                      })
+                    }
+                  </ClassNames>
                   {heading}
                 </Fragment>
               ),
@@ -190,5 +204,5 @@ Alert.propTypes = {
       .map((color) => Object.values(color))
       .reduce((a, b) => a.concat(b)) as PaletteColor[]
   ).isRequired,
-  Icon: PropTypes.func.isRequired,
+  icon: PropTypes.element.isRequired,
 };
