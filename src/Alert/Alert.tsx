@@ -215,4 +215,8 @@ Alert.propTypes = {
       .reduce((a, b) => a.concat(b)) as PaletteColor[]
   ).isRequired,
   icon: PropTypes.element.isRequired,
+  headingAs: PropTypes.oneOfType([
+    PropTypes.element.isRequired,
+    PropTypes.string.isRequired as any, // Using PropTypes.string to match keyof JSX.IntrinsicElements
+  ]),
 };
