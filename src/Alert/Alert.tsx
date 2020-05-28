@@ -98,7 +98,12 @@ export const Alert: React.FC<AlertProps> = ({
         boxShadow: `0 4px 8px 0 rgba(0, 0, 0, .04)`,
         borderStyle: "solid",
         borderRadius: 4,
-        borderWidth: theme === "light" ? 1 : 0,
+        borderWidth:
+          theme === "light"
+            ? 1
+            : theme === "dark"
+            ? 0
+            : assertUnreachable(theme),
         borderColor: colors.silver.dark,
         padding: 15,
       }}
@@ -122,7 +127,11 @@ export const Alert: React.FC<AlertProps> = ({
                   display: "flex",
                   color: getOffsetInPalette(
                     2,
-                    theme === "light" ? "darker" : "lighter",
+                    theme === "light"
+                      ? "darker"
+                      : theme === "dark"
+                      ? "lighter"
+                      : assertUnreachable(theme),
                     color
                   ),
                   ...base.base,
@@ -180,7 +189,11 @@ export const Alert: React.FC<AlertProps> = ({
             height: 1,
             borderWidth: 0,
             backgroundColor:
-              theme === "dark" ? colors.grey.dark : colors.silver.dark,
+              theme === "light"
+                ? colors.silver.dark
+                : theme === "dark"
+                ? colors.grey.dark
+                : assertUnreachable(theme),
             marginTop: 14,
             marginBottom: 14,
           }}
