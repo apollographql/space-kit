@@ -42,7 +42,7 @@ Informational alerts present general info about something you are doing or worki
     <Alert
       onClose={() => undefined}
       color={colors.blue.base}
-      icon={<IconInfoSolid />}
+      icon={<IconInfoSolid css={{ "& .inner": { fill: colors.white } }} />}
       theme="dark"
       heading="Informational alert"
     >
@@ -71,7 +71,7 @@ Informational alerts present general info about something you are doing or worki
     <Alert
       onClose={() => undefined}
       color={colors.blue.base}
-      icon={<IconInfoSolid />}
+      icon={<IconInfoSolid css={{ "& .inner": { fill: colors.white } }} />}
       theme="dark"
       heading="Informational alert"
       extended={true}
@@ -138,7 +138,7 @@ Error alerts let the user know that something has gone wrong or is blocked in th
     <Alert
       onClose={() => undefined}
       color={colors.red.base}
-      icon={<IconErrorSolid />}
+      icon={<IconErrorSolid css={{ "& .inner": { fill: colors.white } }} />}
       heading="Error alert"
       theme="dark"
       style={{ marginBottom: 20 }}
@@ -167,7 +167,7 @@ Success alerts are confirmation that the action the user was trying to take has 
     <Alert
       onClose={() => undefined}
       color={colors.green.base}
-      icon={<IconSuccessSolid />}
+      icon={<IconSuccessSolid css={{ "& .inner": { fill: colors.white } }} />}
       theme="dark"
       heading="Success alert"
     >
