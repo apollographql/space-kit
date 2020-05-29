@@ -170,3 +170,11 @@ storiesOf("Tests|Menu", module)
       </PerformUserInteraction>
     </div>
   ));
+
+storiesOf("Tests|MenuItem", module)
+  .addParameters({ component: MenuItem })
+  .add('aria-expanded="true"', () => (
+    <div style={{ width: 100, height: 20 }}>
+      <MenuItem aria-expanded="true">Circle</MenuItem>
+    </div>
+  ));
