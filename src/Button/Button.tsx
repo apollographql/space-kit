@@ -447,7 +447,7 @@ export const Button = React.forwardRef<HTMLElement, Props>(
                         : getOffsetInPalette(1, "darker", color)
                     }, inset 0 -1px 0 0 rgba(18, 21, 26, 0.05)`,
                   },
-                  "&:active, &[data-force-active-state]": {
+                  "&:active, &[data-force-active-state], &[aria-expanded=true]": {
                     ...(getTextColor({
                       color,
                       feel,
