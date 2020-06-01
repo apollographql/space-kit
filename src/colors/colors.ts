@@ -140,12 +140,14 @@ export const colors = {
 } as const;
 
 /**
- * An enumeration of all colors in all palettes.
+ * An enumeration of all colors in all shaded palettes. These are all the colors
+ * that can be lightened and darkened. This excludes colors.white intentionally
+ * because that will not be a valid input for a color change function.
  *
  * This can be used to restrict a prop to only be a color value from one of our
  * palettes.
  */
-export type PaletteColor =
+export type ShadedColor =
   | typeof colors["pink"][keyof typeof colors["pink"]]
   | typeof colors["teal"][keyof typeof colors["teal"]]
   | typeof colors["indigo"][keyof typeof colors["indigo"]]

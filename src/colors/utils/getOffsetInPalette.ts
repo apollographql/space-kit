@@ -1,4 +1,4 @@
-import { MonochromePalette, ColorPalette, PaletteColor } from "../index";
+import { MonochromePalette, ColorPalette, ShadedColor } from "../index";
 import { findPaletteByColor } from "./findPaletteByColor";
 
 const monochromePaletteKeys: ReadonlyArray<keyof MonochromePalette> = [
@@ -41,8 +41,8 @@ function isColorPalette(
 export function getOffsetInPalette(
   offset: number,
   offsetDirection: "lighter" | "darker",
-  color: PaletteColor
-): PaletteColor {
+  color: ShadedColor
+): ShadedColor {
   /**
    * Palette this color belongs to
    */
@@ -69,7 +69,7 @@ export function getOffsetInPalette(
           Math.max(0, index + effectiveOffset)
         )
       ]
-    ] as PaletteColor;
+    ] as ShadedColor;
   }
 
   const index = Object.keys(palette).findIndex(
@@ -85,5 +85,5 @@ export function getOffsetInPalette(
         Math.max(0, index + effectiveOffset)
       )
     ]
-  ] as PaletteColor;
+  ] as ShadedColor;
 }
