@@ -202,8 +202,7 @@ export const Alert: React.FC<AlertProps> = ({
       <div css={{ marginLeft: extended ? 0 : 33 }}>
         <div
           css={{
-            fontSize: 13,
-            lineHeight: "1.5",
+            ...base.small,
             marginBottom: actions ? 13 : 0,
           }}
         >
