@@ -146,6 +146,9 @@ export const colors = {
  *
  * This can be used to restrict a prop to only be a color value from one of our
  * palettes.
+ *
+ * This is not intended to be a representation of all colors available in Space
+ * Kit; for that, see  `@AllColors`.
  */
 export type ShadedColor =
   | typeof colors["pink"][keyof typeof colors["pink"]]
@@ -161,3 +164,15 @@ export type ShadedColor =
   | typeof colors["yellow"][keyof typeof colors["yellow"]]
   | typeof colors["purple"][keyof typeof colors["purple"]]
   | typeof colors["blilet"][keyof typeof colors["blilet"]];
+
+/**
+ * Represents all colors available in Space Kit
+ *
+ * This is explicitly not valid when a color needs the ability to be made
+ * lighter or darker. For that use case, refer to `PaletteColor`
+ */
+export type AllColors =
+  | ShadedColor
+  | "initial"
+  | "inherit"
+  | typeof colors.white;
