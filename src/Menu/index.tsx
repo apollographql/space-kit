@@ -8,6 +8,7 @@ import {
   useMenuItemClickListener,
 } from "../MenuItemClickListener";
 import { sizeModifier } from "./menu/sizeModifier";
+import { ShadedColor } from "../colors";
 
 interface Props
   extends Pick<
@@ -30,6 +31,12 @@ interface Props
    */
   closeOnMenuItemClick?: boolean;
 
+  /**
+   * Color to use for the selected state of a menu item. Hover state will be
+   * programatically calculated depending on the theme.
+   */
+  color?: ShadedColor;
+
   style?: React.CSSProperties;
 }
 
@@ -39,6 +46,7 @@ interface Props
 export const Menu: React.FC<Props> = ({
   children,
   closeOnMenuItemClick = true,
+  color,
   fallbackPlacements,
   iconSize,
   content,
@@ -73,7 +81,7 @@ export const Menu: React.FC<Props> = ({
   );
 
   return (
-    <MenuConfigProvider iconSize={iconSize ?? inheritedIconSize}>
+    <MenuConfigProvider color={color} iconSize={iconSize ?? inheritedIconSize}>
       <TippyMenuStyles />
       <AbstractTooltip
         appendTo="parent"
