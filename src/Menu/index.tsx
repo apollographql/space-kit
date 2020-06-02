@@ -77,6 +77,7 @@ export const Menu: React.FC<Props> = ({
       <TippyMenuStyles />
       <AbstractTooltip
         appendTo="parent"
+        offset={[0, 2]}
         onCreate={(instance) => {
           instanceRef.current = instance;
         }}
