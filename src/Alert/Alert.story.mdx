@@ -54,6 +54,8 @@ Informational alerts present general info about something you are doing or worki
 
 ### Extended
 
+The extended card variant is for rare use cases where an alert is the most appropriate format for explaining longer instructions.
+
 <Preview>
   <Story name="info light extended">
     <Alert
@@ -63,8 +65,19 @@ Informational alerts present general info about something you are doing or worki
       heading="Informational alert"
       extended={true}
     >
-      This is a general informational message telling you about something. Learn
-      more
+      In some cases it may be appropriate for the toast card to give a longer
+      message, or a set of instructions helping users navigate complicated
+      situations in the workflow.
+      <br />
+      <br />
+      It is typically preferrable to link out to a docs article in situations like
+      this, but there are cases where you may also need to include a lengthy amount
+      of content with the card because it will be immediately useful to the user
+      in their workflow.
+      <br />
+      <br />
+      If a toast card’s content requires more than one paragraph, use the
+      expanded content toast variant.
     </Alert>
   </Story>
   <Story name="info dark extended">
@@ -76,8 +89,19 @@ Informational alerts present general info about something you are doing or worki
       heading="Informational alert"
       extended={true}
     >
-      This is a general informational message telling you about something. Learn
-      more
+      In some cases it may be appropriate for the toast card to give a longer
+      message, or a set of instructions helping users navigate complicated
+      situations in the workflow.
+      <br />
+      <br />
+      It is typically preferrable to link out to a docs article in situations like
+      this, but there are cases where you may also need to include a lengthy amount
+      of content with the card because it will be immediately useful to the user
+      in their workflow.
+      <br />
+      <br />
+      If a toast card’s content requires more than one paragraph, use the
+      expanded content toast variant.
     </Alert>
   </Story>
 </Preview>
