@@ -1,5 +1,5 @@
 import userEvent from "@testing-library/user-event";
-import { findByText } from "@testing-library/dom";
+import { findByRole, findByText } from "@testing-library/dom";
 import { Button } from "../Button";
 import { colors } from "../colors";
 import { Menu } from "../Menu";
@@ -496,6 +496,38 @@ export const MenuItemWithContentHuggingSides = ({
                 endContent="0 rm"
               />
             </MenuItem>
+          </React.Fragment>
+        }
+      >
+        <Button>Open Menu</Button>
+      </Menu>
+    </PerformUserInteraction>
+  </Story>
+</Preview>
+
+## Colors Menu
+
+Menu colors can be configured on the `Menu` component. Nested menus will inherit colors defined in antecendent `Menu`s and hover colors will be automatically calcualted depending on the theme.
+
+<Preview>
+  <Story name="color-configuration">
+    <PerformUserInteraction
+      callback={async () => {
+        userEvent.click(await findByRole(document.body, "button"));
+      }}
+    >
+      <Menu
+        popperOptions={{ strategy: "fixed" }}
+        placement="bottom-start"
+        color={colors.red.base}
+        content={
+          <React.Fragment>
+            <MenuItem>Root</MenuItem>
+            <MenuItem selected>Objects</MenuItem>
+            <MenuItem>Inputs</MenuItem>
+            <MenuItem>Interfaces</MenuItem>
+            <MenuItem>Unions</MenuItem>
+            <MenuItem>Scalars and Enums</MenuItem>
           </React.Fragment>
         }
       >
