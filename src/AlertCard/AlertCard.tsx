@@ -10,7 +10,7 @@ import { colors, PaletteColor } from "../colors";
 import { getOffsetInPalette } from "../colors/utils/getOffsetInPalette";
 import { assertUnreachable } from "../shared/assertUnreachable";
 
-interface AlertProps {
+interface AlertCardProps {
   /**
    * color theme for alert
    * @default "light"
@@ -67,7 +67,7 @@ interface AlertProps {
   style?: CSSProperties;
 }
 
-export const Alert: React.FC<AlertProps> = ({
+export const AlertCard: React.FC<AlertCardProps> = ({
   heading,
   onClose,
   actions,
@@ -215,7 +215,7 @@ export const Alert: React.FC<AlertProps> = ({
   );
 };
 
-Alert.propTypes = {
+AlertCard.propTypes = {
   extended: PropTypes.bool,
   onClose: PropTypes.func.isRequired,
   children: PropTypes.node,

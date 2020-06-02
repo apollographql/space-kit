@@ -1,5 +1,5 @@
 import { colors } from "../colors";
-import { Alert } from "../Alert";
+import { AlertCard } from "../AlertCard";
 import { Button } from "../Button";
 import { IconInfoSolid } from "../icons/IconInfoSolid";
 import { IconErrorSolid } from "../icons/IconErrorSolid";
@@ -13,13 +13,13 @@ import {
   Preview,
 } from "@storybook/addon-docs/blocks";
 
-<Meta title="Components|Alert" />
+<Meta title="Components|AlertCard" />
 
-# Alert
+# AlertCard
 
 <Description
-  of={Alert}
-  markdown="**Alerts** provide a way to display short, important message in a way that attracts the user's attention without interrupting the user's task."
+  of={AlertCard}
+  markdown="**AlertCards** provide a way to display short, important message in a way that attracts the user's attention without interrupting the user's task."
 />
 
 ## Info Alert
@@ -28,7 +28,7 @@ Informational alerts present general info about something you are doing or worki
 
 <Preview>
   <Story name="info light">
-    <Alert
+    <AlertCard
       onClose={() => undefined}
       color={colors.blue.base}
       icon={<IconInfoSolid />}
@@ -36,10 +36,10 @@ Informational alerts present general info about something you are doing or worki
     >
       This is a general informational message telling you about something. Learn
       more
-    </Alert>
+    </AlertCard>
   </Story>
   <Story name="info dark">
-    <Alert
+    <AlertCard
       onClose={() => undefined}
       color={colors.blue.base}
       icon={<IconInfoSolid css={{ "& .inner": { fill: colors.white } }} />}
@@ -48,7 +48,7 @@ Informational alerts present general info about something you are doing or worki
     >
       This is a general informational message telling you about something. Learn
       more
-    </Alert>
+    </AlertCard>
   </Story>
 </Preview>
 
@@ -58,7 +58,7 @@ The extended card variant is for rare use cases where an alert is the most appro
 
 <Preview>
   <Story name="info light extended">
-    <Alert
+    <AlertCard
       onClose={() => undefined}
       color={colors.blue.base}
       icon={<IconInfoSolid />}
@@ -78,10 +78,10 @@ The extended card variant is for rare use cases where an alert is the most appro
       <br />
       If a toast card’s content requires more than one paragraph, use the
       expanded content toast variant.
-    </Alert>
+    </AlertCard>
   </Story>
   <Story name="info dark extended">
-    <Alert
+    <AlertCard
       onClose={() => undefined}
       color={colors.blue.base}
       icon={<IconInfoSolid css={{ "& .inner": { fill: colors.white } }} />}
@@ -102,7 +102,7 @@ The extended card variant is for rare use cases where an alert is the most appro
       <br />
       If a toast card’s content requires more than one paragraph, use the
       expanded content toast variant.
-    </Alert>
+    </AlertCard>
   </Story>
 </Preview>
 
@@ -112,7 +112,7 @@ Warning alerts present information about the action that is about to be taken th
 
 <Preview>
   <Story name="warning light">
-    <Alert
+    <AlertCard
       onClose={() => undefined}
       color={colors.orange.base}
       icon={<IconWarningSolid />}
@@ -121,10 +121,10 @@ Warning alerts present information about the action that is about to be taken th
     >
       exceededSubLimitAt is a deprecated field. You can use it but it may not
       work as expected.
-    </Alert>
+    </AlertCard>
   </Story>
   <Story name="warning dark">
-    <Alert
+    <AlertCard
       onClose={() => undefined}
       color={colors.orange.base}
       icon={<IconWarningSolid />}
@@ -138,7 +138,7 @@ Warning alerts present information about the action that is about to be taken th
     >
       exceededSubLimitAt is a deprecated field. You can use it but it may not
       work as expected.
-    </Alert>
+    </AlertCard>
   </Story>
 </Preview>
 
@@ -148,7 +148,7 @@ Error alerts let the user know that something has gone wrong or is blocked in th
 
 <Preview>
   <Story name="error light">
-    <Alert
+    <AlertCard
       onClose={() => undefined}
       color={colors.red.base}
       icon={<IconErrorSolid />}
@@ -156,10 +156,10 @@ Error alerts let the user know that something has gone wrong or is blocked in th
       style={{ marginBottom: 20 }}
     >
       Something is broken. You cannot perform this action at this time.
-    </Alert>
+    </AlertCard>
   </Story>
   <Story name="error dark">
-    <Alert
+    <AlertCard
       onClose={() => undefined}
       color={colors.red.base}
       icon={<IconErrorSolid css={{ "& .inner": { fill: colors.white } }} />}
@@ -168,7 +168,7 @@ Error alerts let the user know that something has gone wrong or is blocked in th
       style={{ marginBottom: 20 }}
     >
       Something is broken. You cannot perform this action at this time.
-    </Alert>
+    </AlertCard>
   </Story>
 </Preview>
 
@@ -178,17 +178,17 @@ Success alerts are confirmation that the action the user was trying to take has 
 
 <Preview>
   <Story name="success light">
-    <Alert
+    <AlertCard
       onClose={() => undefined}
       color={colors.green.base}
       icon={<IconSuccessSolid />}
       heading="Success alert"
     >
       A new schema registry has been created by timbotnik.
-    </Alert>
+    </AlertCard>
   </Story>
   <Story name="success dark">
-    <Alert
+    <AlertCard
       onClose={() => undefined}
       color={colors.green.base}
       icon={<IconSuccessSolid css={{ "& .inner": { fill: colors.white } }} />}
@@ -196,7 +196,7 @@ Success alerts are confirmation that the action the user was trying to take has 
       heading="Success alert"
     >
       A new schema registry has been created by timbotnik.
-    </Alert>
+    </AlertCard>
   </Story>
 </Preview>
 
@@ -204,4 +204,4 @@ Success alerts are confirmation that the action the user was trying to take has 
 
 ### `Alert`
 
-<Props of={Alert} />
+<Props of={AlertCard} />
