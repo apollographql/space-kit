@@ -1,3 +1,20 @@
+# v5.1.0 (Wed Jun 03 2020)
+
+#### 🚀 Enhancement
+
+- Apply hover states to `MenuItem` and `Button` when `aria-expanded="true"` [#177](https://github.com/apollographql/space-kit/pull/177) ([@justinanastos](https://github.com/justinanastos))
+
+#### 🏠 Internal
+
+- Update testing dependencies [#175](https://github.com/apollographql/space-kit/pull/175) ([@justinanastos](https://github.com/justinanastos))
+- Add space-kit svg as favicon [#173](https://github.com/apollographql/space-kit/pull/173) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v5.0.0 (Fri May 08 2020)
 
 #### 💥 Breaking Change
