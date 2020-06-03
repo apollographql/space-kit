@@ -2,15 +2,15 @@ import React from "react";
 import userEvent from "@testing-library/user-event";
 import { Button } from "../Button";
 import { findByText } from "@testing-library/dom";
-import { Menu } from "../Menu";
+import { PopupMenu } from "../PopupMenu";
 import { MenuHeading } from "../MenuHeading";
 import { MenuItem } from "../MenuItem";
 import { PerformUserInteraction } from "../shared/PerformUserInteraction";
 import { storiesOf } from "@storybook/react";
 import { colors } from "../colors";
 
-storiesOf("Tests|Menu", module)
-  .addParameters({ component: Menu })
+storiesOf("Tests|PopupMenu", module)
+  .addParameters({ component: PopupMenu })
   .add("max height", () => (
     <div
       className="sk-scroll-container"
@@ -27,7 +27,7 @@ storiesOf("Tests|Menu", module)
           userEvent.click(await findByText(document.body, /open menu/i));
         }}
       >
-        <Menu
+        <PopupMenu
           placement="bottom-start"
           fallbackPlacements={["top-start"]}
           iconSize="small"
@@ -49,9 +49,9 @@ storiesOf("Tests|Menu", module)
           }
         >
           <Button style={{ position: "absolute", left: 400, top: 400 }}>
-            Open Menu
+            Open PopupMenu
           </Button>
-        </Menu>
+        </PopupMenu>
       </PerformUserInteraction>
     </div>
   ))
@@ -71,7 +71,7 @@ storiesOf("Tests|Menu", module)
           userEvent.click(await findByText(document.body, /open menu/i));
         }}
       >
-        <Menu
+        <PopupMenu
           placement="bottom"
           popperOptions={{ strategy: "absolute" }}
           fallbackPlacements={["top"]}
@@ -87,9 +87,9 @@ storiesOf("Tests|Menu", module)
           }
         >
           <Button style={{ position: "absolute", left: 0, top: 200 }}>
-            Open Menu
+            Open PopupMenu
           </Button>
-        </Menu>
+        </PopupMenu>
       </PerformUserInteraction>
     </div>
   ))
@@ -109,7 +109,7 @@ storiesOf("Tests|Menu", module)
           userEvent.click(await findByText(document.body, /open menu/i));
         }}
       >
-        <Menu
+        <PopupMenu
           popperOptions={{ strategy: "absolute" }}
           placement="bottom"
           fallbackPlacements={["top"]}
@@ -125,9 +125,9 @@ storiesOf("Tests|Menu", module)
           }
         >
           <Button style={{ position: "absolute", left: 0, top: 200 }}>
-            Open Menu
+            Open PopupMenu
           </Button>
-        </Menu>
+        </PopupMenu>
       </PerformUserInteraction>
     </div>
   ))
@@ -147,7 +147,7 @@ storiesOf("Tests|Menu", module)
           userEvent.click(await findByText(document.body, /open menu/i));
         }}
       >
-        <Menu
+        <PopupMenu
           popperOptions={{ strategy: "absolute" }}
           placement="bottom-start"
           fallbackPlacements={["top-start"]}
@@ -164,9 +164,9 @@ storiesOf("Tests|Menu", module)
           }
         >
           <Button style={{ position: "absolute", left: 0, top: 0 }}>
-            Open Menu
+            Open PopupMenu
           </Button>
-        </Menu>
+        </PopupMenu>
       </PerformUserInteraction>
     </div>
   ));

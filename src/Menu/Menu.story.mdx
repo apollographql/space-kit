@@ -1,9 +1,8 @@
 import userEvent from "@testing-library/user-event";
-import { findByRole, findByText } from "@testing-library/dom";
+import { findByRole } from "@testing-library/dom";
 import { Button } from "../Button";
 import { colors } from "../colors";
 import { Menu } from "../Menu";
-import { PerformUserInteraction } from "../shared/PerformUserInteraction";
 import { MenuItem } from "../MenuItem";
 import { MenuDivider } from "../MenuDivider";
 import { MenuHeading } from "../MenuHeading";
@@ -28,7 +27,7 @@ import { IconCheck } from "../icons/IconCheck";
 
 <Description
   of={Menu}
-  markdown="**Menus** provide a way for sures to interact with the application by selecting from a set of options. While that’s simple in theory, menus can be complex and not eveything is detailed below. Menus can emerge from Select buttons or a simple button."
+  markdown="**Menus** provide a mechanic to style a group of `MenuItem` elements in a single place"
 />
 
 ## Simple Menu
@@ -36,29 +35,51 @@ import { IconCheck } from "../icons/IconCheck";
 The simple menu provides a list of options for a user to choose from and updates the button or select button with the choice the user has selected.
 
 <Preview>
-  <Story name="basic">
-    <PerformUserInteraction
-      callback={async () => {
-        userEvent.click(await findByText(document.body, /open menu/i));
-      }}
-    >
-      <Menu
-        popperOptions={{ strategy: "fixed" }}
-        placement="bottom-start"
-        content={
-          <React.Fragment>
-            <MenuItem>Root</MenuItem>
-            <MenuItem selected>Objects</MenuItem>
-            <MenuItem>Inputs</MenuItem>
-            <MenuItem>Interfaces</MenuItem>
-            <MenuItem>Unions</MenuItem>
-            <MenuItem>Scalars and Enums</MenuItem>
-          </React.Fragment>
-        }
-      >
-        <Button>Open Menu</Button>
+  <Story name="Simple Menu">
+    <Menu className="bg-black text-white" theme="dark">
+      <MenuItem>Root</MenuItem>
+      <MenuItem selected>Objects</MenuItem>
+      <MenuItem>Inputs</MenuItem>
+      <MenuItem>Interfaces</MenuItem>
+      <MenuItem>Unions</MenuItem>
+      <MenuItem>Scalars and Enums</MenuItem>
+    </Menu>
+  </Story>
+</Preview>
+
+## Colors
+
+Menus support a `color` prop that will specify the color of the active/selecrted state and formulalicly calculate the hover color depending on theme.
+
+### Light
+
+<Preview>
+  <Story name="Colors, light theme">
+    <Menu color={colors.red.base} theme="light">
+      <MenuItem>Root</MenuItem>
+      <MenuItem selected>Objects</MenuItem>
+      <MenuItem>Inputs</MenuItem>
+      <MenuItem>Interfaces</MenuItem>
+      <MenuItem>Unions</MenuItem>
+      <MenuItem>Scalars and Enums</MenuItem>
+    </Menu>
+  </Story>
+</Preview>
+
+### Dark
+
+<Preview>
+  <Story name="Colors, dark theme">
+    <div style={{ backgroundColor: "black", color: "white" }}>
+      <Menu color={colors.red.base} theme="dark">
+        <MenuItem>Root</MenuItem>
+        <MenuItem selected>Objects</MenuItem>
+        <MenuItem>Inputs</MenuItem>
+        <MenuItem>Interfaces</MenuItem>
+        <MenuItem>Unions</MenuItem>
+        <MenuItem>Scalars and Enums</MenuItem>
       </Menu>
-    </PerformUserInteraction>
+    </div>
   </Story>
 </Preview>
 
@@ -69,354 +90,271 @@ by a divider and in other cases, headers can be used to group similar
 information and provide a nice visual grouping.
 
 <Preview>
-  <Story name="divided">
-    <PerformUserInteraction
-      callback={async () => {
-        userEvent.click(await findByText(document.body, /open menu/i));
-      }}
-    >
-      <Menu
-        popperOptions={{ strategy: "fixed" }}
-        placement="bottom-start"
-        content={
-          <React.Fragment>
-            <MenuItem>All Types</MenuItem>
-            <MenuDivider />
-            <MenuItem>Root</MenuItem>
-            <MenuItem>Objects</MenuItem>
-            <MenuItem>Inputs</MenuItem>
-            <MenuItem>Interfaces</MenuItem>
-            <MenuItem>Unions</MenuItem>
-            <MenuItem>Scalars and Enums</MenuItem>
-            <MenuDivider />
-            <MenuItem>Deprecations</MenuItem>
-          </React.Fragment>
-        }
-      >
-        <Button>Open Menu</Button>
-      </Menu>
-    </PerformUserInteraction>
+  <Story name="Segmented Menu">
+    <Menu>
+      <MenuItem>All Types</MenuItem>
+      <MenuDivider />
+      <MenuItem>Root</MenuItem>
+      <MenuItem>Objects</MenuItem>
+      <MenuItem>Inputs</MenuItem>
+      <MenuItem>Interfaces</MenuItem>
+      <MenuItem>Unions</MenuItem>
+      <MenuItem>Scalars and Enums</MenuItem>
+      <MenuDivider />
+      <MenuItem>Deprecations</MenuItem>
+    </Menu>
   </Story>
 </Preview>
 
 ## Header
 
 <Preview>
-  <Story name="heading">
-    <PerformUserInteraction
-      callback={async () => {
-        userEvent.click(await findByText(document.body, /open menu/i));
-      }}
-    >
-      <Menu
-        popperOptions={{ strategy: "fixed" }}
-        placement="bottom-start"
-        content={
-          <React.Fragment>
-            <MenuHeading count={5}>Filter by</MenuHeading>
-            <MenuItem>Root</MenuItem>
-            <MenuItem>Objects</MenuItem>
-            <MenuItem>Inputs</MenuItem>
-            <MenuItem>Interfaces</MenuItem>
-            <MenuItem>Unions</MenuItem>
-            <MenuItem>Scalars and Enums</MenuItem>
-          </React.Fragment>
-        }
-      >
-        <Button>Open Menu</Button>
-      </Menu>
-    </PerformUserInteraction>
+  <Story name="Heading">
+    <Menu>
+      <MenuHeading count={5}>Filter by</MenuHeading>
+      <MenuItem>Root</MenuItem>
+      <MenuItem>Objects</MenuItem>
+      <MenuItem>Inputs</MenuItem>
+      <MenuItem>Interfaces</MenuItem>
+      <MenuItem>Unions</MenuItem>
+      <MenuItem>Scalars and Enums</MenuItem>
+    </Menu>
   </Story>
 </Preview>
 
 ## Icons
 
+### `startIcon`
+
+MenuItems can take a `startIcon` to display an icon to the left
+
 <Preview>
-  <Story name="start-icons">
-    <PerformUserInteraction
-      callback={async () => {
-        userEvent.click(await findByText(document.body, /open menu/i));
-      }}
-    >
-      <Menu
-        popperOptions={{ strategy: "fixed" }}
-        placement="bottom-start"
-        content={
-          <React.Fragment>
-            <MenuItem
-              startIcon={
-                <IconAstronaut1
-                  style={{ width: "100%", height: "100%" }}
-                  weight="thin"
-                />
-              }
-            >
-              Cones
-            </MenuItem>
-            <MenuItem
-              startIcon={
-                <IconAstronaut2
-                  style={{ width: "100%", height: "100%" }}
-                  weight="thin"
-                />
-              }
-            >
-              Rhomboid
-            </MenuItem>
-            <MenuItem
-              startIcon={
-                <IconAstronaut3
-                  style={{ width: "100%", height: "100%" }}
-                  weight="thin"
-                />
-              }
-            >
-              Cubes
-            </MenuItem>
-            <MenuItem
-              startIcon={
-                <IconLander
-                  style={{ width: "100%", height: "100%" }}
-                  weight="thin"
-                />
-              }
-            >
-              Diamonds
-            </MenuItem>
-            <MenuItem
-              startIcon={
-                <IconPlanet3
-                  style={{ width: "100%", height: "100%" }}
-                  weight="thin"
-                />
-              }
-            >
-              Cylinders
-            </MenuItem>
-            <MenuItem
-              startIcon={
-                <IconShip3
-                  style={{ width: "100%", height: "100%" }}
-                  weight="thin"
-                />
-              }
-            >
-              Pyramids
-            </MenuItem>
-          </React.Fragment>
+  <Story name="startIcon">
+    <Menu>
+      <MenuItem
+        startIcon={
+          <IconAstronaut1
+            style={{ width: "100%", height: "100%" }}
+            weight="thin"
+          />
         }
       >
-        <Button>Open Menu</Button>
-      </Menu>
-    </PerformUserInteraction>
+        Cones
+      </MenuItem>
+      <MenuItem
+        startIcon={
+          <IconAstronaut2
+            style={{ width: "100%", height: "100%" }}
+            weight="thin"
+          />
+        }
+      >
+        Rhomboid
+      </MenuItem>
+      <MenuItem
+        startIcon={
+          <IconAstronaut3
+            style={{ width: "100%", height: "100%" }}
+            weight="thin"
+          />
+        }
+      >
+        Cubes
+      </MenuItem>
+      <MenuItem
+        startIcon={
+          <IconLander style={{ width: "100%", height: "100%" }} weight="thin" />
+        }
+      >
+        Diamonds
+      </MenuItem>
+      <MenuItem
+        startIcon={
+          <IconPlanet3
+            style={{ width: "100%", height: "100%" }}
+            weight="thin"
+          />
+        }
+      >
+        Cylinders
+      </MenuItem>
+      <MenuItem
+        startIcon={
+          <IconShip3 style={{ width: "100%", height: "100%" }} weight="thin" />
+        }
+      >
+        Pyramids
+      </MenuItem>
+    </Menu>
   </Story>
-  <Story name="end-icons">
-    <PerformUserInteraction
-      callback={async () => {
-        userEvent.click(await findByText(document.body, /open menu/i));
-      }}
-    >
-      <Menu
-        popperOptions={{ strategy: "fixed" }}
-        placement="bottom-start"
-        content={
-          <React.Fragment>
-            <MenuItem
-              endIcon={
-                <IconAstronaut1
-                  style={{ width: "100%", height: "100%" }}
-                  weight="thin"
-                />
-              }
-            >
-              Cones
-            </MenuItem>
-            <MenuItem
-              endIcon={
-                <IconAstronaut2
-                  style={{ width: "100%", height: "100%" }}
-                  weight="thin"
-                />
-              }
-            >
-              Rhomboid
-            </MenuItem>
-            <MenuItem
-              endIcon={
-                <IconAstronaut3
-                  style={{ width: "100%", height: "100%" }}
-                  weight="thin"
-                />
-              }
-            >
-              Cubes
-            </MenuItem>
-            <MenuItem
-              endIcon={
-                <IconLander
-                  style={{ width: "100%", height: "100%" }}
-                  weight="thin"
-                />
-              }
-            >
-              Diamonds
-            </MenuItem>
-            <MenuItem
-              endIcon={
-                <IconPlanet3
-                  style={{ width: "100%", height: "100%" }}
-                  weight="thin"
-                />
-              }
-            >
-              Cylinders
-            </MenuItem>
-            <MenuItem
-              endIcon={
-                <IconShip3
-                  style={{ width: "100%", height: "100%" }}
-                  weight="thin"
-                />
-              }
-            >
-              Pyramids
-            </MenuItem>
-          </React.Fragment>
+</Preview>
+
+### `endIcon`
+
+`MenuItem`s can take an `endIcon` prop to place an icon on the right
+
+<Preview>
+  <Story name="endIcon">
+    <Menu>
+      <MenuItem
+        endIcon={
+          <IconAstronaut1
+            style={{ width: "100%", height: "100%" }}
+            weight="thin"
+          />
         }
       >
-        <Button>Open Menu</Button>
-      </Menu>
-    </PerformUserInteraction>
+        Cones
+      </MenuItem>
+      <MenuItem
+        endIcon={
+          <IconAstronaut2
+            style={{ width: "100%", height: "100%" }}
+            weight="thin"
+          />
+        }
+      >
+        Rhomboid
+      </MenuItem>
+      <MenuItem
+        endIcon={
+          <IconAstronaut3
+            style={{ width: "100%", height: "100%" }}
+            weight="thin"
+          />
+        }
+      >
+        Cubes
+      </MenuItem>
+      <MenuItem
+        endIcon={
+          <IconLander style={{ width: "100%", height: "100%" }} weight="thin" />
+        }
+      >
+        Diamonds
+      </MenuItem>
+      <MenuItem
+        endIcon={
+          <IconPlanet3
+            style={{ width: "100%", height: "100%" }}
+            weight="thin"
+          />
+        }
+      >
+        Cylinders
+      </MenuItem>
+      <MenuItem
+        endIcon={
+          <IconShip3 style={{ width: "100%", height: "100%" }} weight="thin" />
+        }
+      >
+        Pyramids
+      </MenuItem>
+    </Menu>
   </Story>
-  <Story name="multiline-end-icons">
-    <PerformUserInteraction
-      callback={async () => {
-        userEvent.click(await findByText(document.body, /open menu/i));
-      }}
-    >
-      <Menu
-        popperOptions={{ strategy: "fixed" }}
-        placement="bottom-start"
-        iconSize="small"
-        content={
-          <React.Fragment>
-            <MenuItem
-              endIcon={
-                <IconAstronaut1
-                  style={{ width: "100%", height: "100%" }}
-                  weight="thin"
-                />
-              }
-            >
-              <div>Cones</div>
-              <div>subtext</div>
-            </MenuItem>
-            <MenuItem
-              endIcon={
-                <IconAstronaut2
-                  style={{ width: "100%", height: "100%" }}
-                  weight="thin"
-                />
-              }
-            >
-              <div>Rhomboid</div>
-              <div>subtext</div>
-            </MenuItem>
-            <MenuItem
-              endIcon={
-                <IconAstronaut3
-                  style={{ width: "100%", height: "100%" }}
-                  weight="thin"
-                />
-              }
-            >
-              <div>Cubes</div>
-              <div>subtext</div>
-            </MenuItem>
-            <MenuItem
-              endIcon={
-                <IconLander
-                  style={{ width: "100%", height: "100%" }}
-                  weight="thin"
-                />
-              }
-            >
-              <div>Diamonds</div>
-              <div>subtext</div>
-            </MenuItem>
-            <MenuItem
-              endIcon={
-                <IconPlanet3
-                  style={{ width: "100%", height: "100%" }}
-                  weight="thin"
-                />
-              }
-            >
-              <div>Cylinders</div>
-              <div>subtext</div>
-            </MenuItem>
-            <MenuItem
-              endIcon={
-                <IconShip3
-                  style={{ width: "100%", height: "100%" }}
-                  weight="thin"
-                />
-              }
-            >
-              Pyramids
-            </MenuItem>
-          </React.Fragment>
+</Preview>
+
+### Multiline
+
+Icons will be vertically centered when menu item content wraps more than one line
+
+<Preview>
+  <Story name="Multiline icons">
+    <Menu iconSize="small">
+      <MenuItem
+        endIcon={
+          <IconAstronaut1
+            style={{ width: "100%", height: "100%" }}
+            weight="thin"
+          />
         }
       >
-        <Button>Open Menu</Button>
-      </Menu>
-    </PerformUserInteraction>
+        <div>Cones</div>
+        <div>subtext</div>
+      </MenuItem>
+      <MenuItem
+        endIcon={
+          <IconAstronaut2
+            style={{ width: "100%", height: "100%" }}
+            weight="thin"
+          />
+        }
+      >
+        <div>Rhomboid</div>
+        <div>subtext</div>
+      </MenuItem>
+      <MenuItem
+        endIcon={
+          <IconAstronaut3
+            style={{ width: "100%", height: "100%" }}
+            weight="thin"
+          />
+        }
+      >
+        <div>Cubes</div>
+        <div>subtext</div>
+      </MenuItem>
+      <MenuItem
+        endIcon={
+          <IconLander style={{ width: "100%", height: "100%" }} weight="thin" />
+        }
+      >
+        <div>Diamonds</div>
+        <div>subtext</div>
+      </MenuItem>
+      <MenuItem
+        endIcon={
+          <IconPlanet3
+            style={{ width: "100%", height: "100%" }}
+            weight="thin"
+          />
+        }
+      >
+        <div>Cylinders</div>
+        <div>subtext</div>
+      </MenuItem>
+      <MenuItem
+        endIcon={
+          <IconShip3 style={{ width: "100%", height: "100%" }} weight="thin" />
+        }
+      >
+        Pyramids
+      </MenuItem>
+    </Menu>
   </Story>
 </Preview>
 
 ## Icons with custom sizes
 
+Menus support several icon sizes
+
+### Small
+
 <Preview>
-  <Story name="menu-icon-size">
-    <PerformUserInteraction
-      callback={async () => {
-        userEvent.click(await findByText(document.body, /open menu/i));
-      }}
-    >
-      <Menu
-        popperOptions={{ strategy: "fixed" }}
-        placement="bottom-start"
-        iconSize="small"
-        maxWidth={280}
-        content={
-          <React.Fragment>
-            <MenuHeading startIcon={null}>mdg-private-graphs</MenuHeading>
-            <MenuItem startIcon={null}>apollo-day-nyc</MenuItem>
-            <MenuItem startIcon={null} selected>
-              engine
-            </MenuItem>
-            <MenuItem startIcon={null}>galaxy-eu-west</MenuItem>
-            <MenuItem
-              startIcon={
-                <IconCheck
-                  style={{
-                    color: colors.blue.base,
-                    width: "100%",
-                    height: "100%",
-                  }}
-                />
-              }
-            >
-              galaxy-ties
-            </MenuItem>
-            <MenuItem startIcon={null}>space-explorer</MenuItem>
-            <MenuItem startIcon={null}>z-end-to-end-ingestion-20</MenuItem>
-          </React.Fragment>
+  <Story name="Small icons">
+    <Menu iconSize="small">
+      <MenuHeading startIcon={null}>mdg-private-graphs</MenuHeading>
+      <MenuItem startIcon={null}>apollo-day-nyc</MenuItem>
+      <MenuItem startIcon={null} selected>
+        engine
+      </MenuItem>
+      <MenuItem startIcon={null}>galaxy-eu-west</MenuItem>
+      <MenuItem
+        startIcon={
+          <IconCheck
+            style={{
+              color: colors.blue.base,
+              width: "100%",
+              height: "100%",
+            }}
+          />
         }
       >
-        <Button>Open Menu</Button>
-      </Menu>
-    </PerformUserInteraction>
+        galaxy-ties
+      </MenuItem>
+      <MenuItem startIcon={null}>space-explorer</MenuItem>
+      <MenuItem startIcon={null}>z-end-to-end-ingestion-20</MenuItem>
+    </Menu>
   </Story>
 </Preview>
 
@@ -455,53 +393,39 @@ export const MenuItemWithContentHuggingSides = ({
 
 <Preview>
   <Story name="flexbox truncation">
-    <PerformUserInteraction
-      callback={async () => {
-        userEvent.click(await findByText(document.body, /open menu/i));
-      }}
-    >
-      <Menu
-        popperOptions={{ strategy: "fixed" }}
-        placement="bottom-start"
-        iconSize="small"
-        maxWidth={280}
-        content={
-          <React.Fragment>
-            <MenuHeading startIcon={null}>mdg-private-graphs</MenuHeading>
-            <MenuItem startIcon={null}>
-              <MenuItemWithContentHuggingSides
-                startContent="really_long_test_name_really_long_test_name"
-                endContent="0 rpm"
-              />
-            </MenuItem>
-            <MenuItem startIcon={null} selected>
-              <MenuItemWithContentHuggingSides
-                startContent="engine"
-                endContent="1.9k rm"
-              />
-            </MenuItem>
-            <MenuItem
-              startIcon={
-                <IconCheck
-                  style={{
-                    color: colors.blue.base,
-                    width: "100%",
-                    height: "100%",
-                  }}
-                />
-              }
-            >
-              <MenuItemWithContentHuggingSides
-                startContent="galaxy-eu-west"
-                endContent="0 rm"
-              />
-            </MenuItem>
-          </React.Fragment>
-        }
-      >
-        <Button>Open Menu</Button>
+    <div style={{ maxWidth: 280 }}>
+      <Menu iconSize="small">
+        <MenuHeading startIcon={null}>mdg-private-graphs</MenuHeading>
+        <MenuItem startIcon={null}>
+          <MenuItemWithContentHuggingSides
+            startContent="really_long_test_name_really_long_test_name"
+            endContent="0 rpm"
+          />
+        </MenuItem>
+        <MenuItem startIcon={null} selected>
+          <MenuItemWithContentHuggingSides
+            startContent="engine"
+            endContent="1.9k rm"
+          />
+        </MenuItem>
+        <MenuItem
+          startIcon={
+            <IconCheck
+              style={{
+                color: colors.blue.base,
+                width: "100%",
+                height: "100%",
+              }}
+            />
+          }
+        >
+          <MenuItemWithContentHuggingSides
+            startContent="galaxy-eu-west"
+            endContent="0 rm"
+          />
+        </MenuItem>
       </Menu>
-    </PerformUserInteraction>
+    </div>
   </Story>
 </Preview>
 
@@ -511,29 +435,14 @@ Menu colors can be configured on the `Menu` component. Nested menus will inherit
 
 <Preview>
   <Story name="color-configuration">
-    <PerformUserInteraction
-      callback={async () => {
-        userEvent.click(await findByRole(document.body, "button"));
-      }}
-    >
-      <Menu
-        popperOptions={{ strategy: "fixed" }}
-        placement="bottom-start"
-        color={colors.red.base}
-        content={
-          <React.Fragment>
-            <MenuItem>Root</MenuItem>
-            <MenuItem selected>Objects</MenuItem>
-            <MenuItem>Inputs</MenuItem>
-            <MenuItem>Interfaces</MenuItem>
-            <MenuItem>Unions</MenuItem>
-            <MenuItem>Scalars and Enums</MenuItem>
-          </React.Fragment>
-        }
-      >
-        <Button>Open Menu</Button>
-      </Menu>
-    </PerformUserInteraction>
+    <Menu color={colors.red.base}>
+      <MenuItem>Root</MenuItem>
+      <MenuItem selected>Objects</MenuItem>
+      <MenuItem>Inputs</MenuItem>
+      <MenuItem>Interfaces</MenuItem>
+      <MenuItem>Unions</MenuItem>
+      <MenuItem>Scalars and Enums</MenuItem>
+    </Menu>
   </Story>
 </Preview>
 

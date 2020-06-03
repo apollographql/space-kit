@@ -4,9 +4,15 @@ import { base } from "../../typography";
 import { colors } from "../../colors";
 import { Global, css } from "@emotion/core";
 
-export const TippyMenuStyles: React.FC = () => (
+export const TippyPopupMenuStyles: React.FC = () => (
   <Global
     styles={css({
+      ".bg-black": {
+        backgroundColor: `${colors.black.base} !important`,
+      },
+      ".text-white": {
+        color: `${colors.white} !important`,
+      },
       "*[data-tippy-root]": {},
       ".tippy-box": {
         "&[data-theme=space-kit-menu]": {

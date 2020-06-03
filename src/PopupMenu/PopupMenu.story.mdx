@@ -1,0 +1,558 @@
+import userEvent from "@testing-library/user-event";
+import { findByRole } from "@testing-library/dom";
+import { Button } from "../Button";
+import { colors } from "../colors";
+import { PopupMenu } from "../PopupMenu";
+import { PerformUserInteraction } from "../shared/PerformUserInteraction";
+import { MenuItem } from "../MenuItem";
+import { MenuDivider } from "../MenuDivider";
+import { MenuHeading } from "../MenuHeading";
+import {
+  Description,
+  Meta,
+  Story,
+  Props,
+  Preview,
+} from "@storybook/addon-docs/blocks";
+import { IconAstronaut1 } from "../icons/IconAstronaut1";
+import { IconAstronaut2 } from "../icons/IconAstronaut2";
+import { IconAstronaut3 } from "../icons/IconAstronaut3";
+import { IconLander } from "../icons/IconLander";
+import { IconPlanet3 } from "../icons/IconPlanet3";
+import { IconShip3 } from "../icons/IconShip3";
+import { IconCheck } from "../icons/IconCheck";
+
+<Meta title="Components|PopupMenu" />
+
+# PopupMenu
+
+<Description
+  of={PopupMenu}
+  markdown="**Menus** provide a way for sures to interact with the application by selecting from a set of options. While that’s simple in theory, menus can be complex and not eveything is detailed below. Menus can emerge from Select buttons or a simple button."
+/>
+
+## Simple PopupMenu
+
+The simple menu provides a list of options for a user to choose from and updates the button or select button with the choice the user has selected.
+
+<Preview>
+  <Story name="basic">
+    <PerformUserInteraction
+      callback={async () => {
+        userEvent.click(await findByRole(document.body, "button"));
+      }}
+    >
+      <PopupMenu
+        className="bg-black text-white"
+        popperOptions={{ strategy: "fixed" }}
+        placement="bottom-start"
+        theme="dark"
+        content={
+          <React.Fragment>
+            <MenuItem>Root</MenuItem>
+            <MenuItem selected>Objects</MenuItem>
+            <MenuItem>Inputs</MenuItem>
+            <MenuItem>Interfaces</MenuItem>
+            <MenuItem>Unions</MenuItem>
+            <MenuItem>Scalars and Enums</MenuItem>
+          </React.Fragment>
+        }
+      >
+        <Button>Open PopupMenu</Button>
+      </PopupMenu>
+    </PerformUserInteraction>
+  </Story>
+</Preview>
+
+## Segmented PopupMenu
+
+The segmented menu provides a way to group related options. This can be achieved
+by a divider and in other cases, headers can be used to group similar
+information and provide a nice visual grouping.
+
+<Preview>
+  <Story name="divided">
+    <PerformUserInteraction
+      callback={async () => {
+        userEvent.click(await findByRole(document.body, "button"));
+      }}
+    >
+      <PopupMenu
+        popperOptions={{ strategy: "fixed" }}
+        placement="bottom-start"
+        content={
+          <React.Fragment>
+            <MenuItem>All Types</MenuItem>
+            <MenuDivider />
+            <MenuItem>Root</MenuItem>
+            <MenuItem>Objects</MenuItem>
+            <MenuItem>Inputs</MenuItem>
+            <MenuItem>Interfaces</MenuItem>
+            <MenuItem>Unions</MenuItem>
+            <MenuItem>Scalars and Enums</MenuItem>
+            <MenuDivider />
+            <MenuItem>Deprecations</MenuItem>
+          </React.Fragment>
+        }
+      >
+        <Button>Open PopupMenu</Button>
+      </PopupMenu>
+    </PerformUserInteraction>
+  </Story>
+</Preview>
+
+## Header
+
+<Preview>
+  <Story name="heading">
+    <PerformUserInteraction
+      callback={async () => {
+        userEvent.click(await findByRole(document.body, "button"));
+      }}
+    >
+      <PopupMenu
+        popperOptions={{ strategy: "fixed" }}
+        placement="bottom-start"
+        content={
+          <React.Fragment>
+            <MenuHeading count={5}>Filter by</MenuHeading>
+            <MenuItem>Root</MenuItem>
+            <MenuItem>Objects</MenuItem>
+            <MenuItem>Inputs</MenuItem>
+            <MenuItem>Interfaces</MenuItem>
+            <MenuItem>Unions</MenuItem>
+            <MenuItem>Scalars and Enums</MenuItem>
+          </React.Fragment>
+        }
+      >
+        <Button>Open PopupMenu</Button>
+      </PopupMenu>
+    </PerformUserInteraction>
+  </Story>
+</Preview>
+
+## Icons
+
+<Preview>
+  <Story name="start-icons">
+    <PerformUserInteraction
+      callback={async () => {
+        userEvent.click(await findByRole(document.body, "button"));
+      }}
+    >
+      <PopupMenu
+        popperOptions={{ strategy: "fixed" }}
+        placement="bottom-start"
+        content={
+          <React.Fragment>
+            <MenuItem
+              startIcon={
+                <IconAstronaut1
+                  style={{ width: "100%", height: "100%" }}
+                  weight="thin"
+                />
+              }
+            >
+              Cones
+            </MenuItem>
+            <MenuItem
+              startIcon={
+                <IconAstronaut2
+                  style={{ width: "100%", height: "100%" }}
+                  weight="thin"
+                />
+              }
+            >
+              Rhomboid
+            </MenuItem>
+            <MenuItem
+              startIcon={
+                <IconAstronaut3
+                  style={{ width: "100%", height: "100%" }}
+                  weight="thin"
+                />
+              }
+            >
+              Cubes
+            </MenuItem>
+            <MenuItem
+              startIcon={
+                <IconLander
+                  style={{ width: "100%", height: "100%" }}
+                  weight="thin"
+                />
+              }
+            >
+              Diamonds
+            </MenuItem>
+            <MenuItem
+              startIcon={
+                <IconPlanet3
+                  style={{ width: "100%", height: "100%" }}
+                  weight="thin"
+                />
+              }
+            >
+              Cylinders
+            </MenuItem>
+            <MenuItem
+              startIcon={
+                <IconShip3
+                  style={{ width: "100%", height: "100%" }}
+                  weight="thin"
+                />
+              }
+            >
+              Pyramids
+            </MenuItem>
+          </React.Fragment>
+        }
+      >
+        <Button>Open PopupMenu</Button>
+      </PopupMenu>
+    </PerformUserInteraction>
+  </Story>
+  <Story name="end-icons">
+    <PerformUserInteraction
+      callback={async () => {
+        userEvent.click(await findByRole(document.body, "button"));
+      }}
+    >
+      <PopupMenu
+        popperOptions={{ strategy: "fixed" }}
+        placement="bottom-start"
+        content={
+          <React.Fragment>
+            <MenuItem
+              endIcon={
+                <IconAstronaut1
+                  style={{ width: "100%", height: "100%" }}
+                  weight="thin"
+                />
+              }
+            >
+              Cones
+            </MenuItem>
+            <MenuItem
+              endIcon={
+                <IconAstronaut2
+                  style={{ width: "100%", height: "100%" }}
+                  weight="thin"
+                />
+              }
+            >
+              Rhomboid
+            </MenuItem>
+            <MenuItem
+              endIcon={
+                <IconAstronaut3
+                  style={{ width: "100%", height: "100%" }}
+                  weight="thin"
+                />
+              }
+            >
+              Cubes
+            </MenuItem>
+            <MenuItem
+              endIcon={
+                <IconLander
+                  style={{ width: "100%", height: "100%" }}
+                  weight="thin"
+                />
+              }
+            >
+              Diamonds
+            </MenuItem>
+            <MenuItem
+              endIcon={
+                <IconPlanet3
+                  style={{ width: "100%", height: "100%" }}
+                  weight="thin"
+                />
+              }
+            >
+              Cylinders
+            </MenuItem>
+            <MenuItem
+              endIcon={
+                <IconShip3
+                  style={{ width: "100%", height: "100%" }}
+                  weight="thin"
+                />
+              }
+            >
+              Pyramids
+            </MenuItem>
+          </React.Fragment>
+        }
+      >
+        <Button>Open PopupMenu</Button>
+      </PopupMenu>
+    </PerformUserInteraction>
+  </Story>
+  <Story name="multiline-end-icons">
+    <PerformUserInteraction
+      callback={async () => {
+        userEvent.click(await findByRole(document.body, "button"));
+      }}
+    >
+      <PopupMenu
+        popperOptions={{ strategy: "fixed" }}
+        placement="bottom-start"
+        iconSize="small"
+        content={
+          <React.Fragment>
+            <MenuItem
+              endIcon={
+                <IconAstronaut1
+                  style={{ width: "100%", height: "100%" }}
+                  weight="thin"
+                />
+              }
+            >
+              <div>Cones</div>
+              <div>subtext</div>
+            </MenuItem>
+            <MenuItem
+              endIcon={
+                <IconAstronaut2
+                  style={{ width: "100%", height: "100%" }}
+                  weight="thin"
+                />
+              }
+            >
+              <div>Rhomboid</div>
+              <div>subtext</div>
+            </MenuItem>
+            <MenuItem
+              endIcon={
+                <IconAstronaut3
+                  style={{ width: "100%", height: "100%" }}
+                  weight="thin"
+                />
+              }
+            >
+              <div>Cubes</div>
+              <div>subtext</div>
+            </MenuItem>
+            <MenuItem
+              endIcon={
+                <IconLander
+                  style={{ width: "100%", height: "100%" }}
+                  weight="thin"
+                />
+              }
+            >
+              <div>Diamonds</div>
+              <div>subtext</div>
+            </MenuItem>
+            <MenuItem
+              endIcon={
+                <IconPlanet3
+                  style={{ width: "100%", height: "100%" }}
+                  weight="thin"
+                />
+              }
+            >
+              <div>Cylinders</div>
+              <div>subtext</div>
+            </MenuItem>
+            <MenuItem
+              endIcon={
+                <IconShip3
+                  style={{ width: "100%", height: "100%" }}
+                  weight="thin"
+                />
+              }
+            >
+              Pyramids
+            </MenuItem>
+          </React.Fragment>
+        }
+      >
+        <Button>Open PopupMenu</Button>
+      </PopupMenu>
+    </PerformUserInteraction>
+  </Story>
+</Preview>
+
+## Icons with custom sizes
+
+<Preview>
+  <Story name="menu-icon-size">
+    <PerformUserInteraction
+      callback={async () => {
+        userEvent.click(await findByRole(document.body, "button"));
+      }}
+    >
+      <PopupMenu
+        popperOptions={{ strategy: "fixed" }}
+        placement="bottom-start"
+        iconSize="small"
+        maxWidth={280}
+        content={
+          <React.Fragment>
+            <MenuHeading startIcon={null}>mdg-private-graphs</MenuHeading>
+            <MenuItem startIcon={null}>apollo-day-nyc</MenuItem>
+            <MenuItem startIcon={null} selected>
+              engine
+            </MenuItem>
+            <MenuItem startIcon={null}>galaxy-eu-west</MenuItem>
+            <MenuItem
+              startIcon={
+                <IconCheck
+                  style={{
+                    color: colors.blue.base,
+                    width: "100%",
+                    height: "100%",
+                  }}
+                />
+              }
+            >
+              galaxy-ties
+            </MenuItem>
+            <MenuItem startIcon={null}>space-explorer</MenuItem>
+            <MenuItem startIcon={null}>z-end-to-end-ingestion-20</MenuItem>
+          </React.Fragment>
+        }
+      >
+        <Button>Open PopupMenu</Button>
+      </PopupMenu>
+    </PerformUserInteraction>
+  </Story>
+</Preview>
+
+## Truncation
+
+Items should be truncated properly
+
+export const MenuItemWithContentHuggingSides = ({
+  startContent,
+  endContent,
+}) => {
+  return (
+    <div style={{ width: "100%", display: "flex" }}>
+      <span
+        style={{
+          flex: 1,
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+          whiteSpace: "nowrap",
+        }}
+      >
+        {startContent}
+      </span>
+      <span
+        style={{
+          marginLeft: ".5rem",
+          flex: "none",
+          color: colors.grey.light,
+        }}
+      >
+        {endContent}
+      </span>
+    </div>
+  );
+};
+
+<Preview>
+  <Story name="flexbox truncation">
+    <PerformUserInteraction
+      callback={async () => {
+        userEvent.click(await findByRole(document.body, "button"));
+      }}
+    >
+      <PopupMenu
+        popperOptions={{ strategy: "fixed" }}
+        placement="bottom-start"
+        iconSize="small"
+        maxWidth={280}
+        content={
+          <React.Fragment>
+            <MenuHeading startIcon={null}>mdg-private-graphs</MenuHeading>
+            <MenuItem startIcon={null}>
+              <MenuItemWithContentHuggingSides
+                startContent="really_long_test_name_really_long_test_name"
+                endContent="0 rpm"
+              />
+            </MenuItem>
+            <MenuItem startIcon={null} selected>
+              <MenuItemWithContentHuggingSides
+                startContent="engine"
+                endContent="1.9k rm"
+              />
+            </MenuItem>
+            <MenuItem
+              startIcon={
+                <IconCheck
+                  style={{
+                    color: colors.blue.base,
+                    width: "100%",
+                    height: "100%",
+                  }}
+                />
+              }
+            >
+              <MenuItemWithContentHuggingSides
+                startContent="galaxy-eu-west"
+                endContent="0 rm"
+              />
+            </MenuItem>
+          </React.Fragment>
+        }
+      >
+        <Button>Open PopupMenu</Button>
+      </PopupMenu>
+    </PerformUserInteraction>
+  </Story>
+</Preview>
+
+## Colors PopupMenu
+
+PopupMenu colors can be configured on the `PopupMenu` component. Nested menus will inherit colors defined in antecendent `PopupMenu`s and hover colors will be automatically calcualted depending on the theme.
+
+<Preview>
+  <Story name="color-configuration">
+    <PerformUserInteraction
+      callback={async () => {
+        userEvent.click(await findByRole(document.body, "button"));
+      }}
+    >
+      <PopupMenu
+        popperOptions={{ strategy: "fixed" }}
+        placement="bottom-start"
+        color={colors.red.base}
+        content={
+          <React.Fragment>
+            <MenuItem>Root</MenuItem>
+            <MenuItem selected>Objects</MenuItem>
+            <MenuItem>Inputs</MenuItem>
+            <MenuItem>Interfaces</MenuItem>
+            <MenuItem>Unions</MenuItem>
+            <MenuItem>Scalars and Enums</MenuItem>
+          </React.Fragment>
+        }
+      >
+        <Button>Open PopupMenu</Button>
+      </PopupMenu>
+    </PerformUserInteraction>
+  </Story>
+</Preview>
+
+## Props
+
+### `PopupMenu`
+
+<Props of={PopupMenu} />
+
+### `MenuItem`
+
+<Props of={MenuItem} />
+
+### `MenuHeading`
+
+<Props of={MenuHeading} />
+
+### `MenuDivider`
+
+<Props of={MenuDivider} />

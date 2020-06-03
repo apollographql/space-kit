@@ -4,17 +4,17 @@ import React from "react";
 import userEvent from "@testing-library/user-event";
 import { Button } from "../Button";
 import { render, waitFor } from "@testing-library/react";
-import { Menu } from "../Menu";
+import { PopupMenu } from "../PopupMenu";
 import { MenuItem } from "../MenuItem";
 import { SpaceKitProvider } from "../SpaceKitProvider";
 
-test("when child of `Menu` is clicked, menu is shown", () => {
+test("when child of `PopupMenu` is clicked, menu is shown", () => {
   const menuItemText = faker.random.word();
   const triggerText = faker.random.word();
 
   const { getByText, queryByText } = render(
     <SpaceKitProvider disableAnimations>
-      <Menu
+      <PopupMenu
         content={
           <>
             <MenuItem>{menuItemText}</MenuItem>
@@ -22,7 +22,7 @@ test("when child of `Menu` is clicked, menu is shown", () => {
         }
       >
         <Button>{triggerText}</Button>
-      </Menu>
+      </PopupMenu>
     </SpaceKitProvider>
   );
 
@@ -38,7 +38,7 @@ test("when `closeOnMenuItemClick` is `false`, `onClick` callback is called when 
 
   const { getByText } = render(
     <SpaceKitProvider disableAnimations>
-      <Menu
+      <PopupMenu
         closeOnMenuItemClick={false}
         content={
           <>
@@ -47,7 +47,7 @@ test("when `closeOnMenuItemClick` is `false`, `onClick` callback is called when 
         }
       >
         <Button>{triggerText}</Button>
-      </Menu>
+      </PopupMenu>
     </SpaceKitProvider>
   );
 
@@ -62,7 +62,7 @@ test("when `closeOnMenuItemClick` is `true`, menu closes when `MenuItem` in `con
 
   const { container, getByText, queryByText } = render(
     <SpaceKitProvider disableAnimations>
-      <Menu
+      <PopupMenu
         content={
           <>
             <MenuItem>{menuItemText}</MenuItem>
@@ -70,7 +70,7 @@ test("when `closeOnMenuItemClick` is `true`, menu closes when `MenuItem` in `con
         }
       >
         <Button>{triggerText}</Button>
-      </Menu>
+      </PopupMenu>
     </SpaceKitProvider>
   );
 
@@ -86,7 +86,7 @@ test("when `closeOnMenuItemClick` is `false`, menu doesn't close when `MenuItem`
 
   const { getByText } = render(
     <SpaceKitProvider disableAnimations>
-      <Menu
+      <PopupMenu
         closeOnMenuItemClick={false}
         content={
           <>
@@ -95,7 +95,7 @@ test("when `closeOnMenuItemClick` is `false`, menu doesn't close when `MenuItem`
         }
       >
         <Button>{triggerText}</Button>
-      </Menu>
+      </PopupMenu>
     </SpaceKitProvider>
   );
 
