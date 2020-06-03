@@ -124,7 +124,7 @@ export const MenuItem = React.forwardRef<
         onClick={delegatingOnClick}
         css={css({
           ...(selected && selectedStyles),
-          "&:hover": selectedStyles,
+          "&:hover, &[aria-expanded=true]": selectedStyles,
           color:
             selected && selectedStyles
               ? selectedStyles.color
