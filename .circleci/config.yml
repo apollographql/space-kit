@@ -8,6 +8,7 @@ defaults: &defaults
 jobs:
   chromatic:
     <<: *defaults
+    resource_class: medium+
     steps:
       - checkout
       - run:
