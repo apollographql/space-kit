@@ -140,12 +140,17 @@ export const colors = {
 } as const;
 
 /**
- * An enumeration of all colors in all palettes.
+ * An enumeration of all colors in all shaded palettes. These are all the colors
+ * that can be lightened and darkened. This excludes colors.white intentionally
+ * because that will not be a valid input for a color change function.
  *
  * This can be used to restrict a prop to only be a color value from one of our
  * palettes.
+ *
+ * This is not intended to be a representation of all colors available in Space
+ * Kit; for that, see  `@AllColors`.
  */
-export type PaletteColor =
+export type ShadedColor =
   | typeof colors["pink"][keyof typeof colors["pink"]]
   | typeof colors["teal"][keyof typeof colors["teal"]]
   | typeof colors["indigo"][keyof typeof colors["indigo"]]
@@ -159,3 +164,15 @@ export type PaletteColor =
   | typeof colors["yellow"][keyof typeof colors["yellow"]]
   | typeof colors["purple"][keyof typeof colors["purple"]]
   | typeof colors["blilet"][keyof typeof colors["blilet"]];
+
+/**
+ * Represents all colors available in Space Kit
+ *
+ * This is explicitly not valid when a color needs the ability to be made
+ * lighter or darker. For that use case, refer to `PaletteColor`
+ */
+export type AllColors =
+  | ShadedColor
+  | "initial"
+  | "inherit"
+  | typeof colors.white;

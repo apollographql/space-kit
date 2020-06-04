@@ -1,4 +1,5 @@
 import React from "react";
+import { colors, ShadedColor } from "../colors";
 
 /**
  * Enumeration of all icon sizes
@@ -9,6 +10,14 @@ import React from "react";
 type IconSize = "small" | "normal";
 
 interface MenuConfig {
+  /**
+   * Color of the menu. This will be used to programtically alter hover,
+   * selected, and text colors
+   *
+   * @default "inherit"
+   */
+  color: ShadedColor;
+
   /**
    * Icon size to use for all descendents
    */
@@ -29,10 +38,16 @@ const MenuConfigContext = React.createContext<Partial<MenuConfig> | undefined>(
  */
 export const MenuConfigProvider: React.FC<Partial<MenuConfig>> = ({
   children,
-  ...menuConfig
+  iconSize,
+  color,
 }) => {
   return (
-    <MenuConfigContext.Provider value={menuConfig}>
+    <MenuConfigContext.Provider
+      value={{
+        color,
+        iconSize,
+      }}
+    >
       {children}
     </MenuConfigContext.Provider>
   );
@@ -66,6 +81,20 @@ export const WithMenuIconSize: React.FC<withMenuIconSizeProps> = ({
   </MenuConfigContext.Consumer>
 );
 
+function useMenuConfig() {
+  return React.useContext(MenuConfigContext);
+}
+
+/**
+ * Extract color from menu config context
+ *
+ * Uses a reasonable default as we don't require any consumer to use
+ * `MenuConfigProvider`
+ */
+export function useMenuColor(): MenuConfig["color"] {
+  return useMenuConfig()?.color ?? colors.blue.base;
+}
+
 /**
  * Extract `IconSize` from context
  *
@@ -73,7 +102,5 @@ export const WithMenuIconSize: React.FC<withMenuIconSizeProps> = ({
  * `IconSizeProvider`
  */
 export function useMenuIconSize(): MenuConfig["iconSize"] {
-  const context = React.useContext(MenuConfigContext);
-
-  return context?.iconSize ?? "normal";
+  return useMenuConfig()?.iconSize ?? "normal";
 }

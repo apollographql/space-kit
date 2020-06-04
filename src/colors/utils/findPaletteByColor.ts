@@ -1,12 +1,7 @@
-import {
-  colors,
-  ColorPalette,
-  MonochromePalette,
-  PaletteColor,
-} from "../index";
+import { colors, ColorPalette, MonochromePalette, ShadedColor } from "../index";
 
 export function findPaletteByColor(
-  searchColor: PaletteColor
+  searchColor: ShadedColor
 ): MonochromePalette | ColorPalette {
   const result = Object.values(colors)
     .filter((color) => typeof color !== "string")
