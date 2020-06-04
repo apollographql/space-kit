@@ -136,6 +136,16 @@ export const colors = {
     lightest: "#E6EBFF",
   },
 
+  midnight: {
+    darkest: "#060F2F",
+    darker: "#1B2240",
+    dark: "#383D5B",
+    base: "#3D4B6A",
+    light: "#566992",
+    lighter: "#798FBB",
+    lightest: "#B4C3DB",
+  },
+
   white: "#ffffff",
 } as const;
 
@@ -163,7 +173,8 @@ export type ShadedColor =
   | typeof colors["orange"][keyof typeof colors["orange"]]
   | typeof colors["yellow"][keyof typeof colors["yellow"]]
   | typeof colors["purple"][keyof typeof colors["purple"]]
-  | typeof colors["blilet"][keyof typeof colors["blilet"]];
+  | typeof colors["blilet"][keyof typeof colors["blilet"]]
+  | typeof colors["midnight"][keyof typeof colors["midnight"]];
 
 /**
  * Represents all colors available in Space Kit
