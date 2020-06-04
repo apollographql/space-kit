@@ -1,3 +1,19 @@
+# v5.2.0 (Thu Jun 04 2020)
+
+#### 🚀 Enhancement
+
+- Add color configurability to `Menu` [#178](https://github.com/apollographql/space-kit/pull/178) ([@justinanastos](https://github.com/justinanastos))
+
+#### 🏠 Internal
+
+- [AR-1689](https://apollographql.atlassian.net/browse/AR-1689): Fix crashing chromatic builds [#179](https://github.com/apollographql/space-kit/pull/179) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v5.1.0 (Wed Jun 03 2020)
 
 #### 🚀 Enhancement
