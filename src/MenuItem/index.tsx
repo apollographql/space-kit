@@ -120,6 +120,7 @@ export const MenuItem = React.forwardRef<
           ...(selected && selectedStyles),
           ...{ "&[aria-expanded=true]": selectedStyles },
           ...(!selected && { "&:hover": hoverStyles }),
+          alignItems: "stretch",
           cursor: interactive ? "pointer" : undefined,
           borderRadius: 4,
           display: "flex",
@@ -134,7 +135,6 @@ export const MenuItem = React.forwardRef<
           <div
             css={css({
               flex: "none",
-              height: 20,
               marginLeft: getIconMarginLeft(iconSize),
               marginRight: getIconHorizontalPadding(iconSize),
               width: getIconSize(iconSize),
@@ -156,7 +156,6 @@ export const MenuItem = React.forwardRef<
           <div
             css={css({
               flex: "none",
-              height: 20,
               marginLeft: getIconHorizontalPadding(iconSize),
               width: getIconSize(iconSize),
             })}
