@@ -1,3 +1,15 @@
+# v5.3.0 (Fri Jun 05 2020)
+
+#### 🚀 Enhancement
+
+- Add history and left/right/down/up double arrow icons [#181](https://github.com/apollographql/space-kit/pull/181) ([@Jephuff](https://github.com/Jephuff))
+
+#### Authors: 1
+
+- Jeffrey Burt ([@Jephuff](https://github.com/Jephuff))
+
+---
+
 # v5.2.0 (Thu Jun 04 2020)
 
 #### 🚀 Enhancement
