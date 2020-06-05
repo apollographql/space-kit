@@ -445,6 +445,41 @@ const blilet = {
   },
 };
 
+const midnight = {
+  title: "Midnight",
+  options: {
+    darkest: {
+      text: 1,
+      flags: [1, 1, 0, 0],
+    },
+    darker: {
+      text: 1,
+      flags: [1, 1, 0, 0],
+    },
+    dark: {
+      text: 1,
+      flags: [1, 1, 0, 0],
+    },
+    base: {
+      flag: "base",
+      text: 1,
+      flags: [1, 1, 0, 0],
+    },
+    light: {
+      text: 1,
+      flags: [1, 1, 0, 1],
+    },
+    lighter: {
+      text: 0,
+      flags: [0, 1, 1, 1],
+    },
+    lightest: {
+      text: 0,
+      flags: [0, 0, 1, 1],
+    },
+  },
+};
+
 module.exports = {
   // brand colors
   pink,
@@ -463,4 +498,5 @@ module.exports = {
   yellow,
   purple,
   blilet,
+  midnight,
 };
