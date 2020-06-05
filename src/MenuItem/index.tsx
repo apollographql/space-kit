@@ -4,7 +4,6 @@ import * as CSS from "csstype";
 import React from "react";
 import { css, jsx } from "@emotion/core";
 import { useMenuIconSize, useMenuColor } from "../MenuConfig";
-import { useMenuItemClickListener } from "../MenuItemClickListener";
 import { assertUnreachable } from "../shared/assertUnreachable";
 import tinycolor from "tinycolor2";
 import { colors } from "../colors";
@@ -88,7 +87,6 @@ export const MenuItem = React.forwardRef<
       children,
       endIcon,
       interactive = true,
-      onClick,
       selected = false,
       startIcon,
       ...props
@@ -96,7 +94,6 @@ export const MenuItem = React.forwardRef<
     ref
   ) => {
     const iconSize = useMenuIconSize();
-    const menuItemClickListener = useMenuItemClickListener();
     const menuColor = useMenuColor();
 
     const selectedTextColor = tinycolor
@@ -116,22 +113,9 @@ export const MenuItem = React.forwardRef<
       backgroundColor: colors.silver.light,
     };
 
-    /**
-     * Handler to call `onClick` handler passed in props and also handler passed
-     * via context
-     */
-    const delegatingOnClick = React.useCallback<React.MouseEventHandler<any>>(
-      (event) => {
-        if (onClick) onClick(event);
-        if (menuItemClickListener) menuItemClickListener(event);
-      },
-      [menuItemClickListener, onClick]
-    );
-
     return (
       <div
         {...props}
-        onClick={delegatingOnClick}
         css={css({
           ...(selected && selectedStyles),
           ...{ "&[aria-expanded=true]": selectedStyles },

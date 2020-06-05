@@ -8,8 +8,19 @@ import { colors } from "../colors";
  * Divider between sections in a menu
  */
 export const MenuDivider: React.FC = () => {
+  // Stop click events so we don't try to close the menu when clicking something
+  // non-interactive
+  const handleClick = React.useCallback<React.MouseEventHandler<HTMLHRElement>>(
+    (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+    },
+    []
+  );
+
   return (
     <hr
+      onClick={handleClick}
       css={css({
         marginLeft: -8,
         marginRight: -8,

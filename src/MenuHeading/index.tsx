@@ -22,8 +22,20 @@ export const MenuHeading = React.forwardRef<
   HTMLHeadingElement,
   React.PropsWithChildren<Props>
 >(({ children, count, ...props }, ref) => {
+  // Stop click events so we don't try to close the menu when clicking something
+  // non-interactive
+  const handleClick = React.useCallback<NonNullable<typeof props.onClick>>(
+    (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      props.onClick?.(event);
+    },
+    [props.onClick]
+  );
+
   return (
-    <MenuItem {...props} interactive={false} ref={ref}>
+    <MenuItem {...props} interactive={false} onClick={handleClick} ref={ref}>
       <h2
         css={css({
           display: "flex",

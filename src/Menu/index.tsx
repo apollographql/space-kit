@@ -2,10 +2,6 @@
 import React from "react";
 import { AbstractTooltip } from "../AbstractTooltip";
 import { TippyMenuStyles } from "./menu/TippyMenuStyles";
-import {
-  MenuItemClickListenerProvider,
-  useMenuItemClickListener,
-} from "../MenuItemClickListener";
 import { sizeModifier } from "./menu/sizeModifier";
 import { ShadedColor } from "../colors";
 
@@ -23,13 +19,6 @@ interface Props
   className?: string;
 
   /**
-   * Close menu automatically when a `MenuItem` is clicked
-   *
-   * @default true
-   */
-  closeOnMenuItemClick?: boolean;
-
-  /**
    * Color to use for the selected state of a menu item. Hover state will be
    * programatically calculated depending on the theme.
    */
@@ -43,7 +32,6 @@ interface Props
  */
 export const Menu: React.FC<Props> = ({
   children,
-  closeOnMenuItemClick = true,
   fallbackPlacements,
   content,
   popperOptions,
@@ -54,25 +42,25 @@ export const Menu: React.FC<Props> = ({
       NonNullable<React.ComponentProps<typeof AbstractTooltip>["onCreate"]>
     >[0]
   >();
-  const inheritedMenuItemClickListener = useMenuItemClickListener();
 
   /**
-   * Callback to handle descendeant `MenuItem` clicks.
+   * Callback to handle descendent `MenuItem` clicks.
    *
    * When we have nested menus and toggle menus we might need to change how this
    * behaves.
    */
-  const onMenuItemClick = React.useCallback<React.MouseEventHandler>(
-    (event) => {
-      if (inheritedMenuItemClickListener) {
-        inheritedMenuItemClickListener(event);
+  const handleClick = React.useCallback<React.MouseEventHandler>(
+    (element) => {
+      if (element.target === element.currentTarget) {
+        // We're listening for clicks on descendents so ignore events that come
+        // from the element with the listener.
+        return;
       }
 
-      if (closeOnMenuItemClick) {
-        instanceRef.current?.hide();
-      }
+      // how do we know if we want to hide the menu?
+      instanceRef.current?.hide();
     },
-    [closeOnMenuItemClick, inheritedMenuItemClickListener, instanceRef]
+    [instanceRef]
   );
 
   return (
@@ -84,11 +72,7 @@ export const Menu: React.FC<Props> = ({
         onCreate={(instance) => {
           instanceRef.current = instance;
         }}
-        content={
-          <MenuItemClickListenerProvider onClick={onMenuItemClick}>
-            {content}
-          </MenuItemClickListenerProvider>
-        }
+        content={<span onClick={handleClick}>{content}</span>}
         hideOnClick
         theme="space-kit-menu"
         trigger="mousedown"
