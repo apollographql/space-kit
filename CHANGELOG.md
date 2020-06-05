@@ -1,3 +1,15 @@
+# v5.4.0 (Fri Jun 05 2020)
+
+#### 🚀 Enhancement
+
+- Add Midnight color palette to SpaceKit [#180](https://github.com/apollographql/space-kit/pull/180) ([@jglovier](https://github.com/jglovier))
+
+#### Authors: 1
+
+- Joel Glovier ([@jglovier](https://github.com/jglovier))
+
+---
+
 # v5.3.0 (Fri Jun 05 2020)
 
 #### 🚀 Enhancement
