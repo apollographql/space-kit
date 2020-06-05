@@ -2,7 +2,6 @@
 import React from "react";
 import { AbstractTooltip } from "../AbstractTooltip";
 import { TippyMenuStyles } from "./menu/TippyMenuStyles";
-import { MenuConfigProvider, useMenuIconSize } from "../MenuConfig";
 import {
   MenuItemClickListenerProvider,
   useMenuItemClickListener,
@@ -12,16 +11,15 @@ import { ShadedColor } from "../colors";
 
 interface Props
   extends Pick<
-      React.ComponentProps<typeof AbstractTooltip>,
-      | "children"
-      | "content"
-      | "maxWidth"
-      | "placement"
-      | "trigger"
-      | "fallbackPlacements"
-      | "popperOptions"
-    >,
-    Omit<React.ComponentProps<typeof MenuConfigProvider>, "children"> {
+    React.ComponentProps<typeof AbstractTooltip>,
+    | "children"
+    | "content"
+    | "maxWidth"
+    | "placement"
+    | "trigger"
+    | "fallbackPlacements"
+    | "popperOptions"
+  > {
   className?: string;
 
   /**
@@ -46,9 +44,7 @@ interface Props
 export const Menu: React.FC<Props> = ({
   children,
   closeOnMenuItemClick = true,
-  color,
   fallbackPlacements,
-  iconSize,
   content,
   popperOptions,
   ...props
@@ -59,7 +55,6 @@ export const Menu: React.FC<Props> = ({
     >[0]
   >();
   const inheritedMenuItemClickListener = useMenuItemClickListener();
-  const inheritedIconSize = useMenuIconSize();
 
   /**
    * Callback to handle descendeant `MenuItem` clicks.
@@ -81,7 +76,7 @@ export const Menu: React.FC<Props> = ({
   );
 
   return (
-    <MenuConfigProvider color={color} iconSize={iconSize ?? inheritedIconSize}>
+    <>
       <TippyMenuStyles />
       <AbstractTooltip
         appendTo="parent"
@@ -158,6 +153,6 @@ export const Menu: React.FC<Props> = ({
       >
         {children}
       </AbstractTooltip>
-    </MenuConfigProvider>
+    </>
   );
 };
