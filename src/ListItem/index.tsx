@@ -3,13 +3,13 @@
 import * as CSS from "csstype";
 import React from "react";
 import { css, jsx } from "@emotion/core";
-import { useListIconSize, useListColor } from "../ListConfig";
 import { assertUnreachable } from "../shared/assertUnreachable";
 import tinycolor from "tinycolor2";
 import { colors } from "../colors";
+import { useListConfig } from "../ListConfig";
 
 function getIconHorizontalPadding(
-  iconSize: ReturnType<typeof useListIconSize>
+  iconSize: NonNullable<ReturnType<typeof useListConfig>["iconSize"]>
 ): CSS.PaddingProperty<number> {
   switch (iconSize) {
     case "normal":
@@ -22,7 +22,7 @@ function getIconHorizontalPadding(
 }
 
 function getIconSize(
-  iconSize: ReturnType<typeof useListIconSize>
+  iconSize: NonNullable<ReturnType<typeof useListConfig>["iconSize"]>
 ): CSS.WidthProperty<number> {
   switch (iconSize) {
     case "normal":
@@ -35,7 +35,7 @@ function getIconSize(
 }
 
 function getIconMarginLeft(
-  iconSize: ReturnType<typeof useListIconSize>
+  iconSize: NonNullable<ReturnType<typeof useListConfig>["iconSize"]>
 ): CSS.MarginLeftProperty<number> {
   switch (iconSize) {
     case "normal":
@@ -93,16 +93,15 @@ export const ListItem = React.forwardRef<
     },
     ref
   ) => {
-    const iconSize = useListIconSize();
-    const listColor = useListColor();
+    const { color, iconSize } = useListConfig();
 
     const selectedTextColor = tinycolor
-      .mostReadable(listColor, [colors.white, colors.grey.darker], {
+      .mostReadable(color, [colors.white, colors.grey.darker], {
         level: "AA",
         size: "small",
       })
       .toString();
-    const selectedBackgroundColor = listColor;
+    const selectedBackgroundColor = color;
 
     const selectedStyles = interactive && {
       backgroundColor: selectedBackgroundColor,

@@ -1,5 +1,5 @@
 import React from "react";
-import { ListConfigProvider } from "../ListConfig";
+import { ListConfigProvider, useListConfig } from "../ListConfig";
 
 interface Props
   extends Omit<React.ComponentProps<typeof ListConfigProvider>, "children">,
@@ -17,8 +17,17 @@ export const List: React.FC<Props> = ({
   style,
   ...props
 }) => {
+  /**
+   * Combination of inherited configuration and new configuration passed via
+   * props
+   */
+  const listConfig: ReturnType<typeof useListConfig> = {
+    ...useListConfig(),
+    ...props,
+  };
+
   return (
-    <ListConfigProvider {...props}>
+    <ListConfigProvider {...listConfig}>
       <div className={className} style={style}>
         {children}
       </div>
