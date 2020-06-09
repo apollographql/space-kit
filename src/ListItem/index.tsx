@@ -124,7 +124,7 @@ export const ListItem = React.forwardRef<
           ...(selected && selectedStyles),
           ...{ "&[aria-expanded=true]": selectedStyles },
           ...(!selected && { "&:hover": hoverStyles }),
-          alignItems: "stretch",
+          alignItems: "center",
           cursor: interactive ? "pointer" : undefined,
           borderRadius: 4,
           display: "flex",
@@ -138,6 +138,7 @@ export const ListItem = React.forwardRef<
         {typeof startIcon !== "undefined" && (
           <div
             css={css({
+              display: "flex",
               flex: "none",
               marginLeft: getIconMarginLeft(iconSize),
               marginRight: getIconHorizontalPadding(iconSize),
@@ -159,7 +160,9 @@ export const ListItem = React.forwardRef<
         {typeof endIcon !== "undefined" && (
           <div
             css={css({
+              display: "flex",
               flex: "none",
+              justifyContent: "flex-end",
               marginLeft: getIconHorizontalPadding(iconSize),
               width: getIconSize(iconSize),
             })}
