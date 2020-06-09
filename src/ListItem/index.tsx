@@ -98,7 +98,7 @@ export const ListItem = React.forwardRef<
     },
     ref
   ) => {
-    const { hoverColor, iconSize, selectedColor } = useListConfig();
+    const { hoverColor, iconSize, padding, selectedColor } = useListConfig();
 
     const selectedTextColor = tinycolor
       .mostReadable(selectedColor, [colors.white, colors.grey.darker], {
@@ -136,6 +136,12 @@ export const ListItem = React.forwardRef<
           cursor: interactive ? "pointer" : undefined,
           borderRadius: 4,
           display: "flex",
+          height:
+            padding === "normal"
+              ? 28
+              : padding === "relaxed"
+              ? 40
+              : assertUnreachable(padding),
           paddingLeft: 12,
           paddingRight: 12,
           paddingTop: 4,

@@ -23,6 +23,11 @@ interface ListConfig {
   iconSize: IconSize;
 
   /**
+   * Padding level on menu items
+   */
+  padding: "normal" | "relaxed";
+
+  /**
    * Background color of the selected item in a menu
    *
    * The text color will be determined automatically
@@ -36,6 +41,7 @@ interface ListConfig {
 export const defaults: ListConfig = {
   hoverColor: colors.silver.light,
   iconSize: "normal",
+  padding: "normal",
   selectedColor: colors.blue.base,
 };
 
