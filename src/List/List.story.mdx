@@ -389,6 +389,33 @@ export const ListItemWithContentHuggingSides = ({
   </Story>
 </Preview>
 
+## `hoverColor`
+
+`hoverColor` can be configured on the `List` component.
+
+<Preview>
+  <Story name="hoverColor light color">
+    <List hoverColor={colors.red.lightest}>
+      <ListItem data-force-hover-state>Root</ListItem>
+      <ListItem>Objects</ListItem>
+      <ListItem>Inputs</ListItem>
+      <ListItem>Interfaces</ListItem>
+      <ListItem>Unions</ListItem>
+      <ListItem>Scalars and Enums</ListItem>
+    </List>
+  </Story>
+  <Story name="hoverColor dark color">
+    <List hoverColor={colors.red.darkest}>
+      <ListItem data-force-hover-state>Root</ListItem>
+      <ListItem>Objects</ListItem>
+      <ListItem>Inputs</ListItem>
+      <ListItem>Interfaces</ListItem>
+      <ListItem>Unions</ListItem>
+      <ListItem>Scalars and Enums</ListItem>
+    </List>
+  </Story>
+</Preview>
+
 ## Props
 
 ### `List`

@@ -98,7 +98,7 @@ export const ListItem = React.forwardRef<
     },
     ref
   ) => {
-    const { iconSize, selectedColor } = useListConfig();
+    const { hoverColor, iconSize, selectedColor } = useListConfig();
 
     const selectedTextColor = tinycolor
       .mostReadable(selectedColor, [colors.white, colors.grey.darker], {
@@ -114,7 +114,13 @@ export const ListItem = React.forwardRef<
     };
 
     const hoverStyles = interactive && {
-      backgroundColor: colors.silver.light,
+      backgroundColor: hoverColor,
+      color: tinycolor
+        .mostReadable(hoverColor, [colors.white, colors.grey.darker], {
+          level: "AA",
+          size: "small",
+        })
+        .toString(),
     };
 
     return (
@@ -123,7 +129,9 @@ export const ListItem = React.forwardRef<
         css={css({
           ...(selected && selectedStyles),
           ...{ "&[aria-expanded=true]": selectedStyles },
-          ...(!selected && { "&:hover": hoverStyles }),
+          ...(!selected && {
+            "&:hover, &[data-force-hover-state]": hoverStyles,
+          }),
           alignItems: "center",
           cursor: interactive ? "pointer" : undefined,
           borderRadius: 4,

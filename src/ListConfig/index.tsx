@@ -11,6 +11,13 @@ type IconSize = "small" | "normal" | "large";
 
 interface ListConfig {
   /**
+   * Background color of the hovered item in a menu
+   *
+   * The text color will be determined automatically
+   */
+  hoverColor: ShadedColor;
+
+  /**
    * Icon size to use for all descendents
    */
   iconSize: IconSize;
@@ -27,6 +34,7 @@ interface ListConfig {
  * Default values for each property
  */
 export const defaults: ListConfig = {
+  hoverColor: colors.silver.light,
   iconSize: "normal",
   selectedColor: colors.blue.base,
 };
