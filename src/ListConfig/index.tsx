@@ -11,25 +11,24 @@ type IconSize = "small" | "normal" | "large";
 
 interface ListConfig {
   /**
-   * Color of the list. This will be used to programtically alter hover,
-   * selected, and text colors
-   *
-   * @default "inherit"
-   */
-  color: ShadedColor;
-
-  /**
    * Icon size to use for all descendents
    */
   iconSize: IconSize;
+
+  /**
+   * Background color of the selected item in a menu
+   *
+   * The text color will be determined automatically
+   */
+  selectedColor: ShadedColor;
 }
 
 /**
  * Default values for each property
  */
 export const defaults: ListConfig = {
-  color: colors.blue.base,
   iconSize: "normal",
+  selectedColor: colors.blue.base,
 };
 
 /**

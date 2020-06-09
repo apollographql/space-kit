@@ -98,15 +98,15 @@ export const ListItem = React.forwardRef<
     },
     ref
   ) => {
-    const { color, iconSize } = useListConfig();
+    const { iconSize, selectedColor } = useListConfig();
 
     const selectedTextColor = tinycolor
-      .mostReadable(color, [colors.white, colors.grey.darker], {
+      .mostReadable(selectedColor, [colors.white, colors.grey.darker], {
         level: "AA",
         size: "small",
       })
       .toString();
-    const selectedBackgroundColor = color;
+    const selectedBackgroundColor = selectedColor;
 
     const selectedStyles = interactive && {
       backgroundColor: selectedBackgroundColor,
