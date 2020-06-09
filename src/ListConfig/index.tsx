@@ -9,9 +9,9 @@ import { colors, ShadedColor } from "../colors";
  */
 type IconSize = "small" | "normal";
 
-interface MenuConfig {
+interface ListConfig {
   /**
-   * Color of the menu. This will be used to programtically alter hover,
+   * Color of the list. This will be used to programtically alter hover,
    * selected, and text colors
    *
    * @default "inherit"
@@ -25,29 +25,29 @@ interface MenuConfig {
 }
 
 /**
- * Context holding all configuration options for Menus
+ * Context holding all configuration options for lists
  */
-const MenuConfigContext = React.createContext<Partial<MenuConfig> | undefined>(
+const ListConfigContext = React.createContext<Partial<ListConfig> | undefined>(
   undefined
 );
 
 /**
- * Provider to set menu config on the context
+ * Provider to set list config on the context
  *
  * This value is immutable; it's defined when instantiated
  */
-export const MenuConfigProvider: React.FC<Partial<MenuConfig>> = ({
+export const ListConfigProvider: React.FC<Partial<ListConfig>> = ({
   children,
   ...props
 }) => {
   return (
-    <MenuConfigContext.Provider value={props}>
+    <ListConfigContext.Provider value={props}>
       {children}
-    </MenuConfigContext.Provider>
+    </ListConfigContext.Provider>
   );
 };
 
-interface withMenuIconSizeProps {
+interface withlistIconSizeProps {
   /**
    * Render prop function. Calls the callback in the shape of
    *
@@ -56,37 +56,37 @@ interface withMenuIconSizeProps {
    * ```
    */
   children: (
-    renderPropValues: Pick<MenuConfig, "iconSize">
+    renderPropValues: Pick<ListConfig, "iconSize">
   ) => ReturnType<React.FC>;
 }
 
 /**
  * Extract `IconSize` from context.
  *
- * *Avoid this component.* Use `useMenuIconSize` instead. This is intended to be
+ * *Avoid this component.* Use `useListIconSize` instead. This is intended to be
  * used _only_ in the case where you can't use hooks because you're rendering
  * something under another render prop component.
  */
-export const WithMenuIconSize: React.FC<withMenuIconSizeProps> = ({
+export const WithlistIconSize: React.FC<withlistIconSizeProps> = ({
   children,
 }) => (
-  <MenuConfigContext.Consumer>
+  <ListConfigContext.Consumer>
     {(config) => children({ iconSize: config?.iconSize ?? "normal" })}
-  </MenuConfigContext.Consumer>
+  </ListConfigContext.Consumer>
 );
 
-function useMenuConfig() {
-  return React.useContext(MenuConfigContext);
+function useListConfig() {
+  return React.useContext(ListConfigContext);
 }
 
 /**
- * Extract color from menu config context
+ * Extract color from list config context
  *
  * Uses a reasonable default as we don't require any consumer to use
- * `MenuConfigProvider`
+ * `ListConfigProvider`
  */
-export function useMenuColor(): MenuConfig["color"] {
-  return useMenuConfig()?.color ?? colors.blue.base;
+export function useListColor(): ListConfig["color"] {
+  return useListConfig()?.color ?? colors.blue.base;
 }
 
 /**
@@ -95,6 +95,6 @@ export function useMenuColor(): MenuConfig["color"] {
  * Uses a reasonable default as we don't require any consumer to use
  * `IconSizeProvider`
  */
-export function useMenuIconSize(): MenuConfig["iconSize"] {
-  return useMenuConfig()?.iconSize ?? "normal";
+export function useListIconSize(): ListConfig["iconSize"] {
+  return useListConfig()?.iconSize ?? "normal";
 }

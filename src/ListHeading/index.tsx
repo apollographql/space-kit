@@ -3,9 +3,9 @@
 import React from "react";
 import { css, jsx } from "@emotion/core";
 import { colors } from "../colors";
-import { MenuItem } from "../MenuItem";
+import { ListItem } from "../ListItem";
 
-interface Props extends React.ComponentProps<typeof MenuItem> {
+interface Props extends React.ComponentProps<typeof ListItem> {
   /**
    * Add a number as a right adornment. Usually used to express a count
    */
@@ -13,16 +13,16 @@ interface Props extends React.ComponentProps<typeof MenuItem> {
 }
 
 /**
- * Heading intended to be used in a menu. Can also be used to deliniate between
- * sections in a single menu.
+ * Heading intended to be used in a list. Can also be used to deliniate between
+ * sections in a single list.
  *
- * Composed with and accepts all props of `MenuItem`
+ * Composed with and accepts all props of `ListItem`
  */
-export const MenuHeading = React.forwardRef<
+export const ListHeading = React.forwardRef<
   HTMLHeadingElement,
   React.PropsWithChildren<Props>
 >(({ children, count, ...props }, ref) => {
-  // Stop click events so we don't try to close the menu when clicking something
+  // Stop click events so we don't try to close the list when clicking something
   // non-interactive
   const handleClick = React.useCallback<NonNullable<typeof props.onClick>>(
     (event) => {
@@ -35,7 +35,7 @@ export const MenuHeading = React.forwardRef<
   );
 
   return (
-    <MenuItem {...props} interactive={false} onClick={handleClick} ref={ref}>
+    <ListItem {...props} interactive={false} onClick={handleClick} ref={ref}>
       <h2
         css={css({
           display: "flex",
@@ -62,6 +62,6 @@ export const MenuHeading = React.forwardRef<
           </span>
         )}
       </h2>
-    </MenuItem>
+    </ListItem>
   );
 });

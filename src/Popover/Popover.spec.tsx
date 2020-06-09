@@ -4,46 +4,44 @@ import React from "react";
 import userEvent from "@testing-library/user-event";
 import { Button } from "../Button";
 import { render, screen, waitFor } from "@testing-library/react";
-import { Menu } from "../Menu";
-import { MenuItem } from "../MenuItem";
+import { Popover } from "../Popover";
+import { ListItem } from "../ListItem";
 import { SpaceKitProvider } from "../SpaceKitProvider";
 
-test("when child of `Menu` is clicked, menu is shown", () => {
-  const menuItemText = faker.random.word();
+test("when child of `Popover` is clicked, list is shown", () => {
+  const listItemText = faker.random.word();
 
   render(
     <SpaceKitProvider disableAnimations>
-      <Menu
+      <Popover
         content={
           <>
-            <MenuItem>{menuItemText}</MenuItem>
+            <ListItem>{listItemText}</ListItem>
           </>
         }
-      >
-        <Button>{faker.random.word()}</Button>
-      </Menu>
+        trigger={<Button>{faker.random.word()}</Button>}
+      ></Popover>
     </SpaceKitProvider>
   );
 
-  expect(screen.queryByText(menuItemText)).not.toBeInTheDocument();
+  expect(screen.queryByText(listItemText)).not.toBeInTheDocument();
   userEvent.click(screen.getByRole("button"));
-  screen.getByText(menuItemText);
+  screen.getByText(listItemText);
 });
 
-test("when `onClick` handler does not call `stopPropagation()`, menu closes when `MenuItem` in `content` is clicked", async () => {
-  const menuItemText = faker.random.word();
+test("when `onClick` handler does not call `stopPropagation()`, list closes when `ListItem` in `content` is clicked", async () => {
+  const listItemText = faker.random.word();
 
   render(
     <SpaceKitProvider disableAnimations>
-      <Menu
+      <Popover
         content={
           <>
-            <MenuItem>{menuItemText}</MenuItem>
+            <ListItem>{listItemText}</ListItem>
           </>
         }
-      >
-        <Button>{faker.random.word()}</Button>
-      </Menu>
+        trigger={<Button>{faker.random.word()}</Button>}
+      ></Popover>
     </SpaceKitProvider>
   );
 
@@ -51,35 +49,34 @@ test("when `onClick` handler does not call `stopPropagation()`, menu closes when
   await waitFor(() =>
     expect(screen.getByRole("button")).toHaveAttribute("aria-expanded", "true")
   );
-  userEvent.click(screen.getByText(menuItemText));
-  expect(screen.queryByText(menuItemText)).not.toBeInTheDocument();
+  userEvent.click(screen.getByText(listItemText));
+  expect(screen.queryByText(listItemText)).not.toBeInTheDocument();
 });
 
-test("when `onClick` handler calls `stopPropagation()`, menu doesn't close when `MenuItem` in `content` is clicked", async () => {
-  const menuItemText = faker.random.word();
+test("when `onClick` handler calls `stopPropagation()`, list doesn't close when `ListItem` in `content` is clicked", async () => {
+  const listItemText = faker.random.word();
 
   render(
     <SpaceKitProvider disableAnimations>
-      <Menu
+      <Popover
         content={
           <>
-            <MenuItem
+            <ListItem
               onClick={jest.fn().mockImplementation((event: MouseEvent) => {
                 event.stopPropagation();
               })}
             >
-              {menuItemText}
-            </MenuItem>
+              {listItemText}
+            </ListItem>
           </>
         }
-      >
-        <Button>{faker.random.word()}</Button>
-      </Menu>
+        trigger={<Button>{faker.random.word()}</Button>}
+      ></Popover>
     </SpaceKitProvider>
   );
 
   userEvent.click(screen.getByRole("button"));
-  userEvent.click(screen.getByText(menuItemText));
+  userEvent.click(screen.getByText(listItemText));
 
   // This is a bummer and I would love ideas on how to improve it. Things are
   // set up in a way where this render will be syncronous, meaning we don't
@@ -88,5 +85,5 @@ test("when `onClick` handler calls `stopPropagation()`, menu doesn't close when 
   // accidental false passes, so I left this artificial delay.
   await new Promise((resolve) => setTimeout(resolve, 100));
 
-  expect(screen.getByText(menuItemText)).toBeInTheDocument();
+  expect(screen.getByText(listItemText)).toBeInTheDocument();
 });

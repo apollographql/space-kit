@@ -3,13 +3,13 @@
 import * as CSS from "csstype";
 import React from "react";
 import { css, jsx } from "@emotion/core";
-import { useMenuIconSize, useMenuColor } from "../MenuConfig";
+import { useListIconSize, useListColor } from "../ListConfig";
 import { assertUnreachable } from "../shared/assertUnreachable";
 import tinycolor from "tinycolor2";
 import { colors } from "../colors";
 
 function getIconHorizontalPadding(
-  iconSize: ReturnType<typeof useMenuIconSize>
+  iconSize: ReturnType<typeof useListIconSize>
 ): CSS.PaddingProperty<number> {
   switch (iconSize) {
     case "normal":
@@ -22,7 +22,7 @@ function getIconHorizontalPadding(
 }
 
 function getIconSize(
-  iconSize: ReturnType<typeof useMenuIconSize>
+  iconSize: ReturnType<typeof useListIconSize>
 ): CSS.WidthProperty<number> {
   switch (iconSize) {
     case "normal":
@@ -35,7 +35,7 @@ function getIconSize(
 }
 
 function getIconMarginLeft(
-  iconSize: ReturnType<typeof useMenuIconSize>
+  iconSize: ReturnType<typeof useListIconSize>
 ): CSS.MarginLeftProperty<number> {
   switch (iconSize) {
     case "normal":
@@ -56,21 +56,21 @@ interface Props
     "onClick"
   > {
   className?: string;
-  /** Icon to display at the end of a menu item.
+  /** Icon to display at the end of a list item.
    *
    * This element will always be rendered unless the value is `undefined`. If
    * you want an empty node, a spacer for example, use `null`
    */
   endIcon?: React.ReactNode;
   /**
-   * Indicates if this menu item can be itneracted with. Defaults to `true`. If
+   * Indicates if this list item can be itneracted with. Defaults to `true`. If
    * set to `false`, there will be no hover effects.
    *
    * This is _not_ the same as `disabled`
    */
   interactive?: boolean;
   selected?: boolean;
-  /** Icon to display at the start of a menu item.
+  /** Icon to display at the start of a list item.
    *
    * This element will always be rendered unless the value is `undefined`. If
    * you want an empty node, a spacer for example, use `null`
@@ -78,7 +78,7 @@ interface Props
   startIcon?: React.ReactNode;
 }
 
-export const MenuItem = React.forwardRef<
+export const ListItem = React.forwardRef<
   HTMLDivElement,
   React.PropsWithChildren<Props>
 >(
@@ -93,16 +93,16 @@ export const MenuItem = React.forwardRef<
     },
     ref
   ) => {
-    const iconSize = useMenuIconSize();
-    const menuColor = useMenuColor();
+    const iconSize = useListIconSize();
+    const listColor = useListColor();
 
     const selectedTextColor = tinycolor
-      .mostReadable(menuColor, [colors.white, colors.grey.darker], {
+      .mostReadable(listColor, [colors.white, colors.grey.darker], {
         level: "AA",
         size: "small",
       })
       .toString();
-    const selectedBackgroundColor = menuColor;
+    const selectedBackgroundColor = listColor;
 
     const selectedStyles = interactive && {
       backgroundColor: selectedBackgroundColor,
@@ -146,7 +146,7 @@ export const MenuItem = React.forwardRef<
         <div
           css={css({
             flex: "1",
-            /* This is weird but it's necessary to truncate menu items */
+            /* This is weird but it's necessary to truncate list items */
             minWidth: 0,
           })}
         >

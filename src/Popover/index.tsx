@@ -1,9 +1,7 @@
-/* eslint-disable @typescript-eslint/no-empty-interface */
 import React from "react";
 import { AbstractTooltip } from "../AbstractTooltip";
-import { TippyMenuStyles } from "./menu/TippyMenuStyles";
-import { sizeModifier } from "./menu/sizeModifier";
-import { ShadedColor } from "../colors";
+import { TippyPopoverStyles } from "./popover/TippyPopoverStyles";
+import { sizeModifier } from "./popover/sizeModifier";
 
 interface Props
   extends Pick<
@@ -12,29 +10,34 @@ interface Props
     | "content"
     | "maxWidth"
     | "placement"
-    | "trigger"
     | "fallbackPlacements"
     | "popperOptions"
   > {
   className?: string;
+  style?: React.CSSProperties;
 
   /**
-   * Color to use for the selected state of a menu item. Hover state will be
-   * programatically calculated depending on the theme.
+   * Don't use `children`, use `trigger` instead
    */
-  color?: ShadedColor;
-
-  style?: React.CSSProperties;
+  children?: never;
+  /**
+   * Element that will be monitored to trigger the popover
+   */
+  trigger: React.ComponentProps<typeof AbstractTooltip>["children"];
+  /**
+   * Events used to know when to trigger the popover
+   *
+   * @see https://atomiks.github.io/tippyjs/v6/all-props/#trigger
+   */
+  triggerEvents?: React.ComponentProps<typeof AbstractTooltip>["trigger"];
 }
 
-/**
- * Menu element
- */
-export const Menu: React.FC<Props> = ({
-  children,
+export const Popover: React.FC<Props> = ({
   fallbackPlacements,
   content,
   popperOptions,
+  trigger,
+  triggerEvents = "mousedown",
   ...props
 }) => {
   const instanceRef = React.useRef<
@@ -44,9 +47,9 @@ export const Menu: React.FC<Props> = ({
   >();
 
   /**
-   * Callback to handle descendent `MenuItem` clicks.
+   * Callback to handle descendent `ListItem` clicks.
    *
-   * When we have nested menus and toggle menus we might need to change how this
+   * When we have nested lists and toggle lists we might need to change how this
    * behaves.
    */
   const handleClick = React.useCallback<React.MouseEventHandler>(
@@ -57,7 +60,7 @@ export const Menu: React.FC<Props> = ({
         return;
       }
 
-      // how do we know if we want to hide the menu?
+      // how do we know if we want to hide the list?
       instanceRef.current?.hide();
     },
     [instanceRef]
@@ -65,7 +68,7 @@ export const Menu: React.FC<Props> = ({
 
   return (
     <>
-      <TippyMenuStyles />
+      <TippyPopoverStyles />
       <AbstractTooltip
         appendTo="parent"
         offset={[0, 2]}
@@ -74,8 +77,8 @@ export const Menu: React.FC<Props> = ({
         }}
         content={<span onClick={handleClick}>{content}</span>}
         hideOnClick
-        theme="space-kit-menu"
-        trigger="mousedown"
+        theme="space-kit-list"
+        trigger={triggerEvents}
         popperOptions={{
           strategy: "fixed",
           ...popperOptions,
@@ -135,7 +138,7 @@ export const Menu: React.FC<Props> = ({
         {...props}
         interactive
       >
-        {children}
+        {trigger}
       </AbstractTooltip>
     </>
   );
