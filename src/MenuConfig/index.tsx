@@ -38,16 +38,10 @@ const MenuConfigContext = React.createContext<Partial<MenuConfig> | undefined>(
  */
 export const MenuConfigProvider: React.FC<Partial<MenuConfig>> = ({
   children,
-  iconSize,
-  color,
+  ...props
 }) => {
   return (
-    <MenuConfigContext.Provider
-      value={{
-        color,
-        iconSize,
-      }}
-    >
+    <MenuConfigContext.Provider value={props}>
       {children}
     </MenuConfigContext.Provider>
   );
