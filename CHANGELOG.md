@@ -1,3 +1,20 @@
+# v5.4.1 (Wed Jun 10 2020)
+
+#### 🐛 Bug Fix
+
+- Fix history icon [#184](https://github.com/apollographql/space-kit/pull/184) ([@jgzuke](https://github.com/jgzuke))
+
+#### 🏠 Internal
+
+- link npm badge to npm page in readme [#183](https://github.com/apollographql/space-kit/pull/183) ([@cheapsteak](https://github.com/cheapsteak))
+
+#### Authors: 2
+
+- Chang Wang ([@cheapsteak](https://github.com/cheapsteak))
+- Jason Zukewich ([@jgzuke](https://github.com/jgzuke))
+
+---
+
 # v5.4.0 (Fri Jun 05 2020)
 
 #### 🚀 Enhancement
