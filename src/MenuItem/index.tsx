@@ -3,10 +3,11 @@
 import * as CSS from "csstype";
 import React from "react";
 import { css, jsx } from "@emotion/core";
-import { colors } from "../colors";
-import { useMenuIconSize } from "../MenuConfig";
+import { useMenuIconSize, useMenuColor } from "../MenuConfig";
 import { useMenuItemClickListener } from "../MenuItemClickListener";
 import { assertUnreachable } from "../shared/assertUnreachable";
+import tinycolor from "tinycolor2";
+import { colors } from "../colors";
 
 function getIconHorizontalPadding(
   iconSize: ReturnType<typeof useMenuIconSize>
@@ -96,10 +97,23 @@ export const MenuItem = React.forwardRef<
   ) => {
     const iconSize = useMenuIconSize();
     const menuItemClickListener = useMenuItemClickListener();
+    const menuColor = useMenuColor();
+
+    const selectedTextColor = tinycolor
+      .mostReadable(menuColor, [colors.white, colors.grey.darker], {
+        level: "AA",
+        size: "small",
+      })
+      .toString();
+    const selectedBackgroundColor = menuColor;
 
     const selectedStyles = interactive && {
-      backgroundColor: colors.blue.base,
-      color: colors.white,
+      backgroundColor: selectedBackgroundColor,
+      color: selectedTextColor,
+    };
+
+    const hoverStyles = interactive && {
+      backgroundColor: colors.silver.light,
     };
 
     /**
@@ -120,11 +134,8 @@ export const MenuItem = React.forwardRef<
         onClick={delegatingOnClick}
         css={css({
           ...(selected && selectedStyles),
-          "&:hover": selectedStyles,
-          color:
-            selected && selectedStyles
-              ? selectedStyles.color
-              : colors.black.base,
+          ...{ "&[aria-expanded=true]": selectedStyles },
+          ...(!selected && { "&:hover": hoverStyles }),
           cursor: interactive ? "pointer" : undefined,
           borderRadius: 4,
           display: "flex",

@@ -1,4 +1,4 @@
-import { colors, PaletteColor } from "../colors";
+import { colors, ShadedColor } from "../colors";
 import * as CSS from "csstype";
 import { base } from "../typography";
 import { ClassNames } from "@emotion/core";
@@ -163,7 +163,7 @@ interface Props
    *
    * @default colors.silver.light
    */
-  color?: PaletteColor | typeof colors["white"];
+  color?: ShadedColor | typeof colors["white"];
 
   /**
    * If the button will appear and behave disabled.
@@ -443,7 +443,7 @@ export const Button = React.forwardRef<HTMLElement, Props>(
                         : getOffsetInPalette(1, "darker", color)
                     }, inset 0 -1px 0 0 rgba(18, 21, 26, 0.05)`,
                   },
-                  "&:active, &[data-force-active-state]": {
+                  "&:active, &[data-force-active-state], &[aria-expanded=true]": {
                     ...(getTextColor({
                       color,
                       feel,
