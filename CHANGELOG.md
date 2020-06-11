@@ -1,3 +1,15 @@
+# v5.5.0 (Thu Jun 11 2020)
+
+#### 🚀 Enhancement
+
+- Adds keyboard control icon [#185](https://github.com/apollographql/space-kit/pull/185) ([@jchesterman](https://github.com/jchesterman))
+
+#### Authors: 1
+
+- [@jchesterman](https://github.com/jchesterman)
+
+---
+
 # v5.4.1 (Wed Jun 10 2020)
 
 #### 🐛 Bug Fix
