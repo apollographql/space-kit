@@ -1,10 +1,5 @@
-import { colors } from "../colors";
 import { AlertCard } from "../AlertCard";
 import { Button } from "../Button";
-import { IconInfoSolid } from "../icons/IconInfoSolid";
-import { IconErrorSolid } from "../icons/IconErrorSolid";
-import { IconWarningSolid } from "../icons/IconWarningSolid";
-import { IconSuccessSolid } from "../icons/IconSuccessSolid";
 import {
   Description,
   Meta,
@@ -30,8 +25,7 @@ Informational alerts present general info about something you are doing or worki
   <Story name="info light">
     <AlertCard
       onClose={() => undefined}
-      color={colors.blue.base}
-      icon={<IconInfoSolid />}
+      type="info"
       heading="Informational alert"
     >
       This is a general informational message telling you about something. Learn
@@ -41,8 +35,7 @@ Informational alerts present general info about something you are doing or worki
   <Story name="info dark">
     <AlertCard
       onClose={() => undefined}
-      color={colors.blue.base}
-      icon={<IconInfoSolid css={{ "& .inner": { fill: colors.white } }} />}
+      type="info"
       theme="dark"
       heading="Informational alert"
     >
@@ -60,8 +53,7 @@ The extended card variant is for rare use cases where an alert is the most appro
   <Story name="info light extended">
     <AlertCard
       onClose={() => undefined}
-      color={colors.blue.base}
-      icon={<IconInfoSolid />}
+      type="info"
       heading="Informational alert"
       extended={true}
     >
@@ -83,8 +75,7 @@ The extended card variant is for rare use cases where an alert is the most appro
   <Story name="info dark extended">
     <AlertCard
       onClose={() => undefined}
-      color={colors.blue.base}
-      icon={<IconInfoSolid css={{ "& .inner": { fill: colors.white } }} />}
+      type="info"
       theme="dark"
       heading="Informational alert"
       extended={true}
@@ -114,8 +105,7 @@ Warning alerts present information about the action that is about to be taken th
   <Story name="warning light">
     <AlertCard
       onClose={() => undefined}
-      color={colors.orange.base}
-      icon={<IconWarningSolid />}
+      type="warn"
       heading="Warning alert"
       actions={<Button size="small">Confirm</Button>}
     >
@@ -126,8 +116,7 @@ Warning alerts present information about the action that is about to be taken th
   <Story name="warning dark">
     <AlertCard
       onClose={() => undefined}
-      color={colors.orange.base}
-      icon={<IconWarningSolid />}
+      type="warn"
       heading="Warning alert"
       theme="dark"
       actions={
@@ -150,8 +139,7 @@ Error alerts let the user know that something has gone wrong or is blocked in th
   <Story name="error light">
     <AlertCard
       onClose={() => undefined}
-      color={colors.red.base}
-      icon={<IconErrorSolid />}
+      type="error"
       heading="Error alert"
       style={{ marginBottom: 20 }}
     >
@@ -161,8 +149,7 @@ Error alerts let the user know that something has gone wrong or is blocked in th
   <Story name="error dark">
     <AlertCard
       onClose={() => undefined}
-      color={colors.red.base}
-      icon={<IconErrorSolid css={{ "& .inner": { fill: colors.white } }} />}
+      type="error"
       heading="Error alert"
       theme="dark"
       style={{ marginBottom: 20 }}
@@ -178,20 +165,14 @@ Success alerts are confirmation that the action the user was trying to take has 
 
 <Preview>
   <Story name="success light">
-    <AlertCard
-      onClose={() => undefined}
-      color={colors.green.base}
-      icon={<IconSuccessSolid />}
-      heading="Success alert"
-    >
+    <AlertCard onClose={() => undefined} type="success" heading="Success alert">
       A new schema registry has been created by timbotnik.
     </AlertCard>
   </Story>
   <Story name="success dark">
     <AlertCard
       onClose={() => undefined}
-      color={colors.green.base}
-      icon={<IconSuccessSolid css={{ "& .inner": { fill: colors.white } }} />}
+      type="success"
       theme="dark"
       heading="Success alert"
     >

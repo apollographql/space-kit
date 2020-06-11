@@ -1,14 +1,17 @@
 /** @jsx jsx */
 import { jsx, ClassNames } from "@emotion/core";
-import React, { CSSProperties, Fragment } from "react";
+import React, { CSSProperties, Fragment, useMemo } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 
 import { base } from "../typography";
 import { IconClose } from "../icons/IconClose";
-import { colors, PaletteColor } from "../colors";
-import { getOffsetInPalette } from "../colors/utils/getOffsetInPalette";
+import { colors } from "../colors";
 import { assertUnreachable } from "../shared/assertUnreachable";
+import { IconInfoSolid } from "../icons/IconInfoSolid";
+import { IconWarningSolid } from "../icons/IconWarningSolid";
+import { IconErrorSolid } from "../icons/IconErrorSolid";
+import { IconSuccessSolid } from "../icons/IconSuccessSolid";
 
 interface AlertCardProps {
   /**
@@ -16,17 +19,6 @@ interface AlertCardProps {
    * @default "light"
    */
   theme?: "light" | "dark";
-
-  /**
-   * The color used for the heading icon, the heading text will be 2 shades
-   * darker if light theme and 2 shaders lighter if a dark theme
-   */
-  color: PaletteColor;
-
-  /**
-   * The icon displayed to the left of the heading text
-   */
-  icon: React.ReactElement<{ className?: string }>;
 
   heading: React.ReactNode;
 
@@ -65,6 +57,11 @@ interface AlertCardProps {
 
   className?: string;
   style?: CSSProperties;
+
+  /**
+   * Type of alert, this is used to determine the color and icon in the title
+   */
+  type: "info" | "warn" | "error" | "success";
 }
 
 export const AlertCard: React.FC<AlertCardProps> = ({
@@ -73,12 +70,25 @@ export const AlertCard: React.FC<AlertCardProps> = ({
   actions,
   headingAs = "h2",
   children,
-  color,
-  icon,
   theme = "light",
   extended = false,
+  type,
   ...otherProps
 }) => {
+  const { Icon, color: colorTemp } = useMemo(() => {
+    switch (type) {
+      case "info":
+        return { color: colors.blue, Icon: IconInfoSolid };
+      case "warn":
+        return { color: colors.orange, Icon: IconWarningSolid };
+      case "error":
+        return { color: colors.red, Icon: IconErrorSolid };
+      case "success":
+        return { color: colors.green, Icon: IconSuccessSolid };
+      default:
+        assertUnreachable(type);
+    }
+  }, [type]);
   return (
     <section
       {...otherProps}
@@ -125,37 +135,27 @@ export const AlertCard: React.FC<AlertCardProps> = ({
                   marginTop: 0,
                   width: "100%",
                   display: "flex",
-                  color: getOffsetInPalette(
-                    2,
+                  color:
                     theme === "light"
-                      ? "darker"
+                      ? colorTemp.darker
                       : theme === "dark"
-                      ? "lighter"
+                      ? colorTemp.lighter
                       : assertUnreachable(theme),
-                    color
-                  ),
                   ...base.base,
                 })
               ),
               children: (
                 <Fragment>
-                  <ClassNames>
-                    {({ css, cx }) =>
-                      React.cloneElement(icon, {
-                        className: classnames(
-                          icon.props.className,
-                          cx(
-                            css({
-                              width: 20,
-                              height: 20,
-                              color,
-                              marginRight: 13,
-                            })
-                          )
-                        ),
-                      })
-                    }
-                  </ClassNames>
+                  <Icon
+                    css={{
+                      width: 20,
+                      height: 20,
+                      color: colorTemp.base,
+                      marginRight: 13,
+                      "& .inner": theme === "dark" &&
+                        type !== "warn" && { fill: colors.white },
+                    }}
+                  />
                   {heading}
                 </Fragment>
               ),
@@ -221,12 +221,8 @@ AlertCard.propTypes = {
   children: PropTypes.node,
   heading: PropTypes.node.isRequired,
   actions: PropTypes.node,
-  color: PropTypes.oneOf(
-    Object.values(colors)
-      .map((color) => Object.values(color))
-      .reduce((a, b) => a.concat(b)) as PaletteColor[]
-  ).isRequired,
-  icon: PropTypes.element.isRequired,
+  type: PropTypes.oneOf(["info", "warn", "error", "success"] as const)
+    .isRequired,
   headingAs: PropTypes.oneOfType([
     PropTypes.element.isRequired,
     PropTypes.string.isRequired as any, // Using PropTypes.string to match keyof JSX.IntrinsicElements
