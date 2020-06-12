@@ -1,3 +1,15 @@
+# v5.6.0 (Fri Jun 12 2020)
+
+#### 🚀 Enhancement
+
+- [AR-572](https://apollographql.atlassian.net/browse/AR-572): Create Alert component [#174](https://github.com/apollographql/space-kit/pull/174) ([@Jephuff](https://github.com/Jephuff))
+
+#### Authors: 1
+
+- Jeffrey Burt ([@Jephuff](https://github.com/Jephuff))
+
+---
+
 # v5.5.0 (Thu Jun 11 2020)
 
 #### 🚀 Enhancement
