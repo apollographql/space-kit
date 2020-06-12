@@ -8,6 +8,7 @@ import { colors } from "../colors";
 import * as CSS from "csstype";
 import classnames from "classnames";
 import { useSpaceKitProvider } from "../SpaceKitProvider";
+import { assertUnreachable } from "../shared/assertUnreachable";
 
 interface Props {
   /**
@@ -102,11 +103,6 @@ const modalBackdrop = css`
     width: 100vw;
   }
 `;
-
-/* istanbul ignore next */
-function assertUnreachable(value: never): never {
-  throw new TypeError(`Unreachable value reached ${value}`);
-}
 
 type TLength = string | 0 | number;
 

@@ -5,13 +5,9 @@ import React from "react";
 import { css, jsx } from "@emotion/core";
 import { useMenuIconSize, useMenuColor } from "../MenuConfig";
 import { useMenuItemClickListener } from "../MenuItemClickListener";
+import { assertUnreachable } from "../shared/assertUnreachable";
 import tinycolor from "tinycolor2";
 import { colors } from "../colors";
-
-/* istanbul ignore next */
-function assertUnreachable(value: never): never {
-  throw new TypeError(`Unreachable value reached ${value}`);
-}
 
 function getIconHorizontalPadding(
   iconSize: ReturnType<typeof useMenuIconSize>
