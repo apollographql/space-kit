@@ -54,8 +54,6 @@ const ListConfigContext = React.createContext<Partial<ListConfig> | undefined>(
 
 /**
  * Provider to set list config on the context
- *
- * This value is immutable; it's defined when instantiated
  */
 export const ListConfigProvider: React.FC<Partial<ListConfig>> = ({
   children,
