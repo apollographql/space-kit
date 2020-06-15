@@ -416,6 +416,29 @@ export const ListItemWithContentHuggingSides = ({
   </Story>
 </Preview>
 
+## `as`
+
+Specify the element used to render the button with the `as` prop. The default is `<div />`.
+
+All props added to the `as` element will be merged with the props added by the component. `classNames`, `styles`, and `css` will be intelligently merged.
+
+<Preview>
+  <Story name="as a">
+    <List>
+      <ListItem as={<a href="https://apollographql.com" />}>Root</ListItem>
+      <ListItem as={<a href="https://apollographql.com" />}>Objects</ListItem>
+      <ListItem as={<a href="https://apollographql.com" />}>Inputs</ListItem>
+      <ListItem as={<a href="https://apollographql.com" />}>
+        Interfaces
+      </ListItem>
+      <ListItem as={<a href="https://apollographql.com" />}>Unions</ListItem>
+      <ListItem as={<a href="https://apollographql.com" />}>
+        Scalars and Enums
+      </ListItem>
+    </List>
+  </Story>
+</Preview>
+
 ## Props
 
 ### `List`

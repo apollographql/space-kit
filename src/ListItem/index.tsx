@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
-/** @jsx jsx */
 import * as CSS from "csstype";
+import classnames from "classnames";
 import React from "react";
-import { css, jsx } from "@emotion/core";
+import { ClassNames } from "@emotion/core";
 import { assertUnreachable } from "../shared/assertUnreachable";
 import tinycolor from "tinycolor2";
 import { colors } from "../colors";
@@ -59,9 +59,18 @@ interface Props
       React.HTMLAttributes<HTMLDivElement>,
       HTMLDivElement
     >,
-    "onClick"
+    "className" | "onClick" | "style"
   > {
-  className?: string;
+  /**
+   * Override the the default element used to render
+   *
+   * All props provided will be merged with props that this component adds,
+   * including `className`s being merged.
+   *
+   * @default <div />
+   */
+  as?: React.ReactElement;
+
   /** Icon to display at the end of a list item.
    *
    * This element will always be rendered unless the value is `undefined`. If
@@ -84,12 +93,10 @@ interface Props
   startIcon?: React.ReactNode;
 }
 
-export const ListItem = React.forwardRef<
-  HTMLDivElement,
-  React.PropsWithChildren<Props>
->(
+export const ListItem = React.forwardRef<any, React.PropsWithChildren<Props>>(
   (
     {
+      as = <div />,
       children,
       endIcon,
       interactive = true,
@@ -127,69 +134,97 @@ export const ListItem = React.forwardRef<
     const verticalMargin = verticalListMarginFromPadding(padding) / 2;
 
     return (
-      <div
-        {...props}
-        css={css({
-          ...(selected && selectedStyles),
-          ...{ "&[aria-expanded=true]": selectedStyles },
-          ...(!selected && {
-            "&:hover, &[data-force-hover-state]": hoverStyles,
-          }),
-          alignItems: "center",
-          cursor: interactive ? "pointer" : undefined,
-          borderRadius: 4,
-          display: "flex",
-          height:
-            padding === "normal"
-              ? 28
-              : padding === "relaxed"
-              ? 40
-              : assertUnreachable(padding),
-          paddingLeft: 12,
-          paddingRight: 12,
-          paddingTop: 4,
-          paddingBottom: 4,
-          marginTop: verticalMargin,
-          marginBottom: verticalMargin,
-        })}
-        ref={ref}
-      >
-        {typeof startIcon !== "undefined" && (
-          <div
-            css={css({
-              display: "flex",
-              flex: "none",
-              marginLeft: getIconMarginLeft(iconSize),
-              marginRight: getIconHorizontalPadding(iconSize),
-              width: getIconSize(iconSize),
-            })}
-          >
-            {startIcon}
-          </div>
-        )}
-        <div
-          css={css({
-            flex: "1",
-            /* This is weird but it's necessary to truncate list items */
-            minWidth: 0,
-          })}
-        >
-          {children}
-        </div>
-        {typeof endIcon !== "undefined" && (
-          <div
-            css={css({
-              display: "flex",
-              flex: "none",
-              justifyContent: "flex-end",
-              marginLeft: getIconHorizontalPadding(iconSize),
-              width: getIconSize(iconSize),
-            })}
-          >
-            {endIcon}
-          </div>
-        )}
-      </div>
+      <ClassNames>
+        {({ css, cx }) => {
+          const result = (
+            <div
+              {...props}
+              className={cx(
+                css({
+                  ...(selected && selectedStyles),
+                  ...{ "&[aria-expanded=true]": selectedStyles },
+                  ...(!selected && {
+                    "&:hover, &[data-force-hover-state]": hoverStyles,
+                  }),
+                  alignItems: "center",
+                  cursor: interactive ? "pointer" : undefined,
+                  borderRadius: 4,
+                  display: "flex",
+                  height:
+                    padding === "normal"
+                      ? 28
+                      : padding === "relaxed"
+                      ? 40
+                      : assertUnreachable(padding),
+                  paddingLeft: 12,
+                  paddingRight: 12,
+                  paddingTop: 4,
+                  paddingBottom: 4,
+                  marginTop: verticalMargin,
+                  marginBottom: verticalMargin,
+                })
+              )}
+              ref={ref}
+            >
+              {typeof startIcon !== "undefined" && (
+                <div
+                  className={cx(
+                    css({
+                      display: "flex",
+                      flex: "none",
+                      marginLeft: getIconMarginLeft(iconSize),
+                      marginRight: getIconHorizontalPadding(iconSize),
+                      width: getIconSize(iconSize),
+                    })
+                  )}
+                >
+                  {startIcon}
+                </div>
+              )}
+              <div
+                className={cx(
+                  css({
+                    flex: "1",
+                    /* This is weird but it's necessary to truncate list items */
+                    minWidth: 0,
+                  })
+                )}
+              >
+                {children}
+              </div>
+              {typeof endIcon !== "undefined" && (
+                <div
+                  className={cx(
+                    css({
+                      display: "flex",
+                      flex: "none",
+                      justifyContent: "flex-end",
+                      marginLeft: getIconHorizontalPadding(iconSize),
+                      width: getIconSize(iconSize),
+                    })
+                  )}
+                >
+                  {endIcon}
+                </div>
+              )}
+            </div>
+          );
+
+          return React.cloneElement(as, {
+            ...result.props,
+            className: classnames(
+              result.props.className,
+              props.className,
+              // If the parent component is using emotion with the jsx pragma, we
+              // have to get fancy and intercept the styles to use with the
+              // `ClassNames` wrapper.
+              as.props.css ? cx(css(as.props.css.styles)) : null
+            ),
+            style: { ...result.props.style, ...props.style },
+            ref: as.props.ref ?? ref,
+          });
+        }}
+      </ClassNames>
     );
   }
 );
