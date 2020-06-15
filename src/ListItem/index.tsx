@@ -7,6 +7,7 @@ import { assertUnreachable } from "../shared/assertUnreachable";
 import tinycolor from "tinycolor2";
 import { colors } from "../colors";
 import { useListConfig } from "../ListConfig";
+import { verticalListMarginFromPadding } from "../shared/verticalListMarginFromPadding";
 
 function getIconHorizontalPadding(
   iconSize: NonNullable<ReturnType<typeof useListConfig>["iconSize"]>
@@ -123,6 +124,8 @@ export const ListItem = React.forwardRef<
         .toString(),
     };
 
+    const verticalMargin = verticalListMarginFromPadding(padding) / 2;
+
     return (
       <div
         {...props}
@@ -146,6 +149,8 @@ export const ListItem = React.forwardRef<
           paddingRight: 12,
           paddingTop: 4,
           paddingBottom: 4,
+          marginTop: verticalMargin,
+          marginBottom: verticalMargin,
         })}
         ref={ref}
       >

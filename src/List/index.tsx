@@ -1,5 +1,8 @@
+/** @jsx jsx */
 import React from "react";
+import { css, jsx } from "@emotion/core";
 import { ListConfigProvider, useListConfig } from "../ListConfig";
+import { verticalListMarginFromPadding } from "../shared/verticalListMarginFromPadding";
 
 interface Props
   extends Omit<React.ComponentProps<typeof ListConfigProvider>, "children">,
@@ -26,9 +29,18 @@ export const List: React.FC<Props> = ({
     ...props,
   };
 
+  const verticalMargin = -verticalListMarginFromPadding(listConfig.padding) / 2;
+
   return (
     <ListConfigProvider {...listConfig}>
-      <div className={className} style={style}>
+      <div
+        className={className}
+        style={style}
+        css={css({
+          marginTop: verticalMargin,
+          marginBottom: verticalMargin,
+        })}
+      >
         {children}
       </div>
     </ListConfigProvider>
