@@ -416,6 +416,45 @@ export const ListItemWithContentHuggingSides = ({
   </Story>
 </Preview>
 
+## `padding`
+
+Padding will determine how spaced the insides of the element is.
+
+Padding is used to calculate the margin between elements and to add a negative margin to the top and bottom of `List`. This presents a gotcha: we don't know if you're going to have collapsable margins so we don't know if we should add the real amount or half of the desired margin. We're assuming margin collapsing is not available.
+
+<Preview>
+  <Story name="padding default">
+    <List>
+      <ListItem selected>Root</ListItem>
+      <ListItem data-force-hover-state>Objects</ListItem>
+      <ListItem>Inputs</ListItem>
+      <ListItem>Interfaces</ListItem>
+      <ListItem>Unions</ListItem>
+      <ListItem>Scalars and Enums</ListItem>
+    </List>
+  </Story>
+  <Story name="padding normal">
+    <List padding="normal">
+      <ListItem selected>Root</ListItem>
+      <ListItem data-force-hover-state>Objects</ListItem>
+      <ListItem>Inputs</ListItem>
+      <ListItem>Interfaces</ListItem>
+      <ListItem>Unions</ListItem>
+      <ListItem>Scalars and Enums</ListItem>
+    </List>
+  </Story>
+  <Story name="padding relaxed">
+    <List padding="relaxed">
+      <ListItem selected>Root</ListItem>
+      <ListItem data-force-hover-state>Objects</ListItem>
+      <ListItem>Inputs</ListItem>
+      <ListItem>Interfaces</ListItem>
+      <ListItem>Unions</ListItem>
+      <ListItem>Scalars and Enums</ListItem>
+    </List>
+  </Story>
+</Preview>
+
 ## `as`
 
 Specify the element used to render the button with the `as` prop. The default is `<div />`.
