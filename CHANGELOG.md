@@ -1,3 +1,15 @@
+# v6.0.1 (Tue Jun 16 2020)
+
+#### 🐛  Bug Fix
+
+- [AR-1658](https://apollographql.atlassian.net/browse/AR-1658): Fix bug where `className` isn't passed through to `ListItem` [#186](https://github.com/apollographql/space-kit/pull/186) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v6.0.0 (Tue Jun 16 2020)
 
 ### Release Notes
