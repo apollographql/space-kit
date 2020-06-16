@@ -5,11 +5,22 @@ import { css, jsx } from "@emotion/core";
 import { colors } from "../colors";
 
 /**
- * Divider between sections in a menu
+ * Divider between sections in a list
  */
-export const MenuDivider: React.FC = () => {
+export const ListDivider: React.FC = () => {
+  // Stop click events so we don't try to close the list when clicking something
+  // non-interactive
+  const handleClick = React.useCallback<React.MouseEventHandler<HTMLHRElement>>(
+    (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+    },
+    []
+  );
+
   return (
     <hr
+      onClick={handleClick}
       css={css({
         marginLeft: -8,
         marginRight: -8,

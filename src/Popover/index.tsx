@@ -1,56 +1,43 @@
-/* eslint-disable @typescript-eslint/no-empty-interface */
 import React from "react";
 import { AbstractTooltip } from "../AbstractTooltip";
-import { TippyMenuStyles } from "./menu/TippyMenuStyles";
-import { MenuConfigProvider, useMenuIconSize } from "../MenuConfig";
-import {
-  MenuItemClickListenerProvider,
-  useMenuItemClickListener,
-} from "../MenuItemClickListener";
-import { sizeModifier } from "./menu/sizeModifier";
-import { ShadedColor } from "../colors";
+import { TippyPopoverStyles } from "./popover/TippyPopoverStyles";
+import { sizeModifier } from "./popover/sizeModifier";
 
 interface Props
   extends Pick<
-      React.ComponentProps<typeof AbstractTooltip>,
-      | "children"
-      | "content"
-      | "maxWidth"
-      | "placement"
-      | "trigger"
-      | "fallbackPlacements"
-      | "popperOptions"
-    >,
-    Omit<React.ComponentProps<typeof MenuConfigProvider>, "children"> {
+    React.ComponentProps<typeof AbstractTooltip>,
+    | "children"
+    | "content"
+    | "maxWidth"
+    | "placement"
+    | "fallbackPlacements"
+    | "popperOptions"
+  > {
   className?: string;
-
-  /**
-   * Close menu automatically when a `MenuItem` is clicked
-   *
-   * @default true
-   */
-  closeOnMenuItemClick?: boolean;
-
-  /**
-   * Color to use for the selected state of a menu item. Hover state will be
-   * programatically calculated depending on the theme.
-   */
-  color?: ShadedColor;
-
   style?: React.CSSProperties;
+
+  /**
+   * Don't use `children`, use `trigger` instead
+   */
+  children?: never;
+  /**
+   * Element that will be monitored to trigger the popover
+   */
+  trigger: React.ComponentProps<typeof AbstractTooltip>["children"];
+  /**
+   * Events used to know when to trigger the popover
+   *
+   * @see https://atomiks.github.io/tippyjs/v6/all-props/#trigger
+   */
+  triggerEvents?: React.ComponentProps<typeof AbstractTooltip>["trigger"];
 }
 
-/**
- * Menu element
- */
-export const Menu: React.FC<Props> = ({
-  children,
-  closeOnMenuItemClick = true,
-  color,
+export const Popover: React.FC<Props> = ({
   fallbackPlacements,
-  iconSize,
   content,
   popperOptions,
+  trigger,
+  triggerEvents = "mousedown",
   ...props
 }) => {
   const instanceRef = React.useRef<
@@ -58,45 +45,40 @@ export const Menu: React.FC<Props> = ({
       NonNullable<React.ComponentProps<typeof AbstractTooltip>["onCreate"]>
     >[0]
   >();
-  const inheritedMenuItemClickListener = useMenuItemClickListener();
-  const inheritedIconSize = useMenuIconSize();
 
   /**
-   * Callback to handle descendeant `MenuItem` clicks.
+   * Callback to handle descendent `ListItem` clicks.
    *
-   * When we have nested menus and toggle menus we might need to change how this
+   * When we have nested lists and toggle lists we might need to change how this
    * behaves.
    */
-  const onMenuItemClick = React.useCallback<React.MouseEventHandler>(
-    (event) => {
-      if (inheritedMenuItemClickListener) {
-        inheritedMenuItemClickListener(event);
+  const handleClick = React.useCallback<React.MouseEventHandler>(
+    (element) => {
+      if (element.target === element.currentTarget) {
+        // We're listening for clicks on descendents so ignore events that come
+        // from the element with the listener.
+        return;
       }
 
-      if (closeOnMenuItemClick) {
-        instanceRef.current?.hide();
-      }
+      // how do we know if we want to hide the list?
+      instanceRef.current?.hide();
     },
-    [closeOnMenuItemClick, inheritedMenuItemClickListener, instanceRef]
+    [instanceRef]
   );
 
   return (
-    <MenuConfigProvider color={color} iconSize={iconSize ?? inheritedIconSize}>
-      <TippyMenuStyles />
+    <>
+      <TippyPopoverStyles />
       <AbstractTooltip
         appendTo="parent"
         offset={[0, 2]}
         onCreate={(instance) => {
           instanceRef.current = instance;
         }}
-        content={
-          <MenuItemClickListenerProvider onClick={onMenuItemClick}>
-            {content}
-          </MenuItemClickListenerProvider>
-        }
+        content={<span onClick={handleClick}>{content}</span>}
         hideOnClick
-        theme="space-kit-menu"
-        trigger="mousedown"
+        theme="space-kit-list"
+        trigger={triggerEvents}
         popperOptions={{
           strategy: "fixed",
           ...popperOptions,
@@ -156,8 +138,8 @@ export const Menu: React.FC<Props> = ({
         {...props}
         interactive
       >
-        {children}
+        {trigger}
       </AbstractTooltip>
-    </MenuConfigProvider>
+    </>
   );
 };

@@ -1,16 +1,16 @@
 import React from "react";
 import userEvent from "@testing-library/user-event";
 import { Button } from "../Button";
-import { findByText } from "@testing-library/dom";
-import { Menu } from "../Menu";
-import { MenuHeading } from "../MenuHeading";
-import { MenuItem } from "../MenuItem";
+import { findByRole } from "@testing-library/dom";
+import { Popover } from "../Popover";
+import { ListHeading } from "../ListHeading";
+import { ListItem } from "../ListItem";
 import { PerformUserInteraction } from "../shared/PerformUserInteraction";
 import { storiesOf } from "@storybook/react";
 import { colors } from "../colors";
 
-storiesOf("Tests|Menu", module)
-  .addParameters({ component: Menu })
+storiesOf("Tests|Popover", module)
+  .addParameters({ component: Popover })
   .add("max height", () => (
     <div
       className="sk-scroll-container"
@@ -24,34 +24,35 @@ storiesOf("Tests|Menu", module)
     >
       <PerformUserInteraction
         callback={async () => {
-          userEvent.click(await findByText(document.body, /open menu/i));
+          userEvent.click(await findByRole(document.body, "button"));
         }}
       >
-        <Menu
+        <Popover
           placement="bottom-start"
           fallbackPlacements={["top-start"]}
           iconSize="small"
           maxWidth={280}
           content={
             <React.Fragment>
-              <MenuHeading>mdg-private-graphs</MenuHeading>
-              <MenuItem>space-kit</MenuItem>
-              <MenuItem>space-kit</MenuItem>
-              <MenuItem>space-kit</MenuItem>
-              <MenuItem>space-kit</MenuItem>
-              <MenuItem>space-kit</MenuItem>
-              <MenuItem>space-kit</MenuItem>
-              <MenuItem>space-kit</MenuItem>
-              <MenuItem>space-kit</MenuItem>
-              <MenuItem>space-kit</MenuItem>
-              <MenuItem>space-kit</MenuItem>
+              <ListHeading>mdg-private-graphs</ListHeading>
+              <ListItem>space-kit</ListItem>
+              <ListItem>space-kit</ListItem>
+              <ListItem>space-kit</ListItem>
+              <ListItem>space-kit</ListItem>
+              <ListItem>space-kit</ListItem>
+              <ListItem>space-kit</ListItem>
+              <ListItem>space-kit</ListItem>
+              <ListItem>space-kit</ListItem>
+              <ListItem>space-kit</ListItem>
+              <ListItem>space-kit</ListItem>
             </React.Fragment>
           }
-        >
-          <Button style={{ position: "absolute", left: 400, top: 400 }}>
-            Open Menu
-          </Button>
-        </Menu>
+          trigger={
+            <Button style={{ position: "absolute", left: 400, top: 400 }}>
+              Open Popover
+            </Button>
+          }
+        />
       </PerformUserInteraction>
     </div>
   ))
@@ -68,10 +69,10 @@ storiesOf("Tests|Menu", module)
     >
       <PerformUserInteraction
         callback={async () => {
-          userEvent.click(await findByText(document.body, /open menu/i));
+          userEvent.click(await findByRole(document.body, "button"));
         }}
       >
-        <Menu
+        <Popover
           placement="bottom"
           popperOptions={{ strategy: "absolute" }}
           fallbackPlacements={["top"]}
@@ -79,17 +80,18 @@ storiesOf("Tests|Menu", module)
           maxWidth={280}
           content={
             <React.Fragment>
-              <MenuHeading>Shapes</MenuHeading>
-              <MenuItem>Circle</MenuItem>
-              <MenuItem>Rectangle</MenuItem>
-              <MenuItem>Square</MenuItem>
+              <ListHeading>Shapes</ListHeading>
+              <ListItem>Circle</ListItem>
+              <ListItem>Rectangle</ListItem>
+              <ListItem>Square</ListItem>
             </React.Fragment>
           }
-        >
-          <Button style={{ position: "absolute", left: 0, top: 200 }}>
-            Open Menu
-          </Button>
-        </Menu>
+          trigger={
+            <Button style={{ position: "absolute", left: 0, top: 200 }}>
+              Open Popover
+            </Button>
+          }
+        />
       </PerformUserInteraction>
     </div>
   ))
@@ -106,10 +108,10 @@ storiesOf("Tests|Menu", module)
     >
       <PerformUserInteraction
         callback={async () => {
-          userEvent.click(await findByText(document.body, /open menu/i));
+          userEvent.click(await findByRole(document.body, "button"));
         }}
       >
-        <Menu
+        <Popover
           popperOptions={{ strategy: "absolute" }}
           placement="bottom"
           fallbackPlacements={["top"]}
@@ -117,17 +119,18 @@ storiesOf("Tests|Menu", module)
           maxWidth={280}
           content={
             <React.Fragment>
-              <MenuHeading>Shapes</MenuHeading>
-              <MenuItem>Circle</MenuItem>
-              <MenuItem>Rectangle</MenuItem>
-              <MenuItem>Square</MenuItem>
+              <ListHeading>Shapes</ListHeading>
+              <ListItem>Circle</ListItem>
+              <ListItem>Rectangle</ListItem>
+              <ListItem>Square</ListItem>
             </React.Fragment>
           }
-        >
-          <Button style={{ position: "absolute", left: 0, top: 200 }}>
-            Open Menu
-          </Button>
-        </Menu>
+          trigger={
+            <Button style={{ position: "absolute", left: 0, top: 200 }}>
+              Open Popover
+            </Button>
+          }
+        />
       </PerformUserInteraction>
     </div>
   ))
@@ -144,10 +147,10 @@ storiesOf("Tests|Menu", module)
     >
       <PerformUserInteraction
         callback={async () => {
-          userEvent.click(await findByText(document.body, /open menu/i));
+          userEvent.click(await findByRole(document.body, "button"));
         }}
       >
-        <Menu
+        <Popover
           popperOptions={{ strategy: "absolute" }}
           placement="bottom-start"
           fallbackPlacements={["top-start"]}
@@ -155,26 +158,27 @@ storiesOf("Tests|Menu", module)
           maxWidth={280}
           content={
             <React.Fragment>
-              <MenuHeading>Shapes</MenuHeading>
-              <MenuItem>Circle</MenuItem>
-              <MenuItem>Rectangle</MenuItem>
-              <MenuItem>Square</MenuItem>
-              <MenuItem>Triangle</MenuItem>
+              <ListHeading>Shapes</ListHeading>
+              <ListItem>Circle</ListItem>
+              <ListItem>Rectangle</ListItem>
+              <ListItem>Square</ListItem>
+              <ListItem>Triangle</ListItem>
             </React.Fragment>
           }
-        >
-          <Button style={{ position: "absolute", left: 0, top: 0 }}>
-            Open Menu
-          </Button>
-        </Menu>
+          trigger={
+            <Button style={{ position: "absolute", left: 0, top: 0 }}>
+              Open Popover
+            </Button>
+          }
+        />
       </PerformUserInteraction>
     </div>
   ));
 
-storiesOf("Tests|MenuItem", module)
-  .addParameters({ component: MenuItem })
+storiesOf("Tests|ListItem", module)
+  .addParameters({ component: ListItem })
   .add('aria-expanded="true"', () => (
     <div style={{ width: 100, height: 20 }}>
-      <MenuItem aria-expanded="true">Circle</MenuItem>
+      <ListItem aria-expanded="true">Circle</ListItem>
     </div>
   ));

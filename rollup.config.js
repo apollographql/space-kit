@@ -40,8 +40,7 @@ function CJS() {
             path.join("src", "illustrations", "scripts"),
             path.join("src", "shared"),
             path.join("src", "AbstractTooltip"),
-            path.join("src", "MenuItemClickListener"),
-            path.join("src", "MenuConfig"),
+            path.join("src", "ListConfig"),
           ].some((excludedPathname) => filename.includes(excludedPathname))
       ),
     external: [

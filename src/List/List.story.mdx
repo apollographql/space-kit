@@ -1,0 +1,469 @@
+import { colors } from "../colors";
+import { List } from "../List";
+import { ListItem } from "../ListItem";
+import { ListDivider } from "../ListDivider";
+import { ListHeading } from "../ListHeading";
+import {
+  Description,
+  Meta,
+  Story,
+  Props,
+  Preview,
+} from "@storybook/addon-docs/blocks";
+import { IconAstronaut1 } from "../icons/IconAstronaut1";
+import { IconAstronaut2 } from "../icons/IconAstronaut2";
+import { IconAstronaut3 } from "../icons/IconAstronaut3";
+import { IconLander } from "../icons/IconLander";
+import { IconPlanet3 } from "../icons/IconPlanet3";
+import { IconShip3 } from "../icons/IconShip3";
+import { IconCheck } from "../icons/IconCheck";
+
+<Meta title="Components|List" />
+
+# List
+
+<Description
+  of={List}
+  markdown="**Lists** provide a way for sures to interact with the application by selecting from a set of options. While that’s simple in theory, lists can be complex and not eveything is detailed below. lists can emerge from Select buttons or a simple button."
+/>
+
+## Simple List
+
+The simple list provides a list of options for a user to choose from and updates the button or select button with the choice the user has selected.
+
+<Preview>
+  <Story name="basic">
+    <List>
+      <ListItem>Root</ListItem>
+      <ListItem selected>Objects</ListItem>
+      <ListItem>Inputs</ListItem>
+      <ListItem>Interfaces</ListItem>
+      <ListItem>Unions</ListItem>
+      <ListItem>Scalars and Enums</ListItem>
+    </List>
+  </Story>
+</Preview>
+
+## Segmented List
+
+The segmented list provides a way to group related options. This can be achieved
+by a divider and in other cases, headers can be used to group similar
+information and provide a nice visual grouping.
+
+<Preview>
+  <Story name="divided">
+    <List>
+      <ListItem>All Types</ListItem>
+      <ListDivider />
+      <ListItem>Root</ListItem>
+      <ListItem>Objects</ListItem>
+      <ListItem>Inputs</ListItem>
+      <ListItem>Interfaces</ListItem>
+      <ListItem>Unions</ListItem>
+      <ListItem>Scalars and Enums</ListItem>
+      <ListDivider />
+      <ListItem>Deprecations</ListItem>
+    </List>
+  </Story>
+</Preview>
+
+## Header
+
+<Preview>
+  <Story name="heading">
+    <List>
+      <ListHeading count={5}>Filter by</ListHeading>
+      <ListItem>Root</ListItem>
+      <ListItem>Objects</ListItem>
+      <ListItem>Inputs</ListItem>
+      <ListItem>Interfaces</ListItem>
+      <ListItem>Unions</ListItem>
+      <ListItem>Scalars and Enums</ListItem>
+    </List>
+  </Story>
+</Preview>
+
+## Icons
+
+<Preview>
+  <Story name="start-icons">
+    <List>
+      <ListItem
+        startIcon={
+          <IconAstronaut1
+            style={{ width: "100%", height: "100%" }}
+            weight="thin"
+          />
+        }
+      >
+        Cones
+      </ListItem>
+      <ListItem
+        startIcon={
+          <IconAstronaut2
+            style={{ width: "100%", height: "100%" }}
+            weight="thin"
+          />
+        }
+      >
+        Rhomboid
+      </ListItem>
+      <ListItem
+        startIcon={
+          <IconAstronaut3
+            style={{ width: "100%", height: "100%" }}
+            weight="thin"
+          />
+        }
+      >
+        Cubes
+      </ListItem>
+      <ListItem
+        startIcon={
+          <IconLander style={{ width: "100%", height: "100%" }} weight="thin" />
+        }
+      >
+        Diamonds
+      </ListItem>
+      <ListItem
+        startIcon={
+          <IconPlanet3
+            style={{ width: "100%", height: "100%" }}
+            weight="thin"
+          />
+        }
+      >
+        Cylinders
+      </ListItem>
+      <ListItem
+        startIcon={
+          <IconShip3 style={{ width: "100%", height: "100%" }} weight="thin" />
+        }
+      >
+        Pyramids
+      </ListItem>
+    </List>
+  </Story>
+  <Story name="end-icons">
+    <List>
+      <ListItem
+        endIcon={
+          <IconAstronaut1
+            style={{ width: "100%", height: "100%" }}
+            weight="thin"
+          />
+        }
+      >
+        Cones
+      </ListItem>
+      <ListItem
+        endIcon={
+          <IconAstronaut2
+            style={{ width: "100%", height: "100%" }}
+            weight="thin"
+          />
+        }
+      >
+        Rhomboid
+      </ListItem>
+      <ListItem
+        endIcon={
+          <IconAstronaut3
+            style={{ width: "100%", height: "100%" }}
+            weight="thin"
+          />
+        }
+      >
+        Cubes
+      </ListItem>
+      <ListItem
+        endIcon={
+          <IconLander style={{ width: "100%", height: "100%" }} weight="thin" />
+        }
+      >
+        Diamonds
+      </ListItem>
+      <ListItem
+        endIcon={
+          <IconPlanet3
+            style={{ width: "100%", height: "100%" }}
+            weight="thin"
+          />
+        }
+      >
+        Cylinders
+      </ListItem>
+      <ListItem
+        endIcon={
+          <IconShip3 style={{ width: "100%", height: "100%" }} weight="thin" />
+        }
+      >
+        Pyramids
+      </ListItem>
+    </List>
+  </Story>
+  <Story name="multiline-end-icons">
+    <List iconSize="small">
+      <ListItem
+        style={{ height: "auto" }}
+        endIcon={
+          <IconAstronaut1
+            style={{ width: "100%", height: "100%" }}
+            weight="thin"
+          />
+        }
+      >
+        <div>Cones</div>
+        <div>subtext</div>
+      </ListItem>
+      <ListItem
+        style={{ height: "auto" }}
+        endIcon={
+          <IconAstronaut2
+            style={{ width: "100%", height: "100%" }}
+            weight="thin"
+          />
+        }
+      >
+        <div>Rhomboid</div>
+        <div>subtext</div>
+      </ListItem>
+      <ListItem
+        style={{ height: "auto" }}
+        endIcon={
+          <IconAstronaut3
+            style={{ width: "100%", height: "100%" }}
+            weight="thin"
+          />
+        }
+      >
+        <div>Cubes</div>
+        <div>subtext</div>
+      </ListItem>
+      <ListItem
+        style={{ height: "auto" }}
+        endIcon={
+          <IconLander style={{ width: "100%", height: "100%" }} weight="thin" />
+        }
+      >
+        <div>Diamonds</div>
+        <div>subtext</div>
+      </ListItem>
+      <ListItem
+        style={{ height: "auto" }}
+        endIcon={
+          <IconPlanet3
+            style={{ width: "100%", height: "100%" }}
+            weight="thin"
+          />
+        }
+      >
+        <div>Cylinders</div>
+        <div>subtext</div>
+      </ListItem>
+      <ListItem
+        style={{ height: "auto" }}
+        endIcon={
+          <IconShip3 style={{ width: "100%", height: "100%" }} weight="thin" />
+        }
+      >
+        Pyramids
+      </ListItem>
+    </List>
+  </Story>
+</Preview>
+
+## Icons with custom sizes
+
+<Preview>
+  <Story name="list-icon-size">
+    <List iconSize="small">
+      <ListHeading startIcon={null}>mdg-private-graphs</ListHeading>
+      <ListItem startIcon={null}>apollo-day-nyc</ListItem>
+      <ListItem startIcon={null} selected>
+        engine
+      </ListItem>
+      <ListItem startIcon={null}>galaxy-eu-west</ListItem>
+      <ListItem
+        startIcon={
+          <IconCheck
+            style={{
+              color: colors.blue.base,
+              width: "100%",
+              height: "100%",
+            }}
+          />
+        }
+      >
+        galaxy-ties
+      </ListItem>
+      <ListItem startIcon={null}>space-explorer</ListItem>
+      <ListItem startIcon={null}>z-end-to-end-ingestion-20</ListItem>
+    </List>
+  </Story>
+</Preview>
+
+## Truncation and icon customization
+
+Items should be truncated properly. This provides an example to show how to add a custom `endIcon` as well.
+
+<Preview>
+  <Story name="flexbox truncation">
+    <List
+      endIconAs={<div style={{ color: colors.grey.light, width: "auto" }} />}
+      iconSize="small"
+      style={{ maxWidth: 280 }}
+    >
+      <ListHeading startIcon={null}>mdg-private-graphs</ListHeading>
+      <ListItem startIcon={null} endIcon={<>1.9k rpm</>}>
+        really_long_test_name_really_long_test_name
+      </ListItem>
+      <ListItem
+        startIcon={null}
+        endIcon={<>8 rpm</>}
+        selected
+        endIconAs={<div style={{ color: colors.white, width: "auto" }} />}
+      >
+        really_long_test_name_really_long_test_name
+      </ListItem>
+      <ListItem
+        startIcon={
+          <IconCheck
+            style={{
+              color: colors.blue.base,
+              width: "100%",
+              height: "100%",
+            }}
+          />
+        }
+        endIcon={<>0 rpm</>}
+      >
+        engine-eu
+      </ListItem>
+    </List>
+  </Story>
+</Preview>
+
+## `selectedColor`
+
+`selectedColor` can be configured on the `List` component.
+
+<Preview>
+  <Story name="selectedColor">
+    <List selectedColor={colors.red.base}>
+      <ListItem>Root</ListItem>
+      <ListItem selected>Objects</ListItem>
+      <ListItem>Inputs</ListItem>
+      <ListItem>Interfaces</ListItem>
+      <ListItem>Unions</ListItem>
+      <ListItem>Scalars and Enums</ListItem>
+    </List>
+  </Story>
+</Preview>
+
+## `hoverColor`
+
+`hoverColor` can be configured on the `List` component.
+
+<Preview>
+  <Story name="hoverColor light color">
+    <List hoverColor={colors.red.lightest}>
+      <ListItem data-force-hover-state>Root</ListItem>
+      <ListItem>Objects</ListItem>
+      <ListItem>Inputs</ListItem>
+      <ListItem>Interfaces</ListItem>
+      <ListItem>Unions</ListItem>
+      <ListItem>Scalars and Enums</ListItem>
+    </List>
+  </Story>
+  <Story name="hoverColor dark color">
+    <List hoverColor={colors.red.darkest}>
+      <ListItem data-force-hover-state>Root</ListItem>
+      <ListItem>Objects</ListItem>
+      <ListItem>Inputs</ListItem>
+      <ListItem>Interfaces</ListItem>
+      <ListItem>Unions</ListItem>
+      <ListItem>Scalars and Enums</ListItem>
+    </List>
+  </Story>
+</Preview>
+
+## `padding`
+
+Padding will determine how spaced the insides of the element is.
+
+Padding is used to calculate the margin between elements and to add a negative margin to the top and bottom of `List`. This presents a gotcha: we don't know if you're going to have collapsable margins so we don't know if we should add the real amount or half of the desired margin. We're assuming margin collapsing is not available.
+
+<Preview>
+  <Story name="padding default">
+    <List>
+      <ListItem selected>Root</ListItem>
+      <ListItem data-force-hover-state>Objects</ListItem>
+      <ListItem>Inputs</ListItem>
+      <ListItem>Interfaces</ListItem>
+      <ListItem>Unions</ListItem>
+      <ListItem>Scalars and Enums</ListItem>
+    </List>
+  </Story>
+  <Story name="padding normal">
+    <List padding="normal">
+      <ListItem selected>Root</ListItem>
+      <ListItem data-force-hover-state>Objects</ListItem>
+      <ListItem>Inputs</ListItem>
+      <ListItem>Interfaces</ListItem>
+      <ListItem>Unions</ListItem>
+      <ListItem>Scalars and Enums</ListItem>
+    </List>
+  </Story>
+  <Story name="padding relaxed">
+    <List padding="relaxed">
+      <ListItem selected>Root</ListItem>
+      <ListItem data-force-hover-state>Objects</ListItem>
+      <ListItem>Inputs</ListItem>
+      <ListItem>Interfaces</ListItem>
+      <ListItem>Unions</ListItem>
+      <ListItem>Scalars and Enums</ListItem>
+    </List>
+  </Story>
+</Preview>
+
+## `as`
+
+Specify the element used to render the button with the `as` prop. The default is `<div />`.
+
+All props added to the `as` element will be merged with the props added by the component. `classNames`, `styles`, and `css` will be intelligently merged.
+
+<Preview>
+  <Story name="as a">
+    <List>
+      <ListItem as={<a href="https://apollographql.com" />}>Root</ListItem>
+      <ListItem as={<a href="https://apollographql.com" />}>Objects</ListItem>
+      <ListItem as={<a href="https://apollographql.com" />}>Inputs</ListItem>
+      <ListItem as={<a href="https://apollographql.com" />}>
+        Interfaces
+      </ListItem>
+      <ListItem as={<a href="https://apollographql.com" />}>Unions</ListItem>
+      <ListItem as={<a href="https://apollographql.com" />}>
+        Scalars and Enums
+      </ListItem>
+    </List>
+  </Story>
+</Preview>
+
+## Props
+
+### `List`
+
+<Props of={List} />
+
+### `ListItem`
+
+<Props of={ListItem} />
+
+### `ListHeading`
+
+<Props of={ListHeading} />
+
+### `ListDivider`
+
+<Props of={ListDivider} />
