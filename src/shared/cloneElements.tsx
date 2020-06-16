@@ -4,16 +4,15 @@ import { ClassNames } from "@emotion/core";
 
 /**
  * Clone elements in order. All `className`, `style`, and `css` props will be
- * propogated and merged. The shallowest `ref` will be maintained.
+ * propogated and merged. The leftmost `ref` will be maintained.
  */
 export const cloneElements = (
-  ...elements: React.ReactElement[]
+  ...elements: readonly React.ReactElement[]
 ): React.ReactElement => {
   return (
     <ClassNames>
       {({ css, cx }) => {
         if (elements.length === 1) return elements[0];
-
         return elements.reduce((accumulator, element) => {
           return React.cloneElement(accumulator, {
             ...element.props,

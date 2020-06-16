@@ -55,12 +55,15 @@ function getIconMarginLeft(
 
 interface Props
   extends Pick<
-    React.DetailedHTMLProps<
-      React.HTMLAttributes<HTMLDivElement>,
-      HTMLDivElement
+      React.DetailedHTMLProps<
+        React.HTMLAttributes<HTMLDivElement>,
+        HTMLDivElement
+      >,
+      "className" | "onClick" | "style"
     >,
-    "className" | "onClick" | "style"
-  > {
+    Partial<
+      Pick<ReturnType<typeof useListConfig>, "endIconAs" | "startIconAs">
+    > {
   /**
    * Override the the default element used to render
    *
@@ -77,6 +80,7 @@ interface Props
    * you want an empty node, a spacer for example, use `null`
    */
   endIcon?: React.ReactNode;
+
   /**
    * Indicates if this list item can be itneracted with. Defaults to `true`. If
    * set to `false`, there will be no hover effects.
@@ -99,14 +103,25 @@ export const ListItem = React.forwardRef<any, React.PropsWithChildren<Props>>(
       as = <div />,
       children,
       endIcon,
+      endIconAs: endIconAsProp,
       interactive = true,
       selected = false,
       startIcon,
+      startIconAs: startIconAsProp,
       ...props
     },
     ref
   ) => {
-    const { hoverColor, iconSize, padding, selectedColor } = useListConfig();
+    const {
+      hoverColor,
+      iconSize,
+      padding,
+      selectedColor,
+      ...listConfig
+    } = useListConfig();
+
+    const endIconAs = endIconAsProp ?? listConfig.endIconAs;
+    const startIconAs = startIconAsProp ?? listConfig.startIconAs;
 
     const selectedTextColor = tinycolor
       .mostReadable(selectedColor, [colors.white, colors.grey.darker], {
@@ -167,47 +182,58 @@ export const ListItem = React.forwardRef<any, React.PropsWithChildren<Props>>(
               )}
               ref={ref}
             >
-              {typeof startIcon !== "undefined" && (
-                <div
-                  className={cx(
-                    css({
-                      display: "flex",
-                      flex: "none",
-                      marginLeft: getIconMarginLeft(iconSize),
-                      marginRight: getIconHorizontalPadding(iconSize),
-                      width: getIconSize(iconSize),
-                    })
-                  )}
-                >
-                  {startIcon}
-                </div>
-              )}
+              {typeof startIcon !== "undefined" &&
+                cloneElements(
+                  startIconAs,
+                  <div
+                    className={cx(
+                      css({
+                        display: "flex",
+                        flex: "none",
+                        marginLeft: getIconMarginLeft(iconSize),
+                        marginRight: getIconHorizontalPadding(iconSize),
+                        overflow: "hidden",
+                        whiteSpace: "nowrap",
+                        width: getIconSize(iconSize),
+                      })
+                    )}
+                  >
+                    {startIcon}
+                  </div>
+                )}
               <div
                 className={cx(
                   css({
                     flex: "1",
                     /* This is weird but it's necessary to truncate list items */
                     minWidth: 0,
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
                   })
                 )}
               >
                 {children}
               </div>
-              {typeof endIcon !== "undefined" && (
-                <div
-                  className={cx(
-                    css({
-                      display: "flex",
-                      flex: "none",
-                      justifyContent: "flex-end",
-                      marginLeft: getIconHorizontalPadding(iconSize),
-                      width: getIconSize(iconSize),
-                    })
-                  )}
-                >
-                  {endIcon}
-                </div>
-              )}
+              {typeof endIcon !== "undefined" &&
+                cloneElements(
+                  endIconAs,
+                  <div
+                    className={cx(
+                      css({
+                        display: "flex",
+                        flex: "none",
+                        justifyContent: "flex-end",
+                        marginLeft: getIconHorizontalPadding(iconSize),
+                        overflow: "hidden",
+                        whiteSpace: "nowrap",
+                        width: getIconSize(iconSize),
+                      })
+                    )}
+                  >
+                    {endIcon}
+                  </div>
+                )}
             </div>
           )
         }

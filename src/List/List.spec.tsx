@@ -10,11 +10,13 @@ const DebugListConfig: React.FC = () => {
 
   return (
     <>
-      {Object.entries(listConfig).map(([key, value]) => (
-        <div data-testid={key} key={key}>
-          {value}
-        </div>
-      ))}
+      {Object.entries(listConfig).map(([key, value]) => {
+        return React.cloneElement(
+          React.isValidElement(value) ? value : <div />,
+          { "data-testid": key, key },
+          <>{value}</>
+        );
+      })}
     </>
   );
 };
@@ -38,10 +40,12 @@ test("given no configuration, defaults values should be present", () => {
 
 test("given nested lists with configurations in both, correct values should propegate", () => {
   const newValues: ReturnType<typeof useListConfig> = {
+    endIconAs: <span />,
     hoverColor: colors.red.base,
     iconSize: "large",
     padding: "relaxed",
     selectedColor: colors.green.dark,
+    startIconAs: <span />,
   };
 
   render(
@@ -57,6 +61,9 @@ test("given nested lists with configurations in both, correct values should prop
     </List>
   );
 
+  expect(screen.getByTestId("endIconAs").tagName).toBe(
+    ((newValues.endIconAs.type as unknown) as string).toUpperCase()
+  );
   expect(screen.getByTestId("iconSize")).toHaveTextContent(newValues.iconSize);
   expect(screen.getByTestId("hoverColor")).toHaveTextContent(
     newValues.hoverColor
@@ -65,14 +72,19 @@ test("given nested lists with configurations in both, correct values should prop
   expect(screen.getByTestId("selectedColor")).toHaveTextContent(
     newValues.selectedColor
   );
+  expect(screen.getByTestId("startIconAs").tagName).toBe(
+    ((newValues.startIconAs.type as unknown) as string).toUpperCase()
+  );
 });
 
 test("given nested lists with the top level having default configuration and the child configuring everything, correct values should propegate", () => {
   const newValues: ReturnType<typeof useListConfig> = {
+    endIconAs: <span />,
     hoverColor: colors.red.base,
     iconSize: "large",
     padding: "relaxed",
     selectedColor: colors.green.dark,
+    startIconAs: <span />,
   };
 
   render(
@@ -83,6 +95,9 @@ test("given nested lists with the top level having default configuration and the
     </List>
   );
 
+  expect(screen.getByTestId("endIconAs").tagName).toBe(
+    ((newValues.endIconAs.type as unknown) as string).toUpperCase()
+  );
   expect(screen.getByTestId("iconSize")).toHaveTextContent(newValues.iconSize);
   expect(screen.getByTestId("hoverColor")).toHaveTextContent(
     newValues.hoverColor
@@ -91,14 +106,20 @@ test("given nested lists with the top level having default configuration and the
   expect(screen.getByTestId("selectedColor")).toHaveTextContent(
     newValues.selectedColor
   );
+
+  expect(screen.getByTestId("startIconAs").tagName).toBe(
+    ((newValues.startIconAs.type as unknown) as string).toUpperCase()
+  );
 });
 
 test("given nested lists with the top level having configuration and the child using defaults, correct values should propegate", () => {
   const newValues: ReturnType<typeof useListConfig> = {
+    endIconAs: <span />,
     hoverColor: colors.red.base,
     iconSize: "large",
     padding: "relaxed",
     selectedColor: colors.green.dark,
+    startIconAs: <span />,
   };
 
   render(
@@ -109,6 +130,9 @@ test("given nested lists with the top level having configuration and the child u
     </List>
   );
 
+  expect(screen.getByTestId("endIconAs").tagName).toBe(
+    ((newValues.endIconAs.type as unknown) as string).toUpperCase()
+  );
   expect(screen.getByTestId("iconSize")).toHaveTextContent(newValues.iconSize);
   expect(screen.getByTestId("hoverColor")).toHaveTextContent(
     newValues.hoverColor
@@ -116,5 +140,9 @@ test("given nested lists with the top level having configuration and the child u
   expect(screen.getByTestId("padding")).toHaveTextContent(newValues.padding);
   expect(screen.getByTestId("selectedColor")).toHaveTextContent(
     newValues.selectedColor
+  );
+
+  expect(screen.getByTestId("startIconAs").tagName).toBe(
+    ((newValues.startIconAs.type as unknown) as string).toUpperCase()
   );
 });

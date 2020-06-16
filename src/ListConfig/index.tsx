@@ -11,6 +11,16 @@ type IconSize = "small" | "normal" | "large";
 
 interface ListConfig {
   /**
+   * Override the the default element used to render `endIcon`
+   *
+   * All props provided will be merged with props that this component adds,
+   * including `className`s being merged.
+   *
+   * @default <div />
+   */
+  endIconAs: React.ReactElement;
+
+  /**
    * Background color of the hovered item in a menu
    *
    * The text color will be determined automatically
@@ -33,16 +43,28 @@ interface ListConfig {
    * The text color will be determined automatically
    */
   selectedColor: ShadedColor;
+
+  /**
+   * Override the the default element used to render `startIcon`
+   *
+   * All props provided will be merged with props that this component adds,
+   * including `className`s being merged.
+   *
+   * @default <div />
+   */
+  startIconAs: React.ReactElement;
 }
 
 /**
  * Default values for each property
  */
 export const defaults: ListConfig = {
+  endIconAs: <div />,
   hoverColor: colors.silver.light,
   iconSize: "normal",
   padding: "normal",
   selectedColor: colors.blue.base,
+  startIconAs: <div />,
 };
 
 /**
