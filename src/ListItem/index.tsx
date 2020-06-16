@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
 import * as CSS from "csstype";
-import classnames from "classnames";
 import React from "react";
 import { ClassNames } from "@emotion/core";
 import { assertUnreachable } from "../shared/assertUnreachable";
@@ -8,6 +7,7 @@ import tinycolor from "tinycolor2";
 import { colors } from "../colors";
 import { useListConfig } from "../ListConfig";
 import { verticalListMarginFromPadding } from "../shared/verticalListMarginFromPadding";
+import { cloneElements } from "../shared/cloneElements";
 
 function getIconHorizontalPadding(
   iconSize: NonNullable<ReturnType<typeof useListConfig>["iconSize"]>
@@ -135,8 +135,9 @@ export const ListItem = React.forwardRef<any, React.PropsWithChildren<Props>>(
 
     return (
       <ClassNames>
-        {({ css, cx }) => {
-          const result = (
+        {({ css, cx }) =>
+          cloneElements(
+            as,
             <div
               {...props}
               className={cx(
@@ -208,22 +209,8 @@ export const ListItem = React.forwardRef<any, React.PropsWithChildren<Props>>(
                 </div>
               )}
             </div>
-          );
-
-          return React.cloneElement(as, {
-            ...result.props,
-            className: classnames(
-              result.props.className,
-              props.className,
-              // If the parent component is using emotion with the jsx pragma, we
-              // have to get fancy and intercept the styles to use with the
-              // `ClassNames` wrapper.
-              as.props.css ? cx(css(as.props.css.styles)) : null
-            ),
-            style: { ...result.props.style, ...props.style },
-            ref: as.props.ref ?? ref,
-          });
-        }}
+          )
+        }
       </ClassNames>
     );
   }
