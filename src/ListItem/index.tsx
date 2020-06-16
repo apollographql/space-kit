@@ -8,6 +8,7 @@ import { colors } from "../colors";
 import { useListConfig } from "../ListConfig";
 import { verticalListMarginFromPadding } from "../shared/verticalListMarginFromPadding";
 import { cloneElements } from "../shared/cloneElements";
+import classnames from "classnames";
 
 function getIconHorizontalPadding(
   iconSize: NonNullable<ReturnType<typeof useListConfig>["iconSize"]>
@@ -155,30 +156,33 @@ export const ListItem = React.forwardRef<any, React.PropsWithChildren<Props>>(
             as,
             <div
               {...props}
-              className={cx(
-                css({
-                  ...(selected && selectedStyles),
-                  ...{ "&[aria-expanded=true]": selectedStyles },
-                  ...(!selected && {
-                    "&:hover, &[data-force-hover-state]": hoverStyles,
-                  }),
-                  alignItems: "center",
-                  cursor: interactive ? "pointer" : undefined,
-                  borderRadius: 4,
-                  display: "flex",
-                  height:
-                    padding === "normal"
-                      ? 28
-                      : padding === "relaxed"
-                      ? 40
-                      : assertUnreachable(padding),
-                  paddingLeft: 12,
-                  paddingRight: 12,
-                  paddingTop: 4,
-                  paddingBottom: 4,
-                  marginTop: verticalMargin,
-                  marginBottom: verticalMargin,
-                })
+              className={classnames(
+                props.className,
+                cx(
+                  css({
+                    ...(selected && selectedStyles),
+                    ...{ "&[aria-expanded=true]": selectedStyles },
+                    ...(!selected && {
+                      "&:hover, &[data-force-hover-state]": hoverStyles,
+                    }),
+                    alignItems: "center",
+                    cursor: interactive ? "pointer" : undefined,
+                    borderRadius: 4,
+                    display: "flex",
+                    height:
+                      padding === "normal"
+                        ? 28
+                        : padding === "relaxed"
+                        ? 40
+                        : assertUnreachable(padding),
+                    paddingLeft: 12,
+                    paddingRight: 12,
+                    paddingTop: 4,
+                    paddingBottom: 4,
+                    marginTop: verticalMargin,
+                    marginBottom: verticalMargin,
+                  })
+                )
               )}
               ref={ref}
             >

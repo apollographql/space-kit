@@ -40,3 +40,16 @@ it("given `as` prop, ref should be passed through", () => {
 
   expect(ref.current).toBe(screen.getByTestId("ListItem"));
 });
+
+it("given `className`, it should be merged with other class names", () => {
+  render(
+    <ListItem className="test-class-name" data-testid="ListItem">
+      text
+    </ListItem>
+  );
+
+  expect(screen.getByTestId("ListItem")).toHaveClass("test-class-name");
+  expect(
+    screen.getByTestId("ListItem").getAttribute("class")?.split(/\s/)
+  ).toHaveLength(2);
+});
