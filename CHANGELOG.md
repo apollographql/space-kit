@@ -1,3 +1,31 @@
+# v6.0.0 (Tue Jun 16 2020)
+
+### Release Notes
+
+_From #182_
+
+* Split `Menu` into `Popover` and `List` and rename `MenuHeading` to `ListHeading`, `MenuDivider` to `ListDivider`, and `MenuItem` to `ListItem`
+* Rename `color` configuration in `List` (formerly in `Menu`) to `selectedColor`
+* Add `hoverColor` configuration to `List`
+* Add "large" `iconSize` to `List` configuration
+* Add `padding` to `List` configuration
+* Add `cloneElements` helper to make it easy to add `as` props
+* Add `endIconAs` and `startIconAs` props to `List` and `ListItem` to allow configuring how they are rendered.
+  * This is useful for adding colors and setting manual props on the elements themselves instead of nesting new elements underneath. 
+  * This will now provide automatic truncation.
+
+---
+
+#### 💥 Breaking Change
+
+- [AP-1658](https://apollographql.atlassian.net/browse/AP-1658): Create `Popup` and `List` components [#182](https://github.com/apollographql/space-kit/pull/182) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v5.6.0 (Fri Jun 12 2020)
 
 #### 🚀 Enhancement
