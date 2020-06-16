@@ -303,54 +303,28 @@ information and provide a nice visual grouping.
   </Story>
 </Preview>
 
-## Truncation
+## Truncation and icon customization
 
-Items should be truncated properly
-
-export const ListItemWithContentHuggingSides = ({
-  startContent,
-  endContent,
-}) => {
-  return (
-    <div style={{ width: "100%", display: "flex" }}>
-      <span
-        style={{
-          flex: 1,
-          overflow: "hidden",
-          textOverflow: "ellipsis",
-          whiteSpace: "nowrap",
-        }}
-      >
-        {startContent}
-      </span>
-      <span
-        style={{
-          marginLeft: ".5rem",
-          flex: "none",
-          color: colors.grey.light,
-        }}
-      >
-        {endContent}
-      </span>
-    </div>
-  );
-};
+Items should be truncated properly. This provides an example to show how to add a custom `endIcon` as well.
 
 <Preview>
   <Story name="flexbox truncation">
-    <List iconSize="small" style={{ maxWidth: 280 }}>
+    <List
+      endIconAs={<div style={{ color: colors.grey.light, width: "auto" }} />}
+      iconSize="small"
+      style={{ maxWidth: 280 }}
+    >
       <ListHeading startIcon={null}>mdg-private-graphs</ListHeading>
-      <ListItem startIcon={null}>
-        <ListItemWithContentHuggingSides
-          startContent="really_long_test_name_really_long_test_name"
-          endContent="0 rpm"
-        />
+      <ListItem startIcon={null} endIcon={<>1.9k rpm</>}>
+        really_long_test_name_really_long_test_name
       </ListItem>
-      <ListItem startIcon={null} selected>
-        <ListItemWithContentHuggingSides
-          startContent="engine"
-          endContent="1.9k rm"
-        />
+      <ListItem
+        startIcon={null}
+        endIcon={<>8 rpm</>}
+        selected
+        endIconAs={<div style={{ color: colors.white, width: "auto" }} />}
+      >
+        really_long_test_name_really_long_test_name
       </ListItem>
       <ListItem
         startIcon={
@@ -362,11 +336,9 @@ export const ListItemWithContentHuggingSides = ({
             }}
           />
         }
+        endIcon={<>0 rpm</>}
       >
-        <ListItemWithContentHuggingSides
-          startContent="galaxy-eu-west"
-          endContent="0 rm"
-        />
+        engine-eu
       </ListItem>
     </List>
   </Story>
