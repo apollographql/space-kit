@@ -1,3 +1,15 @@
+# v6.1.0 (Wed Jun 17 2020)
+
+#### 🚀 Enhancement
+
+- add icons for light/dark toggle [#187](https://github.com/apollographql/space-kit/pull/187) ([@cheapsteak](https://github.com/cheapsteak))
+
+#### Authors: 1
+
+- Chang Wang ([@cheapsteak](https://github.com/cheapsteak))
+
+---
+
 # v6.0.2 (Wed Jun 17 2020)
 
 #### 🐛 Bug Fix
