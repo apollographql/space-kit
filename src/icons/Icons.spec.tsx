@@ -1,10 +1,8 @@
 import React from "react";
-import { cleanup, render } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import fs from "fs";
 import path from "path";
 import faker from "faker";
-
-afterEach(cleanup);
 
 /**
  * Retrieve a list of absolute filenames to all icon component files

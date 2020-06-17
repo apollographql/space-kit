@@ -1,0 +1,188 @@
+import { AlertCard } from "../AlertCard";
+import { Button } from "../Button";
+import {
+  Description,
+  Meta,
+  Story,
+  Props,
+  Preview,
+} from "@storybook/addon-docs/blocks";
+
+<Meta title="Components|AlertCard" />
+
+# AlertCard
+
+<Description
+  of={AlertCard}
+  markdown="**AlertCards** provide a way to display short, important message in a way that attracts the user's attention without interrupting the user's task."
+/>
+
+## Info Alert
+
+Informational alerts present general info about something you are doing or working with. It is neutral and conveys no implications of success or failure.
+
+<Preview>
+  <Story name="info light">
+    <AlertCard
+      onClose={() => undefined}
+      type="info"
+      heading="Informational alert"
+    >
+      This is a general informational message telling you about something. Learn
+      more
+    </AlertCard>
+  </Story>
+  <Story name="info dark">
+    <AlertCard
+      onClose={() => undefined}
+      type="info"
+      theme="dark"
+      heading="Informational alert"
+    >
+      This is a general informational message telling you about something. Learn
+      more
+    </AlertCard>
+  </Story>
+</Preview>
+
+### Extended
+
+The extended card variant is for rare use cases where an alert is the most appropriate format for explaining longer instructions.
+
+<Preview>
+  <Story name="info light extended">
+    <AlertCard
+      onClose={() => undefined}
+      type="info"
+      heading="Informational alert"
+      extended={true}
+    >
+      In some cases it may be appropriate for the toast card to give a longer
+      message, or a set of instructions helping users navigate complicated
+      situations in the workflow.
+      <br />
+      <br />
+      It is typically preferrable to link out to a docs article in situations like
+      this, but there are cases where you may also need to include a lengthy amount
+      of content with the card because it will be immediately useful to the user
+      in their workflow.
+      <br />
+      <br />
+      If a toast card’s content requires more than one paragraph, use the
+      expanded content toast variant.
+    </AlertCard>
+  </Story>
+  <Story name="info dark extended">
+    <AlertCard
+      onClose={() => undefined}
+      type="info"
+      theme="dark"
+      heading="Informational alert"
+      extended={true}
+    >
+      In some cases it may be appropriate for the toast card to give a longer
+      message, or a set of instructions helping users navigate complicated
+      situations in the workflow.
+      <br />
+      <br />
+      It is typically preferrable to link out to a docs article in situations like
+      this, but there are cases where you may also need to include a lengthy amount
+      of content with the card because it will be immediately useful to the user
+      in their workflow.
+      <br />
+      <br />
+      If a toast card’s content requires more than one paragraph, use the
+      expanded content toast variant.
+    </AlertCard>
+  </Story>
+</Preview>
+
+## Warning Alert
+
+Warning alerts present information about the action that is about to be taken that alerts the user to consequences of the action and asks for confirmation that the action still be taken in light of the consequences.
+
+<Preview>
+  <Story name="warning light">
+    <AlertCard
+      onClose={() => undefined}
+      type="warn"
+      heading="Warning alert"
+      actions={<Button size="small">Confirm</Button>}
+    >
+      exceededSubLimitAt is a deprecated field. You can use it but it may not
+      work as expected.
+    </AlertCard>
+  </Story>
+  <Story name="warning dark">
+    <AlertCard
+      onClose={() => undefined}
+      type="warn"
+      heading="Warning alert"
+      theme="dark"
+      actions={
+        <Button theme="dark" size="small">
+          Confirm
+        </Button>
+      }
+    >
+      exceededSubLimitAt is a deprecated field. You can use it but it may not
+      work as expected.
+    </AlertCard>
+  </Story>
+</Preview>
+
+## Error Alert
+
+Error alerts let the user know that something has gone wrong or is blocked in the given workflow they are trying to complete. When possible, error alerts should contain helpful information about what has happened to help unblock the user (such as steps to resolve or a link to a docs article).
+
+<Preview>
+  <Story name="error light">
+    <AlertCard
+      onClose={() => undefined}
+      type="error"
+      heading="Error alert"
+      style={{ marginBottom: 20 }}
+    >
+      Something is broken. You cannot perform this action at this time.
+    </AlertCard>
+  </Story>
+  <Story name="error dark">
+    <AlertCard
+      onClose={() => undefined}
+      type="error"
+      heading="Error alert"
+      theme="dark"
+      style={{ marginBottom: 20 }}
+    >
+      Something is broken. You cannot perform this action at this time.
+    </AlertCard>
+  </Story>
+</Preview>
+
+## Success Alert
+
+Success alerts are confirmation that the action the user was trying to take has succeeded.
+
+<Preview>
+  <Story name="success light">
+    <AlertCard onClose={() => undefined} type="success" heading="Success alert">
+      A new schema registry has been created by timbotnik.
+    </AlertCard>
+  </Story>
+  <Story name="success dark">
+    <AlertCard
+      onClose={() => undefined}
+      type="success"
+      theme="dark"
+      heading="Success alert"
+    >
+      A new schema registry has been created by timbotnik.
+    </AlertCard>
+  </Story>
+</Preview>
+
+## Props
+
+### `Alert`
+
+<Props of={AlertCard} />

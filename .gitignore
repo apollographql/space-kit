@@ -13,22 +13,26 @@ tsconfig.tsbuildinfo
 # Other modules
 /*-????????.js*
 /AbstractTooltip
+/Alert
+/AlertCard
 /Button
+/Card
 /colors
 /ConfirmationTooltip
 /emotionCacheProviderFactory
 /fonts
 /icons
 /illustrations
+/List*
 /Loaders
-/TextField
+/Menu*
 /Modal
-/Card
+/Popover
 /shared
 /SpaceKitProvider
 /Table
+/TextField
 /Tooltip
-/Menu*
 /typography
 
 # Generated icons stored in src directory 

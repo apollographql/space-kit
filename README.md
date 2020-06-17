@@ -2,7 +2,9 @@
   <img height="100" src="https://i.imgur.com/YPhoQOA.png">
   <h1 align="center">Space Kit</h1>
   <p>The home base for Apollo's design system, Space Kit provides essential design resources for our developers to use in the Apollo-branded interfaces that they create.</p>
-  <img src="https://img.shields.io/npm/v/@apollo/space-kit.svg">
+  <a href="https://www.npmjs.com/package/@apollo/space-kit" title="@apollo/space-kit npm page">
+    <img src="https://img.shields.io/npm/v/@apollo/space-kit.svg">
+  </a>
 </div>
 
 ## Table of Contents <!-- omit in toc -->

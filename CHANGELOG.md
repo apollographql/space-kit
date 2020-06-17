@@ -1,3 +1,153 @@
+# v6.0.1 (Tue Jun 16 2020)
+
+#### 🐛  Bug Fix
+
+- [AR-1658](https://apollographql.atlassian.net/browse/AR-1658): Fix bug where `className` isn't passed through to `ListItem` [#186](https://github.com/apollographql/space-kit/pull/186) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
+# v6.0.0 (Tue Jun 16 2020)
+
+### Release Notes
+
+_From #182_
+
+* Split `Menu` into `Popover` and `List` and rename `MenuHeading` to `ListHeading`, `MenuDivider` to `ListDivider`, and `MenuItem` to `ListItem`
+* Rename `color` configuration in `List` (formerly in `Menu`) to `selectedColor`
+* Add `hoverColor` configuration to `List`
+* Add "large" `iconSize` to `List` configuration
+* Add `padding` to `List` configuration
+* Add `cloneElements` helper to make it easy to add `as` props
+* Add `endIconAs` and `startIconAs` props to `List` and `ListItem` to allow configuring how they are rendered.
+  * This is useful for adding colors and setting manual props on the elements themselves instead of nesting new elements underneath. 
+  * This will now provide automatic truncation.
+
+---
+
+#### 💥 Breaking Change
+
+- [AP-1658](https://apollographql.atlassian.net/browse/AP-1658): Create `Popup` and `List` components [#182](https://github.com/apollographql/space-kit/pull/182) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
+# v5.6.0 (Fri Jun 12 2020)
+
+#### 🚀 Enhancement
+
+- [AR-572](https://apollographql.atlassian.net/browse/AR-572): Create Alert component [#174](https://github.com/apollographql/space-kit/pull/174) ([@Jephuff](https://github.com/Jephuff))
+
+#### Authors: 1
+
+- Jeffrey Burt ([@Jephuff](https://github.com/Jephuff))
+
+---
+
+# v5.5.0 (Thu Jun 11 2020)
+
+#### 🚀 Enhancement
+
+- Adds keyboard control icon [#185](https://github.com/apollographql/space-kit/pull/185) ([@jchesterman](https://github.com/jchesterman))
+
+#### Authors: 1
+
+- [@jchesterman](https://github.com/jchesterman)
+
+---
+
+# v5.4.1 (Wed Jun 10 2020)
+
+#### 🐛 Bug Fix
+
+- Fix history icon [#184](https://github.com/apollographql/space-kit/pull/184) ([@jgzuke](https://github.com/jgzuke))
+
+#### 🏠 Internal
+
+- link npm badge to npm page in readme [#183](https://github.com/apollographql/space-kit/pull/183) ([@cheapsteak](https://github.com/cheapsteak))
+
+#### Authors: 2
+
+- Chang Wang ([@cheapsteak](https://github.com/cheapsteak))
+- Jason Zukewich ([@jgzuke](https://github.com/jgzuke))
+
+---
+
+# v5.4.0 (Fri Jun 05 2020)
+
+#### 🚀 Enhancement
+
+- Add Midnight color palette to SpaceKit [#180](https://github.com/apollographql/space-kit/pull/180) ([@jglovier](https://github.com/jglovier))
+
+#### Authors: 1
+
+- Joel Glovier ([@jglovier](https://github.com/jglovier))
+
+---
+
+# v5.3.0 (Fri Jun 05 2020)
+
+#### 🚀 Enhancement
+
+- Add history and left/right/down/up double arrow icons [#181](https://github.com/apollographql/space-kit/pull/181) ([@Jephuff](https://github.com/Jephuff))
+
+#### Authors: 1
+
+- Jeffrey Burt ([@Jephuff](https://github.com/Jephuff))
+
+---
+
+# v5.2.0 (Thu Jun 04 2020)
+
+#### 🚀 Enhancement
+
+- Add color configurability to `Menu` [#178](https://github.com/apollographql/space-kit/pull/178) ([@justinanastos](https://github.com/justinanastos))
+
+#### 🏠 Internal
+
+- [AR-1689](https://apollographql.atlassian.net/browse/AR-1689): Fix crashing chromatic builds [#179](https://github.com/apollographql/space-kit/pull/179) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
+# v5.1.0 (Wed Jun 03 2020)
+
+#### 🚀 Enhancement
+
+- Apply hover states to `MenuItem` and `Button` when `aria-expanded="true"` [#177](https://github.com/apollographql/space-kit/pull/177) ([@justinanastos](https://github.com/justinanastos))
+
+#### 🏠 Internal
+
+- Update testing dependencies [#175](https://github.com/apollographql/space-kit/pull/175) ([@justinanastos](https://github.com/justinanastos))
+- Add space-kit svg as favicon [#173](https://github.com/apollographql/space-kit/pull/173) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
+# v5.0.0 (Fri May 08 2020)
+
+#### 💥 Breaking Change
+
+- Align icons with upcoming alert designs [#172](https://github.com/apollographql/space-kit/pull/172) ([@Jephuff](https://github.com/Jephuff))
+
+#### Authors: 1
+
+- Jeffrey Burt ([@Jephuff](https://github.com/Jephuff))
+
+---
+
 # v4.2.0 (Wed Apr 22 2020)
 
 #### 🚀 Enhancement

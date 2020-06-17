@@ -1,11 +1,9 @@
-import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom";
 import * as faker from "faker";
 import { Button } from "./Button";
-import { cleanup, fireEvent, render } from "@testing-library/react";
+import { fireEvent, render } from "@testing-library/react";
 import { IconShip2 } from "../icons/IconShip2";
 import React from "react";
-
-afterEach(cleanup);
 
 test("default button renders", () => {
   const { getByText } = render(<Button>submit</Button>);
