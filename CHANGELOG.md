@@ -1,3 +1,15 @@
+# v6.0.2 (Wed Jun 17 2020)
+
+#### 🐛 Bug Fix
+
+- Add className to Tooltip prop types [#171](https://github.com/apollographql/space-kit/pull/171) ([@Jephuff](https://github.com/Jephuff))
+
+#### Authors: 1
+
+- Jeffrey Burt ([@Jephuff](https://github.com/Jephuff))
+
+---
+
 # v6.0.1 (Tue Jun 16 2020)
 
 #### 🐛  Bug Fix
