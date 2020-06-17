@@ -1,0 +1,10 @@
+<svg width="26px" height="26px" viewBox="0 0 26 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g transform="translate(-777.000000, -1903.000000)">
+            <g transform="translate(778.000000, 1904.000000)">
+                <circle class="icon-moon-crescent icon-moon-rim" stroke="#000000" stroke-width="1.5" cx="12" cy="12" r="12"></circle>
+                <path class="icon-moon-shadow" d="M8.57169355,0.497013742 C13.5283956,1.9723257 17.1428571,6.56406149 17.1428571,12 C17.1428571,17.4359385 13.5283956,22.0276743 8.57169355,23.5029863 C3.61446156,22.0276743 0,17.4359385 0,12 C0,6.59610614 3.57197294,2.02649126 8.48364527,0.523428895 L8.57169355,0.497013742 Z" fill="#000000"></path>
+            </g>
+        </g>
+    </g>
+</svg>
