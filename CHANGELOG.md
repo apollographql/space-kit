@@ -1,3 +1,15 @@
+# v6.1.1 (Wed Jun 17 2020)
+
+#### 🐛 Bug Fix
+
+- add viewbox to sun/moon icons [#188](https://github.com/apollographql/space-kit/pull/188) ([@cheapsteak](https://github.com/cheapsteak))
+
+#### Authors: 1
+
+- Chang Wang ([@cheapsteak](https://github.com/cheapsteak))
+
+---
+
 # v6.1.0 (Wed Jun 17 2020)
 
 #### 🚀 Enhancement
