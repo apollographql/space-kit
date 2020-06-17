@@ -1,17 +1,6 @@
-<svg width="26px" height="26px" viewBox="0 0 26 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g class="icon-sun-group" transform="translate(-776.000000, -1852.000000)" stroke="#000000" stroke-width="1.5">
-            <g transform="translate(777.000000, 1853.000000)">
-                <circle cx="12" cy="12" r="7"></circle>
-                <line x1="12" y1="0" x2="12" y2="2" stroke-linecap="round" stroke-linejoin="round"></line>
-                <line x1="12" y1="22" x2="12" y2="24" stroke-linecap="round" stroke-linejoin="round"></line>
-                <line x1="19.6545805" y1="3.13311395" x2="19.6937961" y2="4.76056493" stroke-linecap="round" stroke-linejoin="round" transform="translate(19.674188, 3.946839) rotate(-315.000000) translate(-19.674188, -3.946839) "></line>
-                <line x1="4.30620386" y1="19.2394351" x2="4.34541954" y2="20.8668861" stroke-linecap="round" stroke-linejoin="round" transform="translate(4.325812, 20.053161) rotate(-315.000000) translate(-4.325812, -20.053161) "></line>
-                <line x1="23" y1="11" x2="23" y2="13" stroke-linecap="round" stroke-linejoin="round" transform="translate(23.000000, 12.000000) rotate(-270.000000) translate(-23.000000, -12.000000) "></line>
-                <line x1="1" y1="11" x2="1" y2="13" stroke-linecap="round" stroke-linejoin="round" transform="translate(1.000000, 12.000000) rotate(-270.000000) translate(-1.000000, -12.000000) "></line>
-                <line x1="19.6937961" y1="19.2394351" x2="19.6545805" y2="20.8668861" stroke-linecap="round" stroke-linejoin="round" transform="translate(19.674188, 20.053161) rotate(-225.000000) translate(-19.674188, -20.053161) "></line>
-                <line x1="4.34541954" y1="3.13311395" x2="4.30620386" y2="4.76056493" stroke-linecap="round" stroke-linejoin="round" transform="translate(4.325812, 3.946839) rotate(-225.000000) translate(-4.325812, -3.946839) "></line>
-            </g>
-        </g>
-    </g>
+<svg width="26" height="26" xmlns="http://www.w3.org/2000/svg">
+  <g class="icon-sun-group" transform="translate(1 1)" stroke="#000000" stroke-width="1.5" fill="none" fill-rule="evenodd">
+    <circle cx="12" cy="12" r="7"/>
+    <path stroke-linecap="round" stroke-linejoin="round" d="M12 0v2M12 22v2M20.236 3.358l-1.124 1.179M4.888 19.463l-1.124 1.18M24 12h-2M2 12H0M20.236 20.643l-1.124-1.179M4.888 4.536L3.764 3.357"/>
+  </g>
 </svg>
