@@ -1,3 +1,15 @@
+# v6.1.2 (Wed Jun 17 2020)
+
+#### 🐛 Bug Fix
+
+- ✨ add `placement` prop to `Tooltip` [#189](https://github.com/apollographql/space-kit/pull/189) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v6.1.1 (Wed Jun 17 2020)
 
 #### 🐛 Bug Fix
