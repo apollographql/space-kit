@@ -1,4 +1,4 @@
-<svg width="26" height="26" xmlns="http://www.w3.org/2000/svg">
+<svg width="26" height="26" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26">
   <g class="icon-moon-group" transform="translate(1 1)" fill="none" fill-rule="evenodd">
     <circle class="icon-moon-crescent icon-moon-rim" stroke="#000" stroke-width="1.5" cx="12" cy="12" r="12"/>
     <path class="icon-moon-shadow" d="M8.572.497c4.956 1.475 8.57 6.067 8.57 11.503s-3.614 10.028-8.57 11.503C3.614 22.028 0 17.436 0 12 0 6.596 3.572 2.026 8.484.523l.088-.026z" fill="#000"/>
