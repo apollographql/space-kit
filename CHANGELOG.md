@@ -1,3 +1,15 @@
+# v6.3.0 (Thu Jun 18 2020)
+
+#### 🚀 Enhancement
+
+- Update AlertCard dark theme to use midnight tones [#192](https://github.com/apollographql/space-kit/pull/192) ([@jglovier](https://github.com/jglovier))
+
+#### Authors: 1
+
+- Joel Glovier ([@jglovier](https://github.com/jglovier))
+
+---
+
 # v6.2.1 (Thu Jun 18 2020)
 
 #### 🐛  Bug Fix
