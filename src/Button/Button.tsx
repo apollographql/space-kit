@@ -497,6 +497,14 @@ export const Button = React.forwardRef<HTMLElement, Props>(
             // Remove the focus
             event.currentTarget.blur();
           },
+          onMouseOut: (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+            if (event.buttons > 0) {
+              event.currentTarget.blur();
+            }
+
+            otherProps.onMouseOut?.(event);
+            as.props.onMouseOut?.(event);
+          },
 
           children: (
             <>
