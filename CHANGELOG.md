@@ -1,3 +1,15 @@
+# v6.2.0 (Thu Jun 18 2020)
+
+#### 🚀 Enhancement
+
+- Adds new Explorer icon [#190](https://github.com/apollographql/space-kit/pull/190) ([@jglovier](https://github.com/jglovier))
+
+#### Authors: 1
+
+- Joel Glovier ([@jglovier](https://github.com/jglovier))
+
+---
+
 # v6.1.3 (Thu Jun 18 2020)
 
 #### 🐛  Bug Fix
