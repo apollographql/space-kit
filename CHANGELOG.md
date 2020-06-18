@@ -1,3 +1,15 @@
+# v6.1.3 (Thu Jun 18 2020)
+
+#### 🐛  Bug Fix
+
+- [AR-1634](https://apollographql.atlassian.net/browse/AR-1634): Remove focus from Buttons when you mouseout with a mouse button pressed [#176](https://github.com/apollographql/space-kit/pull/176) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v6.1.2 (Wed Jun 17 2020)
 
 #### 🐛 Bug Fix
