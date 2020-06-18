@@ -1,3 +1,15 @@
+# v6.2.1 (Thu Jun 18 2020)
+
+#### 🐛  Bug Fix
+
+- Replace old explorer icon with fields icon [#191](https://github.com/apollographql/space-kit/pull/191) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v6.2.0 (Thu Jun 18 2020)
 
 #### 🚀 Enhancement
