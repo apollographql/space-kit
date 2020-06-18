@@ -97,7 +97,7 @@ export const AlertCard: React.FC<AlertCardProps> = ({
           theme === "light"
             ? colors.white
             : theme === "dark"
-            ? colors.black.lighter
+            ? colors.midnight.darker
             : assertUnreachable(theme),
         color:
           theme === "light"
@@ -175,7 +175,12 @@ export const AlertCard: React.FC<AlertCardProps> = ({
         <IconClose
           onClick={onClose}
           css={{
-            color: colors.grey.lighter,
+            color:
+              theme === "light"
+                ? colors.grey.lighter
+                : theme === "dark"
+                ? colors.midnight.lighter
+                : assertUnreachable(theme),
             cursor: "pointer",
             width: 10,
             height: 10,
@@ -192,7 +197,7 @@ export const AlertCard: React.FC<AlertCardProps> = ({
               theme === "light"
                 ? colors.silver.dark
                 : theme === "dark"
-                ? colors.grey.dark
+                ? colors.midnight.base
                 : assertUnreachable(theme),
             marginTop: 14,
             marginBottom: 14,
