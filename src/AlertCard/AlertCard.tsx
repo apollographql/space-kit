@@ -97,7 +97,7 @@ export const AlertCard: React.FC<AlertCardProps> = ({
           theme === "light"
             ? colors.white
             : theme === "dark"
-            ? colors.black.lighter
+            ? colors.midnight.darker
             : assertUnreachable(theme),
         color:
           theme === "light"
@@ -192,7 +192,7 @@ export const AlertCard: React.FC<AlertCardProps> = ({
               theme === "light"
                 ? colors.silver.dark
                 : theme === "dark"
-                ? colors.grey.dark
+                ? colors.midnight.base
                 : assertUnreachable(theme),
             marginTop: 14,
             marginBottom: 14,
