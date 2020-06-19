@@ -14,6 +14,8 @@ function getIconHorizontalPadding(
   iconSize: NonNullable<ReturnType<typeof useListConfig>["iconSize"]>
 ): CSS.PaddingProperty<number> {
   switch (iconSize) {
+    case "xlarge":
+      return 8;
     case "large":
       return 16;
     case "normal":
@@ -29,6 +31,8 @@ function getIconSize(
   iconSize: NonNullable<ReturnType<typeof useListConfig>["iconSize"]>
 ): CSS.WidthProperty<number> {
   switch (iconSize) {
+    case "xlarge":
+      return 20;
     case "large":
       return 18;
     case "normal":
@@ -44,6 +48,7 @@ function getIconMarginLeft(
   iconSize: NonNullable<ReturnType<typeof useListConfig>["iconSize"]>
 ): CSS.MarginLeftProperty<number> {
   switch (iconSize) {
+    case "xlarge":
     case "large":
     case "normal":
       return "initial";

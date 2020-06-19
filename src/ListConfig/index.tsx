@@ -7,7 +7,7 @@ import { ShadedColor, colors } from "../colors";
  * This uses string literals instead of a TypeScript union so we can use
  * strings, like `"small"`, for props instead of `IconSize.small`
  */
-type IconSize = "small" | "normal" | "large";
+type IconSize = "small" | "normal" | "large" | "xlarge";
 
 interface ListConfig {
   /**
