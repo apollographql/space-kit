@@ -1,3 +1,15 @@
+# v6.5.0 (Mon Jun 22 2020)
+
+#### 🚀 Enhancement
+
+- Adds unavailable icon [#195](https://github.com/apollographql/space-kit/pull/195) ([@jglovier](https://github.com/jglovier))
+
+#### Authors: 1
+
+- Joel Glovier ([@jglovier](https://github.com/jglovier))
+
+---
+
 # v6.4.0 (Mon Jun 22 2020)
 
 #### 🚀 Enhancement
