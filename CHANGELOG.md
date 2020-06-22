@@ -1,3 +1,15 @@
+# v6.4.0 (Mon Jun 22 2020)
+
+#### 🚀 Enhancement
+
+- ✨ add new Fields icon [#194](https://github.com/apollographql/space-kit/pull/194) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v6.3.0 (Thu Jun 18 2020)
 
 #### 🚀 Enhancement
