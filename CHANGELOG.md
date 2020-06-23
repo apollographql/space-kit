@@ -1,3 +1,15 @@
+# v6.6.0 (Tue Jun 23 2020)
+
+#### 🚀 Enhancement
+
+- Update Edit icon [#196](https://github.com/apollographql/space-kit/pull/196) ([@jglovier](https://github.com/jglovier))
+
+#### Authors: 1
+
+- Joel Glovier ([@jglovier](https://github.com/jglovier))
+
+---
+
 # v6.5.0 (Mon Jun 22 2020)
 
 #### 🚀 Enhancement
