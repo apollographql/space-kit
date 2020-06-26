@@ -1,3 +1,15 @@
+# v7.0.0 (Fri Jun 26 2020)
+
+#### 💥 Breaking Change
+
+- darken spinner trail by 1 shade [#197](https://github.com/apollographql/space-kit/pull/197) ([@cheapsteak](https://github.com/cheapsteak))
+
+#### Authors: 1
+
+- Chang Wang ([@cheapsteak](https://github.com/cheapsteak))
+
+---
+
 # v6.6.0 (Tue Jun 23 2020)
 
 #### 🚀 Enhancement
