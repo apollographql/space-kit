@@ -53,7 +53,7 @@ export const LoadingSpinner = React.forwardRef<SVGSVGElement, Props>(
       }
     > = {
       light: {
-        orbitColor: colors.silver.light,
+        orbitColor: colors.silver.base,
         orbitOpacity: 1,
         asteroidColor: colors.blue.base,
       },
