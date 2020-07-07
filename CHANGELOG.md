@@ -1,3 +1,15 @@
+# v7.1.0 (Tue Jul 07 2020)
+
+#### 🚀 Enhancement
+
+- Adding new icons to support navigation update [#198](https://github.com/apollographql/space-kit/pull/198) ([@jchesterman](https://github.com/jchesterman))
+
+#### Authors: 1
+
+- Jay Chesterman ([@jchesterman](https://github.com/jchesterman))
+
+---
+
 # v7.0.0 (Fri Jun 26 2020)
 
 #### 💥 Breaking Change
