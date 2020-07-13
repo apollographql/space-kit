@@ -38,7 +38,7 @@ export const AlertBanner: React.FC<AlertBannerProps> = ({
   type,
   ...otherProps
 }) => {
-  const { Icon, color: colorTemp } = useMemo(() => {
+  const { Icon, color } = useMemo(() => {
     switch (type) {
       case "info":
         return { color: colors.blue, Icon: IconInfoSolid };
@@ -58,15 +58,15 @@ export const AlertBanner: React.FC<AlertBannerProps> = ({
       css={{
         ...(theme === "light"
           ? {
-              backgroundColor: colorTemp.lightest,
-              color: colorTemp.darker,
+              backgroundColor: color.lightest,
+              color: color.darker,
               borderWidth: 1,
-              borderColor: colorTemp.lighter,
+              borderColor: type === "info" ? color.lighter : color.light,
             }
           : theme === "dark"
           ? {
-              backgroundColor: colorTemp.darkest,
-              color: colorTemp.lightest,
+              backgroundColor: color.darkest,
+              color: color.lightest,
               borderWidth: 0,
               borderColor: colors.silver.dark,
             }
@@ -84,7 +84,7 @@ export const AlertBanner: React.FC<AlertBannerProps> = ({
         css={{
           width: 20,
           height: 20,
-          color: colorTemp.base,
+          color: color.base,
           marginRight: 13,
           "& .inner": theme === "dark" &&
             type !== "warn" && { fill: colors.white },

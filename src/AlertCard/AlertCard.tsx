@@ -75,7 +75,7 @@ export const AlertCard: React.FC<AlertCardProps> = ({
   type,
   ...otherProps
 }) => {
-  const { Icon, color: colorTemp } = useMemo(() => {
+  const { Icon, color } = useMemo(() => {
     switch (type) {
       case "info":
         return { color: colors.blue, Icon: IconInfoSolid };
@@ -137,9 +137,9 @@ export const AlertCard: React.FC<AlertCardProps> = ({
                   display: "flex",
                   color:
                     theme === "light"
-                      ? colorTemp.darker
+                      ? color.darker
                       : theme === "dark"
-                      ? colorTemp.lighter
+                      ? color.lighter
                       : assertUnreachable(theme),
                   ...base.base,
                 })
@@ -150,7 +150,7 @@ export const AlertCard: React.FC<AlertCardProps> = ({
                     css={{
                       width: 20,
                       height: 20,
-                      color: colorTemp.base,
+                      color: color.base,
                       marginRight: 13,
                       "& .inner": theme === "dark" &&
                         type !== "warn" && { fill: colors.white },
