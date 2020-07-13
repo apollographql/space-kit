@@ -71,7 +71,6 @@ export const AlertBanner: React.FC<AlertBannerProps> = ({
               borderColor: colors.silver.dark,
             }
           : assertUnreachable(theme)),
-        boxShadow: `0 4px 8px 0 rgba(0, 0, 0, .04)`,
         borderStyle: "solid",
         borderRadius: 4,
         padding: "12px 15px",
