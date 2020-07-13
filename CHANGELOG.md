@@ -1,3 +1,15 @@
+# v7.2.1 (Mon Jul 13 2020)
+
+#### 🐛 Bug Fix
+
+- Remove drop shadow from AlertBanner [#201](https://github.com/apollographql/space-kit/pull/201) ([@Jephuff](https://github.com/Jephuff))
+
+#### Authors: 1
+
+- Jeffrey Burt ([@Jephuff](https://github.com/Jephuff))
+
+---
+
 # v7.2.0 (Mon Jul 13 2020)
 
 #### 🚀 Enhancement
