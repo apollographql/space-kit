@@ -1,3 +1,15 @@
+# v7.3.0 (Tue Jul 14 2020)
+
+#### 🚀 Enhancement
+
+- Update overflow icon [#202](https://github.com/apollographql/space-kit/pull/202) ([@jglovier](https://github.com/jglovier))
+
+#### Authors: 1
+
+- Joel Glovier ([@jglovier](https://github.com/jglovier))
+
+---
+
 # v7.2.1 (Mon Jul 13 2020)
 
 #### 🐛 Bug Fix
