@@ -1,3 +1,15 @@
+# v7.4.0 (Tue Jul 14 2020)
+
+#### 🚀 Enhancement
+
+- Update share icon [#203](https://github.com/apollographql/space-kit/pull/203) ([@jglovier](https://github.com/jglovier))
+
+#### Authors: 1
+
+- Joel Glovier ([@jglovier](https://github.com/jglovier))
+
+---
+
 # v7.3.0 (Tue Jul 14 2020)
 
 #### 🚀 Enhancement
