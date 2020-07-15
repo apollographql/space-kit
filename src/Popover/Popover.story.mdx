@@ -50,6 +50,28 @@ The simple list provides a list of options for a user to choose from and updates
       />
     </PerformUserInteraction>
   </Story>
+  <Story name="interactive">
+    <PerformUserInteraction
+      callback={async () => {
+        userEvent.click(await findByRole(document.body, "button"));
+      }}
+    >
+      <Popover
+        popperOptions={{ strategy: "fixed" }}
+        placement="bottom-start"
+        interactive
+        content={
+          <List>
+            <ListItem><label style={{ display: 'flex', alignItems: 'stretch'}}><input id="option1" type="checkbox"/><span style={{ marginLeft: '1rem' }}>Option 1</span></label></ListItem>
+            <ListItem><label style={{ display: 'flex', alignItems: 'stretch'}}><input id="option2" type="checkbox"/><span style={{ marginLeft: '1rem' }}>Option 2</span></label></ListItem>
+            <ListItem><label style={{ display: 'flex', alignItems: 'stretch'}}><input id="option3" type="checkbox"/><span style={{ marginLeft: '1rem' }}>Option 3</span></label></ListItem>
+            <ListItem><label style={{ display: 'flex', alignItems: 'stretch'}}><input id="option4" type="checkbox"/><span style={{ marginLeft: '1rem' }}>Option 4</span></label></ListItem>
+          </List>
+        }
+        trigger={<Button>Open Popover</Button>}
+      />
+    </PerformUserInteraction>
+  </Story>
 </Preview>
 
 ## Props
