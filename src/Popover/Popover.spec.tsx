@@ -87,3 +87,29 @@ test("when `onClick` handler calls `stopPropagation()`, list doesn't close when 
 
   expect(screen.getByText(listItemText)).toBeInTheDocument();
 });
+
+test("when interactive is set, list doesn't close when `ListItem` in `content` is clicked", async () => {
+  const listItemText = faker.random.word();
+
+  render(
+    <SpaceKitProvider disableAnimations>
+      <Popover
+        interactive
+        content={
+          <>
+            <ListItem>{listItemText}</ListItem>
+          </>
+        }
+        trigger={<Button>{faker.random.word()}</Button>}
+      ></Popover>
+    </SpaceKitProvider>
+  );
+
+  userEvent.click(screen.getByRole("button"));
+  userEvent.click(screen.getByText(listItemText));
+
+  // refer to above test for rationale here
+  await new Promise((resolve) => setTimeout(resolve, 100));
+
+  expect(screen.getByText(listItemText)).toBeInTheDocument();
+});

@@ -30,6 +30,12 @@ interface Props
    * @see https://atomiks.github.io/tippyjs/v6/all-props/#trigger
    */
   triggerEvents?: React.ComponentProps<typeof AbstractTooltip>["trigger"];
+
+  /**
+   * Interactive mode turns off hiding when clicking on descendents.
+   * Useful for nested / toggle lists etc.
+   */
+  interactive?: boolean;
 }
 
 export const Popover: React.FC<Props> = ({
@@ -38,6 +44,7 @@ export const Popover: React.FC<Props> = ({
   popperOptions,
   trigger,
   triggerEvents = "mousedown",
+  interactive,
   ...props
 }) => {
   const instanceRef = React.useRef<
@@ -54,7 +61,7 @@ export const Popover: React.FC<Props> = ({
    */
   const handleClick = React.useCallback<React.MouseEventHandler>(
     (element) => {
-      if (element.target === element.currentTarget) {
+      if (interactive || element.target === element.currentTarget) {
         // We're listening for clicks on descendents so ignore events that come
         // from the element with the listener.
         return;
@@ -63,7 +70,7 @@ export const Popover: React.FC<Props> = ({
       // how do we know if we want to hide the list?
       instanceRef.current?.hide();
     },
-    [instanceRef]
+    [interactive]
   );
 
   return (
