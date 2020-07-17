@@ -1,3 +1,15 @@
+# v7.5.0 (Fri Jul 17 2020)
+
+#### 🚀 Enhancement
+
+- Popover: add interactive property [#204](https://github.com/apollographql/space-kit/pull/204) ([@timbotnik](https://github.com/timbotnik))
+
+#### Authors: 1
+
+- timbotnik ([@timbotnik](https://github.com/timbotnik))
+
+---
+
 # v7.4.0 (Tue Jul 14 2020)
 
 #### 🚀 Enhancement
