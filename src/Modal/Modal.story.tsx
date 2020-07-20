@@ -213,4 +213,51 @@ storiesOf("Modal", module)
         </div>
       </Modal>
     )
-  );
+  )
+  .add("using verticalScrollMode 'modal'", () => (
+    <Modal
+      size="medium"
+      title="Modal Title"
+      primaryAction={
+        <Button color={colors.green.base} style={{ color: colors.white }}>
+          Buy 1 Seat
+        </Button>
+      }
+      secondaryAction={<Button color={colors.white}>Cancel</Button>}
+      bottomLeftText={
+        <span style={{ color: colors.blue.base }}>
+          Update Billing Information
+        </span>
+      }
+    >
+      <div>
+        {Array.from(Array(500))
+          .map(() => "lorem ipsum dolor")
+          .join(" ")}
+      </div>
+    </Modal>
+  ))
+  .add("using verticalScrollMode 'children'", () => (
+    <Modal
+      size="medium"
+      title="Modal Title"
+      verticalScrollMode="children"
+      primaryAction={
+        <Button color={colors.green.base} style={{ color: colors.white }}>
+          Buy 1 Seat
+        </Button>
+      }
+      secondaryAction={<Button color={colors.white}>Cancel</Button>}
+      bottomLeftText={
+        <span style={{ color: colors.blue.base }}>
+          Update Billing Information
+        </span>
+      }
+    >
+      <div>
+        {Array.from(Array(500))
+          .map(() => "lorem ipsum dolor")
+          .join(" ")}
+      </div>
+    </Modal>
+  ));
