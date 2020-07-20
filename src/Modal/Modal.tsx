@@ -53,14 +53,6 @@ interface Props {
   secondaryAction?: React.ReactNode;
 
   children?: React.ReactNode;
-
-  /**
-   * Limit vertical overflow to children or let the entire modal scroll.
-   *
-   * Defaults to "modal".
-   */
-  verticalScrollMode?: "modal" | "children";
-
   /**
    * Optional description to show of the modal
    */
@@ -135,7 +127,6 @@ export const Modal: React.FC<Props> = ({
   title,
   description,
   children,
-  verticalScrollMode = "modal",
   onClose,
   size,
   bottomLeftText,
@@ -213,30 +204,23 @@ export const Modal: React.FC<Props> = ({
             className={classnames(
               className,
               cx(
-                css(
-                  {
-                    backgroundColor: "white",
-                    borderRadius: 12,
-                    boxShadow: `0 16px 32px 0 rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(18, 21, 26, 0.04)`,
-                    maxHeight: "80%",
-                    minWidth: 400,
-                    opacity: 1,
-                    overflowY:
-                      verticalScrollMode === "modal" ? "auto" : "hidden",
-                    padding: size === "large" ? "40px" : "32px",
-                    position: "absolute",
-                    width: getModalWidth(size),
-                    zIndex: 11,
-                    marginLeft: "auto",
-                    marginRight: "auto",
-                    left: 0,
-                    right: 0,
-                  },
-                  verticalScrollMode === "children" && {
-                    display: "flex",
-                    flexDirection: "column",
-                  }
-                )
+                css({
+                  backgroundColor: "white",
+                  borderRadius: 12,
+                  boxShadow: `0 16px 32px 0 rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(18, 21, 26, 0.04)`,
+                  maxHeight: "80%",
+                  minWidth: 400,
+                  opacity: 1,
+                  overflowY: "auto",
+                  padding: size === "large" ? "40px" : "32px",
+                  position: "absolute",
+                  width: getModalWidth(size),
+                  zIndex: 11,
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                  left: 0,
+                  right: 0,
+                })
               ),
               as.props.className,
               // If the parent component is using emotion with the jsx pragma, we
@@ -270,15 +254,9 @@ export const Modal: React.FC<Props> = ({
               )}
             </div>
             <div
-              css={css(
-                {
-                  marginTop:
-                    size === "large" ? 24 : size === "medium" ? 16 : 12,
-                },
-                verticalScrollMode === "children" && {
-                  overflowY: "auto",
-                }
-              )}
+              css={{
+                marginTop: size === "large" ? 24 : size === "medium" ? 16 : 12,
+              }}
             >
               {children}
             </div>
