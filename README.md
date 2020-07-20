@@ -405,7 +405,7 @@ Some resources on testing:
 
 ### Releases
 
-Releases are handled automatically after merging PRs by [`intuit/auto`](https://github.com/intuit/auto). You can split PRs into a feature branch and then send that as a PR to master; that'll use all the different PRs to create the changelog.
+Releases are handled automatically after merging PRs by [`intuit/auto`](https://github.com/intuit/auto). You can split PRs into a feature branch and then send that as a PR to main; that'll use all the different PRs to create the changelog.
 
 #### Semver
 
@@ -431,7 +431,7 @@ The changelog will be updated automatically with the title of your PR used as th
 
 Our icons are all stored in [`icons/src/svgs`](./icons/src/svgs) in folders named for the icon category. To add new icons, add svg files to one of these category folders and open a pull request. Fill and stroke colors with values `#000` or `#000000` will be replace by `currentColor` to allow the consumer to change the colors; all other colors will be maintained and will not be configurable.
 
-All React components will be automatically generated and the TypeScript will be transpiled automatically after merging to `master`.
+All React components will be automatically generated and the TypeScript will be transpiled automatically after merging to `main`.
 
 The following scripts are available:
 
@@ -456,7 +456,7 @@ npm install
 npm run storybook
 ```
 
-All pull requests will automatically generate deploy previews and the `master` branch is automatically deployed to https://space-kit.netlify.com.
+All pull requests will automatically generate deploy previews and the `main` branch is automatically deployed to https://space-kit.netlify.com.
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/d5469491-a3d2-4ee1-b31d-d7f87ae806f8/deploy-status)](https://app.netlify.com/sites/space-kit/deploys)
 
