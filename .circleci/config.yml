@@ -18,10 +18,10 @@ jobs:
           name: Restore storybook cache
           keys:
             - storybook-cache--{{ .Branch }}--{{ checksum ".circleci/config.yml" }}
-            - storybook-cache--master--{{ checksum ".circleci/config.yml" }}
+            - storybook-cache--main--{{ checksum ".circleci/config.yml" }}
       - run:
           name: Run Chromatic
-          command: npm run chromatic -- --exit-zero-on-changes --auto-accept-changes=master
+          command: npm run chromatic -- --exit-zero-on-changes --auto-accept-changes=main
           environment:
             CI: 1
       - save_cache:
@@ -108,7 +108,7 @@ workflows:
           filters:
             branches:
               ignore:
-                - master
+                - main
       - release:
           requires:
             - eslint
@@ -117,4 +117,4 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
