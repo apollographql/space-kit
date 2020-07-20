@@ -1,3 +1,15 @@
+# v7.6.0 (Mon Jul 20 2020)
+
+#### 🚀 Enhancement
+
+- Modal: add verticalScrollMode property to limit overflow to children [#206](https://github.com/apollographql/space-kit/pull/206) ([@timbotnik](https://github.com/timbotnik))
+
+#### Authors: 1
+
+- timbotnik ([@timbotnik](https://github.com/timbotnik))
+
+---
+
 # v7.5.0 (Fri Jul 17 2020)
 
 #### 🚀 Enhancement
