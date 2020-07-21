@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import * as faker from "faker";
 import { Button } from "./Button";
-import { act, fireEvent, render, screen } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 import { IconShip2 } from "../icons/IconShip2";
 import React from "react";
 import userEvent from "@testing-library/user-event";
@@ -41,7 +41,7 @@ test("when passed an icon, endIcon, and text; all are rendered", () => {
   screen.getByTestId("endIcon");
 });
 
-test("wyhen passed an icon and no children, should render an icon and no text content", () => {
+test("when passed an icon and no children, should render an icon and no text content", () => {
   render(<Button icon={<IconShip2 data-testid="icon" />} />);
 
   expect(screen.getByRole("button")).toHaveTextContent("");
@@ -52,20 +52,21 @@ test("when passed `as` prop renders that element", () => {
   // include passthrough props
   render(<Button as={<a href="https://apollographql.com" />}>button</Button>);
 
-  expect(screen.getByRole("link")).toBeInTheDocument();
-  expect(screen.getByRole("link")).toHaveTextContent("button");
-  expect(screen.queryByRole("button")).not.toBeInTheDocument();
+  expect(screen.getByRole("button")).toBeInTheDocument();
+  expect(screen.getByRole("button")).toHaveTextContent("button");
+  expect(screen.getByRole("button").tagName).toBe("A");
+  expect(screen.queryByRole("link")).not.toBeInTheDocument();
 });
 
 test("when disabled, button does not call click handlers", () => {
-  const rootElementOnClick = jest.fn();
+  const rootElementOnPress = jest.fn();
   const asElementOnClick = jest.fn();
 
   render(
     <Button
       as={<button onClick={asElementOnClick} />}
       disabled
-      onClick={rootElementOnClick}
+      onPress={rootElementOnPress}
     >
       submit
     </Button>
@@ -76,18 +77,18 @@ test("when disabled, button does not call click handlers", () => {
 
   // assert
   expect(asElementOnClick).not.toHaveBeenCalled();
-  expect(rootElementOnClick).not.toHaveBeenCalled();
+  expect(rootElementOnPress).not.toHaveBeenCalled();
 });
 
 test("when disabled, button with 'as=' set to not a button element does not call click handlers", () => {
-  const rootElementOnClick = jest.fn();
+  const rootElementOnPress = jest.fn();
   const asElementOnClick = jest.fn();
 
   render(
     <Button
       as={<div onClick={asElementOnClick} />}
       disabled
-      onClick={rootElementOnClick}
+      onPress={rootElementOnPress}
     >
       submit
     </Button>
@@ -96,13 +97,13 @@ test("when disabled, button with 'as=' set to not a button element does not call
   act(() => userEvent.click(screen.getByText("submit")));
 
   // assert
-  expect(screen.queryByRole("button")).not.toBeInTheDocument();
+  expect(screen.queryByRole("button")).toBeInTheDocument();
   expect(asElementOnClick).not.toHaveBeenCalled();
-  expect(rootElementOnClick).not.toHaveBeenCalled();
+  expect(rootElementOnPress).not.toHaveBeenCalled();
 });
 
 test("when loading, button does not call click handlers", () => {
-  const rootElementOnClick = jest.fn();
+  const rootElementOnPress = jest.fn();
   const asElementOnClick = jest.fn();
 
   render(
@@ -110,7 +111,7 @@ test("when loading, button does not call click handlers", () => {
       as={<button onClick={asElementOnClick} />}
       data-testid="button"
       loading
-      onClick={rootElementOnClick}
+      onPress={rootElementOnPress}
     >
       submit
     </Button>
@@ -121,17 +122,17 @@ test("when loading, button does not call click handlers", () => {
 
   // assert
   expect(asElementOnClick).not.toHaveBeenCalled();
-  expect(rootElementOnClick).not.toHaveBeenCalled();
+  expect(rootElementOnPress).not.toHaveBeenCalled();
 });
 
-test("when passed onClick props to the element and the `as` prop, they should both be called", () => {
-  const rootElementOnClick = jest.fn();
+test("when passed `onPress` props to the element and `onClick` to the `as` prop, they should both be called", () => {
+  const rootElementOnPress = jest.fn();
   const asElementOnClick = jest.fn();
 
   render(
     <Button
       as={<button onClick={asElementOnClick} />}
-      onClick={rootElementOnClick}
+      onPress={rootElementOnPress}
     >
       submit
     </Button>
@@ -142,17 +143,29 @@ test("when passed onClick props to the element and the `as` prop, they should bo
 
   // assert
   expect(asElementOnClick).toHaveBeenCalled();
-  expect(rootElementOnClick).toHaveBeenCalled();
+  expect(rootElementOnPress).toHaveBeenCalled();
+});
+
+test("given a top-level `className` and an `as` prop with it's own `className`, `className` props are merged", () => {
+  render(
+    <Button className="testClassA" as={<button className="testClassB" />} />
+  );
+
+  const button = screen.getByRole("button");
+
+  expect(button).toHaveClass("testClassA");
+  expect(button).toHaveClass("testClassB");
+});
+
+test("given a style prop, style should be rendered in the dom", () => {
+  render(<Button style={{ margin: 10 }}>{faker.random.word()}</Button>);
+
+  expect(screen.getByRole("button")).toHaveStyle("margin: 10px");
 });
 
 test("when passed unrecognized props, they should be rendered in the dom", () => {
   render(
-    <Button
-      className="testClass"
-      data-test-prop="test"
-      data-testid="button"
-      style={{ margin: 10 }}
-    >
+    <Button data-test-prop="test" data-testid="button">
       {faker.random.word()}
     </Button>
   );
@@ -160,8 +173,6 @@ test("when passed unrecognized props, they should be rendered in the dom", () =>
   const button = screen.getByRole("button");
 
   expect(button).toBeInTheDocument();
-  expect(button).toHaveClass("testClass");
-  expect(button).toHaveStyle("margin: 10px");
   expect(button).toHaveAttribute("data-test-prop");
 });
 
@@ -171,7 +182,7 @@ test("when passed a type, should render it in the dom", () => {
   expect(screen.getByRole("button")).toHaveAttribute("type", "button");
 });
 
-test("ref is forwarded", () => {
+test("ref object is forwarded", () => {
   const ref = React.createRef<HTMLElement>();
 
   render(<Button ref={ref}>{faker.lorem.word()}</Button>);
@@ -179,36 +190,10 @@ test("ref is forwarded", () => {
   expect(ref.current).toBe(screen.getByRole("button"));
 });
 
-test("when mouseOut event occurs and button is pressed, button isn't focused", () => {
-  render(<Button>{faker.lorem.word()}</Button>);
+test("ref function is called", () => {
+  const ref = jest.fn();
 
-  const button = screen.getByRole("button");
+  render(<Button ref={ref}>{faker.lorem.word()}</Button>);
 
-  // This is hacky. We are really just testing that the focus is removed when
-  // there's a mouseout event with a button pressed.
-  button.focus();
-
-  act(() => {
-    fireEvent(
-      button,
-      new MouseEvent("mouseout", {
-        buttons: 1,
-        bubbles: true,
-        cancelable: true,
-      })
-    );
-  });
-
-  act(() => {
-    fireEvent(
-      button,
-      new MouseEvent("mouseup", {
-        buttons: 1,
-        bubbles: true,
-        cancelable: true,
-      })
-    );
-  });
-
-  expect(button).not.toHaveFocus();
+  expect(ref).toHaveBeenCalledWith(screen.getByRole("button"));
 });

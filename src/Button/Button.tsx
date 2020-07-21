@@ -5,9 +5,15 @@ import { ClassNames } from "@emotion/core";
 import { getOffsetInPalette } from "../colors/utils/getOffsetInPalette";
 import tinycolor from "tinycolor2";
 import React from "react";
-import classnames from "classnames";
 import { LoadingSpinner } from "../Loaders";
 import { assertUnreachable } from "../shared/assertUnreachable";
+import { useFocusRing, FocusRingProps } from "@react-aria/focus";
+import { mergeProps } from "@react-aria/utils";
+import { ButtonIcon } from "./button/ButtonIcon";
+import { useButton } from "@react-aria/button";
+import { useHover, HoverProps } from "@react-aria/interactions";
+import { AriaButtonProps } from "@react-types/button";
+import { useRefToRefObject } from "../shared/useRefToRefObject";
 
 type TLength = string | 0 | number;
 
@@ -139,10 +145,10 @@ function getHoverBackgroundColor({
 // decided it'd be best, for the time being, to `throw` if we use things
 // incorrectly.
 interface Props
-  extends Omit<
-    React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>,
-    "css"
-  > {
+  extends AriaButtonProps,
+    FocusRingProps,
+    HoverProps,
+    Partial<Pick<React.HTMLAttributes<HTMLElement>, "className" | "style">> {
   /**
    * Override the the default element used to render a button
    *
@@ -166,6 +172,8 @@ interface Props
   color?: ShadedColor | typeof colors["white"];
 
   /**
+   * @deprecated Use `isDisabled` to be compatible with `react-spectrum`
+   *
    * If the button will appear and behave disabled.
    *
    * This prop is explicitly here and not granted by extension because it
@@ -205,6 +213,13 @@ interface Props
    * Automatically disables the button as well
    */
   loading?: boolean;
+
+  /**
+   * @deprecated use `onPress` instead
+   *
+   * Provided for reverse compatability
+   */
+  onClick?: AriaButtonProps["onPress"];
 
   /**
    * Size of the button
@@ -265,64 +280,128 @@ export const Button = React.forwardRef<HTMLElement, Props>(
       as = <button />,
       children,
       color = defaultColor,
-      disabled: disabledProps = false,
       variant,
       endIcon,
       feel = "raised",
       icon: iconProp,
       loading,
+      onClick,
       size = "default",
       theme = "light",
-      ...otherProps
+      ...passthroughProps
     },
     ref
-  ) => (
-    <ClassNames>
-      {({ cx, css }) => {
-        /**
-         * If the button is in a `loading` state, then always treat it as
-         * disabled. Otherwise, try to use `as.props`. Finally, use `props`
-         */
-        const disabled: boolean =
-          loading ||
-          (as.props.disabled != null ? as.props.disabled : disabledProps);
+  ) => {
+    const {
+      isFocusVisible: useFocusRingIsFocusVisible,
+      focusProps,
+    } = useFocusRing(passthroughProps);
 
-        const icon = loading ? (
-          <LoadingSpinner
-            size="2xsmall"
-            theme={theme === "light" ? "grayscale" : "dark"}
-          />
-        ) : (
-          iconProp
-        );
+    /**
+     * Indicates that the component should show a focus ring
+     *
+     * Handles the special case of this component being rendered with
+     * `data-force-focus-state`
+     */
+    const isFocusVisible =
+      useFocusRingIsFocusVisible ||
+      !!(passthroughProps as any)["data-force-focus-state"];
 
-        /**
-         * Icon size in pixels
-         *
-         * This is stored so we can use the same value for `height` and `width`
-         */
-        const iconSize = size === "small" ? 12 : size === "large" ? 24 : 16;
+    const { hoverProps, isHovered: useHoverIsHovered } = useHover(
+      passthroughProps
+    );
+    /**
+     * Indicates if the component is being hovered on
+     *
+     * Handles the special case where we pass `data-force-hover-state`
+     */
+    const isHovered =
+      useHoverIsHovered ||
+      !!(passthroughProps as any)["data-force-hover-state"];
 
-        const iconOnly = !children;
+    // Combine `passthroughProps` and `as.props`. This includes:
+    // * Replace `disabled` with `isDisabled` for reverse compatability
+    // * Replace `onClick` with `onPress` for reverse compatability
+    const props = mergeProps(passthroughProps, as.props);
+    props.isDisabled =
+      loading ||
+      (Object.prototype.hasOwnProperty.call(props, "isDisabled")
+        ? props.isDisabled
+        : props.disabled);
+    delete props.disabled;
+    // Stack the three click handlers into one
+    props.onPress = mergeProps(
+      { onPress: as.props.onClick },
+      { onPress: onClick },
+      { onPress: passthroughProps.onPress }
+    ).onPress;
+    delete props.onClick;
 
-        if (variant === "fab") {
-          if (!icon) {
-            throw new TypeError("FAB buttons are required to have an `icon`");
-          } else if (children) {
-            throw new TypeError(
-              "FAB buttons cannot have children, only an `icon`"
-            );
-          }
-        }
+    /**
+     * `ref` can be a function ref or a `RefObject`; `useButton` requires a
+     * `RefObject` so we must convert a ref function to a `RefObject`.
+     */
+    const refObject = useRefToRefObject(ref);
+    const { buttonProps, isPressed: useButtonIsPressed } = useButton(
+      {
+        ...props,
+        elementType: as.type,
+      },
+      refObject
+    );
 
-        const propsToPass = {
-          ...otherProps,
-          ref,
-          className: classnames(
-            // I couldn't figure out how to get TypeScript to recognize that
-            // `className` can be in `otherProps`.
-            "className" in otherProps && (otherProps as any).className,
-            cx(
+    /**
+     * Indicates if the button is being pressed
+     *
+     * Handles special cases of `aria-expanded=true` and
+     * `data-force-active-state`
+     */
+    const isPressed =
+      useButtonIsPressed ||
+      props["data-force-active-state"] ||
+      props["aria-expanded"] === "true";
+
+    const icon = loading ? (
+      <LoadingSpinner
+        size="2xsmall"
+        theme={theme === "light" ? "grayscale" : "dark"}
+      />
+    ) : (
+      iconProp
+    );
+
+    /**
+     * Icon size in pixels
+     *
+     * This is stored so we can use the same value for `height` and `width`
+     */
+    const iconSize =
+      size === "small"
+        ? 12
+        : size === "large"
+        ? 24
+        : size === "default"
+        ? 16
+        : assertUnreachable(size);
+
+    const iconOnly = !children;
+
+    if (variant === "fab") {
+      if (!icon) {
+        throw new TypeError("FAB buttons are required to have an `icon`");
+      } else if (children) {
+        throw new TypeError("FAB buttons cannot have children, only an `icon`");
+      }
+    }
+
+    return (
+      <ClassNames>
+        {({ cx, css }) => {
+          const propsToPass = {
+            ...mergeProps(focusProps, buttonProps, hoverProps),
+            style: props.style,
+            ref,
+            className: cx(
               css([
                 {
                   // We need to also set the `:hover` on `:disabled` so it has a
@@ -362,7 +441,7 @@ export const Button = React.forwardRef<HTMLElement, Props>(
 
                   color: getTextColor({ color, feel, theme }),
 
-                  cursor: loading || disabled ? "default" : "pointer",
+                  cursor: props.isDisabled ? "default" : "pointer",
 
                   // Vertically center children
                   display: "inline-flex",
@@ -374,18 +453,25 @@ export const Button = React.forwardRef<HTMLElement, Props>(
                   minWidth: iconOnly
                     ? size === "small"
                       ? 28
+                      : size === "default"
+                      ? 36
                       : size === "large"
                       ? 42
-                      : 36
+                      : assertUnreachable(size)
+                    : endIcon
+                    ? 0
                     : size === "small"
                     ? 76
+                    : size === "default"
+                    ? 100
                     : size === "large"
                     ? 112
-                    : 100,
+                    : assertUnreachable(size),
 
                   // We have to set the Y padding because browsers (at least Chrome) has
                   // a non-symmetrical vertical padding applied by default.
-                  padding: `0 ${iconOnly ? 0 : 12}px`,
+                  paddingLeft: iconOnly ? 0 : 12,
+                  paddingRight: iconOnly ? 0 : endIcon ? 8 : 12,
 
                   ...(size === "small"
                     ? base.small
@@ -403,47 +489,8 @@ export const Button = React.forwardRef<HTMLElement, Props>(
                   whiteSpace: "nowrap",
                 },
 
-                !disabled && {
-                  ":hover, &[data-force-hover-state]": {
-                    backgroundColor: getHoverBackgroundColor({
-                      color,
-                      feel,
-                      theme,
-                    }),
-                    color: getTextColor({ color, feel, theme, mode: ":hover" }),
-                    ...(feel !== "flat" && {
-                      // The `box-shadow` property is copied directly from Zeplin
-                      boxShadow:
-                        theme === "light"
-                          ? "0 5px 10px 0 rgba(18, 21, 26, 0.08), inset 0 0 0 1px rgba(18, 21, 26, 0.2), inset 0 -1px 0 0 rgba(18, 21, 26, 0.05)"
-                          : "0 0 0 1px rgba(18, 21, 26, 0.2), 0 5px 10px 0 rgba(18, 21, 26, 0.12), 0 1px 0 0 rgba(18, 21, 26, 0.05)",
-                    }),
-                  },
-                  ":focus, &[data-force-focus-state]": {
-                    ...(feel === "flat" && {
-                      backgroundColor:
-                        theme === "light" ? colors.white : "#000",
-                      color:
-                        theme === "light"
-                          ? colors.blue.base
-                          : colors.blue.light,
-                    }),
-                    // The `box-shadow` property is copied directly from Zeplin for the
-                    // light theme. For the dark theme we use a variant of the color to
-                    // make the borders sharp.
-                    boxShadow: `0 1px 4px 0 rgba(18, 21, 26, 0.08), 0 0 0 2px ${
-                      theme === "light" ||
-                      color === defaultColor ||
-                      color === colors.white
-                        ? "#bbdbff"
-                        : getOffsetInPalette(Infinity, "lighter", color)
-                    }, inset 0 0 0 1px ${
-                      color === defaultColor || color === colors.white
-                        ? "#2075d6"
-                        : getOffsetInPalette(1, "darker", color)
-                    }, inset 0 -1px 0 0 rgba(18, 21, 26, 0.05)`,
-                  },
-                  "&:active, &[data-force-active-state], &[aria-expanded=true]": {
+                isPressed &&
+                  css({
                     ...(getTextColor({
                       color,
                       feel,
@@ -477,92 +524,91 @@ export const Button = React.forwardRef<HTMLElement, Props>(
                           : "0 0 0 1px rgba(18, 21, 26, 0.2), 0 1px 4px 0 rgba(18, 21, 26, 0.08), 0 -1px 0 0 rgba(18, 21, 26, 0.16), inset 0 1px 2px 0 rgba(18, 21, 26, 0.42)"
                         : "none",
                     outline: "0",
-                  },
-                },
-              ])
-            )
-          ),
-          disabled,
-          onClick: (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
-            if (disabled) return event.preventDefault();
+                  }),
 
-            if (otherProps.onClick) {
-              otherProps.onClick(event);
-            }
+                // We use `isPressed` now to handle the `:active` style, so we
+                // must not render the `:hover` style when `isPressed` is
+                // `true`.
+                !props.isDisabled &&
+                  !isPressed &&
+                  isHovered &&
+                  css({
+                    backgroundColor: getHoverBackgroundColor({
+                      color,
+                      feel,
+                      theme,
+                    }),
+                    color: getTextColor({
+                      color,
+                      feel,
+                      theme,
+                      mode: ":hover",
+                    }),
+                    ...(feel !== "flat" && {
+                      // The `box-shadow` property is copied directly from Zeplin
+                      boxShadow:
+                        theme === "light"
+                          ? "0 5px 10px 0 rgba(18, 21, 26, 0.08), inset 0 0 0 1px rgba(18, 21, 26, 0.2), inset 0 -1px 0 0 rgba(18, 21, 26, 0.05)"
+                          : "0 0 0 1px rgba(18, 21, 26, 0.2), 0 5px 10px 0 rgba(18, 21, 26, 0.12), 0 1px 0 0 rgba(18, 21, 26, 0.05)",
+                    }),
+                  }),
 
-            if (as.props.onClick) {
-              as.props.onClick(Event);
-            }
+                isFocusVisible &&
+                  css({
+                    ...(feel === "flat" && {
+                      backgroundColor:
+                        theme === "light" ? colors.white : "#000",
+                      color:
+                        theme === "light"
+                          ? colors.blue.base
+                          : colors.blue.light,
+                    }),
+                    // The `box-shadow` property is copied directly from Zeplin for the
+                    // light theme. For the dark theme we use a variant of the color to
+                    // make the borders sharp.
+                    boxShadow: `0 1px 4px 0 rgba(18, 21, 26, 0.08), 0 0 0 2px ${
+                      theme === "light" ||
+                      color === defaultColor ||
+                      color === colors.white
+                        ? "#bbdbff"
+                        : getOffsetInPalette(Infinity, "lighter", color)
+                    }, inset 0 0 0 1px ${
+                      color === defaultColor || color === colors.white
+                        ? "#2075d6"
+                        : getOffsetInPalette(1, "darker", color)
+                    }, inset 0 -1px 0 0 rgba(18, 21, 26, 0.05)`,
+                  }),
+              ]),
+              passthroughProps.className,
+              as.props.className
+            ),
 
-            // Remove the focus
-            event.currentTarget.blur();
-          },
-          onMouseOut: (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
-            if (event.buttons > 0) {
-              event.currentTarget.blur();
-            }
+            children: (
+              <>
+                {icon && (
+                  <ButtonIcon
+                    iconSize={iconSize}
+                    className={css({ margin: iconOnly ? 0 : "0 4px 0" })}
+                  >
+                    {icon}
+                  </ButtonIcon>
+                )}
+                {children}
+                {endIcon && !loading && (
+                  <ButtonIcon
+                    iconSize={iconSize}
+                    className={css({ margin: iconOnly ? 0 : `0 0 0 12px` })}
+                  >
+                    {endIcon}
+                  </ButtonIcon>
+                )}
+              </>
+            ),
+          };
 
-            otherProps.onMouseOut?.(event);
-            as.props.onMouseOut?.(event);
-          },
-
-          children: (
-            <>
-              {icon && (
-                <span
-                  className={cx(
-                    css({
-                      alignItems: "center",
-                      // This needs to be `inline-flex` and not the default of
-                      // `inline-block` to vertically center the icon automatically
-                      display: "inline-flex",
-                      height: iconSize,
-                      justifyContent: "center",
-                      // The `4px` will be on the right to separate the icon from the text
-                      margin: iconOnly ? 0 : "0 4px 0",
-                      width: iconSize,
-                    })
-                  )}
-                >
-                  {icon}
-                </span>
-              )}
-              {children}
-              {endIcon && !loading && (
-                <span
-                  className={cx(
-                    css({
-                      alignItems: "center",
-                      // This needs to be `inline-flex` and not the default of
-                      // `inline-block` to vertically center the icon automatically
-                      display: "inline-flex",
-                      height: iconSize,
-                      justifyContent: "center",
-                      // The `4px` will be on the right to separate the icon from the text
-                      margin: iconOnly ? 0 : "0 0 0 4px",
-                      width: iconSize,
-                    })
-                  )}
-                >
-                  {endIcon}
-                </span>
-              )}
-            </>
-          ),
-        };
-
-        return React.cloneElement(as, {
-          ...propsToPass,
-          className: classnames(
-            propsToPass.className,
-            as.props.className,
-            // If the parent component is using emotion with the jsx pragma, we
-            // have to get fancy and intercept the styles to use with the
-            // `ClassNames` wrapper.
-            as.props.css ? css(as.props.css.styles) : null
-          ),
-        });
-      }}
-    </ClassNames>
-  )
+          return React.cloneElement(as, propsToPass);
+        }}
+      </ClassNames>
+    );
+  }
 );
