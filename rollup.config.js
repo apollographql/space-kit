@@ -63,6 +63,7 @@ function CJS() {
       "classnames",
       "framer-motion",
       "prop-types",
+      "lodash/omit",
       "react",
       "tinycolor2",
     ],
