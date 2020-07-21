@@ -2,7 +2,7 @@
 import "@testing-library/jest-dom";
 import faker from "faker";
 import React from "react";
-import { render } from "@testing-library/react";
+import { act, render } from "@testing-library/react";
 import { ConfirmationTooltip } from "../ConfirmationTooltip";
 import { SpaceKitProvider } from "../SpaceKitProvider";
 import userEvent from "@testing-library/user-event";
@@ -21,7 +21,7 @@ test("when child element is clicked, the tooltip is shown", () => {
   );
 
   expect(queryByText(tooltipContent)).not.toBeInTheDocument();
-  userEvent.click(getByText(interactiveElementText));
+  act(() => userEvent.click(getByText(interactiveElementText)));
   getByText(tooltipContent);
 });
 
@@ -39,7 +39,7 @@ test.skip("when a tooltip is shown, it is removed after a delay", async () => {
   );
 
   expect(queryByText(tooltipContent)).not.toBeInTheDocument();
-  userEvent.click(getByText(interactiveElementText));
+  act(() => userEvent.click(getByText(interactiveElementText)));
   getByText(tooltipContent);
   jest.runTimersToTime(5000);
 
