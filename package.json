@@ -72,9 +72,11 @@
     "@react-stately/toggle": "^3.1.0",
     "@tippyjs/react": "^4.2.0",
     "@types/classnames": "^2.2.9",
+    "@types/lodash": "^4.14.157",
     "@types/tinycolor2": "^1.4.2",
     "classnames": "^2.2.6",
     "csstype": "^3.0.3",
+    "lodash": "*",
     "tinycolor2": "^1.4.1",
     "tslib": "^2.0.1"
   },
