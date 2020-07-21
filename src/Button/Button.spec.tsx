@@ -145,6 +145,17 @@ test("when passed onClick props to the element and the `as` prop, they should bo
   expect(rootElementOnClick).toHaveBeenCalled();
 });
 
+test("given a top-level `className` and an `as` prop with it's own `className`, `className` props are merged", () => {
+  render(
+    <Button className="testClassA" as={<button className="testClassB" />} />
+  );
+
+  const button = screen.getByRole("button");
+
+  expect(button).toHaveClass("testClassA");
+  expect(button).toHaveClass("testClassB");
+});
+
 test("when passed unrecognized props, they should be rendered in the dom", () => {
   render(
     <Button
