@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import * as faker from "faker";
 import { Button } from "./Button";
-import { act, fireEvent, render, screen } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 import { IconShip2 } from "../icons/IconShip2";
 import React from "react";
 import userEvent from "@testing-library/user-event";
@@ -41,7 +41,7 @@ test("when passed an icon, endIcon, and text; all are rendered", () => {
   screen.getByTestId("endIcon");
 });
 
-test("wyhen passed an icon and no children, should render an icon and no text content", () => {
+test("when passed an icon and no children, should render an icon and no text content", () => {
   render(<Button icon={<IconShip2 data-testid="icon" />} />);
 
   expect(screen.getByRole("button")).toHaveTextContent("");
@@ -188,38 +188,4 @@ test("ref is forwarded", () => {
   render(<Button ref={ref}>{faker.lorem.word()}</Button>);
 
   expect(ref.current).toBe(screen.getByRole("button"));
-});
-
-test("when mouseOut event occurs and button is pressed, button isn't focused", () => {
-  render(<Button>{faker.lorem.word()}</Button>);
-
-  const button = screen.getByRole("button");
-
-  // This is hacky. We are really just testing that the focus is removed when
-  // there's a mouseout event with a button pressed.
-  button.focus();
-
-  act(() => {
-    fireEvent(
-      button,
-      new MouseEvent("mouseout", {
-        buttons: 1,
-        bubbles: true,
-        cancelable: true,
-      })
-    );
-  });
-
-  act(() => {
-    fireEvent(
-      button,
-      new MouseEvent("mouseup", {
-        buttons: 1,
-        bubbles: true,
-        cancelable: true,
-      })
-    );
-  });
-
-  expect(button).not.toHaveFocus();
 });

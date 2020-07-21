@@ -5,12 +5,12 @@ import { ClassNames, ObjectInterpolation } from "@emotion/core";
 import { getOffsetInPalette } from "../colors/utils/getOffsetInPalette";
 import tinycolor from "tinycolor2";
 import React from "react";
-import classnames from "classnames";
 import { LoadingSpinner } from "../Loaders";
 import { assertUnreachable } from "../shared/assertUnreachable";
 import { useFocusRing } from "@react-aria/focus";
 import { mergeProps } from "@react-aria/utils";
 import omit from "lodash/omit";
+import { ButtonIcon } from "./button/ButtonIcon";
 
 type TLength = string | 0 | number;
 
@@ -268,7 +268,6 @@ export const Button = React.forwardRef<HTMLElement, Props>(
       as = <button />,
       children,
       color = defaultColor,
-      disabled: disabledProps = false,
       variant,
       endIcon,
       feel = "raised",
@@ -276,13 +275,35 @@ export const Button = React.forwardRef<HTMLElement, Props>(
       loading,
       size = "default",
       theme = "light",
-      ...otherProps
+      ...passthroughProps
     },
     ref
   ) => {
     const { isFocusVisible, focusProps } = useFocusRing();
 
-    const focusedStyles: ObjectInterpolation<any> = {
+    const mergedProps = mergeProps(passthroughProps, as.props, focusProps, {
+      ref,
+    });
+
+    /**
+     * If the button is in a `loading` state, then always treat it as
+     * disabled. Otherwise, try to use `as.props`. Finally, use `props`
+     */
+    mergedProps.disabled = loading || mergedProps.disabled;
+
+    /**
+     * Handler to avoid responding to click events for all attached listeners
+     * when `disabled`
+     */
+    const onClick = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+      // If the button is disabled, then don't propogate `onClick`
+      // events.
+      if (mergedProps.disabled) return event.preventDefault();
+
+      mergedProps.onClick?.(event);
+    };
+
+    const focusedStyles: ObjectInterpolation<undefined> = {
       ...(feel === "flat" && {
         backgroundColor: theme === "light" ? colors.white : "#000",
         color: theme === "light" ? colors.blue.base : colors.blue.light,
@@ -301,275 +322,221 @@ export const Button = React.forwardRef<HTMLElement, Props>(
       }, inset 0 -1px 0 0 rgba(18, 21, 26, 0.05)`,
     };
 
+    const icon = loading ? (
+      <LoadingSpinner
+        size="2xsmall"
+        theme={theme === "light" ? "grayscale" : "dark"}
+      />
+    ) : (
+      iconProp
+    );
+
+    /**
+     * Icon size in pixels
+     *
+     * This is stored so we can use the same value for `height` and `width`
+     */
+    const iconSize = size === "small" ? 12 : size === "large" ? 24 : 16;
+
+    const iconOnly = !children;
+
+    if (variant === "fab") {
+      if (!icon) {
+        throw new TypeError("FAB buttons are required to have an `icon`");
+      } else if (children) {
+        throw new TypeError("FAB buttons cannot have children, only an `icon`");
+      }
+    }
+
     return (
       <ClassNames>
         {({ cx, css }) => {
-          /**
-           * If the button is in a `loading` state, then always treat it as
-           * disabled. Otherwise, try to use `as.props`. Finally, use `props`
-           */
-          const disabled: boolean =
-            loading ||
-            (as.props.disabled != null ? as.props.disabled : disabledProps);
-
-          const icon = loading ? (
-            <LoadingSpinner
-              size="2xsmall"
-              theme={theme === "light" ? "grayscale" : "dark"}
-            />
-          ) : (
-            iconProp
-          );
-
-          /**
-           * Icon size in pixels
-           *
-           * This is stored so we can use the same value for `height` and `width`
-           */
-          const iconSize = size === "small" ? 12 : size === "large" ? 24 : 16;
-
-          const iconOnly = !children;
-
-          if (variant === "fab") {
-            if (!icon) {
-              throw new TypeError("FAB buttons are required to have an `icon`");
-            } else if (children) {
-              throw new TypeError(
-                "FAB buttons cannot have children, only an `icon`"
-              );
-            }
-          }
-
           const propsToPass = mergeProps(
             // Omit `onClick` from `otherProps` beacuse we'll be conditionally
             // calling it in the `onClick` handler depending on the `disabled`
-            // prop.
-            omit(otherProps, "onClick"),
-            mergeProps(focusProps, {
-              ref,
-              className: classnames(
-                // I couldn't figure out how to get TypeScript to recognize that
-                // `className` can be in `otherProps`.
-                "className" in otherProps && (otherProps as any).className,
-                isFocusVisible && cx(css(focusedStyles)),
-                cx(
-                  css([
-                    {
-                      // We need to also set the `:hover` on `:disabled` so it has a
-                      // higher specificity than any `:hover` classes passed in. This
-                      // also means that both of these need to be overriden if we want
-                      // to use a custom disabled color.
-                      "&[disabled], &[disabled]:hover": {
-                        backgroundColor:
-                          feel === "flat"
-                            ? "transparent"
-                            : theme === "light"
-                            ? colors.silver.light
-                            : colors.grey.dark,
-                        boxShadow: "none",
-                        color:
-                          feel === "flat" && theme === "dark"
-                            ? colors.grey.dark
-                            : colors.grey.light,
-                      },
+            // prop. Also exclude `className` beacuse we'll be combining it on
+            // our own with `cx`. This is necessary because `cx` allows for
+            // emotion styles to be logically overwritten.
+            omit(mergedProps, "className", "onClick"),
+            {
+              onClick,
+              className: cx(
+                css([
+                  {
+                    // We need to also set the `:hover` on `:disabled` so it has a
+                    // higher specificity than any `:hover` classes passed in. This
+                    // also means that both of these need to be overriden if we want
+                    // to use a custom disabled color.
+                    "&[disabled], &[disabled]:hover": {
+                      backgroundColor:
+                        feel === "flat"
+                          ? "transparent"
+                          : theme === "light"
+                          ? colors.silver.light
+                          : colors.grey.dark,
+                      boxShadow: "none",
+                      color:
+                        feel === "flat" && theme === "dark"
+                          ? colors.grey.dark
+                          : colors.grey.light,
+                    },
+
+                    backgroundColor:
+                      color === colors.white
+                        ? colors.white
+                        : feel === "raised"
+                        ? color
+                        : "transparent",
+
+                    borderRadius: variant === "fab" ? "100%" : 4,
+
+                    borderWidth: 0,
+                    ...(feel !== "flat" && {
+                      boxShadow:
+                        theme === "light"
+                          ? "0 1px 4px 0 rgba(18, 21, 26, 0.04), inset 0 0 0 1px rgba(18, 21, 26, 0.2), inset 0 -1px 0 0 rgba(18, 21, 26, 0.05)"
+                          : "0 0 0 1px rgba(18, 21, 26, 0.2), 0 1px 4px 0 rgba(18, 21, 26, 0.08), 0 1px 0 0 rgba(18, 21, 26, 0.05)",
+                    }),
+
+                    color: getTextColor({ color, feel, theme }),
+
+                    cursor: mergedProps.disabled ? "default" : "pointer",
+
+                    // Vertically center children
+                    display: "inline-flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+
+                    height: getHeight({ size }),
+
+                    minWidth: iconOnly
+                      ? size === "small"
+                        ? 28
+                        : size === "default"
+                        ? 36
+                        : size === "large"
+                        ? 42
+                        : assertUnreachable(size)
+                      : endIcon
+                      ? 0
+                      : size === "small"
+                      ? 76
+                      : size === "default"
+                      ? 100
+                      : size === "large"
+                      ? 112
+                      : assertUnreachable(size),
+
+                    // We have to set the Y padding because browsers (at least Chrome) has
+                    // a non-symmetrical vertical padding applied by default.
+                    paddingLeft: iconOnly ? 0 : 12,
+                    paddingRight: iconOnly ? 0 : endIcon ? 8 : 12,
+
+                    ...(size === "small"
+                      ? base.small
+                      : size === "large"
+                      ? base.large
+                      : base.base),
+
+                    fontWeight: 600,
+
+                    // Disable the outline because we're setting a custom `:active` style
+                    outline: 0,
+
+                    textDecoration: "none",
+
+                    whiteSpace: "nowrap",
+                  },
+
+                  !mergedProps.disabled && {
+                    ":hover, &[data-force-hover-state]": {
+                      backgroundColor: getHoverBackgroundColor({
+                        color,
+                        feel,
+                        theme,
+                      }),
+                      color: getTextColor({
+                        color,
+                        feel,
+                        theme,
+                        mode: ":hover",
+                      }),
+                      ...(feel !== "flat" && {
+                        // The `box-shadow` property is copied directly from Zeplin
+                        boxShadow:
+                          theme === "light"
+                            ? "0 5px 10px 0 rgba(18, 21, 26, 0.08), inset 0 0 0 1px rgba(18, 21, 26, 0.2), inset 0 -1px 0 0 rgba(18, 21, 26, 0.05)"
+                            : "0 0 0 1px rgba(18, 21, 26, 0.2), 0 5px 10px 0 rgba(18, 21, 26, 0.12), 0 1px 0 0 rgba(18, 21, 26, 0.05)",
+                      }),
+                    },
+                    // This is kind of hacky behavior
+                    "&[data-force-focus-state]": focusedStyles,
+                    "&:active, &[data-force-active-state], &[aria-expanded=true]": {
+                      ...(getTextColor({
+                        color,
+                        feel,
+                        theme,
+                        mode: ":hover",
+                      }) && {
+                        color: getTextColor({
+                          color,
+                          feel,
+                          theme,
+                          mode: ":active",
+                        }),
+                      }),
 
                       backgroundColor:
                         color === colors.white
                           ? colors.white
                           : feel === "raised"
                           ? color
-                          : "transparent",
+                          : color === defaultColor
+                          ? theme === "dark"
+                            ? colors.grey.darker
+                            : colors.silver.base
+                          : getOffsetInPalette(2, "lighter", color),
 
-                      borderRadius: variant === "fab" ? "100%" : 4,
-
-                      borderWidth: 0,
-                      ...(feel !== "flat" && {
-                        boxShadow:
-                          theme === "light"
-                            ? "0 1px 4px 0 rgba(18, 21, 26, 0.04), inset 0 0 0 1px rgba(18, 21, 26, 0.2), inset 0 -1px 0 0 rgba(18, 21, 26, 0.05)"
-                            : "0 0 0 1px rgba(18, 21, 26, 0.2), 0 1px 4px 0 rgba(18, 21, 26, 0.08), 0 1px 0 0 rgba(18, 21, 26, 0.05)",
-                      }),
-
-                      color: getTextColor({ color, feel, theme }),
-
-                      cursor: loading || disabled ? "default" : "pointer",
-
-                      // Vertically center children
-                      display: "inline-flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-
-                      height: getHeight({ size }),
-
-                      minWidth: iconOnly
-                        ? size === "small"
-                          ? 28
-                          : size === "large"
-                          ? 42
-                          : 36
-                        : size === "small"
-                        ? 76
-                        : size === "large"
-                        ? 112
-                        : 100,
-
-                      // We have to set the Y padding because browsers (at least Chrome) has
-                      // a non-symmetrical vertical padding applied by default.
-                      padding: `0 ${iconOnly ? 0 : 12}px`,
-
-                      ...(size === "small"
-                        ? base.small
-                        : size === "large"
-                        ? base.large
-                        : base.base),
-
-                      fontWeight: 600,
-
-                      // Disable the outline because we're setting a custom `:active` style
-                      outline: 0,
-
-                      textDecoration: "none",
-
-                      whiteSpace: "nowrap",
+                      // The `box-shadow` properties are copied directly from Zeplin
+                      boxShadow:
+                        feel !== "flat"
+                          ? theme === "light"
+                            ? "inset 0 0 0 1px rgba(18, 21, 26, 0.2), inset 0 -1px 0 0 rgba(18, 21, 26, 0.05), inset 0 2px 2px 0 rgba(18, 21, 26, 0.12)"
+                            : "0 0 0 1px rgba(18, 21, 26, 0.2), 0 1px 4px 0 rgba(18, 21, 26, 0.08), 0 -1px 0 0 rgba(18, 21, 26, 0.16), inset 0 1px 2px 0 rgba(18, 21, 26, 0.42)"
+                          : "none",
+                      outline: "0",
                     },
-
-                    !disabled && {
-                      ":hover, &[data-force-hover-state]": {
-                        backgroundColor: getHoverBackgroundColor({
-                          color,
-                          feel,
-                          theme,
-                        }),
-                        color: getTextColor({
-                          color,
-                          feel,
-                          theme,
-                          mode: ":hover",
-                        }),
-                        ...(feel !== "flat" && {
-                          // The `box-shadow` property is copied directly from Zeplin
-                          boxShadow:
-                            theme === "light"
-                              ? "0 5px 10px 0 rgba(18, 21, 26, 0.08), inset 0 0 0 1px rgba(18, 21, 26, 0.2), inset 0 -1px 0 0 rgba(18, 21, 26, 0.05)"
-                              : "0 0 0 1px rgba(18, 21, 26, 0.2), 0 5px 10px 0 rgba(18, 21, 26, 0.12), 0 1px 0 0 rgba(18, 21, 26, 0.05)",
-                        }),
-                      },
-                      // This is kind of hacky behavior
-                      "&[data-force-focus-state]": focusedStyles,
-                      "&:active, &[data-force-active-state], &[aria-expanded=true]": {
-                        ...(getTextColor({
-                          color,
-                          feel,
-                          theme,
-                          mode: ":hover",
-                        }) && {
-                          color: getTextColor({
-                            color,
-                            feel,
-                            theme,
-                            mode: ":active",
-                          }),
-                        }),
-
-                        backgroundColor:
-                          color === colors.white
-                            ? colors.white
-                            : feel === "raised"
-                            ? color
-                            : color === defaultColor
-                            ? theme === "dark"
-                              ? colors.grey.darker
-                              : colors.silver.base
-                            : getOffsetInPalette(2, "lighter", color),
-
-                        // The `box-shadow` properties are copied directly from Zeplin
-                        boxShadow:
-                          feel !== "flat"
-                            ? theme === "light"
-                              ? "inset 0 0 0 1px rgba(18, 21, 26, 0.2), inset 0 -1px 0 0 rgba(18, 21, 26, 0.05), inset 0 2px 2px 0 rgba(18, 21, 26, 0.12)"
-                              : "0 0 0 1px rgba(18, 21, 26, 0.2), 0 1px 4px 0 rgba(18, 21, 26, 0.08), 0 -1px 0 0 rgba(18, 21, 26, 0.16), inset 0 1px 2px 0 rgba(18, 21, 26, 0.42)"
-                            : "none",
-                        outline: "0",
-                      },
-                    },
-                  ])
-                )
+                  },
+                ]),
+                mergedProps.className,
+                isFocusVisible && css(focusedStyles)
               ),
-              disabled,
-              onClick: (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
-                if (disabled) return event.preventDefault();
-
-                otherProps.onClick?.(event);
-                as.props.onClick?.(event);
-              },
-              onMouseOut: (
-                event: React.MouseEvent<HTMLElement, MouseEvent>
-              ) => {
-                if (event.buttons > 0) {
-                  event.currentTarget.blur();
-                }
-
-                otherProps.onMouseOut?.(event);
-                as.props.onMouseOut?.(event);
-              },
 
               children: (
                 <>
                   {icon && (
-                    <span
-                      className={cx(
-                        css({
-                          alignItems: "center",
-                          // This needs to be `inline-flex` and not the default of
-                          // `inline-block` to vertically center the icon automatically
-                          display: "inline-flex",
-                          height: iconSize,
-                          justifyContent: "center",
-                          // The `4px` will be on the right to separate the icon from the text
-                          margin: iconOnly ? 0 : "0 4px 0",
-                          width: iconSize,
-                        })
-                      )}
+                    <ButtonIcon
+                      iconSize={iconSize}
+                      className={css({ margin: iconOnly ? 0 : "0 4px 0" })}
                     >
                       {icon}
-                    </span>
+                    </ButtonIcon>
                   )}
                   {children}
                   {endIcon && !loading && (
-                    <span
-                      className={cx(
-                        css({
-                          alignItems: "center",
-                          // This needs to be `inline-flex` and not the default of
-                          // `inline-block` to vertically center the icon automatically
-                          display: "inline-flex",
-                          height: iconSize,
-                          justifyContent: "center",
-                          // The `4px` will be on the right to separate the icon from the text
-                          margin: iconOnly ? 0 : "0 0 0 4px",
-                          width: iconSize,
-                        })
-                      )}
+                    <ButtonIcon
+                      iconSize={iconSize}
+                      className={css({ margin: iconOnly ? 0 : `0 0 0 12px` })}
                     >
                       {endIcon}
-                    </span>
+                    </ButtonIcon>
                   )}
                 </>
               ),
-            })
+            }
           );
 
-          return React.cloneElement(as, {
-            ...propsToPass,
-            className: classnames(
-              propsToPass.className,
-              as.props.className,
-              // If the parent component is using emotion with the jsx pragma, we
-              // have to get fancy and intercept the styles to use with the
-              // `ClassNames` wrapper.
-              as.props.css ? css(as.props.css.styles) : null
-            ),
-          });
+          return React.cloneElement(as, propsToPass);
         }}
       </ClassNames>
     );
