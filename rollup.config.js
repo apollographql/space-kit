@@ -47,6 +47,8 @@ function CJS() {
     external: [
       "@emotion/cache",
       "@emotion/core",
+      "@react-aria/focus",
+      "@react-aria/utils",
       "@tippyjs/react",
       "@popperjs/core",
       "@popperjs/core/lib/utils/computeAutoPlacement",
