@@ -28,6 +28,27 @@ storiesOf("ConfirmationTooltip", module)
       chromatic: { delay: 500 },
     }
   )
+  .add(
+    "disabled, no confirmation should be visible",
+    () => {
+      return (
+        <PerformUserInteraction
+          callback={async () => {
+            userEvent.click(await findByText(document.body, "click"));
+          }}
+        >
+          <div style={{ padding: 50 }}>
+            <ConfirmationTooltip content="content" disabled>
+              <Button>click</Button>
+            </ConfirmationTooltip>
+          </div>
+        </PerformUserInteraction>
+      );
+    },
+    {
+      chromatic: { delay: 500 },
+    }
+  )
   .add("interactive", () => {
     return (
       <div style={{ padding: 50 }}>
