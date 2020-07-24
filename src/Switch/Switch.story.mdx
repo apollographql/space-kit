@@ -1,0 +1,165 @@
+import { Wrapper as Switch } from "./switch.story/Wrapper";
+import { Switch as OriginalSwitch } from "../Switch";
+import { colors } from "../colors";
+import { Meta, Story, ArgsTable, Canvas } from "@storybook/addon-docs/blocks";
+import noop from "lodash/noop";
+
+<Meta title="Components/Switch" component={OriginalSwitch} />
+
+# Switch
+
+**Switchs** use the same props schema as the underlying library from react-spectrum.
+
+## Uncontrolled
+
+Using the `defaultSelected` prop to indicate these components are uncontrolled; meaning their state is not controlled externally.
+
+<Canvas>
+  <Story name="Uncontrolled Deselected">
+    <Switch>Deslected</Switch>
+  </Story>
+  <Story name="Uncontrolled Selected">
+    <Switch defaultSelected>Selected</Switch>
+  </Story>
+  <Story name="Uncontrolled Disabled Deselected">
+    <Switch isDisabled>Disabled Deslected</Switch>
+  </Story>
+  <Story name="Uncontrolled Disabled Selected">
+    <Switch isDisabled defaultSelected>
+      Disabled Selected
+    </Switch>
+  </Story>
+</Canvas>
+
+## Controlled
+
+Pass `isSelected` and `onChange` props to indicate these components are controlled; meaning their state held and controlled externally.
+
+<Canvas>
+  <Story name="Controlled Deselected">
+    <Switch isSelected={false} onChange={noop}>
+      Deslected
+    </Switch>
+  </Story>
+  <Story name="Controlled Selected">
+    <Switch isSelected onChange={noop}>
+      Selected
+    </Switch>
+  </Story>
+  <Story name="Controlled Disabled Deselected">
+    <Switch isDisabled isSelected={false} onChange={noop}>
+      Disabled Deslected
+    </Switch>
+  </Story>
+  <Story name="Controlled Disabled Selected">
+    <Switch isDisabled isSelected onChange={noop}>
+      Disabled Selected
+    </Switch>
+  </Story>
+</Canvas>
+
+## Dark
+
+Elements can respond to the theme
+
+<Canvas theme="dark">
+  <Story name="Dark Themed Uncontrolled Deselected">
+    <Switch theme="dark">Deslected</Switch>
+  </Story>
+  <Story name="Dark Themed Uncontrolled Selected">
+    <Switch theme="dark" defaultSelected>
+      Selected
+    </Switch>
+  </Story>
+  <Story name="Dark Themed Uncontrolled Disabled Deselected">
+    <Switch theme="dark" isDisabled>
+      Disabled Deslected
+    </Switch>
+  </Story>
+  <Story name="Dark Themed Uncontrolled Disabled Selected">
+    <Switch theme="dark" isDisabled defaultSelected>
+      Disabled Selected
+    </Switch>
+  </Story>
+</Canvas>
+
+## Color
+
+You can customize the color of the checkbox's selected state with the `color` prop
+
+<Canvas>
+  <Story name="Color Deselected">
+    <Switch color={colors.green.base}>Deslected</Switch>
+  </Story>
+  <Story name="Color Selected">
+    <Switch color={colors.green.base} defaultSelected>
+      Selected
+    </Switch>
+  </Story>
+  <Story name="Color Disabled Deselected">
+    <Switch color={colors.green.base} isDisabled>
+      Disabled Deslected
+    </Switch>
+  </Story>
+  <Story name="Color Disabled Selected">
+    <Switch color={colors.green.base} isDisabled defaultSelected>
+      Disabled Selected
+    </Switch>
+  </Story>
+</Canvas>
+
+## Focus
+
+Switchs will show a border when focused from keyboard navigation and not from touches or clicks.
+
+<Canvas>
+  <Story name="Focus Deselected">
+    <Switch isFocusVisible>Deslected</Switch>
+  </Story>
+  <Story name="Focus Selected">
+    <Switch isFocusVisible defaultSelected>
+      Selected
+    </Switch>
+  </Story>
+  <Story name="Focus Disabled Deselected">
+    <Switch isFocusVisible isDisabled>
+      Disabled Deslected
+    </Switch>
+  </Story>
+  <Story name="Focus Disabled Selected">
+    <Switch isFocusVisible isDisabled defaultSelected>
+      Disabled Selected
+    </Switch>
+  </Story>
+</Canvas>
+
+## Size
+
+Switchs support several sizes
+
+### Large
+
+<Canvas>
+  <Story name="Large, Deselected">
+    <Switch size="large">Deslected</Switch>
+  </Story>
+  <Story name="Large, Selected">
+    <Switch size="large" defaultSelected>
+      Selected
+    </Switch>
+  </Story>
+  <Story name="Large, Disabled Deselected">
+    <Switch size="large" isDisabled>
+      Disabled Deslected
+    </Switch>
+  </Story>
+  <Story name="Large, Disabled Selected">
+    <Switch size="large" isDisabled defaultSelected>
+      Disabled Selected
+    </Switch>
+  </Story>
+</Canvas>
+
+## Props
+
+<ArgsTable of="." />
