@@ -8,6 +8,7 @@ interface Props
     React.ComponentProps<typeof AbstractTooltip>,
     | "children"
     | "content"
+    | "disabled"
     | "maxWidth"
     | "placement"
     | "fallbackPlacements"

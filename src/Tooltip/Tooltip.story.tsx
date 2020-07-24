@@ -113,4 +113,35 @@ storiesOf("Tooltip", module)
     {
       chromatic: { delay: 500 },
     }
+  )
+  .add(
+    "disabled, no tooltip should be visible",
+    () => {
+      return (
+        <PerformUserInteraction
+          callback={async () => {
+            userEvent.click(await findByRole(document.body, "button"));
+          }}
+        >
+          <div
+            style={{
+              alignItems: "center",
+              border: `1px solid ${colors.silver.light}`,
+              borderRadius: ".25rem",
+              display: "flex",
+              height: 150,
+              justifyContent: "center",
+              width: 149,
+            }}
+          >
+            <Tooltip content="tooltip" disabled>
+              <Button>tooltip</Button>
+            </Tooltip>
+          </div>
+        </PerformUserInteraction>
+      );
+    },
+    {
+      chromatic: { delay: 500 },
+    }
   );

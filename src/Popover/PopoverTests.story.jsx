@@ -173,6 +173,39 @@ storiesOf("Tests|Popover", module)
         />
       </PerformUserInteraction>
     </div>
+  ))
+  .add("with disabled prop, nothing should appear", () => (
+    <div
+      className="sk-scroll-container"
+      style={{
+        height: 165,
+        width: 210,
+        border: `1px solid ${colors.blue.base}`,
+        overflow: "hidden",
+        position: "relative",
+      }}
+    >
+      <PerformUserInteraction
+        callback={async () => {
+          userEvent.click(await findByRole(document.body, "button"));
+        }}
+      >
+        <Popover
+          disabled
+          popperOptions={{ strategy: "absolute" }}
+          placement="bottom-start"
+          fallbackPlacements={["top-start"]}
+          iconSize="small"
+          maxWidth={280}
+          content="content"
+          trigger={
+            <Button style={{ position: "absolute", left: 0, top: 0 }}>
+              Open Popover
+            </Button>
+          }
+        />
+      </PerformUserInteraction>
+    </div>
   ));
 
 storiesOf("Tests|ListItem", module)
