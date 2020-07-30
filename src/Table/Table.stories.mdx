@@ -1,13 +1,7 @@
 import { Table } from "./Table";
-import {
-  Description,
-  Meta,
-  Story,
-  Props,
-  Preview,
-} from "@storybook/addon-docs/blocks";
+import { Meta, Story, ArgsTable, Canvas } from "@storybook/addon-docs/blocks";
 
-<Meta title="Components|Table" />
+<Meta title="Components/Table" component={Table} />
 
 # Table
 
@@ -25,7 +19,7 @@ Table density is an important characteristic when considering how to present inf
 
 ### standard (default)
 
-<Preview>
+<Canvas>
   <Story name="standard density">
     <Table
       keyOn="name"
@@ -66,11 +60,11 @@ Table density is an important characteristic when considering how to present inf
       ]}
     />
   </Story>
-</Preview>
+</Canvas>
 
 ### relaxed
 
-<Preview>
+<Canvas>
   <Story name="relaxed density">
     <Table
       density="relaxed"
@@ -112,11 +106,11 @@ Table density is an important characteristic when considering how to present inf
       ]}
     />
   </Story>
-</Preview>
+</Canvas>
 
 ### condensed
 
-<Preview>
+<Canvas>
   <Story name="condensed density">
     <Table
       density="condensed"
@@ -158,8 +152,8 @@ Table density is an important characteristic when considering how to present inf
       ]}
     />
   </Story>
-</Preview>
+</Canvas>
 
 ## Props
 
-<Props of={Table} />
+<ArgsTable of={Table} />

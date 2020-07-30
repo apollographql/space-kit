@@ -9,7 +9,7 @@ import { PerformUserInteraction } from "../shared/PerformUserInteraction";
 import { storiesOf } from "@storybook/react";
 import { colors } from "../colors";
 
-storiesOf("Tests|Popover", module)
+storiesOf("Tests/Popover", module)
   .addParameters({ component: Popover })
   .add("max height", () => (
     <div
@@ -208,7 +208,7 @@ storiesOf("Tests|Popover", module)
     </div>
   ));
 
-storiesOf("Tests|ListItem", module)
+storiesOf("Tests/ListItem", module)
   .addParameters({ component: ListItem })
   .add('aria-expanded="true"', () => (
     <div style={{ width: 100, height: 20 }}>

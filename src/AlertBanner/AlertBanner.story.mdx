@@ -1,7 +1,7 @@
 import { AlertBanner } from "../AlertBanner";
-import { Meta, Story, Props, Preview } from "@storybook/addon-docs/blocks";
+import { Meta, Story, ArgsTable, Canvas } from "@storybook/addon-docs/blocks";
 
-<Meta title="Components|AlertBanner" />
+<Meta title="Components/AlertBanner" component={AlertBanner} />
 
 # AlertBanner
 
@@ -9,7 +9,7 @@ import { Meta, Story, Props, Preview } from "@storybook/addon-docs/blocks";
 
 ## Info Alert
 
-<Preview>
+<Canvas>
   <Story name="info light">
     <AlertBanner type="info">
       This is an example of an inline info message. It should be rather short,
@@ -22,11 +22,11 @@ import { Meta, Story, Props, Preview } from "@storybook/addon-docs/blocks";
       but can have multi-lines if needed.
     </AlertBanner>
   </Story>
-</Preview>
+</Canvas>
 
 ## Warning Alert
 
-<Preview>
+<Canvas>
   <Story name="warning light">
     <AlertBanner type="warn">
       This is an example of an inline warning message. It should be rather
@@ -39,11 +39,11 @@ import { Meta, Story, Props, Preview } from "@storybook/addon-docs/blocks";
       short, but can have multi-lines if needed.
     </AlertBanner>
   </Story>
-</Preview>
+</Canvas>
 
 ## Error Alert
 
-<Preview>
+<Canvas>
   <Story name="error light">
     <AlertBanner type="error" style={{ marginBottom: 20 }}>
       This is an example of an inline error message. It should be rather short,
@@ -56,11 +56,11 @@ import { Meta, Story, Props, Preview } from "@storybook/addon-docs/blocks";
       but can have multi-lines if needed.
     </AlertBanner>
   </Story>
-</Preview>
+</Canvas>
 
 ## Success Alert
 
-<Preview>
+<Canvas>
   <Story name="success light">
     <AlertBanner type="success">
       This is an example of an inline error message. It should be rather short,
@@ -73,10 +73,10 @@ import { Meta, Story, Props, Preview } from "@storybook/addon-docs/blocks";
       but can have multi-lines if needed.
     </AlertBanner>
   </Story>
-</Preview>
+</Canvas>
 
 ## Props
 
 ### `Alert`
 
-<Props of={AlertBanner} />
+<ArgsTable of={AlertBanner} />

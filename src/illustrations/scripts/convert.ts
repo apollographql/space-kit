@@ -65,9 +65,9 @@ function generateStorybookStory(componentNames: string[]) {
     )
     .join("\n")}
 import { colors } from "../colors";
-import { Meta, Story, Props, Preview } from "@storybook/addon-docs/blocks";
+import { Meta, Story, Props, Canvas } from "@storybook/addon-docs/blocks";
 
-<Meta title="Components|Illustrations" />
+<Meta title="Components/Illustrations" />
 
 # Illustrations
 
@@ -82,11 +82,11 @@ ${componentNames
     (componentName) =>
       `## ${componentName}
 
-<Preview>
+<Canvas>
   <Story name="${componentName}">
     <${componentName} />
   </Story>
-</Preview>
+</Canvas>
 `
   )
   .join("\n")}
@@ -94,7 +94,7 @@ ${componentNames
 
 All backgrounds are customizable using \`color\`
 
-<Preview>
+<Canvas>
 ${componentNames
   .map(
     (componentName) =>
@@ -103,7 +103,7 @@ ${componentNames
   </Story>`
   )
   .join("\n")}
-</Preview>
+</Canvas>
 
 ## Props
 
