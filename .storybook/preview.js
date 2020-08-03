@@ -1,7 +1,8 @@
 import isChromatic from "storybook-chromatic/isChromatic";
 import React from "react";
-import { addDecorator } from "@storybook/react";
+import { addDecorator, addParameters } from "@storybook/react";
 import { SpaceKitProvider } from "../src/SpaceKitProvider";
+import { ThemedCanvas } from "./preview/ThemedCanvas";
 
 import "../reset.css";
 import "../font.css";
@@ -11,3 +12,11 @@ addDecorator((story) => (
     {story()}
   </SpaceKitProvider>
 ));
+
+addParameters({
+  docs: {
+    components: {
+      Canvas: ThemedCanvas,
+    },
+  },
+});
