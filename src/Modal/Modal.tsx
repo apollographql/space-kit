@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 import * as typography from "../typography";
 import { colors } from "../colors";
 import * as CSS from "csstype";
-import classnames from "classnames";
 import { useSpaceKitProvider } from "../SpaceKitProvider";
 import { assertUnreachable } from "../shared/assertUnreachable";
 
@@ -185,10 +184,7 @@ export const Modal: React.FC<Props> = ({
           {
             onClick: onClose,
             ...containerAs.props,
-            className: classnames(
-              containerAs.props.className,
-              cx(css(modalBackdrop))
-            ),
+            className: cx(css(modalBackdrop), containerAs.props.className),
           },
           <MotionComponent
             {...as.props}
@@ -215,34 +211,31 @@ export const Modal: React.FC<Props> = ({
                 as.props.onClick?.(event);
               }
             }
-            className={classnames(
-              className,
-              cx(
-                css(
-                  {
-                    backgroundColor: "white",
-                    borderRadius: 12,
-                    boxShadow: `0 16px 32px 0 rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(18, 21, 26, 0.04)`,
-                    maxHeight: "80%",
-                    minWidth: 400,
-                    opacity: 1,
-                    overflowY:
-                      verticalScrollMode === "modal" ? "auto" : "hidden",
-                    padding: size === "large" ? "40px" : "32px",
-                    position: "absolute",
-                    width: getModalWidth(size),
-                    zIndex: 11,
-                    marginLeft: "auto",
-                    marginRight: "auto",
-                    left: 0,
-                    right: 0,
-                  },
-                  verticalScrollMode === "children" && {
-                    display: "flex",
-                    flexDirection: "column",
-                  }
-                )
+            className={cx(
+              css(
+                {
+                  backgroundColor: "white",
+                  borderRadius: 12,
+                  boxShadow: `0 16px 32px 0 rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(18, 21, 26, 0.04)`,
+                  maxHeight: "80%",
+                  minWidth: 400,
+                  opacity: 1,
+                  overflowY: verticalScrollMode === "modal" ? "auto" : "hidden",
+                  padding: size === "large" ? "40px" : "32px",
+                  position: "absolute",
+                  width: getModalWidth(size),
+                  zIndex: 11,
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                  left: 0,
+                  right: 0,
+                },
+                verticalScrollMode === "children" && {
+                  display: "flex",
+                  flexDirection: "column",
+                }
               ),
+              className,
               as.props.className,
               // If the parent component is using emotion with the jsx pragma, we
               // have to get fancy and intercept the styles to use with the
