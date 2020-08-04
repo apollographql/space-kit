@@ -157,12 +157,17 @@ export const Modal: React.FC<Props> = ({
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [onClose]);
 
-  const type: keyof typeof motion = as.type;
+  const type: keyof typeof motion =
+    as.props.__EMOTION_TYPE_PLEASE_DO_NOT_USE__ || as.type;
   if (!type || type === "custom") {
     // TypeScript will give us some protection here, but we need to guarantee
     // that `as` is an element that `motion` supports
     throw new TypeError(
       "`as` must be an element with a corresponding element in `Framer.motion`"
+    );
+  } else if (!motion[type] && !React.isValidElement(as)) {
+    throw new TypeError(
+      "Could not determine the type of `as` to clone that element using Framer. This is most likely because it's a ref forwarding component and we don't have any way of determining what type it will render to."
     );
   }
 
