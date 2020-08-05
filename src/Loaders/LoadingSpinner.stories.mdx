@@ -1,25 +1,16 @@
 import { LoadingSpinner } from "./LoadingSpinner";
-import {
-  Description,
-  Meta,
-  Story,
-  Props,
-  Preview,
-} from "@storybook/addon-docs/blocks";
+import { Meta, Story, ArgsTable, Canvas } from "@storybook/addon-docs/blocks";
 import { colors } from "../colors";
 
-<Meta title="Components|LoadingSpinner" />
+<Meta title="Components/LoadingSpinner" component={LoadingSpinner} />
 
 # LoadingSpinner
 
-<Description
-  of={LoadingSpinner}
-  markdown="Spinners are used when we are unable to determine loading time. Ideally, they should appear as briefly and infrequently as possible."
-/>
+Spinners are used when we are unable to determine loading time. Ideally, they should appear as briefly and infrequently as possible.
 
 ## Sizes
 
-<Preview>
+<Canvas>
   <Story name="size large">
     <LoadingSpinner size="large" />
   </Story>
@@ -35,7 +26,7 @@ import { colors } from "../colors";
   <Story name="size 2xsmall">
     <LoadingSpinner size="2xsmall" />
   </Story>
-</Preview>
+</Canvas>
 
 ## Themes
 
@@ -45,7 +36,7 @@ export const ThemeWrapper = ({ backgroundColor = colors.white, children }) => (
   </div>
 );
 
-<Preview>
+<Canvas>
   <Story name="theme light">
     <ThemeWrapper>
       <LoadingSpinner size="xsmall" theme="light" />
@@ -61,8 +52,8 @@ export const ThemeWrapper = ({ backgroundColor = colors.white, children }) => (
       <LoadingSpinner size="xsmall" theme="grayscale" />
     </ThemeWrapper>
   </Story>
-</Preview>
+</Canvas>
 
 ## Props
 
-<Props of={LoadingSpinner} />
+<ArgsTable of={LoadingSpinner} />

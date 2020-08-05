@@ -1,11 +1,5 @@
 import { Button } from "./Button";
-import {
-  Description,
-  Meta,
-  Story,
-  Props,
-  Preview,
-} from "@storybook/addon-docs/blocks";
+import { Meta, Story, ArgsTable, Canvas } from "@storybook/addon-docs/blocks";
 import { IconExpandList } from "../icons/IconExpandList";
 import { IconShip2 } from "../icons/IconShip2";
 import { ButtonLayout } from "./button.stories/ButtonLayout";
@@ -19,20 +13,17 @@ export const SampleIcon = () => (
   <IconShip2 style={{ height: "100%", width: "100%" }} />
 );
 
-<Meta title="Components|Button" />
+<Meta title="Components/Button" component={Button} />
 
 # Button
 
-<Description
-  of={Button}
-  markdown="**Buttons** are the one of the most common way users interact with our interface and expose the most common actions they can take within our product."
-/>
+**Buttons** are the one of the most common way users interact with our interface and expose the most common actions they can take within our product.
 
 ## Sizes
 
 There are three different sizes of buttons, with the most common button being the default size. Small and large buttons are available for specific settings.
 
-<Preview>
+<Canvas>
   <Story inline name="default size">
     <Button>Rest click</Button>
   </Story>
@@ -51,13 +42,13 @@ There are three different sizes of buttons, with the most common button being th
   <Story inline name="large icon">
     <Button size="large" icon={<SampleIcon />} />
   </Story>
-</Preview>
+</Canvas>
 
 ## Colors
 
 The states for our buttons are formulaic. You pass a `color` (from the Space Kit palette) and a `theme` (light or dark) and the button states will be automatically configured to show hover states, borders, focus borders, and disabled state.
 
-<Preview>
+<Canvas>
   <Story inline name="color">
     <div style={{ display: "flex", justifyContent: "space-between" }}>
       <Button>Default</Button>
@@ -68,7 +59,7 @@ The states for our buttons are formulaic. You pass a `color` (from the Space Kit
       <Button color={colors.blue.base}>Blue</Button>
     </div>
   </Story>
-</Preview>
+</Canvas>
 
 ## Buttons and States
 
@@ -78,7 +69,7 @@ The states for our buttons are formulaic. You pass a `color` (from the Space Kit
 
 Light themed buttons have a border. The hover state is a shade darker than the rest color.
 
-<Preview>
+<Canvas>
   <Story inline name="button states light">
     <div
       style={{
@@ -219,13 +210,13 @@ Light themed buttons have a border. The hover state is a shade darker than the r
       </ButtonLayout>
     </div>
   </Story>
-</Preview>
+</Canvas>
 
 ### Dark Theme
 
 For dark themed buttons, the borders are completely removed to make the colors look sharper on the background. The focus state border is same color as the button and reduced to it's lighest shade.
 
-<Preview>
+<Canvas>
   <Story inline name="button states dark">
     <div
       style={{
@@ -366,7 +357,7 @@ For dark themed buttons, the borders are completely removed to make the colors l
       </ButtonLayout>
     </div>
   </Story>
-</Preview>
+</Canvas>
 
 ## `as`
 
@@ -374,7 +365,7 @@ Specify the element used to render the button with the `as` prop. The default is
 
 All props added to the `as` element will be merged with the props added by the `Button` component. `classNames`, `styles`, and `css` will be intelligently merged.
 
-<Preview>
+<Canvas>
   <Story name="as a">
     <div style={{ display: "flex", justifyContent: "space-between" }}>
       <Button as={<a href="google.com" />}>Default</Button>
@@ -395,7 +386,7 @@ All props added to the `as` element will be merged with the props added by the `
       </Button>
     </div>
   </Story>
-</Preview>
+</Canvas>
 
 ## Icon Buttons
 
@@ -405,7 +396,7 @@ Icon buttons are a good way to communicate more information about the button’s
 
 Pass a `React.ReactElement` to the `icon` prop alongside `children` to render an icon to the left of a button.
 
-<Preview>
+<Canvas>
   <Story inline name="light with icon">
     <ButtonLayout theme="light">
       <Button icon={<SampleIcon />}>Rest</Button>
@@ -418,13 +409,13 @@ Pass a `React.ReactElement` to the `icon` prop alongside `children` to render an
       </Button>
     </ButtonLayout>
   </Story>
-</Preview>
+</Canvas>
 
 ### Icons only
 
 Pass a `React.ReactElement` to the `icon` prop and no `children` to render an icon-only button.
 
-<Preview>
+<Canvas>
   <Story inline name="light icon-only">
     <ButtonLayout theme="light">
       <Button icon={<SampleIcon />} />
@@ -435,13 +426,13 @@ Pass a `React.ReactElement` to the `icon` prop and no `children` to render an ic
       <Button theme="dark" icon={<SampleIcon />} />
     </ButtonLayout>
   </Story>
-</Preview>
+</Canvas>
 
 ### Floating Action Buttons
 
 In space constrained places or for floating action buttons (FAB), we can show an icon in button form.
 
-<Preview>
+<Canvas>
   <Story inline name="light fab">
     <ButtonLayout theme="light">
       <Button icon={<SampleIcon />} variant="fab" />
@@ -452,13 +443,13 @@ In space constrained places or for floating action buttons (FAB), we can show an
       <Button theme="dark" icon={<SampleIcon />} variant="fab" />
     </ButtonLayout>
   </Story>
-</Preview>
+</Canvas>
 
 ### End Icons
 
 You can specify that a button has an additional icon at the end of the row
 
-<Preview>
+<Canvas>
   <Story name="light end icon">
     <ButtonLayout theme="light">
       <Button endIcon={<ExpandIcon />}>Submit</Button>
@@ -471,13 +462,13 @@ You can specify that a button has an additional icon at the end of the row
       </Button>
     </ButtonLayout>
   </Story>
-</Preview>
+</Canvas>
 
 ### Loading
 
 You can specify that a button is in a loading state with the `loading` prop
 
-<Preview>
+<Canvas>
   <Story name="light loading">
     <ButtonLayout theme="light">
       <Button loading>Submit</Button>
@@ -490,7 +481,7 @@ You can specify that a button is in a loading state with the `loading` prop
       </Button>
     </ButtonLayout>
   </Story>
-</Preview>
+</Canvas>
 
 ## Flat Buttons
 
@@ -500,7 +491,7 @@ As the name implies, the flat button is a simpler approach on the standard butto
 
 Showing how we could potentially use color with the simple button.
 
-<Preview>
+<Canvas>
   <Story inline name="flat">
     <div style={{ display: "flex", justifyContent: "space-evenly" }}>
       <ButtonLayout theme="light">
@@ -515,9 +506,9 @@ Showing how we could potentially use color with the simple button.
       </ButtonLayout>
     </div>
   </Story>
-</Preview>
+</Canvas>
 
-<Preview>
+<Canvas>
   <Story inline name="flat all states">
     <div style={{ display: "flex", justifyContent: "space-evenly" }}>
       <ButtonLayout theme="light">
@@ -556,13 +547,13 @@ Showing how we could potentially use color with the simple button.
       </ButtonLayout>
     </div>
   </Story>
-</Preview>
+</Canvas>
 
 ### Flat Color Button
 
 Showing how we could potentially use color with the simple button.
 
-<Preview>
+<Canvas>
   <Story inline name="flat color">
     <div style={{ display: "flex", justifyContent: "space-evenly" }}>
       <ButtonLayout theme="light">
@@ -577,9 +568,9 @@ Showing how we could potentially use color with the simple button.
       </ButtonLayout>
     </div>
   </Story>
-</Preview>
+</Canvas>
 
-<Preview>
+<Canvas>
   <Story inline name="flat color all states">
     <div style={{ display: "flex", justifyContent: "space-evenly" }}>
       <ButtonLayout theme="light">
@@ -648,13 +639,13 @@ Showing how we could potentially use color with the simple button.
       </ButtonLayout>
     </div>
   </Story>
-</Preview>
+</Canvas>
 
 ### Flat Color Button with Icon
 
 Showing how we could potentially use color with the simple button.
 
-<Preview>
+<Canvas>
   <Story inline name="flat icon color">
     <div style={{ display: "flex", justifyContent: "space-evenly" }}>
       <ButtonLayout theme="light">
@@ -679,9 +670,9 @@ Showing how we could potentially use color with the simple button.
       </ButtonLayout>
     </div>
   </Story>
-</Preview>
+</Canvas>
 
-<Preview>
+<Canvas>
   <Story inline name="flat color icon all states">
     <div style={{ display: "flex", justifyContent: "space-evenly" }}>
       <ButtonLayout theme="light">
@@ -778,13 +769,13 @@ Showing how we could potentially use color with the simple button.
       </ButtonLayout>
     </div>
   </Story>
-</Preview>
+</Canvas>
 
 ## Props
 
 This component extends `HTMLElement` so that most props you'd want to pass to any element can be passed to this component.
 
-<Props of={Button} />
+<ArgsTable of={Button} />
 
 ## Special Cases
 

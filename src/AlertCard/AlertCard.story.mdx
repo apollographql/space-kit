@@ -1,27 +1,18 @@
 import { AlertCard } from "../AlertCard";
 import { Button } from "../Button";
-import {
-  Description,
-  Meta,
-  Story,
-  Props,
-  Preview,
-} from "@storybook/addon-docs/blocks";
+import { Meta, Story, ArgsTable, Canvas } from "@storybook/addon-docs/blocks";
 
-<Meta title="Components|AlertCard" />
+<Meta title="Components/AlertCard" component={AlertCard} />
 
 # AlertCard
 
-<Description
-  of={AlertCard}
-  markdown="**AlertCards** provide a way to display short, important message in a way that attracts the user's attention without interrupting the user's task."
-/>
+**AlertCards** provide a way to display short, important message in a way that attracts the user's attention without interrupting the user's task.
 
 ## Info Alert
 
 Informational alerts present general info about something you are doing or working with. It is neutral and conveys no implications of success or failure.
 
-<Preview>
+<Canvas>
   <Story name="info light">
     <AlertCard
       onClose={() => undefined}
@@ -43,13 +34,13 @@ Informational alerts present general info about something you are doing or worki
       more
     </AlertCard>
   </Story>
-</Preview>
+</Canvas>
 
 ### Extended
 
 The extended card variant is for rare use cases where an alert is the most appropriate format for explaining longer instructions.
 
-<Preview>
+<Canvas>
   <Story name="info light extended">
     <AlertCard
       onClose={() => undefined}
@@ -95,13 +86,13 @@ The extended card variant is for rare use cases where an alert is the most appro
       expanded content toast variant.
     </AlertCard>
   </Story>
-</Preview>
+</Canvas>
 
 ## Warning Alert
 
 Warning alerts present information about the action that is about to be taken that alerts the user to consequences of the action and asks for confirmation that the action still be taken in light of the consequences.
 
-<Preview>
+<Canvas>
   <Story name="warning light">
     <AlertCard
       onClose={() => undefined}
@@ -129,13 +120,13 @@ Warning alerts present information about the action that is about to be taken th
       work as expected.
     </AlertCard>
   </Story>
-</Preview>
+</Canvas>
 
 ## Error Alert
 
 Error alerts let the user know that something has gone wrong or is blocked in the given workflow they are trying to complete. When possible, error alerts should contain helpful information about what has happened to help unblock the user (such as steps to resolve or a link to a docs article).
 
-<Preview>
+<Canvas>
   <Story name="error light">
     <AlertCard
       onClose={() => undefined}
@@ -157,13 +148,13 @@ Error alerts let the user know that something has gone wrong or is blocked in th
       Something is broken. You cannot perform this action at this time.
     </AlertCard>
   </Story>
-</Preview>
+</Canvas>
 
 ## Success Alert
 
 Success alerts are confirmation that the action the user was trying to take has succeeded.
 
-<Preview>
+<Canvas>
   <Story name="success light">
     <AlertCard onClose={() => undefined} type="success" heading="Success alert">
       A new schema registry has been created by timbotnik.
@@ -179,10 +170,10 @@ Success alerts are confirmation that the action the user was trying to take has 
       A new schema registry has been created by timbotnik.
     </AlertCard>
   </Story>
-</Preview>
+</Canvas>
 
 ## Props
 
 ### `Alert`
 
-<Props of={AlertCard} />
+<ArgsTable of={AlertCard} />

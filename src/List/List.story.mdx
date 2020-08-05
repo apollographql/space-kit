@@ -3,13 +3,7 @@ import { List } from "../List";
 import { ListItem } from "../ListItem";
 import { ListDivider } from "../ListDivider";
 import { ListHeading } from "../ListHeading";
-import {
-  Description,
-  Meta,
-  Story,
-  Props,
-  Preview,
-} from "@storybook/addon-docs/blocks";
+import { Meta, Story, ArgsTable, Canvas } from "@storybook/addon-docs/blocks";
 import { IconAstronaut1 } from "../icons/IconAstronaut1";
 import { IconAstronaut2 } from "../icons/IconAstronaut2";
 import { IconAstronaut3 } from "../icons/IconAstronaut3";
@@ -18,20 +12,17 @@ import { IconPlanet3 } from "../icons/IconPlanet3";
 import { IconShip3 } from "../icons/IconShip3";
 import { IconCheck } from "../icons/IconCheck";
 
-<Meta title="Components|List" />
+<Meta title="Components/List" component={List} />
 
 # List
 
-<Description
-  of={List}
-  markdown="**Lists** provide a way for sures to interact with the application by selecting from a set of options. While that’s simple in theory, lists can be complex and not eveything is detailed below. lists can emerge from Select buttons or a simple button."
-/>
+**Lists** provide a way for sures to interact with the application by selecting from a set of options. While that’s simple in theory, lists can be complex and not eveything is detailed below. lists can emerge from Select buttons or a simple button.
 
 ## Simple List
 
 The simple list provides a list of options for a user to choose from and updates the button or select button with the choice the user has selected.
 
-<Preview>
+<Canvas>
   <Story name="basic">
     <List>
       <ListItem>Root</ListItem>
@@ -42,7 +33,7 @@ The simple list provides a list of options for a user to choose from and updates
       <ListItem>Scalars and Enums</ListItem>
     </List>
   </Story>
-</Preview>
+</Canvas>
 
 ## Segmented List
 
@@ -50,7 +41,7 @@ The segmented list provides a way to group related options. This can be achieved
 by a divider and in other cases, headers can be used to group similar
 information and provide a nice visual grouping.
 
-<Preview>
+<Canvas>
   <Story name="divided">
     <List>
       <ListItem>All Types</ListItem>
@@ -65,11 +56,11 @@ information and provide a nice visual grouping.
       <ListItem>Deprecations</ListItem>
     </List>
   </Story>
-</Preview>
+</Canvas>
 
 ## Header
 
-<Preview>
+<Canvas>
   <Story name="heading">
     <List>
       <ListHeading count={5}>Filter by</ListHeading>
@@ -81,11 +72,11 @@ information and provide a nice visual grouping.
       <ListItem>Scalars and Enums</ListItem>
     </List>
   </Story>
-</Preview>
+</Canvas>
 
 ## Icons
 
-<Preview>
+<Canvas>
   <Story name="start-icons">
     <List>
       <ListItem
@@ -271,11 +262,11 @@ information and provide a nice visual grouping.
       </ListItem>
     </List>
   </Story>
-</Preview>
+</Canvas>
 
 ## Icons with custom sizes
 
-<Preview>
+<Canvas>
   <Story name="list-icon-size">
     <List iconSize="small">
       <ListHeading startIcon={null}>mdg-private-graphs</ListHeading>
@@ -301,13 +292,13 @@ information and provide a nice visual grouping.
       <ListItem startIcon={null}>z-end-to-end-ingestion-20</ListItem>
     </List>
   </Story>
-</Preview>
+</Canvas>
 
 ## Truncation and icon customization
 
 Items should be truncated properly. This provides an example to show how to add a custom `endIcon` as well.
 
-<Preview>
+<Canvas>
   <Story name="flexbox truncation">
     <List
       endIconAs={<div style={{ color: colors.grey.light, width: "auto" }} />}
@@ -342,13 +333,13 @@ Items should be truncated properly. This provides an example to show how to add 
       </ListItem>
     </List>
   </Story>
-</Preview>
+</Canvas>
 
 ## `selectedColor`
 
 `selectedColor` can be configured on the `List` component.
 
-<Preview>
+<Canvas>
   <Story name="selectedColor">
     <List selectedColor={colors.red.base}>
       <ListItem>Root</ListItem>
@@ -359,13 +350,13 @@ Items should be truncated properly. This provides an example to show how to add 
       <ListItem>Scalars and Enums</ListItem>
     </List>
   </Story>
-</Preview>
+</Canvas>
 
 ## `hoverColor`
 
 `hoverColor` can be configured on the `List` component.
 
-<Preview>
+<Canvas>
   <Story name="hoverColor light color">
     <List hoverColor={colors.red.lightest}>
       <ListItem data-force-hover-state>Root</ListItem>
@@ -386,7 +377,7 @@ Items should be truncated properly. This provides an example to show how to add 
       <ListItem>Scalars and Enums</ListItem>
     </List>
   </Story>
-</Preview>
+</Canvas>
 
 ## `padding`
 
@@ -394,7 +385,7 @@ Padding will determine how spaced the insides of the element is.
 
 Padding is used to calculate the margin between elements and to add a negative margin to the top and bottom of `List`. This presents a gotcha: we don't know if you're going to have collapsable margins so we don't know if we should add the real amount or half of the desired margin. We're assuming margin collapsing is not available.
 
-<Preview>
+<Canvas>
   <Story name="padding default">
     <List>
       <ListItem selected>Root</ListItem>
@@ -425,7 +416,7 @@ Padding is used to calculate the margin between elements and to add a negative m
       <ListItem>Scalars and Enums</ListItem>
     </List>
   </Story>
-</Preview>
+</Canvas>
 
 ## `as`
 
@@ -433,7 +424,7 @@ Specify the element used to render the button with the `as` prop. The default is
 
 All props added to the `as` element will be merged with the props added by the component. `classNames`, `styles`, and `css` will be intelligently merged.
 
-<Preview>
+<Canvas>
   <Story name="as a">
     <List>
       <ListItem as={<a href="https://apollographql.com" />}>Root</ListItem>
@@ -448,22 +439,22 @@ All props added to the `as` element will be merged with the props added by the c
       </ListItem>
     </List>
   </Story>
-</Preview>
+</Canvas>
 
 ## Props
 
 ### `List`
 
-<Props of={List} />
+<ArgsTable of={List} />
 
 ### `ListItem`
 
-<Props of={ListItem} />
+<ArgsTable of={ListItem} />
 
 ### `ListHeading`
 
-<Props of={ListHeading} />
+<ArgsTable of={ListHeading} />
 
 ### `ListDivider`
 
-<Props of={ListDivider} />
+<ArgsTable of={ListDivider} />

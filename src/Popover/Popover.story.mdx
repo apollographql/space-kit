@@ -5,28 +5,19 @@ import { Popover } from "../Popover";
 import { PerformUserInteraction } from "../shared/PerformUserInteraction";
 import { List } from "../List";
 import { ListItem } from "../ListItem";
-import {
-  Description,
-  Meta,
-  Story,
-  Props,
-  Preview,
-} from "@storybook/addon-docs/blocks";
+import { Meta, Story, ArgsTable, Canvas } from "@storybook/addon-docs/blocks";
 
-<Meta title="Components|Popover" />
+<Meta title="Components/Popover" component={Popover} />
 
 # Popover
 
-<Description
-  of={Popover}
-  markdown="**Popover** is a thin wrapper to allow `List`s to be shown in a popover. Really, anything can be shown, but that's what the tests will illustrate."
-/>
+**Popover** is a thin wrapper to allow `List`s to be shown in a popover. Really, anything can be shown, but that's what the tests will illustrate.
 
 ## Simple Popover
 
 The simple list provides a list of options for a user to choose from and updates the button or select button with the choice the user has selected.
 
-<Preview>
+<Canvas>
   <Story name="basic">
     <PerformUserInteraction
       callback={async () => {
@@ -92,10 +83,10 @@ The simple list provides a list of options for a user to choose from and updates
       />
     </PerformUserInteraction>
   </Story>
-</Preview>
+</Canvas>
 
 ## Props
 
 ### `Popover`
 
-<Props of={Popover} />
+<ArgsTable of={Popover} />

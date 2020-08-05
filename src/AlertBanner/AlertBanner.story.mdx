@@ -1,24 +1,15 @@
 import { AlertBanner } from "../AlertBanner";
-import {
-  Description,
-  Meta,
-  Story,
-  Props,
-  Preview,
-} from "@storybook/addon-docs/blocks";
+import { Meta, Story, ArgsTable, Canvas } from "@storybook/addon-docs/blocks";
 
-<Meta title="Components|AlertBanner" />
+<Meta title="Components/AlertBanner" component={AlertBanner} />
 
 # AlertBanner
 
-<Description
-  of={AlertBanner}
-  markdown="**AlertBanners** are primarily for situations where there is nothing you can do in the UI to immediately fix or change the state (e.g. deprecation warnings, account status alerts, etc)."
-/>
+**AlertBanners** are primarily for situations where there is nothing you can do in the UI to immediately fix or change the state (e.g. deprecation warnings, account status alerts, etc).
 
 ## Info Alert
 
-<Preview>
+<Canvas>
   <Story name="info light">
     <AlertBanner type="info">
       This is an example of an inline info message. It should be rather short,
@@ -31,11 +22,11 @@ import {
       but can have multi-lines if needed.
     </AlertBanner>
   </Story>
-</Preview>
+</Canvas>
 
 ## Warning Alert
 
-<Preview>
+<Canvas>
   <Story name="warning light">
     <AlertBanner type="warn">
       This is an example of an inline warning message. It should be rather
@@ -48,11 +39,11 @@ import {
       short, but can have multi-lines if needed.
     </AlertBanner>
   </Story>
-</Preview>
+</Canvas>
 
 ## Error Alert
 
-<Preview>
+<Canvas>
   <Story name="error light">
     <AlertBanner type="error" style={{ marginBottom: 20 }}>
       This is an example of an inline error message. It should be rather short,
@@ -65,11 +56,11 @@ import {
       but can have multi-lines if needed.
     </AlertBanner>
   </Story>
-</Preview>
+</Canvas>
 
 ## Success Alert
 
-<Preview>
+<Canvas>
   <Story name="success light">
     <AlertBanner type="success">
       This is an example of an inline error message. It should be rather short,
@@ -82,10 +73,10 @@ import {
       but can have multi-lines if needed.
     </AlertBanner>
   </Story>
-</Preview>
+</Canvas>
 
 ## Props
 
 ### `Alert`
 
-<Props of={AlertBanner} />
+<ArgsTable of={AlertBanner} />

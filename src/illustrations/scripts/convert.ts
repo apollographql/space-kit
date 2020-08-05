@@ -65,19 +65,13 @@ function generateStorybookStory(componentNames: string[]) {
     )
     .join("\n")}
 import { colors } from "../colors";
-import {
-  Description,
-  Meta,
-  Story,
-  Props,
-  Preview,
-} from "@storybook/addon-docs/blocks";
+import { Meta, Story, Props, Canvas } from "@storybook/addon-docs/blocks";
 
-<Meta title="Components|Illustrations" />
+<Meta title="Components/Illustrations" />
 
 # Illustrations
 
-<Description markdown="Any of these illustrations may be selected when building a standard style empty state. The titles below are a starting point for the use case of each specific illustration; titles may be customized but should follow the general idea shown here." />
+Any of these illustrations may be selected when building a standard style empty state. The titles below are a starting point for the use case of each specific illustration; titles may be customized but should follow the general idea shown here.
 
 https://zpl.io/VOA3E0P
 
@@ -88,11 +82,11 @@ ${componentNames
     (componentName) =>
       `## ${componentName}
 
-<Preview>
+<Canvas>
   <Story name="${componentName}">
     <${componentName} />
   </Story>
-</Preview>
+</Canvas>
 `
   )
   .join("\n")}
@@ -100,7 +94,7 @@ ${componentNames
 
 All backgrounds are customizable using \`color\`
 
-<Preview>
+<Canvas>
 ${componentNames
   .map(
     (componentName) =>
@@ -109,7 +103,7 @@ ${componentNames
   </Story>`
   )
   .join("\n")}
-</Preview>
+</Canvas>
 
 ## Props
 
