@@ -9,10 +9,13 @@ interface State {
    * @default false
    */
   disableAnimations: boolean;
+
+  theme: "light" | "dark";
 }
 
 const defaultState: State = {
   disableAnimations: false,
+  theme: "light",
 };
 
 // This implementation is based on the excellent blog post by Kent C. Dodds on
