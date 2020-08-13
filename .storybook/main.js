@@ -7,9 +7,9 @@ module.exports = {
     "../stories/**/*.@(story|stories).@(jsx|tsx|mdx)",
   ],
   addons: [
-    "@storybook/addon-docs",
     path.resolve(
       path.join(__dirname, "privatePresets/ignoreTestFilesPreset.js")
     ),
+    "@storybook/addon-docs",
   ],
 };
