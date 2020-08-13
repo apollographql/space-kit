@@ -1,3 +1,23 @@
+# v7.8.0 (Thu Aug 13 2020)
+
+#### 🚀 Enhancement
+
+- [AR-748](https://apollographql.atlassian.net/browse/AR-748): Add `Switch` component [#212](https://github.com/apollographql/space-kit/pull/212) ([@justinanastos](https://github.com/justinanastos))
+
+#### 🐛 Bug Fix
+
+- Upgrade storybook to v6 [#214](https://github.com/apollographql/space-kit/pull/214) ([@justinanastos](https://github.com/justinanastos))
+
+#### 🏠 Internal
+
+- Update tests to wrap `act` calls and modernize `Button` tests [#215](https://github.com/apollographql/space-kit/pull/215) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v7.6.0 (Mon Jul 20 2020)
 
 #### 🚀 Enhancement
