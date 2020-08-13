@@ -1,36 +1,33 @@
 import "@testing-library/jest-dom";
 import * as faker from "faker";
 import { Button } from "./Button";
-import { fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from "@testing-library/react";
 import { IconShip2 } from "../icons/IconShip2";
 import React from "react";
+import userEvent from "@testing-library/user-event";
 
 test("default button renders", () => {
-  const { getByText } = render(<Button>submit</Button>);
+  render(<Button>submit</Button>);
 
-  expect(getByText("submit")).toBeInTheDocument();
+  expect(screen.getByRole("button")).toBeInTheDocument();
 });
 
 test("when passed an icon, text and icon are rendered", () => {
-  const { getByText, getByTestId } = render(
-    <Button icon={<IconShip2 data-testid="icon" />}>submit</Button>
-  );
+  render(<Button icon={<IconShip2 data-testid="icon" />}>submit</Button>);
 
-  expect(getByText("submit")).toBeInTheDocument();
-  expect(getByTestId("icon")).toBeInTheDocument();
+  expect(screen.getByRole("button")).toBeInTheDocument();
+  expect(screen.getByTestId("icon")).toBeInTheDocument();
 });
 
 test("when passed an endIcon and text, both are rendered", () => {
-  const { getByText, getByTestId } = render(
-    <Button endIcon={<IconShip2 data-testid="icon" />}>submit</Button>
-  );
+  render(<Button endIcon={<IconShip2 data-testid="icon" />}>submit</Button>);
 
-  getByText("submit");
-  getByTestId("icon");
+  screen.getByRole("button");
+  screen.getByTestId("icon");
 });
 
 test("when passed an icon, endIcon, and text; all are rendered", () => {
-  const { getByText, getByTestId } = render(
+  render(
     <Button
       endIcon={<IconShip2 data-testid="endIcon" />}
       icon={<IconShip2 data-testid="icon" />}
@@ -39,39 +36,34 @@ test("when passed an icon, endIcon, and text; all are rendered", () => {
     </Button>
   );
 
-  getByText("submit");
-  getByTestId("icon");
-  getByTestId("endIcon");
+  screen.getByRole("button");
+  screen.getByTestId("icon");
+  screen.getByTestId("endIcon");
 });
 
 test("wyhen passed an icon and no children, should render an icon and no text content", () => {
-  const { container, getByTestId } = render(
-    <Button icon={<IconShip2 data-testid="icon" />} />
-  );
+  render(<Button icon={<IconShip2 data-testid="icon" />} />);
 
-  expect(container).toHaveTextContent("");
-  expect(getByTestId("icon")).toBeInTheDocument();
+  expect(screen.getByRole("button")).toHaveTextContent("");
+  expect(screen.getByTestId("icon")).toBeInTheDocument();
 });
 
 test("when passed `as` prop renders that element", () => {
   // include passthrough props
-  const { container, getByText } = render(
-    <Button as={<a href="https://apollographql.com" />}>button</Button>
-  );
+  render(<Button as={<a href="https://apollographql.com" />}>button</Button>);
 
-  expect(container.querySelector("a")).toBeInTheDocument();
-  expect(container.querySelector("button")).not.toBeInTheDocument();
-  expect(getByText("button")).toBeInTheDocument();
+  expect(screen.getByRole("link")).toBeInTheDocument();
+  expect(screen.getByRole("link")).toHaveTextContent("button");
+  expect(screen.queryByRole("button")).not.toBeInTheDocument();
 });
 
 test("when disabled, button does not call click handlers", () => {
   const rootElementOnClick = jest.fn();
   const asElementOnClick = jest.fn();
 
-  const { getByTestId } = render(
+  render(
     <Button
       as={<button onClick={asElementOnClick} />}
-      data-testid="button"
       disabled
       onClick={rootElementOnClick}
     >
@@ -80,7 +72,7 @@ test("when disabled, button does not call click handlers", () => {
   );
 
   // act
-  getByTestId("button").click();
+  screen.getByRole("button").click();
 
   // assert
   expect(asElementOnClick).not.toHaveBeenCalled();
@@ -91,10 +83,9 @@ test("when disabled, button with 'as=' set to not a button element does not call
   const rootElementOnClick = jest.fn();
   const asElementOnClick = jest.fn();
 
-  const { getByTestId } = render(
+  render(
     <Button
       as={<div onClick={asElementOnClick} />}
-      data-testid="button"
       disabled
       onClick={rootElementOnClick}
     >
@@ -102,10 +93,10 @@ test("when disabled, button with 'as=' set to not a button element does not call
     </Button>
   );
 
-  // act
-  getByTestId("button").click();
+  act(() => userEvent.click(screen.getByText("submit")));
 
   // assert
+  expect(screen.queryByRole("button")).not.toBeInTheDocument();
   expect(asElementOnClick).not.toHaveBeenCalled();
   expect(rootElementOnClick).not.toHaveBeenCalled();
 });
@@ -114,7 +105,7 @@ test("when loading, button does not call click handlers", () => {
   const rootElementOnClick = jest.fn();
   const asElementOnClick = jest.fn();
 
-  const { getByTestId } = render(
+  render(
     <Button
       as={<button onClick={asElementOnClick} />}
       data-testid="button"
@@ -126,31 +117,18 @@ test("when loading, button does not call click handlers", () => {
   );
 
   // act
-  getByTestId("button").click();
+  act(() => userEvent.click(screen.getByRole("button")));
 
   // assert
   expect(asElementOnClick).not.toHaveBeenCalled();
   expect(rootElementOnClick).not.toHaveBeenCalled();
 });
 
-test("when clicked should remove focus from itself", () => {
-  const { getByTestId } = render(<Button data-testid="button">submit</Button>);
-  const button = getByTestId("button");
-
-  // Verify button can have the focus at all, for example, when tabbed to
-  button.focus();
-  expect(button).toHaveFocus();
-
-  // Click the button and expect the focus to go away
-  fireEvent.click(button);
-  expect(button).not.toHaveFocus();
-});
-
 test("when passed onClick props to the element and the `as` prop, they should both be called", () => {
   const rootElementOnClick = jest.fn();
   const asElementOnClick = jest.fn();
 
-  const { getByText } = render(
+  render(
     <Button
       as={<button onClick={asElementOnClick} />}
       onClick={rootElementOnClick}
@@ -160,7 +138,7 @@ test("when passed onClick props to the element and the `as` prop, they should bo
   );
 
   // act
-  fireEvent.click(getByText("submit"));
+  act(() => userEvent.click(screen.getByRole("button")));
 
   // assert
   expect(asElementOnClick).toHaveBeenCalled();
@@ -168,18 +146,18 @@ test("when passed onClick props to the element and the `as` prop, they should bo
 });
 
 test("when passed unrecognized props, they should be rendered in the dom", () => {
-  const { getByTestId } = render(
+  render(
     <Button
       className="testClass"
       data-test-prop="test"
       data-testid="button"
       style={{ margin: 10 }}
     >
-      button
+      {faker.random.word()}
     </Button>
   );
 
-  const button = getByTestId("button");
+  const button = screen.getByRole("button");
 
   expect(button).toBeInTheDocument();
   expect(button).toHaveClass("testClass");
@@ -188,26 +166,17 @@ test("when passed unrecognized props, they should be rendered in the dom", () =>
 });
 
 test("when passed a type, should render it in the dom", () => {
-  const { getByTestId } = render(
-    <Button data-testid="button" type="button">
-      button
-    </Button>
-  );
+  render(<Button type="button">{faker.random.word()}</Button>);
 
-  expect(getByTestId("button")).toHaveAttribute("type", "button");
+  expect(screen.getByRole("button")).toHaveAttribute("type", "button");
 });
 
 test("ref is forwarded", () => {
   const ref = React.createRef<HTMLElement>();
-  const testId = faker.lorem.word();
 
-  const { getByTestId } = render(
-    <Button data-testid={testId} ref={ref}>
-      {faker.lorem.word()}
-    </Button>
-  );
+  render(<Button ref={ref}>{faker.lorem.word()}</Button>);
 
-  expect(ref.current).toBe(getByTestId(testId));
+  expect(ref.current).toBe(screen.getByRole("button"));
 });
 
 test("when mouseOut event occurs and button is pressed, button isn't focused", () => {
@@ -219,21 +188,27 @@ test("when mouseOut event occurs and button is pressed, button isn't focused", (
   // there's a mouseout event with a button pressed.
   button.focus();
 
-  fireEvent(
-    button,
-    new MouseEvent("mouseout", {
-      buttons: 1,
-      bubbles: true,
-      cancelable: true,
-    })
-  );
-  fireEvent(
-    button,
-    new MouseEvent("mouseup", {
-      buttons: 1,
-      bubbles: true,
-      cancelable: true,
-    })
-  );
+  act(() => {
+    fireEvent(
+      button,
+      new MouseEvent("mouseout", {
+        buttons: 1,
+        bubbles: true,
+        cancelable: true,
+      })
+    );
+  });
+
+  act(() => {
+    fireEvent(
+      button,
+      new MouseEvent("mouseup", {
+        buttons: 1,
+        bubbles: true,
+        cancelable: true,
+      })
+    );
+  });
+
   expect(button).not.toHaveFocus();
 });

@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import React from "react";
 import userEvent from "@testing-library/user-event";
-import { render } from "@testing-library/react";
+import { act, render } from "@testing-library/react";
 import { TextField } from "./TextField";
 
 test("when passed a label, renders it", () => {
@@ -21,7 +21,7 @@ test("when the label is clicked it focuses the input", () => {
   const input = getByLabelText(labelText);
   expect(input).not.toHaveFocus();
 
-  userEvent.click(label);
+  act(() => userEvent.click(label));
   expect(input).toHaveFocus();
 });
 
@@ -117,7 +117,7 @@ test("calls events", async () => {
   expect(onChange).not.toHaveBeenCalled();
   expect(onFocus).toHaveBeenCalled();
 
-  await userEvent.type(input, "test");
+  await act(() => userEvent.type(input, "test"));
   expect(onBlur).not.toHaveBeenCalled();
   expect(onChange).toHaveBeenCalled();
 
@@ -133,7 +133,7 @@ test("when disabled, does not accept input", async () => {
   );
 
   const input = getByLabelText(inputLabel);
-  await userEvent.type(input, textInput);
+  await act(() => userEvent.type(input, textInput));
 
   expect(queryByText(textInput)).not.toBeInTheDocument();
 });

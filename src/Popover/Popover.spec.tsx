@@ -3,7 +3,7 @@ import * as faker from "faker";
 import React from "react";
 import userEvent from "@testing-library/user-event";
 import { Button } from "../Button";
-import { render, screen, waitFor } from "@testing-library/react";
+import { act, render, screen, waitFor } from "@testing-library/react";
 import { Popover } from "../Popover";
 import { ListItem } from "../ListItem";
 import { SpaceKitProvider } from "../SpaceKitProvider";
@@ -25,7 +25,7 @@ test("when child of `Popover` is clicked, list is shown", () => {
   );
 
   expect(screen.queryByText(listItemText)).not.toBeInTheDocument();
-  userEvent.click(screen.getByRole("button"));
+  act(() => userEvent.click(screen.getByRole("button")));
   screen.getByText(listItemText);
 });
 
@@ -45,11 +45,11 @@ test("when `onClick` handler does not call `stopPropagation()`, list closes when
     </SpaceKitProvider>
   );
 
-  userEvent.click(screen.getByRole("button"));
+  act(() => userEvent.click(screen.getByRole("button")));
   await waitFor(() =>
     expect(screen.getByRole("button")).toHaveAttribute("aria-expanded", "true")
   );
-  userEvent.click(screen.getByText(listItemText));
+  act(() => userEvent.click(screen.getByText(listItemText)));
   expect(screen.queryByText(listItemText)).not.toBeInTheDocument();
 });
 
@@ -75,8 +75,8 @@ test("when `onClick` handler calls `stopPropagation()`, list doesn't close when 
     </SpaceKitProvider>
   );
 
-  userEvent.click(screen.getByRole("button"));
-  userEvent.click(screen.getByText(listItemText));
+  act(() => userEvent.click(screen.getByRole("button")));
+  act(() => userEvent.click(screen.getByText(listItemText)));
 
   // This is a bummer and I would love ideas on how to improve it. Things are
   // set up in a way where this render will be syncronous, meaning we don't
@@ -105,8 +105,8 @@ test("when interactive is set, list doesn't close when `ListItem` in `content` i
     </SpaceKitProvider>
   );
 
-  userEvent.click(screen.getByRole("button"));
-  userEvent.click(screen.getByText(listItemText));
+  act(() => userEvent.click(screen.getByRole("button")));
+  act(() => userEvent.click(screen.getByText(listItemText)));
 
   // refer to above test for rationale here
   await new Promise((resolve) => setTimeout(resolve, 100));
