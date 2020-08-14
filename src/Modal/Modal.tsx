@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/ban-ts-ignore */
 /** @jsx jsx */
 import { jsx, css, ClassNames } from "@emotion/core";
 import React, { useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, MotionProps } from "framer-motion";
 import * as typography from "../typography";
 import { colors } from "../colors";
 import * as CSS from "csstype";
@@ -172,15 +171,18 @@ export const Modal: React.FC<Props> = ({
 
   /**
    * Framer motion component to render. The type will be taken from the `as`
-   * prop
+   * prop.
+   *
+   * We have to strip the type because we'll get an error about the union being
+   * too complex to model because `motion` has over 100 options.
    */
-  const MotionComponent = motion[type];
+  const MotionComponent: React.ComponentType<MotionProps> = motion[type];
 
   return (
     <ClassNames>
       {({ css, cx }) => {
-        return React.createElement(
-          containerAs.type,
+        return React.cloneElement(
+          containerAs,
           {
             onClick: onClose,
             ...containerAs.props,
@@ -188,6 +190,7 @@ export const Modal: React.FC<Props> = ({
           },
           <MotionComponent
             {...as.props}
+            ref={(as as any).ref}
             animate={{ opacity: 1, scale: 1 }}
             initial={disableAnimations ? false : { opacity: 0, scale: 0.9 }}
             transition={{
@@ -199,18 +202,11 @@ export const Modal: React.FC<Props> = ({
                 velocity: 8,
               },
             }}
-            onClick={
-              // Ignore the type of `event` because the React.MouseEvent
-              // generic will be a union of 170 different DOM elements;
-              // TypeScript can't handle that.
-              //
-              // @ts-ignore
-              (event: React.MouseEvent<any>) => {
-                event.stopPropagation();
+            onClick={(event: React.MouseEvent<any>) => {
+              event.stopPropagation();
 
-                as.props.onClick?.(event);
-              }
-            }
+              as.props.onClick?.(event);
+            }}
             className={cx(
               css(
                 {
