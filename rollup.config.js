@@ -49,6 +49,7 @@ function CJS() {
       "@emotion/core",
       "@react-aria/button",
       "@react-aria/focus",
+      "@react-aria/interactions",
       "@react-aria/utils",
       "@tippyjs/react",
       "@popperjs/core",

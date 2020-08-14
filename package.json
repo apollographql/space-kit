@@ -67,6 +67,7 @@
     "@emotion/core": "^10.0.28",
     "@react-aria/button": "^3.1.0",
     "@react-aria/focus": "^3.1.0",
+    "@react-aria/interactions": "^3.1.0",
     "@react-aria/switch": "^3.1.0",
     "@react-aria/utils": "^3.1.0",
     "@react-aria/visually-hidden": "^3.1.0",
