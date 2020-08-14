@@ -47,6 +47,7 @@ function CJS() {
     external: [
       "@emotion/cache",
       "@emotion/core",
+      "@react-aria/button",
       "@react-aria/focus",
       "@react-aria/utils",
       "@tippyjs/react",
