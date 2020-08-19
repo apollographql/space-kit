@@ -64,12 +64,7 @@ export const Card: React.FC<CardProps> = ({
     <div
       css={{
         display: "flex",
-        marginBottom:
-          !children ||
-          (Array.isArray(children) &&
-            children.filter((child) => !!child).length === 0)
-            ? 0
-            : 24,
+        marginBottom: React.Children.toArray(children).some(Boolean) ? 24 : 0
       }}
     >
       <div
