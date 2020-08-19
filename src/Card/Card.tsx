@@ -61,7 +61,12 @@ export const Card: React.FC<CardProps> = ({
       paddingBottom: size === "large" ? 16 : 28,
     }}
   >
-    <div css={{ display: "flex", marginBottom: children ? 24 : 0 }}>
+    <div
+      css={{
+        display: "flex",
+        marginBottom: React.Children.toArray(children).some(Boolean) ? 24 : 0,
+      }}
+    >
       <div
         css={{
           flex: "1 1 0%",
