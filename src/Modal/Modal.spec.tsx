@@ -1,5 +1,5 @@
 import React from "react";
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { Modal } from "./Modal";
 import { Button } from "../Button";
@@ -209,4 +209,20 @@ test("when passed `containerAs` prop, props should be merged", () => {
   expect(getByTestId(testId)).toHaveClass(className);
   expect(getByTestId(testId).localName).toBe("span");
   expect(getByTestId(testId)).toHaveStyle("font-weight: bold");
+});
+
+test("when `as` includes a `ref`, `ref` is propagated", () => {
+  const ref = React.createRef<HTMLFormElement>();
+
+  render(
+    <Modal
+      as={<form data-testid="form" ref={ref} />}
+      size="medium"
+      title="title"
+    >
+      content
+    </Modal>
+  );
+
+  expect(ref.current).toBe(screen.getByTestId("form"));
 });
