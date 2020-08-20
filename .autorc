@@ -2,6 +2,7 @@
   "name": "Apollo GraphQL",
   "email": "opensource@apollographql.com",
   "owner": "Justin Anastos <justin@apollographql.com>",
+  "baseBranch": "main",
   "plugins": [
     "npm",
     "released",
