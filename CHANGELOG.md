@@ -1,3 +1,19 @@
+# v7.10.0 (Thu Aug 20 2020)
+
+#### 🚀 Enhancement
+
+- [AR-1818](https://apollographql.atlassian.net/browse/AR-1818): Modal: Make `as` prop propogate `ref` [#217](https://github.com/apollographql/space-kit/pull/217) ([@justinanastos](https://github.com/justinanastos))
+
+#### ⚠️  Pushed to `master`
+
+- Update base branch for auto and bump to 7.9.0 ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v7.8.0 (Thu Aug 13 2020)
 
 #### 🚀 Enhancement
