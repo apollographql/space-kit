@@ -110,10 +110,6 @@ workflows:
               ignore:
                 - main
       - release:
-          requires:
-            - eslint
-            - typescript
-            - test
           filters:
             branches:
               only:

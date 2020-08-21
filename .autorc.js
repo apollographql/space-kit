@@ -4,11 +4,7 @@ module.exports = {
   email: "opensource@apollographql.com",
   owner: "Justin Anastos <justin@apollographql.com>",
   baseBranch: "main",
-  plugins: [
-    "npm",
-    "released",
-    ["jira", { url: "https://apollographql.atlassian.net/browse" }],
-  ],
+  plugins: [["jira", { url: "https://apollographql.atlassian.net/browse" }]],
   labels: [
     {
       releaseType: "none",
