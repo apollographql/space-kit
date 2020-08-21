@@ -1,5 +1,6 @@
 src/icons/*.tsx
 !.eslintrc.js
+!.autorc.js
 
 # Storybook
 !.storybook
