@@ -98,6 +98,7 @@ export const Switch: React.FC<SwitchProps> & { Label: typeof Label } = ({
           className={cx(
             css({
               opacity: props.isDisabled ? 0.5 : undefined,
+              position: "relative",
             }),
             className
           )}
