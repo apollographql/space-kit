@@ -37,6 +37,7 @@ const groupedIcons = svgsReq.keys().reduce((map, fullname) => {
   map[category].push({
     basename: componentName,
     isStreamlineIcon: fullname.includes("-sl"),
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     Component: require(`../icons/${componentName}.tsx`)[componentName],
   });
 
