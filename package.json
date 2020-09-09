@@ -73,7 +73,7 @@
   "devDependencies": {
     "@actions/core": "^1.1.0",
     "@actions/github": "^1.1.0",
-    "@auto-it/jira": "^7.6.2",
+    "@auto-it/jira": "^9.53.1",
     "@babel/core": "^7.4.5",
     "@babel/preset-env": "^7.9.5",
     "@babel/traverse": "^7.5.5",
@@ -98,7 +98,7 @@
     "@types/svgo": "^1.2.1",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
-    "auto": "^9.28.0",
+    "auto": "^9.53.1",
     "babel-loader": "^8.1.0",
     "btoa": "^1.2.1",
     "eslint": "^6.7.2",
