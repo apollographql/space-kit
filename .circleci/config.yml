@@ -60,16 +60,27 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             # see https://circleci.com/gh/apollographql/space-kit/edit#checkout
-            - "c3:d8:f4:b7:55:5c:70:72:51:21:8c:e1:63:92:ce:92"
-      - run:
-          name: Add NPM_TOKEN to `.npmrc`
-          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/space-kit/.npmrc
+            - "24:43:ac:47:ed:1f:e3:8c:2f:1f:cd:99:64:39:7d:77"
+      # - run:
+      #     name: Add NPM_TOKEN to `.npmrc`
+      #     command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/space-kit/.npmrc
       - run:
           name: Install npm dependencies
           command: npm ci
       - run:
           name: Release
           command: npm run release
+
+  canary:
+    <<: *defaults
+    steps:
+      - checkout
+      - run:
+          name: Install npm dependencies
+          command: npm ci
+      - run:
+          name: Release
+          command: npx auto canary
 
   test:
     <<: *defaults
@@ -104,6 +115,11 @@ workflows:
       - eslint
       - typescript
       - test
+      - canary:
+          filters:
+            branches:
+              ignore:
+                - main
       - check-label:
           filters:
             branches:
