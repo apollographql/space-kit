@@ -71,6 +71,17 @@ jobs:
           name: Release
           command: npm run release
 
+  canary:
+    <<: *defaults
+    steps:
+      - checkout
+      - run:
+          name: Install npm dependencies
+          command: npm ci
+      - run:
+          name: Release
+          command: npx auto canary
+
   test:
     <<: *defaults
     steps:
@@ -104,6 +115,11 @@ workflows:
       - eslint
       - typescript
       - test
+      - canary:
+          filters:
+            branches:
+              ignore:
+                - main
       - check-label:
           filters:
             branches:
