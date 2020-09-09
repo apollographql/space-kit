@@ -1,11 +1,11 @@
-import { Instance } from "tippy.js";
+import { Plugin } from "tippy.js";
 
 // @see https://atomiks.github.io/tippyjs/misc/#onmouserest-implementation
 
-export const mouseRest = {
+export const mouseRest: Plugin = {
   name: "mouseRest",
   defaultValue: false,
-  fn(instance: Instance) {
+  fn(instance) {
     const { reference } = instance;
     const DEBOUNCE_MS = 80;
 
