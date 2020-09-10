@@ -1,3 +1,26 @@
+# v7.13.0 (Thu Sep 10 2020)
+
+#### 🚀 Enhancement
+
+- adds icon-break to essentials category [#224](https://github.com/apollographql/space-kit/pull/224) ([@caydie-tran](https://github.com/caydie-tran))
+
+#### 🐛  Bug Fix
+
+- WIP: Fixing releases [#229](https://github.com/apollographql/space-kit/pull/229) ([@justinanastos](https://github.com/justinanastos))
+
+#### 🐛 Bug Fix
+
+- Update SSH key to try to fix automatic releases [#228](https://github.com/apollographql/space-kit/pull/228) ([@justinanastos](https://github.com/justinanastos))
+- Test automatic releases [#227](https://github.com/apollographql/space-kit/pull/227) ([@justinanastos](https://github.com/justinanastos))
+- Try to fix releases [#226](https://github.com/apollographql/space-kit/pull/226) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 2
+
+- Caydie Tran ([@caydie-tran](https://github.com/caydie-tran))
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v7.10.0 (Thu Aug 20 2020)
 
 #### 🚀 Enhancement
