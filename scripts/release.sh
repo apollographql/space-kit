@@ -1,3 +1,5 @@
+## https://intuit.github.io/auto/docs/welcome/getting-started#enabling-skip-release-label
+
 export PATH=$(npm bin):$PATH
 
 VERSION=`auto version`
@@ -12,7 +14,6 @@ if [ ! -z "$VERSION" ]; then
   npm publish
 
   ## Create GitHub Release
-  git remote -v
   git push --verbose --follow-tags --set-upstream origin $branch
-  auto release -v
+  auto release
 fi
