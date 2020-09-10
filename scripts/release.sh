@@ -14,6 +14,6 @@ if [ ! -z "$VERSION" ]; then
   npm publish
 
   ## Create GitHub Release
-  git push --verbose --follow-tags --set-upstream origin $branch
+  git push --verbose --follow-tags --set-upstream https://github.com/apollographql/space-kit.git $branch
   auto release
 fi
