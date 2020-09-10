@@ -1,3 +1,20 @@
+# v7.13.1 (Thu Sep 10 2020)
+
+#### 🐛  Bug Fix
+
+- WIP: Fixing releases [#229](https://github.com/apollographql/space-kit/pull/229) ([@justinanastos](https://github.com/justinanastos))
+
+#### 🐛 Bug Fix
+
+- Update SSH key to try to fix automatic releases [#228](https://github.com/apollographql/space-kit/pull/228) ([@justinanastos](https://github.com/justinanastos))
+- Test automatic releases [#227](https://github.com/apollographql/space-kit/pull/227) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v7.10.0 (Thu Aug 20 2020)
 
 #### 🚀 Enhancement
