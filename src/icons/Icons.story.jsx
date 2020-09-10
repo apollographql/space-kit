@@ -68,6 +68,7 @@ const AllIcons: React.FC = ({ color, ...otherProps }) =>
             style={{
               color,
               height: 20,
+              width: 20,
             }}
           />
         </div>
