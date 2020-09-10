@@ -5,10 +5,10 @@ import { AbstractTooltip, AbstractTooltipProps } from "../AbstractTooltip";
 type Props = Pick<
   React.ComponentProps<typeof AbstractTooltip>,
   | "children"
+  | "className"
   | "content"
   | "disabled"
   | "interactive"
-  | "className"
   | "placement"
 > &
   AbstractTooltipProps;
