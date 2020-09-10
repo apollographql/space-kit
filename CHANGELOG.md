@@ -1,5 +1,17 @@
 # v7.13.1 (Thu Sep 10 2020)
 
+#### 🐛 Bug Fix
+
+- Sort types in `AbstractTooltip` [#230](https://github.com/apollographql/space-kit/pull/230) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
+# v7.13.1 (Thu Sep 10 2020)
+
 #### 🐛  Bug Fix
 
 - WIP: Fixing releases [#229](https://github.com/apollographql/space-kit/pull/229) ([@justinanastos](https://github.com/justinanastos))
