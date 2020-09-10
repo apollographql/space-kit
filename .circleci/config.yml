@@ -60,10 +60,10 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             # see https://circleci.com/gh/apollographql/space-kit/edit#checkout
-            - "24:43:ac:47:ed:1f:e3:8c:2f:1f:cd:99:64:39:7d:77"
-      # - run:
-      #     name: Add NPM_TOKEN to `.npmrc`
-      #     command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/space-kit/.npmrc
+            - "66:03:9d:44:4c:ef:74:c5:ec:4e:23:21:8a:29:f3:cf"
+      - run:
+          name: Add NPM_TOKEN to `.npmrc`
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/space-kit/.npmrc
       - run:
           name: Install npm dependencies
           command: npm ci
