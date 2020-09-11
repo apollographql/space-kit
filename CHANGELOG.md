@@ -1,3 +1,15 @@
+# v7.14.0 (Fri Sep 11 2020)
+
+#### 🚀 Enhancement
+
+- Add new icons (Clipboard, Codeblock, Sync, Table) [#231](https://github.com/apollographql/space-kit/pull/231) ([@jglovier](https://github.com/jglovier))
+
+#### Authors: 1
+
+- Joel Glovier ([@jglovier](https://github.com/jglovier))
+
+---
+
 # v7.13.1 (Thu Sep 10 2020)
 
 #### 🐛 Bug Fix
