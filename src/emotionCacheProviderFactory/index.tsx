@@ -22,7 +22,9 @@ import createCache from "@emotion/cache";
  * @param container {HTMLElement} The container element that you want all your
  * emotion styles to be placed inside of
  */
-export function emotionCacheProviderFactory(container?: HTMLElement | null) {
+export function emotionCacheProviderFactory(
+  container?: HTMLElement | null
+): React.FC {
   // This expects us to have added `<style id="spaceKitEmotionStyleContainer"></style>`
   // somewhere to the DOM
   const emotionCache = createCache({
