@@ -31,6 +31,7 @@
     "test": "run-p test:*",
     "test:typescript": "tsc --noEmit",
     "test:unit": "jest",
+    "test:duplicate-icons": "ts-node --transpile-only src/icons/scripts/assertNoDuplicates",
     "test:unit:coverage": "jest --collectCoverage",
     "watch": "run-p watch:*",
     "watch:rollup": "npm run build -- --watch",

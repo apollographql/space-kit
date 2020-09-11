@@ -29,6 +29,18 @@ jobs:
           key: storybook-cache--{{ .Branch }}--{{ checksum ".circleci/config.yml" }}--{{ epoch }}
           paths:
             - node_modules/.cache/storybook
+
+  check-conflicting-icon-components:
+    <<: *defaults
+    steps:
+      - checkout
+      - run:
+          name: Install npm dependencies
+          command: npm ci
+      - run:
+          name: Check for duplicate icons
+          command: npm run test:duplicate-icons -s
+
   eslint:
     <<: *defaults
     steps:
@@ -112,6 +124,7 @@ workflows:
   test:
     jobs:
       - chromatic
+      - check-conflicting-icon-components
       - eslint
       - typescript
       - test
@@ -127,6 +140,7 @@ workflows:
                 - main
       - release:
           requires:
+            - check-conflicting-icon-components
             - eslint
             - typescript
             - test
