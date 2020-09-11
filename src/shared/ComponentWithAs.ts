@@ -19,7 +19,7 @@ export type ComponentWithAs<
       (As extends keyof JSX.IntrinsicElements
         ? JSX.IntrinsicElements[As]
         : As extends React.ReactElement
-        ? {}
+        ? unknown
         : never)
   >
 ) => ReturnType<React.FC>;

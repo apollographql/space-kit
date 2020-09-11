@@ -11,12 +11,11 @@ module.exports = {
       jsx: true,
       modules: true,
     },
-    ecmaVersion: 2019,
+    ecmaVersion: 2021,
     sourceType: "module",
   },
   extends: [
     "problems",
-    "problems/node10",
     "plugin:react/recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
@@ -42,6 +41,9 @@ module.exports = {
      */
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
+
+    // In favor of @typescript-eslint variants
+    "no-use-before-define": "off",
 
     // The default for this rule requires that we define typedefs before we use
     // them, which is silly because that can't cause a bug because typedefs are

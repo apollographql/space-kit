@@ -1,4 +1,4 @@
-import isChromatic from "storybook-chromatic/isChromatic";
+import isChromatic from "chromatic/isChromatic";
 import React from "react";
 import { addDecorator, addParameters } from "@storybook/react";
 import { SpaceKitProvider } from "../src/SpaceKitProvider";

@@ -2,6 +2,19 @@ import React from "react";
 import classnames from "classnames";
 import { colors } from "../src/colors";
 
+export const Tag = ({ bool }) => (
+  <div
+    className="font-lbl font-code"
+    style={{
+      borderRadius: 2,
+      color: colors.white,
+      backgroundColor: colors.black.base,
+    }}
+  >
+    {bool ? "PASS" : "FAIL"}
+  </div>
+);
+
 export const Flag = ({ small, light, pass }) => (
   <div
     className={classnames("font-semibold", small ? "font-sm" : "")}
@@ -15,19 +28,6 @@ export const Flag = ({ small, light, pass }) => (
   >
     <div>A</div>
     <Tag bool={pass} />
-  </div>
-);
-
-export const Tag = ({ bool }) => (
-  <div
-    className="font-lbl font-code"
-    style={{
-      borderRadius: 2,
-      color: colors.white,
-      backgroundColor: colors.black.base,
-    }}
-  >
-    {bool ? "PASS" : "FAIL"}
   </div>
 );
 
