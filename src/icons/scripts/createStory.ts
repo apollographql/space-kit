@@ -67,7 +67,7 @@ mdx += `import { IconDemo } from './icons.story/IconDemo';\n`;
   Object.entries(categorizedFilenames).forEach(([category, filenames]) => {
     mdx += `## ${category.substr(0, 1).toUpperCase()}${category.substr(1)}\n`;
 
-    mdx += `<Canvas noFlexbox>\n`;
+    mdx += "<Canvas>\n";
     mdx += filenames
       .map((filename) => {
         const componentName = formatComponentName(
