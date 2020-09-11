@@ -1,3 +1,15 @@
+# v7.14.1 (Fri Sep 11 2020)
+
+#### 🐛 Bug Fix
+
+- Upgrade eslint and TypeScript dependencies [#225](https://github.com/apollographql/space-kit/pull/225) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v7.14.0 (Fri Sep 11 2020)
 
 #### 🚀 Enhancement
