@@ -67,17 +67,22 @@ mdx += `import { IconDemo } from './icons.story/IconDemo';\n`;
   Object.entries(categorizedFilenames).forEach(([category, filenames]) => {
     mdx += `## ${category.substr(0, 1).toUpperCase()}${category.substr(1)}\n`;
 
-    mdx += "<Canvas>\n";
-    mdx += filenames
-      .map((filename) => {
-        const componentName = formatComponentName(
-          path.basename(filename, path.extname(filename))
-        );
+    mdx += `<Canvas mdxSource="${filenames
+      .map((filename) =>
+        formatComponentName(path.basename(filename, path.extname(filename)))
+      )
+      .map((componentName) => `<${componentName} />`)
+      .join("\n")}">\n`;
 
-        return `<Story name="${componentName}">
+    mdx += filenames
+      .map((filename) =>
+        formatComponentName(path.basename(filename, path.extname(filename)))
+      )
+      .map(
+        (componentName) => `<Story name="${componentName}">
           <IconDemo name="${componentName}" Component={${componentName}} />
-        </Story>`;
-      })
+        </Story>`
+      )
       .join("\n");
     mdx += "</Canvas>\n";
     mdx += "\n";

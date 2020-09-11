@@ -8,20 +8,31 @@ interface Props {
   Component: React.ComponentType<any>;
 }
 
-const IconDemoItem: React.FC<{ label: string }> = ({ children, label }) => (
+const IconDemoItem: React.FC<{ className?: string; label: string }> = ({
+  children,
+  className,
+  label,
+}) => (
   <ClassNames>
-    {({ css }) => (
+    {({ css, cx }) => (
       <div
-        className={css({
-          textAlign: "center",
-          width: 40,
-        })}
+        className={cx(
+          css({
+            textAlign: "center",
+            width: 40,
+          }),
+          className
+        )}
       >
         <div>{children}</div>
         <div
           className={css({
             ...typography.base.xsmall,
             color: colors.grey.light,
+
+            ".sbdocs &": {
+              display: "none",
+            },
           })}
         >
           {label}
@@ -37,39 +48,62 @@ export const IconDemo: React.FC<Props> = ({ name, Component }) => {
       {({ css }) => (
         <div
           className={css({
-            backgroundColor: colors.silver.light,
-            borderRadius: 8,
-            margin: 4,
-            padding: 8,
+            display: "inline-flex",
             textAlign: "center",
-            whiteSpace: "nowrap",
-            width: 165,
+
+            ".sbdocs &": {
+              display: "block",
+              width: 76,
+              height: 76,
+              margin: -8,
+            },
           })}
+          title={name}
         >
-          <div
-            className={css({
-              ...typography.mono.xsmall,
-              marginBottom: 8,
-            })}
-          >
-            &lt;{name} /&gt;
-          </div>
           <div
             className={css({
               display: "flex",
               justifyContent: "space-between",
+
+              ".sbdocs &": {
+                justifyContent: "center",
+              },
             })}
           >
             <IconDemoItem label="normal">
-              <Component className={css({ width: 20, height: 20 })} />
+              <Component
+                className={css({
+                  width: 20,
+                  height: 20,
+
+                  ".sbdocs &": {
+                    width: 20,
+                    height: 20,
+                  },
+                })}
+              />
             </IconDemoItem>
-            <IconDemoItem label="thin">
+            <IconDemoItem
+              label="thin"
+              className={css({
+                ".sbdocs &": {
+                  display: "none",
+                },
+              })}
+            >
               <Component
                 className={css({ width: 20, height: 20 })}
                 weight="thin"
               />
             </IconDemoItem>
-            <IconDemoItem label="colored">
+            <IconDemoItem
+              label="colored"
+              className={css({
+                ".sbdocs &": {
+                  display: "none",
+                },
+              })}
+            >
               <Component
                 className={css({
                   width: 20,
@@ -78,6 +112,23 @@ export const IconDemo: React.FC<Props> = ({ name, Component }) => {
                 })}
               />
             </IconDemoItem>
+          </div>
+          <div
+            className={css({
+              ...typography.base.xsmall,
+              color: colors.grey.lighter,
+              marginBottom: 8,
+              overflow: "hidden",
+              whiteSpace: "nowrap",
+              textOverflow: "ellipsis",
+
+              display: "none",
+              ".sbdocs &": {
+                display: "block",
+              },
+            })}
+          >
+            {name}
           </div>
         </div>
       )}
