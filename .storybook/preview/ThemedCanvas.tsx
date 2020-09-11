@@ -5,6 +5,8 @@ import { assertUnreachable } from "../../src/shared/assertUnreachable";
 import { Canvas } from "@storybook/addon-docs/dist/blocks/Canvas";
 
 interface ThemedCanvasProps extends React.ComponentProps<typeof Canvas> {
+  noFlexbox?: boolean;
+
   /**
    * Space Kit specific theme to render the preview with.
    *
@@ -19,6 +21,7 @@ interface ThemedCanvasProps extends React.ComponentProps<typeof Canvas> {
  * a theme-specific className.
  */
 export const ThemedCanvas: React.FC<ThemedCanvasProps> = ({
+  noFlexbox = false,
   theme = "light",
   ...props
 }) => {
@@ -36,7 +39,16 @@ export const ThemedCanvas: React.FC<ThemedCanvasProps> = ({
                   backgroundColor: colors.midnight.darkest,
                   color: colors.white,
                 })
-              : assertUnreachable(theme)
+              : assertUnreachable(theme),
+            noFlexbox &&
+              css({
+                "> * > * > *": {
+                  display: "block !important",
+                  // These margins counteract the forced 10 pixel border added
+                  marginTop: -10,
+                  marginBottom: -10,
+                },
+              })
           )}
         />
       )}

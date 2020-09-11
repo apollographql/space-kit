@@ -8,20 +8,32 @@ interface Props {
   Component: React.ComponentType<any>;
 }
 
-const IconDemoItem: React.FC<{ label: string }> = ({ children, label }) => (
+const IconDemoItem: React.FC<{ className?: string; label: string }> = ({
+  children,
+  className,
+  label,
+}) => (
   <ClassNames>
-    {({ css }) => (
+    {({ cx, css }) => (
       <div
-        className={css({
-          textAlign: "center",
-          width: 40,
-        })}
+        className={cx(
+          css({
+            textAlign: "center",
+            width: 40,
+          }),
+          className
+        )}
       >
         <div>{children}</div>
         <div
           className={css({
             ...typography.base.xsmall,
             color: colors.grey.light,
+            lineHeight: 1,
+            marginTop: 4,
+            ".sbdocs &": {
+              display: "none",
+            },
           })}
         >
           {label}
@@ -37,19 +49,23 @@ export const IconDemo: React.FC<Props> = ({ name, Component }) => {
       {({ css }) => (
         <div
           className={css({
-            backgroundColor: colors.silver.light,
-            borderRadius: 8,
-            margin: 4,
-            padding: 8,
-            textAlign: "center",
-            whiteSpace: "nowrap",
-            width: 165,
+            alignItems: "center",
+            display: "inline-flex",
+            ".sbdocs &": {
+              dipsplay: "flex",
+              width: 220,
+            },
           })}
         >
           <div
             className={css({
               ...typography.mono.xsmall,
-              marginBottom: 8,
+              flex: 1,
+              display: "none",
+
+              ".sbdocs &": {
+                display: "block",
+              },
             })}
           >
             &lt;{name} /&gt;
@@ -58,18 +74,33 @@ export const IconDemo: React.FC<Props> = ({ name, Component }) => {
             className={css({
               display: "flex",
               justifyContent: "space-between",
+              flex: "none",
             })}
           >
             <IconDemoItem label="normal">
               <Component className={css({ width: 20, height: 20 })} />
             </IconDemoItem>
-            <IconDemoItem label="thin">
+            <IconDemoItem
+              label="thin"
+              className={css({
+                ".sbdocs &": {
+                  display: "none",
+                },
+              })}
+            >
               <Component
                 className={css({ width: 20, height: 20 })}
                 weight="thin"
               />
             </IconDemoItem>
-            <IconDemoItem label="colored">
+            <IconDemoItem
+              label="colored"
+              className={css({
+                ".sbdocs &": {
+                  display: "none",
+                },
+              })}
+            >
               <Component
                 className={css({
                   width: 20,
