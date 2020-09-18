@@ -23,6 +23,16 @@ interface AlertBannerProps {
    */
   children?: React.ReactNode;
 
+  /**
+   * Override container around `{children}`. You can pass either an intrinisic
+   * jsx element as a string (like "p") or a React element (`<p />`)
+   *
+   * If you pass a React element, props that we add are spread onto the input.
+   *
+   * @default "div"
+   */
+  childrenContainerAs?: React.ReactElement | keyof JSX.IntrinsicElements;
+
   className?: string;
   style?: CSSProperties;
 
@@ -34,6 +44,7 @@ interface AlertBannerProps {
 
 export const AlertBanner: React.FC<AlertBannerProps> = ({
   children,
+  childrenContainerAs = "div",
   theme = "light",
   type,
   ...otherProps
@@ -89,13 +100,19 @@ export const AlertBanner: React.FC<AlertBannerProps> = ({
             type !== "warn" && { fill: colors.white },
         }}
       />
-      {children}
+      {React.isValidElement(childrenContainerAs)
+        ? React.cloneElement(childrenContainerAs, {}, children)
+        : React.createElement(childrenContainerAs, {}, children)}
     </section>
   );
 };
 
 AlertBanner.propTypes = {
   children: PropTypes.node,
+  childrenContainerAs: PropTypes.oneOfType([
+    PropTypes.element.isRequired,
+    PropTypes.string.isRequired as any, // Using PropTypes.string to match keyof JSX.IntrinsicElements
+  ]),
   type: PropTypes.oneOf(["info", "warn", "error", "success"] as const)
     .isRequired,
 };
