@@ -1,3 +1,38 @@
+# v7.15.0 (Mon Sep 21 2020)
+
+### Release Notes
+
+_From #238_
+
+Children sometimes have multiple elements (like `<code>` and `ClickableText`) and will look bad because we're using flexbox to align elements to the middle. This will make sure that consumers don't have to wrap their content with a `<div />`
+
+_From #234_
+
+We store our icon SVGs in categorized folders that are used in storybook to show categorized lists of icons. When we generate components for those SVGs we strip off `-sl`, indicating this is a streamline library icon, and we write all the components to a flat directory. This will cause icons to be overwritten if there are two file names that will result in the same component name.
+
+This PR adds an `npm` script and CI checks to validate there are no duplicates. Since we already have duplicates, this PR also removes them.
+
+---
+
+#### 🚀 Enhancement
+
+- `AlertBanner`: wrap `children` in customizable `childrenContainerAs` element [#238](https://github.com/apollographql/space-kit/pull/238) ([@justinanastos](https://github.com/justinanastos))
+
+#### 📝 Documentation
+
+- Restore Color storybook story [#237](https://github.com/apollographql/space-kit/pull/237) ([@justinanastos](https://github.com/justinanastos))
+- [AR-1850,FTD-35](https://apollographql.atlassian.net/browse/AR-1850/FTD-35): FTD-35 Upgrade `Icon` docspage and storybook stories [#235](https://github.com/apollographql/space-kit/pull/235) ([@justinanastos](https://github.com/justinanastos))
+
+#### 🏠 Internal
+
+- [AR-1848](https://apollographql.atlassian.net/browse/AR-1848): Add CI check for icons that will generate the same filename [#234](https://github.com/apollographql/space-kit/pull/234) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v7.14.1 (Fri Sep 11 2020)
 
 #### 🐛 Bug Fix
