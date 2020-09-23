@@ -5,7 +5,6 @@ import { formatComponentName } from "./formatComponentName";
 import { svgo } from "./convertUtils/setupSvgo";
 import * as types from "@babel/types";
 import traverse from "@babel/traverse";
-import { colors } from "../../colors";
 import prettier from "prettier";
 
 const SVG_PATH = path.resolve(__dirname, "..", "svgs");
