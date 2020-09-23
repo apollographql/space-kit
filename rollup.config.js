@@ -38,6 +38,7 @@ function CJS() {
           ![
             path.join("src", "icons", "scripts"),
             path.join("src", "illustrations", "scripts"),
+            path.join("src", "pictograms", "scripts"),
             path.join("src", "shared"),
             path.join("src", "AbstractTooltip"),
             path.join("src", "ListConfig"),
