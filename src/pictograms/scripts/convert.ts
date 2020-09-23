@@ -32,29 +32,29 @@ function addDimensions(node: types.JSXOpeningElement) {
     return;
   }
 
-  const [, , width, height] = viewBoxAttribute.value.value.split(/\s+/);
+  // const [, , width, height] = viewBoxAttribute.value.value.split(/\s+/);
 
-  node.attributes.push(
-    types.jsxAttribute(
-      types.jsxIdentifier("css"),
-      types.jsxExpressionContainer(
-        types.objectExpression([
-          types.objectProperty(
-            types.stringLiteral("color"),
-            types.stringLiteral(colors.silver.light)
-          ),
-          types.objectProperty(
-            types.stringLiteral("height"),
-            types.stringLiteral(`${height}px`)
-          ),
-          types.objectProperty(
-            types.stringLiteral("width"),
-            types.stringLiteral(`${width}px`)
-          ),
-        ])
-      )
-    )
-  );
+  // node.attributes.push(
+  //   types.jsxAttribute(
+  //     types.jsxIdentifier("css"),
+  //     types.jsxExpressionContainer(
+  //       types.objectExpression([
+  //         types.objectProperty(
+  //           types.stringLiteral("color"),
+  //           types.stringLiteral(colors.silver.light)
+  //         ),
+  //         types.objectProperty(
+  //           types.stringLiteral("height"),
+  //           types.stringLiteral(`${height}px`)
+  //         ),
+  //         types.objectProperty(
+  //           types.stringLiteral("width"),
+  //           types.stringLiteral(`${width}px`)
+  //         ),
+  //       ])
+  //     )
+  //   )
+  // );
 }
 
 function generateStorybookStory(componentNames: string[]) {
