@@ -47,6 +47,11 @@ src/illustrations/*.tsx
 !src/illustrations/*spec.tsx
 src/illustrations/Illustrations.story.mdx
 
+# Generated pictograms stored in src directory (we also generate the story)
+src/pictograms/*.tsx
+!src/pictograms/*spec.tsx
+src/pictograms/Pictograms.story.mdx
+
 .awcache
 
 .envrc

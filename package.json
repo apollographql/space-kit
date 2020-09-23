@@ -25,6 +25,7 @@
     "icons:create:story": "ts-node --transpile-only src/icons/scripts/createStory > src/icons/Icons.story.mdx",
     "illustrations": "run-s clean:illustrations illustrations:generate",
     "illustrations:generate": "ts-node --transpile-only src/illustrations/scripts/convert",
+    "pictograms:generate": "ts-node --transpile-only src/pictograms/scripts/convert",
     "lint": "eslint --cache --ext .js,.jsx,.ts,.tsx,.mdx .eslintrc.js build-reset.ts components-util/ .storybook/ stories/ src/",
     "prepare": "npm run build",
     "release": "./scripts/release.sh",

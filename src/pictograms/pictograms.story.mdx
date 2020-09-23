@@ -1,5 +1,5 @@
 import { Acorn } from "./Acorn";
-import { Watch } from "./Watch";
+import { AppleWatch } from "./AppleWatch";
 import { Camera } from "./Camera";
 import { Client } from "./Client";
 import { Deliver } from "./Deliver";
@@ -13,7 +13,7 @@ import { Tooling } from "./Tooling";
 import { colors } from "../colors";
 import { Meta, Story, Props, Canvas } from "@storybook/addon-docs/blocks";
 
-<Meta title="www site/Pictograms" />
+<Meta title="www/Pictograms" />
 
 # Pictograms
 
@@ -25,15 +25,15 @@ Pictograms are custom Apollo graphics/icons, they will always be Indigo, and wil
 
 <Canvas>
   <Story name="Acorn">
-    <Acorn width={200} />
+    <Acorn />
   </Story>
 </Canvas>
 
-## Watch
+## AppleWatch
 
 <Canvas>
-  <Story name="Watch">
-    <Watch width={200} />
+  <Story name="AppleWatch">
+    <AppleWatch />
   </Story>
 </Canvas>
 
@@ -41,7 +41,7 @@ Pictograms are custom Apollo graphics/icons, they will always be Indigo, and wil
 
 <Canvas>
   <Story name="Camera">
-    <Camera width={200} />
+    <Camera />
   </Story>
 </Canvas>
 
@@ -49,7 +49,7 @@ Pictograms are custom Apollo graphics/icons, they will always be Indigo, and wil
 
 <Canvas>
   <Story name="Client">
-    <Client width={200} />
+    <Client />
   </Story>
 </Canvas>
 
@@ -57,7 +57,7 @@ Pictograms are custom Apollo graphics/icons, they will always be Indigo, and wil
 
 <Canvas>
   <Story name="Deliver">
-    <Deliver width={200} />
+    <Deliver />
   </Story>
 </Canvas>
 
@@ -65,15 +65,15 @@ Pictograms are custom Apollo graphics/icons, they will always be Indigo, and wil
 
 <Canvas>
   <Story name="Develop">
-    <Develop width={200} />
+    <Develop />
   </Story>
 </Canvas>
 
-## Flip Flops
+## FlipFlops
 
 <Canvas>
   <Story name="FlipFlops">
-    <FlipFlops width={200} />
+    <FlipFlops />
   </Story>
 </Canvas>
 
@@ -81,7 +81,7 @@ Pictograms are custom Apollo graphics/icons, they will always be Indigo, and wil
 
 <Canvas>
   <Story name="Gears">
-    <Gears width={200} />
+    <Gears />
   </Story>
 </Canvas>
 
@@ -89,15 +89,15 @@ Pictograms are custom Apollo graphics/icons, they will always be Indigo, and wil
 
 <Canvas>
   <Story name="Observe">
-    <Observe width={200} />
+    <Observe />
   </Story>
 </Canvas>
 
-## Rubber Duck
+## RubberDuck
 
 <Canvas>
   <Story name="RubberDuck">
-    <RubberDuck width={200} />
+    <RubberDuck />
   </Story>
 </Canvas>
 
@@ -105,7 +105,7 @@ Pictograms are custom Apollo graphics/icons, they will always be Indigo, and wil
 
 <Canvas>
   <Story name="Server">
-    <Server width={200} />
+    <Server />
   </Story>
 </Canvas>
 
@@ -113,12 +113,13 @@ Pictograms are custom Apollo graphics/icons, they will always be Indigo, and wil
 
 <Canvas>
   <Story name="Tooling">
-    <Tooling width={200} />
+    <Tooling />
   </Story>
 </Canvas>
 
+
 ## Props
 
-All illustration components extends `SVGSVGElement` so that most props you'd want to pass to any element can be passed to this component.
+All pictogram components extends `SVGSVGElement` so that most props you'd want to pass to any element can be passed to this component.
 
 <Props of={Acorn} />

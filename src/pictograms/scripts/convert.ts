@@ -67,53 +67,37 @@ function generateStorybookStory(componentNames: string[]) {
 import { colors } from "../colors";
 import { Meta, Story, Props, Canvas } from "@storybook/addon-docs/blocks";
 
-<Meta title="Components/Illustrations" />
+<Meta title="www/Pictograms" />
 
-# Illustrations
+# Pictograms
 
-Any of these illustrations may be selected when building a standard style empty state. The titles below are a starting point for the use case of each specific illustration; titles may be customized but should follow the general idea shown here.
-
-https://zpl.io/VOA3E0P
+Pictograms are custom Apollo graphics/icons, they will always be Indigo, and will only be used as they are displayed below.
 
 ## Variants
 
 ${componentNames
-  .map(
-    (componentName) =>
-      `## ${componentName}
+      .map(
+        (componentName) =>
+          `## ${componentName}
 
 <Canvas>
   <Story name="${componentName}">
-    <${componentName} />
+    <${componentName} width={180} />
   </Story>
 </Canvas>
 `
-  )
-  .join("\n")}
-## Customization
-
-All backgrounds are customizable using \`color\`
-
-<Canvas>
-${componentNames
-  .map(
-    (componentName) =>
-      `  <Story name="${componentName}-silver-base">
-    <${componentName} style={{ color: colors.silver.base }} />
-  </Story>`
-  )
-  .join("\n")}
-</Canvas>
+      )
+      .join("\n")}
 
 ## Props
 
-All illustration components extends \`SVGSVGElement\` so that most props you'd want to pass to any element can be passed to this component.
+All pictogram components extends \`SVGSVGElement\` so that most props you'd want to pass to any element can be passed to this component.
 
 <Props of={${componentNames[0]}} />
 `;
 
   fs.writeFileSync(
-    path.join(COMPONENT_PATH, "Illustrations.story.mdx"),
+    path.join(COMPONENT_PATH, "Pictograms.story.mdx"),
     content,
     "utf-8"
   );
@@ -194,9 +178,6 @@ All illustration components extends \`SVGSVGElement\` so that most props you'd w
             `;
           },
           plugins: ["@svgr/plugin-jsx"],
-          replaceAttrValues: {
-            "#F4F6F8": "currentColor",
-          },
         },
         { componentName }
       );
