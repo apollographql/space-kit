@@ -17,6 +17,7 @@
     "clean:built": "ts-node --transpile-only scripts/cleanBuiltFiles.ts",
     "clean:icons": "rimraf icons 'src/icons/!(*.story|*.spec).tsx'",
     "clean:illustrations": "rimraf illustrations 'src/illustrations/!(*.story|*.spec).tsx'",
+    "clean:pictograms": "rimraf pictograms 'src/pictograms/!(*.story|*.spec).tsx'",
     "chromatic": "chromatic test",
     "netlify": "run-s build-storybook",
     "icons": "run-s clean:icons icons:generate",
