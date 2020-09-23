@@ -4,57 +4,10 @@ import svgr from "@svgr/core";
 import { formatComponentName } from "./formatComponentName";
 import { svgo } from "./convertUtils/setupSvgo";
 import * as types from "@babel/types";
-import traverse from "@babel/traverse";
 import prettier from "prettier";
 
 const SVG_PATH = path.resolve(__dirname, "..", "svgs");
 const COMPONENT_PATH = path.resolve(__dirname, "..");
-
-function addDimensions(node: types.JSXOpeningElement) {
-  if (node.name.type !== "JSXIdentifier" || node.name.name !== "svg") {
-    return;
-  }
-
-  const viewBoxAttribute = node.attributes.find(
-    (attribute) =>
-      attribute.type === "JSXAttribute" &&
-      attribute.name.type === "JSXIdentifier" &&
-      attribute.name.name === "viewBox"
-  );
-
-  if (
-    !viewBoxAttribute ||
-    viewBoxAttribute.type !== "JSXAttribute" ||
-    !viewBoxAttribute.value ||
-    viewBoxAttribute.value.type !== "StringLiteral"
-  ) {
-    return;
-  }
-
-  // const [, , width, height] = viewBoxAttribute.value.value.split(/\s+/);
-
-  // node.attributes.push(
-  //   types.jsxAttribute(
-  //     types.jsxIdentifier("css"),
-  //     types.jsxExpressionContainer(
-  //       types.objectExpression([
-  //         types.objectProperty(
-  //           types.stringLiteral("color"),
-  //           types.stringLiteral(colors.silver.light)
-  //         ),
-  //         types.objectProperty(
-  //           types.stringLiteral("height"),
-  //           types.stringLiteral(`${height}px`)
-  //         ),
-  //         types.objectProperty(
-  //           types.stringLiteral("width"),
-  //           types.stringLiteral(`${width}px`)
-  //         ),
-  //       ])
-  //     )
-  //   )
-  // );
-}
 
 function generateStorybookStory(componentNames: string[]) {
   const content = `${componentNames
@@ -63,7 +16,6 @@ function generateStorybookStory(componentNames: string[]) {
         `import { ${componentName} } from "./${componentName}";`
     )
     .join("\n")}
-import { colors } from "../colors";
 import { Meta, Story, Props, Canvas } from "@storybook/addon-docs/blocks";
 
 <Meta title="www/Pictograms" />
@@ -75,9 +27,9 @@ Pictograms are custom Apollo graphics/icons, they will always be Indigo, and wil
 ## Variants
 
 ${componentNames
-      .map(
-        (componentName) =>
-          `## ${componentName}
+  .map(
+    (componentName) =>
+      `## ${componentName}
 
 <Canvas>
   <Story name="${componentName}">
@@ -85,9 +37,8 @@ ${componentNames
   </Story>
 </Canvas>
 `
-      )
-      .join("\n")}
-
+  )
+  .join("\n")}
 ## Props
 
 All pictogram components extends \`SVGSVGElement\` so that most props you'd want to pass to any element can be passed to this component.
@@ -159,13 +110,6 @@ All pictogram components extends \`SVGSVGElement\` so that most props you'd want
                 types.jsxExpressionContainer(types.identifier("ref"))
               )
             );
-
-            traverse(jsx, {
-              noScope: true,
-              JSXOpeningElement({ node }) {
-                addDimensions(node);
-              },
-            });
 
             return typeScriptTpl.ast`
               ${imports}
