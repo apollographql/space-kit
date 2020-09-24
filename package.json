@@ -4,7 +4,7 @@
   "description": "Home base for Apollo's design system",
   "main": "index.js",
   "scripts": {
-    "prebuild": "run-p build:reset icons illustrations",
+    "prebuild": "run-p build:reset icons illustrations pictograms",
     "build": "rollup -c",
     "build:icons": "run-s icons build",
     "build:illustrations": "run-s illustrations build",
