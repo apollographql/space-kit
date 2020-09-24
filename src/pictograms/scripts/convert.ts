@@ -18,7 +18,7 @@ function generateStorybookStory(componentNames: string[]) {
     .join("\n")}
 import { Meta, Story, Props, Canvas } from "@storybook/addon-docs/blocks";
 
-<Meta title="www/Pictograms" />
+<Meta title="Pictograms" />
 
 # Pictograms
 
