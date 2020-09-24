@@ -448,6 +448,10 @@ The following scripts are available:
 
 Similar to icons, Space Kit illustrations are stored and generated from [`src/illustrations/svgs`](./src/illustrations/svgs). To build the stories for newly added illustrations, run `npm run illustrations:generate`.
 
+### Pictograms
+
+Similar to icons & illustrations, Space Kit pictograms are stored and generated from [`src/pictograms/svgs`](./src/pictograms/svgs). To build the stories for newly added pictograms, run `npm run pictograms:generate`.
+
 ### TypeScript
 
 To watch all TypeScript projects for development, run the `npm run watch` script.
