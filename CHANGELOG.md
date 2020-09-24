@@ -1,3 +1,15 @@
+# v7.16.0 (Thu Sep 24 2020)
+
+#### 🚀 Enhancement
+
+- Add Pictograms [#239](https://github.com/apollographql/space-kit/pull/239) ([@jchesterman](https://github.com/jchesterman))
+
+#### Authors: 1
+
+- Jay Chesterman ([@jchesterman](https://github.com/jchesterman))
+
+---
+
 # v7.15.0 (Mon Sep 21 2020)
 
 ### Release Notes
