@@ -266,6 +266,8 @@ export const Modal: React.FC<Props> = ({
             <div
               css={css(
                 {
+                  display: "flex",
+                  flexDirection: "column",
                   marginTop:
                     size === "large" ? 24 : size === "medium" ? 16 : 12,
                 },
