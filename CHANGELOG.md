@@ -1,3 +1,20 @@
+# v7.17.0 (Thu Oct 01 2020)
+
+#### 🚀 Enhancement
+
+- Add headset icon [#241](https://github.com/apollographql/space-kit/pull/241) ([@jchesterman](https://github.com/jchesterman))
+
+#### 📝 Documentation
+
+- Sort storybook stories [#240](https://github.com/apollographql/space-kit/pull/240) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 2
+
+- Jay Chesterman ([@jchesterman](https://github.com/jchesterman))
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v7.16.0 (Thu Sep 24 2020)
 
 #### 🚀 Enhancement
