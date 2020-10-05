@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
+import { configure } from "@testing-library/dom";
 
 // We need to polyfill `createRange` to make JSDOM compatible with Popper. See
 // this thread https://github.com/popperjs/popper-core/issues/478 and this

@@ -30,7 +30,7 @@ test("given no configuration, defaults values should be present", () => {
 
   expect(screen.getByTestId("iconSize")).toHaveTextContent(defaults.iconSize);
   expect(screen.getByTestId("hoverColor")).toHaveTextContent(
-    defaults.hoverColor
+    defaults.hoverColor ?? ""
   );
   expect(screen.getByTestId("padding")).toHaveTextContent(defaults.padding);
   expect(screen.getByTestId("selectedColor")).toHaveTextContent(
@@ -66,7 +66,7 @@ test("given nested lists with configurations in both, correct values should prop
   );
   expect(screen.getByTestId("iconSize")).toHaveTextContent(newValues.iconSize);
   expect(screen.getByTestId("hoverColor")).toHaveTextContent(
-    newValues.hoverColor
+    newValues.hoverColor ?? ""
   );
   expect(screen.getByTestId("padding")).toHaveTextContent(newValues.padding);
   expect(screen.getByTestId("selectedColor")).toHaveTextContent(
@@ -100,7 +100,7 @@ test("given nested lists with the top level having default configuration and the
   );
   expect(screen.getByTestId("iconSize")).toHaveTextContent(newValues.iconSize);
   expect(screen.getByTestId("hoverColor")).toHaveTextContent(
-    newValues.hoverColor
+    newValues.hoverColor ?? ""
   );
   expect(screen.getByTestId("padding")).toHaveTextContent(newValues.padding);
   expect(screen.getByTestId("selectedColor")).toHaveTextContent(
@@ -135,7 +135,7 @@ test("given nested lists with the top level having configuration and the child u
   );
   expect(screen.getByTestId("iconSize")).toHaveTextContent(newValues.iconSize);
   expect(screen.getByTestId("hoverColor")).toHaveTextContent(
-    newValues.hoverColor
+    newValues.hoverColor ?? ""
   );
   expect(screen.getByTestId("padding")).toHaveTextContent(newValues.padding);
   expect(screen.getByTestId("selectedColor")).toHaveTextContent(

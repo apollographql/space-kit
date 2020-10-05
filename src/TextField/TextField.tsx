@@ -7,6 +7,61 @@ import { IconWarningSolid } from "../icons/IconWarningSolid";
 import { IconInfoSolid } from "../icons/IconInfoSolid";
 import classnames from "classnames";
 
+interface FormControlProps {
+  as?: React.ReactElement | keyof JSX.IntrinsicElements;
+}
+
+/**
+ * Component that wraps the outside of a form element and all it's contents
+ */
+export const FormControl: React.FC<FormControlProps> = ({
+  as = "div",
+  children,
+}) => {
+  return React.isValidElement(as)
+    ? React.cloneElement(as, undefined, children)
+    : React.createElement(as, undefined, children);
+};
+
+interface InputLabelProps
+  extends React.DetailedHTMLProps<
+    React.LabelHTMLAttributes<HTMLLabelElement>,
+    HTMLLabelElement
+  > {
+  as?: React.ReactElement | keyof JSX.IntrinsicElements;
+}
+
+export const InputLabel = React.forwardRef<HTMLLabelElement, InputLabelProps>(
+  ({ as = "label", children, ...props }, ref) => {
+    return (
+      <ClassNames>
+        {({ css, cx }) => {
+          const element = React.isValidElement(as)
+            ? as
+            : React.createElement(as);
+
+          return React.cloneElement(
+            element,
+            {
+              ...props,
+              className: cx(
+                css({
+                  paddingBottom: 8,
+                  ...typography.base.base,
+                  fontWeight: 600,
+                }),
+                element.props.className
+              ),
+              ref,
+            },
+            children
+          );
+        }}
+      </ClassNames>
+    );
+  }
+);
+
 interface Props {
   /**
    * Passed through to the underlying `input`
@@ -182,58 +237,52 @@ export const TextField: React.FC<Props> = ({
       };
 
       return (
-        <div className={className}>
-          <label
-            className={cx(
-              css({
-                paddingBottom: 8,
-                ...typography.base.base,
-                fontWeight: 600,
-              })
-            )}
-          >
-            {label != null && <div css={{ marginBottom: 4 }}>{label}</div>}
-            {description != null && (
-              <div
-                css={{
-                  ...typography.base.base,
-                  color: colors.black.base,
-                }}
-              >
-                {description}
-              </div>
-            )}
-            <div
-              css={{
-                marginTop: 8,
-                position: "relative",
-              }}
-            >
-              {icon && (
+        <FormControl as={<div className={className} />}>
+          <InputLabel>
+            <React.Fragment>
+              {label != null && <div css={{ marginBottom: 4 }}>{label}</div>}
+              {description != null && (
                 <div
                   css={{
-                    position: "absolute",
-                    display: "inline-flex",
-                    left: 12,
-                    top: "50%",
-                    transform: "translateY(-50%)",
+                    ...typography.base.base,
+                    color: colors.black.base,
                   }}
                 >
-                  {icon}
+                  {description}
                 </div>
               )}
+              <div
+                css={{
+                  marginTop: 8,
+                  position: "relative",
+                }}
+              >
+                {icon && (
+                  <div
+                    css={{
+                      position: "absolute",
+                      display: "inline-flex",
+                      left: 12,
+                      top: "50%",
+                      transform: "translateY(-50%)",
+                    }}
+                  >
+                    {icon}
+                  </div>
+                )}
 
-              {React.isValidElement(inputAs)
-                ? React.cloneElement(inputAs, {
-                    ...inputProps,
-                    className: classnames(
-                      inputProps.className,
-                      inputAs.props.className
-                    ),
-                  })
-                : React.createElement(inputAs, inputProps)}
-            </div>
-          </label>
+                {React.isValidElement(inputAs)
+                  ? React.cloneElement(inputAs, {
+                      ...inputProps,
+                      className: classnames(
+                        inputProps.className,
+                        inputAs.props.className
+                      ),
+                    })
+                  : React.createElement(inputAs, inputProps)}
+              </div>
+            </React.Fragment>
+          </InputLabel>
           <div
             css={{
               marginTop: 8,
@@ -279,7 +328,7 @@ export const TextField: React.FC<Props> = ({
               </div>
             )}
           </div>
-        </div>
+        </FormControl>
       );
     }}
   </ClassNames>

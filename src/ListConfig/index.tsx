@@ -23,9 +23,10 @@ interface ListConfig {
   /**
    * Background color of the hovered item in a menu
    *
-   * The text color will be determined automatically
+   * The text color will be determined automatically. `null` indicates we don't
+   * want to show any different styling on hover.
    */
-  hoverColor: ShadedColor;
+  hoverColor: ShadedColor | null;
 
   /**
    * Icon size to use for all descendents
