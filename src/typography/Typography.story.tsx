@@ -1,9 +1,11 @@
+/* eslint-disable prefer-destructuring */
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import * as typographyDefinitions from "./index";
 import { colors } from "../colors";
 import { Page } from "../../components-util/Page";
 import { Column } from "../../components-util/Column";
+import { PropertyValue } from "csstype";
 
 function round(number: number, digits: number): number {
   const multiplier = 10 ** digits;
@@ -24,22 +26,28 @@ const TypographyDefs: React.FC<{
       marginTop: 24,
     }}
   >
-    {Object.entries(definitions).map(([name, properties]) => (
-      <div key={name} style={{ margin: "15px 0" }}>
-        <div style={properties}>{name}</div>
-        <div style={typographyDefinitions.base.small}>
-          {typeof properties.fontSize === "number"
-            ? round(properties.fontSize / 15, 4)
-            : properties.fontSize}
-          em • {properties.fontSize}
-          {typeof properties.fontSize === "number" &&
-          typeof properties.lineHeight === "number"
-            ? ` / ${Math.round(properties.fontSize * properties.lineHeight)}`
-            : ""}{" "}
-          • {properties.fontWeight}
+    {Object.entries(definitions).map(([name, properties]) => {
+      // @see https://github.com/frenic/csstype#version-30 on why we need to use
+      // `PropertyValue` to unpack these values.
+      const fontSize: PropertyValue<typeof properties.fontSize> =
+        properties.fontSize;
+      const lineHeight: PropertyValue<typeof properties.lineHeight> =
+        properties.lineHeight;
+
+      return (
+        <div key={name} style={{ margin: "15px 0" }}>
+          <div style={properties}>{name}</div>
+          <div style={typographyDefinitions.base.small}>
+            {typeof fontSize === "number" ? round(fontSize / 15, 4) : fontSize}
+            em • {fontSize}
+            {typeof fontSize === "number" && typeof lineHeight === "number"
+              ? ` / ${Math.round(fontSize * lineHeight)}`
+              : ""}{" "}
+            • {properties.fontWeight}
+          </div>
         </div>
-      </div>
-    ))}
+      );
+    })}
   </div>
 );
 

@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import React from "react";
-import * as CSS from "csstype";
+import type { Property } from "csstype";
 import { jsx, keyframes } from "@emotion/core";
 import { colors } from "../colors";
 import { useSpaceKitProvider } from "../SpaceKitProvider";
@@ -47,9 +47,9 @@ export const LoadingSpinner = React.forwardRef<SVGSVGElement, Props>(
     const THEME_MAP: Record<
       Theme,
       {
-        orbitColor: CSS.ColorProperty;
-        orbitOpacity: CSS.GlobalsNumber;
-        asteroidColor: CSS.ColorProperty;
+        orbitColor: Property.Color;
+        orbitOpacity: Property.Opacity;
+        asteroidColor: Property.Color;
       }
     > = {
       light: {

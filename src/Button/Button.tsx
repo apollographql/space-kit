@@ -1,5 +1,5 @@
 import { colors, ShadedColor } from "../colors";
-import * as CSS from "csstype";
+import type { Property, SimplePseudos } from "csstype";
 import { base } from "../typography";
 import { ClassNames } from "@emotion/core";
 import { getOffsetInPalette } from "../colors/utils/getOffsetInPalette";
@@ -29,8 +29,8 @@ function getTextColor({
   color: NonNullable<Props["color"]>;
   feel: NonNullable<Props["feel"]>;
   theme: NonNullable<Props["theme"]>;
-  mode?: CSS.SimplePseudos;
-}): CSS.ColorProperty | undefined {
+  mode?: SimplePseudos;
+}): Property.Color | undefined {
   // Text color will always be the same for secondary buttons
   if (color === colors.white) {
     return colors.grey.darker;
@@ -82,7 +82,7 @@ function getHeight({
   size,
 }: {
   size: NonNullable<Props["size"]>;
-}): CSS.HeightProperty<TLength> {
+}): Property.Height<TLength> {
   switch (size) {
     case "small":
       return 28;
@@ -107,7 +107,7 @@ function getHoverBackgroundColor({
   color: NonNullable<Props["color"]>;
   feel: NonNullable<Props["feel"]>;
   theme: NonNullable<Props["theme"]>;
-}): CSS.BackgroundColorProperty {
+}): Property.BackgroundColor {
   if (color === colors.white) {
     // Special case for secondary buttons
     return colors.silver.light;

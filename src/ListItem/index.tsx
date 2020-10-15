@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-empty-interface */
-import * as CSS from "csstype";
+import type { Property } from "csstype";
 import React from "react";
 import { ClassNames } from "@emotion/core";
 import { assertUnreachable } from "../shared/assertUnreachable";
@@ -12,7 +11,7 @@ import classnames from "classnames";
 
 function getIconHorizontalPadding(
   iconSize: NonNullable<ReturnType<typeof useListConfig>["iconSize"]>
-): CSS.PaddingProperty<number> {
+): Property.Padding<number> {
   switch (iconSize) {
     case "large":
       return 16;
@@ -27,7 +26,7 @@ function getIconHorizontalPadding(
 
 function getIconSize(
   iconSize: NonNullable<ReturnType<typeof useListConfig>["iconSize"]>
-): CSS.WidthProperty<number> {
+): Property.Width<number> {
   switch (iconSize) {
     case "large":
       return 18;
@@ -42,7 +41,7 @@ function getIconSize(
 
 function getIconMarginLeft(
   iconSize: NonNullable<ReturnType<typeof useListConfig>["iconSize"]>
-): CSS.MarginLeftProperty<number> {
+): Property.MarginLeft<number> {
   switch (iconSize) {
     case "large":
     case "normal":

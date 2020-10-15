@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import { motion, MotionProps } from "framer-motion";
 import * as typography from "../typography";
 import { colors } from "../colors";
-import * as CSS from "csstype";
+import type { Property } from "csstype";
 import { useSpaceKitProvider } from "../SpaceKitProvider";
 import { assertUnreachable } from "../shared/assertUnreachable";
 
@@ -112,7 +112,7 @@ const modalBackdrop = css`
 
 type TLength = string | 0 | number;
 
-function getModalWidth(size: Props["size"]): CSS.WidthProperty<TLength> {
+function getModalWidth(size: Props["size"]): Property.Width<TLength> {
   switch (size) {
     case "small":
       return 460;
