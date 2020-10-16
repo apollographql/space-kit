@@ -4,6 +4,7 @@ import Tippy from "@tippyjs/react";
 import { Placement } from "tippy.js";
 import { TippyStyles } from "./abstractTooltip/TippyStyles";
 import { useSpaceKitProvider } from "../SpaceKitProvider";
+import { matchTriggerWidth as matchTriggerWidthModifier } from "./abstractTooltip/matchTriggerWidth";
 import classnames from "classnames";
 
 type TippyProps = React.ComponentProps<typeof Tippy>;
@@ -27,6 +28,14 @@ export interface AbstractTooltipProps {
    * more space
    */
   padding?: "normal" | "relaxed";
+
+  /**
+   * Indicates that the popup list should match the width of the trigger
+   * compoonent
+   *
+   * @default false
+   */
+  matchTriggerWidth?: boolean;
 }
 
 type Props = TippyProps & AbstractTooltipProps;
@@ -40,6 +49,7 @@ export const AbstractTooltip: React.FC<Props> = ({
   padding = "normal",
   trigger,
   hideOnClick,
+  matchTriggerWidth = false,
   popperOptions = {},
   ...props
 }) => {
@@ -67,6 +77,10 @@ export const AbstractTooltip: React.FC<Props> = ({
               options: {
                 fallbackPlacements,
               },
+            },
+            {
+              ...matchTriggerWidthModifier,
+              enabled: matchTriggerWidth,
             },
             // This must be at the end because later modifiers override earlier
             // ones. @see

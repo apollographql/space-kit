@@ -9,6 +9,7 @@ interface Props
     | "children"
     | "content"
     | "disabled"
+    | "matchTriggerWidth"
     | "maxWidth"
     | "placement"
     | "fallbackPlacements"
