@@ -1,3 +1,29 @@
+# v7.18.0 (Mon Oct 19 2020)
+
+### Release Notes
+
+_From #244_
+
+* Show focus ring around `Button` when keyboard focus is received
+* Use `@react-aria/utils`'s `mergeProps` in `Button`
+* Add test to `Button` for `className` merging
+
+---
+
+#### 🚀 Enhancement
+
+- Show focus on `Button` when interacting with keyboard [#244](https://github.com/apollographql/space-kit/pull/244) ([@justinanastos](https://github.com/justinanastos))
+
+#### 🔩 Dependency Updates
+
+- Update tippy, react, jest, and testing dependencies [#245](https://github.com/apollographql/space-kit/pull/245) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v7.17.0 (Thu Oct 01 2020)
 
 #### 🚀 Enhancement
