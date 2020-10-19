@@ -266,7 +266,7 @@ function getPlacementAndMaxSize({
  * element in it's entirety, it'll find the placement that can show the most
  * content with a max-height.
  */
-export const sizeModifier: Modifier<Options> = {
+export const sizeModifier: Modifier<"maxSize", Options> = {
   name: "maxSize",
   enabled: true,
   phase: "main",
