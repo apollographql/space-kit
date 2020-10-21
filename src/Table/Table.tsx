@@ -1,5 +1,4 @@
-/** @jsx jsx */
-import { jsx } from "@emotion/core";
+import { ClassNames } from "@emotion/core";
 import React from "react";
 import * as typography from "../typography";
 import { colors } from "../colors";
@@ -104,66 +103,71 @@ export function Table<RowShape>({
     typeof keyOn === "function" ? keyOn : (row: RowShape) => row[keyOn];
 
   return (
-    <table
-      css={{
-        borderCollapse: "collapse",
-        width: "100%",
-      }}
-    >
-      <colgroup>
-        {columns.map(({ colProps, id }) => (
-          <col key={id} {...colProps} />
-        ))}
-      </colgroup>
-
-      <thead>
-        <tr
-          css={{
-            borderBottom: `1px solid ${colors.silver.dark}`,
-          }}
+    <ClassNames>
+      {({ css }) => (
+        <table
+          className={css({
+            borderCollapse: "collapse",
+            width: "100%",
+          })}
         >
-          {columns.map(({ headerTitle, id }, colIndex) => (
-            <th
-              key={id}
-              css={{
-                ...typography.base.xsmall,
-                textTransform: "uppercase",
-                color: colors.grey.darker,
-                fontWeight: 600,
-                textAlign: "left",
-                padding,
-                paddingLeft: colIndex === 0 ? 0 : padding,
-                paddingRight: colIndex === columns.length - 1 ? 0 : padding,
-              }}
-            >
-              {headerTitle}
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {data.map((item, index) => (
-          <tr key={getRowKey(item)}>
-            {columns.map(({ render, id }, colIndex) => (
-              <td
-                key={id}
-                css={{
-                  // no border on the bottom row
-                  borderBottom:
-                    index === data.length - 1
-                      ? `none`
-                      : `1px solid ${colors.silver.dark}`,
-                  padding,
-                  paddingLeft: colIndex === 0 ? 0 : padding,
-                  paddingRight: colIndex === columns.length - 1 ? 0 : padding,
-                }}
-              >
-                {render(item, index, data)}
-              </td>
+          <colgroup>
+            {columns.map(({ colProps, id }) => (
+              <col key={id} {...colProps} />
             ))}
-          </tr>
-        ))}
-      </tbody>
-    </table>
+          </colgroup>
+
+          <thead>
+            <tr
+              className={css({
+                borderBottom: `1px solid ${colors.silver.dark}`,
+              })}
+            >
+              {columns.map(({ headerTitle, id }, colIndex) => (
+                <th
+                  key={id}
+                  className={css({
+                    ...typography.base.xsmall,
+                    textTransform: "uppercase",
+                    color: colors.grey.darker,
+                    fontWeight: 600,
+                    textAlign: "left",
+                    padding,
+                    paddingLeft: colIndex === 0 ? 0 : padding,
+                    paddingRight: colIndex === columns.length - 1 ? 0 : padding,
+                  })}
+                >
+                  {headerTitle}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((item, index) => (
+              <tr key={getRowKey(item)}>
+                {columns.map(({ render, id }, colIndex) => (
+                  <td
+                    key={id}
+                    className={css({
+                      // no border on the bottom row
+                      borderBottom:
+                        index === data.length - 1
+                          ? `none`
+                          : `1px solid ${colors.silver.dark}`,
+                      padding,
+                      paddingLeft: colIndex === 0 ? 0 : padding,
+                      paddingRight:
+                        colIndex === columns.length - 1 ? 0 : padding,
+                    })}
+                  >
+                    {render(item, index, data)}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+    </ClassNames>
   );
 }
