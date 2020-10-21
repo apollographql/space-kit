@@ -37,6 +37,16 @@ interface Props<RowShape> {
    */
   columns: readonly {
     /**
+     * Override the the default element
+     *
+     * All props provided will be merged with props that this component adds,
+     * including `className`s being merged using emotion's `cx` function
+     *
+     * @default "td"
+     */
+    as?: As;
+
+    /**
      * Column's title
      */
     headerTitle?: React.ReactNode | string;
@@ -200,24 +210,31 @@ export function Table<RowShape>({
                 {
                   key: getRowKey(item),
                 },
-                ...columns.map(({ render, id }, colIndex) => (
-                  <td
-                    key={id}
-                    className={css({
-                      // no border on the bottom row
-                      borderBottom:
-                        index === data.length - 1
-                          ? `none`
-                          : `1px solid ${colors.silver.dark}`,
-                      padding,
-                      paddingLeft: colIndex === 0 ? 0 : padding,
-                      paddingRight:
-                        colIndex === columns.length - 1 ? 0 : padding,
-                    })}
-                  >
-                    {render(item, index, data)}
-                  </td>
-                ))
+                ...columns.map(({ as = "td", render, id }, colIndex) => {
+                  const element = createElementFromAs(as);
+
+                  return React.cloneElement(
+                    element,
+                    {
+                      key: id,
+                      className: cx(
+                        css({
+                          // no border on the bottom row
+                          borderBottom:
+                            index === data.length - 1
+                              ? `none`
+                              : `1px solid ${colors.silver.dark}`,
+                          padding,
+                          paddingLeft: colIndex === 0 ? 0 : padding,
+                          paddingRight:
+                            colIndex === columns.length - 1 ? 0 : padding,
+                        }),
+                        element.props.className
+                      ),
+                    },
+                    render(item, index, data)
+                  );
+                })
               )
             )}
           </tbody>

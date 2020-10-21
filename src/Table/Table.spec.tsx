@@ -4,6 +4,7 @@ import "@testing-library/jest-dom";
 import { Table } from "./Table";
 import { ClassNames } from "@emotion/core";
 import { matchers } from "jest-emotion";
+import { colors } from "../colors";
 
 // Add the custom matchers provided by 'jest-emotion'
 expect.extend(matchers);
@@ -125,6 +126,45 @@ test("when passed col for columns, should render them", () => {
       />
     </colgroup>
   `);
+});
+
+it("when passed `column` values for `td`, they are rendered", () => {
+  render(
+    <ClassNames>
+      {({ css }) => (
+        <Table
+          keyOn="name"
+          data={[
+            { name: "Mason", firstWord: "Apollo" },
+            { name: "Sadie", firstWord: "GraphQL" },
+          ]}
+          columns={[
+            {
+              id: "name",
+              headerTitle: "Name",
+              render: ({ name }) => name,
+              as: <td className={css({ color: colors.red.light })} />,
+            },
+            {
+              id: "firstWord",
+              headerTitle: "First Word Spoken",
+              render: ({ firstWord }) => firstWord,
+              as: <td className={css({ color: colors.blue.light })} />,
+            },
+          ]}
+          trAs={<tr className="injected-class" />}
+        />
+      )}
+    </ClassNames>
+  );
+
+  expect(document.querySelector("tbody > tr > td")).toHaveStyleRule(
+    "color",
+    colors.red.light
+  );
+  expect(
+    document.querySelector("tbody > tr > td:nth-of-type(2)")
+  ).toHaveStyleRule("color", colors.blue.light);
 });
 
 it("when passed `trAs` single value, `className`s are merged to head and body `tr`s", () => {

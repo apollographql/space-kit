@@ -156,6 +156,59 @@ Table density is an important characteristic when considering how to present inf
   </Story>
 </Canvas>
 
+## `td` customization
+
+You can customize how each column's `td` is rendered.
+
+<Canvas>
+  <Story name="column-level `td` as">
+    <ClassNames>
+      {({ css }) => (
+        <Table
+          keyOn="name"
+          data={[
+            {
+              name: "Alice Howell",
+              image: require("./table.stories/alice-howell.png"),
+            },
+            {
+              name: "Benjamin Lawrence",
+              image: require("./table.stories/benjamin-lawrence.png"),
+            },
+            {
+              name: "Cynthia Bowman",
+              image: require("./table.stories/cynthia-bowman.png"),
+            },
+            {
+              name: "Jeremy Jacobs",
+              image: require("./table.stories/jeremy-jacobs.png"),
+            },
+            {
+              name: "Jeremy Griffin",
+              image: require("./table.stories/jeremy-griffin.png"),
+            },
+          ]}
+          columns={[
+            {
+              id: "image",
+              as: <td className={css({ width: 24 })} />,
+              render: ({ image }) => (
+                <img style={{ width: 24, height: 24 }} src={image} />
+              ),
+            },
+            {
+              id: "name",
+              headerTitle: "name",
+              as: <td className={css({ color: colors.red.dark })} />,
+              render: ({ name }) => <>{name}</>,
+            },
+          ]}
+        />
+      )}
+    </ClassNames>
+  </Story>
+</Canvas>
+
 ## `tr` customization
 
 You can customize how `tr`s are rendered by using the `trAs` prop. It accepts a single value (check the TypeScript types for what those values are, the props table will be a little obtuse). You can also pass an object with `head` and/or `body` (both are optional and default to "tr") keys to customize `thead > tr` and `tbody > tr` separately.
