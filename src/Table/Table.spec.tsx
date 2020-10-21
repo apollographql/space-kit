@@ -128,6 +128,44 @@ test("when passed col for columns, should render them", () => {
   `);
 });
 
+it("when passed `column` values for `th`, they are rendered", () => {
+  render(
+    <ClassNames>
+      {({ css }) => (
+        <Table
+          keyOn="name"
+          data={[
+            { name: "Mason", firstWord: "Apollo" },
+            { name: "Sadie", firstWord: "GraphQL" },
+          ]}
+          columns={[
+            {
+              id: "name",
+              headerTitle: "Name",
+              render: ({ name }) => name,
+              thAs: <th className={css({ color: colors.red.light })} />,
+            },
+            {
+              id: "firstWord",
+              headerTitle: "First Word Spoken",
+              render: ({ firstWord }) => firstWord,
+              thAs: <th className={css({ color: colors.blue.light })} />,
+            },
+          ]}
+        />
+      )}
+    </ClassNames>
+  );
+
+  expect(document.querySelector("thead > tr > th")).toHaveStyleRule(
+    "color",
+    colors.red.light
+  );
+  expect(
+    document.querySelector("thead > tr > th:nth-of-type(2)")
+  ).toHaveStyleRule("color", colors.blue.light);
+});
+
 it("when passed `column` values for `td`, they are rendered", () => {
   render(
     <ClassNames>

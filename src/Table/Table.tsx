@@ -94,6 +94,16 @@ interface Props<RowShape> {
       index: number,
       list: readonly RowShape[]
     ) => React.ReactNode;
+
+    /**
+     * Override the the default `th` element
+     *
+     * All props provided will be merged with props that this component adds,
+     * including `className`s being merged using emotion's `cx` function
+     *
+     * @default "th"
+     */
+    thAs?: As;
   }[];
 
   /**
@@ -188,19 +198,27 @@ export function Table<RowShape>({
                   headTrElement.props.className
                 ),
               },
-              ...columns.map(({ headerTitle, id }, colIndex) => (
-                <th
-                  key={id}
-                  className={css({
-                    fontWeight: 600,
-                    padding,
-                    paddingLeft: colIndex === 0 ? 0 : padding,
-                    paddingRight: colIndex === columns.length - 1 ? 0 : padding,
-                  })}
-                >
-                  {headerTitle}
-                </th>
-              ))
+              ...columns.map(({ headerTitle, id, thAs = "th" }, colIndex) => {
+                const element = createElementFromAs(thAs);
+
+                return React.cloneElement(
+                  element,
+                  {
+                    className: css(
+                      css({
+                        fontWeight: 600,
+                        padding,
+                        paddingLeft: colIndex === 0 ? 0 : padding,
+                        paddingRight:
+                          colIndex === columns.length - 1 ? 0 : padding,
+                      }),
+                      element.props.className
+                    ),
+                    key: id,
+                  },
+                  headerTitle
+                );
+              })
             )}
           </thead>
           <tbody>
