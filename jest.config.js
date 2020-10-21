@@ -18,9 +18,7 @@ module.exports = {
   snapshotSerializers: ["jest-emotion"],
   globals: {
     "ts-jest": {
-      diagnostics: {
-        warnOnly: true,
-      },
+      diagnostics: false,
     },
   },
   transformIgnorePatterns: ["/node_modules/(?!@popperjs/core).+\\.js$"],
