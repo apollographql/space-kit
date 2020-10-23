@@ -1,5 +1,7 @@
-import { Table } from "./Table";
+import { ClassNames } from "@emotion/core";
+import { colors } from "../colors";
 import { Meta, Story, ArgsTable, Canvas } from "@storybook/addon-docs/blocks";
+import { Table } from "./Table";
 
 <Meta title="Components/Table" component={Table} />
 
@@ -151,6 +153,222 @@ Table density is an important characteristic when considering how to present inf
         },
       ]}
     />
+  </Story>
+</Canvas>
+
+## `td` customization
+
+You can customize how each column's `td` is rendered.
+
+<Canvas>
+  <Story name="column-level `td` as">
+    <ClassNames>
+      {({ css }) => (
+        <Table
+          keyOn="name"
+          data={[
+            {
+              name: "Alice Howell",
+              image: require("./table.stories/alice-howell.png"),
+            },
+            {
+              name: "Benjamin Lawrence",
+              image: require("./table.stories/benjamin-lawrence.png"),
+            },
+            {
+              name: "Cynthia Bowman",
+              image: require("./table.stories/cynthia-bowman.png"),
+            },
+            {
+              name: "Jeremy Jacobs",
+              image: require("./table.stories/jeremy-jacobs.png"),
+            },
+            {
+              name: "Jeremy Griffin",
+              image: require("./table.stories/jeremy-griffin.png"),
+            },
+          ]}
+          columns={[
+            {
+              id: "image",
+              as: <td className={css({ width: 24 })} />,
+              render: ({ image }) => (
+                <img style={{ width: 24, height: 24 }} src={image} />
+              ),
+            },
+            {
+              id: "name",
+              headerTitle: "name",
+              as: <td className={css({ color: colors.red.dark })} />,
+              render: ({ name }) => <>{name}</>,
+            },
+          ]}
+        />
+      )}
+    </ClassNames>
+  </Story>
+</Canvas>
+
+## `th` customization
+
+You can customize how each column's `th` is rendered.
+
+<Canvas>
+  <Story name="column-level `th` as">
+    <ClassNames>
+      {({ css }) => (
+        <Table
+          keyOn="name"
+          data={[
+            {
+              name: "Alice Howell",
+              image: require("./table.stories/alice-howell.png"),
+            },
+            {
+              name: "Benjamin Lawrence",
+              image: require("./table.stories/benjamin-lawrence.png"),
+            },
+            {
+              name: "Cynthia Bowman",
+              image: require("./table.stories/cynthia-bowman.png"),
+            },
+            {
+              name: "Jeremy Jacobs",
+              image: require("./table.stories/jeremy-jacobs.png"),
+            },
+            {
+              name: "Jeremy Griffin",
+              image: require("./table.stories/jeremy-griffin.png"),
+            },
+          ]}
+          columns={[
+            {
+              id: "image",
+              headerTitle: "Icon",
+              thAs: <td className={css({ color: colors.blue.light })} />,
+              render: ({ image }) => (
+                <img style={{ width: 24, height: 24 }} src={image} />
+              ),
+            },
+            {
+              id: "name",
+              headerTitle: "name",
+              thAs: <td className={css({ color: colors.red.dark })} />,
+              render: ({ name }) => <>{name}</>,
+            },
+          ]}
+        />
+      )}
+    </ClassNames>
+  </Story>
+</Canvas>
+
+## `tr` customization
+
+You can customize how `tr`s are rendered by using the `trAs` prop. It accepts a single value (check the TypeScript types for what those values are, the props table will be a little obtuse). You can also pass an object with `head` and/or `body` (both are optional and default to "tr") keys to customize `thead > tr` and `tbody > tr` separately.
+
+### Customizing Both At Once
+
+<Canvas>
+  <Story name="single `trAs`">
+    <ClassNames>
+      {({ css }) => (
+        <Table
+          keyOn="name"
+          data={[
+            {
+              name: "Alice Howell",
+              image: require("./table.stories/alice-howell.png"),
+            },
+            {
+              name: "Benjamin Lawrence",
+              image: require("./table.stories/benjamin-lawrence.png"),
+            },
+            {
+              name: "Cynthia Bowman",
+              image: require("./table.stories/cynthia-bowman.png"),
+            },
+            {
+              name: "Jeremy Jacobs",
+              image: require("./table.stories/jeremy-jacobs.png"),
+            },
+            {
+              name: "Jeremy Griffin",
+              image: require("./table.stories/jeremy-griffin.png"),
+            },
+          ]}
+          columns={[
+            {
+              id: "image",
+              render: ({ image }) => (
+                <img style={{ width: 24, height: 24 }} src={image} />
+              ),
+            },
+            {
+              id: "name",
+              headerTitle: "name",
+              render: ({ name }) => <>{name}</>,
+            },
+          ]}
+          trAs={<tr className={css({ color: colors.red.dark })} />}
+        />
+      )}
+    </ClassNames>
+  </Story>
+</Canvas>
+
+### Customizing separately
+
+Both the `head` and `body` keys in `trAs` are optional. They are both shown here to illustrate how it's used.
+
+<Canvas>
+  <Story name="separately configured `trAs`">
+    <ClassNames>
+      {({ css }) => (
+        <Table
+          keyOn="name"
+          data={[
+            {
+              name: "Alice Howell",
+              image: require("./table.stories/alice-howell.png"),
+            },
+            {
+              name: "Benjamin Lawrence",
+              image: require("./table.stories/benjamin-lawrence.png"),
+            },
+            {
+              name: "Cynthia Bowman",
+              image: require("./table.stories/cynthia-bowman.png"),
+            },
+            {
+              name: "Jeremy Jacobs",
+              image: require("./table.stories/jeremy-jacobs.png"),
+            },
+            {
+              name: "Jeremy Griffin",
+              image: require("./table.stories/jeremy-griffin.png"),
+            },
+          ]}
+          columns={[
+            {
+              id: "image",
+              render: ({ image }) => (
+                <img style={{ width: 24, height: 24 }} src={image} />
+              ),
+            },
+            {
+              id: "name",
+              headerTitle: "name",
+              render: ({ name }) => <>{name}</>,
+            },
+          ]}
+          trAs={{
+            body: <tr className={css({ color: colors.red.dark })} />,
+            head: <tr className={css({ color: colors.orange.light })} />,
+          }}
+        />
+      )}
+    </ClassNames>
   </Story>
 </Canvas>
 

@@ -1,8 +1,21 @@
-/** @jsx jsx */
-import { jsx } from "@emotion/core";
+import { ClassNames } from "@emotion/core";
 import React from "react";
 import * as typography from "../typography";
 import { colors } from "../colors";
+import { assertUnreachable } from "../shared/assertUnreachable";
+
+type As = React.ReactElement | keyof JSX.IntrinsicElements;
+
+/**
+ * Take an `as` value and make it into a `React.ReactElement`
+ */
+function createElementFromAs(as: As): React.ReactElement {
+  return React.isValidElement(as)
+    ? as
+    : typeof as === "string"
+    ? React.createElement(as)
+    : assertUnreachable(as);
+}
 
 interface Props<RowShape> {
   /**
@@ -23,6 +36,16 @@ interface Props<RowShape> {
    * Definition of how each column will be rendered
    */
   columns: readonly {
+    /**
+     * Override the the default element
+     *
+     * All props provided will be merged with props that this component adds,
+     * including `className`s being merged using emotion's `cx` function
+     *
+     * @default "td"
+     */
+    as?: As;
+
     /**
      * Column's title
      */
@@ -71,6 +94,16 @@ interface Props<RowShape> {
       index: number,
       list: readonly RowShape[]
     ) => React.ReactNode;
+
+    /**
+     * Override the the default `th` element
+     *
+     * All props provided will be merged with props that this component adds,
+     * including `className`s being merged using emotion's `cx` function
+     *
+     * @default "th"
+     */
+    thAs?: As;
   }[];
 
   /**
@@ -84,6 +117,25 @@ interface Props<RowShape> {
    * row data and returns a key
    */
   keyOn: keyof RowShape | ((row: RowShape) => any);
+
+  /**
+   * Override the the default element used to render `tr` elements
+   *
+   * You can pass a single value that will be applied to both the `thead > tr`
+   * and `tbody> tr` or you can individiaully specify `head` and `body` values,
+   * both of which are optional.
+   *
+   * All props provided will be merged with props that this component adds,
+   * including `className`s being merged using emotion's `cx` function
+   *
+   * @default "tr"
+   */
+  trAs?:
+    | As
+    | {
+        head?: As;
+        body?: As;
+      };
 }
 
 /**
@@ -98,72 +150,114 @@ export function Table<RowShape>({
   density = "standard",
   columns,
   keyOn,
+  trAs = "tr",
 }: Props<RowShape>): ReturnType<React.FC> {
   const padding = density === "standard" ? 8 : density === "condensed" ? 3 : 11;
   const getRowKey =
     typeof keyOn === "function" ? keyOn : (row: RowShape) => row[keyOn];
 
-  return (
-    <table
-      css={{
-        borderCollapse: "collapse",
-        width: "100%",
-      }}
-    >
-      <colgroup>
-        {columns.map(({ colProps, id }) => (
-          <col key={id} {...colProps} />
-        ))}
-      </colgroup>
+  const headTrElement = React.isValidElement(trAs)
+    ? trAs
+    : typeof trAs === "string"
+    ? React.createElement(trAs)
+    : createElementFromAs(trAs.head || "tr");
 
-      <thead>
-        <tr
-          css={{
-            borderBottom: `1px solid ${colors.silver.dark}`,
-          }}
+  const bodyTrElement = React.isValidElement(trAs)
+    ? trAs
+    : typeof trAs === "string"
+    ? React.createElement(trAs)
+    : createElementFromAs(trAs.body || "tr");
+
+  return (
+    <ClassNames>
+      {({ css, cx }) => (
+        <table
+          className={css({
+            borderCollapse: "collapse",
+            width: "100%",
+          })}
         >
-          {columns.map(({ headerTitle, id }, colIndex) => (
-            <th
-              key={id}
-              css={{
-                ...typography.base.xsmall,
-                textTransform: "uppercase",
-                color: colors.grey.darker,
-                fontWeight: 600,
-                textAlign: "left",
-                padding,
-                paddingLeft: colIndex === 0 ? 0 : padding,
-                paddingRight: colIndex === columns.length - 1 ? 0 : padding,
-              }}
-            >
-              {headerTitle}
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {data.map((item, index) => (
-          <tr key={getRowKey(item)}>
-            {columns.map(({ render, id }, colIndex) => (
-              <td
-                key={id}
-                css={{
-                  // no border on the bottom row
-                  borderBottom:
-                    index === data.length - 1
-                      ? `none`
-                      : `1px solid ${colors.silver.dark}`,
-                  padding,
-                  paddingLeft: colIndex === 0 ? 0 : padding,
-                  paddingRight: colIndex === columns.length - 1 ? 0 : padding,
-                }}
-              >
-                {render(item, index, data)}
-              </td>
+          <colgroup>
+            {columns.map(({ colProps, id }) => (
+              <col key={id} {...colProps} />
             ))}
-          </tr>
-        ))}
-      </tbody>
-    </table>
+          </colgroup>
+
+          <thead>
+            {React.cloneElement(
+              headTrElement,
+              {
+                className: cx(
+                  css({
+                    ...typography.base.xsmall,
+                    borderBottom: `1px solid ${colors.silver.dark}`,
+                    color: colors.grey.darker,
+                    textAlign: "left",
+                    textTransform: "uppercase",
+                  }),
+                  headTrElement.props.className
+                ),
+              },
+              ...columns.map(({ headerTitle, id, thAs = "th" }, colIndex) => {
+                const element = createElementFromAs(thAs);
+
+                return React.cloneElement(
+                  element,
+                  {
+                    className: css(
+                      css({
+                        fontWeight: 600,
+                        padding,
+                        paddingLeft: colIndex === 0 ? 0 : padding,
+                        paddingRight:
+                          colIndex === columns.length - 1 ? 0 : padding,
+                      }),
+                      element.props.className
+                    ),
+                    key: id,
+                  },
+                  headerTitle
+                );
+              })
+            )}
+          </thead>
+          <tbody>
+            {data.map((item, index) =>
+              React.cloneElement(
+                bodyTrElement,
+                {
+                  key: getRowKey(item),
+                },
+                ...columns.map(({ as = "td", render, id }, colIndex) => {
+                  const element = createElementFromAs(as);
+
+                  return React.cloneElement(
+                    element,
+                    {
+                      key: id,
+                      className: cx(
+                        css({
+                          // no border on the bottom row
+                          borderBottom:
+                            index === data.length - 1
+                              ? `none`
+                              : `1px solid ${colors.silver.dark}`,
+                          padding,
+                          paddingLeft: colIndex === 0 ? 0 : padding,
+                          paddingRight:
+                            colIndex === columns.length - 1 ? 0 : padding,
+                        }),
+                        element.props.className
+                      ),
+                    },
+                    render(item, index, data)
+                  );
+                })
+              )
+            )}
+          </tbody>
+        </table>
+      )}
+    </ClassNames>
   );
 }
