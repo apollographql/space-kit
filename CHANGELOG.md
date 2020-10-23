@@ -1,3 +1,29 @@
+# v7.19.0 (Fri Oct 23 2020)
+
+### Release Notes
+
+_From #247_
+
+* Allow `tr`s in the `Table` component to be customized. You can pass a single `trAs` prop that accepts `keyof JSX.IntrinsicElements`, like `"tr"`, or a `React.ReactElement` that will be cloned with `React.cloneElement`. 
+
+  This configuration accepts a single value that can be applied to both the `thead > tr` element and to `tbody > tr` elements. You can also configure them separately with `trAs={{ head: ..., body: ... }}`, of which both keys are optional (you can exclude either of them and the default of "tr" will be used). 
+
+* Allow each `column`'s `td` and `th` to be customized
+
+See the tests and storybook story docs for usage examples.
+
+---
+
+#### 🚀 Enhancement
+
+- [AR-1672,AR-1909](https://apollographql.atlassian.net/browse/AR-1672/AR-1909): , AR-1909 Add `tr` and column-level `th`/`td` customization to `Table` [#247](https://github.com/apollographql/space-kit/pull/247) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v7.18.0 (Mon Oct 19 2020)
 
 ### Release Notes
