@@ -155,6 +155,52 @@ function createCSSAttribute(css: string): types.JSXAttribute {
                     },
                   });
 
+                  // Replace `fill="none"` with `fill={fill}`
+                  traverse(jsx, {
+                    noScope: true,
+                    JSXAttribute({ node }) {
+                      if (
+                        node.name.type === "JSXIdentifier" &&
+                        node.name.name === "fill" &&
+                        node.value?.type === "StringLiteral" &&
+                        node.value.value === "none"
+                      ) {
+                        node.value = types.jsxExpressionContainer(
+                          types.identifier("fill")
+                        );
+                      }
+                    },
+                  });
+
+                  // Replace `stroke="currentColor"` with `stroke={stroke}`
+                  traverse(jsx, {
+                    noScope: true,
+                    JSXAttribute({ node }) {
+                      if (
+                        node.name.type === "JSXIdentifier" &&
+                        node.name.name === "stroke" &&
+                        node.value?.type === "StringLiteral" &&
+                        (node.value.value === "currentColor" ||
+                          node.value.value === "#000" ||
+                          node.value.value === "#000000" ||
+                          // This color is a specical color that GitHub's icon
+                          // uses for the `fill` and `stroke`
+                          node.value.value.toLowerCase() === "#12151a")
+                      ) {
+                        node.value = types.jsxExpressionContainer(
+                          types.identifier("stroke")
+                        );
+                      }
+                    },
+                  });
+
+                  traverse(jsx, {
+                    noScope: true,
+                    JSXOpeningElement({ node }) {
+                      updateStrokeWidths(node);
+                    },
+                  });
+
                   // Add css template literal
                   jsx.openingElement.attributes.push(
                     createCSSAttribute(
@@ -179,7 +225,7 @@ function createCSSAttribute(css: string): types.JSXAttribute {
                     }
 
                     export const ${componentName} = React.forwardRef<SVGSVGElement, Props>(
-                      ({ weight = "normal", ...props }, ref) => 
+                      ({ fill = "none", stroke = "currentColor", weight = "normal", ...props }, ref) =>
                         ${jsx}
                       )
                   `;
