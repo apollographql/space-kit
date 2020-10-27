@@ -77,6 +77,7 @@ function CJS() {
     ],
     plugins: [
       typescript({
+        check: false,
         tsconfig: "tsconfig.build.json",
       }),
       multiInput({
