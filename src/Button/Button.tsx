@@ -444,7 +444,6 @@ export const Button = React.forwardRef<HTMLElement, Props>(
                     outline: 0,
 
                     textDecoration: "none",
-
                     whiteSpace: "nowrap",
                   },
 
@@ -522,11 +521,12 @@ export const Button = React.forwardRef<HTMLElement, Props>(
                       {icon}
                     </ButtonIcon>
                   )}
+
                   {children}
                   {endIcon && !loading && (
                     <ButtonIcon
                       iconSize={iconSize}
-                      className={css({ margin: iconOnly ? 0 : `0 0 0 12px` })}
+                      className={css({ margin: iconOnly ? 0 : `0 0 0 6px` })}
                     >
                       {endIcon}
                     </ButtonIcon>
