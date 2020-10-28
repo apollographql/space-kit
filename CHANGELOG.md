@@ -1,3 +1,15 @@
+# v7.20.1 (Wed Oct 28 2020)
+
+#### 🐛  Bug Fix
+
+- fix icon button spacing [#250](https://github.com/apollographql/space-kit/pull/250) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v7.20.0 (Wed Oct 28 2020)
 
 #### 🚀 Enhancement
