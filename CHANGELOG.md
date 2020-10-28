@@ -1,3 +1,19 @@
+# v7.20.0 (Wed Oct 28 2020)
+
+#### 🚀 Enhancement
+
+- Create `Select` component [#243](https://github.com/apollographql/space-kit/pull/243) ([@justinanastos](https://github.com/justinanastos))
+
+#### 🏠 Internal
+
+- Stop checking TypeScript in `rollup` script [#248](https://github.com/apollographql/space-kit/pull/248) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v7.19.0 (Fri Oct 23 2020)
 
 ### Release Notes
