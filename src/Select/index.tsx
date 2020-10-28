@@ -328,7 +328,16 @@ export const Select: React.FC<Props> = ({
                   />
                 }
               >
-                {selectedItem?.children || label}
+                <div
+                  className={css({
+                    flex: 1,
+                    overflow: "hidden",
+                    whiteSpace: "nowrap",
+                    textOverflow: "ellipsis",
+                  })}
+                >
+                  {selectedItem?.children || label}
+                </div>
               </Button>
             }
           />
