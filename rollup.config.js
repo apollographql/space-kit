@@ -61,10 +61,12 @@ function CJS() {
       "@react-aria/visually-hidden",
       "@react-stately/toggle",
       "classnames",
+      "downshift",
       "framer-motion",
       "prop-types",
       "lodash/omit",
       "react",
+      "react-dom",
       "tinycolor2",
     ],
     output: [

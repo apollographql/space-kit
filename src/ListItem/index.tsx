@@ -59,7 +59,7 @@ interface Props
         React.HTMLAttributes<HTMLDivElement>,
         HTMLDivElement
       >,
-      "className" | "onClick" | "style"
+      "className" | "onClick" | "style" | "role"
     >,
     Partial<
       Pick<ReturnType<typeof useListConfig>, "endIconAs" | "startIconAs">
@@ -82,6 +82,11 @@ interface Props
   endIcon?: React.ReactNode;
 
   /**
+   * Indicates that the `ListItem` is being highlighted
+   */
+  highlighted?: boolean;
+
+  /**
    * Indicates if this list item can be itneracted with. Defaults to `true`. If
    * set to `false`, there will be no hover effects.
    *
@@ -97,13 +102,17 @@ interface Props
   startIcon?: React.ReactNode;
 }
 
-export const ListItem = React.forwardRef<any, React.PropsWithChildren<Props>>(
+export const ListItem = React.forwardRef<
+  HTMLDivElement,
+  React.PropsWithChildren<Props>
+>(
   (
     {
       as = <div />,
       children,
       endIcon,
       endIconAs: endIconAsProp,
+      highlighted = false,
       interactive = true,
       selected = false,
       startIcon,
@@ -136,15 +145,16 @@ export const ListItem = React.forwardRef<any, React.PropsWithChildren<Props>>(
       color: selectedTextColor,
     };
 
-    const hoverStyles = interactive && {
-      backgroundColor: hoverColor,
-      color: tinycolor
-        .mostReadable(hoverColor, [colors.white, colors.grey.darker], {
-          level: "AA",
-          size: "small",
-        })
-        .toString(),
-    };
+    const highlightedStyles = hoverColor &&
+      interactive && {
+        backgroundColor: hoverColor,
+        color: tinycolor
+          .mostReadable(hoverColor, [colors.white, colors.grey.darker], {
+            level: "AA",
+            size: "small",
+          })
+          .toString(),
+      };
 
     const verticalMargin = verticalListMarginFromPadding(padding) / 2;
 
@@ -162,8 +172,9 @@ export const ListItem = React.forwardRef<any, React.PropsWithChildren<Props>>(
                     ...(selected && selectedStyles),
                     ...{ "&[aria-expanded=true]": selectedStyles },
                     ...(!selected && {
-                      "&:hover, &[data-force-hover-state]": hoverStyles,
+                      "&:hover, &[data-force-hover-state]": highlightedStyles,
                     }),
+                    ...(highlighted && !selected && highlightedStyles),
                     alignItems: "center",
                     cursor: interactive ? "pointer" : undefined,
                     borderRadius: 4,

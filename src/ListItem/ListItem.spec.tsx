@@ -14,7 +14,7 @@ it("given `as` prop, custom element should be rendered", () => {
 });
 
 it("given no `as` prop, ref should be passed through", () => {
-  const ref = React.createRef<HTMLElement>();
+  const ref = React.createRef<HTMLDivElement>();
 
   render(
     <ListItem data-testid="ListItem" ref={ref}>
@@ -26,7 +26,7 @@ it("given no `as` prop, ref should be passed through", () => {
 });
 
 it("given `as` prop, ref should be passed through", () => {
-  const ref = React.createRef<HTMLElement>();
+  const ref = React.createRef<HTMLDivElement>();
 
   render(
     <ListItem

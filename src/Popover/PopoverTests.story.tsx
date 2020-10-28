@@ -4,6 +4,7 @@ import { Button } from "../Button";
 import { findByRole } from "@testing-library/dom";
 import { Popover } from "../Popover";
 import { ListHeading } from "../ListHeading";
+import { List } from "../List";
 import { ListItem } from "../ListItem";
 import { PerformUserInteraction } from "../shared/PerformUserInteraction";
 import { storiesOf } from "@storybook/react";
@@ -30,10 +31,9 @@ storiesOf("Tests/Popover", module)
         <Popover
           placement="bottom-start"
           fallbackPlacements={["top-start"]}
-          iconSize="small"
           maxWidth={280}
           content={
-            <React.Fragment>
+            <List>
               <ListHeading>mdg-private-graphs</ListHeading>
               <ListItem>space-kit</ListItem>
               <ListItem>space-kit</ListItem>
@@ -45,7 +45,7 @@ storiesOf("Tests/Popover", module)
               <ListItem>space-kit</ListItem>
               <ListItem>space-kit</ListItem>
               <ListItem>space-kit</ListItem>
-            </React.Fragment>
+            </List>
           }
           trigger={
             <Button style={{ position: "absolute", left: 400, top: 400 }}>
@@ -76,15 +76,14 @@ storiesOf("Tests/Popover", module)
           placement="bottom"
           popperOptions={{ strategy: "absolute" }}
           fallbackPlacements={["top"]}
-          iconSize="small"
           maxWidth={280}
           content={
-            <React.Fragment>
+            <List>
               <ListHeading>Shapes</ListHeading>
               <ListItem>Circle</ListItem>
               <ListItem>Rectangle</ListItem>
               <ListItem>Square</ListItem>
-            </React.Fragment>
+            </List>
           }
           trigger={
             <Button style={{ position: "absolute", left: 0, top: 200 }}>
@@ -115,15 +114,14 @@ storiesOf("Tests/Popover", module)
           popperOptions={{ strategy: "absolute" }}
           placement="bottom"
           fallbackPlacements={["top"]}
-          iconSize="small"
           maxWidth={280}
           content={
-            <React.Fragment>
+            <List>
               <ListHeading>Shapes</ListHeading>
               <ListItem>Circle</ListItem>
               <ListItem>Rectangle</ListItem>
               <ListItem>Square</ListItem>
-            </React.Fragment>
+            </List>
           }
           trigger={
             <Button style={{ position: "absolute", left: 0, top: 200 }}>
@@ -154,7 +152,6 @@ storiesOf("Tests/Popover", module)
           popperOptions={{ strategy: "absolute" }}
           placement="bottom-start"
           fallbackPlacements={["top-start"]}
-          iconSize="small"
           maxWidth={280}
           content={
             <React.Fragment>
@@ -195,7 +192,6 @@ storiesOf("Tests/Popover", module)
           popperOptions={{ strategy: "absolute" }}
           placement="bottom-start"
           fallbackPlacements={["top-start"]}
-          iconSize="small"
           maxWidth={280}
           content="content"
           trigger={

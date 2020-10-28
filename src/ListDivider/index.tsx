@@ -7,7 +7,7 @@ import { colors } from "../colors";
 /**
  * Divider between sections in a list
  */
-export const ListDivider: React.FC = () => {
+export const ListDivider: React.FC = (props) => {
   // Stop click events so we don't try to close the list when clicking something
   // non-interactive
   const handleClick = React.useCallback<React.MouseEventHandler<HTMLHRElement>>(
@@ -20,6 +20,7 @@ export const ListDivider: React.FC = () => {
 
   return (
     <hr
+      {...props}
       onClick={handleClick}
       css={css({
         marginLeft: -8,

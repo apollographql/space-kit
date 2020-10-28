@@ -9,9 +9,11 @@ interface Props
     | "children"
     | "content"
     | "disabled"
-    | "maxWidth"
-    | "placement"
     | "fallbackPlacements"
+    | "matchTriggerWidth"
+    | "maxWidth"
+    | "onCreate"
+    | "placement"
     | "popperOptions"
   > {
   className?: string;

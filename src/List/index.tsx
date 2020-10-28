@@ -14,35 +14,58 @@ interface Props
       "style" | "className"
     > {}
 
-export const List: React.FC<Props> = ({
-  children,
-  className,
-  style,
-  ...props
-}) => {
-  /**
-   * Combination of inherited configuration and new configuration passed via
-   * props
-   */
-  const listConfig: ReturnType<typeof useListConfig> = {
-    ...useListConfig(),
-    ...props,
-  };
+export const List = React.forwardRef<
+  HTMLDivElement,
+  React.PropsWithChildren<Props>
+>(
+  (
+    {
+      children,
+      className,
+      style,
+      endIconAs,
+      hoverColor,
+      iconSize,
+      padding,
+      selectedColor,
+      startIconAs,
+      ...props
+    },
+    ref
+  ) => {
+    /**
+     * Combination of inherited configuration and new configuration passed via
+     * props
+     */
+    const listConfig: ReturnType<typeof useListConfig> = {
+      ...useListConfig(),
+      ...(endIconAs && { endIconAs }),
+      ...(hoverColor && { hoverColor }),
+      ...(iconSize && { iconSize }),
+      ...(padding && { padding }),
+      ...(selectedColor && { selectedColor }),
+      ...(startIconAs && { startIconAs }),
+    };
 
-  const verticalMargin = -verticalListMarginFromPadding(listConfig.padding) / 2;
+    const verticalMargin =
+      -verticalListMarginFromPadding(listConfig.padding) / 2;
 
-  return (
-    <ListConfigProvider {...listConfig}>
-      <div
-        className={className}
-        style={style}
-        css={css({
-          marginTop: verticalMargin,
-          marginBottom: verticalMargin,
-        })}
-      >
-        {children}
-      </div>
-    </ListConfigProvider>
-  );
-};
+    return (
+      <ListConfigProvider {...listConfig}>
+        <div
+          {...props}
+          ref={ref}
+          className={className}
+          style={style}
+          css={css({
+            marginTop: verticalMargin,
+            marginBottom: verticalMargin,
+            outline: "none",
+          })}
+        >
+          {children}
+        </div>
+      </ListConfigProvider>
+    );
+  }
+);

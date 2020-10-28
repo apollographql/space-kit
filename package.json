@@ -76,6 +76,7 @@
     "@types/tinycolor2": "^1.4.2",
     "classnames": "^2.2.6",
     "csstype": "^3.0.3",
+    "downshift": "^6.0.6",
     "lodash": "*",
     "tinycolor2": "^1.4.1",
     "tslib": "^2.0.1"
@@ -145,6 +146,7 @@
   },
   "peerDependencies": {
     "react": ">16",
+    "react-dom": ">16",
     "framer-motion": ">1.6"
   }
 }
