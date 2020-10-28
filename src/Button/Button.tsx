@@ -444,7 +444,7 @@ export const Button = React.forwardRef<HTMLElement, Props>(
                     outline: 0,
 
                     textDecoration: "none",
-                    textAlign: "center",
+
                     whiteSpace: "nowrap",
                   },
 
@@ -522,23 +522,11 @@ export const Button = React.forwardRef<HTMLElement, Props>(
                       {icon}
                     </ButtonIcon>
                   )}
-
-                  {children && (
-                    <div
-                      className={css({
-                        flex: 1,
-                        overflow: "hidden",
-                        whiteSpace: "nowrap",
-                        textOverflow: "ellipsis",
-                      })}
-                    >
-                      {children}
-                    </div>
-                  )}
+                  {children}
                   {endIcon && !loading && (
                     <ButtonIcon
                       iconSize={iconSize}
-                      className={css({ margin: iconOnly ? 0 : `0 0 0 6px` })}
+                      className={css({ margin: iconOnly ? 0 : `0 0 0 12px` })}
                     >
                       {endIcon}
                     </ButtonIcon>
