@@ -10,7 +10,7 @@
 ## Getting started
 
 ```shell
-npm install @apollo/space-kit
+npm install @apollo/space-kit @emotion/core @emotion/cache framer-motion
 ```
 
 ## Usage
