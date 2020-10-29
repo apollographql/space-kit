@@ -285,6 +285,7 @@ export const TextField: React.FC<Props> = ({
           </InputLabel>
           <div
             css={{
+              marginTop: 8,
               alignItems: "center",
               position: "relative",
             }}
