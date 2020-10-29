@@ -62,10 +62,14 @@ mdx += `import { IconDemo } from './icons.story/IconDemo';\n`;
   mdx += "\n";
   mdx += "# Icons\n";
 
-  mdx += "\n";
+  mdx += "## Customization\n";
+  mdx +=
+    'We set reasonable defaults for `fill` and `stroke` values. If you don\'t want these defaults, like you\'re using `className` to override these values, you can pass an empty string `""` as the values of the `fill` or `stroke` prop, like this: `fill=""` or `stroke=""` \n';
+
+  mdx += "## Categories\n";
 
   Object.entries(categorizedFilenames).forEach(([category, filenames]) => {
-    mdx += `## ${category.substr(0, 1).toUpperCase()}${category.substr(1)}\n`;
+    mdx += `### ${category.substr(0, 1).toUpperCase()}${category.substr(1)}\n`;
 
     mdx += `<Canvas mdxSource="${filenames
       .map((filename) =>

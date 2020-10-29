@@ -7,31 +7,7 @@
   </a>
 </div>
 
-## Table of Contents <!-- omit in toc -->
-
-- [Installation](#installation)
-- [Usage](#usage)
-- [Exports](#exports)
-  - [Stylesheet reset](#stylesheet-reset)
-  - [Colors](#colors)
-  - [Icons](#icons)
-  - [Typography](#typography)
-  - [Buttons](#buttons)
-  - [Modals](#modals)
-  - [Loaders](#loaders)
-  - [Emotion Example](#emotion-example)
-- [Developing Space Kit](#developing-space-kit)
-  - [`npm link`](#npm-link)
-  - [Tests](#tests)
-  - [Releases](#releases)
-  - [Icons](#icons-1)
-  - [TypeScript](#typescript)
-  - [Storybook](#storybook)
-  - [Beta Releases](#beta-releases)
-- [Resources](#resources)
-
-
-## Installation
+## Getting started
 
 ```shell
 npm install @apollo/space-kit
@@ -64,6 +40,8 @@ function MyComponent() {
 
 ### Stylesheet reset
 
+_TODO: Move this to storybook docs_
+
 A "base" stylesheet with a few sensible rules. It uses [normalize.css](https://necolas.github.io/normalize.css/) to smooth out any inconsistencies between the ways that different browsers render elements. It also applies `box-sizing: border-box;` to everything, for [a better element sizing experience](https://www.paulirish.com/2012/box-sizing-border-box-ftw/). Lastly, the stylesheet imports and sets our two main font families: [Source Sans Pro](https://fonts.google.com/specimen/Source+Sans+Pro), and [Source Code Pro](https://fonts.google.com/specimen/Source+Code+Pro).
 
 You'll probably want to include this file once in your app, ideally at the top-most level. For instance, in a Gatsby site that would be your [`layout.js` component](https://www.gatsbyjs.org/docs/layout-components/).
@@ -80,254 +58,7 @@ import "@apollo/space-kit/reset.css";
 @import (inline) "../node_modules/@apollo/space-kit/reset.css
 ```
 
-### Colors
 
-A JavaScript object that maps color names to palettes of hex codes to apply on-brand color to elements on a page. The available colors include:
-
-- `pink`
-- `teal`
-- `indigo`
-- `black`
-- `grey`
-- `silver`
-- `red`
-- `green`
-- `blue`
-- `orange`
-- `yellow`
-- `purple`
-
-When you access a color by name (i.e. `colors.indigo`), you'll find a palette of hex codes keyed by a "lightness" variant. These include:
-
-- `base`
-- `dark`
-- `darker`
-- `darkest` (not on `black`, `grey`, or `silver`)
-- `light`
-- `lighter`
-- `lightest` (not on `black`, `grey`, or `silver`)
-
-**CSS-in-JS**
-
-```jsx
-import styled from "@emotion/styled";
-import { colors } from "@apollo/space-kit";
-
-const StyledButton = styled.button({
-  backgroundColor: colors.indigo.dark,
-  color: "white",
-  border: `1px solid ${colors.grey.light}`,
-});
-
-function MyComponent() {
-  return (
-    <div>
-      <StyledButton>Save</StyledButton>
-      <StyledButton
-        style={{
-          backgroundColor: colors.red.base,
-        }}
-      >
-        Delete
-      </StyledButton>
-    </div>
-  );
-}
-```
-
-### Icons
-
-All our icons are displayed in a gallery in [Storybook](https://space-kit.netlify.com/?path=/story/space-kit--icons).
-
-Note that there are no styles or classes applied to the SVGs by default; you'll have to add a `width` and `height` to see the icons; and apply a text color to color them.
-
-All our icons are SVG files stored in [`./icons/src/svgs`](./icons/src/svgs). There are scripts set up to convert these SVGs into React components, and then to transpile those files for consumption. These conversions and transpilations are `.gitignore`'ed, so they are not maintained in source control.
-
-These icons are _not_ open source and are only licensed for use in this project. See [license](./icons/LICENSE.md) for more details.
-
-Please see [#developing-space-kit-icons](#icons-1) for instructions on adding new icons.
-
-### Typography
-
-Zeplin: https://zpl.io/V4ep7Jy
-
-We decided to export our typography style system as plain old JavaScript to allow consumers to chose how to implement the configurations. The names relate to each other and do not imply intent. For example, we did not use the names "title" or "caption" because the style system only gives the options; it's up to each consumer to chose a style guide.
-
-To consume these types with [Tailwindcss](https://tailwindcss.com/), one would create a plugin to add a [utility](https://v0.tailwindcss.com/docs/plugins#adding-utilities) to add these classnames.
-
-This example will use the original names prefixed with `space-kit-`:
-
-```js
-const typographyConfig = require("@apollo/space-kit/typography");
-
-module.exports = {
-  plugins: [
-    function spaceKitTypography({ addUtilities }) {
-      addUtilities(
-        Object.entries(typographyConfig.base).reduce(
-          (accumulator, [name, properties]) => ({
-            ...accumulator,
-            [`.space-kit-${name}`]: properties,
-          }),
-          {}
-        )
-      );
-    },
-  ],
-};
-```
-
-You could also use the style system to add intent:
-
-```js
-const typographyConfig = require("@apollo/space-kit/typography");
-
-module.exports = {
-  plugins: [
-    function spaceKitTypography({ addUtilities }) {
-      addUtilities({
-        ".space-kit-title": typographyConfig.base.xxxlarge,
-        ".caption": typographyConfig.base.xsmall,
-      });
-    },
-  ],
-};
-```
-
-#### Example
-
-```js
-import React from "react";
-import { IconServices } from "@apollo/space-kit/icons/IconServices";
-
-export const IconServiceItem: React.FC = () => (
-  <div className="w-5 h-5">
-    <IconServices className="w-full h-full text-teal" />
-  </div>
-);
-```
-
-### Buttons
-
-Zeplin: https://zpl.io/amdN6Pr
-
-This is our style system for buttons. This is intended to be used to create your project's style guide. Configure the color by passing an optional `color` prop with a value from the space kit palette. You should use emotion or tailwind to set the text color as this will not be handled for you unless you're using a flat button.
-
-You can use this component with no configuration as-is to use the default colors.
-
-You can configure anything you'd like with tailwind or emotion, but you should never have to do this.
-
-#### Tailwind Example
-
-```js
-import React from "react";
-import classnames from "classnames";
-import { Button } from "@apollo/space-kit/Button";
-import { colors } from "@apollo/space-kit/colors";
-
-export const PrimaryButton: React.FC<ComponentProps<typeof Button>> = ({
-  children,
-  className,
-  ...otherProps
-}) => (
-  <Button
-    {...otherProps}
-    color={colors.blue.base}
-    className={classnames(className, "text-white")}
-  >
-    {children}
-  </Button>
-);
-```
-
-#### Emotion Example
-
-```js
-/** @jsx jsx */
-import React from "react";
-import { Button } from "@apollo/space-kit/Button";
-import { colors } from "@apollo/space-kit/colors";
-import { jsx } from "@emotion/core";
-
-export const PrimaryButton: React.FC<ComponentProps<typeof Button>> = ({
-  children,
-  ...otherProps
-}) => (
-  <Button
-    {...otherProps}
-    color={colors.indigo.dark}
-    css={{
-      color: "white",
-    }}
-  >
-    {children}
-  </Button>
-);
-```
-
-### Modals
-
-### Loaders
-
-Zeplin: https://app.zeplin.io/project/5c7dcb5ab4e654bca8cde54d/screen/5d56d40acf2df541b112fc57
-
-#### Spinners
-
-Spinners are used when we are unable to determine loading time. Ideally, they should appear as briefly and infrequently as possible.
-
-Spinners can be configured through their `theme` and `size` props. By default a loading spinner will have a 'light' theme and 'medium' size.
-
-You can configure anything you'd like with tailwind or emotion, but you should never have to do this.
-
-#### Example
-
-```js
-import React from "react";
-import { LoadingSpinner } from "@apollo/space-kit/Loaders";
-
-export const LoadingPage: React.FC<Props> = (otherProps) => (
-  <div {...otherProps} >
-    <LoadingSpinner
-      theme="light"
-      size="medium"
-    />
-  </div>
-);
-```
-
-### Emotion Example
-
-```js
-/** @jsx jsx */
-import React from "react";
-import { Modal } from "@apollo/space-kit/Modal";
-import { Button } from "@apollo/space-kit/Button";
-import { colors } from "@apollo/space-kit/colors";
-import { jsx } from "@emotion/core";
-
-export const SmallModal: React.FC<ComponentProps<typeof Modal>> = ({
-  children, 
-  ...otherProps 
-}) => (
-    <Modal
-    {...otherProps}
-      size="small"
-      title="Are you sure you want to remove Jeremy?"
-      primaryAction={
-        <Button
-          color={colors.red.base}
-          css={{ color: colors.white }}
-          type="button"
-        >
-          Yes, remove
-        </Button>
-      }
-    >
-      Jeremy will no longer have access to the MGD-Private. You can always add
-      them back to the organization later.
-    </Modal>
-);
-```
 
 #### FAQ
 
@@ -349,35 +80,22 @@ Developing locally against Storybook is easy; run `npm run storybook`.
 
 ### `npm link`
 
-You can use `npm link` to develop Space Kit features directly inside another project with a little bit of work. `npm link` does not work out of the box, however, because of React hooks. We must use the same instance of `React` both in this project and in your consuming project, so you must use the following process or you will get errors about react hooks:
+Run `npm run watch` to watch the entire project for changes and recompile on the fly.
 
-* Link the consuming package's react package into space kit
-    
-    Run the following from the space kit directory:
+You can use `npm link` to develop Space Kit features directly inside another project with a little bit of work. `npm link` does not work out of the box, however, because of React hooks requiring that the same instance of `react` be used everywhere in an application. We must use the same instance of `React` both in this project and in your consuming project. If you're using webpack, add `resolve.alias` fields to your project's configuration like so:
 
-    ```shell
-    npm link ../engine-frontend/node_modules/react
-    ```
-
-* Use development build of space kit
-
-    Run `npm run watch` and everything should build automatically
-
-    Note: When developing a new feature of space-kit, please make sure that the `watch` script will automatically perform all setps necessary to build for development. For example, there is a `watch:typescript` script and a `watch:npmwatch` script that will watch all TypeScript files and watch all the svg icons for changes.
-
-* Link space kit
-
-    Run the following from the space kit directory:
-
-    ```shell
-    npm link
-    ```
-
-    Then run the following form the consuming package's directory:
-
-    ```shell
-    npm link @apollo/space-kit
-    ```
+```js
+resolve: {
+  alias: {
+    // Used for `npm link`'ing to Space Kit
+    react: path.resolve('./node_modules/react'),
+    // Used for `npm link`'ing to Space Kit
+    'react-refresh/runtime': path.resolve(
+      './node_modules/react-refresh/runtime',
+    ),
+  },
+},
+```
 
 ### Tests
 
@@ -428,50 +146,12 @@ There is a CircleCI job that checks that an appropriate label is on the PR. It w
 
 The changelog will be updated automatically with the title of your PR used as the line item in the changelog. The sections of the changelog will decided by the labels you gave your PR. If you want to add more information for the changelog, add a `## Release Notes` section in your PR description. https://intuit.github.io/auto/pages/auto-changelog.html#additional-release-notes
 
-### Icons
-
-Our icons are all stored in [`icons/src/svgs`](./icons/src/svgs) in folders named for the icon category. To add new icons, add svg files to one of these category folders and open a pull request. Fill and stroke colors with values `#000` or `#000000` will be replace by `currentColor` to allow the consumer to change the colors; all other colors will be maintained and will not be configurable.
-
-All React components will be automatically generated and the TypeScript will be transpiled automatically after merging to `main`.
-
-The following scripts are available:
-
-- `icons:clean`: Clean all the React components and TypeScript generated files from the `icons/` directory. This will not touch the raw svg files in `icons/src`.
-- `icons:generate`: Generate TypeScript files for each icon. These will be immediately available in Storybook.
-- `icons`: Run `icons:clean` and `icons:genreate` in series
-- `build:typescript`: Transpile TypeScript files to be consumed externally.
-- `watch`: Watch TypeScript files and automatically update.
-
-  This is useful when you've `npm link`'ed this repository and are developing against another project.
-
-### Illustrations
-
-Similar to icons, Space Kit illustrations are stored and generated from [`src/illustrations/svgs`](./src/illustrations/svgs). To build the stories for newly added illustrations, run `npm run illustrations:generate`.
-
-### Pictograms
-
-Similar to icons & illustrations, Space Kit pictograms are stored and generated from [`src/pictograms/svgs`](./src/pictograms/svgs). To build the stories for newly added pictograms, run `npm run pictograms:generate`.
-
-### TypeScript
-
-To watch all TypeScript projects for development, run the `npm run watch` script.
-
-### Storybook
-
-Many elements of Space Kit are showcased in Storybook, which can be used for local development by running:
-
-```
-npm install
-npm run storybook
-```
-
-All pull requests will automatically generate deploy previews and the `main` branch is automatically deployed to https://space-kit.netlify.com.
-
-[![Netlify Status](https://api.netlify.com/api/v1/badges/d5469491-a3d2-4ee1-b31d-d7f87ae806f8/deploy-status)](https://app.netlify.com/sites/space-kit/deploys)
-
 ### Beta Releases
 
-While local development should be done with [`npm link`](https://docs.npmjs.com/cli/link),sometimes we need to release pre-release versions. This will require you use `npm version` to bump the package (prepatch, preminor, or premajor would be a smart move). Then you can use `npm publish --tag=next` (or whatever tag you want to use).
+While local development should be done with [`npm link`](https://docs.npmjs.com/cli/link),sometimes we need to release pre-release versions so you can see the effects of Space Kit changes in your project somewhere you can't use `npm link`, like in a pull request. In that case, there are two options:
+
+1. All Space Kit PRs automatically publish a canary build on `npm` and addd a link to that in your PR description
+2. You can build your own canary anytime by running `npx auto canary`
 
 ## Resources
 
