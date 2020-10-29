@@ -30,7 +30,7 @@
     "pictograms": "run-s clean:pictograms pictograms:generate",
     "pictograms:generate": "ts-node --transpile-only src/pictograms/scripts/convert",
     "lint": "eslint --cache --ext .js,.jsx,.ts,.tsx,.mdx .eslintrc.js build-reset.ts components-util/ .storybook/ stories/ src/",
-    "prepare": "npm run build",
+    "prepublishOnly": "npm run build",
     "release": "./scripts/release.sh",
     "start": "npm run storybook",
     "storybook": "start-storybook -p 6006 --static-dir .storybook/public",
