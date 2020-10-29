@@ -1,3 +1,35 @@
+# v8.0.0 (Thu Oct 29 2020)
+
+### Release Notes
+
+_From #251_
+
+* Move `@emotion/core` and `@emotion/cache` to `peerDependencies`
+
+  This will require that consumers install and maintain upgrades of these packages on their own... until we start using the recently release npm v7 which installed peer deps automatically 🤷‍♂️ 
+
+* Update README.md to reflect new peer dependencies
+
+  We already included `framer-motion` as a `peerDependency`; now we specify that in the README.md
+
+---
+
+#### 💥 Breaking Change
+
+- Move `@emotion` to `peerDependencies` [#251](https://github.com/apollographql/space-kit/pull/251) ([@Jephuff](https://github.com/Jephuff) [@justinanastos](https://github.com/justinanastos))
+- Remove extra top margin for TextField error [#246](https://github.com/apollographql/space-kit/pull/246) ([@Jephuff](https://github.com/Jephuff))
+
+#### 🏠 Internal
+
+- fix flakey test in `Popover` [#252](https://github.com/apollographql/space-kit/pull/252) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 2
+
+- Jeffrey Burt ([@Jephuff](https://github.com/Jephuff))
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v7.21.0 (Thu Oct 29 2020)
 
 #### 🚀 Enhancement
