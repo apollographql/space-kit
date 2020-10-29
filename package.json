@@ -63,8 +63,6 @@
   "keywords": [],
   "license": "MIT",
   "dependencies": {
-    "@emotion/cache": "^10.0.29",
-    "@emotion/core": "^10.0.28",
     "@react-aria/focus": "^3.1.0",
     "@react-aria/switch": "^3.1.0",
     "@react-aria/utils": "^3.1.0",
@@ -89,6 +87,8 @@
     "@babel/generator": "^7.12.1",
     "@babel/preset-env": "^7.12.1",
     "@babel/traverse": "^7.12.1",
+    "@emotion/cache": "^10.0.29",
+    "@emotion/core": "^10.0.35",
     "@storybook/addon-docs": "^6.0.26",
     "@storybook/react": "^6.0.26",
     "@svgr/core": "^4.3.0",
@@ -145,6 +145,8 @@
     "typescript": "^4.0.2"
   },
   "peerDependencies": {
+    "@emotion/cache": ">10.0.29",
+    "@emotion/core": ">10.0.28",
     "react": ">16",
     "react-dom": ">16",
     "framer-motion": ">1.6"
