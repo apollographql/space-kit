@@ -1,3 +1,15 @@
+# v7.21.0 (Thu Oct 29 2020)
+
+#### 🚀 Enhancement
+
+- [AR-1917](https://apollographql.atlassian.net/browse/AR-1917): Icons: use overridable props for `fill` and `stroke` [#249](https://github.com/apollographql/space-kit/pull/249) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v7.20.1 (Wed Oct 28 2020)
 
 #### 🐛  Bug Fix
