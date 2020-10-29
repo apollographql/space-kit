@@ -54,7 +54,8 @@ test("when `onClick` handler does not call `stopPropagation()`, list closes when
 });
 
 test("when `onClick` handler calls `stopPropagation()`, list doesn't close when `ListItem` in `content` is clicked", async () => {
-  const listItemText = faker.random.word();
+  const listItemText = "list-item-text";
+  const triggerText = "trigger-text";
 
   render(
     <SpaceKitProvider disableAnimations>
@@ -70,7 +71,7 @@ test("when `onClick` handler calls `stopPropagation()`, list doesn't close when 
             </ListItem>
           </>
         }
-        trigger={<Button>{faker.random.word()}</Button>}
+        trigger={<Button>{triggerText}</Button>}
       ></Popover>
     </SpaceKitProvider>
   );
