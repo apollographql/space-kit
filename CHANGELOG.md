@@ -1,3 +1,15 @@
+# v8.0.1 (Fri Nov 06 2020)
+
+#### 🐛  Bug Fix
+
+- [AR-1935](https://apollographql.atlassian.net/browse/AR-1935): Reset `Button` css outline [#255](https://github.com/apollographql/space-kit/pull/255) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v8.0.0 (Thu Oct 29 2020)
 
 ### Release Notes
