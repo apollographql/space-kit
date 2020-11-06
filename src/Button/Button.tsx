@@ -363,6 +363,9 @@ export const Button = React.forwardRef<HTMLElement, Props>(
               className: cx(
                 css([
                   {
+                    "&:focus": {
+                      outline: 0,
+                    },
                     // We need to also set the `:hover` on `:disabled` so it has a
                     // higher specificity than any `:hover` classes passed in. This
                     // also means that both of these need to be overriden if we want
