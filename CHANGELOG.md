@@ -1,3 +1,15 @@
+# v8.1.0 (Fri Nov 06 2020)
+
+#### 🚀 Enhancement
+
+- Add `as` prop to `AlertCard` [#256](https://github.com/apollographql/space-kit/pull/256) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v8.0.1 (Fri Nov 06 2020)
 
 #### 🐛  Bug Fix
