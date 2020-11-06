@@ -1,4 +1,5 @@
 /** @jsx jsx */
+/** @jsxFrag React.Fragment */
 import { jsx, ClassNames } from "@emotion/core";
 import React, { CSSProperties, Fragment, useMemo } from "react";
 import PropTypes from "prop-types";
@@ -14,6 +15,16 @@ import { IconErrorSolid } from "../icons/IconErrorSolid";
 import { IconSuccessSolid } from "../icons/IconSuccessSolid";
 
 interface AlertCardProps {
+  /**
+   * Override the the default element
+   *
+   * All props provided will be merged with props that this component adds,
+   * including `className`s being merged using emotion's `cx` function
+   *
+   * @default "section"
+   */
+  as?: React.ReactElement | keyof JSX.IntrinsicElements;
+
   /**
    * color theme for alert
    * @default "light"
@@ -65,6 +76,7 @@ interface AlertCardProps {
 }
 
 export const AlertCard: React.FC<AlertCardProps> = ({
+  as = "section",
   heading,
   onClose,
   actions,
@@ -89,134 +101,151 @@ export const AlertCard: React.FC<AlertCardProps> = ({
         assertUnreachable(type);
     }
   }, [type]);
+
   return (
-    <section
-      {...otherProps}
-      css={{
-        backgroundColor:
-          theme === "light"
-            ? colors.white
-            : theme === "dark"
-            ? colors.midnight.darker
-            : assertUnreachable(theme),
-        color:
-          theme === "light"
-            ? colors.black.base
-            : theme === "dark"
-            ? colors.white
-            : assertUnreachable(theme),
-        boxShadow: `0 4px 8px 0 rgba(0, 0, 0, .04)`,
-        borderStyle: "solid",
-        borderRadius: 4,
-        borderWidth:
-          theme === "light"
-            ? 1
-            : theme === "dark"
-            ? 0
-            : assertUnreachable(theme),
-        borderColor: colors.silver.dark,
-        padding: 15,
-      }}
-    >
-      <div
-        css={{
-          marginBottom: extended ? 14 : 6,
-          overflow: "hidden",
-          display: "flex",
-        }}
-      >
-        <ClassNames>
-          {({ css, cx }) => {
-            const headingProps = {
-              className: cx(
-                css({
-                  fontWeight: 600,
-                  marginBottom: 0,
-                  marginTop: 0,
-                  width: "100%",
-                  display: "flex",
+    <ClassNames>
+      {({ css, cx }) =>
+        React.cloneElement(
+          React.isValidElement(as)
+            ? as
+            : typeof as === "string"
+            ? React.createElement(as)
+            : assertUnreachable(as),
+          {
+            ...otherProps,
+            className: cx(
+              css({
+                backgroundColor:
+                  theme === "light"
+                    ? colors.white
+                    : theme === "dark"
+                    ? colors.midnight.darker
+                    : assertUnreachable(theme),
+                color:
+                  theme === "light"
+                    ? colors.black.base
+                    : theme === "dark"
+                    ? colors.white
+                    : assertUnreachable(theme),
+                boxShadow: `0 4px 8px 0 rgba(0, 0, 0, .04)`,
+                borderStyle: "solid",
+                borderRadius: 4,
+                borderWidth:
+                  theme === "light"
+                    ? 1
+                    : theme === "dark"
+                    ? 0
+                    : assertUnreachable(theme),
+                borderColor: colors.silver.dark,
+                padding: 15,
+              }),
+              otherProps.className,
+              React.isValidElement(as) && as.props.className
+            ),
+          },
+          <>
+            <div
+              css={{
+                marginBottom: extended ? 14 : 6,
+                overflow: "hidden",
+                display: "flex",
+              }}
+            >
+              <ClassNames>
+                {({ css, cx }) => {
+                  const headingProps = {
+                    className: cx(
+                      css({
+                        fontWeight: 600,
+                        marginBottom: 0,
+                        marginTop: 0,
+                        width: "100%",
+                        display: "flex",
+                        color:
+                          theme === "light"
+                            ? color.darker
+                            : theme === "dark"
+                            ? color.lighter
+                            : assertUnreachable(theme),
+                        ...base.base,
+                      })
+                    ),
+                    children: (
+                      <Fragment>
+                        <Icon
+                          css={{
+                            width: 20,
+                            height: 20,
+                            color: color.base,
+                            marginRight: 13,
+                            "& .inner": theme === "dark" &&
+                              type !== "warn" && { fill: colors.white },
+                          }}
+                        />
+                        {heading}
+                      </Fragment>
+                    ),
+                  };
+
+                  return React.isValidElement(headingAs)
+                    ? React.cloneElement(headingAs, {
+                        ...headingProps,
+                        className: classnames(
+                          headingProps.className,
+                          headingAs.props.className
+                        ),
+                      })
+                    : React.createElement(headingAs, headingProps);
+                }}
+              </ClassNames>
+              <IconClose
+                onClick={onClose}
+                css={{
                   color:
                     theme === "light"
-                      ? color.darker
+                      ? colors.grey.lighter
                       : theme === "dark"
-                      ? color.lighter
+                      ? colors.midnight.lighter
                       : assertUnreachable(theme),
-                  ...base.base,
-                })
-              ),
-              children: (
-                <Fragment>
-                  <Icon
-                    css={{
-                      width: 20,
-                      height: 20,
-                      color: color.base,
-                      marginRight: 13,
-                      "& .inner": theme === "dark" &&
-                        type !== "warn" && { fill: colors.white },
-                    }}
-                  />
-                  {heading}
-                </Fragment>
-              ),
-            };
+                  cursor: "pointer",
+                  width: 10,
+                  height: 10,
+                }}
+              />
+            </div>
 
-            return React.isValidElement(headingAs)
-              ? React.cloneElement(headingAs, {
-                  ...headingProps,
-                  className: classnames(
-                    headingProps.className,
-                    headingAs.props.className
-                  ),
-                })
-              : React.createElement(headingAs, headingProps);
-          }}
-        </ClassNames>
-        <IconClose
-          onClick={onClose}
-          css={{
-            color:
-              theme === "light"
-                ? colors.grey.lighter
-                : theme === "dark"
-                ? colors.midnight.lighter
-                : assertUnreachable(theme),
-            cursor: "pointer",
-            width: 10,
-            height: 10,
-          }}
-        />
-      </div>
+            {extended && (
+              <hr
+                css={{
+                  height: 1,
+                  borderWidth: 0,
+                  backgroundColor:
+                    theme === "light"
+                      ? colors.silver.dark
+                      : theme === "dark"
+                      ? colors.midnight.base
+                      : assertUnreachable(theme),
+                  marginTop: 14,
+                  marginBottom: 14,
+                }}
+              />
+            )}
+            <div css={{ marginLeft: extended ? 0 : 33 }}>
+              <div
+                css={{
+                  ...base.small,
+                  marginBottom: actions ? 13 : 0,
+                }}
+              >
+                {children}
+              </div>
 
-      {extended && (
-        <hr
-          css={{
-            height: 1,
-            borderWidth: 0,
-            backgroundColor:
-              theme === "light"
-                ? colors.silver.dark
-                : theme === "dark"
-                ? colors.midnight.base
-                : assertUnreachable(theme),
-            marginTop: 14,
-            marginBottom: 14,
-          }}
-        />
-      )}
-      <div css={{ marginLeft: extended ? 0 : 33 }}>
-        <div
-          css={{
-            ...base.small,
-            marginBottom: actions ? 13 : 0,
-          }}
-        >
-          {children}
-        </div>
-
-        {actions}
-      </div>
-    </section>
+              {actions}
+            </div>
+          </>
+        )
+      }
+    </ClassNames>
   );
 };
 
