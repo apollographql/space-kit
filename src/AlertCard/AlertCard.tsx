@@ -13,6 +13,7 @@ import { IconInfoSolid } from "../icons/IconInfoSolid";
 import { IconWarningSolid } from "../icons/IconWarningSolid";
 import { IconErrorSolid } from "../icons/IconErrorSolid";
 import { IconSuccessSolid } from "../icons/IconSuccessSolid";
+import { Button } from "../Button";
 
 interface AlertCardProps {
   /**
@@ -147,7 +148,6 @@ export const AlertCard: React.FC<AlertCardProps> = ({
             <div
               css={{
                 marginBottom: extended ? 14 : 6,
-                overflow: "hidden",
                 display: "flex",
               }}
             >
@@ -198,19 +198,40 @@ export const AlertCard: React.FC<AlertCardProps> = ({
                     : React.createElement(headingAs, headingProps);
                 }}
               </ClassNames>
-              <IconClose
+              <Button
                 onClick={onClose}
+                size="small"
+                feel="flat"
+                theme={theme}
                 css={{
+                  marginRight: -9,
+                  marginTop: -9,
                   color:
                     theme === "light"
                       ? colors.grey.lighter
-                      : theme === "dark"
-                      ? colors.midnight.lighter
-                      : assertUnreachable(theme),
-                  cursor: "pointer",
-                  width: 10,
-                  height: 10,
+                      : colors.midnight.lighter,
+                  ":hover": {
+                    backgroundColor: "transparent",
+                    color:
+                      theme === "light"
+                        ? colors.grey.light
+                        : colors.midnight.lightest,
+                  },
                 }}
+                color={
+                  {
+                    light: colors.grey.lighter,
+                    dark: colors.midnight.lighter,
+                  }[theme]
+                }
+                icon={
+                  <IconClose
+                    css={{
+                      width: 10,
+                      height: 10,
+                    }}
+                  />
+                }
               />
             </div>
 
