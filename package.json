@@ -57,6 +57,13 @@
         "src/illustrations/svgs",
         "src/illustrations/scripts/convert.ts"
       ]
+    },
+    "pictograms:generate": {
+      "extensions": "svg,spec.tsx,.ts",
+      "patterns": [
+        "src/pictograms/svgs",
+        "src/pictograms/scripts/convert.ts"
+      ]
     }
   },
   "repository": "apollographql/space-kit",
