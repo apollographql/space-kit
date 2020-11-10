@@ -14,7 +14,7 @@ export const ButtonLayout: React.FC<Props> = ({ children, theme }) => (
         className={cx(
           css({
             backgroundColor:
-              theme === "light" ? colors.white : colors.black.base,
+              theme === "light" ? colors.white : colors.midnight.darkest,
             border: "solid 1px #dee2e7",
             borderRadius: 8,
             display: "inline-flex",

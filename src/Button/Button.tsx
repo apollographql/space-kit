@@ -62,13 +62,15 @@ function getTextColor({
         : undefined;
     case "flat":
       if (color === defaultColor) {
+        if (mode === ":focus") {
+          return colors.blue.base;
+        }
+
         return theme === "dark" ? colors.grey.light : colors.grey.darker;
       }
 
-      // We have a custom color and we're in dark mode, lighten the base and
-      // focused colors 1 shade.
-      if (theme === "dark" && (!mode || mode === ":focus")) {
-        return getOffsetInPalette(1, "lighter", color);
+      if (theme === "dark" && (mode === ":focus" || mode === ":active")) {
+        return colors.white;
       }
 
       return color;
@@ -124,7 +126,13 @@ function getHoverBackgroundColor({
         return theme === "light" ? colors.silver.light : colors.grey.dark;
       }
 
-      return getOffsetInPalette(Infinity, "lighter", color);
+      return {
+        light:
+          color === colors.grey.lighter
+            ? colors.silver.light
+            : getOffsetInPalette(Infinity, "lighter", color),
+        dark: getOffsetInPalette(3, "darker", color),
+      }[theme];
     case "raised":
       // One shade darker
       return getOffsetInPalette(1, "darker", color);
@@ -305,8 +313,13 @@ export const Button = React.forwardRef<HTMLElement, Props>(
 
     const focusedStyles: ObjectInterpolation<undefined> = {
       ...(feel === "flat" && {
-        backgroundColor: theme === "light" ? colors.white : "#000",
-        color: theme === "light" ? colors.blue.base : colors.blue.light,
+        backgroundColor:
+          theme === "light"
+            ? colors.white
+            : color === colors.white
+            ? colors.black.darker
+            : getOffsetInPalette(2, "darker", color),
+        color: getTextColor({ theme, color, feel, mode: ":focus" }),
       }),
       // The `box-shadow` property is copied directly from Zeplin for the
       // light theme. For the dark theme we use a variant of the color to
@@ -497,7 +510,9 @@ export const Button = React.forwardRef<HTMLElement, Props>(
                           ? theme === "dark"
                             ? colors.grey.darker
                             : colors.silver.base
-                          : getOffsetInPalette(2, "lighter", color),
+                          : theme === "light"
+                          ? getOffsetInPalette(2, "lighter", color)
+                          : getOffsetInPalette(2, "darker", color),
 
                       // The `box-shadow` properties are copied directly from Zeplin
                       boxShadow:
