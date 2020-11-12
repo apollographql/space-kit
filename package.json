@@ -102,7 +102,7 @@
     "@rollup/plugin-babel": "^5.2.1",
     "@storybook/addon-docs": "^6.1.0-beta.6",
     "@storybook/react": "^6.1.0-beta.6",
-    "@svgr/core": "^4.3.0",
+    "@svgr/core": "^5.4.0",
     "@svgr/plugin-jsx": "^4.3.0",
     "@svgr/plugin-prettier": "^4.2.0",
     "@svgr/plugin-svgo": "^4.2.0",
