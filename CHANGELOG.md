@@ -1,3 +1,40 @@
+# v8.2.0 (Thu Nov 12 2020)
+
+### Release Notes
+
+_From #270_
+
+React 17's release notes explaining there is a [new jsx transform](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html). This causes issues with emotion using it's own custom jsx transform to make the css property work. I was able to get the babel plugin that uses `css` across the board; but instead opted to make the small change of just opting out of using the new jsx transform. While this seems super easy, it wasn't, because we were using an out-of-the-box setup for both storybook and rollup, both of which had to be customized to opt out of the new jsx transform. 
+
+In the end, this should be a transparent change.
+
+---
+
+#### 🚀 Enhancement
+
+- Use Space Kit `Button` for `AlertCard` close button [#272](https://github.com/apollographql/space-kit/pull/272) ([@justinanastos](https://github.com/justinanastos))
+
+#### 🐛  Bug Fix
+
+- fix(`Select`): include `currentTarget.value` in change event [#273](https://github.com/apollographql/space-kit/pull/273) ([@justinanastos](https://github.com/justinanastos))
+
+#### 🏠 Internal
+
+- Add support for React 17 [#270](https://github.com/apollographql/space-kit/pull/270) ([@justinanastos](https://github.com/justinanastos))
+- update `watch` script configuration to watch pictograms [#269](https://github.com/apollographql/space-kit/pull/269) ([@justinanastos](https://github.com/justinanastos))
+
+#### 🔩 Dependency Updates
+
+- Bump lodash from 4.17.11 to 4.17.20 [#216](https://github.com/apollographql/space-kit/pull/216) ([@dependabot[bot]](https://github.com/dependabot[bot]))
+- Upgrade eslint and TypeScript packages [#258](https://github.com/apollographql/space-kit/pull/258) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 2
+
+- [@dependabot[bot]](https://github.com/dependabot[bot])
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v8.1.0 (Fri Nov 06 2020)
 
 #### 🚀 Enhancement
