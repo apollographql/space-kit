@@ -1,9 +1,11 @@
 /* eslint-env node */
+import babel from "@rollup/plugin-babel";
 import typescript from "rollup-plugin-typescript2";
 import multiInput from "rollup-plugin-multi-input";
 import fs from "fs";
 import path from "path";
 import postcss from "rollup-plugin-postcss";
+import { DEFAULT_EXTENSIONS } from "@babel/core";
 
 /**
  * Recursively read files from `rootPath`. `rootPath` and `options` are passed
@@ -87,6 +89,20 @@ function CJS() {
       }),
       postcss({
         extensions: [".css"],
+      }),
+      babel({
+        babelHelpers: "runtime",
+        extensions: [...DEFAULT_EXTENSIONS, ".ts", ".tsx"],
+        presets: [
+          [
+            "@babel/preset-react",
+            {
+              runtime: "classic",
+              importSource: "@emotion/core",
+            },
+          ],
+        ],
+        plugins: ["@babel/plugin-transform-runtime"],
       }),
     ],
   };

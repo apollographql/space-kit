@@ -12,4 +12,25 @@ module.exports = {
     ),
     "@storybook/addon-docs",
   ],
+  babel(babelConfig) {
+    return {
+      ...babelConfig,
+      presets: babelConfig.presets.map((preset) => {
+        const presetName = Array.isArray(preset) ? preset[0] : preset;
+        const presetOptions = Array.isArray(preset) ? preset[1] : [];
+
+        if (presetName !== require.resolve("@babel/preset-react")) {
+          return preset;
+        }
+
+        return [
+          presetName,
+          {
+            ...presetOptions,
+            runtime: "classic",
+          },
+        ];
+      }),
+    };
+  },
 };
