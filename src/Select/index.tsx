@@ -198,9 +198,10 @@ export const Select: React.FC<Props> = ({
         // This is kind of hacky because there's no underlying `select` with
         // native events firing. Maybe we should create them and then fire
         // events?
-        onChange(({ target: { value: newValue } } as unknown) as ChangeEvent<
-          HTMLSelectElement
-        >);
+        onChange(({
+          currentTarget: { value: newValue },
+          target: { value: newValue },
+        } as unknown) as ChangeEvent<HTMLSelectElement>);
       } else {
         setUncontrolledValue(newValue);
       }
