@@ -519,7 +519,7 @@ export const Button = React.forwardRef<HTMLElement, Props>(
                   {icon && (
                     <ButtonIcon
                       iconSize={iconSize}
-                      className={css({ margin: iconOnly ? 0 : "0 4px 0" })}
+                      className={css({ margin: iconOnly ? 0 : "0 8px 0 0" })}
                     >
                       {icon}
                     </ButtonIcon>
