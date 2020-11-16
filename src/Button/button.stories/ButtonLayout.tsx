@@ -13,6 +13,7 @@ export const ButtonLayout: React.FC<Props> = ({ children, theme }) => (
       <div
         className={cx(
           css({
+            alignItems: "center",
             backgroundColor:
               theme === "light" ? colors.white : colors.black.base,
             border: "solid 1px #dee2e7",

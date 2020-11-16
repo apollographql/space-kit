@@ -420,15 +420,7 @@ export const Button = React.forwardRef<HTMLElement, Props>(
                         : size === "large"
                         ? 42
                         : assertUnreachable(size)
-                      : endIcon
-                      ? 0
-                      : size === "small"
-                      ? 76
-                      : size === "default"
-                      ? 100
-                      : size === "large"
-                      ? 112
-                      : assertUnreachable(size),
+                      : 0,
 
                     // We have to set the Y padding because browsers (at least Chrome) has
                     // a non-symmetrical vertical padding applied by default.
