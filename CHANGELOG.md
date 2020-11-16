@@ -1,3 +1,15 @@
+# v8.3.0 (Mon Nov 16 2020)
+
+#### 🚀 Enhancement
+
+- Button: Add 4 more pixels of padding to the right of icons [#257](https://github.com/apollographql/space-kit/pull/257) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v8.2.0 (Thu Nov 12 2020)
 
 ### Release Notes
