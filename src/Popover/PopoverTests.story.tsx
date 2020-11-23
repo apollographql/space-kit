@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import userEvent from "@testing-library/user-event";
 import { Button } from "../Button";
 import { findByRole } from "@testing-library/dom";
@@ -9,6 +9,45 @@ import { ListItem } from "../ListItem";
 import { PerformUserInteraction } from "../shared/PerformUserInteraction";
 import { storiesOf } from "@storybook/react";
 import { colors } from "../colors";
+import { IconArrowDown } from "../icons/IconArrowDown";
+
+function ResizablePopover() {
+  const [expanded, setExpanded] = useState(true);
+  return (
+    <Popover
+      interactive
+      popperOptions={{ strategy: "fixed" }}
+      placement="bottom-start"
+      fallbackPlacements={["top-start"]}
+      maxWidth={280}
+      content={
+        <React.Fragment>
+          <Button
+            feel="flat"
+            onClick={() => setExpanded(!expanded)}
+            endIcon={<IconArrowDown weight="thin" style={{ height: 12 }} />}
+          >
+            Shapes
+          </Button>
+
+          {expanded && (
+            <ul>
+              <li>Circle</li>
+              <li>Rectangle</li>
+              <li>Square</li>
+              <li>Triangle</li>
+            </ul>
+          )}
+        </React.Fragment>
+      }
+      trigger={
+        <Button style={{ position: "absolute", left: 0, top: 0 }}>
+          Open Popover
+        </Button>
+      }
+    />
+  );
+}
 
 storiesOf("Tests/Popover", module)
   .addParameters({ component: Popover })
@@ -200,6 +239,26 @@ storiesOf("Tests/Popover", module)
             </Button>
           }
         />
+      </PerformUserInteraction>
+    </div>
+  ))
+  .add("when resizing content, popover resizes", () => (
+    <div
+      className="sk-scroll-container"
+      style={{
+        height: 300,
+        width: 300,
+        border: `1px solid ${colors.blue.base}`,
+        overflow: "hidden",
+        position: "relative",
+      }}
+    >
+      <PerformUserInteraction
+        callback={async () => {
+          userEvent.click(await findByRole(document.body, "button"));
+        }}
+      >
+        <ResizablePopover />
       </PerformUserInteraction>
     </div>
   ));

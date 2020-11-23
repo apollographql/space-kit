@@ -107,6 +107,14 @@ export const Popover: React.FC<Props> = ({
                 state.modifiersData[name].boxElement = element;
               },
             },
+            {
+              name: "log",
+              enabled: true,
+              phase: "beforeMain",
+              fn({ state }) {
+                console.log(state.rects.popper);
+              },
+            },
             sizeModifier,
             {
               name: "maxSize",
