@@ -30,13 +30,14 @@ You must use the same `<option>` and `<optgroup>` elements you would use for a n
 
 <Canvas>
   <Story name="basic options">
-    <Select label="select an item">
+    <Select label={<>select an item</>} initialValue="">
+      <option value="">Select an option</option>
       <option value="value a">a</option>
       <option value="value b">b</option>
     </Select>
   </Story>
   <Story name="basic optgroup">
-    <Select label="select an item">
+    <Select label={<>select an item</>}>
       <optgroup label="Group of options">
         <option value="value a">a</option>
         <option value="value b">b</option>
@@ -61,7 +62,7 @@ You must use the same `<option>` and `<optgroup>` elements you would use for a n
 
 For controlled components, you must pass a `value` prop and have the option to pass an `onChange` prop. If you don't use an `onChange` prop, as expected, the `value` can not be changed.
 
-If you elect to use an uncontrolled component, do not pass `value` or `onChange` props. You can pass a `defaultValue` for the initial to be set and then the component will control the on it's own.
+If you elect to use an uncontrolled component, do not pass `value` or `onChange` props. You can pass a `initialValue` for the initial to be set and then the component will control the on it's own.
 
 ## Options
 
@@ -71,7 +72,7 @@ Selects can be displayed using any of the `feel` values from `Button`.
 
 <Canvas>
   <Story name="feel raised">
-    <Select label="select an item" feel="raised">
+    <Select label={<>select an item</>} feel="raised">
       <option>a</option>
       <optgroup label="header 1">
         <option>b</option>
@@ -79,7 +80,7 @@ Selects can be displayed using any of the `feel` values from `Button`.
     </Select>
   </Story>
   <Story name="feel flat">
-    <Select label="select an item" feel="flat">
+    <Select label={<>select an item</>} feel="flat">
       <option>a</option>
       <optgroup label="header 1">
         <option>b</option>
