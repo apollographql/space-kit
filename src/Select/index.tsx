@@ -15,6 +15,7 @@ import {
   isHTMLOptgroupElement,
 } from "./select/reactNodeToDownshiftItems";
 import { ListConfigProvider, useListConfig } from "../ListConfig";
+import { As, createElementFromAs } from "../shared/createElementFromAs";
 
 export type OptionProps = Omit<
   React.DetailedHTMLProps<
@@ -75,7 +76,7 @@ interface Props
       | "popperOptions"
       | "matchTriggerWidth"
     >,
-    Pick<React.ComponentProps<typeof Button>, "className" | "feel" | "style">,
+    Pick<React.ComponentProps<typeof Button>, "feel" | "style">,
     Pick<
       React.DetailedHTMLProps<
         React.SelectHTMLAttributes<HTMLSelectElement>,
@@ -95,6 +96,8 @@ interface Props
    * `setTimeout(... ,0)`.
    */
   onChange?: (event: ChangeEvent<HTMLSelectElement>) => void;
+
+  triggerAs?: As;
 
   /**
    * Item currently selected
@@ -293,11 +296,12 @@ export const Select: React.FC<Props> = ({
             placement={placement}
             triggerEvents="manual"
             matchTriggerWidth={matchTriggerWidth}
-            trigger={
-              <Button
-                {...props}
-                {...getToggleButtonProps({ disabled })}
-                className={cx(
+            trigger={React.cloneElement(
+              createElementFromAs(triggerAs),
+              {
+                ...getToggleButtonProps({ disabled }),
+                ...props,
+                className: cx(
                   css({
                     textAlign: "left",
                     maxWidth: {
@@ -308,39 +312,38 @@ export const Select: React.FC<Props> = ({
                       "extra large": 188,
                     }[size],
                   }),
-                  props.className
-                )}
-                color={colors.white}
-                feel={feel}
-                type="button"
-                size={
-                  {
-                    auto: "small",
-                    small: "small",
-                    medium: "small",
-                    large: "small",
-                    "extra large": "default",
-                  }[size]
-                }
-                endIcon={
+                  React.isValidElement(triggerAs) &&
+                    (triggerAs.props as any).className
+                ),
+                color: colors.white,
+                feel,
+                type: "button",
+                size: {
+                  auto: "small",
+                  small: "small",
+                  medium: "small",
+                  large: "small",
+                  "extra large": "default",
+                }[size],
+
+                endIcon: (
                   <IconArrowDown
                     className={css({ height: "70%" })}
                     weight="thin"
                   />
-                }
+                ),
+              },
+              <div
+                className={css({
+                  flex: 1,
+                  overflow: "hidden",
+                  whiteSpace: "nowrap",
+                  textOverflow: "ellipsis",
+                })}
               >
-                <div
-                  className={css({
-                    flex: 1,
-                    overflow: "hidden",
-                    whiteSpace: "nowrap",
-                    textOverflow: "ellipsis",
-                  })}
-                >
-                  {selectedItem?.children || label}
-                </div>
-              </Button>
-            }
+                {selectedItem?.children || label}
+              </div>
+            )}
           />
         )}
       </ClassNames>
