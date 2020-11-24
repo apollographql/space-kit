@@ -113,41 +113,12 @@ function findPlacementWithMinimumVerticalOverflow({
 }
 
 /**
- * Find the last ordered modifier that includes a `padding` configuration.
- * Defaults to `0` if none are found.
+ * Generate a list of `Placement`s given the modifier options
  */
-function getPaddingFromState(
-  state: ModifierArguments<Options>["state"]
-): Padding {
-  return state.orderedModifiers.reduce<Padding>((accumulator, modifier) => {
-    if (typeof modifier.options?.padding != "undefined") {
-      accumulator = modifier.options.padding;
-    }
-
-    return accumulator;
-  }, 0);
-}
-
-/**
- * Calculate the placement and max size
- */
-function getPlacementAndMaxSize({
+function buildPlacementsList({
   state,
   options,
-}: ModifierArguments<Options>): {
-  placement: Placement;
-  maxSize: { height: number };
-} {
-  const {
-    fallbackPlacements: specifiedFallbackPlacements,
-    padding = getPaddingFromState(state),
-    boundary = "clippingParents",
-    rootBoundary = "viewport",
-    altBoundary,
-    flipVariations = true,
-    allowedAutoPlacements,
-  } = options;
-
+}: ModifierArguments<Options>): readonly Placement[] {
   /**
    * Preferred placement
    *
@@ -177,8 +148,8 @@ function getPlacementAndMaxSize({
    * https://github.com/popperjs/popper-core/blob/de867743d4b841af88675691064c8271452e150f/src/modifiers/flip.js#L55-L59
    */
   const fallbackPlacements =
-    specifiedFallbackPlacements ||
-    (isBasePlacement || !flipVariations
+    options.fallbackPlacements ||
+    (isBasePlacement || !options.flipVariations
       ? [getOppositePlacement(preferredPlacement)]
       : getExpandedFallbackPlacements(preferredPlacement));
 
@@ -188,24 +159,32 @@ function getPlacementAndMaxSize({
    * This is copied verbatim from the popper's flip modifier source; @see
    * https://github.com/popperjs/popper-core/blob/de867743d4b841af88675691064c8271452e150f/src/modifiers/flip.js#L61-L77
    */
-  const placements = [preferredPlacement, ...fallbackPlacements].reduce<
-    Placement[]
-  >((acc, placement) => {
-    return acc.concat(
-      getBasePlacement(placement) === "auto"
-        ? computeAutoPlacement(state, {
-            placement,
-            boundary,
-            rootBoundary,
-            padding,
-            flipVariations,
-            allowedAutoPlacements,
-          })
-        : placement
-    );
-  }, []);
+  return [preferredPlacement, ...fallbackPlacements].reduce<Placement[]>(
+    (acc, placement) => {
+      return acc.concat(
+        getBasePlacement(placement) === "auto"
+          ? computeAutoPlacement(state, {
+              ...options,
+              placement,
+            } as any)
+          : placement
+      );
+    },
+    []
+  );
+}
 
-  const popperRect = state.rects.popper;
+/**
+ * Calculate the placement and max size
+ */
+function getPlacementAndMaxSize(
+  modifierArguments: ModifierArguments<Options>
+): {
+  placement: Placement;
+  maxSize: { height: number };
+} {
+  const { state, options } = modifierArguments;
+  const placements = buildPlacementsList(modifierArguments);
 
   /**
    * Array calculated from `placements` with the calculated values of each
@@ -215,31 +194,10 @@ function getPlacementAndMaxSize({
   const placementOverflows = placements.map((placement) => ({
     placement,
     overflow: detectOverflow(state, {
+      ...options,
       placement,
-      boundary,
-      rootBoundary,
-      altBoundary,
-      padding,
     }),
   }));
-
-  /**
-   * First placement that does not overflow on any side
-   */
-  const firstPlacementWithNoOverflow = placementOverflows.find(
-    ({ overflow }) =>
-      overflow.bottom <= 0 &&
-      overflow.top <= 0 &&
-      overflow.right <= 0 &&
-      overflow.left <= 0
-  );
-
-  if (firstPlacementWithNoOverflow) {
-    return {
-      placement: firstPlacementWithNoOverflow.placement,
-      maxSize: popperRect,
-    };
-  }
 
   const minimumOverflowPlacement = findPlacementWithMinimumVerticalOverflow({
     placementOverflows,
@@ -249,7 +207,9 @@ function getPlacementAndMaxSize({
 
   return {
     placement: minimumOverflowPlacement.placement,
-    maxSize: { height: minimumOverflowPlacement.maxHeight },
+    maxSize: {
+      height: minimumOverflowPlacement.maxHeight,
+    },
   };
 }
 
