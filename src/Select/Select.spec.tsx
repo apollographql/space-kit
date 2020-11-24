@@ -5,10 +5,11 @@ import { act, render, screen, within } from "@testing-library/react";
 import { Select } from "../Select";
 import { SpaceKitProvider } from "../SpaceKitProvider";
 
-test("given no `value`, should render `label`", () => {
+test('given no `value`, should render `<option value="" />`', () => {
   render(
     <SpaceKitProvider disableAnimations>
-      <Select value={null} label={<>select an item</>}>
+      <Select initialValue="">
+        <option value="">select an item</option>
         <option value="a">a</option>
         <option value="b">b</option>
       </Select>
@@ -20,7 +21,34 @@ test("given no `value`, should render `label`", () => {
   ).toBeInTheDocument();
 });
 
-test("given a `value`, should render initial value", () => {
+test("label props should be called back", () => {
+  const labelText = "select label";
+  const SelectWithLabel: React.FC = () => {
+    const [labelProps, setLabelProps] = React.useState();
+
+    return (
+      <>
+        <label {...labelProps}>{labelText}</label>
+        <Select initialValue="" labelPropsCallbackRef={setLabelProps}>
+          <option value="">select an item</option>
+          <option value="a">a</option>
+          <option value="b">b</option>
+        </Select>
+      </>
+    );
+  };
+
+  render(
+    <SpaceKitProvider disableAnimations>
+      <SelectWithLabel />
+    </SpaceKitProvider>
+  );
+
+  expect(screen.getByText(labelText)).toBeInTheDocument();
+  expect(screen.getByLabelText(labelText)).toBeInTheDocument();
+});
+
+test("given a controlled `value`, should render controlled value", () => {
   render(
     <SpaceKitProvider disableAnimations>
       <Select value="a">

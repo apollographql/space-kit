@@ -22,6 +22,19 @@ export const Select = (props) => {
   );
 };
 
+export function SelectWithLabel({ label, select }) {
+  const [labelProps, setLabelProps] = React.useState();
+  const labelPropsCallback = React.useCallback((incomingLabelProps) => {
+    setLabelProps(incomingLabelProps);
+  }, []);
+  return (
+    <React.Fragment>
+      {React.cloneElement(label, labelProps)}
+      {React.cloneElement(select, { labelPropsRef: labelPropsCallback })}
+    </React.Fragment>
+  );
+}
+
 # Select
 
 **Select** is emulates a native `select` element, but rendered with Space Kit appearances.
@@ -30,11 +43,23 @@ You must use the same `<option>` and `<optgroup>` elements you would use for a n
 
 <Canvas>
   <Story name="basic options">
-    <Select label={<>select an item</>} initialValue="">
+    <Select aria-labelledby="basic-options-label" initialValue="">
       <option value="">Select an option</option>
       <option value="value a">a</option>
       <option value="value b">b</option>
     </Select>
+  </Story>
+  <Story name="basic options with label">
+    <SelectWithLabel
+      label={<label>label</label>}
+      select={
+        <Select initialValue="">
+          <option value="">Select an option</option>
+          <option value="value a">a</option>
+          <option value="value b">b</option>
+        </Select>
+      }
+    />
   </Story>
   <Story name="basic optgroup">
     <Select label={<>select an item</>}>

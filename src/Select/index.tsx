@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, RefCallback } from "react";
 import { Button } from "../Button";
 import { colors } from "../colors";
 import { IconArrowDown } from "../icons/IconArrowDown";
@@ -16,6 +16,7 @@ import {
 } from "./select/reactNodeToDownshiftItems";
 import { ListConfigProvider, useListConfig } from "../ListConfig";
 import { As, createElementFromAs } from "../shared/createElementFromAs";
+import useDeepCompareEffect from "use-deep-compare-effect";
 
 export type OptionProps = Omit<
   React.DetailedHTMLProps<
@@ -87,6 +88,43 @@ interface Props
   disabled?: boolean;
 
   /**
+   * `RefCallback` for props that should be spread onto a `label` component
+   * associated with this `Select`.
+   *
+   * The value will be calculated internally by `downshift`; so get the value
+   * and call this callback. This callback will only be called when the values
+   * change by a deep comparission (via
+   * [`use-deep-compare-effect`](https://github.com/kentcdodds/use-deep-compare-effect));
+   * not by `Object.is`. Therefore it's safe to save this entire value in state
+   * and spread it onto a label without fear of more than one re-render.
+   *
+   * Example:
+   *
+   * ```
+   * import * as React from 'react';
+   *
+   * export const SelectWithLabel: React.FC = () => {
+   *   const [labelProps, setLabelProps] = React.useState();
+   *
+   *   return (
+   *     <React.Fragment>
+   *       <label {...labelProps}>select label</label>
+   *       <Select
+   *         labelPropsCallbackRef={setLabelProps}
+   *         ...
+   *       >
+   *          ...
+   *       </Select>
+   *     </React.Fragment>
+   *   );
+   * }
+   * ```
+   */
+  labelPropsCallbackRef?: RefCallback<
+    ReturnType<UseSelectPropGetters<OptionProps>["getLabelProps"]>
+  >;
+
+  /**
    * Callback called when the selected item changes
    *
    * This will be called syncronously after you try to close the menu. If you
@@ -118,6 +156,7 @@ export const Select: React.FC<Props> = ({
   initialValue,
   disabled = false,
   feel,
+  labelPropsCallbackRef,
   matchTriggerWidth,
   onChange,
   placement = "bottom-start",
@@ -163,6 +202,7 @@ export const Select: React.FC<Props> = ({
   const items = reactNodeToDownshiftItems(children);
 
   const {
+    getLabelProps,
     getItemProps,
     getMenuProps,
     getToggleButtonProps,
@@ -215,6 +255,12 @@ export const Select: React.FC<Props> = ({
       }
     },
   });
+
+  // Get the label's props and call the callback ref when they change.
+  const labelProps = getLabelProps();
+  useDeepCompareEffect(() => {
+    labelPropsCallbackRef?.(labelProps);
+  }, [labelProps, labelPropsCallbackRef]);
 
   return (
     <ListConfigProvider {...listConfig} hoverColor={null}>
