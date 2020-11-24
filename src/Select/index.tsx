@@ -153,7 +153,7 @@ interface Props
 
 export const Select: React.FC<Props> = ({
   children,
-  initialValue,
+  initialValue = "",
   disabled = false,
   feel,
   labelPropsCallbackRef,

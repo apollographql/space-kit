@@ -30,7 +30,7 @@ export function SelectWithLabel({ label, select }) {
   return (
     <React.Fragment>
       {React.cloneElement(label, labelProps)}
-      {React.cloneElement(select, { labelPropsRef: labelPropsCallback })}
+      {React.cloneElement(select, { labelPropsCallbackRef: setLabelProps })}
     </React.Fragment>
   );
 }
@@ -62,7 +62,8 @@ You must use the same `<option>` and `<optgroup>` elements you would use for a n
     />
   </Story>
   <Story name="basic optgroup">
-    <Select label={<>select an item</>}>
+    <Select>
+      <option value="">select an item</option>
       <optgroup label="Group of options">
         <option value="value a">a</option>
         <option value="value b">b</option>
@@ -74,7 +75,8 @@ You must use the same `<option>` and `<optgroup>` elements you would use for a n
     </Select>
   </Story>
   <Story name="disabled">
-    <Select label="disabled" disabled>
+    <Select disabled>
+      <option value="">select an item</option>
       <option value="value a">a</option>
       <option value="value b">b</option>
     </Select>
@@ -97,7 +99,8 @@ Selects can be displayed using any of the `feel` values from `Button`.
 
 <Canvas>
   <Story name="feel raised">
-    <Select label={<>select an item</>} feel="raised">
+    <Select feel="raised">
+      <option value="">select an item</option>
       <option>a</option>
       <optgroup label="header 1">
         <option>b</option>
@@ -105,7 +108,8 @@ Selects can be displayed using any of the `feel` values from `Button`.
     </Select>
   </Story>
   <Story name="feel flat">
-    <Select label={<>select an item</>} feel="flat">
+    <Select feel="flat">
+      <option value="">select an item</option>
       <option>a</option>
       <optgroup label="header 1">
         <option>b</option>
