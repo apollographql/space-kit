@@ -163,11 +163,10 @@ export const Select: React.FC<Props> = ({
   const items = reactNodeToDownshiftItems(children);
 
   const {
-    getToggleButtonProps,
-    getMenuProps,
     getItemProps,
+    getMenuProps,
+    getToggleButtonProps,
     selectedItem,
-    closeMenu,
   } = useSelect<OptionProps>({
     items,
     scrollIntoView(node) {
@@ -186,7 +185,7 @@ export const Select: React.FC<Props> = ({
       }, 0);
     },
     selectedItem: items.find((item) => {
-      return item.value ? item.value === value : item.children === value;
+      return value === (item.value ?? item.children);
     }),
     onSelectedItemChange: (event) => {
       const newValue =
@@ -194,15 +193,15 @@ export const Select: React.FC<Props> = ({
         event.selectedItem?.children ??
         "";
 
-      closeMenu();
-
       if (onChange) {
         // This is kind of hacky because there's no underlying `select` with
         // native events firing. Maybe we should create them and then fire
         // events?
+        const target = { ...props, value: newValue };
+
         onChange(({
-          currentTarget: { value: newValue },
-          target: { value: newValue },
+          currentTarget: target,
+          target,
         } as unknown) as ChangeEvent<HTMLSelectElement>);
       } else {
         setUncontrolledValue(newValue);
