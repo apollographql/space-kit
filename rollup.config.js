@@ -70,6 +70,7 @@ function CJS() {
       "react-dom",
       "react",
       "tinycolor2",
+      "use-deep-compare-effect",
     ],
     output: [
       {
