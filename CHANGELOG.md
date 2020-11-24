@@ -1,3 +1,15 @@
+# v8.3.1 (Tue Nov 24 2020)
+
+#### 🐛  Bug Fix
+
+- fix(Popover): Fix resizing of `Popover` [#278](https://github.com/apollographql/space-kit/pull/278) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v8.3.0 (Mon Nov 16 2020)
 
 #### 🚀 Enhancement
