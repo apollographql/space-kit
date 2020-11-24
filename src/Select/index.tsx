@@ -85,7 +85,6 @@ interface Props
       "onChange" | "name" | "id"
     > {
   disabled?: boolean;
-  label?: React.ReactElement;
 
   /**
    * Callback called when the selected item changes
@@ -119,7 +118,6 @@ export const Select: React.FC<Props> = ({
   defaultValue,
   disabled = false,
   feel,
-  label,
   matchTriggerWidth,
   onChange,
   placement = "bottom-start",
@@ -341,7 +339,7 @@ export const Select: React.FC<Props> = ({
                   textOverflow: "ellipsis",
                 })}
               >
-                {selectedItem?.children || label}
+                {selectedItem?.children || ""}
               </div>
             )}
           />
