@@ -6,6 +6,7 @@ import { colors } from "../colors";
 import { PerformUserInteraction } from "../shared/PerformUserInteraction";
 import userEvent from "@testing-library/user-event";
 import { findByRole } from "@testing-library/dom";
+import { DebugTooltip } from "../shared/DebugTooltip";
 
 storiesOf("Tooltip", module)
   .add("live", () => {
@@ -40,79 +41,79 @@ storiesOf("Tooltip", module)
     "normal padding",
     () => {
       return (
-        <PerformUserInteraction
-          callback={async () => {
-            userEvent.click(await findByRole(document.body, "button"));
-          }}
-        >
-          <div
-            style={{
-              alignItems: "center",
-              border: `1px solid ${colors.silver.light}`,
-              borderRadius: ".25rem",
-              display: "flex",
-              height: 150,
-              justifyContent: "center",
-              width: 149,
+        <DebugTooltip>
+          <PerformUserInteraction
+            callback={async () => {
+              userEvent.click(await findByRole(document.body, "button"));
             }}
           >
-            <Tooltip content="hover">
-              <Button>hover</Button>
-            </Tooltip>
-          </div>
-        </PerformUserInteraction>
+            <div
+              style={{
+                alignItems: "center",
+                border: `1px solid ${colors.silver.light}`,
+                borderRadius: ".25rem",
+                display: "flex",
+                height: 150,
+                justifyContent: "center",
+                width: 149,
+              }}
+            >
+              <Tooltip content="hover">
+                <Button>hover</Button>
+              </Tooltip>
+            </div>
+          </PerformUserInteraction>
+        </DebugTooltip>
       );
     },
-    {
-      chromatic: { delay: 500 },
-    }
+    { chromatic: { delay: 500 } }
   )
   .add(
     "relaxed padding",
     () => {
       return (
-        <PerformUserInteraction
-          callback={async () => {
-            userEvent.click(await findByRole(document.body, "button"));
-          }}
-        >
-          <div
-            style={{
-              alignItems: "flex-start",
-              border: `1px solid ${colors.silver.light}`,
-              borderRadius: ".25rem",
-              display: "flex",
-              height: 200,
-              justifyContent: "center",
-              width: 400,
+        <DebugTooltip>
+          <PerformUserInteraction
+            callback={async () => {
+              userEvent.click(await findByRole(document.body, "button"));
             }}
           >
-            <Tooltip
-              content={
-                <>
-                  <div style={{ fontWeight: 700, marginBottom: 8 }}>
-                    Our No-worries Billing Policy
-                  </div>
-                  <div>
-                    We give you a preview of how many users have been added to
-                    your organization, so you can make changes if someone
-                    shouldn’t have access to your data or were added by mistake.
-                    Simply remove them before you’re billed and you won’t be
-                    charged.
-                  </div>
-                </>
-              }
-              padding="relaxed"
+            <div
+              style={{
+                alignItems: "flex-start",
+                border: `1px solid ${colors.silver.light}`,
+                borderRadius: ".25rem",
+                display: "flex",
+                height: 200,
+                justifyContent: "center",
+                width: 400,
+              }}
             >
-              <Button>hover</Button>
-            </Tooltip>
-          </div>
-        </PerformUserInteraction>
+              <Tooltip
+                content={
+                  <>
+                    <div style={{ fontWeight: 700, marginBottom: 8 }}>
+                      Our No-worries Billing Policy
+                    </div>
+                    <div>
+                      We give you a preview of how many users have been added to
+                      your organization, so you can make changes if someone
+                      shouldn’t have access to your data or were added by
+                      mistake. Simply remove them before you’re billed and you
+                      won’t be charged.
+                    </div>
+                  </>
+                }
+                padding="relaxed"
+              >
+                <Button>hover</Button>
+              </Tooltip>
+            </div>
+          </PerformUserInteraction>
+        </DebugTooltip>
       );
     },
-    {
-      chromatic: { delay: 500 },
-    }
+    { chromatic: { delay: 500 } }
   )
   .add(
     "disabled, no tooltip should be visible",
@@ -141,7 +142,5 @@ storiesOf("Tooltip", module)
         </PerformUserInteraction>
       );
     },
-    {
-      chromatic: { delay: 500 },
-    }
+    { chromatic: { delay: 500 } }
   );
