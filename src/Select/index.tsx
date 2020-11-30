@@ -85,8 +85,6 @@ interface Props
       >,
       "onChange" | "name" | "id"
     > {
-  disabled?: boolean;
-
   /**
    * `RefCallback` for props that should be spread onto a `label` component
    * associated with this `Select`.
@@ -124,16 +122,6 @@ interface Props
     ReturnType<UseSelectPropGetters<OptionProps>["getLabelProps"]>
   >;
 
-  /**
-   * Callback called when the selected item changes
-   *
-   * This will be called syncronously after you try to close the menu. If you
-   * are running a long-running task, like fetching data or parseing something
-   * as the result of this handler; you might want to wrap your callback in a
-   * `setTimeout(... ,0)`.
-   */
-  onChange?: (event: ChangeEvent<HTMLSelectElement>) => void;
-
   triggerAs?: As;
 
   /**
@@ -145,7 +133,7 @@ interface Props
    */
   value?: NonNullable<OptionProps["value"]> | null;
 
-  /** Default value for a non-controlled component */
+  /** Initial value for a non-controlled component */
   initialValue?: NonNullable<OptionProps["value"]> | null;
 
   size?: "auto" | "small" | "medium" | "extra large";
