@@ -1,4 +1,4 @@
-import React, { ChangeEvent, RefCallback } from "react";
+import React, { ChangeEvent, FocusEvent, RefCallback } from "react";
 import { Button } from "../Button";
 import { colors } from "../colors";
 import { IconArrowDown } from "../icons/IconArrowDown";
@@ -83,7 +83,7 @@ interface Props
         React.SelectHTMLAttributes<HTMLSelectElement>,
         HTMLSelectElement
       >,
-      "onChange" | "name" | "id"
+      "onBlur" | "onChange" | "name" | "id"
     > {
   /**
    * `RefCallback` for props that should be spread onto a `label` component
@@ -146,6 +146,7 @@ export const Select: React.FC<Props> = ({
   feel,
   labelPropsCallbackRef,
   matchTriggerWidth,
+  onBlur,
   onChange,
   placement = "bottom-start",
   popperOptions,
@@ -189,6 +190,29 @@ export const Select: React.FC<Props> = ({
    */
   const items = reactNodeToDownshiftItems(children);
 
+  /**
+   * Ref stored for a timeout that's initiated after a `ToggleButtonClick` state
+   * change. It'll automatically clear itself after the timeout. Use this ref
+   * containing a value to mean that there was a `ToggleButtonClick` state
+   * change in the last tick.
+   */
+  const toggleButtonClickTimeout = React.useRef<number | undefined>();
+
+  /**
+   * Wrapper to call `onBlur`
+   *
+   * Will attempt to simulate a real event.
+   */
+  const blur = () => {
+    const target = { ...props, value };
+
+    onBlur?.(({
+      type: "blur",
+      currentTarget: target,
+      target,
+    } as unknown) as FocusEvent<HTMLSelectElement>);
+  };
+
   const {
     getLabelProps,
     getItemProps,
@@ -196,6 +220,20 @@ export const Select: React.FC<Props> = ({
     getToggleButtonProps,
     selectedItem,
   } = useSelect<OptionProps>({
+    onStateChange(changes) {
+      switch (changes.type) {
+        case useSelect.stateChangeTypes.MenuBlur: {
+          blur();
+          break;
+        }
+        case useSelect.stateChangeTypes.ToggleButtonClick:
+          window.clearTimeout(toggleButtonClickTimeout.current);
+          toggleButtonClickTimeout.current = window.setTimeout(() => {
+            toggleButtonClickTimeout.current = undefined;
+          }, 0);
+          break;
+      }
+    },
     items,
     scrollIntoView(node) {
       // We have to defer this call until the popover has been created. I really
@@ -349,6 +387,15 @@ export const Select: React.FC<Props> = ({
                 ),
                 color: colors.white,
                 feel,
+                onBlur() {
+                  if (toggleButtonClickTimeout.current) {
+                    // There was a `ToggleButtonClick` state change in the last
+                    // tick, so ignore this blur call.
+                    return;
+                  }
+
+                  blur();
+                },
                 type: "button",
                 size: {
                   auto: "small",
