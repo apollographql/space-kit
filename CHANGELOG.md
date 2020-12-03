@@ -1,3 +1,20 @@
+# v8.4.0 (Thu Dec 03 2020)
+
+#### 🚀 Enhancement
+
+- Add opensource icon [#280](https://github.com/apollographql/space-kit/pull/280) ([@jchesterman](https://github.com/jchesterman))
+
+#### 🏠 Internal
+
+- 🚧 add debugging to Tooltip/Confirmation stories [#207](https://github.com/apollographql/space-kit/pull/207) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 2
+
+- Jay Chesterman ([@jchesterman](https://github.com/jchesterman))
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v8.3.1 (Tue Nov 24 2020)
 
 #### 🐛  Bug Fix
