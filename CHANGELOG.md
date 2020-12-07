@@ -1,3 +1,37 @@
+# v8.5.0 (Mon Dec 07 2020)
+
+### Release Notes
+
+_From #279_
+
+The `Select` component needed to be refactored and this will include breaking API changes.
+
+* Remove `label` prop from `Select`
+
+  We had a `label` prop before to indicate what to populate the select with when there was no content; `select`s already have this logic by giving an option with an empty value: `<option value="">empty text here</option>`
+
+* Rename `defaultValue` to `initialValue` to be more inline with other non-controlled React elements
+
+* Add `triggerAs` prop and remove passthrough `className` to remove confusion as to where a top-level `className` would be used
+
+* Add `labelPropsCallbackRef` prop. 
+
+  **This is the magic of this PR**. This will be called with an object of props to be spread onto your `<label>` component. It is called intelligently as to prevent infinite re-renders.
+
+* Ensure this behaves correctly with `formik` by adding initial unit testing to actually use `formik`. This exposed the issue that we don't provide any `onBlur` callback, which I added here as well.
+
+---
+
+#### 🚀 Enhancement
+
+- Fix events fired by `Select` [#279](https://github.com/apollographql/space-kit/pull/279) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v8.4.0 (Thu Dec 03 2020)
 
 #### 🚀 Enhancement
