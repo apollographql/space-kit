@@ -22,6 +22,24 @@ export const Select = (props) => {
   );
 };
 
+export function SelectWithLabel({ label, ...props }) {
+  const [labelProps, setLabelProps] = React.useState();
+  // Wait for the label callback to be called and then click the button
+  const labelPropsCallback = React.useCallback(async (incomingLabelProps) => {
+    setLabelProps(incomingLabelProps);
+    if (!document.querySelector(".sbdocs")) {
+      // Only `click` if this is not storybook docs mode
+      userEvent.click(await findByRole(document.body, "button"));
+    }
+  }, []);
+  return (
+    <React.Fragment>
+      {React.cloneElement(label, labelProps)}
+      <SpaceKitSelect {...props} labelPropsCallbackRef={labelPropsCallback} />
+    </React.Fragment>
+  );
+}
+
 # Select
 
 **Select** is emulates a native `select` element, but rendered with Space Kit appearances.
@@ -30,13 +48,22 @@ You must use the same `<option>` and `<optgroup>` elements you would use for a n
 
 <Canvas>
   <Story name="basic options">
-    <Select label="select an item">
+    <Select aria-labelledby="basic-options-label" initialValue="">
+      <option value="">Select an option</option>
       <option value="value a">a</option>
       <option value="value b">b</option>
     </Select>
   </Story>
+  <Story name="basic options with label">
+    <SelectWithLabel label={<label>label</label>} initialValue="">
+      <option value="">Select an option</option>
+      <option value="value a">a</option>
+      <option value="value b">b</option>
+    </SelectWithLabel>
+  </Story>
   <Story name="basic optgroup">
-    <Select label="select an item">
+    <Select>
+      <option value="">select an item</option>
       <optgroup label="Group of options">
         <option value="value a">a</option>
         <option value="value b">b</option>
@@ -48,7 +75,8 @@ You must use the same `<option>` and `<optgroup>` elements you would use for a n
     </Select>
   </Story>
   <Story name="disabled">
-    <Select label="disabled" disabled>
+    <Select disabled>
+      <option value="">select an item</option>
       <option value="value a">a</option>
       <option value="value b">b</option>
     </Select>
@@ -61,7 +89,7 @@ You must use the same `<option>` and `<optgroup>` elements you would use for a n
 
 For controlled components, you must pass a `value` prop and have the option to pass an `onChange` prop. If you don't use an `onChange` prop, as expected, the `value` can not be changed.
 
-If you elect to use an uncontrolled component, do not pass `value` or `onChange` props. You can pass a `defaultValue` for the initial to be set and then the component will control the on it's own.
+If you elect to use an uncontrolled component, do not pass `value` or `onChange` props. You can pass a `initialValue` for the initial to be set and then the component will control the state on it's own.
 
 ## Options
 
@@ -71,7 +99,8 @@ Selects can be displayed using any of the `feel` values from `Button`.
 
 <Canvas>
   <Story name="feel raised">
-    <Select label="select an item" feel="raised">
+    <Select feel="raised" initialValue="">
+      <option value="">select an item</option>
       <option>a</option>
       <optgroup label="header 1">
         <option>b</option>
@@ -79,7 +108,8 @@ Selects can be displayed using any of the `feel` values from `Button`.
     </Select>
   </Story>
   <Story name="feel flat">
-    <Select label="select an item" feel="flat">
+    <Select feel="flat" initialValue="">
+      <option value="">select an item</option>
       <option>a</option>
       <optgroup label="header 1">
         <option>b</option>
@@ -96,12 +126,12 @@ By default, the component will match the width of it's content. The dropdown lis
 
 <Canvas>
   <Story name="Automatic Size, Narrow">
-    <Select value="a">
+    <Select initialValue="a">
       <option>a</option>
     </Select>
   </Story>
   <Story name="Automatic Size, Wide">
-    <Select value="this is a super long to show how wide the select will be">
+    <Select initialValue="this is a super long to show how wide the select will be">
       <option>this is a super long to show how wide the select will be</option>
     </Select>
   </Story>
@@ -113,42 +143,42 @@ Selects will grow and shrink with the content to up until a point (TBD)
 
 <Canvas>
   <Story name="Small, Not Truncated">
-    <Select size="small" value="small">
+    <Select size="small" initialValue="small">
       <option>small</option>
     </Select>
   </Story>
   <Story name="Small, Truncated">
-    <Select size="small" value="small truncated">
+    <Select size="small" initialValue="small truncated">
       <option>small truncated</option>
     </Select>
   </Story>
   <Story name="Medium, Not Truncated">
-    <Select size="medium" value="medium">
+    <Select size="medium" initialValue="medium">
       <option>medium</option>
     </Select>
   </Story>
   <Story name="Medium, Truncated">
-    <Select size="medium" value="medium truncated truncated">
+    <Select size="medium" initialValue="medium truncated truncated">
       <option>medium truncated truncated</option>
     </Select>
   </Story>
   <Story name="Large, Not Truncated">
-    <Select size="large" value="large">
+    <Select size="large" initialValue="large">
       <option>large</option>
     </Select>
   </Story>
   <Story name="Large, Truncated">
-    <Select size="large" value="large truncated truncated">
+    <Select size="large" initialValue="large truncated truncated">
       <option>large truncated truncated</option>
     </Select>
   </Story>
   <Story name="Extra Large, Not Truncated">
-    <Select size="extra large" value="extra large">
+    <Select size="extra large" initialValue="extra large">
       <option>extra large</option>
     </Select>
   </Story>
   <Story name="Extra Large, Truncated">
-    <Select size="extra large" value="extra large truncated truncated">
+    <Select size="extra large" initialValue="extra large truncated truncated">
       <option>extra large truncated truncated</option>
     </Select>
   </Story>
@@ -160,7 +190,7 @@ The menu width can be fixed to match the trigger button size with the `matchTrig
 
 <Canvas>
   <Story name="Match Trigger Prop">
-    <Select value="small" matchTriggerWidth style={{ width: 150 }}>
+    <Select initialValue="small" matchTriggerWidth style={{ width: 150 }}>
       <option>small</option>
       <option>medium</option>
       <option>large</option>

@@ -1,14 +1,17 @@
 import "@testing-library/jest-dom";
 import React from "react";
 import userEvent from "@testing-library/user-event";
-import { act, render, screen, within } from "@testing-library/react";
+import { act, render, screen, within, waitFor } from "@testing-library/react";
 import { Select } from "../Select";
 import { SpaceKitProvider } from "../SpaceKitProvider";
+import { FormikConfig, useFormik } from "formik";
+import * as Yup from "yup";
 
-test("given no `value`, should render `label`", () => {
+test('given no `value`, should render `<option value="" />`', () => {
   render(
     <SpaceKitProvider disableAnimations>
-      <Select value={null} label={<>select an item</>}>
+      <Select initialValue="">
+        <option value="">select an item</option>
         <option value="a">a</option>
         <option value="b">b</option>
       </Select>
@@ -20,7 +23,34 @@ test("given no `value`, should render `label`", () => {
   ).toBeInTheDocument();
 });
 
-test("given a `value`, should render initial value", () => {
+test("label props should be called back", () => {
+  const labelText = "select label";
+  const SelectWithLabel: React.FC = () => {
+    const [labelProps, setLabelProps] = React.useState();
+
+    return (
+      <>
+        <label {...labelProps}>{labelText}</label>
+        <Select initialValue="" labelPropsCallbackRef={setLabelProps}>
+          <option value="">select an item</option>
+          <option value="a">a</option>
+          <option value="b">b</option>
+        </Select>
+      </>
+    );
+  };
+
+  render(
+    <SpaceKitProvider disableAnimations>
+      <SelectWithLabel />
+    </SpaceKitProvider>
+  );
+
+  expect(screen.getByText(labelText)).toBeInTheDocument();
+  expect(screen.getByLabelText(labelText)).toBeInTheDocument();
+});
+
+test("given a controlled `value`, should render controlled value", () => {
   render(
     <SpaceKitProvider disableAnimations>
       <Select value="a">
@@ -96,4 +126,59 @@ test("when clicking a select trigger in a form, form is not submitted", () => {
   act(() => userEvent.click(screen.getByRole("button")));
   expect(screen.getByRole("listbox")).toBeInTheDocument();
   expect(handleSubmit).not.toHaveBeenCalled();
+});
+
+test("works correctly with formik", async () => {
+  const validationSchema = Yup.object({
+    letter: Yup.mixed()
+      .oneOf(["", "a", "b"] as const)
+      .defined(),
+  }).defined();
+  type FormValues = Yup.InferType<typeof validationSchema>;
+
+  const TestComponent: React.FC<{
+    onSubmit: FormikConfig<FormValues>["onSubmit"];
+  }> = ({ onSubmit }) => {
+    const [labelProps, setLabelProps] = React.useState();
+    const { values, handleChange, handleBlur, handleSubmit } = useFormik<
+      FormValues
+    >({
+      initialValues: { letter: "" },
+      validationSchema,
+      onSubmit,
+    });
+
+    return (
+      <SpaceKitProvider disableAnimations>
+        <form onSubmit={handleSubmit}>
+          <label {...labelProps}>input</label>
+          <Select
+            name="letter"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.letter}
+            labelPropsCallbackRef={setLabelProps}
+          >
+            <option value="">Select an option</option>
+            <option value="a">a</option>
+            <option value="b">b</option>
+          </Select>
+          <button type="submit">submit</button>
+        </form>
+      </SpaceKitProvider>
+    );
+  };
+
+  const onSubmit = jest.fn();
+
+  render(<TestComponent onSubmit={onSubmit} />);
+
+  userEvent.click(screen.getByLabelText("input"));
+  userEvent.click(screen.getByRole("option", { name: /^a$/i }));
+  userEvent.click(screen.getByRole("button", { name: /submit/i }));
+  // Wait for the `onSubmit` to have been called
+  await waitFor(() => {
+    expect(onSubmit).toHaveBeenCalledTimes(1);
+  });
+  expect(onSubmit).toHaveBeenCalledWith({ letter: "a" }, expect.anything());
 });

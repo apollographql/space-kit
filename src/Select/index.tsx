@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, FocusEvent, RefCallback } from "react";
 import { Button } from "../Button";
 import { colors } from "../colors";
 import { IconArrowDown } from "../icons/IconArrowDown";
@@ -15,6 +15,8 @@ import {
   isHTMLOptgroupElement,
 } from "./select/reactNodeToDownshiftItems";
 import { ListConfigProvider, useListConfig } from "../ListConfig";
+import { As, createElementFromAs } from "../shared/createElementFromAs";
+import useDeepCompareEffect from "use-deep-compare-effect";
 
 export type OptionProps = Omit<
   React.DetailedHTMLProps<
@@ -75,26 +77,52 @@ interface Props
       | "popperOptions"
       | "matchTriggerWidth"
     >,
-    Pick<React.ComponentProps<typeof Button>, "className" | "feel" | "style">,
+    Pick<React.ComponentProps<typeof Button>, "feel" | "style">,
     Pick<
       React.DetailedHTMLProps<
         React.SelectHTMLAttributes<HTMLSelectElement>,
         HTMLSelectElement
       >,
-      "onChange" | "name" | "id"
+      "onBlur" | "onChange" | "name" | "id"
     > {
-  disabled?: boolean;
-  label?: React.ReactElement;
-
   /**
-   * Callback called when the selected item changes
+   * `RefCallback` for props that should be spread onto a `label` component
+   * associated with this `Select`.
    *
-   * This will be called syncronously after you try to close the menu. If you
-   * are running a long-running task, like fetching data or parseing something
-   * as the result of this handler; you might want to wrap your callback in a
-   * `setTimeout(... ,0)`.
+   * The value will be calculated internally by `downshift`; so get the value
+   * and call this callback. This callback will only be called when the values
+   * change by a deep comparission (via
+   * [`use-deep-compare-effect`](https://github.com/kentcdodds/use-deep-compare-effect));
+   * not by `Object.is`. Therefore it's safe to save this entire value in state
+   * and spread it onto a label without fear of more than one re-render.
+   *
+   * Example:
+   *
+   * ```
+   * import * as React from 'react';
+   *
+   * export const SelectWithLabel: React.FC = () => {
+   *   const [labelProps, setLabelProps] = React.useState();
+   *
+   *   return (
+   *     <React.Fragment>
+   *       <label {...labelProps}>select label</label>
+   *       <Select
+   *         labelPropsCallbackRef={setLabelProps}
+   *         ...
+   *       >
+   *          ...
+   *       </Select>
+   *     </React.Fragment>
+   *   );
+   * }
+   * ```
    */
-  onChange?: (event: ChangeEvent<HTMLSelectElement>) => void;
+  labelPropsCallbackRef?: RefCallback<
+    ReturnType<UseSelectPropGetters<OptionProps>["getLabelProps"]>
+  >;
+
+  triggerAs?: As;
 
   /**
    * Item currently selected
@@ -105,38 +133,40 @@ interface Props
    */
   value?: NonNullable<OptionProps["value"]> | null;
 
-  /** Default value for a non-controlled component */
-  defaultValue?: NonNullable<OptionProps["value"]> | null;
+  /** Initial value for a non-controlled component */
+  initialValue?: NonNullable<OptionProps["value"]> | null;
 
   size?: "auto" | "small" | "medium" | "extra large";
 }
 
 export const Select: React.FC<Props> = ({
   children,
-  defaultValue,
+  initialValue = "",
   disabled = false,
   feel,
-  label,
+  labelPropsCallbackRef,
   matchTriggerWidth,
+  onBlur,
   onChange,
   placement = "bottom-start",
   popperOptions,
   size = "auto",
+  triggerAs = <Button />,
   value: valueProp,
   ...props
 }) => {
   const [uncontrolledValue, setUncontrolledValue] = React.useState(
-    defaultValue
+    initialValue
   );
 
   // Validate controlled versus uncontrolled
   if (
     (typeof onChange !== "undefined" || typeof valueProp !== "undefined") &&
-    typeof defaultValue !== "undefined"
+    typeof initialValue !== "undefined"
   ) {
     // eslint-disable-next-line no-console
     console.warn(
-      "Select component must be either controlled or uncontrolled. Pass either `defaultValue` for an uncontrolled component or `value` and optionally `onChange` for a controlled component."
+      "Select component must be either controlled or uncontrolled. Pass either `initialValue` for an uncontrolled component or `value` and optionally `onChange` for a controlled component."
     );
   }
 
@@ -160,13 +190,50 @@ export const Select: React.FC<Props> = ({
    */
   const items = reactNodeToDownshiftItems(children);
 
+  /**
+   * Ref stored for a timeout that's initiated after a `ToggleButtonClick` state
+   * change. It'll automatically clear itself after the timeout. Use this ref
+   * containing a value to mean that there was a `ToggleButtonClick` state
+   * change in the last tick.
+   */
+  const toggleButtonClickTimeout = React.useRef<number | undefined>();
+
+  /**
+   * Wrapper to call `onBlur`
+   *
+   * Will attempt to simulate a real event.
+   */
+  const blur = () => {
+    const target = { ...props, value };
+
+    onBlur?.(({
+      type: "blur",
+      currentTarget: target,
+      target,
+    } as unknown) as FocusEvent<HTMLSelectElement>);
+  };
+
   const {
-    getToggleButtonProps,
-    getMenuProps,
+    getLabelProps,
     getItemProps,
+    getMenuProps,
+    getToggleButtonProps,
     selectedItem,
-    closeMenu,
   } = useSelect<OptionProps>({
+    onStateChange(changes) {
+      switch (changes.type) {
+        case useSelect.stateChangeTypes.MenuBlur: {
+          blur();
+          break;
+        }
+        case useSelect.stateChangeTypes.ToggleButtonClick:
+          window.clearTimeout(toggleButtonClickTimeout.current);
+          toggleButtonClickTimeout.current = window.setTimeout(() => {
+            toggleButtonClickTimeout.current = undefined;
+          }, 0);
+          break;
+      }
+    },
     items,
     scrollIntoView(node) {
       // We have to defer this call until the popover has been created. I really
@@ -184,7 +251,7 @@ export const Select: React.FC<Props> = ({
       }, 0);
     },
     selectedItem: items.find((item) => {
-      return item.value ? item.value === value : item.children === value;
+      return value === (item.value ?? item.children);
     }),
     onSelectedItemChange: (event) => {
       const newValue =
@@ -192,15 +259,15 @@ export const Select: React.FC<Props> = ({
         event.selectedItem?.children ??
         "";
 
-      closeMenu();
-
       if (onChange) {
         // This is kind of hacky because there's no underlying `select` with
         // native events firing. Maybe we should create them and then fire
         // events?
+        const target = { ...props, value: newValue };
+
         onChange(({
-          currentTarget: { value: newValue },
-          target: { value: newValue },
+          currentTarget: target,
+          target,
         } as unknown) as ChangeEvent<HTMLSelectElement>);
       } else {
         setUncontrolledValue(newValue);
@@ -214,6 +281,12 @@ export const Select: React.FC<Props> = ({
       }
     },
   });
+
+  // Get the label's props and call the callback ref when they change.
+  const labelProps = getLabelProps();
+  useDeepCompareEffect(() => {
+    labelPropsCallbackRef?.(labelProps);
+  }, [labelProps, labelPropsCallbackRef]);
 
   return (
     <ListConfigProvider {...listConfig} hoverColor={null}>
@@ -293,11 +366,12 @@ export const Select: React.FC<Props> = ({
             placement={placement}
             triggerEvents="manual"
             matchTriggerWidth={matchTriggerWidth}
-            trigger={
-              <Button
-                {...props}
-                {...getToggleButtonProps({ disabled })}
-                className={cx(
+            trigger={React.cloneElement(
+              createElementFromAs(triggerAs),
+              {
+                ...getToggleButtonProps({ disabled }),
+                ...props,
+                className: cx(
                   css({
                     textAlign: "left",
                     maxWidth: {
@@ -308,39 +382,47 @@ export const Select: React.FC<Props> = ({
                       "extra large": 188,
                     }[size],
                   }),
-                  props.className
-                )}
-                color={colors.white}
-                feel={feel}
-                type="button"
-                size={
-                  {
-                    auto: "small",
-                    small: "small",
-                    medium: "small",
-                    large: "small",
-                    "extra large": "default",
-                  }[size]
-                }
-                endIcon={
+                  React.isValidElement(triggerAs) &&
+                    (triggerAs.props as any).className
+                ),
+                color: colors.white,
+                feel,
+                onBlur() {
+                  if (toggleButtonClickTimeout.current) {
+                    // There was a `ToggleButtonClick` state change in the last
+                    // tick, so ignore this blur call.
+                    return;
+                  }
+
+                  blur();
+                },
+                type: "button",
+                size: {
+                  auto: "small",
+                  small: "small",
+                  medium: "small",
+                  large: "small",
+                  "extra large": "default",
+                }[size],
+
+                endIcon: (
                   <IconArrowDown
                     className={css({ height: "70%" })}
                     weight="thin"
                   />
-                }
+                ),
+              },
+              <div
+                className={css({
+                  flex: 1,
+                  overflow: "hidden",
+                  whiteSpace: "nowrap",
+                  textOverflow: "ellipsis",
+                })}
               >
-                <div
-                  className={css({
-                    flex: 1,
-                    overflow: "hidden",
-                    whiteSpace: "nowrap",
-                    textOverflow: "ellipsis",
-                  })}
-                >
-                  {selectedItem?.children || label}
-                </div>
-              </Button>
-            }
+                {selectedItem?.children || ""}
+              </div>
+            )}
           />
         )}
       </ClassNames>
