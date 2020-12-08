@@ -252,7 +252,7 @@ export const Select: React.FC<Props> = ({
     },
     selectedItem: items.find((item) => {
       return value === (item.value ?? item.children);
-    }),
+    }) ?? null,
     onSelectedItemChange: (event) => {
       const newValue =
         event.selectedItem?.value?.toString() ??
