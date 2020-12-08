@@ -418,6 +418,35 @@ Padding is used to calculate the margin between elements and to add a negative m
   </Story>
 </Canvas>
 
+## `feel`
+
+Feel determins how the list items feel.
+
+Edge-to-edge must be used in conjunction with `Popover` to be meaningful.
+
+<Canvas>
+  <Story name="Feel, rounded">
+    <List feel="rounded" style={{ border: "1px solid black" }}>
+      <ListItem selected>Root</ListItem>
+      <ListItem data-force-hover-state>Objects</ListItem>
+      <ListItem>Inputs</ListItem>
+      <ListItem>Interfaces</ListItem>
+      <ListItem>Unions</ListItem>
+      <ListItem>Scalars and Enums</ListItem>
+    </List>
+  </Story>
+  <Story name="Feel, edge-to-edge">
+    <List feel="edge-to-edge" style={{ border: "1px solid black" }}>
+      <ListItem selected>Root</ListItem>
+      <ListItem data-force-hover-state>Objects</ListItem>
+      <ListItem>Inputs</ListItem>
+      <ListItem>Interfaces</ListItem>
+      <ListItem>Unions</ListItem>
+      <ListItem>Scalars and Enums</ListItem>
+    </List>
+  </Story>
+</Canvas>
+
 ## `as`
 
 Specify the element used to render the button with the `as` prop. The default is `<div />`.

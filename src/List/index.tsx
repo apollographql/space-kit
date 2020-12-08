@@ -23,6 +23,7 @@ export const List = React.forwardRef<
       children,
       className,
       style,
+      feel,
       endIconAs,
       hoverColor,
       iconSize,
@@ -39,6 +40,7 @@ export const List = React.forwardRef<
      */
     const listConfig: ReturnType<typeof useListConfig> = {
       ...useListConfig(),
+      ...(feel && { feel }),
       ...(endIconAs && { endIconAs }),
       ...(hoverColor && { hoverColor }),
       ...(iconSize && { iconSize }),
@@ -48,7 +50,9 @@ export const List = React.forwardRef<
     };
 
     const verticalMargin =
-      -verticalListMarginFromPadding(listConfig.padding) / 2;
+      -verticalListMarginFromPadding(listConfig.padding) / 2 +
+      (feel === "edge-to-edge" ? -6 : 0);
+    const horizontalMargin = feel === "edge-to-edge" ? -6 : 0;
 
     return (
       <ListConfigProvider {...listConfig}>
@@ -60,6 +64,8 @@ export const List = React.forwardRef<
           css={css({
             marginTop: verticalMargin,
             marginBottom: verticalMargin,
+            marginLeft: horizontalMargin,
+            marginRight: horizontalMargin,
             outline: "none",
           })}
         >

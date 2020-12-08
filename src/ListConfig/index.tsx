@@ -21,6 +21,14 @@ interface ListConfig {
   endIconAs: React.ReactElement;
 
   /**
+   * Indicates how list items are rendered. They can have a rounded appearance
+   * or be edge-to-edge.
+   *
+   * @default "rounded"
+   */
+  feel: "rounded" | "edge-to-edge";
+
+  /**
    * Background color of the hovered item in a menu
    *
    * The text color will be determined automatically. `null` indicates we don't
@@ -61,6 +69,7 @@ interface ListConfig {
  */
 export const defaults: ListConfig = {
   endIconAs: <div />,
+  feel: "rounded",
   hoverColor: colors.silver.light,
   iconSize: "normal",
   padding: "normal",
