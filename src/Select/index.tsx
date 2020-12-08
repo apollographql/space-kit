@@ -127,6 +127,15 @@ interface Props
     ReturnType<UseSelectPropGetters<OptionProps>["getLabelProps"]>
   >;
 
+  /**
+   * Render prop function to generate a `React.ReactNode` based on the currently
+   * selected value.
+   *
+   * This is useful when you want some custom behavior with what is shown in the
+   * select in the unopened state.
+   */
+  renderTriggerNode?: (value: OptionProps | null) => React.ReactNode;
+
   triggerAs?: As;
 
   /**
@@ -156,6 +165,7 @@ export const Select: React.FC<Props> = ({
   onChange,
   placement = "bottom-start",
   popperOptions,
+  renderTriggerNode = (value) => <>{value?.children || ""}</>,
   size = "standard",
   triggerAs = <Button />,
   value: valueProp,
@@ -415,7 +425,7 @@ export const Select: React.FC<Props> = ({
                   textOverflow: "ellipsis",
                 })}
               >
-                {selectedItem?.children || ""}
+                {renderTriggerNode(selectedItem)}
               </div>,
             )}
           />
