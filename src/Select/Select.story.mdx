@@ -54,13 +54,6 @@ You must use the same `<option>` and `<optgroup>` elements you would use for a n
       <option value="value b">b</option>
     </Select>
   </Story>
-  <Story name="basic options with label">
-    <SelectWithLabel label={<label>label</label>} initialValue="">
-      <option value="">Select an option</option>
-      <option value="value a">a</option>
-      <option value="value b">b</option>
-    </SelectWithLabel>
-  </Story>
   <Story name="basic optgroup">
     <Select>
       <option value="">select an item</option>
@@ -80,6 +73,39 @@ You must use the same `<option>` and `<optgroup>` elements you would use for a n
       <option value="value a">a</option>
       <option value="value b">b</option>
     </Select>
+  </Story>
+</Canvas>
+
+## Labels
+
+We're using [downshift](https://www.downshift-js.com/), specifically [`useSelect`](https://www.downshift-js.com/use-select) under the hood. `useSelect` automatically adds props to the trigger, to the list, and to the label. Space Kit's `Select` component does not render it's own `<label>` element and instead provides a `RefCallback` prop called `labelPropsCallbackRef` to provide access these props to the consumer.
+
+Here's an example:
+
+```tsx
+import * as React from "react";
+import { Select } from "@apollo/space-kit";
+
+export const YourFunction: React.FC = () => {
+  const [labelProps, setLabelProps] = React.useState();
+  return (
+    <React.Fragment>
+      <label {...labelProps}>your label</label>
+      <Select labelPropsCallbackRef={setLabelProps}>...</Select>
+    </React.Fragment>
+  );
+};
+```
+
+If you inspect the `label` shown in the following story; you'll see that `id` and `for` props are automatically added to the `label` to tie the `label` and `Select` together.
+
+<Canvas>
+  <Story name="basic options with label">
+    <SelectWithLabel label={<label>label</label>} initialValue="">
+      <option value="">Select an option</option>
+      <option value="value a">a</option>
+      <option value="value b">b</option>
+    </SelectWithLabel>
   </Story>
 </Canvas>
 
