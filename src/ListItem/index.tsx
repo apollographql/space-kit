@@ -59,7 +59,14 @@ interface Props
         React.HTMLAttributes<HTMLDivElement>,
         HTMLDivElement
       >,
-      "className" | "onClick" | "style" | "role"
+      "aria-selected" | "className" | "onClick" | "style" | "role"
+    >,
+    Pick<
+      React.DetailedHTMLProps<
+        React.OptionHTMLAttributes<HTMLOptionElement>,
+        HTMLOptionElement
+      >,
+      "value"
     >,
     Partial<
       Pick<ReturnType<typeof useListConfig>, "endIconAs" | "startIconAs">
@@ -102,6 +109,21 @@ interface Props
   startIcon?: React.ReactNode;
 }
 
+function ariaSelectedToBoolean(
+  ariaSelected: React.DetailedHTMLProps<
+    React.HTMLAttributes<HTMLDivElement>,
+    HTMLDivElement
+  >["aria-selected"]
+): boolean | undefined {
+  if (ariaSelected == null || typeof ariaSelected === "boolean")
+    return ariaSelected;
+  return ariaSelected === "true"
+    ? true
+    : ariaSelected === "false"
+    ? false
+    : assertUnreachable(ariaSelected);
+}
+
 export const ListItem = React.forwardRef<
   HTMLDivElement,
   React.PropsWithChildren<Props>
@@ -129,6 +151,13 @@ export const ListItem = React.forwardRef<
       selectedColor,
       ...listConfig
     } = useListConfig();
+
+    // If we're passed in `aria-selected`, then use this value in favor of
+    // `selected`
+    const ariaSelected = ariaSelectedToBoolean(props["aria-selected"]);
+    if (ariaSelected != null) {
+      selected = ariaSelected;
+    }
 
     const endIconAs = endIconAsProp ?? listConfig.endIconAs;
     const startIconAs = startIconAsProp ?? listConfig.startIconAs;
@@ -193,8 +222,8 @@ export const ListItem = React.forwardRef<
                         : assertUnreachable(padding),
                     paddingLeft: 12 + (feel === "edge-to-edge" ? 6 : 0),
                     paddingRight: 12 + (feel === "edge-to-edge" ? 6 : 0),
-                    paddingTop: 4,
-                    paddingBottom: 4,
+                    paddingTop: 4 + (feel === "edge-to-edge" ? 2 : 0),
+                    paddingBottom: 4 + (feel === "edge-to-edge" ? 2 : 0),
                     marginTop: verticalMargin,
                     marginBottom: verticalMargin,
                   })
@@ -261,3 +290,5 @@ export const ListItem = React.forwardRef<
     );
   }
 );
+
+ListItem.displayName = "ListItem";

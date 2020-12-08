@@ -1,5 +1,6 @@
 import React from "react";
 import { reactNodeToDownshiftItems } from "./reactNodeToDownshiftItems";
+import { ListItem } from "../../ListItem";
 
 it("should work with options with no `value` props", () => {
   expect(
@@ -173,6 +174,73 @@ it("given mixed `optgroup` and `option`s with `value` props, should return corre
       Object {
         "children": "c",
         "value": "value c",
+      },
+    ]
+  `);
+});
+
+it("given `ListItem`s, should return correct result", () => {
+  expect(
+    reactNodeToDownshiftItems([
+      <ListItem key="a" value="a">
+        label a
+      </ListItem>,
+      <ListItem key="b" value="b">
+        <div>title</div>
+        <div>caption</div>
+      </ListItem>,
+    ])
+  ).toMatchInlineSnapshot(`
+    Array [
+      Object {
+        "children": "label a",
+        "value": "a",
+      },
+      Object {
+        "children": Array [
+          <div>
+            title
+          </div>,
+          <div>
+            caption
+          </div>,
+        ],
+        "value": "b",
+      },
+    ]
+  `);
+});
+
+it("given `ListItem`s nested under `optgroup`, should return correct result", () => {
+  expect(
+    reactNodeToDownshiftItems([
+      <optgroup key="a" label="label a">
+        <ListItem key="a" value="a">
+          label a
+        </ListItem>
+        ,
+        <ListItem key="b" value="b">
+          <div>title</div>
+          <div>caption</div>
+        </ListItem>
+      </optgroup>,
+    ])
+  ).toMatchInlineSnapshot(`
+    Array [
+      Object {
+        "children": "label a",
+        "value": "a",
+      },
+      Object {
+        "children": Array [
+          <div>
+            title
+          </div>,
+          <div>
+            caption
+          </div>,
+        ],
+        "value": "b",
       },
     ]
   `);

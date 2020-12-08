@@ -3,6 +3,9 @@ import { findByRole } from "@testing-library/dom";
 import { Meta, Story, ArgsTable, Canvas } from "@storybook/addon-docs/blocks";
 import { PerformUserInteraction } from "../shared/PerformUserInteraction";
 import { Select as SpaceKitSelect } from "../Select";
+import { ListItem } from "../ListItem";
+import { List } from "../List";
+import { base } from "../../typography";
 
 <Meta title="Form/Select" component={SpaceKitSelect} />
 
@@ -19,6 +22,48 @@ export const Select = (props) => {
     >
       <SpaceKitSelect {...props} />
     </PerformUserInteraction>
+  );
+};
+
+export const StatefulCheckedListItemSelect = () => {
+  const [selectedValue, setSelectedValue] = React.useState("Member");
+  return (
+    <Select
+      checkMarks
+      listAs={<List style={{ width: 300 }} />}
+      listFeel="edge-to-edge"
+      renderTriggerNode={(selectedItem) => {
+        return <>Role: {selectedItem?.value}</>;
+      }}
+      value={selectedValue}
+      onChange={(event) => setSelectedValue(event.target.value)}
+      style={{ maxWidth: 300 }}
+      title="Organization role"
+    >
+      {[
+        {
+          value: "Owner",
+          description:
+            "Has full administrative access to the entire organization.",
+        },
+        {
+          value: "Member",
+          description:
+            "Can see every member and non-secret team in the organization, and can create new repositories.",
+        },
+      ].map(({ value, description }) => (
+        <ListItem
+          key={value}
+          value={value}
+          style={{ alignItems: "baseline", height: "auto" }}
+        >
+          <div style={{ whiteSpace: "normal", overflow: "auto" }}>
+            <div style={{ ...base.base, fontWeight: "semibold" }}>{value}</div>
+            <div style={{ opacity: 0.75 }}>{description}</div>
+          </div>
+        </ListItem>
+      ))}
+    </Select>
   );
 };
 
@@ -44,12 +89,17 @@ export function SelectWithLabel({ label, ...props }) {
 
 **Select** is emulates a native `select` element, but rendered with Space Kit appearances.
 
-You must use the same `<option>` and `<optgroup>` elements you would use for a native `select` element. Any nested components will not work.
+## Rendering Options
+
+You have two options for rendering `Select` component options.
+
+### `option` and `optgroup`
+
+You can use the same `<option>` and `<optgroup>` elements you would use for a native `select` element. Any nested components will not work.
 
 <Canvas>
   <Story name="basic options">
     <Select
-      aria-labelledby="basic-options-label"
       initialValue=""
       renderTriggerNode={(selectedItem) => (
         <>{selectedItem?.children ?? "select an item"}</>
@@ -85,6 +135,32 @@ You must use the same `<option>` and `<optgroup>` elements you would use for a n
       <option value="value a">a</option>
       <option value="value b">b</option>
     </Select>
+  </Story>
+</Canvas>
+
+### `ListItem`
+
+You can also use `ListItem` components at the root level or nested under `optgroup` elements. Again, you must render your `ListItem`s as `children` of `Select` or under the `optgroup` elements; you cannot create another component to compose from `ListItem`.
+
+<Canvas>
+  <Story name="ListItem with string children">
+    <Select
+      initialValue=""
+      renderTriggerNode={(selectedItem) => (
+        <>{selectedItem?.children ?? "select an item"}</>
+      )}
+    >
+      <ListItem>a</ListItem>
+      <ListItem>b</ListItem>
+    </Select>
+  </Story>
+</Canvas>
+
+You can use this behavior to add a description field and completely customize how to render each item.
+
+<Canvas>
+  <Story name="ListItem with complex children">
+    <StatefulCheckedListItemSelect />
   </Story>
 </Canvas>
 
@@ -167,6 +243,21 @@ Selects can be displayed using any of the `feel` values from `Button`.
       <optgroup label="header 1">
         <option>b</option>
       </optgroup>
+    </Select>
+  </Story>
+</Canvas>
+
+### `selectedItemDecoration`
+
+We have the option to use a custom decoration to indicate an item is selected. Note that this is different from when an item is highlighted from a hover or keyboard arrow.
+
+#### `checkmark`
+
+<Canvas>
+  <Story name="selectedItemDecoration, checkmark">
+    <Select feel="flat" initialValue="a" selectedItemDecoration="checkmark">
+      <option>a</option>
+      <option>b</option>
     </Select>
   </Story>
 </Canvas>

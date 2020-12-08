@@ -49,10 +49,12 @@ export const List = React.forwardRef<
       ...(startIconAs && { startIconAs }),
     };
 
+    const edgeToEdgeMarginOffset = feel === "edge-to-edge" ? -6 : 0;
+
     const verticalMargin =
       -verticalListMarginFromPadding(listConfig.padding) / 2 +
-      (feel === "edge-to-edge" ? -6 : 0);
-    const horizontalMargin = feel === "edge-to-edge" ? -6 : 0;
+      edgeToEdgeMarginOffset;
+    const horizontalMargin = edgeToEdgeMarginOffset;
 
     return (
       <ListConfigProvider {...listConfig}>

@@ -1,13 +1,11 @@
 import React from "react";
 import { render } from "react-dom";
+import { ListItem } from "../../ListItem";
 
-type OptionProps = Omit<
-  React.DetailedHTMLProps<
-    React.OptionHTMLAttributes<HTMLOptionElement>,
-    HTMLOptionElement
-  >,
-  "children"
-> & { children: string };
+type OptionProps = React.DetailedHTMLProps<
+  React.OptionHTMLAttributes<HTMLOptionElement>,
+  HTMLOptionElement
+>;
 
 type OptgroupProps = React.DetailedHTMLProps<
   React.OptgroupHTMLAttributes<HTMLOptGroupElement>,
@@ -28,6 +26,10 @@ export function isHTMLOptionElement(
 
   if (typeof element.type === "string") {
     return element.type === "option";
+  }
+
+  if (typeof (element.type as any)?.displayName === "string") {
+    return (element.type as any).displayName === "option";
   }
 
   return renderHTML(element) instanceof HTMLOptionElement;
@@ -59,7 +61,35 @@ export function isHTMLOptgroupElement(
     return element.type === "optgroup";
   }
 
+  if (typeof (element.type as any)?.displayName === "string") {
+    return (element.type as any).displayName === "optgroup";
+  }
+
   return renderHTML(element) instanceof HTMLOptGroupElement;
+}
+
+export function isListItem(
+  element: React.ReactNode
+): element is React.ReactElement<
+  React.ComponentProps<typeof ListItem>,
+  "ListItem"
+> {
+  if (!React.isValidElement(element)) {
+    return false;
+  }
+
+  // This is a special check performed only for MDX processing in storybook
+  if (typeof element.props.originalType === "string") {
+    return element.props.originalType === "ListItem";
+  } else if (typeof element.props.mdxType === "string") {
+    return element.props.mdxType === "ListItem";
+  }
+
+  if (typeof element.type === "string") {
+    return element.type === "ListItem";
+  }
+
+  return (element.type as any)?.displayName === "ListItem";
 }
 
 /**
@@ -69,23 +99,37 @@ export function isHTMLOptgroupElement(
  */
 export function reactNodeToDownshiftItems(
   children: React.ReactNode
-): OptionProps[] {
-  return React.Children.toArray(children).reduce<OptionProps[]>(
-    (accumulator, child) => {
-      if (isHTMLOptionElement(child)) {
-        return accumulator.concat(child.props);
-      }
+): Array<OptionProps | React.ComponentProps<typeof ListItem>> {
+  return React.Children.toArray(children).reduce<
+    Array<OptionProps | React.ComponentProps<typeof ListItem>>
+  >((accumulator, child) => {
+    if (isListItem(child)) {
+      return accumulator.concat(child.props);
+    }
 
-      if (!React.isValidElement(child)) {
-        return accumulator;
-      }
+    if (isHTMLOptionElement(child)) {
+      return accumulator.concat(child.props);
+    }
 
-      return accumulator.concat(
-        React.Children.toArray(child.props.children)
-          .filter(isHTMLOptionElement)
-          .map((optgroupChild) => optgroupChild.props)
-      );
-    },
-    []
-  );
+    if (!React.isValidElement(child)) {
+      return accumulator;
+    }
+
+    return accumulator.concat(
+      React.Children.toArray(child.props.children)
+        .filter(
+          (
+            element
+          ): element is
+            | React.ReactElement<OptionProps, "option">
+            | React.ReactElement<
+                React.ComponentProps<typeof ListItem>,
+                "ListItem"
+              > =>
+            React.isValidElement(element) &&
+            (isHTMLOptionElement(element) || isListItem(element))
+        )
+        .map((optgroupChild) => optgroupChild.props)
+    );
+  }, []);
 }
