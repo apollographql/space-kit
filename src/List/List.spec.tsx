@@ -14,7 +14,7 @@ const DebugListConfig: React.FC = () => {
         return React.cloneElement(
           React.isValidElement(value) ? value : <div />,
           { "data-testid": key, key },
-          <>{value}</>,
+          <>{String(value)}</>,
         );
       })}
     </>
@@ -38,11 +38,12 @@ test("given no configuration, defaults values should be present", () => {
   );
 });
 
-test("given nested lists with configurations in both, correct values should propegate", () => {
+test("given nested lists with configurations in both, correct values should propogate", () => {
   const newValues: ReturnType<typeof useListConfig> = {
     endIconAs: <span />,
     hoverColor: colors.red.base,
     iconSize: "large",
+    margin: "none",
     padding: "relaxed",
     selectedColor: colors.green.dark,
     startIconAs: <span />,
@@ -53,6 +54,7 @@ test("given nested lists with configurations in both, correct values should prop
       hoverColor={colors.blue.base}
       iconSize="small"
       padding="normal"
+      margin="auto"
       selectedColor={colors.green.base}
     >
       <List {...newValues}>
@@ -68,6 +70,7 @@ test("given nested lists with configurations in both, correct values should prop
   expect(screen.getByTestId("hoverColor")).toHaveTextContent(
     newValues.hoverColor ?? "",
   );
+  expect(screen.getByTestId("margin")).toHaveTextContent(newValues.margin);
   expect(screen.getByTestId("padding")).toHaveTextContent(newValues.padding);
   expect(screen.getByTestId("selectedColor")).toHaveTextContent(
     newValues.selectedColor,
@@ -77,11 +80,12 @@ test("given nested lists with configurations in both, correct values should prop
   );
 });
 
-test("given nested lists with the top level having default configuration and the child configuring everything, correct values should propegate", () => {
+test("given nested lists with the top level having default configuration and the child configuring everything, correct values should propogate", () => {
   const newValues: ReturnType<typeof useListConfig> = {
     endIconAs: <span />,
     hoverColor: colors.red.base,
     iconSize: "large",
+    margin: "none",
     padding: "relaxed",
     selectedColor: colors.green.dark,
     startIconAs: <span />,
@@ -102,6 +106,7 @@ test("given nested lists with the top level having default configuration and the
   expect(screen.getByTestId("hoverColor")).toHaveTextContent(
     newValues.hoverColor ?? "",
   );
+  expect(screen.getByTestId("margin")).toHaveTextContent(newValues.margin);
   expect(screen.getByTestId("padding")).toHaveTextContent(newValues.padding);
   expect(screen.getByTestId("selectedColor")).toHaveTextContent(
     newValues.selectedColor,
@@ -112,11 +117,12 @@ test("given nested lists with the top level having default configuration and the
   );
 });
 
-test("given nested lists with the top level having configuration and the child using defaults, correct values should propegate", () => {
+test("given nested lists with the top level having configuration and the child using defaults, correct values should propogate", () => {
   const newValues: ReturnType<typeof useListConfig> = {
     endIconAs: <span />,
     hoverColor: colors.red.base,
     iconSize: "large",
+    margin: "none",
     padding: "relaxed",
     selectedColor: colors.green.dark,
     startIconAs: <span />,
@@ -137,6 +143,7 @@ test("given nested lists with the top level having configuration and the child u
   expect(screen.getByTestId("hoverColor")).toHaveTextContent(
     newValues.hoverColor ?? "",
   );
+  expect(screen.getByTestId("margin")).toHaveTextContent(newValues.margin);
   expect(screen.getByTestId("padding")).toHaveTextContent(newValues.padding);
   expect(screen.getByTestId("selectedColor")).toHaveTextContent(
     newValues.selectedColor,

@@ -418,6 +418,33 @@ Padding is used to calculate the margin between elements and to add a negative m
   </Story>
 </Canvas>
 
+## `margin`
+
+Determines if the margin around liste items will be the default or removed completely
+
+<Canvas>
+  <Story name="Margin=auto">
+    <List margin="auto" style={{ border: "1px solid black" }}>
+      <ListItem selected>Root</ListItem>
+      <ListItem data-force-hover-state>Objects</ListItem>
+      <ListItem>Inputs</ListItem>
+      <ListItem>Interfaces</ListItem>
+      <ListItem>Unions</ListItem>
+      <ListItem>Scalars and Enums</ListItem>
+    </List>
+  </Story>
+  <Story name="Margin=none">
+    <List margin="none" style={{ border: "1px solid black" }}>
+      <ListItem selected>Root</ListItem>
+      <ListItem data-force-hover-state>Objects</ListItem>
+      <ListItem>Inputs</ListItem>
+      <ListItem>Interfaces</ListItem>
+      <ListItem>Unions</ListItem>
+      <ListItem>Scalars and Enums</ListItem>
+    </List>
+  </Story>
+</Canvas>
+
 ## `as`
 
 Specify the element used to render the button with the `as` prop. The default is `<div />`.

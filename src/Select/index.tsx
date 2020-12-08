@@ -83,6 +83,7 @@ interface Props
       React.ComponentProps<typeof Button>,
       "aria-labelledby" | "aria-describedby" | "feel" | "style"
     >,
+    Pick<React.ComponentProps<typeof ListConfigProvider>, "margin">,
     Pick<
       React.DetailedHTMLProps<
         React.SelectHTMLAttributes<HTMLSelectElement>,
@@ -188,6 +189,7 @@ export const Select: React.FC<Props> = ({
   feel,
   labelPropsCallbackRef,
   listAs = <List />,
+  margin = "auto",
   matchTriggerWidth,
   onBlur,
   onChange,
@@ -356,6 +358,7 @@ export const Select: React.FC<Props> = ({
             content={React.cloneElement(
               listAs,
               {
+                margin,
                 ...getMenuProps(undefined, { suppressRefError: true }),
                 ...(id && { id: `${id}-menu` }),
                 "aria-labelledby": labelledBy,

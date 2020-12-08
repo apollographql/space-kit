@@ -124,6 +124,7 @@ export const ListItem = React.forwardRef<
     const {
       hoverColor,
       iconSize,
+      margin,
       padding,
       selectedColor,
       ...listConfig
@@ -177,7 +178,12 @@ export const ListItem = React.forwardRef<
                     ...(highlighted && !selected && highlightedStyles),
                     alignItems: "center",
                     cursor: interactive ? "pointer" : undefined,
-                    borderRadius: 4,
+                    borderRadius:
+                      margin === "auto"
+                        ? 4
+                        : margin === "none"
+                        ? 0
+                        : assertUnreachable(margin),
                     display: "flex",
                     height:
                       padding === "normal"
@@ -185,8 +191,20 @@ export const ListItem = React.forwardRef<
                         : padding === "relaxed"
                         ? 40
                         : assertUnreachable(padding),
-                    paddingLeft: 12,
-                    paddingRight: 12,
+                    paddingLeft:
+                      12 +
+                      (margin === "none"
+                        ? 6
+                        : margin === "auto"
+                        ? 0
+                        : assertUnreachable(margin)),
+                    paddingRight:
+                      12 +
+                      (margin === "none"
+                        ? 6
+                        : margin === "auto"
+                        ? 0
+                        : assertUnreachable(margin)),
                     paddingTop: 4,
                     paddingBottom: 4,
                     marginTop: verticalMargin,
