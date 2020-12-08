@@ -141,7 +141,7 @@ interface Props
 
 export const Select: React.FC<Props> = ({
   children,
-  initialValue = "",
+  initialValue,
   disabled = false,
   feel,
   labelPropsCallbackRef,
@@ -156,7 +156,7 @@ export const Select: React.FC<Props> = ({
   ...props
 }) => {
   const [uncontrolledValue, setUncontrolledValue] = React.useState(
-    initialValue
+    initialValue ?? ""
   );
 
   // Validate controlled versus uncontrolled
