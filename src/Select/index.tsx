@@ -126,6 +126,14 @@ interface Props
   labelPropsCallbackRef?: RefCallback<
     ReturnType<UseSelectPropGetters<OptionProps>["getLabelProps"]>
   >;
+  /**
+   * Used to override how the underlying `List` is rendered
+   *
+   * This is useful when need to customize the list behavior
+   *
+   * @default <List />
+   */
+  listAs?: React.ReactElement<React.ComponentProps<typeof List>>;
 
   /**
    * Render prop function to generate a `React.ReactNode` based on the currently
@@ -160,6 +168,7 @@ export const Select: React.FC<Props> = ({
   disabled = false,
   feel,
   labelPropsCallbackRef,
+  listAs = <List />,
   matchTriggerWidth,
   onBlur,
   onChange,
@@ -314,72 +323,72 @@ export const Select: React.FC<Props> = ({
             onCreate={(instance) => {
               instanceRef.current = instance;
             }}
-            content={
-              <List {...getMenuProps(undefined, { suppressRefError: true })}>
-                {React.Children.toArray(children)
-                  // Filter out falsy elements in `children`. We need to know if
-                  // we're rendering the first actual element in `children` to
-                  // know if we should add a divider or not. If the consumer uses
-                  // conditional logic in their rendering then we could have
-                  // `undefined` elements in `children`.
-                  .filter(
-                    (child): child is NonNullable<React.ReactNode> => !!child,
-                  )
-                  .map((child, topLevelIndex) => {
-                    if (isHTMLOptionElement(child)) {
-                      return (
-                        <ListItemWrapper
-                          data-top-level-index={topLevelIndex}
-                          downshiftItems={items}
-                          element={child}
-                          getItemProps={getItemProps}
-                          key={
-                            child.props.value
-                              ? child.props.value.toString()
-                              : child.props.children
-                          }
-                        />
-                      );
-                    } else if (isHTMLOptgroupElement(child)) {
-                      return (
-                        <React.Fragment key={child.props.label}>
-                          {topLevelIndex > 0 && (
-                            <ListDivider data-top-level-index={topLevelIndex} />
-                          )}
-                          <ListHeading
-                            aria-label={child.props.label}
-                            role="group"
-                          >
-                            {child.props.label}
-                          </ListHeading>
-                          {React.Children.map(
-                            child.props.children as React.ReactElement<
-                              OptionProps,
-                              "option"
-                            >[],
-                            (optgroupChild) => {
-                              return (
-                                <ListItemWrapper
-                                  key={
-                                    optgroupChild.props.value
-                                      ? optgroupChild.props.value.toString()
-                                      : optgroupChild.props.children
-                                  }
-                                  downshiftItems={items}
-                                  element={optgroupChild}
-                                  getItemProps={getItemProps}
-                                />
-                              );
-                            },
-                          )}
-                        </React.Fragment>
-                      );
-                    }
+            content={React.cloneElement(
+              listAs,
+              { ...getMenuProps(undefined, { suppressRefError: true }) },
+              React.Children.toArray(children)
+                // Filter out falsy elements in `children`. We need to know if
+                // we're rendering the first actual element in `children` to
+                // know if we should add a divider or not. If the consumer uses
+                // conditional logic in their rendering then we could have
+                // `undefined` elements in `children`.
+                .filter(
+                  (child): child is NonNullable<React.ReactNode> => !!child,
+                )
+                .map((child, topLevelIndex) => {
+                  if (isHTMLOptionElement(child)) {
+                    return (
+                      <ListItemWrapper
+                        data-top-level-index={topLevelIndex}
+                        downshiftItems={items}
+                        element={child}
+                        getItemProps={getItemProps}
+                        key={
+                          child.props.value
+                            ? child.props.value.toString()
+                            : child.props.children
+                        }
+                      />
+                    );
+                  } else if (isHTMLOptgroupElement(child)) {
+                    return (
+                      <React.Fragment key={child.props.label}>
+                        {topLevelIndex > 0 && (
+                          <ListDivider data-top-level-index={topLevelIndex} />
+                        )}
+                        <ListHeading
+                          aria-label={child.props.label}
+                          role="group"
+                        >
+                          {child.props.label}
+                        </ListHeading>
+                        {React.Children.map(
+                          child.props.children as React.ReactElement<
+                            OptionProps,
+                            "option"
+                          >[],
+                          (optgroupChild) => {
+                            return (
+                              <ListItemWrapper
+                                key={
+                                  optgroupChild.props.value
+                                    ? optgroupChild.props.value.toString()
+                                    : optgroupChild.props.children
+                                }
+                                downshiftItems={items}
+                                element={optgroupChild}
+                                getItemProps={getItemProps}
+                              />
+                            );
+                          },
+                        )}
+                      </React.Fragment>
+                    );
+                  }
 
-                    return null;
-                  })}
-              </List>
-            }
+                  return null;
+                }),
+            )}
             placement={placement}
             triggerEvents="manual"
             matchTriggerWidth={matchTriggerWidth}
