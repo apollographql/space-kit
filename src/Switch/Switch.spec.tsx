@@ -28,7 +28,7 @@ it("given a disabled switch, should not toggle when clicked", () => {
   render(
     <Switch defaultSelected={false} isDisabled>
       switch
-    </Switch>
+    </Switch>,
   );
 
   act(() => {
@@ -42,7 +42,7 @@ it("given an unselected switch with a textual status, status should exist and no
   render(
     <Switch defaultSelected={false} showTextualState>
       switch
-    </Switch>
+    </Switch>,
   );
 
   expect(screen.getByText(/off/i)).toBeInTheDocument();
@@ -53,7 +53,7 @@ it("given a selected switch with a textual status, status should exist and not b
   render(
     <Switch defaultSelected showTextualState>
       switch
-    </Switch>
+    </Switch>,
   );
 
   expect(screen.getByText(/on/i)).toBeInTheDocument();
@@ -64,7 +64,7 @@ it("given a selected switch without a textual status, textual status should not 
   render(
     <Switch defaultSelected showTextualState={false}>
       switch
-    </Switch>
+    </Switch>,
   );
 
   expect(screen.queryByText(/on/i)).not.toBeInTheDocument();
@@ -77,7 +77,7 @@ it("given an unselected switch without a textual status, textual status should n
   render(
     <Switch defaultSelected={false} showTextualState={false}>
       switch
-    </Switch>
+    </Switch>,
   );
 
   expect(screen.queryByText(/on/i)).not.toBeInTheDocument();
@@ -91,7 +91,7 @@ it("given an aria-labledby, component should be wired up correctly", () => {
     <React.Fragment>
       <Switch defaultSelected={false} aria-labelledby="other-element" />
       <div id="other-element">label</div>
-    </React.Fragment>
+    </React.Fragment>,
   );
 
   act(() => {

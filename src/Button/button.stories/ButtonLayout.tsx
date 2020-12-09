@@ -24,7 +24,7 @@ export const ButtonLayout: React.FC<Props> = ({ children, theme }) => (
               margin: 8,
               display: "flex",
             },
-          })
+          }),
         )}
       >
         {children}

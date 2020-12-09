@@ -92,7 +92,7 @@ interface Props<RowShape> {
     render: (
       input: Readonly<RowShape>,
       index: number,
-      list: readonly RowShape[]
+      list: readonly RowShape[],
     ) => React.ReactNode;
 
     /**
@@ -195,7 +195,7 @@ export function Table<RowShape>({
                     textAlign: "left",
                     textTransform: "uppercase",
                   }),
-                  headTrElement.props.className
+                  headTrElement.props.className,
                 ),
               },
               ...columns.map(({ headerTitle, id, thAs = "th" }, colIndex) => {
@@ -212,13 +212,13 @@ export function Table<RowShape>({
                         paddingRight:
                           colIndex === columns.length - 1 ? 0 : padding,
                       }),
-                      element.props.className
+                      element.props.className,
                     ),
                     key: id,
                   },
-                  headerTitle
+                  headerTitle,
                 );
-              })
+              }),
             )}
           </thead>
           <tbody>
@@ -247,13 +247,13 @@ export function Table<RowShape>({
                           paddingRight:
                             colIndex === columns.length - 1 ? 0 : padding,
                         }),
-                        element.props.className
+                        element.props.className,
                       ),
                     },
-                    render(item, index, data)
+                    render(item, index, data),
                   );
-                })
-              )
+                }),
+              ),
             )}
           </tbody>
         </table>

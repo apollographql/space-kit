@@ -73,7 +73,7 @@ export const Popover: React.FC<Props> = ({
       // how do we know if we want to hide the list?
       instanceRef.current?.hide();
     },
-    [interactive]
+    [interactive],
   );
 
   return (

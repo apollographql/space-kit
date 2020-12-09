@@ -21,7 +21,7 @@ const IconDemoItem: React.FC<{ className?: string; label: string }> = ({
             textAlign: "center",
             width: 40,
           }),
-          className
+          className,
         )}
       >
         <div>{children}</div>

@@ -17,7 +17,7 @@ test("when child element is clicked, the tooltip is shown", () => {
       <ConfirmationTooltip content={tooltipContent}>
         <span>{interactiveElementText}</span>
       </ConfirmationTooltip>
-    </SpaceKitProvider>
+    </SpaceKitProvider>,
   );
 
   expect(queryByText(tooltipContent)).not.toBeInTheDocument();
@@ -35,7 +35,7 @@ test.skip("when a tooltip is shown, it is removed after a delay", async () => {
       <ConfirmationTooltip content={tooltipContent}>
         <span>{interactiveElementText}</span>
       </ConfirmationTooltip>
-    </SpaceKitProvider>
+    </SpaceKitProvider>,
   );
 
   expect(queryByText(tooltipContent)).not.toBeInTheDocument();

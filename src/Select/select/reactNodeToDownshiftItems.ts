@@ -15,7 +15,7 @@ type OptgroupProps = React.DetailedHTMLProps<
 >;
 
 export function isHTMLOptionElement(
-  element: React.ReactNode
+  element: React.ReactNode,
 ): element is React.ReactElement<OptionProps, "option"> {
   if (!React.isValidElement(element)) {
     return false;
@@ -44,7 +44,7 @@ function renderHTML(element: React.ReactElement) {
 }
 
 export function isHTMLOptgroupElement(
-  element: React.ReactNode
+  element: React.ReactNode,
 ): element is React.ReactElement<OptgroupProps, "optgroup"> {
   if (!React.isValidElement(element)) {
     return false;
@@ -68,7 +68,7 @@ export function isHTMLOptgroupElement(
  * elements.
  */
 export function reactNodeToDownshiftItems(
-  children: React.ReactNode
+  children: React.ReactNode,
 ): OptionProps[] {
   return React.Children.toArray(children).reduce<OptionProps[]>(
     (accumulator, child) => {
@@ -83,9 +83,9 @@ export function reactNodeToDownshiftItems(
       return accumulator.concat(
         React.Children.toArray(child.props.children)
           .filter(isHTMLOptionElement)
-          .map((optgroupChild) => optgroupChild.props)
+          .map((optgroupChild) => optgroupChild.props),
       );
     },
-    []
+    [],
   );
 }

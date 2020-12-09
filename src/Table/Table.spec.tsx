@@ -35,7 +35,7 @@ test("when passed headers in `columns`, should render them, even with no data", 
           render: ({ dateAdded }) => dateAdded,
         },
       ]}
-    />
+    />,
   );
 
   const thead = container.querySelector<HTMLTableSectionElement>("thead");
@@ -72,7 +72,7 @@ test("should render content", () => {
           render: ({ dateAdded }) => dateAdded,
         },
       ]}
-    />
+    />,
   );
 
   // All the user names should be rendered
@@ -111,7 +111,7 @@ test("when passed col for columns, should render them", () => {
           colProps: { width: "25%" },
         },
       ]}
-    />
+    />,
   );
   const colgroup = container.querySelector<HTMLTableColElement>("colgroup");
   if (!colgroup) throw new Error("could not find colgroup");
@@ -154,15 +154,15 @@ it("when passed `column` values for `th`, they are rendered", () => {
           ]}
         />
       )}
-    </ClassNames>
+    </ClassNames>,
   );
 
   expect(document.querySelector("thead > tr > th")).toHaveStyleRule(
     "color",
-    colors.red.light
+    colors.red.light,
   );
   expect(
-    document.querySelector("thead > tr > th:nth-of-type(2)")
+    document.querySelector("thead > tr > th:nth-of-type(2)"),
   ).toHaveStyleRule("color", colors.blue.light);
 });
 
@@ -193,15 +193,15 @@ it("when passed `column` values for `td`, they are rendered", () => {
           trAs={<tr className="injected-class" />}
         />
       )}
-    </ClassNames>
+    </ClassNames>,
   );
 
   expect(document.querySelector("tbody > tr > td")).toHaveStyleRule(
     "color",
-    colors.red.light
+    colors.red.light,
   );
   expect(
-    document.querySelector("tbody > tr > td:nth-of-type(2)")
+    document.querySelector("tbody > tr > td:nth-of-type(2)"),
   ).toHaveStyleRule("color", colors.blue.light);
 });
 
@@ -226,7 +226,7 @@ it("when passed `trAs` single value, `className`s are merged to head and body `t
         },
       ]}
       trAs={<tr className="injected-class" />}
-    />
+    />,
   );
   expect(headTr()).toBeInTheDocument();
   expect(headTr()).toHaveClass("injected-class");
@@ -257,7 +257,7 @@ it("when passed `trAs` single value, `className`s are merged to head and body `t
           trAs={<tr className={cx(css({ color: "red" }), "injected-class")} />}
         />
       )}
-    </ClassNames>
+    </ClassNames>,
   );
 
   expect(headTr()).toBeInTheDocument();
@@ -291,7 +291,7 @@ it("when passed `trAs` with a `head` with additional classes, `className`s are m
         },
       ]}
       trAs={{ head: <tr className="injected-class" /> }}
-    />
+    />,
   );
   expect(headTr()).toBeInTheDocument();
   expect(headTr()).toHaveClass("injected-class");
@@ -326,7 +326,7 @@ it("when passed `trAs` with a `head` with additional classes, `className`s are m
           }}
         />
       )}
-    </ClassNames>
+    </ClassNames>,
   );
 
   expect(headTr()).toBeInTheDocument();
@@ -360,7 +360,7 @@ it("when passed `trAs` with a `body` with additional classes, `className`s are m
         },
       ]}
       trAs={{ body: <tr className="injected-class" /> }}
-    />
+    />,
   );
   expect(headTr()).toBeInTheDocument();
   expect(headTr()).not.toHaveClass("injected-class");
@@ -395,7 +395,7 @@ it("when passed `trAs` with a `body` with additional classes, `className`s are m
           }}
         />
       )}
-    </ClassNames>
+    </ClassNames>,
   );
 
   expect(headTr()).toBeInTheDocument();
@@ -432,7 +432,7 @@ it("when passed `trAs` with a `body` and `head` with different additional classe
         body: <tr className="body-injected-class" />,
         head: <tr className="head-injected-class" />,
       }}
-    />
+    />,
   );
   expect(headTr()).toBeInTheDocument();
   expect(headTr()).toHaveClass("head-injected-class");
@@ -476,7 +476,7 @@ it("when passed `trAs` with a `body` and `head` with different additional classe
           }}
         />
       )}
-    </ClassNames>
+    </ClassNames>,
   );
 
   expect(headTr()).toBeInTheDocument();

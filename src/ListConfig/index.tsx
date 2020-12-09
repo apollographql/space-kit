@@ -72,7 +72,7 @@ export const defaults: ListConfig = {
  * Context holding all configuration options for lists
  */
 const ListConfigContext = React.createContext<Partial<ListConfig> | undefined>(
-  undefined
+  undefined,
 );
 
 /**

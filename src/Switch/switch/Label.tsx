@@ -28,7 +28,7 @@ export const Label: React.FC<LabelProps> = ({
               display: "flex",
               fontWeight: 600,
             }),
-            className
+            className,
           )}
         >
           {children}

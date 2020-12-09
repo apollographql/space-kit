@@ -7,7 +7,7 @@ it("given `as` prop, custom element should be rendered", () => {
   render(
     <ListItem as={<a href="google.com" />} data-testid="ListItem">
       text
-    </ListItem>
+    </ListItem>,
   );
 
   expect(screen.getByTestId("ListItem").tagName).toBe("A");
@@ -19,7 +19,7 @@ it("given no `as` prop, ref should be passed through", () => {
   render(
     <ListItem data-testid="ListItem" ref={ref}>
       text
-    </ListItem>
+    </ListItem>,
   );
 
   expect(ref.current).toBe(screen.getByTestId("ListItem"));
@@ -35,7 +35,7 @@ it("given `as` prop, ref should be passed through", () => {
       ref={ref}
     >
       text
-    </ListItem>
+    </ListItem>,
   );
 
   expect(ref.current).toBe(screen.getByTestId("ListItem"));
@@ -45,11 +45,11 @@ it("given `className`, it should be merged with other class names", () => {
   render(
     <ListItem className="test-class-name" data-testid="ListItem">
       text
-    </ListItem>
+    </ListItem>,
   );
 
   expect(screen.getByTestId("ListItem")).toHaveClass("test-class-name");
   expect(
-    screen.getByTestId("ListItem").getAttribute("class")?.split(/\s/)
+    screen.getByTestId("ListItem").getAttribute("class")?.split(/\s/),
   ).toHaveLength(2);
 });

@@ -15,11 +15,11 @@ test('given no `value`, should render `<option value="" />`', () => {
         <option value="a">a</option>
         <option value="b">b</option>
       </Select>
-    </SpaceKitProvider>
+    </SpaceKitProvider>,
   );
 
   expect(
-    screen.getByRole("button", { name: "select an item" })
+    screen.getByRole("button", { name: "select an item" }),
   ).toBeInTheDocument();
 });
 
@@ -43,7 +43,7 @@ test("label props should be called back", () => {
   render(
     <SpaceKitProvider disableAnimations>
       <SelectWithLabel />
-    </SpaceKitProvider>
+    </SpaceKitProvider>,
   );
 
   expect(screen.getByText(labelText)).toBeInTheDocument();
@@ -57,7 +57,7 @@ test("given a controlled `value`, should render controlled value", () => {
         <option value="a">a</option>
         <option value="b">b</option>
       </Select>
-    </SpaceKitProvider>
+    </SpaceKitProvider>,
   );
 
   expect(screen.getByText("a")).toBeInTheDocument();
@@ -76,7 +76,7 @@ test("given children mixed with `option` and `optgroup`, should render headings 
           <option>e</option>
         </optgroup>
       </Select>
-    </SpaceKitProvider>
+    </SpaceKitProvider>,
   );
 
   act(() => userEvent.click(screen.getByRole("button")));
@@ -86,7 +86,7 @@ test("given children mixed with `option` and `optgroup`, should render headings 
   const groupC = screen.getByRole("group", { name: "group c" });
   expect(groupC).toBeInTheDocument();
   expect(
-    within(groupC).getByRole("heading", { name: "group c" })
+    within(groupC).getByRole("heading", { name: "group c" }),
   ).toBeInTheDocument();
   expect(screen.getByRole("option", { name: "d" })).toBeInTheDocument();
   expect(screen.getByRole("option", { name: "e" })).toBeInTheDocument();
@@ -99,7 +99,7 @@ test("when clicking button, menu shoud show", () => {
         <option value="a">a</option>
         <option value="b">b</option>
       </Select>
-    </SpaceKitProvider>
+    </SpaceKitProvider>,
   );
 
   expect(screen.getByText("a")).toBeInTheDocument();
@@ -120,7 +120,7 @@ test("when clicking a select trigger in a form, form is not submitted", () => {
           <option value="b">b</option>
         </Select>
       </form>
-    </SpaceKitProvider>
+    </SpaceKitProvider>,
   );
 
   act(() => userEvent.click(screen.getByRole("button")));

@@ -21,7 +21,7 @@ it("when provider has `disableAnimation` set to `true`, that value will be set i
   const { getByText } = render(
     <SpaceKitProvider disableAnimations>
       <Component />
-    </SpaceKitProvider>
+    </SpaceKitProvider>,
   );
 
   getByText(textDisableAnimationsTrue);
@@ -46,7 +46,7 @@ it("when provider has `disableAnimation` set to `false`, that value will be set 
   const { getByText } = render(
     <SpaceKitProvider disableAnimations={false}>
       <Component />
-    </SpaceKitProvider>
+    </SpaceKitProvider>,
   );
 
   getByText(textDisableAnimationsFalse);

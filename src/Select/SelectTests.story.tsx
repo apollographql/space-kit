@@ -44,5 +44,5 @@ storiesOf("Tests/Select", module)
     ),
     {
       chromatic: { delay: 200 },
-    }
+    },
   );

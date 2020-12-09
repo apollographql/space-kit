@@ -10,7 +10,7 @@ import { cloneElements } from "../shared/cloneElements";
 import classnames from "classnames";
 
 function getIconHorizontalPadding(
-  iconSize: NonNullable<ReturnType<typeof useListConfig>["iconSize"]>
+  iconSize: NonNullable<ReturnType<typeof useListConfig>["iconSize"]>,
 ): Property.Padding<number> {
   switch (iconSize) {
     case "large":
@@ -25,7 +25,7 @@ function getIconHorizontalPadding(
 }
 
 function getIconSize(
-  iconSize: NonNullable<ReturnType<typeof useListConfig>["iconSize"]>
+  iconSize: NonNullable<ReturnType<typeof useListConfig>["iconSize"]>,
 ): Property.Width<number> {
   switch (iconSize) {
     case "large":
@@ -40,7 +40,7 @@ function getIconSize(
 }
 
 function getIconMarginLeft(
-  iconSize: NonNullable<ReturnType<typeof useListConfig>["iconSize"]>
+  iconSize: NonNullable<ReturnType<typeof useListConfig>["iconSize"]>,
 ): Property.MarginLeft<number> {
   switch (iconSize) {
     case "large":
@@ -119,7 +119,7 @@ export const ListItem = React.forwardRef<
       startIconAs: startIconAsProp,
       ...props
     },
-    ref
+    ref,
   ) => {
     const {
       hoverColor,
@@ -191,8 +191,8 @@ export const ListItem = React.forwardRef<
                     paddingBottom: 4,
                     marginTop: verticalMargin,
                     marginBottom: verticalMargin,
-                  })
-                )
+                  }),
+                ),
               )}
               ref={ref}
             >
@@ -209,11 +209,11 @@ export const ListItem = React.forwardRef<
                         overflow: "hidden",
                         whiteSpace: "nowrap",
                         width: getIconSize(iconSize),
-                      })
+                      }),
                     )}
                   >
                     {startIcon}
-                  </div>
+                  </div>,
                 )}
               <div
                 className={cx(
@@ -224,7 +224,7 @@ export const ListItem = React.forwardRef<
                     overflow: "hidden",
                     textOverflow: "ellipsis",
                     whiteSpace: "nowrap",
-                  })
+                  }),
                 )}
               >
                 {children}
@@ -242,16 +242,16 @@ export const ListItem = React.forwardRef<
                         overflow: "hidden",
                         whiteSpace: "nowrap",
                         width: getIconSize(iconSize),
-                      })
+                      }),
                     )}
                   >
                     {endIcon}
-                  </div>
+                  </div>,
                 )}
-            </div>
+            </div>,
           )
         }
       </ClassNames>
     );
-  }
+  },
 );

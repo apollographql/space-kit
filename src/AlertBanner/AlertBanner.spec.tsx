@@ -22,7 +22,7 @@ it("should render a custom `childrenContainerAs` element", () => {
       childrenContainerAs={<p data-testid="containerAs" />}
     >
       message
-    </AlertBanner>
+    </AlertBanner>,
   );
   expect(screen.getByTestId("containerAs")).toBeInTheDocument();
   expect(screen.getByTestId("containerAs")).toHaveProperty("tagName", "P");

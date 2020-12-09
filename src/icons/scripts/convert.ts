@@ -19,7 +19,7 @@ function getHeightFromViewbox(node: types.JSXOpeningElement) {
     (attribute) =>
       attribute.type === "JSXAttribute" &&
       attribute.name.type === "JSXIdentifier" &&
-      attribute.name.name === "viewBox"
+      attribute.name.name === "viewBox",
   );
 
   if (
@@ -50,11 +50,11 @@ function updateStrokeWidths(node: types.JSXOpeningElement) {
           types.binaryExpression(
             "===",
             types.identifier("weight"),
-            types.stringLiteral("normal")
+            types.stringLiteral("normal"),
           ),
           types.numericLiteral(1.5),
-          types.numericLiteral(1)
-        )
+          types.numericLiteral(1),
+        ),
       );
     }
   });
@@ -73,13 +73,13 @@ function createCSSAttribute(css: string): types.JSXAttribute {
                 raw: css,
                 cooked: css,
               },
-              true
+              true,
             ),
           ],
-          []
-        )
-      )
-    )
+          [],
+        ),
+      ),
+    ),
   );
 }
 
@@ -94,7 +94,7 @@ function createCSSAttribute(css: string): types.JSXAttribute {
   return fs
     .readdirSync(SVG_PATH)
     .filter((svgPathFilename) =>
-      fs.lstatSync(path.join(SVG_PATH, svgPathFilename)).isDirectory()
+      fs.lstatSync(path.join(SVG_PATH, svgPathFilename)).isDirectory(),
     )
     .map(async (svgPathDirectory) => {
       const fullSvgDirectory = path.join(SVG_PATH, svgPathDirectory);
@@ -106,7 +106,7 @@ function createCSSAttribute(css: string): types.JSXAttribute {
           .map(async (filename) => {
             const svgCode = fs.readFileSync(
               path.join(fullSvgDirectory, filename),
-              "utf-8"
+              "utf-8",
             );
 
             // We have to use a custom svgo setup because the `svgr` one isn't
@@ -117,7 +117,7 @@ function createCSSAttribute(css: string): types.JSXAttribute {
             });
 
             const componentName = formatComponentName(
-              path.basename(filename, path.extname(filename))
+              path.basename(filename, path.extname(filename)),
             );
 
             const componentSource = await svgr(
@@ -135,7 +135,7 @@ function createCSSAttribute(css: string): types.JSXAttribute {
                     imports: any;
                     componentName: string;
                     jsx: types.JSXElement;
-                  }
+                  },
                 ) {
                   const typeScriptTpl = template.smart({
                     plugins: ["typescript"],
@@ -144,8 +144,8 @@ function createCSSAttribute(css: string): types.JSXAttribute {
                   jsx.openingElement.attributes.push(
                     types.jsxAttribute(
                       types.jsxIdentifier("ref"),
-                      types.jsxExpressionContainer(types.identifier("ref"))
-                    )
+                      types.jsxExpressionContainer(types.identifier("ref")),
+                    ),
                   );
 
                   traverse(jsx, {
@@ -166,7 +166,7 @@ function createCSSAttribute(css: string): types.JSXAttribute {
                         node.value.value === "none"
                       ) {
                         node.value = types.jsxExpressionContainer(
-                          types.identifier("fill")
+                          types.identifier("fill"),
                         );
                       }
                     },
@@ -188,7 +188,7 @@ function createCSSAttribute(css: string): types.JSXAttribute {
                           node.value.value.toLowerCase() === "#12151a")
                       ) {
                         node.value = types.jsxExpressionContainer(
-                          types.identifier("stroke")
+                          types.identifier("stroke"),
                         );
                       }
                     },
@@ -206,8 +206,8 @@ function createCSSAttribute(css: string): types.JSXAttribute {
                     createCSSAttribute(
                       `*{vector-effect: non-scaling-stroke}
                       overflow: visible;
-                      height: ${getHeightFromViewbox(jsx.openingElement)}px;`
-                    )
+                      height: ${getHeightFromViewbox(jsx.openingElement)}px;`,
+                    ),
                   );
 
                   // We need to add '/** @jsx jsx */' to the top of the file,
@@ -238,12 +238,12 @@ function createCSSAttribute(css: string): types.JSXAttribute {
                   "#12151A": "currentColor",
                 },
               },
-              { componentName }
+              { componentName },
             );
 
             const outputFilename = path.join(
               COMPONENT_PATH,
-              `${componentName}.tsx`
+              `${componentName}.tsx`,
             );
 
             // This is hacky because I haven't figured out how to make `svgr`'s
@@ -254,9 +254,9 @@ function createCSSAttribute(css: string): types.JSXAttribute {
                 ...prettierConfig,
                 parser: "typescript",
               }),
-              "utf-8"
+              "utf-8",
             );
-          })
+          }),
       );
     });
 })();

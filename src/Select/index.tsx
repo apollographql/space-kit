@@ -48,7 +48,7 @@ const ListItemWrapper: React.FC<ListItemWrapperProps> = ({
 
   if (index === -1) {
     throw new Error(
-      "Development error: props must be passed by reference in `reactNodeToDownshiftItems` so they can be found with `Array.prototype.indexOf`"
+      "Development error: props must be passed by reference in `reactNodeToDownshiftItems` so they can be found with `Array.prototype.indexOf`",
     );
   }
 
@@ -156,7 +156,7 @@ export const Select: React.FC<Props> = ({
   ...props
 }) => {
   const [uncontrolledValue, setUncontrolledValue] = React.useState(
-    initialValue ?? ""
+    initialValue ?? "",
   );
 
   // Validate controlled versus uncontrolled
@@ -166,7 +166,7 @@ export const Select: React.FC<Props> = ({
   ) {
     // eslint-disable-next-line no-console
     console.warn(
-      "Select component must be either controlled or uncontrolled. Pass either `initialValue` for an uncontrolled component or `value` and optionally `onChange` for a controlled component."
+      "Select component must be either controlled or uncontrolled. Pass either `initialValue` for an uncontrolled component or `value` and optionally `onChange` for a controlled component.",
     );
   }
 
@@ -307,7 +307,7 @@ export const Select: React.FC<Props> = ({
                   // conditional logic in their rendering then we could have
                   // `undefined` elements in `children`.
                   .filter(
-                    (child): child is NonNullable<React.ReactNode> => !!child
+                    (child): child is NonNullable<React.ReactNode> => !!child,
                   )
                   .map((child, topLevelIndex) => {
                     if (isHTMLOptionElement(child)) {
@@ -354,7 +354,7 @@ export const Select: React.FC<Props> = ({
                                   getItemProps={getItemProps}
                                 />
                               );
-                            }
+                            },
                           )}
                         </React.Fragment>
                       );
@@ -384,7 +384,7 @@ export const Select: React.FC<Props> = ({
                     }[size],
                   }),
                   React.isValidElement(triggerAs) &&
-                    (triggerAs.props as any).className
+                    (triggerAs.props as any).className,
                 ),
                 color: colors.white,
                 feel,
@@ -422,7 +422,7 @@ export const Select: React.FC<Props> = ({
                 })}
               >
                 {selectedItem?.children || ""}
-              </div>
+              </div>,
             )}
           />
         )}

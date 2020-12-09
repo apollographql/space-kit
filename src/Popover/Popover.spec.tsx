@@ -21,7 +21,7 @@ test("when child of `Popover` is clicked, list is shown", () => {
         }
         trigger={<Button>{faker.random.word()}</Button>}
       ></Popover>
-    </SpaceKitProvider>
+    </SpaceKitProvider>,
   );
 
   expect(screen.queryByText(listItemText)).not.toBeInTheDocument();
@@ -42,12 +42,12 @@ test("when `onClick` handler does not call `stopPropagation()`, list closes when
         }
         trigger={<Button>{faker.random.word()}</Button>}
       ></Popover>
-    </SpaceKitProvider>
+    </SpaceKitProvider>,
   );
 
   act(() => userEvent.click(screen.getByRole("button")));
   await waitFor(() =>
-    expect(screen.getByRole("button")).toHaveAttribute("aria-expanded", "true")
+    expect(screen.getByRole("button")).toHaveAttribute("aria-expanded", "true"),
   );
   act(() => userEvent.click(screen.getByText(listItemText)));
   expect(screen.queryByText(listItemText)).not.toBeInTheDocument();
@@ -73,7 +73,7 @@ test("when `onClick` handler calls `stopPropagation()`, list doesn't close when 
         }
         trigger={<Button>{triggerText}</Button>}
       ></Popover>
-    </SpaceKitProvider>
+    </SpaceKitProvider>,
   );
 
   act(() => userEvent.click(screen.getByRole("button")));
@@ -103,7 +103,7 @@ test("when interactive is set, list doesn't close when `ListItem` in `content` i
         }
         trigger={<Button>{faker.random.word()}</Button>}
       ></Popover>
-    </SpaceKitProvider>
+    </SpaceKitProvider>,
   );
 
   act(() => userEvent.click(screen.getByRole("button")));

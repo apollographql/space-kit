@@ -12,14 +12,14 @@ export const DebugTooltip: React.FC = ({ children }) => {
       callback={async () => {
         const tippyRoot = await waitFor(() => {
           const element = document.querySelector<HTMLDivElement>(
-            "*[data-tippy-root]"
+            "*[data-tippy-root]",
           );
           if (!element) throw new TypeError("could not find tippy root");
           return element;
         });
 
         getByTestId(document.body, "debug-styles-box").appendChild(
-          document.createTextNode(tippyRoot.style.transform)
+          document.createTextNode(tippyRoot.style.transform),
         );
       }}
     >

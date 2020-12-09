@@ -14,7 +14,7 @@ let mdx = `import { Canvas, Meta, Story } from "@storybook/addon-docs/blocks";\n
 mdx += `import { IconDemo } from './icons.story/IconDemo';\n`;
 (async () => {
   const categoryDirectories = (await readdirAsync(SVG_PATH)).filter(
-    (dirname) => !dirname.startsWith(".")
+    (dirname) => !dirname.startsWith("."),
   );
 
   const categorizedFilenames = categoryDirectories.reduce<
@@ -28,20 +28,20 @@ mdx += `import { IconDemo } from './icons.story/IconDemo';\n`;
   }, {});
 
   const importDeclarations: types.ImportDeclaration[] = Object.values(
-    categorizedFilenames
+    categorizedFilenames,
   ).reduce<types.ImportDeclaration[]>((accumulator, filenames) => {
     const imports = filenames.map((filename) => {
       const componentName = formatComponentName(
-        path.basename(filename, path.extname(filename))
+        path.basename(filename, path.extname(filename)),
       );
       return types.importDeclaration(
         [
           types.importSpecifier(
             types.identifier(componentName),
-            types.identifier(componentName)
+            types.identifier(componentName),
           ),
         ],
-        types.stringLiteral(`./${componentName}`)
+        types.stringLiteral(`./${componentName}`),
       );
     });
     return accumulator.concat(imports);
@@ -51,7 +51,7 @@ mdx += `import { IconDemo } from './icons.story/IconDemo';\n`;
   });
 
   mdx += generate(
-    types.file(types.program(importDeclarations, [], "script"), null, null)
+    types.file(types.program(importDeclarations, [], "script"), null, null),
   ).code;
 
   mdx += "\n";
@@ -73,19 +73,19 @@ mdx += `import { IconDemo } from './icons.story/IconDemo';\n`;
 
     mdx += `<Canvas mdxSource="${filenames
       .map((filename) =>
-        formatComponentName(path.basename(filename, path.extname(filename)))
+        formatComponentName(path.basename(filename, path.extname(filename))),
       )
       .map((componentName) => `<${componentName} />`)
       .join("\n")}">\n`;
 
     mdx += filenames
       .map((filename) =>
-        formatComponentName(path.basename(filename, path.extname(filename)))
+        formatComponentName(path.basename(filename, path.extname(filename))),
       )
       .map(
         (componentName) => `<Story name="${componentName}">
           <IconDemo name="${componentName}" Component={${componentName}} />
-        </Story>`
+        </Story>`,
       )
       .join("\n");
     mdx += "</Canvas>\n";
@@ -157,6 +157,6 @@ mdx += `import { IconDemo } from './icons.story/IconDemo';\n`;
     prettier.format(mdx, {
       ...(await prettier.resolveConfig(COMPONENT_PATH)),
       parser: "mdx",
-    })
+    }),
   );
 })();

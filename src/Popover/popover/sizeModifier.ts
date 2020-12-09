@@ -30,7 +30,7 @@ interface Options {
  * internal popper version
  */
 function getBasePlacement(
-  placement: Placement | "auto"
+  placement: Placement | "auto",
 ): BasePlacement | "auto" {
   return (placement.split("-")[0] as any) as BasePlacement | "auto";
 }
@@ -80,7 +80,7 @@ function findPlacementWithMinimumVerticalOverflow({
         // expand when we are resizing to expose more of the clipped content.
         maxHeight: height - verticalOverflow - y,
       };
-    }
+    },
   );
 
   // Sort `placementCalculations` by which placement has the least overflow
@@ -100,10 +100,10 @@ function findPlacementWithMinimumVerticalOverflow({
     // We could build an index for the indicies, but I don't think we'll have
     // any performance issues because the placement lists are short.
     const aPlacementWeight = placementOverflows.findIndex(
-      (overflow) => overflow.placement === a.placement
+      (overflow) => overflow.placement === a.placement,
     );
     const bPlacementWeight = placementOverflows.findIndex(
-      (overflow) => overflow.placement === b.placement
+      (overflow) => overflow.placement === b.placement,
     );
 
     return aPlacementWeight - bPlacementWeight;
@@ -167,10 +167,10 @@ function buildPlacementsList({
               ...options,
               placement,
             } as any)
-          : placement
+          : placement,
       );
     },
-    []
+    [],
   );
 }
 
@@ -178,7 +178,7 @@ function buildPlacementsList({
  * Calculate the placement and max size
  */
 function getPlacementAndMaxSize(
-  modifierArguments: ModifierArguments<Options>
+  modifierArguments: ModifierArguments<Options>,
 ): {
   placement: Placement;
   maxSize: { height: number };

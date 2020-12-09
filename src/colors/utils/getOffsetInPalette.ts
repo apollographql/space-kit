@@ -16,7 +16,7 @@ const colorPaletteKeys: ReadonlyArray<keyof ColorPalette> = [
 ] as const;
 
 function isColorPalette(
-  palette: MonochromePalette | ColorPalette
+  palette: MonochromePalette | ColorPalette,
 ): palette is ColorPalette {
   return Object.prototype.hasOwnProperty.call(palette, "darkest");
 }
@@ -41,7 +41,7 @@ function isColorPalette(
 export function getOffsetInPalette(
   offset: number,
   offsetDirection: "lighter" | "darker",
-  color: ShadedColor
+  color: ShadedColor,
 ): ShadedColor {
   /**
    * Palette this color belongs to
@@ -57,7 +57,7 @@ export function getOffsetInPalette(
 
   if (isColorPalette(palette)) {
     const index = Object.keys(palette).findIndex(
-      (paletteKey) => palette[paletteKey as keyof ColorPalette] === color
+      (paletteKey) => palette[paletteKey as keyof ColorPalette] === color,
     );
 
     // Use `max` to prevent a negative number. We explicitly do not throw an
@@ -66,14 +66,14 @@ export function getOffsetInPalette(
       colorPaletteKeys[
         Math.min(
           Object.keys(palette).length - 1,
-          Math.max(0, index + effectiveOffset)
+          Math.max(0, index + effectiveOffset),
         )
       ]
     ] as ShadedColor;
   }
 
   const index = Object.keys(palette).findIndex(
-    (paletteKey) => palette[paletteKey as keyof MonochromePalette] === color
+    (paletteKey) => palette[paletteKey as keyof MonochromePalette] === color,
   );
 
   // Use `max` to prevent a negative number. We explicitly do not throw an
@@ -82,7 +82,7 @@ export function getOffsetInPalette(
     monochromePaletteKeys[
       Math.min(
         Object.keys(palette).length - 1,
-        Math.max(0, index + effectiveOffset)
+        Math.max(0, index + effectiveOffset),
       )
     ]
   ] as ShadedColor;

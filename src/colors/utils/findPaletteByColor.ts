@@ -1,7 +1,7 @@
 import { colors, ColorPalette, MonochromePalette, ShadedColor } from "../index";
 
 export function findPaletteByColor(
-  searchColor: ShadedColor
+  searchColor: ShadedColor,
 ): MonochromePalette | ColorPalette {
   const result = Object.values(colors)
     .filter((color) => typeof color !== "string")
@@ -13,7 +13,7 @@ export function findPaletteByColor(
       // @see https://github.com/Microsoft/TypeScript/issues/7657#issuecomment-228697078
       (color) => {
         return Object.values(color).includes(searchColor);
-      }
+      },
     );
 
   if (!result) {

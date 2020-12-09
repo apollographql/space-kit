@@ -130,7 +130,7 @@ storiesOf("Modal", module)
         Jeremy will no longer have access to the MGD-Private. You can always add
         them back to the organization later.
       </Modal>
-    )
+    ),
   )
   .add(
     "static (small) (✅ primaryAction, ❌ secondaryAction, ✅ bottomLeftText)",
@@ -154,7 +154,7 @@ storiesOf("Modal", module)
         Jeremy will no longer have access to the MGD-Private. You can always add
         them back to the organization later.
       </Modal>
-    )
+    ),
   )
   .add(
     "static (small) (✅ primaryAction, ❌ secondaryAction, ❌ bottomLeftText)",
@@ -175,7 +175,7 @@ storiesOf("Modal", module)
         Jeremy will no longer have access to the MGD-Private. You can always add
         them back to the organization later.
       </Modal>
-    )
+    ),
   )
   .add(
     "static (medium) (✅ primaryAction, ✅ secondaryAction, ✅ bottomLeftText)",
@@ -197,7 +197,7 @@ storiesOf("Modal", module)
       >
         Additional seats needed
       </Modal>
-    )
+    ),
   )
   .add(
     "static (large) (❌ primaryAction, ❌ secondaryAction, ❌ bottomLeftText) ",
@@ -212,7 +212,7 @@ storiesOf("Modal", module)
           content
         </div>
       </Modal>
-    )
+    ),
   )
   .add("using verticalScrollMode 'modal'", () => (
     <Modal
