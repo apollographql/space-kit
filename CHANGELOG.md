@@ -1,3 +1,15 @@
+# v8.6.1 (Wed Dec 09 2020)
+
+#### 🐛  Bug Fix
+
+- Dont warn whenever using controlled version of component [#284](https://github.com/apollographql/space-kit/pull/284) ([@jgzuke](https://github.com/jgzuke))
+
+#### Authors: 1
+
+- Jason Zukewich ([@jgzuke](https://github.com/jgzuke))
+
+---
+
 # v8.6.0 (Tue Dec 08 2020)
 
 #### 🚀 Enhancement
