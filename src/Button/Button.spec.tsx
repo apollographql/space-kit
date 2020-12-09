@@ -33,7 +33,7 @@ test("when passed an icon, endIcon, and text; all are rendered", () => {
       icon={<IconShip2 data-testid="icon" />}
     >
       submit
-    </Button>
+    </Button>,
   );
 
   screen.getByRole("button");
@@ -68,7 +68,7 @@ test("when disabled, button does not call click handlers", () => {
       onClick={rootElementOnClick}
     >
       submit
-    </Button>
+    </Button>,
   );
 
   // act
@@ -90,7 +90,7 @@ test("when disabled, button with 'as=' set to not a button element does not call
       onClick={rootElementOnClick}
     >
       submit
-    </Button>
+    </Button>,
   );
 
   act(() => userEvent.click(screen.getByText("submit")));
@@ -113,7 +113,7 @@ test("when loading, button does not call click handlers", () => {
       onClick={rootElementOnClick}
     >
       submit
-    </Button>
+    </Button>,
   );
 
   // act
@@ -134,7 +134,7 @@ test("when passed onClick props to the element and the `as` prop, they should bo
       onClick={rootElementOnClick}
     >
       submit
-    </Button>
+    </Button>,
   );
 
   // act
@@ -147,7 +147,7 @@ test("when passed onClick props to the element and the `as` prop, they should bo
 
 test("given a top-level `className` and an `as` prop with it's own `className`, `className` props are merged", () => {
   render(
-    <Button className="testClassA" as={<button className="testClassB" />} />
+    <Button className="testClassA" as={<button className="testClassB" />} />,
   );
 
   const button = screen.getByRole("button");
@@ -165,7 +165,7 @@ test("when passed unrecognized props, they should be rendered in the dom", () =>
       style={{ margin: 10 }}
     >
       {faker.random.word()}
-    </Button>
+    </Button>,
   );
 
   const button = screen.getByRole("button");

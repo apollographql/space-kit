@@ -21,5 +21,5 @@ export type ComponentWithAs<
         : As extends React.ReactElement
         ? unknown
         : never)
-  >
+  >,
 ) => ReturnType<React.FC>;

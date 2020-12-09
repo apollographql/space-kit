@@ -14,7 +14,7 @@ export const matchTriggerWidth: Modifier<"matchTriggerWidth", unknown> = {
       (state.elements.reference as HTMLElement).offsetWidth
     }px`;
     const tippyBox = state.elements.popper.querySelector<HTMLElement>(
-      ".tippy-box"
+      ".tippy-box",
     );
     if (tippyBox) {
       tippyBox.style.minWidth = "0";

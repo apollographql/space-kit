@@ -6,7 +6,7 @@ it("should work with options with no `value` props", () => {
     reactNodeToDownshiftItems([
       <option key="a">a</option>,
       <option key="b">b</option>,
-    ])
+    ]),
   ).toMatchInlineSnapshot(`
     Array [
       Object {
@@ -28,7 +28,7 @@ it("should work with options with `value` props", () => {
       <option key="b" value="value b">
         b
       </option>,
-    ])
+    ]),
   ).toMatchInlineSnapshot(`
     Array [
       Object {
@@ -62,7 +62,7 @@ it("should work with options with forwarded refs", () => {
       <Option key="b" value="value b">
         b
       </Option>,
-    ])
+    ]),
   ).toMatchInlineSnapshot(`
     Array [
       Object {
@@ -83,8 +83,8 @@ it("given `optgroup` and `option`s, should return correct result", () => {
       <optgroup key="a" label="label a">
         <option key="a">a</option>
         <option key="b">b</option>
-      </optgroup>
-    )
+      </optgroup>,
+    ),
   ).toMatchInlineSnapshot(`
     Array [
       Object {
@@ -105,8 +105,8 @@ it("given `optgroup` and `option`s, should return correct result", () => {
         <option key="b" value="b">
           b
         </option>
-      </optgroup>
-    )
+      </optgroup>,
+    ),
   ).toMatchInlineSnapshot(`
     Array [
       Object {
@@ -129,7 +129,7 @@ it("given mixed `optgroup` and `option`s without `value` props, should return co
         <option key="b">b</option>
       </optgroup>,
       <option key="c">c</option>,
-    ])
+    ]),
   ).toMatchInlineSnapshot(`
     Array [
       Object {
@@ -159,7 +159,7 @@ it("given mixed `optgroup` and `option`s with `value` props, should return corre
       <option key="c" value="value c">
         c
       </option>,
-    ])
+    ]),
   ).toMatchInlineSnapshot(`
     Array [
       Object {

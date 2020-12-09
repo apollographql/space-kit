@@ -24,7 +24,7 @@ export const cloneElements = (
               // `ClassNames` wrapper.
               accumulator.props.css
                 ? cx(css(accumulator.props.css.styles))
-                : null
+                : null,
             ),
             style: { ...element.props.style, ...accumulator.props.style },
             // Since we're cloning `as` with the `original` props added, we're

@@ -15,7 +15,7 @@ test("when passed `headerAs` with a react element, correct header is rendered", 
   const heading = faker.lorem.word();
 
   const { getByText, getByTestId } = render(
-    <Card heading={heading} headingAs={<h6 data-testid="heading" />} />
+    <Card heading={heading} headingAs={<h6 data-testid="heading" />} />,
   );
 
   expect(getByText(heading).nodeName.toLowerCase()).toBe("h6");

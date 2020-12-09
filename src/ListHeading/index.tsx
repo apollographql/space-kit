@@ -31,7 +31,7 @@ export const ListHeading = React.forwardRef<
 
       props.onClick?.(event);
     },
-    [props.onClick]
+    [props.onClick],
   );
 
   return (

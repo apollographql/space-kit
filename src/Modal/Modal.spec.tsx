@@ -20,7 +20,7 @@ test("should render a title", () => {
 
 test("should render a description", () => {
   const { getByText } = render(
-    <Modal title="title" description="test description" size="small" />
+    <Modal title="title" description="test description" size="small" />,
   );
 
   expect(getByText("test description")).toBeInTheDocument();
@@ -30,7 +30,7 @@ test("should render children", () => {
   const { getByText } = render(
     <Modal title="title" description="test description" size="small">
       child content
-    </Modal>
+    </Modal>,
   );
 
   expect(getByText("child content")).toBeInTheDocument();
@@ -42,7 +42,7 @@ test("should render primary button", () => {
       title="title"
       primaryAction={<Button type="button">submit</Button>}
       size="small"
-    />
+    />,
   );
 
   expect(getByText("submit")).toBeInTheDocument();
@@ -55,7 +55,7 @@ test("should render secondary button", () => {
       secondaryAction={<Button type="button">cancel</Button>}
       primaryAction={<Button type="button">submit</Button>}
       size="small"
-    />
+    />,
   );
 
   expect(getByText("cancel")).toBeInTheDocument();
@@ -68,7 +68,7 @@ test("should render helper text", () => {
       primaryAction={<Button type="button">submit</Button>}
       size="small"
       bottomLeftText="helper text"
-    />
+    />,
   );
 
   expect(getByText("helper text")).toBeInTheDocument();
@@ -84,7 +84,7 @@ test("when Escape key is pressed, `onClose` callback should be called", () => {
       size="small"
       bottomLeftText="helper text"
       onClose={onClose}
-    />
+    />,
   );
 
   // Fire `keyDown`, `keyUp`, and `keyPress` beacuse we don't care about the
@@ -120,7 +120,7 @@ test("when non-Escape key is pressed, `onClose` callback should not be called", 
       primaryAction={<Button type="button">submit</Button>}
       size="small"
       onClose={onClose}
-    />
+    />,
   );
 
   // Fire `keyDown`, `keyUp`, and `keyPress` beacuse we don't care about the
@@ -156,7 +156,7 @@ test("when content area is clicked, `onClose` should not be called", () => {
       primaryAction={<Button type="button">submit</Button>}
       size="small"
       onClose={onClose}
-    />
+    />,
   );
 
   fireEvent.click(getByText("title"), { button: 1 });
@@ -180,7 +180,7 @@ test("when passed `as` prop, props should be merged", () => {
       }
       size="small"
       title={faker.lorem.word()}
-    />
+    />,
   );
 
   expect(getByTestId(testId)).toHaveClass(className);
@@ -203,7 +203,7 @@ test("when passed `containerAs` prop, props should be merged", () => {
       }
       size="small"
       title={faker.lorem.word()}
-    />
+    />,
   );
 
   expect(getByTestId(testId)).toHaveClass(className);
@@ -221,7 +221,7 @@ test("when `as` includes a `ref`, `ref` is propagated", () => {
       title="title"
     >
       content
-    </Modal>
+    </Modal>,
   );
 
   expect(ref.current).toBe(screen.getByTestId("form"));

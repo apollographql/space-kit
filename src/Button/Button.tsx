@@ -56,7 +56,7 @@ function getTextColor({
               {
                 level: "AA",
                 size: "small",
-              }
+              },
             )
             .toString()
         : undefined;
@@ -277,7 +277,7 @@ export const Button = React.forwardRef<HTMLElement, Props>(
       theme = "light",
       ...passthroughProps
     },
-    ref
+    ref,
   ) => {
     const { isFocusVisible, focusProps } = useFocusRing();
 
@@ -511,7 +511,7 @@ export const Button = React.forwardRef<HTMLElement, Props>(
                   },
                 ]),
                 mergedProps.className,
-                isFocusVisible && css(focusedStyles)
+                isFocusVisible && css(focusedStyles),
               ),
 
               children: (
@@ -536,12 +536,12 @@ export const Button = React.forwardRef<HTMLElement, Props>(
                   )}
                 </>
               ),
-            }
+            },
           );
 
           return React.cloneElement(as, propsToPass);
         }}
       </ClassNames>
     );
-  }
+  },
 );

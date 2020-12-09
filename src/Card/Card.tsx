@@ -87,7 +87,7 @@ export const Card: React.FC<CardProps> = ({
                       marginBottom: 0,
                       marginTop: 0,
                       ...(size === "large" ? base.xlarge : base.large),
-                    })
+                    }),
                   ),
                   children: heading,
                 };
@@ -97,7 +97,7 @@ export const Card: React.FC<CardProps> = ({
                       ...headingProps,
                       className: classnames(
                         headingProps.className,
-                        headingAs.props.className
+                        headingAs.props.className,
                       ),
                     })
                   : React.createElement(headingAs, headingProps);

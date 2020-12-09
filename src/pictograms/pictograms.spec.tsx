@@ -49,7 +49,7 @@ describe("all components should passthrough refs", () => {
        */
       const componentName = path.basename(
         componentFile,
-        path.extname(componentFile)
+        path.extname(componentFile),
       );
 
       /**
@@ -60,7 +60,7 @@ describe("all components should passthrough refs", () => {
       const Component = (await import(componentFile))[componentName];
 
       const { getByTestId } = render(
-        <Component ref={ref} data-testid={testId} />
+        <Component ref={ref} data-testid={testId} />,
       );
 
       expect(ref.current).toBe(getByTestId(testId));

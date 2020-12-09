@@ -50,16 +50,16 @@ export const InputLabel = React.forwardRef<HTMLLabelElement, InputLabelProps>(
                   ...typography.base.base,
                   fontWeight: 600,
                 }),
-                element.props.className
+                element.props.className,
               ),
               ref,
             },
-            children
+            children,
           );
         }}
       </ClassNames>
     );
-  }
+  },
 );
 
 interface Props {
@@ -232,7 +232,7 @@ export const TextField: React.FC<Props> = ({
                   : colors.silver.darker,
               outline: "none",
             },
-          })
+          }),
         ),
       };
 
@@ -276,7 +276,7 @@ export const TextField: React.FC<Props> = ({
                       ...inputProps,
                       className: classnames(
                         inputProps.className,
-                        inputAs.props.className
+                        inputAs.props.className,
                       ),
                     })
                   : React.createElement(inputAs, inputProps)}

@@ -15,7 +15,7 @@ export const ListDivider: React.FC = (props) => {
       event.preventDefault();
       event.stopPropagation();
     },
-    []
+    [],
   );
 
   return (

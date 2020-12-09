@@ -6,7 +6,7 @@ import { mergeProps } from "@react-aria/utils";
 import { assertUnreachable } from "../../shared/assertUnreachable";
 
 export const Wrapper: React.FC<React.ComponentProps<typeof Switch>> = (
-  props
+  props,
 ) => {
   return (
     <ClassNames>
@@ -28,7 +28,7 @@ export const Wrapper: React.FC<React.ComponentProps<typeof Switch>> = (
                     backgroundColor: colors.midnight.darkest,
                     color: colors.white,
                   })
-                : assertUnreachable(props.theme)
+                : assertUnreachable(props.theme),
             ),
           })}
         />

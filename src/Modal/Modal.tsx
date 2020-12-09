@@ -161,11 +161,11 @@ export const Modal: React.FC<Props> = ({
     // TypeScript will give us some protection here, but we need to guarantee
     // that `as` is an element that `motion` supports
     throw new TypeError(
-      "`as` must be an element with a corresponding element in `Framer.motion`"
+      "`as` must be an element with a corresponding element in `Framer.motion`",
     );
   } else if (!motion[type] && !React.isValidElement(as)) {
     throw new TypeError(
-      "Could not determine the type of `as` to clone that element using Framer. This is most likely because it's a ref forwarding component and we don't have any way of determining what type it will render to."
+      "Could not determine the type of `as` to clone that element using Framer. This is most likely because it's a ref forwarding component and we don't have any way of determining what type it will render to.",
     );
   }
 
@@ -229,14 +229,14 @@ export const Modal: React.FC<Props> = ({
                 verticalScrollMode === "children" && {
                   display: "flex",
                   flexDirection: "column",
-                }
+                },
               ),
               className,
               as.props.className,
               // If the parent component is using emotion with the jsx pragma, we
               // have to get fancy and intercept the styles to use with the
               // `ClassNames` wrapper.
-              as.props.css ? css(as.props.css.styles) : null
+              as.props.css ? css(as.props.css.styles) : null,
             )}
           >
             <div>
@@ -271,7 +271,7 @@ export const Modal: React.FC<Props> = ({
                 },
                 verticalScrollMode === "children" && {
                   overflowY: "auto",
-                }
+                },
               )}
             >
               {children}
@@ -294,7 +294,7 @@ export const Modal: React.FC<Props> = ({
                 {primaryAction && <div>{primaryAction}</div>}
               </div>
             )}
-          </MotionComponent>
+          </MotionComponent>,
         );
       }}
     </ClassNames>

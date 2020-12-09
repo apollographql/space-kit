@@ -10,11 +10,11 @@ test("when given no element, emotion should render classes into head", () => {
   render(
     <CacheProvider>
       <div css={{ display: "block" }}>text</div>
-    </CacheProvider>
+    </CacheProvider>,
   );
 
   expect(
-    document.querySelector('head *[data-emotion="space-kit"]')
+    document.querySelector('head *[data-emotion="space-kit"]'),
   ).toBeInTheDocument();
 });
 
@@ -26,7 +26,7 @@ test("when given an element, emotion should add classes into that element", () =
   render(
     <CacheProvider>
       <div css={{ display: "block" }}>text</div>
-    </CacheProvider>
+    </CacheProvider>,
   );
 
   expect(style.hasChildNodes()).toBeTruthy();

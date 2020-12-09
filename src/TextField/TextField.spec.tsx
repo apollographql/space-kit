@@ -27,7 +27,7 @@ test("when the label is clicked it focuses the input", () => {
 
 test("when passed an error and info, only renders the error", () => {
   const { container, queryByText, getByText } = render(
-    <TextField helper="helper text" error="error text" />
+    <TextField helper="helper text" error="error text" />,
   );
 
   getByText("error text");
@@ -51,7 +51,7 @@ test("when passed `helper` and not `showInfoIcon`, renders no svg", () => {
 
 test("when passed `helper` and `showInfoIcon`, renders an svg", () => {
   const { container, getByText } = render(
-    <TextField helper="helper text" showInfoIcon />
+    <TextField helper="helper text" showInfoIcon />,
   );
 
   getByText("helper text");
@@ -78,7 +78,7 @@ test("when not passed `autoFocus` prop, should not have focus after mounting", (
 
 test("renders icon", () => {
   const { getByTestId } = render(
-    <TextField icon={<svg data-testid="icon" />} />
+    <TextField icon={<svg data-testid="icon" />} />,
   );
 
   getByTestId("icon");
@@ -86,7 +86,7 @@ test("renders icon", () => {
 
 test("renders placeholder", () => {
   const { getByPlaceholderText } = render(
-    <TextField placeholder="placeholder" />
+    <TextField placeholder="placeholder" />,
   );
 
   getByPlaceholderText("placeholder");
@@ -103,7 +103,7 @@ test("calls events", async () => {
       onBlur={onBlur}
       onChange={onChange}
       onFocus={onFocus}
-    />
+    />,
   );
 
   const input = getByTestId("input");
@@ -129,7 +129,7 @@ test("when disabled, does not accept input", async () => {
   const textInput = "this is text i typed";
   const inputLabel = "label";
   const { getByLabelText, queryByText } = render(
-    <TextField label={inputLabel} />
+    <TextField label={inputLabel} />,
   );
 
   const input = getByLabelText(inputLabel);

@@ -14,7 +14,7 @@ const DebugListConfig: React.FC = () => {
         return React.cloneElement(
           React.isValidElement(value) ? value : <div />,
           { "data-testid": key, key },
-          <>{value}</>
+          <>{value}</>,
         );
       })}
     </>
@@ -25,16 +25,16 @@ test("given no configuration, defaults values should be present", () => {
   render(
     <List>
       <DebugListConfig />
-    </List>
+    </List>,
   );
 
   expect(screen.getByTestId("iconSize")).toHaveTextContent(defaults.iconSize);
   expect(screen.getByTestId("hoverColor")).toHaveTextContent(
-    defaults.hoverColor ?? ""
+    defaults.hoverColor ?? "",
   );
   expect(screen.getByTestId("padding")).toHaveTextContent(defaults.padding);
   expect(screen.getByTestId("selectedColor")).toHaveTextContent(
-    defaults.selectedColor
+    defaults.selectedColor,
   );
 });
 
@@ -58,22 +58,22 @@ test("given nested lists with configurations in both, correct values should prop
       <List {...newValues}>
         <DebugListConfig />
       </List>
-    </List>
+    </List>,
   );
 
   expect(screen.getByTestId("endIconAs").tagName).toBe(
-    ((newValues.endIconAs.type as unknown) as string).toUpperCase()
+    ((newValues.endIconAs.type as unknown) as string).toUpperCase(),
   );
   expect(screen.getByTestId("iconSize")).toHaveTextContent(newValues.iconSize);
   expect(screen.getByTestId("hoverColor")).toHaveTextContent(
-    newValues.hoverColor ?? ""
+    newValues.hoverColor ?? "",
   );
   expect(screen.getByTestId("padding")).toHaveTextContent(newValues.padding);
   expect(screen.getByTestId("selectedColor")).toHaveTextContent(
-    newValues.selectedColor
+    newValues.selectedColor,
   );
   expect(screen.getByTestId("startIconAs").tagName).toBe(
-    ((newValues.startIconAs.type as unknown) as string).toUpperCase()
+    ((newValues.startIconAs.type as unknown) as string).toUpperCase(),
   );
 });
 
@@ -92,23 +92,23 @@ test("given nested lists with the top level having default configuration and the
       <List {...newValues}>
         <DebugListConfig />
       </List>
-    </List>
+    </List>,
   );
 
   expect(screen.getByTestId("endIconAs").tagName).toBe(
-    ((newValues.endIconAs.type as unknown) as string).toUpperCase()
+    ((newValues.endIconAs.type as unknown) as string).toUpperCase(),
   );
   expect(screen.getByTestId("iconSize")).toHaveTextContent(newValues.iconSize);
   expect(screen.getByTestId("hoverColor")).toHaveTextContent(
-    newValues.hoverColor ?? ""
+    newValues.hoverColor ?? "",
   );
   expect(screen.getByTestId("padding")).toHaveTextContent(newValues.padding);
   expect(screen.getByTestId("selectedColor")).toHaveTextContent(
-    newValues.selectedColor
+    newValues.selectedColor,
   );
 
   expect(screen.getByTestId("startIconAs").tagName).toBe(
-    ((newValues.startIconAs.type as unknown) as string).toUpperCase()
+    ((newValues.startIconAs.type as unknown) as string).toUpperCase(),
   );
 });
 
@@ -127,22 +127,22 @@ test("given nested lists with the top level having configuration and the child u
       <List>
         <DebugListConfig />
       </List>
-    </List>
+    </List>,
   );
 
   expect(screen.getByTestId("endIconAs").tagName).toBe(
-    ((newValues.endIconAs.type as unknown) as string).toUpperCase()
+    ((newValues.endIconAs.type as unknown) as string).toUpperCase(),
   );
   expect(screen.getByTestId("iconSize")).toHaveTextContent(newValues.iconSize);
   expect(screen.getByTestId("hoverColor")).toHaveTextContent(
-    newValues.hoverColor ?? ""
+    newValues.hoverColor ?? "",
   );
   expect(screen.getByTestId("padding")).toHaveTextContent(newValues.padding);
   expect(screen.getByTestId("selectedColor")).toHaveTextContent(
-    newValues.selectedColor
+    newValues.selectedColor,
   );
 
   expect(screen.getByTestId("startIconAs").tagName).toBe(
-    ((newValues.startIconAs.type as unknown) as string).toUpperCase()
+    ((newValues.startIconAs.type as unknown) as string).toUpperCase(),
   );
 });

@@ -141,7 +141,7 @@ export const AlertCard: React.FC<AlertCardProps> = ({
                 padding: 15,
               }),
               otherProps.className,
-              React.isValidElement(as) && as.props.className
+              React.isValidElement(as) && as.props.className,
             ),
           },
           <>
@@ -168,7 +168,7 @@ export const AlertCard: React.FC<AlertCardProps> = ({
                             ? color.lighter
                             : assertUnreachable(theme),
                         ...base.base,
-                      })
+                      }),
                     ),
                     children: (
                       <Fragment>
@@ -192,7 +192,7 @@ export const AlertCard: React.FC<AlertCardProps> = ({
                         ...headingProps,
                         className: classnames(
                           headingProps.className,
-                          headingAs.props.className
+                          headingAs.props.className,
                         ),
                       })
                     : React.createElement(headingAs, headingProps);
@@ -263,7 +263,7 @@ export const AlertCard: React.FC<AlertCardProps> = ({
 
               {actions}
             </div>
-          </>
+          </>,
         )
       }
     </ClassNames>

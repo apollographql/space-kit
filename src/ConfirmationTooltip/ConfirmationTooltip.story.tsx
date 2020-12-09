@@ -29,7 +29,7 @@ storiesOf("ConfirmationTooltip", module)
     },
     {
       chromatic: { delay: 500 },
-    }
+    },
   )
   .add(
     "disabled, no confirmation should be visible",
@@ -50,7 +50,7 @@ storiesOf("ConfirmationTooltip", module)
     },
     {
       chromatic: { delay: 500 },
-    }
+    },
   )
   .add("interactive", () => {
     return (

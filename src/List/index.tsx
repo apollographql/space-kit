@@ -31,7 +31,7 @@ export const List = React.forwardRef<
       startIconAs,
       ...props
     },
-    ref
+    ref,
   ) => {
     /**
      * Combination of inherited configuration and new configuration passed via
@@ -67,5 +67,5 @@ export const List = React.forwardRef<
         </div>
       </ListConfigProvider>
     );
-  }
+  },
 );

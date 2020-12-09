@@ -12,14 +12,14 @@ test.skip("when hovered, the tooltip is shown afer a delay", async () => {
   const { getByText, queryByText } = render(
     <Tooltip content={tooltipContent}>
       <span>{interactiveElementText}</span>
-    </Tooltip>
+    </Tooltip>,
   );
 
   getByText(interactiveElementText).dispatchEvent(
-    new MouseEvent("mouseover", { bubbles: true })
+    new MouseEvent("mouseover", { bubbles: true }),
   );
   getByText(interactiveElementText).dispatchEvent(
-    new MouseEvent("mousemove", { bubbles: true })
+    new MouseEvent("mousemove", { bubbles: true }),
   );
   expect(queryByText(tooltipContent)).not.toBeInTheDocument();
 

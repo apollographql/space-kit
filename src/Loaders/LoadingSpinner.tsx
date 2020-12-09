@@ -114,5 +114,5 @@ export const LoadingSpinner = React.forwardRef<SVGSVGElement, Props>(
         </g>
       </svg>
     );
-  }
+  },
 );

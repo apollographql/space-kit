@@ -13,7 +13,7 @@ function generateStorybookStory(componentNames: string[]) {
   const content = `${componentNames
     .map(
       (componentName) =>
-        `import { ${componentName} } from "./${componentName}";`
+        `import { ${componentName} } from "./${componentName}";`,
     )
     .join("\n")}
 import { Meta, Story, Props, Canvas } from "@storybook/addon-docs/blocks";
@@ -36,7 +36,7 @@ ${componentNames
     <${componentName} width={180} />
   </Story>
 </Canvas>
-`
+`,
   )
   .join("\n")}
 ## Props
@@ -49,7 +49,7 @@ All pictogram components extends \`SVGSVGElement\` so that most props you'd want
   fs.writeFileSync(
     path.join(COMPONENT_PATH, "Pictograms.story.mdx"),
     content,
-    "utf-8"
+    "utf-8",
   );
 }
 
@@ -66,9 +66,9 @@ All pictogram components extends \`SVGSVGElement\` so that most props you'd want
       .filter((filename) => path.extname(filename) === ".svg")
       .map((filename) => {
         return formatComponentName(
-          path.basename(filename, path.extname(filename))
+          path.basename(filename, path.extname(filename)),
         );
-      })
+      }),
   );
 
   fs.readdirSync(SVG_PATH)
@@ -84,7 +84,7 @@ All pictogram components extends \`SVGSVGElement\` so that most props you'd want
       });
 
       const componentName = formatComponentName(
-        path.basename(filename, path.extname(filename))
+        path.basename(filename, path.extname(filename)),
       );
 
       const componentSource = await svgr(
@@ -98,7 +98,7 @@ All pictogram components extends \`SVGSVGElement\` so that most props you'd want
               imports,
               componentName,
               jsx,
-            }: { imports: any; componentName: string; jsx: types.JSXElement }
+            }: { imports: any; componentName: string; jsx: types.JSXElement },
           ) {
             const typeScriptTpl = template.smart({
               plugins: ["typescript"],
@@ -107,8 +107,8 @@ All pictogram components extends \`SVGSVGElement\` so that most props you'd want
             jsx.openingElement.attributes.push(
               types.jsxAttribute(
                 types.jsxIdentifier("ref"),
-                types.jsxExpressionContainer(types.identifier("ref"))
-              )
+                types.jsxExpressionContainer(types.identifier("ref")),
+              ),
             );
 
             return typeScriptTpl.ast`
@@ -122,7 +122,7 @@ All pictogram components extends \`SVGSVGElement\` so that most props you'd want
           },
           plugins: ["@svgr/plugin-jsx"],
         },
-        { componentName }
+        { componentName },
       );
 
       const outputFilename = path.join(COMPONENT_PATH, `${componentName}.tsx`);
@@ -135,7 +135,7 @@ All pictogram components extends \`SVGSVGElement\` so that most props you'd want
           ...prettierConfig,
           parser: "typescript",
         }),
-        "utf-8"
+        "utf-8",
       );
     });
 })();

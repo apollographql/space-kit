@@ -14,7 +14,7 @@ test("it should passthrough ref", () => {
   const ref = React.createRef<SVGSVGElement>();
 
   const { getByTestId } = render(
-    <LoadingSpinner data-testid={testId} ref={ref} />
+    <LoadingSpinner data-testid={testId} ref={ref} />,
   );
 
   expect(getByTestId(testId)).toEqual(ref.current);

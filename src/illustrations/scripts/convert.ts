@@ -20,7 +20,7 @@ function addDimensions(node: types.JSXOpeningElement) {
     (attribute) =>
       attribute.type === "JSXAttribute" &&
       attribute.name.type === "JSXIdentifier" &&
-      attribute.name.name === "viewBox"
+      attribute.name.name === "viewBox",
   );
 
   if (
@@ -41,19 +41,19 @@ function addDimensions(node: types.JSXOpeningElement) {
         types.objectExpression([
           types.objectProperty(
             types.stringLiteral("color"),
-            types.stringLiteral(colors.silver.light)
+            types.stringLiteral(colors.silver.light),
           ),
           types.objectProperty(
             types.stringLiteral("height"),
-            types.stringLiteral(`${height}px`)
+            types.stringLiteral(`${height}px`),
           ),
           types.objectProperty(
             types.stringLiteral("width"),
-            types.stringLiteral(`${width}px`)
+            types.stringLiteral(`${width}px`),
           ),
-        ])
-      )
-    )
+        ]),
+      ),
+    ),
   );
 }
 
@@ -61,7 +61,7 @@ function generateStorybookStory(componentNames: string[]) {
   const content = `${componentNames
     .map(
       (componentName) =>
-        `import { ${componentName} } from "./${componentName}";`
+        `import { ${componentName} } from "./${componentName}";`,
     )
     .join("\n")}
 import { colors } from "../colors";
@@ -87,7 +87,7 @@ ${componentNames
     <${componentName} />
   </Story>
 </Canvas>
-`
+`,
   )
   .join("\n")}
 ## Customization
@@ -100,7 +100,7 @@ ${componentNames
     (componentName) =>
       `  <Story name="${componentName}-silver-base">
     <${componentName} style={{ color: colors.silver.base }} />
-  </Story>`
+  </Story>`,
   )
   .join("\n")}
 </Canvas>
@@ -115,7 +115,7 @@ All illustration components extends \`SVGSVGElement\` so that most props you'd w
   fs.writeFileSync(
     path.join(COMPONENT_PATH, "Illustrations.story.mdx"),
     content,
-    "utf-8"
+    "utf-8",
   );
 }
 
@@ -132,9 +132,9 @@ All illustration components extends \`SVGSVGElement\` so that most props you'd w
       .filter((filename) => path.extname(filename) === ".svg")
       .map((filename) => {
         return formatComponentName(
-          path.basename(filename, path.extname(filename))
+          path.basename(filename, path.extname(filename)),
         );
-      })
+      }),
   );
 
   fs.readdirSync(SVG_PATH)
@@ -150,7 +150,7 @@ All illustration components extends \`SVGSVGElement\` so that most props you'd w
       });
 
       const componentName = formatComponentName(
-        path.basename(filename, path.extname(filename))
+        path.basename(filename, path.extname(filename)),
       );
 
       const componentSource = await svgr(
@@ -164,7 +164,7 @@ All illustration components extends \`SVGSVGElement\` so that most props you'd w
               imports,
               componentName,
               jsx,
-            }: { imports: any; componentName: string; jsx: types.JSXElement }
+            }: { imports: any; componentName: string; jsx: types.JSXElement },
           ) {
             const typeScriptTpl = template.smart({
               plugins: ["typescript"],
@@ -173,8 +173,8 @@ All illustration components extends \`SVGSVGElement\` so that most props you'd w
             jsx.openingElement.attributes.push(
               types.jsxAttribute(
                 types.jsxIdentifier("ref"),
-                types.jsxExpressionContainer(types.identifier("ref"))
-              )
+                types.jsxExpressionContainer(types.identifier("ref")),
+              ),
             );
 
             traverse(jsx, {
@@ -198,7 +198,7 @@ All illustration components extends \`SVGSVGElement\` so that most props you'd w
             "#F4F6F8": "currentColor",
           },
         },
-        { componentName }
+        { componentName },
       );
 
       const outputFilename = path.join(COMPONENT_PATH, `${componentName}.tsx`);
@@ -211,7 +211,7 @@ All illustration components extends \`SVGSVGElement\` so that most props you'd w
           ...prettierConfig,
           parser: "typescript",
         }),
-        "utf-8"
+        "utf-8",
       );
     });
 })();
