@@ -40,7 +40,7 @@ module.exports = {
      * React hooks
      */
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
+    "react-hooks/exhaustive-deps": "error",
 
     // In favor of @typescript-eslint variants
     "no-use-before-define": "off",

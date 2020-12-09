@@ -22,8 +22,10 @@ tsconfig.tsbuildinfo
 /ConfirmationTooltip
 /emotionCacheProviderFactory
 /fonts
+/Form*
 /icons
 /illustrations
+/Input
 /List*
 /Loaders
 /Menu*

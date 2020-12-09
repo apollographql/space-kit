@@ -1,0 +1,63 @@
+import { Input } from "../Input";
+import { Meta, Story, ArgsTable, Canvas } from "@storybook/addon-docs/blocks";
+import { FormControl } from "../FormControl";
+import { FormErrorMessage } from "../FormErrorMessage";
+
+<Meta title="Form/Input" component={Input} />
+
+# Input
+
+## Sizes
+
+<Canvas>
+  <Story name="standard">
+    <Input placeholder="Small input" size="small" />
+  </Story>
+  <Story name="small">
+    <Input placeholder="Standard input" size="standard" />
+  </Story>
+  <Story name="large">
+    <Input placeholder="Large input" size="large" />
+  </Story>
+</Canvas>
+
+## Input states
+
+Inputs automatically handle their input states
+
+<Canvas>
+  <Story name="state resting">
+    <Input placeholder="Resting" />
+  </Story>
+  <Story name="state focus">
+    <Input placeholder="Hover" data-force-hover-state />
+  </Story>
+  <Story name="state hover">
+    <Input placeholder="Focused" data-force-focus-state />
+  </Story>
+  <Story name="state focus typing">
+    <Input data-force-focus-state value="Focused and typing" />
+  </Story>
+  <Story name="state disabled">
+    <Input disabled placeholder="Disabled" />
+  </Story>
+</Canvas>
+
+## FormControl context
+
+`Select` is prepared to handle values passed from `FormControl` via `FormControlContext`.
+
+### Error State
+
+<Canvas>
+  <Story name="FormControlContext, error state">
+    <FormControl value={{ error: "error" }} id="error-state">
+      <Input placeholder="Standard input" size="standard" />
+      <FormErrorMessage>error message</FormErrorMessage>
+    </FormControl>
+  </Story>
+</Canvas>
+
+## Props
+
+<ArgsTable of={Input} />

@@ -78,13 +78,16 @@ interface Props
       | "popperOptions"
       | "matchTriggerWidth"
     >,
-    Pick<React.ComponentProps<typeof Button>, "feel" | "style">,
+    Pick<
+      React.ComponentProps<typeof Button>,
+      "aria-labelledby" | "feel" | "style"
+    >,
     Pick<
       React.DetailedHTMLProps<
         React.SelectHTMLAttributes<HTMLSelectElement>,
         HTMLSelectElement
       >,
-      "onBlur" | "onChange" | "name" | "id"
+      "onBlur" | "onChange" | "name"
     > {
   /**
    * class name to apply to the trigger component
@@ -127,6 +130,21 @@ interface Props
     ReturnType<UseSelectPropGetters<OptionProps>["getLabelProps"]>
   >;
   /**
+   * ID is an optional field used to formulaicly add accessability props as
+   * follows:
+   *
+   * - The trigger button will be given the this `id`
+   * - The list will be given ```${id}-menu```
+   *
+   * If this field is not included or is `undefined`, the automatic downshift
+   * props will be used.
+   *
+   * The list and trigger button will also be assigned the value of
+   * `aria-labelledby`
+   */
+  id?: string | undefined;
+
+  /**
    * Used to override how the underlying `List` is rendered
    *
    * This is useful when need to customize the list behavior
@@ -162,6 +180,7 @@ interface Props
 }
 
 export const Select: React.FC<Props> = ({
+  "aria-labelledby": ariaLabelledby,
   children,
   className,
   defaultValue,
@@ -325,7 +344,11 @@ export const Select: React.FC<Props> = ({
             }}
             content={React.cloneElement(
               listAs,
-              { ...getMenuProps(undefined, { suppressRefError: true }) },
+              {
+                ...getMenuProps(undefined, { suppressRefError: true }),
+                ...(props.id && { id: `${props.id}-menu` }),
+                ...(ariaLabelledby && { "aria-labelledby": ariaLabelledby }),
+              },
               React.Children.toArray(children)
                 // Filter out falsy elements in `children`. We need to know if
                 // we're rendering the first actual element in `children` to
@@ -397,6 +420,7 @@ export const Select: React.FC<Props> = ({
               {
                 ...getToggleButtonProps({ disabled }),
                 ...props,
+                ...(ariaLabelledby && { "aria-labelledby": ariaLabelledby }),
                 className: cx(
                   css({
                     textAlign: "left",

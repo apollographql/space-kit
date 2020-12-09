@@ -66,6 +66,7 @@ function CJS() {
       "downshift",
       "framer-motion",
       "lodash/omit",
+      "lodash/uniqueId",
       "prop-types",
       "react-dom",
       "react",

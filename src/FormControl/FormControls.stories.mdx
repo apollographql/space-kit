@@ -1,0 +1,352 @@
+import { FormControl } from "../FormControl";
+import { FormDescription } from "../FormDescription";
+import { FormEndAdornment } from "../FormEndAdornment";
+import { FormErrorMessage } from "../FormErrorMessage";
+import { FormLabel } from "../FormLabel";
+import { FormStartAdornment } from "../FormStartAdornment";
+import { FormHelperText } from "../FormHelperText";
+import { IconShip2 } from "../icons/IconShip2";
+import { Input } from "../Input";
+import { Meta, Story, ArgsTable, Canvas } from "@storybook/addon-docs/blocks";
+import { Select } from "../Select";
+
+export const SampleIcon = () => (
+  <IconShip2 style={{ height: "100%", width: "100%" }} />
+);
+
+<Meta title="Form/FormControl" component={FormControl} />
+
+# FormControl
+
+FormControl is a layout component intended to abstract away an form field, its label, its helper text, and its error state.
+
+## Shortcut
+
+All form components are exported from `Form` with the preceeding `Form` removed:
+
+- `Form.Control`
+- `Form.Description`
+- `Form.EndAdornment`
+- `Form.ErrorMessage`
+- `Form.Label`
+- `Form.StartAdornment`
+- `Form.HelperText`
+
+## Layout
+
+`FormElement` can lay out it's content vertically or horizontally
+
+### `layout="vertical"`
+
+<Canvas>
+  <Story name="Layout, Vertical">
+    <FormControl
+      style={{ width: 300 }}
+      id="size-small"
+      layout="vertical"
+      size="small"
+    >
+      <FormLabel>Small input</FormLabel>
+      <FormDescription>
+        Small input is small in terms of height and type size. Padding is less
+        both top and bottom as well.
+      </FormDescription>
+      <Input name="input" placeholder="Placeholder Text" />
+    </FormControl>
+  </Story>
+</Canvas>
+
+### `layout="horizontal"`
+
+<Canvas>
+  <Story name="Layout, Horizontal">
+    <FormControl layout="horizontal" size="standard">
+      <FormLabel>Standard input</FormLabel>
+      <FormDescription>
+        Most common input. Start here when trying to create a form.
+      </FormDescription>
+      <Input name="input" placeholder="Placeholder Text" />
+    </FormControl>
+  </Story>
+</Canvas>
+
+### Layout customization
+
+You can further customize how the content is styled by using the props `containerSectionAs`, `labelSectionAs`, and `contentSectionAs`.
+
+For example; you can use these props to alter the sizing of the elements
+
+<Canvas>
+  <Story name="Layout, customization">
+    <FormControl
+      labelSectionAs={<section style={{ flex: 2 }} />}
+      layout="horizontal"
+      size="standard"
+    >
+      <FormLabel>Standard input</FormLabel>
+      <FormDescription>
+        Most common input. Start here when trying to create a form.
+      </FormDescription>
+      <Input name="input" placeholder="Placeholder Text" />
+    </FormControl>
+  </Story>
+</Canvas>
+
+## Anatomy
+
+Anatomy of a complete form field. A label is required (or at the very least, it should be very clear why a label might not be needed). Description, placeholder text, and helper text are all optional.
+
+### Vertical
+
+<Canvas>
+  <Story name="Anatomy, Vertical">
+    <FormControl layout="vertical">
+      <FormLabel>Input Label</FormLabel>
+      <FormDescription>
+        Keep it simple, your organization ID is a unique identifier. Don’t
+        worry, you can always change it later.
+      </FormDescription>
+      <Input
+        name="input"
+        placeholder="Ex. stark-industries or wayne-enterprises"
+      />
+      <FormHelperText>
+        Your organization ID can’t contain any special characters or spaces.
+      </FormHelperText>
+    </FormControl>
+  </Story>
+  <Story name="Anatomy with info icon, Vertical">
+    <FormControl layout="vertical">
+      <FormLabel>Input Label with info icon</FormLabel>
+      <FormDescription>
+        Keep it simple, your organization ID is a unique identifier. Don’t
+        worry, you can always change it later.
+      </FormDescription>
+      <Input
+        name="input"
+        placeholder="Ex. stark-industries or wayne-enterprises"
+      />
+      <FormHelperText showIcon>
+        Your organization ID can’t contain any special characters or spaces.
+      </FormHelperText>
+    </FormControl>
+  </Story>
+</Canvas>
+
+### Horizontal
+
+<Canvas>
+  <Story name="Anatomy, Horizontal">
+    <FormControl layout="horizontal">
+      <FormLabel>Input Label</FormLabel>
+      <FormDescription>
+        Keep it simple, your organization ID is a unique identifier. Don’t
+        worry, you can always change it later.
+      </FormDescription>
+      <Input
+        name="input"
+        placeholder="Ex. stark-industries or wayne-enterprises"
+      />
+      <FormHelperText>
+        Your organization ID can’t contain any special characters or spaces.
+      </FormHelperText>
+    </FormControl>
+  </Story>
+  <Story name="Anatomy with info icon, Horizontal">
+    <FormControl layout="horizontal">
+      <FormLabel>Input Label with info icon</FormLabel>
+      <FormDescription>
+        Keep it simple, your organization ID is a unique identifier. Don’t
+        worry, you can always change it later.
+      </FormDescription>
+      <Input
+        name="input"
+        placeholder="Ex. stark-industries or wayne-enterprises"
+      />
+      <FormHelperText showIcon>
+        Your organization ID can’t contain any special characters or spaces.
+      </FormHelperText>
+    </FormControl>
+  </Story>
+</Canvas>
+
+## Error States
+
+You can use the `FormErrorMessage` component to display an error state.
+
+If you render a `FormErrorMessage` then any `FormHelperText` will not be rendered.
+
+<Canvas>
+  <Story name="Error state">
+    <FormControl>
+      <FormLabel>Input Label</FormLabel>
+      <FormDescription>
+        This component has helper text that will be replaced by the error
+        message.
+      </FormDescription>
+      <Input
+        name="input"
+        placeholder="Ex. stark-industries or wayne-enterprises"
+      />
+      <FormHelperText showIcon>
+        Errors are a variant of helper text with a specific type of information
+        to communicate, for example, errors.
+      </FormHelperText>
+      <FormErrorMessage>
+        Your ID can’t contain special characters.
+      </FormErrorMessage>
+    </FormControl>
+  </Story>
+</Canvas>
+
+## Adornments
+
+You can use `FormStartAdornment` and/or `FormEndAdornment` components to add content to the beginning or end of the element
+
+<Canvas>
+  <Story name="icon">
+    <FormControl id="adornment">
+      <FormStartAdornment>
+        <IconShip2 style={{ height: 16, width: 16 }} />
+      </FormStartAdornment>
+      <Input placeholder="Input Label" />
+      <FormEndAdornment>
+        <IconShip2 style={{ height: 16, width: 16 }} />
+      </FormEndAdornment>
+    </FormControl>
+  </Story>
+</Canvas>
+
+## Examples of Space Kit Form Elements
+
+### `Input`
+
+<Canvas>
+  <Story name="Input, normal size">
+    <FormControl style={{ width: 300 }} id="test">
+      <FormLabel>Input Label</FormLabel>
+      <FormDescription>
+        This component has helper text that will be replaced by the error
+        message.
+      </FormDescription>
+      <Input
+        iconStart={<IconShip2 style={{ height: 16, width: 16 }} />}
+        name="input"
+        defaultValue="Justin Anastos"
+        style={{ width: "100%" }}
+      />
+      <FormHelperText showIcon>
+        Your organization ID can’t contain any special characters or spaces.
+      </FormHelperText>
+    </FormControl>
+  </Story>
+  <Story name="Input, large size">
+    <FormControl style={{ width: 300 }} id="input-large">
+      <FormLabel>Large size</FormLabel>
+      <FormDescription>
+        This component has helper text that will be replaced by the error
+        message.
+      </FormDescription>
+      <Input
+        name="input"
+        defaultValue="Justin Anastos"
+        size="large"
+        style={{ width: "100%" }}
+      />
+      <FormHelperText showIcon>
+        Your organization ID can’t contain any special characters or spaces.
+      </FormHelperText>
+    </FormControl>
+  </Story>
+  <Story name="Input, error state">
+    <FormControl style={{ width: 300 }} id="input-error-state">
+      <FormLabel>Error state</FormLabel>
+      <FormDescription>
+        This component has helper text that will be replaced by the error
+        message.
+      </FormDescription>
+      <Input
+        name="input"
+        defaultValue="Justin Anastos"
+        style={{ width: "100%" }}
+      />
+      <FormHelperText showIcon>
+        Your organization ID can’t contain any special characters or spaces.
+      </FormHelperText>
+      <FormErrorMessage>
+        Your ID can’t contain special characters.
+      </FormErrorMessage>
+    </FormControl>
+  </Story>
+</Canvas>
+
+### `Select`
+
+<Canvas>
+  <Story name="Select, standard size">
+    <FormControl id="select-standard-size" style={{ width: 300 }}>
+      <FormLabel>Input Label</FormLabel>
+      <FormDescription>
+        This component has helper text that will be replaced by the error
+        message.
+      </FormDescription>
+      <Select
+        name="input"
+        defaultValue="Justin Anastos"
+        style={{ width: "100%" }}
+      >
+        <option value="Justin Anastos">Justin Anastos</option>
+      </Select>
+      <FormHelperText showIcon>
+        Your organization ID can’t contain any special characters or spaces.
+      </FormHelperText>
+    </FormControl>
+  </Story>
+  <Story name="Select, large size">
+    <FormControl style={{ width: 300 }}>
+      <FormLabel>Large size</FormLabel>
+      <FormDescription>
+        This component has helper text that will be replaced by the error
+        message.
+      </FormDescription>
+      <Select
+        name="input"
+        defaultValue="Justin Anastos"
+        size="large"
+        style={{ width: "100%" }}
+      >
+        <option value="Justin Anastos">Justin Anastos</option>
+      </Select>
+      <FormHelperText showIcon>
+        Your organization ID can’t contain any special characters or spaces.
+      </FormHelperText>
+    </FormControl>
+  </Story>
+  <Story name="Select, error state">
+    <FormControl style={{ width: 300 }}>
+      <FormLabel>Error state</FormLabel>
+      <FormDescription>
+        This component has helper text that will be replaced by the error
+        message.
+      </FormDescription>
+      <Select
+        name="input"
+        defaultValue="Justin Anastos"
+        style={{ width: "100%" }}
+      >
+        <option value="Justin Anastos">Justin Anastos</option>
+      </Select>
+      <FormHelperText showIcon>
+        Errors are a variant of helper text with a specific type of information
+        to communicate, for example, errors.
+      </FormHelperText>
+      <FormErrorMessage>
+        Your ID can’t contain special characters.
+      </FormErrorMessage>
+    </FormControl>
+  </Story>
+</Canvas>
+
+## Props
+
+<ArgsTable of={FormControl} />
