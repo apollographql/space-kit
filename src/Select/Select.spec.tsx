@@ -10,7 +10,7 @@ import * as Yup from "yup";
 test('given no `value`, should render `<option value="" />`', () => {
   render(
     <SpaceKitProvider disableAnimations>
-      <Select initialValue="">
+      <Select defaultValue="">
         <option value="">select an item</option>
         <option value="a">a</option>
         <option value="b">b</option>
@@ -31,7 +31,7 @@ test("label props should be called back", () => {
     return (
       <>
         <label {...labelProps}>{labelText}</label>
-        <Select initialValue="" labelPropsCallbackRef={setLabelProps}>
+        <Select defaultValue="" labelPropsCallbackRef={setLabelProps}>
           <option value="">select an item</option>
           <option value="a">a</option>
           <option value="b">b</option>

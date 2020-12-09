@@ -134,14 +134,14 @@ interface Props
   value?: NonNullable<OptionProps["value"]> | null;
 
   /** Initial value for a non-controlled component */
-  initialValue?: NonNullable<OptionProps["value"]> | null;
+  defaultValue?: NonNullable<OptionProps["value"]> | null;
 
   size?: "auto" | "small" | "medium" | "extra large";
 }
 
 export const Select: React.FC<Props> = ({
   children,
-  initialValue,
+  defaultValue,
   disabled = false,
   feel,
   labelPropsCallbackRef,
@@ -156,17 +156,17 @@ export const Select: React.FC<Props> = ({
   ...props
 }) => {
   const [uncontrolledValue, setUncontrolledValue] = React.useState(
-    initialValue ?? "",
+    defaultValue ?? "",
   );
 
   // Validate controlled versus uncontrolled
   if (
     (typeof onChange !== "undefined" || typeof valueProp !== "undefined") &&
-    typeof initialValue !== "undefined"
+    typeof defaultValue !== "undefined"
   ) {
     // eslint-disable-next-line no-console
     console.warn(
-      "Select component must be either controlled or uncontrolled. Pass either `initialValue` for an uncontrolled component or `value` and optionally `onChange` for a controlled component.",
+      "Select component must be either controlled or uncontrolled. Pass either `defaultValue` for an uncontrolled component or `value` and optionally `onChange` for a controlled component.",
     );
   }
 

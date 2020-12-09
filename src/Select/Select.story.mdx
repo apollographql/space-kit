@@ -48,7 +48,7 @@ You must use the same `<option>` and `<optgroup>` elements you would use for a n
 
 <Canvas>
   <Story name="basic options">
-    <Select aria-labelledby="basic-options-label" initialValue="">
+    <Select aria-labelledby="basic-options-label" defaultValue="">
       <option value="">Select an option</option>
       <option value="value a">a</option>
       <option value="value b">b</option>
@@ -101,7 +101,7 @@ If you inspect the `label` shown in the following story; you'll see that `id` an
 
 <Canvas>
   <Story name="basic options with label">
-    <SelectWithLabel label={<label>label</label>} initialValue="">
+    <SelectWithLabel label={<label>label</label>} defaultValue="">
       <option value="">Select an option</option>
       <option value="value a">a</option>
       <option value="value b">b</option>
@@ -115,7 +115,7 @@ If you inspect the `label` shown in the following story; you'll see that `id` an
 
 For controlled components, you must pass a `value` prop and have the option to pass an `onChange` prop. If you don't use an `onChange` prop, as expected, the `value` can not be changed.
 
-If you elect to use an uncontrolled component, do not pass `value` or `onChange` props. You can pass a `initialValue` for the initial to be set and then the component will control the state on it's own.
+If you elect to use an uncontrolled component, do not pass `value` or `onChange` props. You can pass a `defaultValue` for the initial to be set and then the component will control the state on it's own.
 
 ## Options
 
@@ -125,7 +125,7 @@ Selects can be displayed using any of the `feel` values from `Button`.
 
 <Canvas>
   <Story name="feel raised">
-    <Select feel="raised" initialValue="">
+    <Select feel="raised" defaultValue="">
       <option value="">select an item</option>
       <option>a</option>
       <optgroup label="header 1">
@@ -134,7 +134,7 @@ Selects can be displayed using any of the `feel` values from `Button`.
     </Select>
   </Story>
   <Story name="feel flat">
-    <Select feel="flat" initialValue="">
+    <Select feel="flat" defaultValue="">
       <option value="">select an item</option>
       <option>a</option>
       <optgroup label="header 1">
@@ -152,12 +152,12 @@ By default, the component will match the width of it's content. The dropdown lis
 
 <Canvas>
   <Story name="Automatic Size, Narrow">
-    <Select initialValue="a">
+    <Select defaultValue="a">
       <option>a</option>
     </Select>
   </Story>
   <Story name="Automatic Size, Wide">
-    <Select initialValue="this is a super long to show how wide the select will be">
+    <Select defaultValue="this is a super long to show how wide the select will be">
       <option>this is a super long to show how wide the select will be</option>
     </Select>
   </Story>
@@ -169,42 +169,42 @@ Selects will grow and shrink with the content to up until a point (TBD)
 
 <Canvas>
   <Story name="Small, Not Truncated">
-    <Select size="small" initialValue="small">
+    <Select size="small" defaultValue="small">
       <option>small</option>
     </Select>
   </Story>
   <Story name="Small, Truncated">
-    <Select size="small" initialValue="small truncated">
+    <Select size="small" defaultValue="small truncated">
       <option>small truncated</option>
     </Select>
   </Story>
   <Story name="Medium, Not Truncated">
-    <Select size="medium" initialValue="medium">
+    <Select size="medium" defaultValue="medium">
       <option>medium</option>
     </Select>
   </Story>
   <Story name="Medium, Truncated">
-    <Select size="medium" initialValue="medium truncated truncated">
+    <Select size="medium" defaultValue="medium truncated truncated">
       <option>medium truncated truncated</option>
     </Select>
   </Story>
   <Story name="Large, Not Truncated">
-    <Select size="large" initialValue="large">
+    <Select size="large" defaultValue="large">
       <option>large</option>
     </Select>
   </Story>
   <Story name="Large, Truncated">
-    <Select size="large" initialValue="large truncated truncated">
+    <Select size="large" defaultValue="large truncated truncated">
       <option>large truncated truncated</option>
     </Select>
   </Story>
   <Story name="Extra Large, Not Truncated">
-    <Select size="extra large" initialValue="extra large">
+    <Select size="extra large" defaultValue="extra large">
       <option>extra large</option>
     </Select>
   </Story>
   <Story name="Extra Large, Truncated">
-    <Select size="extra large" initialValue="extra large truncated truncated">
+    <Select size="extra large" defaultValue="extra large truncated truncated">
       <option>extra large truncated truncated</option>
     </Select>
   </Story>
@@ -216,7 +216,7 @@ The menu width can be fixed to match the trigger button size with the `matchTrig
 
 <Canvas>
   <Story name="Match Trigger Prop">
-    <Select initialValue="small" matchTriggerWidth style={{ width: 150 }}>
+    <Select defaultValue="small" matchTriggerWidth style={{ width: 150 }}>
       <option>small</option>
       <option>medium</option>
       <option>large</option>
