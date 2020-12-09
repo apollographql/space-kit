@@ -1,3 +1,20 @@
+# v8.6.0 (Tue Dec 08 2020)
+
+#### 🚀 Enhancement
+
+- Fix controlled/uncontrolled switch [#281](https://github.com/apollographql/space-kit/pull/281) ([@jgzuke](https://github.com/jgzuke))
+
+#### 📝 Documentation
+
+- docs(Select): Add a write-up on how to add label props [#282](https://github.com/apollographql/space-kit/pull/282) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 2
+
+- Jason Zukewich ([@jgzuke](https://github.com/jgzuke))
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v8.5.0 (Mon Dec 07 2020)
 
 ### Release Notes
