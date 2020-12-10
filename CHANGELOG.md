@@ -1,3 +1,20 @@
+# v8.7.0 (Thu Dec 10 2020)
+
+#### 🚀 Enhancement
+
+- Update GitHub icon [#286](https://github.com/apollographql/space-kit/pull/286) ([@jglovier](https://github.com/jglovier))
+
+#### 🏠 Internal
+
+- add trailing commas for all transpiled code [#285](https://github.com/apollographql/space-kit/pull/285) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 2
+
+- Joel Glovier ([@jglovier](https://github.com/jglovier))
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v8.6.1 (Wed Dec 09 2020)
 
 #### 🐛  Bug Fix
