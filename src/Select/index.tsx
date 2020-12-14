@@ -18,6 +18,7 @@ import { ListConfigProvider, useListConfig } from "../ListConfig";
 import { As, createElementFromAs } from "../shared/createElementFromAs";
 import useDeepCompareEffect from "use-deep-compare-effect";
 import { inputHeightDictionary } from "../shared/inputHeightDictionary";
+import { useFormControlContext } from "../FormControl";
 
 export type OptionProps = Omit<
   React.DetailedHTMLProps<
@@ -80,7 +81,7 @@ interface Props
     >,
     Pick<
       React.ComponentProps<typeof Button>,
-      "aria-labelledby" | "feel" | "style"
+      "aria-labelledby" | "aria-describedby" | "feel" | "style"
     >,
     Pick<
       React.DetailedHTMLProps<
@@ -180,7 +181,6 @@ interface Props
 }
 
 export const Select: React.FC<Props> = ({
-  "aria-labelledby": ariaLabelledby,
   children,
   className,
   defaultValue,
@@ -199,6 +199,17 @@ export const Select: React.FC<Props> = ({
   value: valueProp,
   ...props
 }) => {
+  const {
+    describedBy: formControlDescribedBy,
+    hasError,
+    id: formControlId,
+    labelledBy: formControlLabelledBy,
+  } = useFormControlContext();
+
+  const id = props.id ?? formControlId;
+  const describedBy = props["aria-describedby"] ?? formControlDescribedBy;
+  const labelledBy = props["aria-labelledby"] ?? formControlLabelledBy;
+
   const [uncontrolledValue, setUncontrolledValue] = React.useState(
     defaultValue ?? "",
   );
@@ -346,8 +357,9 @@ export const Select: React.FC<Props> = ({
               listAs,
               {
                 ...getMenuProps(undefined, { suppressRefError: true }),
-                ...(props.id && { id: `${props.id}-menu` }),
-                ...(ariaLabelledby && { "aria-labelledby": ariaLabelledby }),
+                ...(id && { id: `${id}-menu` }),
+                "aria-labelledby": labelledBy,
+                "aria-describedby": describedBy,
               },
               React.Children.toArray(children)
                 // Filter out falsy elements in `children`. We need to know if
@@ -420,9 +432,13 @@ export const Select: React.FC<Props> = ({
               {
                 ...getToggleButtonProps({ disabled }),
                 ...props,
-                ...(ariaLabelledby && { "aria-labelledby": ariaLabelledby }),
+                ...(labelledBy && { "aria-labelledby": labelledBy }),
+                id,
                 className: cx(
                   css({
+                    border: hasError
+                      ? `1px solid ${colors.red.base}`
+                      : undefined,
                     textAlign: "left",
                   }),
                   className,
