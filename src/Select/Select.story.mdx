@@ -165,7 +165,9 @@ By default, the component will match the width of it's content. The dropdown lis
 
 #### Sizes
 
-Selects will grow and shrink with the content to up until a point (TBD)
+Sizes conform to the same sizes across space kit.
+
+Selects will grow to fit their current content. You can use `style` or `className` to force the size. Contents will automatically truncate.
 
 <Canvas>
   <Story name="Small, Not Truncated">
@@ -174,18 +176,22 @@ Selects will grow and shrink with the content to up until a point (TBD)
     </Select>
   </Story>
   <Story name="Small, Truncated">
-    <Select size="small" defaultValue="small truncated">
+    <Select size="small" defaultValue="small truncated" style={{ width: 100 }}>
       <option>small truncated</option>
     </Select>
   </Story>
-  <Story name="Medium, Not Truncated">
-    <Select size="medium" defaultValue="medium">
-      <option>medium</option>
+  <Story name="Standard, Not Truncated">
+    <Select size="standard" defaultValue="standard">
+      <option>standard</option>
     </Select>
   </Story>
-  <Story name="Medium, Truncated">
-    <Select size="medium" defaultValue="medium truncated truncated">
-      <option>medium truncated truncated</option>
+  <Story name="Standard, Truncated">
+    <Select
+      size="standard"
+      defaultValue="standard truncated truncated"
+      style={{ width: 150 }}
+    >
+      <option>standard truncated truncated</option>
     </Select>
   </Story>
   <Story name="Large, Not Truncated">
@@ -194,18 +200,12 @@ Selects will grow and shrink with the content to up until a point (TBD)
     </Select>
   </Story>
   <Story name="Large, Truncated">
-    <Select size="large" defaultValue="large truncated truncated">
+    <Select
+      size="large"
+      defaultValue="large truncated truncated"
+      style={{ width: 200 }}
+    >
       <option>large truncated truncated</option>
-    </Select>
-  </Story>
-  <Story name="Extra Large, Not Truncated">
-    <Select size="extra large" defaultValue="extra large">
-      <option>extra large</option>
-    </Select>
-  </Story>
-  <Story name="Extra Large, Truncated">
-    <Select size="extra large" defaultValue="extra large truncated truncated">
-      <option>extra large truncated truncated</option>
     </Select>
   </Story>
 </Canvas>

@@ -6,7 +6,7 @@ import { colors } from "../colors";
 import { IconWarningSolid } from "../icons/IconWarningSolid";
 import { IconInfoSolid } from "../icons/IconInfoSolid";
 import classnames from "classnames";
-
+import { inputHeightDictionary } from "../shared/inputHeightDictionary";
 interface FormControlProps {
   as?: React.ReactElement | keyof JSX.IntrinsicElements;
 }
@@ -133,7 +133,7 @@ interface Props {
    *
    * Defaults to `standard`
    */
-  size?: "small" | "standard" | "large";
+  size?: keyof typeof inputHeightDictionary;
 
   /**
    * Whether or not to show the circle i icon to the left of helper text
@@ -207,7 +207,7 @@ export const TextField: React.FC<Props> = ({
             },
             borderRadius: 4,
             flex: 1,
-            height: size === "standard" ? 36 : size === "small" ? 28 : 42,
+            height: inputHeightDictionary[size],
             ...(size === "small"
               ? typography.base.small
               : typography.base.base),
