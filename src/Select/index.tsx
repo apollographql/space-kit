@@ -17,6 +17,7 @@ import {
 import { ListConfigProvider, useListConfig } from "../ListConfig";
 import { As, createElementFromAs } from "../shared/createElementFromAs";
 import useDeepCompareEffect from "use-deep-compare-effect";
+import { inputHeightDictionary } from "../shared/inputHeightDictionary";
 
 export type OptionProps = Omit<
   React.DetailedHTMLProps<
@@ -86,6 +87,10 @@ interface Props
       "onBlur" | "onChange" | "name" | "id"
     > {
   /**
+   * class name to apply to the trigger component
+   */
+  className?: string;
+  /**
    * `RefCallback` for props that should be spread onto a `label` component
    * associated with this `Select`.
    *
@@ -134,14 +139,15 @@ interface Props
   value?: NonNullable<OptionProps["value"]> | null;
 
   /** Initial value for a non-controlled component */
-  initialValue?: NonNullable<OptionProps["value"]> | null;
+  defaultValue?: NonNullable<OptionProps["value"]> | null;
 
-  size?: "auto" | "small" | "medium" | "extra large";
+  size?: keyof typeof inputHeightDictionary;
 }
 
 export const Select: React.FC<Props> = ({
   children,
-  initialValue,
+  className,
+  defaultValue,
   disabled = false,
   feel,
   labelPropsCallbackRef,
@@ -150,23 +156,23 @@ export const Select: React.FC<Props> = ({
   onChange,
   placement = "bottom-start",
   popperOptions,
-  size = "auto",
+  size = "standard",
   triggerAs = <Button />,
   value: valueProp,
   ...props
 }) => {
   const [uncontrolledValue, setUncontrolledValue] = React.useState(
-    initialValue ?? "",
+    defaultValue ?? "",
   );
 
   // Validate controlled versus uncontrolled
   if (
     (typeof onChange !== "undefined" || typeof valueProp !== "undefined") &&
-    typeof initialValue !== "undefined"
+    typeof defaultValue !== "undefined"
   ) {
     // eslint-disable-next-line no-console
     console.warn(
-      "Select component must be either controlled or uncontrolled. Pass either `initialValue` for an uncontrolled component or `value` and optionally `onChange` for a controlled component.",
+      "Select component must be either controlled or uncontrolled. Pass either `defaultValue` for an uncontrolled component or `value` and optionally `onChange` for a controlled component.",
     );
   }
 
@@ -375,14 +381,8 @@ export const Select: React.FC<Props> = ({
                 className: cx(
                   css({
                     textAlign: "left",
-                    maxWidth: {
-                      auto: undefined,
-                      small: 71,
-                      medium: 110,
-                      large: 157,
-                      "extra large": 188,
-                    }[size],
                   }),
+                  className,
                   React.isValidElement(triggerAs) &&
                     (triggerAs.props as any).className,
                 ),
@@ -398,13 +398,7 @@ export const Select: React.FC<Props> = ({
                   blur();
                 },
                 type: "button",
-                size: {
-                  auto: "small",
-                  small: "small",
-                  medium: "small",
-                  large: "small",
-                  "extra large": "default",
-                }[size],
+                size,
 
                 endIcon: (
                   <IconArrowDown

@@ -11,6 +11,7 @@ import { useFocusRing } from "@react-aria/focus";
 import { mergeProps } from "@react-aria/utils";
 import omit from "lodash/omit";
 import { ButtonIcon } from "./button/ButtonIcon";
+import { inputHeightDictionary } from "../shared/inputHeightDictionary";
 
 type TLength = string | 0 | number;
 
@@ -90,6 +91,7 @@ function getHeight({
     case "small":
       return 28;
     case "default":
+    case "standard":
       return 36;
     case "large":
       return 42;
@@ -212,9 +214,12 @@ interface Props
   /**
    * Size of the button
    *
-   * @default "default"
+   * The `default` option has been deprecated but will probably never be removed
+   * for reverse compatability.
+   *
+   * @default "standard"
    */
-  size?: "default" | "small" | "large";
+  size?: keyof typeof inputHeightDictionary | "default";
 
   /**
    * Theme to display the button
@@ -273,12 +278,15 @@ export const Button = React.forwardRef<HTMLElement, Props>(
       feel = "raised",
       icon: iconProp,
       loading,
-      size = "default",
+      size = "standard",
       theme = "light",
       ...passthroughProps
     },
     ref,
   ) => {
+    if (size === "default") {
+      size = "standard";
+    }
     const { isFocusVisible, focusProps } = useFocusRing();
 
     const mergedProps = mergeProps(passthroughProps, as.props, focusProps, {
@@ -413,18 +421,14 @@ export const Button = React.forwardRef<HTMLElement, Props>(
                     height: getHeight({ size }),
 
                     minWidth: iconOnly
-                      ? size === "small"
-                        ? 28
-                        : size === "default"
-                        ? 36
-                        : size === "large"
-                        ? 42
-                        : assertUnreachable(size)
+                      ? inputHeightDictionary[
+                          size === "default" ? "standard" : size
+                        ]
                       : endIcon
                       ? 0
                       : size === "small"
                       ? 76
-                      : size === "default"
+                      : size === "default" || size === "standard"
                       ? 100
                       : size === "large"
                       ? 112
