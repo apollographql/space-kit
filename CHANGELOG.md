@@ -1,3 +1,24 @@
+# v8.7.1 (Wed Dec 16 2020)
+
+### Release Notes
+
+_From #290_
+
+- Select: Replace `initialValue` with `defaultValue`
+- Sync input heights for `Button`, `TextField`, and `Select`
+
+---
+
+#### 🐛 Bug Fix
+
+- Tweak `Select` and sync input heights [#290](https://github.com/apollographql/space-kit/pull/290) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v8.7.0 (Thu Dec 10 2020)
 
 #### 🚀 Enhancement
