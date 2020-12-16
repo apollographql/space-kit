@@ -1,3 +1,15 @@
+# v8.7.2 (Wed Dec 16 2020)
+
+#### 🐛  Bug Fix
+
+- Card: don't apply margin without a header [#291](https://github.com/apollographql/space-kit/pull/291) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v8.7.1 (Wed Dec 16 2020)
 
 ### Release Notes
