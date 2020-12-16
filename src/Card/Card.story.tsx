@@ -139,4 +139,17 @@ storiesOf("Card", module)
         }
       />
     </div>
-  ));
+  ))
+  .add("Content with no heading", () => {
+    return (
+      <div
+        style={{
+          backgroundColor: colors.silver.light,
+          padding: "40px",
+          height: "100vh",
+        }}
+      >
+        <Card>child</Card>
+      </div>
+    );
+  });
