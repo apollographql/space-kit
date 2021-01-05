@@ -19,14 +19,12 @@ import { As, createElementFromAs } from "../shared/createElementFromAs";
 import useDeepCompareEffect from "use-deep-compare-effect";
 import { inputHeightDictionary } from "../shared/inputHeightDictionary";
 import { useFormControlContext } from "../FormControl";
+import { getEffectiveValueFromOptionElementProps } from "./select/getEffectiveValueFromOptionElementProps";
 
-export type OptionProps = Omit<
-  React.DetailedHTMLProps<
-    React.OptionHTMLAttributes<HTMLOptionElement>,
-    HTMLOptionElement
-  >,
-  "children"
-> & { children: string };
+export type OptionProps = React.DetailedHTMLProps<
+  React.OptionHTMLAttributes<HTMLOptionElement>,
+  HTMLOptionElement
+>;
 interface ListItemWrapperProps {
   /** `items` prop passed to `useSelect`
    *
@@ -316,10 +314,9 @@ export const Select: React.FC<Props> = ({
         return value === (item.value ?? item.children);
       }) ?? null,
     onSelectedItemChange: (event) => {
-      const newValue =
-        event.selectedItem?.value?.toString() ??
-        event.selectedItem?.children ??
-        "";
+      const newValue = event.selectedItem
+        ? getEffectiveValueFromOptionElementProps(event.selectedItem)
+        : "";
 
       if (onChange) {
         // This is kind of hacky because there's no underlying `select` with
@@ -386,11 +383,9 @@ export const Select: React.FC<Props> = ({
                         downshiftItems={items}
                         element={child}
                         getItemProps={getItemProps}
-                        key={
-                          child.props.value
-                            ? child.props.value.toString()
-                            : child.props.children
-                        }
+                        key={getEffectiveValueFromOptionElementProps(
+                          child.props,
+                        )}
                       />
                     );
                   } else if (isHTMLOptgroupElement(child)) {
@@ -413,11 +408,9 @@ export const Select: React.FC<Props> = ({
                           (optgroupChild) => {
                             return (
                               <ListItemWrapper
-                                key={
-                                  optgroupChild.props.value
-                                    ? optgroupChild.props.value.toString()
-                                    : optgroupChild.props.children
-                                }
+                                key={getEffectiveValueFromOptionElementProps(
+                                  optgroupChild.props,
+                                )}
                                 downshiftItems={items}
                                 element={optgroupChild}
                                 getItemProps={getItemProps}

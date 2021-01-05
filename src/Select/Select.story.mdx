@@ -5,6 +5,7 @@ import { Meta, Story, ArgsTable, Canvas } from "@storybook/addon-docs/blocks";
 import { PerformUserInteraction } from "../shared/PerformUserInteraction";
 import { Select as SpaceKitSelect } from "../Select";
 import userEvent from "@testing-library/user-event";
+import { base } from "../../typography";
 
 <Meta title="Form/Select" component={SpaceKitSelect} />
 
@@ -86,6 +87,54 @@ You must use the same `<option>` and `<optgroup>` elements you would use for a n
     >
       <option value="value a">a</option>
       <option value="value b">b</option>
+    </Select>
+  </Story>
+</Canvas>
+
+## Custom content
+
+You can provide whatever you want as `children` to the `option` elements. The selection rendering requires that we are either given or can infer a value of each option element. You can pass a `value` prop or pass a `string`, `number`, or `null` as the `children` prop. Anything else will result in a `TypeError` being thrown.
+
+export const RichOption = ({ title, description }) => (
+  <div style={{ whiteSpace: "normal", overflow: "auto" }}>
+    <div style={{ ...base.base, fontWeight: "semibold" }}>{title}</div>
+    <div style={{ opacity: 0.75 }}>{description}</div>
+  </div>
+);
+
+<Canvas>
+  <Story name="rich option children">
+    <Select
+      defaultValue=""
+      listFeel="borderless"
+      renderTriggerNode={(selectedItem) => (
+        <>{selectedItem?.value ?? "select an item"}</>
+      )}
+    >
+      <option value="Consumer" style={{ height: "auto" }}>
+        <RichOption
+          title="Consumer"
+          description="Limited read-only user. Can use the Explorer, Schema Reference, and Changelog, but cannot see any graph metrics."
+        />
+      </option>
+      <option value="Observer" style={{ height: "auto" }}>
+        <RichOption
+          title="Observer"
+          description="Read-only user. Can view schemas and metrics on all graphs in the organization."
+        />
+      </option>
+      <option value="Contributor" style={{ height: "auto" }}>
+        <RichOption
+          title="Contributor"
+          description="Can view all graph data and push new schema versions to graphs in the org, but cannot manage graph configurations."
+        />
+      </option>
+      <option value="Graph Admin" style={{ height: "auto" }}>
+        <RichOption
+          title="Graph Admin"
+          description="Can view and manage configuration for every graph in the organization, but cannot manage members and billing."
+        />
+      </option>
     </Select>
   </Story>
 </Canvas>

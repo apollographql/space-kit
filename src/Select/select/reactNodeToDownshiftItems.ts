@@ -1,13 +1,10 @@
 import React from "react";
 import { render } from "react-dom";
 
-type OptionProps = Omit<
-  React.DetailedHTMLProps<
-    React.OptionHTMLAttributes<HTMLOptionElement>,
-    HTMLOptionElement
-  >,
-  "children"
-> & { children: string };
+type OptionProps = React.DetailedHTMLProps<
+  React.OptionHTMLAttributes<HTMLOptionElement>,
+  HTMLOptionElement
+>;
 
 type OptgroupProps = React.DetailedHTMLProps<
   React.OptgroupHTMLAttributes<HTMLOptGroupElement>,
@@ -62,6 +59,21 @@ export function isHTMLOptgroupElement(
   return renderHTML(element) instanceof HTMLOptGroupElement;
 }
 
+function validateOptionProps(
+  element: React.ReactElement<OptionProps, "option">,
+): OptionProps {
+  if (
+    Object.prototype.hasOwnProperty.call(element.props, "value") ||
+    typeof element.props.children === "string"
+  ) {
+    return element.props;
+  }
+
+  throw new TypeError(
+    "All `option`s in a `Select` are required to have a `value` set or have `children` be a string to imply a value.",
+  );
+}
+
 /**
  * Convert a `children` prop rendered with `<optgroup><option /></optgroup>` and
  * `<option />` elements into an array of the props of each of those `option`
@@ -73,7 +85,7 @@ export function reactNodeToDownshiftItems(
   return React.Children.toArray(children).reduce<OptionProps[]>(
     (accumulator, child) => {
       if (isHTMLOptionElement(child)) {
-        return accumulator.concat(child.props);
+        return accumulator.concat(validateOptionProps(child));
       }
 
       if (!React.isValidElement(child)) {
@@ -83,7 +95,7 @@ export function reactNodeToDownshiftItems(
       return accumulator.concat(
         React.Children.toArray(child.props.children)
           .filter(isHTMLOptionElement)
-          .map((optgroupChild) => optgroupChild.props),
+          .map((optgroupChild) => validateOptionProps(optgroupChild)),
       );
     },
     [],
