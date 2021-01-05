@@ -18,6 +18,7 @@ import { ListConfigProvider, useListConfig } from "../ListConfig";
 import { As, createElementFromAs } from "../shared/createElementFromAs";
 import useDeepCompareEffect from "use-deep-compare-effect";
 import { inputHeightDictionary } from "../shared/inputHeightDictionary";
+import { useFormControlContext } from "../FormControl";
 
 export type OptionProps = Omit<
   React.DetailedHTMLProps<
@@ -78,13 +79,16 @@ interface Props
       | "popperOptions"
       | "matchTriggerWidth"
     >,
-    Pick<React.ComponentProps<typeof Button>, "feel" | "style">,
+    Pick<
+      React.ComponentProps<typeof Button>,
+      "aria-labelledby" | "aria-describedby" | "feel" | "style"
+    >,
     Pick<
       React.DetailedHTMLProps<
         React.SelectHTMLAttributes<HTMLSelectElement>,
         HTMLSelectElement
       >,
-      "onBlur" | "onChange" | "name" | "id"
+      "onBlur" | "onChange" | "name"
     > {
   /**
    * class name to apply to the trigger component
@@ -126,6 +130,38 @@ interface Props
   labelPropsCallbackRef?: RefCallback<
     ReturnType<UseSelectPropGetters<OptionProps>["getLabelProps"]>
   >;
+  /**
+   * ID is an optional field used to formulaicly add accessability props as
+   * follows:
+   *
+   * - The trigger button will be given the this `id`
+   * - The list will be given ```${id}-menu```
+   *
+   * If this field is not included or is `undefined`, the automatic downshift
+   * props will be used.
+   *
+   * The list and trigger button will also be assigned the value of
+   * `aria-labelledby`
+   */
+  id?: string | undefined;
+
+  /**
+   * Used to override how the underlying `List` is rendered
+   *
+   * This is useful when need to customize the list behavior
+   *
+   * @default <List />
+   */
+  listAs?: React.ReactElement<React.ComponentProps<typeof List>>;
+
+  /**
+   * Render prop function to generate a `React.ReactNode` based on the currently
+   * selected value.
+   *
+   * This is useful when you want some custom behavior with what is shown in the
+   * select in the unopened state.
+   */
+  renderTriggerNode?: (value: OptionProps | null) => React.ReactNode;
 
   triggerAs?: As;
 
@@ -151,16 +187,29 @@ export const Select: React.FC<Props> = ({
   disabled = false,
   feel,
   labelPropsCallbackRef,
+  listAs = <List />,
   matchTriggerWidth,
   onBlur,
   onChange,
   placement = "bottom-start",
   popperOptions,
+  renderTriggerNode = (value) => <>{value?.children || ""}</>,
   size = "standard",
   triggerAs = <Button />,
   value: valueProp,
   ...props
 }) => {
+  const {
+    describedBy: formControlDescribedBy,
+    hasError,
+    id: formControlId,
+    labelledBy: formControlLabelledBy,
+  } = useFormControlContext();
+
+  const id = props.id ?? formControlId;
+  const describedBy = props["aria-describedby"] ?? formControlDescribedBy;
+  const labelledBy = props["aria-labelledby"] ?? formControlLabelledBy;
+
   const [uncontrolledValue, setUncontrolledValue] = React.useState(
     defaultValue ?? "",
   );
@@ -304,72 +353,77 @@ export const Select: React.FC<Props> = ({
             onCreate={(instance) => {
               instanceRef.current = instance;
             }}
-            content={
-              <List {...getMenuProps(undefined, { suppressRefError: true })}>
-                {React.Children.toArray(children)
-                  // Filter out falsy elements in `children`. We need to know if
-                  // we're rendering the first actual element in `children` to
-                  // know if we should add a divider or not. If the consumer uses
-                  // conditional logic in their rendering then we could have
-                  // `undefined` elements in `children`.
-                  .filter(
-                    (child): child is NonNullable<React.ReactNode> => !!child,
-                  )
-                  .map((child, topLevelIndex) => {
-                    if (isHTMLOptionElement(child)) {
-                      return (
-                        <ListItemWrapper
-                          data-top-level-index={topLevelIndex}
-                          downshiftItems={items}
-                          element={child}
-                          getItemProps={getItemProps}
-                          key={
-                            child.props.value
-                              ? child.props.value.toString()
-                              : child.props.children
-                          }
-                        />
-                      );
-                    } else if (isHTMLOptgroupElement(child)) {
-                      return (
-                        <React.Fragment key={child.props.label}>
-                          {topLevelIndex > 0 && (
-                            <ListDivider data-top-level-index={topLevelIndex} />
-                          )}
-                          <ListHeading
-                            aria-label={child.props.label}
-                            role="group"
-                          >
-                            {child.props.label}
-                          </ListHeading>
-                          {React.Children.map(
-                            child.props.children as React.ReactElement<
-                              OptionProps,
-                              "option"
-                            >[],
-                            (optgroupChild) => {
-                              return (
-                                <ListItemWrapper
-                                  key={
-                                    optgroupChild.props.value
-                                      ? optgroupChild.props.value.toString()
-                                      : optgroupChild.props.children
-                                  }
-                                  downshiftItems={items}
-                                  element={optgroupChild}
-                                  getItemProps={getItemProps}
-                                />
-                              );
-                            },
-                          )}
-                        </React.Fragment>
-                      );
-                    }
+            content={React.cloneElement(
+              listAs,
+              {
+                ...getMenuProps(undefined, { suppressRefError: true }),
+                ...(id && { id: `${id}-menu` }),
+                "aria-labelledby": labelledBy,
+                "aria-describedby": describedBy,
+              },
+              React.Children.toArray(children)
+                // Filter out falsy elements in `children`. We need to know if
+                // we're rendering the first actual element in `children` to
+                // know if we should add a divider or not. If the consumer uses
+                // conditional logic in their rendering then we could have
+                // `undefined` elements in `children`.
+                .filter(
+                  (child): child is NonNullable<React.ReactNode> => !!child,
+                )
+                .map((child, topLevelIndex) => {
+                  if (isHTMLOptionElement(child)) {
+                    return (
+                      <ListItemWrapper
+                        data-top-level-index={topLevelIndex}
+                        downshiftItems={items}
+                        element={child}
+                        getItemProps={getItemProps}
+                        key={
+                          child.props.value
+                            ? child.props.value.toString()
+                            : child.props.children
+                        }
+                      />
+                    );
+                  } else if (isHTMLOptgroupElement(child)) {
+                    return (
+                      <React.Fragment key={child.props.label}>
+                        {topLevelIndex > 0 && (
+                          <ListDivider data-top-level-index={topLevelIndex} />
+                        )}
+                        <ListHeading
+                          aria-label={child.props.label}
+                          role="group"
+                        >
+                          {child.props.label}
+                        </ListHeading>
+                        {React.Children.map(
+                          child.props.children as React.ReactElement<
+                            OptionProps,
+                            "option"
+                          >[],
+                          (optgroupChild) => {
+                            return (
+                              <ListItemWrapper
+                                key={
+                                  optgroupChild.props.value
+                                    ? optgroupChild.props.value.toString()
+                                    : optgroupChild.props.children
+                                }
+                                downshiftItems={items}
+                                element={optgroupChild}
+                                getItemProps={getItemProps}
+                              />
+                            );
+                          },
+                        )}
+                      </React.Fragment>
+                    );
+                  }
 
-                    return null;
-                  })}
-              </List>
-            }
+                  return null;
+                }),
+            )}
             placement={placement}
             triggerEvents="manual"
             matchTriggerWidth={matchTriggerWidth}
@@ -378,8 +432,13 @@ export const Select: React.FC<Props> = ({
               {
                 ...getToggleButtonProps({ disabled }),
                 ...props,
+                ...(labelledBy && { "aria-labelledby": labelledBy }),
+                id,
                 className: cx(
                   css({
+                    border: hasError
+                      ? `1px solid ${colors.red.base}`
+                      : undefined,
                     textAlign: "left",
                   }),
                   className,
@@ -415,7 +474,7 @@ export const Select: React.FC<Props> = ({
                   textOverflow: "ellipsis",
                 })}
               >
-                {selectedItem?.children || ""}
+                {renderTriggerNode(selectedItem)}
               </div>,
             )}
           />

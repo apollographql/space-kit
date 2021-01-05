@@ -29,6 +29,9 @@ module.exports = {
     // Enable prettier
     "prettier/prettier": "error",
 
+    // No consoles!
+    "no-console": "error",
+
     // We're not creating PropTypes anywhere so don't both checking for them
     "react/prop-types": "off",
 
@@ -40,7 +43,7 @@ module.exports = {
      * React hooks
      */
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
+    "react-hooks/exhaustive-deps": "error",
 
     // In favor of @typescript-eslint variants
     "no-use-before-define": "off",

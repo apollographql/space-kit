@@ -1,8 +1,10 @@
-import userEvent from "@testing-library/user-event";
 import { findByRole } from "@testing-library/dom";
+import { FormControl } from "../FormControl";
+import { FormErrorMessage } from "../FormErrorMessage";
 import { Meta, Story, ArgsTable, Canvas } from "@storybook/addon-docs/blocks";
 import { PerformUserInteraction } from "../shared/PerformUserInteraction";
 import { Select as SpaceKitSelect } from "../Select";
+import userEvent from "@testing-library/user-event";
 
 <Meta title="Form/Select" component={SpaceKitSelect} />
 
@@ -48,15 +50,23 @@ You must use the same `<option>` and `<optgroup>` elements you would use for a n
 
 <Canvas>
   <Story name="basic options">
-    <Select aria-labelledby="basic-options-label" defaultValue="">
-      <option value="">Select an option</option>
+    <Select
+      aria-labelledby="basic-options-label"
+      defaultValue=""
+      renderTriggerNode={(selectedItem) => (
+        <>{selectedItem?.children ?? "select an item"}</>
+      )}
+    >
       <option value="value a">a</option>
       <option value="value b">b</option>
     </Select>
   </Story>
   <Story name="basic optgroup">
-    <Select>
-      <option value="">select an item</option>
+    <Select
+      renderTriggerNode={(selectedItem) => (
+        <>{selectedItem?.children ?? "select an item"}</>
+      )}
+    >
       <optgroup label="Group of options">
         <option value="value a">a</option>
         <option value="value b">b</option>
@@ -68,8 +78,12 @@ You must use the same `<option>` and `<optgroup>` elements you would use for a n
     </Select>
   </Story>
   <Story name="disabled">
-    <Select disabled>
-      <option value="">select an item</option>
+    <Select
+      disabled
+      renderTriggerNode={(selectedItem) => (
+        <>{selectedItem?.children ?? "select an item"}</>
+      )}
+    >
       <option value="value a">a</option>
       <option value="value b">b</option>
     </Select>
@@ -101,8 +115,13 @@ If you inspect the `label` shown in the following story; you'll see that `id` an
 
 <Canvas>
   <Story name="basic options with label">
-    <SelectWithLabel label={<label>label</label>} defaultValue="">
-      <option value="">Select an option</option>
+    <SelectWithLabel
+      label={<label>label</label>}
+      defaultValue=""
+      renderTriggerNode={(selectedItem) => (
+        <>{selectedItem?.children ?? "select an item"}</>
+      )}
+    >
       <option value="value a">a</option>
       <option value="value b">b</option>
     </SelectWithLabel>
@@ -125,8 +144,13 @@ Selects can be displayed using any of the `feel` values from `Button`.
 
 <Canvas>
   <Story name="feel raised">
-    <Select feel="raised" defaultValue="">
-      <option value="">select an item</option>
+    <Select
+      feel="raised"
+      defaultValue=""
+      renderTriggerNode={(selectedItem) => (
+        <>{selectedItem?.children ?? "select an item"}</>
+      )}
+    >
       <option>a</option>
       <optgroup label="header 1">
         <option>b</option>
@@ -134,8 +158,13 @@ Selects can be displayed using any of the `feel` values from `Button`.
     </Select>
   </Story>
   <Story name="feel flat">
-    <Select feel="flat" defaultValue="">
-      <option value="">select an item</option>
+    <Select
+      feel="flat"
+      defaultValue=""
+      renderTriggerNode={(selectedItem) => (
+        <>{selectedItem?.children ?? "select an item"}</>
+      )}
+    >
       <option>a</option>
       <optgroup label="header 1">
         <option>b</option>
@@ -221,6 +250,25 @@ The menu width can be fixed to match the trigger button size with the `matchTrig
       <option>medium</option>
       <option>large</option>
     </Select>
+  </Story>
+</Canvas>
+
+## FormControl context
+
+`Select` is prepared to handle values passed from `FormControl` via `FormControlContext`.
+
+### Error State
+
+<Canvas>
+  <Story name="FormControlContext, error state">
+    <FormControl value={{ error: "error" }}>
+      <Select defaultValue="small" style={{ width: 150 }}>
+        <option>small</option>
+        <option>medium</option>
+        <option>large</option>
+      </Select>
+      <FormErrorMessage>error message</FormErrorMessage>
+    </FormControl>
   </Story>
 </Canvas>
 

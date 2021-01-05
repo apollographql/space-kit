@@ -22,6 +22,8 @@ export const ListHeading = React.forwardRef<
   HTMLHeadingElement,
   React.PropsWithChildren<Props>
 >(({ children, count, ...props }, ref) => {
+  const { onClick } = props;
+
   // Stop click events so we don't try to close the list when clicking something
   // non-interactive
   const handleClick = React.useCallback<NonNullable<typeof props.onClick>>(
@@ -29,9 +31,9 @@ export const ListHeading = React.forwardRef<
       event.preventDefault();
       event.stopPropagation();
 
-      props.onClick?.(event);
+      onClick?.(event);
     },
-    [props.onClick],
+    [onClick],
   );
 
   return (
