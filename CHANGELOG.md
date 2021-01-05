@@ -1,3 +1,39 @@
+# v8.8.0 (Tue Jan 05 2021)
+
+### Release Notes
+
+_From #287_
+
+### `FormControl`
+
+There is a new component to handle forms; `FormControl`. It's a layout component that will automatically layout it's children.
+
+New components include: `FormLabel`, `FormDescription`, `FormInput`, `FormHelperText`, `FormStartAdornment`, `ForEndAdornment`, and `FormErrorMessage`. All of these components can be rendered anywhere on their own; but if they are rendered inside of a `FormControl` then they will automatically communicate with `FormControl` to add accessibility props and lay them out correctly.
+
+There is a new hook, `useFormControlContext` intended to be used by any user-component that needs access to information passed by `FormControl`. `Input` and `Select` both consume `useFormControlContext`, for example.
+
+### `Select`
+
+  * Backtrack and rename `initialValue` prop to `defaultValue` to be inline with React's built-ins
+  * Add `listAs` prop
+  * Use `FormControlContext` to accept `error` state
+
+### `Input`
+
+New component to apply custom styles to `<input />`.
+
+---
+
+#### 🚀 Enhancement
+
+- Create `FormControl` component [#287](https://github.com/apollographql/space-kit/pull/287) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v8.7.2 (Wed Dec 16 2020)
 
 #### 🐛  Bug Fix
