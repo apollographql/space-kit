@@ -105,11 +105,12 @@ export const RichOption = ({ title, description }) => (
 <Canvas>
   <Story name="rich option children">
     <Select
-      defaultValue=""
+      defaultValue="Consumer"
       listFeel="borderless"
       renderTriggerNode={(selectedItem) => (
         <>{selectedItem?.value ?? "select an item"}</>
       )}
+      selectionIndicator="checkmark"
     >
       <option value="Consumer" style={{ height: "auto" }}>
         <RichOption
@@ -186,6 +187,21 @@ For controlled components, you must pass a `value` prop and have the option to p
 If you elect to use an uncontrolled component, do not pass `value` or `onChange` props. You can pass a `defaultValue` for the initial to be set and then the component will control the state on it's own.
 
 ## Options
+
+### `selectionIndicator`
+
+We have the option to use a custom decoration to indicate an item is selected. Note that this is different from when an item is highlighted from a hover or keyboard arrow.
+
+#### `checkmark`
+
+<Canvas>
+  <Story name="selectionIndicator, checkmark">
+    <Select feel="flat" defaultValue="a" selectionIndicator="checkmark">
+      <option>a</option>
+      <option>b</option>
+    </Select>
+  </Story>
+</Canvas>
 
 ### Feel
 

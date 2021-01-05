@@ -1,3 +1,5 @@
+/** @jsx jsx */
+/** @jsxFrag React.Fragment */
 import React, { ChangeEvent, FocusEvent, RefCallback } from "react";
 import { Button } from "../Button";
 import { colors } from "../colors";
@@ -8,7 +10,7 @@ import { ListHeading } from "../ListHeading";
 import { ListDivider } from "../ListDivider";
 import { Popover } from "../Popover";
 import { useSelect, UseSelectPropGetters } from "downshift";
-import { ClassNames } from "@emotion/core";
+import { ClassNames, jsx } from "@emotion/core";
 import {
   reactNodeToDownshiftItems,
   isHTMLOptionElement,
@@ -20,12 +22,13 @@ import useDeepCompareEffect from "use-deep-compare-effect";
 import { inputHeightDictionary } from "../shared/inputHeightDictionary";
 import { useFormControlContext } from "../FormControl";
 import { getEffectiveValueFromOptionElementProps } from "./select/getEffectiveValueFromOptionElementProps";
+import { IconCheck } from "../icons/IconCheck";
 
 export type OptionProps = React.DetailedHTMLProps<
   React.OptionHTMLAttributes<HTMLOptionElement>,
   HTMLOptionElement
 >;
-interface ListItemWrapperProps {
+interface ListItemWrapperProps extends Pick<Props, "selectionIndicator"> {
   /** `items` prop passed to `useSelect`
    *
    * We'll use this to get the index
@@ -34,6 +37,7 @@ interface ListItemWrapperProps {
   element: React.ReactElement<OptionProps, "option">;
   /** Passthrough downshift function to get the props for an item */
   getItemProps: UseSelectPropGetters<OptionProps>["getItemProps"];
+  selected: boolean;
 }
 
 /**
@@ -43,6 +47,8 @@ const ListItemWrapper: React.FC<ListItemWrapperProps> = ({
   downshiftItems,
   element,
   getItemProps,
+  selected,
+  selectionIndicator,
 }) => {
   const index = downshiftItems.indexOf(element.props);
 
@@ -59,9 +65,17 @@ const ListItemWrapper: React.FC<ListItemWrapperProps> = ({
 
   return (
     <ListItem
+      css={{ alignItems: "baseline" }}
       key={element.props.value || element.props.children}
       {...downshiftItemProps}
       selected={downshiftItemProps["aria-selected"] === "true"}
+      startIcon={
+        selectionIndicator === "checkmark" ? (
+          selected ? (
+            <IconCheck css={{ height: "100%", width: "100%" }} />
+          ) : null
+        ) : undefined
+      }
     >
       {element.props.children}
     </ListItem>
@@ -179,6 +193,18 @@ interface Props
   /** Initial value for a non-controlled component */
   defaultValue?: NonNullable<OptionProps["value"]> | null;
 
+  /**
+   * Indicates decoration for the selected item
+   *
+   * Note, this is for an item that is selected; _not_ the item that is
+   * highlighted.
+   *
+   * Options:
+   *
+   * * `checkmark` will place a checkmark to the left
+   */
+  selectionIndicator?: "checkmark" | null;
+
   size?: keyof typeof inputHeightDictionary;
 }
 
@@ -189,7 +215,7 @@ export const Select: React.FC<Props> = ({
   disabled = false,
   feel,
   labelPropsCallbackRef,
-  listAs = <List />,
+  listAs = <List startIconAs={<div css={{ alignSelf: "baseline" }} />} />,
   margin = "auto",
   matchTriggerWidth,
   onBlur,
@@ -197,6 +223,7 @@ export const Select: React.FC<Props> = ({
   placement = "bottom-start",
   popperOptions,
   renderTriggerNode = (value) => <>{value?.children || ""}</>,
+  selectionIndicator = null,
   size = "standard",
   triggerAs = <Button />,
   truncate = true,
@@ -348,7 +375,7 @@ export const Select: React.FC<Props> = ({
   }, [labelProps, labelPropsCallbackRef]);
 
   return (
-    <ListConfigProvider {...listConfig} hoverColor={null}>
+    <ListConfigProvider {...listConfig} hoverColor={null} iconSize="small">
       <ClassNames>
         {({ css, cx }) => (
           <Popover
@@ -383,6 +410,8 @@ export const Select: React.FC<Props> = ({
                         downshiftItems={items}
                         element={child}
                         getItemProps={getItemProps}
+                        selected={selectedItem === child.props}
+                        selectionIndicator={selectionIndicator}
                         key={getEffectiveValueFromOptionElementProps(
                           child.props,
                         )}
@@ -414,6 +443,8 @@ export const Select: React.FC<Props> = ({
                                 downshiftItems={items}
                                 element={optgroupChild}
                                 getItemProps={getItemProps}
+                                selectionIndicator={selectionIndicator}
+                                selected={selectedItem === optgroupChild.props}
                               />
                             );
                           },
