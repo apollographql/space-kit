@@ -298,12 +298,23 @@ information and provide a nice visual grouping.
 
 Items should be truncated properly. This provides an example to show how to add a custom `endIcon` as well.
 
+### `truncate={true}`
+
 <Canvas>
   <Story name="flexbox truncation">
     <List
-      endIconAs={<div style={{ color: colors.grey.light, width: "auto" }} />}
+      endIconAs={
+        <div
+          style={{
+            alignSelf: "baseline",
+            color: colors.grey.light,
+            width: "auto",
+          }}
+        />
+      }
       iconSize="small"
       style={{ maxWidth: 280 }}
+      truncate
     >
       <ListHeading startIcon={null}>mdg-private-graphs</ListHeading>
       <ListItem startIcon={null} endIcon={<>1.9k rpm</>}>
@@ -315,7 +326,55 @@ Items should be truncated properly. This provides an example to show how to add 
         selected
         endIconAs={<div style={{ color: colors.white, width: "auto" }} />}
       >
+        really long test name really long test name
+      </ListItem>
+      <ListItem
+        startIcon={
+          <IconCheck
+            style={{
+              color: colors.blue.base,
+              width: "100%",
+              height: "100%",
+            }}
+          />
+        }
+        endIcon={<>0 rpm</>}
+      >
+        engine-eu
+      </ListItem>
+    </List>
+  </Story>
+</Canvas>
+
+### `truncate={false}`
+
+<Canvas>
+  <Story name="flexbox, no truncation">
+    <List
+      endIconAs={
+        <div
+          style={{
+            alignSelf: "baseline",
+            color: colors.grey.light,
+            width: "auto",
+          }}
+        />
+      }
+      iconSize="small"
+      style={{ maxWidth: 280 }}
+      truncate={false}
+    >
+      <ListHeading startIcon={null}>mdg-private-graphs</ListHeading>
+      <ListItem startIcon={null} endIcon={<>1.9k rpm</>}>
         really_long_test_name_really_long_test_name
+      </ListItem>
+      <ListItem
+        startIcon={null}
+        endIcon={<>8 rpm</>}
+        selected
+        endIconAs={<div style={{ color: colors.white, width: "auto" }} />}
+      >
+        really long test name really long test name
       </ListItem>
       <ListItem
         startIcon={

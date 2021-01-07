@@ -63,6 +63,15 @@ interface ListConfig {
    * @default <div />
    */
   startIconAs: React.ReactElement;
+
+  /**
+   * Indicates if text should be truncated when it will overflow the boundary.
+   * `true` incidates use an ellipsis and `false` indicates to allow line
+   * breaks.
+   *
+   * @default true
+   */
+  truncate: boolean;
 }
 
 /**
@@ -76,6 +85,7 @@ export const defaults: ListConfig = {
   padding: "normal",
   selectedColor: colors.blue.base,
   startIconAs: <div />,
+  truncate: true,
 };
 
 /**

@@ -127,6 +127,7 @@ export const ListItem = React.forwardRef<
       margin,
       padding,
       selectedColor,
+      truncate,
       ...listConfig
     } = useListConfig();
 
@@ -176,7 +177,7 @@ export const ListItem = React.forwardRef<
                       "&:hover, &[data-force-hover-state]": highlightedStyles,
                     }),
                     ...(highlighted && !selected && highlightedStyles),
-                    alignItems: "center",
+                    alignItems: "baseline",
                     cursor: interactive ? "pointer" : undefined,
                     borderRadius:
                       margin === "auto"
@@ -185,12 +186,13 @@ export const ListItem = React.forwardRef<
                         ? 0
                         : assertUnreachable(margin),
                     display: "flex",
-                    height:
-                      padding === "normal"
-                        ? 28
-                        : padding === "relaxed"
-                        ? 40
-                        : assertUnreachable(padding),
+                    height: !truncate
+                      ? "auto"
+                      : padding === "normal"
+                      ? 28
+                      : padding === "relaxed"
+                      ? 40
+                      : assertUnreachable(padding),
                     paddingLeft:
                       12 +
                       (margin === "none"
@@ -220,6 +222,7 @@ export const ListItem = React.forwardRef<
                   <div
                     className={cx(
                       css({
+                        alignSelf: "center",
                         display: "flex",
                         flex: "none",
                         marginLeft: getIconMarginLeft(iconSize),
@@ -241,8 +244,11 @@ export const ListItem = React.forwardRef<
                     minWidth: 0,
                     overflow: "hidden",
                     textOverflow: "ellipsis",
-                    whiteSpace: "nowrap",
                   }),
+                  truncate &&
+                    css({
+                      whiteSpace: "nowrap",
+                    }),
                 )}
               >
                 {children}
@@ -253,6 +259,7 @@ export const ListItem = React.forwardRef<
                   <div
                     className={cx(
                       css({
+                        alignSelf: "center",
                         display: "flex",
                         flex: "none",
                         justifyContent: "flex-end",

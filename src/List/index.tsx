@@ -31,6 +31,7 @@ export const List = React.forwardRef<
       padding,
       selectedColor,
       startIconAs,
+      truncate,
       ...props
     },
     ref,
@@ -48,6 +49,7 @@ export const List = React.forwardRef<
       ...(typeof padding !== "undefined" && { padding }),
       ...(typeof selectedColor !== "undefined" && { selectedColor }),
       ...(typeof startIconAs !== "undefined" && { startIconAs }),
+      ...(typeof truncate !== "undefined" && { truncate }),
     };
 
     const verticalMargin =

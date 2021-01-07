@@ -47,6 +47,7 @@ test("given nested lists with configurations in both, correct values should prop
     padding: "relaxed",
     selectedColor: colors.green.dark,
     startIconAs: <span />,
+    truncate: true,
   };
 
   render(
@@ -56,6 +57,7 @@ test("given nested lists with configurations in both, correct values should prop
       padding="normal"
       margin="auto"
       selectedColor={colors.green.base}
+      truncate={false}
     >
       <List {...newValues}>
         <DebugListConfig />
@@ -78,6 +80,9 @@ test("given nested lists with configurations in both, correct values should prop
   expect(screen.getByTestId("startIconAs").tagName).toBe(
     ((newValues.startIconAs.type as unknown) as string).toUpperCase(),
   );
+  expect(screen.getByTestId("truncate")).toHaveTextContent(
+    String(newValues.truncate),
+  );
 });
 
 test("given nested lists with the top level having default configuration and the child configuring everything, correct values should propogate", () => {
@@ -89,6 +94,7 @@ test("given nested lists with the top level having default configuration and the
     padding: "relaxed",
     selectedColor: colors.green.dark,
     startIconAs: <span />,
+    truncate: false,
   };
 
   render(
@@ -115,6 +121,9 @@ test("given nested lists with the top level having default configuration and the
   expect(screen.getByTestId("startIconAs").tagName).toBe(
     ((newValues.startIconAs.type as unknown) as string).toUpperCase(),
   );
+  expect(screen.getByTestId("truncate")).toHaveTextContent(
+    String(newValues.truncate),
+  );
 });
 
 test("given nested lists with the top level having configuration and the child using defaults, correct values should propogate", () => {
@@ -126,6 +135,7 @@ test("given nested lists with the top level having configuration and the child u
     padding: "relaxed",
     selectedColor: colors.green.dark,
     startIconAs: <span />,
+    truncate: false,
   };
 
   render(
@@ -151,5 +161,8 @@ test("given nested lists with the top level having configuration and the child u
 
   expect(screen.getByTestId("startIconAs").tagName).toBe(
     ((newValues.startIconAs.type as unknown) as string).toUpperCase(),
+  );
+  expect(screen.getByTestId("truncate")).toHaveTextContent(
+    String(newValues.truncate),
   );
 });

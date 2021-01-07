@@ -83,7 +83,10 @@ interface Props
       React.ComponentProps<typeof Button>,
       "aria-labelledby" | "aria-describedby" | "feel" | "style"
     >,
-    Pick<React.ComponentProps<typeof ListConfigProvider>, "margin">,
+    Pick<
+      React.ComponentProps<typeof ListConfigProvider>,
+      "margin" | "truncate"
+    >,
     Pick<
       React.DetailedHTMLProps<
         React.SelectHTMLAttributes<HTMLSelectElement>,
@@ -198,6 +201,7 @@ export const Select: React.FC<Props> = ({
   renderTriggerNode = (value) => <>{value?.children || ""}</>,
   size = "standard",
   triggerAs = <Button />,
+  truncate = true,
   value: valueProp,
   ...props
 }) => {
@@ -359,6 +363,7 @@ export const Select: React.FC<Props> = ({
               listAs,
               {
                 margin,
+                truncate,
                 ...getMenuProps(undefined, { suppressRefError: true }),
                 ...(id && { id: `${id}-menu` }),
                 "aria-labelledby": labelledBy,
