@@ -423,12 +423,14 @@ export const Select: React.FC<Props> = ({
                         {topLevelIndex > 0 && (
                           <ListDivider data-top-level-index={topLevelIndex} />
                         )}
-                        <ListHeading
-                          aria-label={child.props.label}
-                          role="group"
-                        >
-                          {child.props.label}
-                        </ListHeading>
+                        {child.props.label && (
+                          <ListHeading
+                            aria-label={child.props.label}
+                            role="group"
+                          >
+                            {child.props.label}
+                          </ListHeading>
+                        )}
                         {React.Children.map(
                           child.props.children as React.ReactElement<
                             OptionProps,
