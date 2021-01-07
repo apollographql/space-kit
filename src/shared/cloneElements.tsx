@@ -1,5 +1,4 @@
 import React from "react";
-import classnames from "classnames";
 import { ClassNames } from "@emotion/core";
 
 /**
@@ -16,15 +15,13 @@ export const cloneElements = (
         return elements.reduce((accumulator, element) => {
           return React.cloneElement(accumulator, {
             ...element.props,
-            className: classnames(
+            className: cx(
               element.props.className,
               accumulator.props.className,
               // If the parent component is using emotion with the jsx pragma, we
               // have to get fancy and intercept the styles to use with the
               // `ClassNames` wrapper.
-              accumulator.props.css
-                ? cx(css(accumulator.props.css.styles))
-                : null,
+              accumulator.props.css ? css(accumulator.props.css.styles) : null,
             ),
             style: { ...element.props.style, ...accumulator.props.style },
             // Since we're cloning `as` with the `original` props added, we're
