@@ -41,13 +41,13 @@ export const List = React.forwardRef<
      */
     const listConfig: ReturnType<typeof useListConfig> = {
       ...useListConfig(),
-      ...(margin && { margin }),
-      ...(endIconAs && { endIconAs }),
-      ...(hoverColor && { hoverColor }),
-      ...(iconSize && { iconSize }),
-      ...(padding && { padding }),
-      ...(selectedColor && { selectedColor }),
-      ...(startIconAs && { startIconAs }),
+      ...(typeof endIconAs !== "undefined" && { endIconAs }),
+      ...(typeof hoverColor !== "undefined" && { hoverColor }),
+      ...(typeof iconSize !== "undefined" && { iconSize }),
+      ...(typeof margin !== "undefined" && { margin }),
+      ...(typeof padding !== "undefined" && { padding }),
+      ...(typeof selectedColor !== "undefined" && { selectedColor }),
+      ...(typeof startIconAs !== "undefined" && { startIconAs }),
     };
 
     const verticalMargin =
