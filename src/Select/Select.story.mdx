@@ -106,11 +106,12 @@ export const RichOption = ({ title, description }) => (
   <Story name="rich option children">
     <Select
       defaultValue="Consumer"
-      listFeel="borderless"
+      margin="none"
       renderTriggerNode={(selectedItem) => (
         <>{selectedItem?.value ?? "select an item"}</>
       )}
       selectionIndicator="checkmark"
+      truncate={false}
     >
       <option value="Consumer" style={{ height: "auto" }}>
         <RichOption
