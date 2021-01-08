@@ -41,6 +41,30 @@ The simple list provides a list of options for a user to choose from and updates
       />
     </PerformUserInteraction>
   </Story>
+  <Story name="margin=none">
+    <PerformUserInteraction
+      callback={async () => {
+        userEvent.click(await findByRole(document.body, "button"));
+      }}
+    >
+      <Popover
+        popperOptions={{ strategy: "fixed" }}
+        placement="bottom-start"
+        style={{ padding: 0 }}
+        content={
+          <List margin="none">
+            <ListItem>Root</ListItem>
+            <ListItem selected>Objects</ListItem>
+            <ListItem>Inputs</ListItem>
+            <ListItem>Interfaces</ListItem>
+            <ListItem>Unions</ListItem>
+            <ListItem>Scalars and Enums</ListItem>
+          </List>
+        }
+        trigger={<Button>Open Popover</Button>}
+      />
+    </PerformUserInteraction>
+  </Story>
   <Story name="interactive">
     <PerformUserInteraction
       callback={async () => {

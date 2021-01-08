@@ -7,7 +7,6 @@ import { colors } from "../colors";
 import { useListConfig } from "../ListConfig";
 import { verticalListMarginFromPadding } from "../shared/verticalListMarginFromPadding";
 import { cloneElements } from "../shared/cloneElements";
-import classnames from "classnames";
 
 function getIconHorizontalPadding(
   iconSize: NonNullable<ReturnType<typeof useListConfig>["iconSize"]>,
@@ -124,8 +123,10 @@ export const ListItem = React.forwardRef<
     const {
       hoverColor,
       iconSize,
+      margin,
       padding,
       selectedColor,
+      truncate,
       ...listConfig
     } = useListConfig();
 
@@ -165,34 +166,51 @@ export const ListItem = React.forwardRef<
             as,
             <div
               {...props}
-              className={classnames(
-                props.className,
-                cx(
-                  css({
-                    ...(selected && selectedStyles),
-                    ...{ "&[aria-expanded=true]": selectedStyles },
-                    ...(!selected && {
-                      "&:hover, &[data-force-hover-state]": highlightedStyles,
-                    }),
-                    ...(highlighted && !selected && highlightedStyles),
-                    alignItems: "center",
-                    cursor: interactive ? "pointer" : undefined,
-                    borderRadius: 4,
-                    display: "flex",
-                    height:
-                      padding === "normal"
-                        ? 28
-                        : padding === "relaxed"
-                        ? 40
-                        : assertUnreachable(padding),
-                    paddingLeft: 12,
-                    paddingRight: 12,
-                    paddingTop: 4,
-                    paddingBottom: 4,
-                    marginTop: verticalMargin,
-                    marginBottom: verticalMargin,
+              className={cx(
+                css({
+                  ...(selected && selectedStyles),
+                  ...{ "&[aria-expanded=true]": selectedStyles },
+                  ...(!selected && {
+                    "&:hover, &[data-force-hover-state]": highlightedStyles,
                   }),
-                ),
+                  ...(highlighted && !selected && highlightedStyles),
+                  alignItems: "center",
+                  cursor: interactive ? "pointer" : undefined,
+                  borderRadius:
+                    margin === "auto"
+                      ? 4
+                      : margin === "none"
+                      ? 0
+                      : assertUnreachable(margin),
+                  display: "flex",
+                  height: !truncate
+                    ? "auto"
+                    : padding === "normal"
+                    ? 28
+                    : padding === "relaxed"
+                    ? 40
+                    : assertUnreachable(padding),
+                  paddingLeft:
+                    12 +
+                    (margin === "none"
+                      ? 6
+                      : margin === "auto"
+                      ? 0
+                      : assertUnreachable(margin)),
+                  paddingRight:
+                    12 +
+                    (margin === "none"
+                      ? 6
+                      : margin === "auto"
+                      ? 0
+                      : assertUnreachable(margin)),
+                  paddingTop: 4,
+                  paddingBottom: 4,
+                  marginTop: verticalMargin,
+                  marginBottom: verticalMargin,
+                }),
+
+                props.className,
               )}
               ref={ref}
             >
@@ -202,6 +220,7 @@ export const ListItem = React.forwardRef<
                   <div
                     className={cx(
                       css({
+                        alignSelf: "center",
                         display: "flex",
                         flex: "none",
                         marginLeft: getIconMarginLeft(iconSize),
@@ -223,8 +242,11 @@ export const ListItem = React.forwardRef<
                     minWidth: 0,
                     overflow: "hidden",
                     textOverflow: "ellipsis",
-                    whiteSpace: "nowrap",
                   }),
+                  truncate &&
+                    css({
+                      whiteSpace: "nowrap",
+                    }),
                 )}
               >
                 {children}
@@ -235,6 +257,7 @@ export const ListItem = React.forwardRef<
                   <div
                     className={cx(
                       css({
+                        alignSelf: "center",
                         display: "flex",
                         flex: "none",
                         justifyContent: "flex-end",

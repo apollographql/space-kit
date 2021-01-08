@@ -34,6 +34,15 @@ interface ListConfig {
   iconSize: IconSize;
 
   /**
+   * The margin to place around list items between the edge of the `List` and
+   * other `ListItem`s. Using "none" will indicate that there is no margin for
+   * an edge-to-edge feel.
+   *
+   * @default "auto"
+   */
+  margin: "auto" | "none";
+
+  /**
    * Padding level on menu items
    */
   padding: "normal" | "relaxed";
@@ -54,6 +63,15 @@ interface ListConfig {
    * @default <div />
    */
   startIconAs: React.ReactElement;
+
+  /**
+   * Indicates if text should be truncated when it will overflow the boundary.
+   * `true` incidates use an ellipsis and `false` indicates to allow line
+   * breaks.
+   *
+   * @default true
+   */
+  truncate: boolean;
 }
 
 /**
@@ -63,9 +81,11 @@ export const defaults: ListConfig = {
   endIconAs: <div />,
   hoverColor: colors.silver.light,
   iconSize: "normal",
+  margin: "auto",
   padding: "normal",
   selectedColor: colors.blue.base,
   startIconAs: <div />,
+  truncate: true,
 };
 
 /**

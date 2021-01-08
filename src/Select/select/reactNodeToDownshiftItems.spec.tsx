@@ -19,6 +19,28 @@ it("should work with options with no `value` props", () => {
   `);
 });
 
+it("when passed top-level `option` with no value prop and a non-string children, should throw TypeError", () => {
+  expect(() =>
+    reactNodeToDownshiftItems([
+      <option key="a">
+        <div>a</div>
+      </option>,
+    ]),
+  ).toThrowError(TypeError);
+});
+
+it("when passed option nested under an `optGroup` with the option having no value prop and a non-string children, should throw TypeError", () => {
+  expect(() =>
+    reactNodeToDownshiftItems([
+      <optgroup key="a" label="label a">
+        <option key="a">
+          <div>a</div>
+        </option>
+      </optgroup>,
+    ]),
+  ).toThrowError(TypeError);
+});
+
 it("should work with options with `value` props", () => {
   expect(
     reactNodeToDownshiftItems([
