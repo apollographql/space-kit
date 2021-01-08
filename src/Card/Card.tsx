@@ -50,7 +50,7 @@ export const Card: React.FC<CardProps> = ({
     css={{
       backgroundColor: colors.white,
       color: colors.black.base,
-      boxShadow: `0 1px 4px 0 rgba(0, 0, 0, .08)`,
+      boxShadow: `0 1px 3px 0 rgba(0,0,0,.06)`,
       borderStyle: "solid",
       borderRadius: 8,
       borderWidth: 1,
