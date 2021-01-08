@@ -1,3 +1,29 @@
+# v8.10.0 (Fri Jan 08 2021)
+
+### Release Notes
+
+_From #293_
+
+* Add borderless appearance to `Select` and `List` with `margin="none"`
+* Add `truncate` prop to `Select` and `List`
+
+  Defaults to `true`. Set this to `false` to enable multi-line items.
+
+* Add `selectionIndicator` to `Select` to show checkmarks for selected items
+* Stop rendering `ListHeading` in `Select` `optgroup` if there is no `label`
+
+---
+
+#### 🚀 Enhancement
+
+- Enhance `Select` [#293](https://github.com/apollographql/space-kit/pull/293) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v8.9.0 (Fri Jan 08 2021)
 
 #### 🚀 Enhancement
