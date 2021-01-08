@@ -1,3 +1,17 @@
+# v8.9.0 (Fri Jan 08 2021)
+
+#### 🚀 Enhancement
+
+- Tighten up card drop shadow [#295](https://github.com/apollographql/space-kit/pull/295) ([@jglovier](https://github.com/jglovier) [@justinanastos](https://github.com/justinanastos))
+- Add GraphQL icon [#294](https://github.com/apollographql/space-kit/pull/294) ([@jglovier](https://github.com/jglovier))
+
+#### Authors: 2
+
+- Joel Glovier ([@jglovier](https://github.com/jglovier))
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v8.8.0 (Tue Jan 05 2021)
 
 ### Release Notes
