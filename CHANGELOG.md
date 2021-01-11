@@ -1,3 +1,15 @@
+# v8.11.0 (Mon Jan 11 2021)
+
+#### 🚀 Enhancement
+
+- Input component forward ref to HTML input element [#296](https://github.com/apollographql/space-kit/pull/296) ([@Jephuff](https://github.com/Jephuff))
+
+#### Authors: 1
+
+- Jeffrey Burt ([@Jephuff](https://github.com/Jephuff))
+
+---
+
 # v8.10.0 (Fri Jan 08 2021)
 
 ### Release Notes
