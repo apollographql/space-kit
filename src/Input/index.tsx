@@ -55,59 +55,58 @@ interface Props
  * to either the containing `div` or the underlying `input`, you must use
  * `containerAs` and `inputAs`.
  */
-export const Input: React.FC<Props> = ({
-  size = "standard",
-  type = "text",
-  ...props
-}) => {
-  const {
-    describedBy,
-    endAdornment,
-    labelledBy,
-    hasError,
-    id,
-    startAdornment,
-  } = useFormControlContext();
+export const Input = React.forwardRef<HTMLInputElement, Props>(
+  ({ size = "standard", type = "text", ...props }, ref) => {
+    const {
+      describedBy,
+      endAdornment,
+      labelledBy,
+      hasError,
+      id,
+      startAdornment,
+    } = useFormControlContext();
 
-  return (
-    <input
-      id={id}
-      aria-labelledby={labelledBy}
-      aria-describedby={describedBy}
-      aria-invalid={hasError || undefined}
-      type={type}
-      {...props}
-      css={css({
-        backgroundColor: props.disabled ? colors.silver.light : colors.white,
-        border: "solid 1px",
-        borderColor: hasError ? colors.red.base : colors.silver.darker,
-        "::placeholder": {
-          color: props.disabled ? colors.grey.lighter : colors.grey.light,
-          opacity: 1,
-        },
-        borderRadius: 4,
-        flex: 1,
-        height: inputHeightDictionary[size],
-        ...(size === "small" ? typography.base.small : typography.base.base),
-        paddingLeft: startAdornment ? 34 : size === "small" ? 8 : 10,
-        paddingRight: endAdornment ? 34 : size === "small" ? 8 : 10,
-        width: "100%",
-        ":hover,  &[data-force-hover-state]": {
-          borderColor: !props.disabled
-            ? colors.grey.light
-            : hasError
-            ? colors.red.base
-            : colors.silver.darker,
-        },
-        ":focus, &[data-force-focus-state]": {
-          borderColor: !props.disabled
-            ? colors.blue.light
-            : hasError
-            ? colors.red.base
-            : colors.silver.darker,
-          outline: "none",
-        },
-      })}
-    />
-  );
-};
+    return (
+      <input
+        ref={ref}
+        id={id}
+        aria-labelledby={labelledBy}
+        aria-describedby={describedBy}
+        aria-invalid={hasError || undefined}
+        type={type}
+        {...props}
+        css={css({
+          backgroundColor: props.disabled ? colors.silver.light : colors.white,
+          border: "solid 1px",
+          borderColor: hasError ? colors.red.base : colors.silver.darker,
+          "::placeholder": {
+            color: props.disabled ? colors.grey.lighter : colors.grey.light,
+            opacity: 1,
+          },
+          borderRadius: 4,
+          flex: 1,
+          height: inputHeightDictionary[size],
+          ...(size === "small" ? typography.base.small : typography.base.base),
+          paddingLeft: startAdornment ? 34 : size === "small" ? 8 : 10,
+          paddingRight: endAdornment ? 34 : size === "small" ? 8 : 10,
+          width: "100%",
+          ":hover,  &[data-force-hover-state]": {
+            borderColor: !props.disabled
+              ? colors.grey.light
+              : hasError
+              ? colors.red.base
+              : colors.silver.darker,
+          },
+          ":focus, &[data-force-focus-state]": {
+            borderColor: !props.disabled
+              ? colors.blue.light
+              : hasError
+              ? colors.red.base
+              : colors.silver.darker,
+            outline: "none",
+          },
+        })}
+      />
+    );
+  },
+);
