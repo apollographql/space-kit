@@ -45,4 +45,43 @@ storiesOf("Tests/Select", module)
     {
       chromatic: { delay: 200 },
     },
+  )
+  .add(
+    "long list",
+    () => (
+      <div
+        className="sk-scroll-container"
+        style={{
+          height: 300,
+          width: 300,
+          border: "1px solid red",
+          overflow: "hidden",
+          position: "relative",
+        }}
+      >
+        <PerformUserInteraction
+          callback={async () => {
+            // Click the triggering button
+            userEvent.click(await findByRole(document.body, "button"));
+          }}
+        >
+          <Select>
+            {["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"].map(
+              (groupLabel) => (
+                <optgroup key={groupLabel} label={groupLabel}>
+                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((optValue) => (
+                    <option key={optValue} value={optValue}>
+                      {optValue}
+                    </option>
+                  ))}
+                </optgroup>
+              ),
+            )}
+          </Select>
+        </PerformUserInteraction>
+      </div>
+    ),
+    {
+      chromatic: { delay: 200 },
+    },
   );
