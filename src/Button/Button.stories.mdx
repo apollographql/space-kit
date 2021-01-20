@@ -1,4 +1,5 @@
 import { Button } from "./Button";
+import { Tooltip } from "../Tooltip";
 import { Meta, Story, ArgsTable, Canvas } from "@storybook/addon-docs/blocks";
 import { IconExpandList } from "../icons/IconExpandList";
 import { IconShip2 } from "../icons/IconShip2";
@@ -770,6 +771,30 @@ Showing how we could potentially use color with the simple button.
     </div>
   </Story>
 </Canvas>
+
+### Disabled Buttons
+
+Disabled buttons wrapped with a `Tooltip` will behave slightly differently to enable the `Tooltip` to be displayed. The only user-facing behavior change will be that the `disabled` prop will not be rendered in the DOM when the tooltip is visible.
+
+<Story name="disabled with tooltip">
+  <style>{`
+    .mt-4 { margin-top: 1rem }
+  `}</style>
+  <Tooltip content="tooltip">
+    <Button className="mt-4" disabled>
+      Button
+    </Button>
+  </Tooltip>
+</Story>
+
+<Story name="enabled with tooltip">
+  <style>{`
+    .mt-4 { margin-top: 1rem }
+  `}</style>
+  <Tooltip content="tooltip">
+    <Button className="mt-4">Button</Button>
+  </Tooltip>
+</Story>
 
 ## Props
 

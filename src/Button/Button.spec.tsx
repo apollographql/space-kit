@@ -1,10 +1,16 @@
 import "@testing-library/jest-dom";
 import * as faker from "faker";
-import { Button } from "./Button";
+import { Button } from "../Button";
+import { Tooltip } from "../Tooltip";
 import { act, render, screen } from "@testing-library/react";
 import { IconShip2 } from "../icons/IconShip2";
 import React from "react";
 import userEvent from "@testing-library/user-event";
+import { matchers } from "jest-emotion";
+import { colors } from "../colors";
+
+// Add the custom matchers provided by 'jest-emotion'
+expect.extend(matchers);
 
 test("default button renders", () => {
   render(<Button>submit</Button>);
@@ -77,6 +83,52 @@ test("when disabled, button does not call click handlers", () => {
   // assert
   expect(asElementOnClick).not.toHaveBeenCalled();
   expect(rootElementOnClick).not.toHaveBeenCalled();
+});
+
+test("when wrapped in a Tooltip, disabled, hovered, disabled style is rendered", async () => {
+  render(
+    <Tooltip content="tooltip">
+      <Button disabled>button</Button>
+    </Tooltip>,
+  );
+
+  screen.debug(document);
+  const button = screen.getByRole("button");
+  expect(button).toHaveStyleRule("background-color", colors.silver.light);
+
+  // Wait for the tooltip to appear
+  userEvent.hover(button);
+  await screen.findByText("tooltip");
+
+  expect(button).toHaveStyleRule("background-color", colors.silver.light);
+});
+
+test("when wrapped in a Tooltip, disabled, hovered, Tooltip content is visible", async () => {
+  render(
+    <Tooltip content="tooltip">
+      <Button disabled>button</Button>
+    </Tooltip>,
+  );
+
+  userEvent.hover(screen.getByRole("button"));
+
+  await screen.findByText("tooltip");
+});
+
+test("when not wrapped in a Tooltip, disabled prop is applied to DOM", () => {
+  render(<Button disabled>button</Button>);
+
+  expect(screen.getByRole("button")).toBeDisabled();
+});
+
+test("when wrapped in a Tooltip, disabled prop is applied to DOM", () => {
+  render(
+    <Tooltip content="tooltip">
+      <Button disabled>button</Button>
+    </Tooltip>,
+  );
+
+  expect(screen.getByRole("button")).toBeDisabled();
 });
 
 test("when disabled, button with 'as=' set to not a button element does not call click handlers", () => {
