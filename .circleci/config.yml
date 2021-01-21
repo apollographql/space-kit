@@ -53,7 +53,7 @@ jobs:
           command: mkdir -p /tmp/test-reports/eslint
       - run:
           name: Eslint
-          command: npm run lint -- --no-cache --format junit --output-file /tmp/test-reports/eslint/results.xml
+          command: npm run lint -- --quiet --no-cache --format junit --output-file /tmp/test-reports/eslint/results.xml
       - store_test_results:
           path: /tmp/test-reports
 
