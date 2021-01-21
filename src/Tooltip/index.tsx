@@ -1,6 +1,7 @@
 import React from "react";
 import { mouseRest } from "./tooltip/mouseRestPlugin";
 import { AbstractTooltip, AbstractTooltipProps } from "../AbstractTooltip";
+import { TooltipContextProvider } from "../shared/TooltipContext";
 
 type Props = Pick<
   React.ComponentProps<typeof AbstractTooltip>,
@@ -22,13 +23,15 @@ type Props = Pick<
  */
 export const Tooltip: React.FC<Props> = ({ children, ...props }) => {
   return (
-    <AbstractTooltip
-      delay={150}
-      trigger="mouseenter"
-      plugins={[mouseRest]}
-      {...props}
-    >
-      {children}
-    </AbstractTooltip>
+    <TooltipContextProvider descendsFromTooltip>
+      <AbstractTooltip
+        delay={150}
+        trigger="mouseenter"
+        plugins={[mouseRest]}
+        {...props}
+      >
+        {children}
+      </AbstractTooltip>
+    </TooltipContextProvider>
   );
 };
