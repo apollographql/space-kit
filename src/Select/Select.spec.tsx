@@ -2,6 +2,7 @@ import "@testing-library/jest-dom";
 import React from "react";
 import userEvent from "@testing-library/user-event";
 import { act, render, screen, within, waitFor } from "@testing-library/react";
+import { ListItem } from "../ListItem";
 import { Select } from "../Select";
 import { SpaceKitProvider } from "../SpaceKitProvider";
 import { FormikConfig, useFormik } from "formik";
@@ -63,6 +64,31 @@ test("given a controlled `value`, should render controlled value", () => {
   expect(screen.getByText("a")).toBeInTheDocument();
   expect(screen.queryByText("b")).not.toBeInTheDocument();
   act(() => userEvent.click(screen.getByRole("button")));
+});
+
+test("given a `renderListItem` prop, should be used", () => {
+  render(
+    <SpaceKitProvider disableAnimations>
+      <Select
+        renderListItem={(props, optionElement) => (
+          <ListItem
+            {...props}
+            as={<a href={`/${String(optionElement.props.value)}`} />}
+          />
+        )}
+        value="a"
+      >
+        <option value="a">a</option>
+        <option value="b">b</option>
+      </Select>
+    </SpaceKitProvider>,
+  );
+
+  userEvent.click(screen.getByRole("button", { name: "a" }));
+
+  const option = screen.getByRole("option", { name: "b" });
+  expect(option.tagName.toLowerCase()).toBe("a");
+  expect(option).toHaveAttribute("href", "/b");
 });
 
 test("given children mixed with `option` and `optgroup`, should render headings and elements", () => {

@@ -28,7 +28,49 @@ export type OptionProps = React.DetailedHTMLProps<
   React.OptionHTMLAttributes<HTMLOptionElement>,
   HTMLOptionElement
 >;
-interface ListItemWrapperProps extends Pick<Props, "selectionIndicator"> {
+
+// This is defined in it's own interface so that both interfaces that will use
+// it can `extend` this interface, therefore automatically including the jsdoc
+// in both types.
+interface RenderListItemProps {
+  /**
+   * Custom function to render each `ListItem`
+   *
+   * This is provided so you can render the `ListItem` on your own, with an `as`
+   * prop, for example, so you can render a `Link`. 
+   *
+   * The function will be called and it's return value rendered; this does not
+   * use `React.createElement`, so an inline function is totally acceptable with
+   * no performance penalty.
+   *
+   * @default `(props) => <ListItem {...props} />`
+   *
+   *
+   * @param props - Props that were going to be passed to the underlying
+   *`ListItem`. You must merge this with whatever you are going to render.
+
+   * @param optionElement - The `option` element that is going to be parsed and
+   * rendered as a `ListItem`.
+   *
+   * You can use this to get the props you passed to the `option` element so you
+   * can customize behavior. For example, you can use this to extract the
+   * `option`'s `value` prop and generate a custom URL with `Link` element.
+   */
+  renderListItem: (
+    props: React.ComponentProps<typeof ListItem>,
+    optionElement: React.ReactElement<
+      React.DetailedHTMLProps<
+        React.OptionHTMLAttributes<HTMLOptionElement>,
+        HTMLOptionElement
+      >,
+      "option"
+    >,
+  ) => React.ReactElement<React.ComponentProps<typeof ListItem>>;
+}
+
+interface ListItemWrapperProps
+  extends Pick<Props, "selectionIndicator">,
+    RenderListItemProps {
   /** `items` prop passed to `useSelect`
    *
    * We'll use this to get the index
@@ -47,6 +89,7 @@ const ListItemWrapper: React.FC<ListItemWrapperProps> = ({
   downshiftItems,
   element,
   getItemProps,
+  renderListItem,
   selected,
   selectionIndicator,
 }) => {
@@ -64,22 +107,27 @@ const ListItemWrapper: React.FC<ListItemWrapperProps> = ({
   });
 
   return (
-    <ListItem
-      css={{ alignItems: "baseline" }}
-      key={element.props.value || element.props.children}
-      {...downshiftItemProps}
-      highlighted={downshiftItemProps["aria-selected"] === "true"}
-      selected={selected}
-      startIcon={
-        selectionIndicator === "checkmark" ? (
-          selected ? (
-            <IconCheck css={{ height: "100%", width: "100%" }} />
-          ) : null
-        ) : undefined
-      }
-    >
-      {element.props.children}
-    </ListItem>
+    <ClassNames>
+      {({ css }) => {
+        return renderListItem(
+          {
+            className: css({ alignItems: "baseline" }),
+            key: element.props.value || element.props.children,
+            ...downshiftItemProps,
+            highlighted: downshiftItemProps["aria-selected"] === "true",
+            selected,
+            startIcon:
+              selectionIndicator === "checkmark" ? (
+                selected ? (
+                  <IconCheck css={{ height: "100%", width: "100%" }} />
+                ) : null
+              ) : undefined,
+            children: element.props.children,
+          },
+          element,
+        );
+      }}
+    </ClassNames>
   );
 };
 
@@ -106,7 +154,8 @@ interface Props
         HTMLSelectElement
       >,
       "onBlur" | "onChange" | "name"
-    > {
+    >,
+    Partial<RenderListItemProps> {
   /**
    * class name to apply to the trigger component
    */
@@ -223,6 +272,7 @@ export const Select: React.FC<Props> = ({
   onChange,
   placement = "bottom-start",
   popperOptions,
+  renderListItem = (props) => <ListItem {...props} />,
   renderTriggerNode = (value) => <>{value?.children || ""}</>,
   selectionIndicator = null,
   size = "standard",
@@ -411,6 +461,7 @@ export const Select: React.FC<Props> = ({
                         downshiftItems={items}
                         element={child}
                         getItemProps={getItemProps}
+                        renderListItem={renderListItem}
                         selected={selectedItem === child.props}
                         selectionIndicator={selectionIndicator}
                         key={getEffectiveValueFromOptionElementProps(
@@ -446,6 +497,7 @@ export const Select: React.FC<Props> = ({
                                 downshiftItems={items}
                                 element={optgroupChild}
                                 getItemProps={getItemProps}
+                                renderListItem={renderListItem}
                                 selectionIndicator={selectionIndicator}
                                 selected={selectedItem === optgroupChild.props}
                               />
