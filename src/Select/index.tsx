@@ -68,7 +68,8 @@ const ListItemWrapper: React.FC<ListItemWrapperProps> = ({
       css={{ alignItems: "baseline" }}
       key={element.props.value || element.props.children}
       {...downshiftItemProps}
-      selected={downshiftItemProps["aria-selected"] === "true"}
+      highlighted={downshiftItemProps["aria-selected"] === "true"}
+      selected={selected}
       startIcon={
         selectionIndicator === "checkmark" ? (
           selected ? (
@@ -375,7 +376,7 @@ export const Select: React.FC<Props> = ({
   }, [labelProps, labelPropsCallbackRef]);
 
   return (
-    <ListConfigProvider {...listConfig} hoverColor={null} iconSize="small">
+    <ListConfigProvider {...listConfig} iconSize="small">
       <ClassNames>
         {({ css, cx }) => (
           <Popover
