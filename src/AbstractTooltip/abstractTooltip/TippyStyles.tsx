@@ -8,6 +8,10 @@ export const TippyStyles: React.FC = () => (
   <Global
     styles={css({
       ".tippy-box": {
+        // We need this to anticipate sub-pixel shifting between the animated
+        // and non-animated state.
+        "will-change": "transform",
+
         "&[data-theme=space-kit]": {
           ...base.small,
           backgroundColor: colors.black.base,
