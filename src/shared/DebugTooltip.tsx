@@ -1,6 +1,7 @@
 import React from "react";
 import { PerformUserInteraction } from "../shared/PerformUserInteraction";
 import { getByTestId, waitFor } from "@testing-library/dom";
+import { pick } from "lodash";
 
 /**
  * Component wrapping a Tooltip to debug it's positioning issues. This should be
@@ -21,7 +22,15 @@ export const DebugTooltip: React.FC = ({ children }) => {
         getByTestId(document.body, "debug-styles-box").appendChild(
           document.createTextNode(
             [
-              `${tippyRoot.style.transform}`,
+              `${JSON.stringify(
+                pick(tippyRoot.style, [
+                  "top",
+                  "bottom",
+                  "left",
+                  "right",
+                  "transform",
+                ]),
+              )}`,
               `clientWidth=${document.querySelector("html")?.clientWidth}`,
               `size=${
                 document.querySelector<HTMLDivElement>("[data-tippy-root]")
@@ -47,7 +56,6 @@ export const DebugTooltip: React.FC = ({ children }) => {
             position: "absolute",
             right: 5,
           }}
-          className="chromatic-ignore"
           data-testid="debug-styles-box"
         />
       </div>
