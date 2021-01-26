@@ -1,19 +1,35 @@
-version: 2
+version: 2.1
 
 defaults: &defaults
   docker:
     - image: circleci/node:dubnium
   working_directory: ~/space-kit
-
+  
+commands:
+  npm-install:
+    steps:
+      - restore_cache:
+          name: Restore npm cache
+          keys:
+            - npm-cache--{{ checksum ".circleci/config.yml" }}--{{ checksum "package-lock.json" }}
+            - npm-cache--{{ checksum ".circleci/config.yml" }}
+            - npm-cache
+      - run:
+          name: Install npm dependencies with `npm ci`
+          command: npm ci --prefer-offline --no-audit
+      - save_cache:
+          name: Save npm and Cypress caches
+          key: npm-cache--{{ checksum ".circleci/config.yml" }}--{{ checksum "package-lock.json" }}
+          paths:
+            - ~/.npm
+  
 jobs:
   chromatic:
     <<: *defaults
     resource_class: medium+
     steps:
       - checkout
-      - run:
-          name: Install npm dependencies
-          command: npm ci
+      - npm-install
       - restore_cache:
           name: Restore storybook cache
           keys:
@@ -34,9 +50,7 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - run:
-          name: Install npm dependencies
-          command: npm ci
+      - npm-install
       - run:
           name: Check for duplicate icons
           command: npm run test:duplicate-icons -s
@@ -45,9 +59,7 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - run:
-          name: Install npm dependencies
-          command: npm ci
+      - npm-install
       - run:
           name: Ensure output directory exists
           command: mkdir -p /tmp/test-reports/eslint
@@ -76,9 +88,7 @@ jobs:
       - run:
           name: Add NPM_TOKEN to `.npmrc`
           command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/space-kit/.npmrc
-      - run:
-          name: Install npm dependencies
-          command: npm ci
+      - npm-install
       - run:
           name: Release
           command: npm run release
@@ -87,9 +97,7 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - run:
-          name: Install npm dependencies
-          command: npm ci
+      - npm-install
       - run:
           name: Release
           command: npx auto canary
@@ -98,9 +106,7 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - run:
-          name: Install npm dependencies
-          command: npm ci
+      - npm-install
       - run:
           name: Test
           command: npm run test:unit:coverage -- --silent --maxWorkers=2 --ci
@@ -112,9 +118,7 @@ jobs:
     <<: *defaults
     steps:
       - checkout
-      - run:
-          name: Install npm dependencies
-          command: npm ci
+      - npm-install
       - run:
           name: TypeScript
           command: npm run test:typescript
