@@ -1,3 +1,20 @@
+# v8.12.0 (Tue Jan 26 2021)
+
+#### 🚀 Enhancement
+
+- [AP-1948](https://apollographql.atlassian.net/browse/AP-1948): Add `renderListItem` prop to `Select` [#300](https://github.com/apollographql/space-kit/pull/300) ([@justinanastos](https://github.com/justinanastos))
+
+#### 🏠 Internal
+
+- add size debugging to tooltip stories [#304](https://github.com/apollographql/space-kit/pull/304) ([@justinanastos](https://github.com/justinanastos))
+- add more to tooltip debugging [#303](https://github.com/apollographql/space-kit/pull/303) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v8.11.1 (Tue Jan 26 2021)
 
 #### 🐛  Bug Fix
