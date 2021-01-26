@@ -20,9 +20,17 @@ export const DebugTooltip: React.FC = ({ children }) => {
 
         getByTestId(document.body, "debug-styles-box").appendChild(
           document.createTextNode(
-            `${tippyRoot.style.transform}\nclientWidth=${
-              document.querySelector("html")?.clientWidth
-            }`,
+            [
+              `${tippyRoot.style.transform}`,
+              `clientWidth=${document.querySelector("html")?.clientWidth}`,
+              `size=${
+                document.querySelector<HTMLDivElement>("[data-tippy-root]")
+                  ?.offsetWidth
+              }x${
+                document.querySelector<HTMLDivElement>("[data-tippy-root]")
+                  ?.offsetHeight
+              }`,
+            ].join("\n"),
           ),
         );
       }}
