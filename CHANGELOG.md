@@ -1,3 +1,22 @@
+# v8.11.1 (Tue Jan 26 2021)
+
+#### 🐛  Bug Fix
+
+- Try to remove post-animation pixel shift in Tooltip, ConfirmationTooltip, and Menu stories [#302](https://github.com/apollographql/space-kit/pull/302) ([@justinanastos](https://github.com/justinanastos))
+- Finally fix Tooltip pixel shifting [#301](https://github.com/apollographql/space-kit/pull/301) ([@justinanastos](https://github.com/justinanastos))
+- [AR-1993](https://apollographql.atlassian.net/browse/AR-1993): Replace `Select` custom blue highlighting with silver [#297](https://github.com/apollographql/space-kit/pull/297) ([@justinanastos](https://github.com/justinanastos))
+
+#### 🏠 Internal
+
+- CI: cache `~/.npm` to speed up `npm ci` [#253](https://github.com/apollographql/space-kit/pull/253) ([@justinanastos](https://github.com/justinanastos))
+- CI: show only lint errors, not warnings, when Ci fails for linting er… [#299](https://github.com/apollographql/space-kit/pull/299) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v8.11.0 (Mon Jan 11 2021)
 
 #### 🚀 Enhancement
