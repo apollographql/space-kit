@@ -19,7 +19,11 @@ export const DebugTooltip: React.FC = ({ children }) => {
         });
 
         getByTestId(document.body, "debug-styles-box").appendChild(
-          document.createTextNode(tippyRoot.style.transform),
+          document.createTextNode(
+            `${tippyRoot.style.transform}\nclientWidth=${
+              document.querySelector("html")?.clientWidth
+            }`,
+          ),
         );
       }}
     >
