@@ -1,3 +1,19 @@
+# v8.13.0 (Wed Jan 27 2021)
+
+#### 🚀 Enhancement
+
+- [AR-2016](https://apollographql.atlassian.net/browse/AR-2016): Allow `Tooltip` to wrap a `Button` that is `disabled` [#298](https://github.com/apollographql/space-kit/pull/298) ([@justinanastos](https://github.com/justinanastos))
+
+#### 🏠 Internal
+
+- add `DebugTooltip` to select story [#305](https://github.com/apollographql/space-kit/pull/305) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v8.12.0 (Tue Jan 26 2021)
 
 #### 🚀 Enhancement
