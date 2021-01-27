@@ -1,10 +1,12 @@
+/** @jsx jsx */
+/** @jsxFrag React.Fragment */
 import { colors, ShadedColor } from "../colors";
 import type { Property, SimplePseudos } from "csstype";
 import { base } from "../typography";
-import { ClassNames, ObjectInterpolation } from "@emotion/core";
+import { ClassNames, jsx, ObjectInterpolation } from "@emotion/core";
 import { getOffsetInPalette } from "../colors/utils/getOffsetInPalette";
 import tinycolor from "tinycolor2";
-import React from "react";
+import React, { useState } from "react";
 import { LoadingSpinner } from "../Loaders";
 import { assertUnreachable } from "../shared/assertUnreachable";
 import { useFocusRing } from "@react-aria/focus";
@@ -12,7 +14,7 @@ import { mergeProps } from "@react-aria/utils";
 import omit from "lodash/omit";
 import { ButtonIcon } from "./button/ButtonIcon";
 import { inputHeightDictionary } from "../shared/inputHeightDictionary";
-
+import { useTooltipContext } from "../shared/TooltipContext";
 type TLength = string | 0 | number;
 
 /**
@@ -173,8 +175,11 @@ interface Props
   /**
    * If the button will appear and behave disabled.
    *
-   * This prop is explicitly here and not granted by extension because it
-   * doesn't exist on HTMLAttributes, but is essential to rendering correctly.
+   * This will be directly applied to the underlying `button` with a notable
+   * exception: if this `Button` is rendered inside of a `Tooltip`, is disabled,
+   * and the pointer is over the button, the `disabled` prop will be removed
+   * from the `button` element and the disabled styles will be directly applied.
+   * This will allow disabled buttons to still use `Tooltip`.
    *
    * @default false
    */
@@ -289,15 +294,32 @@ export const Button = React.forwardRef<HTMLElement, Props>(
     }
     const { isFocusVisible, focusProps } = useFocusRing();
 
+    // Capture if the mouse is over the button by using `onPointerEnter` and
+    // `onPointerLeave`, which will still fire if the button is disabled. When
+    // we know the cursor is over the button, then override the button's
+    // `disabled` behavior to allow `Tooltip`s to work.
+    const [isPointerOver, setIsPointerOver] = useState(false);
+
     const mergedProps = mergeProps(passthroughProps, as.props, focusProps, {
       ref,
     });
 
     /**
-     * If the button is in a `loading` state, then always treat it as
-     * disabled. Otherwise, try to use `as.props`. Finally, use `props`
+     * If the button is in a `loading` state, then always treat the button as
+     * disabled.
      */
-    mergedProps.disabled = loading || mergedProps.disabled;
+    if (loading) {
+      mergedProps.disabled = true;
+    }
+
+    /**
+     * Flag indicating we're going to override the default disabled behavior to
+     * make an antecedent `Tooltip` work
+     */
+    const overrideDisabledBehavior: boolean =
+      useTooltipContext().descendsFromTooltip &&
+      isPointerOver &&
+      mergedProps.disabled;
 
     /**
      * Handler to avoid responding to click events for all attached listeners
@@ -309,6 +331,26 @@ export const Button = React.forwardRef<HTMLElement, Props>(
       if (mergedProps.disabled) return event.preventDefault();
 
       mergedProps.onClick?.(event);
+    };
+
+    /**
+     * Styles to apply when button is disabled.
+     *
+     * We store this because we use this in multiple places to account for
+     * overriding the default disabled behavior.
+     */
+    const disabledStyles = {
+      backgroundColor:
+        feel === "flat"
+          ? "transparent"
+          : theme === "light"
+          ? colors.silver.light
+          : colors.grey.dark,
+      boxShadow: "none",
+      color:
+        feel === "flat" && theme === "dark"
+          ? colors.grey.dark
+          : colors.grey.light,
     };
 
     const focusedStyles: ObjectInterpolation<undefined> = {
@@ -361,37 +403,35 @@ export const Button = React.forwardRef<HTMLElement, Props>(
         {({ cx, css }) => {
           const propsToPass = mergeProps(
             // Omit `onClick` from `otherProps` beacuse we'll be conditionally
-            // calling it in the `onClick` handler depending on the `disabled`
-            // prop. Also exclude `className` beacuse we'll be combining it on
+            // calling it in the `onClick` handler depending on `mergedProps.disabled`.
+            // Also exclude `className` beacuse we'll be combining it on
             // our own with `cx`. This is necessary because `cx` allows for
             // emotion styles to be logically overwritten.
-            omit(mergedProps, "className", "onClick"),
+            omit(
+              mergedProps,
+              "className",
+              "onClick",
+              // If we're overriding the default disabled behavior, then strip
+              // it out from the props we'll pass to the element.
+              overrideDisabledBehavior ? "disabled" : "",
+            ),
             {
+              "aria-disabled": mergedProps.disabled,
               onClick,
+              onPointerEnter() {
+                setIsPointerOver(true);
+              },
+              onPointerLeave() {
+                setIsPointerOver(false);
+              },
               className: cx(
                 css([
                   {
                     "&:focus": {
                       outline: 0,
                     },
-                    // We need to also set the `:hover` on `:disabled` so it has a
-                    // higher specificity than any `:hover` classes passed in. This
-                    // also means that both of these need to be overriden if we want
-                    // to use a custom disabled color.
-                    "&[disabled], &[disabled]:hover": {
-                      backgroundColor:
-                        feel === "flat"
-                          ? "transparent"
-                          : theme === "light"
-                          ? colors.silver.light
-                          : colors.grey.dark,
-                      boxShadow: "none",
-                      color:
-                        feel === "flat" && theme === "dark"
-                          ? colors.grey.dark
-                          : colors.grey.light,
-                    },
-
+                  },
+                  {
                     backgroundColor:
                       color === colors.white
                         ? colors.white
@@ -454,65 +494,73 @@ export const Button = React.forwardRef<HTMLElement, Props>(
                     whiteSpace: "nowrap",
                   },
 
-                  !mergedProps.disabled && {
-                    ":hover, &[data-force-hover-state]": {
-                      backgroundColor: getHoverBackgroundColor({
-                        color,
-                        feel,
-                        theme,
-                      }),
-                      color: getTextColor({
-                        color,
-                        feel,
-                        theme,
-                        mode: ":hover",
-                      }),
-                      ...(feel !== "flat" && {
-                        // The `box-shadow` property is copied directly from Zeplin
-                        boxShadow:
-                          theme === "light"
-                            ? "0 5px 10px 0 rgba(18, 21, 26, 0.08), inset 0 0 0 1px rgba(18, 21, 26, 0.2), inset 0 -1px 0 0 rgba(18, 21, 26, 0.05)"
-                            : "0 0 0 1px rgba(18, 21, 26, 0.2), 0 5px 10px 0 rgba(18, 21, 26, 0.12), 0 1px 0 0 rgba(18, 21, 26, 0.05)",
-                      }),
-                    },
-                    // This is kind of hacky behavior
-                    "&[data-force-focus-state]": focusedStyles,
-                    "&:active, &[data-force-active-state], &[aria-expanded=true]": {
-                      ...(getTextColor({
-                        color,
-                        feel,
-                        theme,
-                        mode: ":hover",
-                      }) && {
-                        color: getTextColor({
-                          color,
-                          feel,
-                          theme,
-                          mode: ":active",
-                        }),
-                      }),
+                  // We need to also set the `:hover` on `:disabled` so it has a
+                  // higher specificity than any `:hover` classes passed in. This
+                  // also means that both of these need to be overriden if we want
+                  // to use a custom disabled color.
+                  mergedProps.disabled
+                    ? overrideDisabledBehavior
+                      ? disabledStyles
+                      : { "&[disabled], &[disabled]:hover": disabledStyles }
+                    : {
+                        ":hover, &[data-force-hover-state]": {
+                          backgroundColor: getHoverBackgroundColor({
+                            color,
+                            feel,
+                            theme,
+                          }),
+                          color: getTextColor({
+                            color,
+                            feel,
+                            theme,
+                            mode: ":hover",
+                          }),
+                          ...(feel !== "flat" && {
+                            // The `box-shadow` property is copied directly from Zeplin
+                            boxShadow:
+                              theme === "light"
+                                ? "0 5px 10px 0 rgba(18, 21, 26, 0.08), inset 0 0 0 1px rgba(18, 21, 26, 0.2), inset 0 -1px 0 0 rgba(18, 21, 26, 0.05)"
+                                : "0 0 0 1px rgba(18, 21, 26, 0.2), 0 5px 10px 0 rgba(18, 21, 26, 0.12), 0 1px 0 0 rgba(18, 21, 26, 0.05)",
+                          }),
+                        },
+                        // This is kind of hacky behavior
+                        "&[data-force-focus-state]": focusedStyles,
+                        "&:active, &[data-force-active-state], &[aria-expanded=true]": {
+                          ...(getTextColor({
+                            color,
+                            feel,
+                            theme,
+                            mode: ":hover",
+                          }) && {
+                            color: getTextColor({
+                              color,
+                              feel,
+                              theme,
+                              mode: ":active",
+                            }),
+                          }),
 
-                      backgroundColor:
-                        color === colors.white
-                          ? colors.white
-                          : feel === "raised"
-                          ? color
-                          : color === defaultColor
-                          ? theme === "dark"
-                            ? colors.grey.darker
-                            : colors.silver.base
-                          : getOffsetInPalette(2, "lighter", color),
+                          backgroundColor:
+                            color === colors.white
+                              ? colors.white
+                              : feel === "raised"
+                              ? color
+                              : color === defaultColor
+                              ? theme === "dark"
+                                ? colors.grey.darker
+                                : colors.silver.base
+                              : getOffsetInPalette(2, "lighter", color),
 
-                      // The `box-shadow` properties are copied directly from Zeplin
-                      boxShadow:
-                        feel !== "flat"
-                          ? theme === "light"
-                            ? "inset 0 0 0 1px rgba(18, 21, 26, 0.2), inset 0 -1px 0 0 rgba(18, 21, 26, 0.05), inset 0 2px 2px 0 rgba(18, 21, 26, 0.12)"
-                            : "0 0 0 1px rgba(18, 21, 26, 0.2), 0 1px 4px 0 rgba(18, 21, 26, 0.08), 0 -1px 0 0 rgba(18, 21, 26, 0.16), inset 0 1px 2px 0 rgba(18, 21, 26, 0.42)"
-                          : "none",
-                      outline: "0",
-                    },
-                  },
+                          // The `box-shadow` properties are copied directly from Zeplin
+                          boxShadow:
+                            feel !== "flat"
+                              ? theme === "light"
+                                ? "inset 0 0 0 1px rgba(18, 21, 26, 0.2), inset 0 -1px 0 0 rgba(18, 21, 26, 0.05), inset 0 2px 2px 0 rgba(18, 21, 26, 0.12)"
+                                : "0 0 0 1px rgba(18, 21, 26, 0.2), 0 1px 4px 0 rgba(18, 21, 26, 0.08), 0 -1px 0 0 rgba(18, 21, 26, 0.16), inset 0 1px 2px 0 rgba(18, 21, 26, 0.42)"
+                              : "none",
+                          outline: "0",
+                        },
+                      },
                 ]),
                 mergedProps.className,
                 isFocusVisible && css(focusedStyles),
