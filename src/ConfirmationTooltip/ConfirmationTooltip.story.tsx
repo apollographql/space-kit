@@ -19,7 +19,7 @@ storiesOf("ConfirmationTooltip", module)
             }}
           >
             <div style={{ padding: 50 }}>
-              <ConfirmationTooltip content="default content">
+              <ConfirmationTooltip content={<span>default content</span>}>
                 <Button>click</Button>
               </ConfirmationTooltip>
             </div>
@@ -27,9 +27,7 @@ storiesOf("ConfirmationTooltip", module)
         </DebugTooltip>
       );
     },
-    {
-      chromatic: { delay: 500 },
-    },
+    { chromatic: { delay: 2000 } },
   )
   .add(
     "disabled, no confirmation should be visible",

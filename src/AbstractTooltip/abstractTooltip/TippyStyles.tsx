@@ -34,32 +34,6 @@ export const TippyStyles: React.FC = () => (
             padding: "8px 12px",
           },
         },
-
-        "&[data-animation=shift-away]": {
-          "will-change": "transform",
-
-          transform: "rotate(0.0001deg) ",
-
-          "&[data-state=hidden]": {
-            opacity: 0,
-
-            "&[data-placement^=top]": {
-              transform: "translateY(10px), rotate(0.0001deg) ",
-            },
-
-            "&[data-placement^=bottom]": {
-              transform: "translateY(-10px), rotate(0.0001deg) ",
-            },
-
-            "&[data-placement^=left]": {
-              transform: "translateX(10px), rotate(0.0001deg) ",
-            },
-
-            "&[data-placement^=right]": {
-              transform: "translateX(-10px), rotate(0.0001deg) ",
-            },
-          },
-        },
       },
     })}
   />

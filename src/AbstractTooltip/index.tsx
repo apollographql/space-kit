@@ -73,6 +73,12 @@ export const AbstractTooltip: React.FC<Props> = ({
           ...popperOptions,
           modifiers: [
             {
+              name: "computeStyles",
+              options: {
+                gpuAcceleration: false,
+              },
+            },
+            {
               name: "flip",
               options: {
                 fallbackPlacements,

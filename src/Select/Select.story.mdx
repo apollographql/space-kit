@@ -6,6 +6,7 @@ import { PerformUserInteraction } from "../shared/PerformUserInteraction";
 import { Select as SpaceKitSelect } from "../Select";
 import userEvent from "@testing-library/user-event";
 import { base } from "../../typography";
+import { DebugTooltip } from "../shared/DebugTooltip";
 
 <Meta title="Form/Select" component={SpaceKitSelect} />
 
@@ -166,16 +167,18 @@ If you inspect the `label` shown in the following story; you'll see that `id` an
 
 <Canvas>
   <Story name="basic options with label">
-    <SelectWithLabel
-      label={<label>label</label>}
-      defaultValue=""
-      renderTriggerNode={(selectedItem) => (
-        <>{selectedItem?.children ?? "select an item"}</>
-      )}
-    >
-      <option value="value a">a</option>
-      <option value="value b">b</option>
-    </SelectWithLabel>
+    <DebugTooltip>
+      <SelectWithLabel
+        label={<label>label</label>}
+        defaultValue=""
+        renderTriggerNode={(selectedItem) => (
+          <>{selectedItem?.children ?? "select an item"}</>
+        )}
+      >
+        <option value="value a">a</option>
+        <option value="value b">b</option>
+      </SelectWithLabel>
+    </DebugTooltip>
   </Story>
 </Canvas>
 

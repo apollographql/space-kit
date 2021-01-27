@@ -66,7 +66,7 @@ storiesOf("Tooltip", module)
         </DebugTooltip>
       );
     },
-    { chromatic: { delay: 500 } },
+    { chromatic: { delay: 2000 } },
   )
   .add(
     "relaxed padding",
@@ -113,7 +113,7 @@ storiesOf("Tooltip", module)
         </DebugTooltip>
       );
     },
-    { chromatic: { delay: 500 } },
+    { chromatic: { delay: 2000 } },
   )
   .add(
     "disabled, no tooltip should be visible",
