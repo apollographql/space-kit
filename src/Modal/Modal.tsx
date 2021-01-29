@@ -163,7 +163,11 @@ export const Modal: React.FC<Props> = ({
     throw new TypeError(
       "`as` must be an element with a corresponding element in `Framer.motion`",
     );
-  } else if (typeof type === 'string' && !motion[type] && !React.isValidElement(as)) {
+  } else if (
+    typeof type === "string" &&
+    !motion[type] &&
+    !React.isValidElement(as)
+  ) {
     throw new TypeError(
       "Could not determine the type of `as` to clone that element using Framer. This is most likely because it's a ref forwarding component and we don't have any way of determining what type it will render to.",
     );
@@ -177,9 +181,7 @@ export const Modal: React.FC<Props> = ({
    * too complex to model because `motion` has over 100 options.
    */
   const MotionComponent: React.ComponentType<MotionProps> =
-    typeof type === "string"
-      ? motion[type]
-      : motion.custom<MotionProps>(type);
+    typeof type === "string" ? motion[type] : motion.custom<MotionProps>(type);
 
   return (
     <ClassNames>
