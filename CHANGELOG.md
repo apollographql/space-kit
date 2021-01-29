@@ -1,3 +1,15 @@
+# v8.13.1 (Fri Jan 29 2021)
+
+#### 🐛  Bug Fix
+
+- Add support for custom `as` components in modals [#306](https://github.com/apollographql/space-kit/pull/306) ([@Jephuff](https://github.com/Jephuff))
+
+#### Authors: 1
+
+- Jeffrey Burt ([@Jephuff](https://github.com/Jephuff))
+
+---
+
 # v8.13.0 (Wed Jan 27 2021)
 
 #### 🚀 Enhancement
