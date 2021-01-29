@@ -12,6 +12,25 @@ interface Props {
   size: "small" | "medium" | "large";
 }
 
+const CustomComponent = React.forwardRef<HTMLDivElement, { an?: undefined }>(
+  (props, ref) => (
+    <div
+      {...props}
+      ref={ref}
+      css={css`
+        background: repeating-linear-gradient(
+          135deg,
+          ${colors.white},
+          ${colors.white} 10px,
+          rgb(255, 253, 253) 10px,
+          rgb(255, 253, 253) 20px
+        );
+        width: 80vw;
+      `}
+    />
+  ),
+);
+
 export function ModalStory({
   title,
   description,
@@ -83,6 +102,29 @@ storiesOf("Modal", module)
           `}
         />
       }
+      size="large"
+      title="Example Title"
+      primaryAction={
+        <Button
+          color={colors.red.base}
+          style={{ color: colors.white }}
+          type="button"
+        >
+          Accept
+        </Button>
+      }
+      secondaryAction={
+        <Button color={colors.white} type="button">
+          Cancel
+        </Button>
+      }
+    >
+      Inner text
+    </Modal>
+  ))
+  .add("using as with custom component", () => (
+    <Modal
+      as={<CustomComponent />}
       size="large"
       title="Example Title"
       primaryAction={
