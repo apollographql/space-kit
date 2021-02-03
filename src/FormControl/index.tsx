@@ -81,7 +81,7 @@ const FormControl: React.FC<Props> = ({
   } = useFormControlInternalContext();
 
   /**
-   * Take a map keyed for each possible valye of `layout` and return the value
+   * Take a map keyed for each possible value of `layout` and return the value
    * corresponding to the current `layout`
    */
   function layoutValue<T>(map: Record<typeof layout, T>): T {
