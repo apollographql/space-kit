@@ -180,8 +180,13 @@ export const Modal: React.FC<Props> = ({
    * We have to strip the type because we'll get an error about the union being
    * too complex to model because `motion` has over 100 options.
    */
-  const MotionComponent: React.ComponentType<MotionProps> =
-    typeof type === "string" ? motion[type] : motion.custom<MotionProps>(type);
+  const MotionComponent: React.ComponentType<MotionProps> = React.useMemo(
+    () =>
+      typeof type === "string"
+        ? motion[type]
+        : motion.custom<MotionProps>(type),
+    [type],
+  );
 
   return (
     <ClassNames>
