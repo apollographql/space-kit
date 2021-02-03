@@ -1,3 +1,15 @@
+# v8.13.2 (Wed Feb 03 2021)
+
+#### 🐛  Bug Fix
+
+- fix(Modal): Fix repeating animations with custom components [#308](https://github.com/apollographql/space-kit/pull/308) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v8.13.1 (Fri Jan 29 2021)
 
 #### 🐛  Bug Fix
