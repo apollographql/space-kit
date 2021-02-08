@@ -98,8 +98,8 @@ const modalBackdrop = css`
     position: fixed;
     z-index: 10;
     content: "";
-    background-color: ${colors.grey.lighter};
-    opacity: 0.7;
+    background-color: ${colors.black.base};
+    opacity: 0.55;
     top: 0;
     left: 0;
     bottom: 0;
