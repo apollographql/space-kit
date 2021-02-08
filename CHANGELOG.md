@@ -1,3 +1,15 @@
+# v8.14.0 (Mon Feb 08 2021)
+
+#### 🚀 Enhancement
+
+- Tweak modal page background color [#309](https://github.com/apollographql/space-kit/pull/309) ([@jglovier](https://github.com/jglovier))
+
+#### Authors: 1
+
+- Joel Glovier ([@jglovier](https://github.com/jglovier))
+
+---
+
 # v8.13.2 (Wed Feb 03 2021)
 
 #### 🐛  Bug Fix
