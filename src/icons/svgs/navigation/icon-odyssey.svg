@@ -1,1 +1,6 @@
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><defs><style>.cls-1,.cls-2{fill:none;stroke:#231f20;stroke-width:1.5px;}.cls-1{stroke-linejoin:round;}.cls-2{stroke-linecap:round;stroke-miterlimit:10;}</style></defs><polygon class="cls-1" points="23.13 9.3 12 2.88 0.88 9.3 0.88 9.3 12 15.72 23.13 9.3 23.13 9.3"/><line class="cls-2" x1="0.88" y1="9.3" x2="0.88" y2="14.38"/><line class="cls-2" x1="0.88" y1="16.38" x2="0.88" y2="17.1"/><path class="cls-2" d="M4.46,11.38v5.44a1.09,1.09,0,0,0,.54.94l4.81,2.78a4.37,4.37,0,0,0,4.34,0L19,17.76a1.08,1.08,0,0,0,.55-.94V11.38"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="20" viewBox="0 0 24 20">
+  <g fill="none" fill-rule="evenodd" stroke="#231F20" stroke-width="1.5">
+    <path stroke-linejoin="round" d="M23.13 7.3L12 .88.88 7.3h0L12 13.72 23.13 7.3z"/>
+    <path stroke-linecap="round" d="M.88 7.3v5.08M.88 14.38v.72M4.46 9.38v5.44a1.09 1.09 0 00.54.94l4.81 2.78a4.37 4.37 0 004.34 0L19 15.76a1.08 1.08 0 00.55-.94V9.38"/>
+  </g>
+</svg>
