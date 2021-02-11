@@ -15,6 +15,13 @@ interface Props
       "style" | "className"
     > {}
 
+/**
+ * Indicates how much padding the default tooltip has
+ *
+ * This will be used to apply negative margins to elements.
+ */
+export const listPadding = 6;
+
 export const List = React.forwardRef<
   HTMLDivElement,
   React.PropsWithChildren<Props>
@@ -61,7 +68,7 @@ export const List = React.forwardRef<
         : assertUnreachable(listConfig.margin));
     const horizontalMargin =
       listConfig.margin === "none"
-        ? -6
+        ? -listPadding
         : listConfig.margin === "auto"
         ? 0
         : assertUnreachable(listConfig.margin);
