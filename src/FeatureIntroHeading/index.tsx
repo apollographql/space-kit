@@ -11,7 +11,7 @@ interface Props
       React.HTMLAttributes<HTMLDivElement>,
       HTMLDivElement
     >,
-    "className" | "style" | "id"
+    "className" | "style"
   > {
   children: React.ReactNode;
 }
@@ -26,10 +26,13 @@ interface Props
 export const FeatureIntroHeading: React.FC<Props> = ({
   children,
   className,
-  id,
   style,
 }) => {
-  const { headingId, setHeading } = useFeatureIntroControlInternalContext();
+  const featureIntroContext = useFeatureIntroControlInternalContext();
+  const [featureIntroId, setHeading] = [
+    featureIntroContext?.id,
+    featureIntroContext?.setHeading,
+  ];
 
   const element = React.useMemo(
     () => (
@@ -40,18 +43,18 @@ export const FeatureIntroHeading: React.FC<Props> = ({
           color: colors.grey.darker,
           fontWeight: 600,
         }}
-        id={headingId || id}
+        id={featureIntroId && `${featureIntroId}-heading`}
         style={style}
       >
         {children}
       </div>
     ),
-    [children, className, headingId, id, style],
+    [children, className, featureIntroId, style],
   );
 
   React.useLayoutEffect(() => {
     setHeading?.(element);
   }, [element, setHeading]);
 
-  return setHeading ? null : element;
+  return featureIntroContext ? null : element;
 };

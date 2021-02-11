@@ -6,7 +6,6 @@ import { FeatureIntroHeading } from "../FeatureIntroHeading";
 import { FeatureIntroImage } from "../FeatureIntroImage";
 import { FeatureIntroLearnMoreLink } from "../FeatureIntroLearnMoreLink";
 import { FeatureIntroDismissButton } from "../FeatureIntroDismissButton";
-import { InteractiveFeatureIntro } from "./InteractiveFeatureIntro";
 import { Develop } from "../pictograms/Develop";
 
 <Meta title="Components/FeatureIntroControl" component={FeatureIntroControl} />
@@ -31,21 +30,20 @@ All FeatureIntro components are exported from `FeatureIntro` with the preceeding
 
 <Canvas>
   <Story name="Default">
-    <ClassNames>
-      {({ css }) => (
-        <FeatureIntroControl id="default">
-          <FeatureIntroHeading>Welcome to your Dev Graph</FeatureIntroHeading>
-          <FeatureIntroContent>
-            <div className={css({ lineHeight: "16px" })}>
-              Development graphs connect to your local server. The circle
-              indicator shows the current state of your connection.
-            </div>
-          </FeatureIntroContent>
-          <FeatureIntroLearnMoreLink href="https://apollographql.com" />
-          <FeatureIntroDismissButton>Got it 👍</FeatureIntroDismissButton>
-        </FeatureIntroControl>
-      )}
-    </ClassNames>
+    <FeatureIntroControl
+      id="default"
+      learnMoreLinkAs={<a href="https://apollographql.com" />}
+    >
+      <FeatureIntroHeading>Welcome to your Dev Graph</FeatureIntroHeading>
+      <FeatureIntroContent>
+        <div>
+          Development graphs connect to your local server. The circle indicator
+          shows the current state of your connection.
+        </div>
+      </FeatureIntroContent>
+      <FeatureIntroLearnMoreLink />
+      <FeatureIntroDismissButton>Got it 👍</FeatureIntroDismissButton>
+    </FeatureIntroControl>
   </Story>
 </Canvas>
 
@@ -53,24 +51,23 @@ All FeatureIntro components are exported from `FeatureIntro` with the preceeding
 
 <Canvas>
   <Story name="Default with Image">
-    <ClassNames>
-      {({ css }) => (
-        <FeatureIntroControl id="default">
-          <FeatureIntroHeading>Welcome to your Dev Graph</FeatureIntroHeading>
-          <FeatureIntroContent>
-            <div className={css({ lineHeight: "16px" })}>
-              Development graphs connect to your local server. The circle
-              indicator shows the current state of your connection.
-            </div>
-          </FeatureIntroContent>
-          <FeatureIntroImage>
-            <Develop width={248} height={186} />
-          </FeatureIntroImage>
-          <FeatureIntroLearnMoreLink href="https://apollographql.com" />
-          <FeatureIntroDismissButton>Got it 👍</FeatureIntroDismissButton>
-        </FeatureIntroControl>
-      )}
-    </ClassNames>
+    <FeatureIntroControl
+      id="default"
+      learnMoreLinkAs={<a href="https://apollographql.com" />}
+    >
+      <FeatureIntroHeading>Welcome to your Dev Graph</FeatureIntroHeading>
+      <FeatureIntroContent>
+        <div>
+          Development graphs connect to your local server. The circle indicator
+          shows the current state of your connection.
+        </div>
+      </FeatureIntroContent>
+      <FeatureIntroImage>
+        <Develop width={248} height={186} />
+      </FeatureIntroImage>
+      <FeatureIntroLearnMoreLink />
+      <FeatureIntroDismissButton>Got it 👍</FeatureIntroDismissButton>
+    </FeatureIntroControl>
   </Story>
 </Canvas>
 
@@ -78,24 +75,24 @@ All FeatureIntro components are exported from `FeatureIntro` with the preceeding
 
 <Canvas>
   <Story name="Image Layout Right">
-    <ClassNames>
-      {({ css }) => (
-        <FeatureIntroControl id="default" imagePlacement="left">
-          <FeatureIntroHeading>Welcome to your Dev Graph</FeatureIntroHeading>
-          <FeatureIntroContent>
-            <div className={css({ lineHeight: "16px" })}>
-              Development graphs connect to your local server. The circle
-              indicator shows the current state of your connection.
-            </div>
-          </FeatureIntroContent>
-          <FeatureIntroImage>
-            <Develop width={248} height={186} />
-          </FeatureIntroImage>
-          <FeatureIntroLearnMoreLink href="https://apollographql.com" />
-          <FeatureIntroDismissButton>Got it 👍</FeatureIntroDismissButton>
-        </FeatureIntroControl>
-      )}
-    </ClassNames>
+    <FeatureIntroControl
+      id="image-layout-right"
+      imagePlacement="right"
+      learnMoreLinkAs={<a href="https://apollographql.com" />}
+    >
+      <FeatureIntroHeading>Welcome to your Dev Graph</FeatureIntroHeading>
+      <FeatureIntroContent>
+        <div>
+          Development graphs connect to your local server. The circle indicator
+          shows the current state of your connection.
+        </div>
+      </FeatureIntroContent>
+      <FeatureIntroImage>
+        <Develop width={248} height={186} />
+      </FeatureIntroImage>
+      <FeatureIntroLearnMoreLink />
+      <FeatureIntroDismissButton>Got it 👍</FeatureIntroDismissButton>
+    </FeatureIntroControl>
   </Story>
 </Canvas>
 
@@ -103,24 +100,24 @@ All FeatureIntro components are exported from `FeatureIntro` with the preceeding
 
 <Canvas>
   <Story name="Image Layout Top">
-    <ClassNames>
-      {({ css }) => (
-        <FeatureIntroControl id="default" imagePlacement="top">
-          <FeatureIntroHeading>Welcome to your Dev Graph</FeatureIntroHeading>
-          <FeatureIntroContent>
-            <div className={css({ lineHeight: "16px" })}>
-              Development graphs connect to your local server. The circle
-              indicator shows the current state of your connection.
-            </div>
-          </FeatureIntroContent>
-          <FeatureIntroImage>
-            <Develop width={248} height={186} />
-          </FeatureIntroImage>
-          <FeatureIntroLearnMoreLink href="https://apollographql.com" />
-          <FeatureIntroDismissButton>Got it 👍</FeatureIntroDismissButton>
-        </FeatureIntroControl>
-      )}
-    </ClassNames>
+    <FeatureIntroControl
+      id="image-layout-top"
+      imagePlacement="top"
+      learnMoreLinkAs={<a href="https://apollographql.com" />}
+    >
+      <FeatureIntroHeading>Welcome to your Dev Graph</FeatureIntroHeading>
+      <FeatureIntroContent>
+        <div>
+          Development graphs connect to your local server. The circle indicator
+          shows the current state of your connection.
+        </div>
+      </FeatureIntroContent>
+      <FeatureIntroImage>
+        <Develop width={248} height={186} />
+      </FeatureIntroImage>
+      <FeatureIntroLearnMoreLink />
+      <FeatureIntroDismissButton>Got it 👍</FeatureIntroDismissButton>
+    </FeatureIntroControl>
   </Story>
 </Canvas>
 
@@ -128,33 +125,23 @@ All FeatureIntro components are exported from `FeatureIntro` with the preceeding
 
 <Canvas>
   <Story name="Image Layout Bottom">
-    <ClassNames>
-      {({ css }) => (
-        <FeatureIntroControl id="default" imagePlacement="bottom">
-          <FeatureIntroHeading>Welcome to your Dev Graph</FeatureIntroHeading>
-          <FeatureIntroContent>
-            <div className={css({ lineHeight: "16px" })}>
-              Development graphs connect to your local server. The circle
-              indicator shows the current state of your connection.
-            </div>
-          </FeatureIntroContent>
-          <FeatureIntroImage>
-            <Develop width={248} height={186} />
-          </FeatureIntroImage>
-          <FeatureIntroLearnMoreLink href="https://apollographql.com" />
-          <FeatureIntroDismissButton>Got it 👍</FeatureIntroDismissButton>
-        </FeatureIntroControl>
-      )}
-    </ClassNames>
-  </Story>
-</Canvas>
-
-## Interactive
-
-An example of how you can use Tippy to make the component look how it is supposed to with a shadow and arrow
-
-<Canvas>
-  <Story name="Interactive Example with Tippy">
-    <InteractiveFeatureIntro />
+    <FeatureIntroControl
+      id="image-layout-bottom"
+      imagePlacement="bottom"
+      learnMoreLinkAs={<a href="https://apollographql.com" />}
+    >
+      <FeatureIntroHeading>Welcome to your Dev Graph</FeatureIntroHeading>
+      <FeatureIntroContent>
+        <div>
+          Development graphs connect to your local server. The circle indicator
+          shows the current state of your connection.
+        </div>
+      </FeatureIntroContent>
+      <FeatureIntroImage aria-label="FIND ME">
+        <Develop width={248} height={186} />
+      </FeatureIntroImage>
+      <FeatureIntroLearnMoreLink />
+      <FeatureIntroDismissButton>Got it 👍</FeatureIntroDismissButton>
+    </FeatureIntroControl>
   </Story>
 </Canvas>

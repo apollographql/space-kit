@@ -11,7 +11,7 @@ interface Props
       React.HTMLAttributes<HTMLDivElement>,
       HTMLDivElement
     >,
-    "className" | "style" | "id"
+    "className" | "style"
   > {
   children: React.ReactNode;
 }
@@ -26,11 +26,13 @@ interface Props
 export const FeatureIntroContent: React.FC<Props> = ({
   children,
   className,
-  id,
   style,
 }) => {
-  const { contentId, setContent } = useFeatureIntroControlInternalContext();
-
+  const featureIntroContext = useFeatureIntroControlInternalContext();
+  const [featureIntroId, setContent] = [
+    featureIntroContext?.id,
+    featureIntroContext?.setContent,
+  ];
   const element = React.useMemo(
     () => (
       <div
@@ -39,19 +41,20 @@ export const FeatureIntroContent: React.FC<Props> = ({
           ...typography.base.small,
           color: colors.grey.base,
           fontWeight: "normal",
+          lineHeight: "16px",
         }}
-        id={contentId || id}
+        id={featureIntroId && `${featureIntroId}-content`}
         style={style}
       >
         {children}
       </div>
     ),
-    [children, className, contentId, id, style],
+    [children, className, featureIntroId, style],
   );
 
   React.useLayoutEffect(() => {
     setContent?.(element);
   }, [element, setContent]);
 
-  return setContent ? null : element;
+  return featureIntroContext ? null : element;
 };

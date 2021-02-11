@@ -11,31 +11,26 @@ interface FeatureIntroControlContextConfig {
  * Required: dismiss, heading, content
  */
 interface FeatureIntroControl extends FeatureIntroControlContextConfig {
-  heading: React.ReactNode | undefined;
+  heading: React.ReactNode;
   setHeading:
     | React.Dispatch<React.SetStateAction<FeatureIntroControl["heading"]>>
     | undefined;
-  content: React.ReactNode | undefined;
+  content: React.ReactNode;
   setContent:
     | React.Dispatch<React.SetStateAction<FeatureIntroControl["content"]>>
     | undefined;
-  image: React.ReactNode | undefined;
+  image: React.ReactNode;
   setImage:
     | React.Dispatch<React.SetStateAction<FeatureIntroControl["image"]>>
     | undefined;
-  learnMoreLink: React.ReactNode | undefined;
+  learnMoreLink: React.ReactNode;
   setLearnMoreLink:
     | React.Dispatch<React.SetStateAction<FeatureIntroControl["image"]>>
     | undefined;
-  dismissButton: React.ReactNode | undefined;
+  dismissButton: React.ReactNode;
   setDismissButton:
     | React.Dispatch<React.SetStateAction<FeatureIntroControl["image"]>>
     | undefined;
-  headingId: string | undefined;
-  contentId: string | undefined;
-  imageId: string | undefined;
-  learnMoreLinkId: string | undefined;
-  dismissButtonId: string | undefined;
 }
 
 /**
@@ -55,27 +50,24 @@ export const FeatureIntroControlContextProvider: React.FC<FeatureIntroControlCon
   const [learnMoreLink, setLearnMoreLink] = React.useState<React.ReactNode>();
   const [dismissButton, setDismissButton] = React.useState<React.ReactNode>();
 
+  const contextValue: FeatureIntroControl = React.useMemo(
+    () => ({
+      id,
+      content,
+      setContent,
+      heading,
+      setHeading,
+      image,
+      setImage,
+      learnMoreLink,
+      setLearnMoreLink,
+      dismissButton,
+      setDismissButton,
+    }),
+    [content, dismissButton, heading, id, image, learnMoreLink],
+  );
   return (
-    <FeatureIntroControlContext.Provider
-      value={{
-        id,
-        contentId: id && `${id}-content`,
-        headingId: id && `${id}-heading`,
-        imageId: id && `${id}-image`,
-        learnMoreLinkId: id && `${id}-learn-more-link`,
-        dismissButtonId: id && `${id}-dismiss-button`,
-        content,
-        setContent,
-        heading,
-        setHeading,
-        image,
-        setImage,
-        learnMoreLink,
-        setLearnMoreLink,
-        dismissButton,
-        setDismissButton,
-      }}
-    >
+    <FeatureIntroControlContext.Provider value={contextValue}>
       {children}
     </FeatureIntroControlContext.Provider>
   );
@@ -84,62 +76,8 @@ export const FeatureIntroControlContextProvider: React.FC<FeatureIntroControlCon
 /**
  * Internal hook to access Feature Intro control context
  */
-export function useFeatureIntroControlInternalContext(): FeatureIntroControl {
-  const {
-    id,
-    heading,
-    setHeading,
-    content,
-    setContent,
-    image,
-    setImage,
-    learnMoreLink,
-    setLearnMoreLink,
-    dismissButton,
-    setDismissButton,
-    headingId,
-    contentId,
-    imageId,
-    learnMoreLinkId,
-    dismissButtonId,
-  } = React.useContext(FeatureIntroControlContext) || {};
-
-  return React.useMemo(
-    () => ({
-      id,
-      heading,
-      setHeading,
-      content,
-      setContent,
-      image,
-      setImage,
-      learnMoreLink,
-      setLearnMoreLink,
-      dismissButton,
-      setDismissButton,
-      headingId,
-      contentId,
-      imageId,
-      learnMoreLinkId,
-      dismissButtonId,
-    }),
-    [
-      id,
-      heading,
-      setHeading,
-      content,
-      setContent,
-      image,
-      setImage,
-      learnMoreLink,
-      setLearnMoreLink,
-      dismissButton,
-      setDismissButton,
-      headingId,
-      contentId,
-      imageId,
-      learnMoreLinkId,
-      dismissButtonId,
-    ],
-  );
+export function useFeatureIntroControlInternalContext():
+  | FeatureIntroControl
+  | undefined {
+  return React.useContext(FeatureIntroControlContext);
 }

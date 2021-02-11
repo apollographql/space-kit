@@ -35,6 +35,12 @@ interface FeatureIntroControlProps
    */
   containerAs?: As;
   /**
+   * Override how the learn more link is rendered.
+   *
+   * @default "a"
+   */
+  learnMoreLinkAs?: As;
+  /**
    * This ID will be used to tie all components together with accessibility
    */
   id?: string;
@@ -49,26 +55,23 @@ interface FeatureIntroControlProps
 }
 
 const FeatureIntroControl: React.FC<FeatureIntroControlProps> = ({
-  imagePlacement = "right",
+  imagePlacement = "left",
   width,
   height,
   className,
   containerAs = "div",
+  learnMoreLinkAs = "a",
   children,
   ...props
 }) => {
-  const {
-    heading,
-    headingId,
-    content,
-    contentId,
-    image,
-    imageId,
-    learnMoreLink,
-    learnMoreLinkId,
-    dismissButton,
-    dismissButtonId,
-  } = useFeatureIntroControlInternalContext();
+  const featureIntroContext = useFeatureIntroControlInternalContext();
+  const [heading, content, dismissButton, learnMoreLink, image] = [
+    featureIntroContext?.heading,
+    featureIntroContext?.content,
+    featureIntroContext?.dismissButton,
+    featureIntroContext?.learnMoreLink,
+    featureIntroContext?.image,
+  ];
 
   /**
    * Choose flex-direction based on imageDirection
@@ -80,10 +83,10 @@ const FeatureIntroControl: React.FC<FeatureIntroControlProps> = ({
       case "top":
         return "column";
       case "right":
-        return "row";
+        return "row-reverse";
       default:
         // left
-        return "row-reverse";
+        return "row";
     }
   }, [imagePlacement]);
 
@@ -102,10 +105,8 @@ const FeatureIntroControl: React.FC<FeatureIntroControlProps> = ({
       image && (imagePlacement === "right" || imagePlacement === "left");
     const verticalImage =
       image && (imagePlacement === "top" || imagePlacement === "bottom");
-    const [defaultWidth, defaultHeight] = [
-      horizontalImage ? baseWidth * 2 : baseWidth,
-      verticalImage ? baseHeight * 2 : baseHeight,
-    ];
+    const defaultWidth = horizontalImage ? baseWidth * 2 : baseWidth;
+    const defaultHeight = verticalImage ? baseHeight * 2 : baseHeight;
 
     return {
       finalWidth: width || defaultWidth,
@@ -141,14 +142,10 @@ const FeatureIntroControl: React.FC<FeatureIntroControlProps> = ({
               borderRadius: 4,
               display: "flex",
               flexDirection,
+              height: finalHeight,
             }}
           >
-            {image &&
-              React.isValidElement<any>(image) &&
-              React.cloneElement(image, {
-                ...image.props,
-                id: imageId,
-              })}
+            {image}
             <div
               css={{
                 padding: 24,
@@ -156,19 +153,8 @@ const FeatureIntroControl: React.FC<FeatureIntroControlProps> = ({
                 flexBasis: image ? "50%" : "auto",
               }}
             >
-              <div css={{ paddingBottom: 12 }}>
-                {React.isValidElement<any>(heading) &&
-                  React.cloneElement(heading, {
-                    ...heading.props,
-                    id: headingId,
-                  })}
-              </div>
-              {content &&
-                React.isValidElement<any>(content) &&
-                React.cloneElement(content, {
-                  ...content.props,
-                  id: contentId,
-                })}
+              <div css={{ paddingBottom: 12 }}>{heading}</div>
+              {content}
               <div
                 css={css({
                   paddingTop: 16,
@@ -176,18 +162,11 @@ const FeatureIntroControl: React.FC<FeatureIntroControlProps> = ({
                   justifyContent: "space-between",
                 })}
               >
-                {learnMoreLink &&
-                  React.isValidElement<any>(learnMoreLink) &&
-                  React.cloneElement(learnMoreLink, {
-                    id: learnMoreLinkId,
+                {React.isValidElement(learnMoreLink) &&
+                  React.cloneElement(createElementFromAs(learnMoreLinkAs), {
                     ...learnMoreLink.props,
                   })}
-                {dismissButton &&
-                  React.isValidElement<any>(dismissButton) &&
-                  React.cloneElement(dismissButton, {
-                    ...dismissButton.props,
-                    id: dismissButtonId,
-                  })}
+                {dismissButton}
                 {children}
               </div>
             </div>

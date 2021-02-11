@@ -14,22 +14,16 @@ import { useFeatureIntroControlInternalContext } from "../shared/FeatureIntroCon
  */
 export const FeatureIntroLearnMoreLink: React.FC<React.HTMLProps<
   HTMLAnchorElement
->> = ({ className, style, id, href, rel, target }) => {
-  const {
-    learnMoreLinkId,
-    setLearnMoreLink,
-  } = useFeatureIntroControlInternalContext();
+>> = () => {
+  const featureIntroContext = useFeatureIntroControlInternalContext();
+  const [featureIntroId, setLearnMoreLink] = [
+    featureIntroContext?.id,
+    featureIntroContext?.setLearnMoreLink,
+  ];
 
   const element = React.useMemo(
     () => (
-      <a
-        style={style}
-        className={className}
-        id={learnMoreLinkId || id}
-        href={href}
-        rel={rel}
-        target={target}
-      >
+      <div id={featureIntroId && `${featureIntroId}-learn-more-link`}>
         <div
           css={{
             color: colors.grey.base,
@@ -39,14 +33,14 @@ export const FeatureIntroLearnMoreLink: React.FC<React.HTMLProps<
         >
           Learn more
         </div>
-      </a>
+      </div>
     ),
-    [style, className, learnMoreLinkId, id, href, rel, target],
+    [featureIntroId],
   );
 
   React.useLayoutEffect(() => {
     setLearnMoreLink?.(element);
   }, [element, setLearnMoreLink]);
 
-  return setLearnMoreLink ? null : element;
+  return featureIntroContext ? null : element;
 };

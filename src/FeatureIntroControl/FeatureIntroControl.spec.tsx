@@ -58,15 +58,17 @@ test("when passed a dismiss button, renders it", () => {
   expect(screen.getByText("dismiss text")).toBeInTheDocument();
 });
 
-test("when passed a learn more link, renders it clickable", () => {
+test("when passed a learn more link as a, renders it clickable", () => {
   const { container } = render(
-    <FeatureIntroControl id="test">
+    <FeatureIntroControl
+      id="test"
+      learnMoreLinkAs={<a href="https://apollographql.com" />}
+    >
       <FeatureIntroHeading>heading text</FeatureIntroHeading>
       <FeatureIntroContent>content text</FeatureIntroContent>
-      <FeatureIntroLearnMoreLink href="https://apollographql.com" />
+      <FeatureIntroLearnMoreLink />
     </FeatureIntroControl>,
   );
-
   expect(screen.getByText("Learn more")).toBeInTheDocument();
   const link = container.querySelector("a");
   if (!link) throw new Error("Could not find link");

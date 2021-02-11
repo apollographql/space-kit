@@ -26,14 +26,14 @@ interface Props
 export const FeatureIntroDismissButton: React.FC<Props> = ({
   children,
   className,
-  id,
   style,
   onClick,
 }) => {
-  const {
-    dismissButtonId,
-    setDismissButton,
-  } = useFeatureIntroControlInternalContext();
+  const featureIntroContext = useFeatureIntroControlInternalContext();
+  const [featureIntroId, setDismissButton] = [
+    featureIntroContext?.id,
+    featureIntroContext?.setDismissButton,
+  ];
 
   const element = React.useMemo(
     () => (
@@ -47,19 +47,19 @@ export const FeatureIntroDismissButton: React.FC<Props> = ({
           marginLeft: "auto",
           cursor: "pointer",
         }}
-        id={dismissButtonId || id}
+        id={featureIntroId && `${featureIntroId}-dismiss-button`}
         style={style}
         onClick={onClick}
       >
         {children}
       </div>
     ),
-    [children, className, dismissButtonId, id, onClick, style],
+    [children, className, featureIntroId, onClick, style],
   );
 
   React.useLayoutEffect(() => {
     setDismissButton?.(element);
   }, [element, setDismissButton]);
 
-  return setDismissButton ? null : element;
+  return featureIntroContext ? null : element;
 };

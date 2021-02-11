@@ -9,7 +9,7 @@ interface Props
       React.HTMLAttributes<HTMLDivElement>,
       HTMLDivElement
     >,
-    "className" | "style" | "id"
+    "className" | "style"
   > {
   children: React.ReactNode;
 }
@@ -24,28 +24,31 @@ interface Props
 export const FeatureIntroImage: React.FC<Props> = ({
   children,
   className,
-  id,
   style,
 }) => {
-  const { imageId, setImage } = useFeatureIntroControlInternalContext();
+  const featureIntroContext = useFeatureIntroControlInternalContext();
+  const [featureIntroId, setImage] = [
+    featureIntroContext?.id,
+    featureIntroContext?.setImage,
+  ];
 
   const element = React.useMemo(
     () => (
       <div
         className={className}
         css={{ flexBasis: "50%" }}
-        id={imageId || id}
+        id={`${featureIntroId}-image`}
         style={style}
       >
         {children}
       </div>
     ),
-    [children, className, imageId, id, style],
+    [children, className, featureIntroId, style],
   );
 
   React.useLayoutEffect(() => {
     setImage?.(element);
   }, [element, setImage]);
 
-  return setImage ? null : element;
+  return featureIntroContext ? null : element;
 };
