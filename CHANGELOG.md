@@ -1,3 +1,24 @@
+# v8.15.0 (Thu Feb 11 2021)
+
+#### 🚀 Enhancement
+
+- Add Odyssey icon [#313](https://github.com/apollographql/space-kit/pull/313) ([@jchesterman](https://github.com/jchesterman))
+
+#### 🐛  Bug Fix
+
+- [AR-2064](https://apollographql.atlassian.net/browse/AR-2064): Resolve issue where `ListDivider` overflows container [#312](https://github.com/apollographql/space-kit/pull/312) ([@justinanastos](https://github.com/justinanastos))
+
+#### 🏠 Internal
+
+- Upgrade storybook to `^6.1.17` [#311](https://github.com/apollographql/space-kit/pull/311) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 2
+
+- Jay Chesterman ([@jchesterman](https://github.com/jchesterman))
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v8.14.0 (Mon Feb 08 2021)
 
 #### 🚀 Enhancement
