@@ -35,12 +35,6 @@ interface FeatureIntroControlProps
    */
   containerAs?: As;
   /**
-   * Override how the learn more link is rendered.
-   *
-   * @default "a"
-   */
-  learnMoreLinkAs?: As;
-  /**
    * This ID will be used to tie all components together with accessibility
    */
   id?: string;
@@ -60,7 +54,6 @@ const FeatureIntroControl: React.FC<FeatureIntroControlProps> = ({
   height,
   className,
   containerAs = "div",
-  learnMoreLinkAs = "a",
   children,
   ...props
 }) => {
@@ -162,10 +155,7 @@ const FeatureIntroControl: React.FC<FeatureIntroControlProps> = ({
                   justifyContent: "space-between",
                 })}
               >
-                {React.isValidElement(learnMoreLink) &&
-                  React.cloneElement(createElementFromAs(learnMoreLinkAs), {
-                    ...learnMoreLink.props,
-                  })}
+                {learnMoreLink}
                 {dismissButton}
                 {children}
               </div>

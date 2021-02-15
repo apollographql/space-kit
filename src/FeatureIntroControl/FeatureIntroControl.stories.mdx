@@ -30,10 +30,7 @@ All FeatureIntro components are exported from `FeatureIntro` with the preceeding
 
 <Canvas>
   <Story name="Default">
-    <FeatureIntroControl
-      id="default"
-      learnMoreLinkAs={<a href="https://apollographql.com" />}
-    >
+    <FeatureIntroControl id="default">
       <FeatureIntroHeading>Welcome to your Dev Graph</FeatureIntroHeading>
       <FeatureIntroContent>
         <div>
@@ -41,7 +38,7 @@ All FeatureIntro components are exported from `FeatureIntro` with the preceeding
           shows the current state of your connection.
         </div>
       </FeatureIntroContent>
-      <FeatureIntroLearnMoreLink />
+      <FeatureIntroLearnMoreLink as={<a href="https://apollographql.com" />} />
       <FeatureIntroDismissButton>Got it 👍</FeatureIntroDismissButton>
     </FeatureIntroControl>
   </Story>
@@ -51,10 +48,7 @@ All FeatureIntro components are exported from `FeatureIntro` with the preceeding
 
 <Canvas>
   <Story name="Default with Image">
-    <FeatureIntroControl
-      id="default"
-      learnMoreLinkAs={<a href="https://apollographql.com" />}
-    >
+    <FeatureIntroControl id="default">
       <FeatureIntroHeading>Welcome to your Dev Graph</FeatureIntroHeading>
       <FeatureIntroContent>
         <div>
@@ -65,7 +59,7 @@ All FeatureIntro components are exported from `FeatureIntro` with the preceeding
       <FeatureIntroImage>
         <Develop width={248} height={186} />
       </FeatureIntroImage>
-      <FeatureIntroLearnMoreLink />
+      <FeatureIntroLearnMoreLink as={<a href="https://apollographql.com" />} />
       <FeatureIntroDismissButton>Got it 👍</FeatureIntroDismissButton>
     </FeatureIntroControl>
   </Story>
@@ -75,11 +69,7 @@ All FeatureIntro components are exported from `FeatureIntro` with the preceeding
 
 <Canvas>
   <Story name="Image Layout Right">
-    <FeatureIntroControl
-      id="image-layout-right"
-      imagePlacement="right"
-      learnMoreLinkAs={<a href="https://apollographql.com" />}
-    >
+    <FeatureIntroControl id="image-layout-right" imagePlacement="right">
       <FeatureIntroHeading>Welcome to your Dev Graph</FeatureIntroHeading>
       <FeatureIntroContent>
         <div>
@@ -90,7 +80,7 @@ All FeatureIntro components are exported from `FeatureIntro` with the preceeding
       <FeatureIntroImage>
         <Develop width={248} height={186} />
       </FeatureIntroImage>
-      <FeatureIntroLearnMoreLink />
+      <FeatureIntroLearnMoreLink as={<a href="https://apollographql.com" />} />
       <FeatureIntroDismissButton>Got it 👍</FeatureIntroDismissButton>
     </FeatureIntroControl>
   </Story>
@@ -100,11 +90,7 @@ All FeatureIntro components are exported from `FeatureIntro` with the preceeding
 
 <Canvas>
   <Story name="Image Layout Top">
-    <FeatureIntroControl
-      id="image-layout-top"
-      imagePlacement="top"
-      learnMoreLinkAs={<a href="https://apollographql.com" />}
-    >
+    <FeatureIntroControl id="image-layout-top" imagePlacement="top">
       <FeatureIntroHeading>Welcome to your Dev Graph</FeatureIntroHeading>
       <FeatureIntroContent>
         <div>
@@ -115,7 +101,7 @@ All FeatureIntro components are exported from `FeatureIntro` with the preceeding
       <FeatureIntroImage>
         <Develop width={248} height={186} />
       </FeatureIntroImage>
-      <FeatureIntroLearnMoreLink />
+      <FeatureIntroLearnMoreLink as={<a href="https://apollographql.com" />} />
       <FeatureIntroDismissButton>Got it 👍</FeatureIntroDismissButton>
     </FeatureIntroControl>
   </Story>
@@ -125,11 +111,7 @@ All FeatureIntro components are exported from `FeatureIntro` with the preceeding
 
 <Canvas>
   <Story name="Image Layout Bottom">
-    <FeatureIntroControl
-      id="image-layout-bottom"
-      imagePlacement="bottom"
-      learnMoreLinkAs={<a href="https://apollographql.com" />}
-    >
+    <FeatureIntroControl id="image-layout-bottom" imagePlacement="bottom">
       <FeatureIntroHeading>Welcome to your Dev Graph</FeatureIntroHeading>
       <FeatureIntroContent>
         <div>
@@ -140,7 +122,7 @@ All FeatureIntro components are exported from `FeatureIntro` with the preceeding
       <FeatureIntroImage aria-label="FIND ME">
         <Develop width={248} height={186} />
       </FeatureIntroImage>
-      <FeatureIntroLearnMoreLink />
+      <FeatureIntroLearnMoreLink as={<a href="https://apollographql.com" />} />
       <FeatureIntroDismissButton>Got it 👍</FeatureIntroDismissButton>
     </FeatureIntroControl>
   </Story>

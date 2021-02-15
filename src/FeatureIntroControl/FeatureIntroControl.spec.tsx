@@ -12,7 +12,7 @@ import { Develop } from "../pictograms/Develop";
 
 test("when passed a heading, renders it", () => {
   render(
-    <FeatureIntroControl id="test">
+    <FeatureIntroControl id="heading-test">
       <FeatureIntroHeading>heading text</FeatureIntroHeading>
     </FeatureIntroControl>,
   );
@@ -22,7 +22,7 @@ test("when passed a heading, renders it", () => {
 
 test("when passed content, renders it", () => {
   render(
-    <FeatureIntroControl id="test">
+    <FeatureIntroControl id="content-test">
       <FeatureIntroHeading>heading text</FeatureIntroHeading>
       <FeatureIntroContent>content text</FeatureIntroContent>
     </FeatureIntroControl>,
@@ -33,7 +33,7 @@ test("when passed content, renders it", () => {
 
 test("when passed an image, renders it", () => {
   const { container } = render(
-    <FeatureIntroControl id="test">
+    <FeatureIntroControl id="image-test">
       <FeatureIntroHeading>heading text</FeatureIntroHeading>
       <FeatureIntroContent>content text</FeatureIntroContent>
       <FeatureIntroImage>
@@ -48,7 +48,7 @@ test("when passed an image, renders it", () => {
 
 test("when passed a dismiss button, renders it", () => {
   render(
-    <FeatureIntroControl id="test">
+    <FeatureIntroControl id="dismiss-button-test">
       <FeatureIntroHeading>heading text</FeatureIntroHeading>
       <FeatureIntroContent>content text</FeatureIntroContent>
       <FeatureIntroDismissButton>dismiss text</FeatureIntroDismissButton>
@@ -60,13 +60,10 @@ test("when passed a dismiss button, renders it", () => {
 
 test("when passed a learn more link as a, renders it clickable", () => {
   const { container } = render(
-    <FeatureIntroControl
-      id="test"
-      learnMoreLinkAs={<a href="https://apollographql.com" />}
-    >
+    <FeatureIntroControl id="learn-more-link-test">
       <FeatureIntroHeading>heading text</FeatureIntroHeading>
       <FeatureIntroContent>content text</FeatureIntroContent>
-      <FeatureIntroLearnMoreLink />
+      <FeatureIntroLearnMoreLink as={<a href="https://apollographql.com" />} />
     </FeatureIntroControl>,
   );
   expect(screen.getByText("Learn more")).toBeInTheDocument();
