@@ -1,3 +1,15 @@
+# v8.16.0 (Mon Feb 15 2021)
+
+#### 🚀 Enhancement
+
+- [minor] Feature Intro Component [#310](https://github.com/apollographql/space-kit/pull/310) ([@mayakoneval](https://github.com/mayakoneval))
+
+#### Authors: 1
+
+- [@mayakoneval](https://github.com/mayakoneval)
+
+---
+
 # v8.15.0 (Thu Feb 11 2021)
 
 #### 🚀 Enhancement
