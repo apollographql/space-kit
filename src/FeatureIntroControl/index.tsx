@@ -150,7 +150,6 @@ const FeatureIntroControl: React.FC<FeatureIntroControlProps> = ({
               {content}
               <div
                 css={css({
-                  paddingTop: 16,
                   display: "flex",
                   justifyContent: "space-between",
                 })}

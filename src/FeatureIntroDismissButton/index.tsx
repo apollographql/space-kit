@@ -43,6 +43,9 @@ export const FeatureIntroDismissButton: React.FC<Props> = ({
           ...typography.base.small,
           color: colors.blue.base,
           fontWeight: 600,
+          padding: "8px 5px",
+          marginRight: -5,
+          marginTop: -8,
           // force right even if there is no learn more button
           marginLeft: "auto",
           cursor: "pointer",
