@@ -42,6 +42,7 @@ export const FeatureIntroContent: React.FC<Props> = ({
           color: colors.grey.base,
           fontWeight: "normal",
           lineHeight: "16px",
+          paddingBottom: 16,
         }}
         id={featureIntroId && `${featureIntroId}-content`}
         style={style}

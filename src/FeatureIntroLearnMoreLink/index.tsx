@@ -52,6 +52,9 @@ export const FeatureIntroLearnMoreLink: React.FC<Props> = ({
                   color: colors.grey.base,
                   ...typography.base.small,
                   fontWeight: 600,
+                  padding: "8px 5px",
+                  marginLeft: -5,
+                  marginTop: -8,
                 }}
               >
                 Learn more
