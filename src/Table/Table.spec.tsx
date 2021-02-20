@@ -3,10 +3,10 @@ import { cleanup, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { Table } from "./Table";
 import { ClassNames } from "@emotion/react";
-import { matchers } from "jest-emotion";
+import { matchers } from "@emotion/jest";
 import { colors } from "../colors";
 
-// Add the custom matchers provided by 'jest-emotion'
+// Add the custom matchers provided by '@emotion/jest'
 expect.extend(matchers);
 
 test("when passed headers in `columns`, should render them, even with no data", () => {

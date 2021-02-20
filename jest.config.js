@@ -15,7 +15,7 @@ module.exports = {
   },
   preset: "ts-jest/presets/js-with-babel",
   setupFilesAfterEnv: ["<rootDir>jest/setup.js"],
-  snapshotSerializers: ["jest-emotion"],
+  snapshotSerializers: ["@emotion/jest/serializer"],
   globals: {
     "ts-jest": {
       diagnostics: false,

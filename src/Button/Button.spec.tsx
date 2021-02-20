@@ -6,10 +6,10 @@ import { act, render, screen } from "@testing-library/react";
 import { IconShip2 } from "../icons/IconShip2";
 import React from "react";
 import userEvent from "@testing-library/user-event";
-import { matchers } from "jest-emotion";
+import { matchers } from "@emotion/jest";
 import { colors } from "../colors";
 
-// Add the custom matchers provided by 'jest-emotion'
+// Add the custom matchers provided by '@emotion/jest'
 expect.extend(matchers);
 
 test("default button renders", () => {
