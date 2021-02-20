@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import * as React from "react";
 import * as typography from "../typography";
-import { jsx } from "@emotion/core";
+import { jsx } from "@emotion/react";
 import { colors } from "../colors";
 import { useFeatureIntroControlInternalContext } from "../shared/FeatureIntroControlContext";
 

@@ -186,7 +186,7 @@ All illustration components extends \`SVGSVGElement\` so that most props you'd w
 
             return typeScriptTpl.ast`
               ${imports}
-              import { jsx } from '@emotion/core';
+              import { jsx } from '@emotion/react';
 
               export const ${componentName} = React.forwardRef<SVGSVGElement, Omit<React.SVGProps<SVGSVGElement>, "css">>(
                 (props, ref) => ${jsx}

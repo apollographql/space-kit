@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { colors } from "../colors";
 import { base } from "../typography";
-import { jsx, ClassNames } from "@emotion/core";
+import { jsx, ClassNames } from "@emotion/react";
 import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";

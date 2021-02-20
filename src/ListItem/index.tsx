@@ -1,6 +1,6 @@
 import type { Property } from "csstype";
 import React from "react";
-import { ClassNames } from "@emotion/core";
+import { ClassNames } from "@emotion/react";
 import { assertUnreachable } from "../shared/assertUnreachable";
 import tinycolor from "tinycolor2";
 import { colors } from "../colors";

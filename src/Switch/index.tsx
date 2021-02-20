@@ -1,5 +1,5 @@
 import React from "react";
-import { ClassNames } from "@emotion/core";
+import { ClassNames } from "@emotion/react";
 import { ShadedColor, colors } from "../colors";
 import { useFocusRing } from "@react-aria/focus";
 import { useSwitch } from "@react-aria/switch";

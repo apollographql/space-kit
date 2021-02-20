@@ -2,7 +2,7 @@ import "../../../node_modules/tippy.js/dist/tippy.css";
 import React from "react";
 import { base } from "../../typography";
 import { colors } from "../../colors";
-import { Global, css } from "@emotion/core";
+import { Global, css } from "@emotion/react";
 
 export const TippyPopoverStyles: React.FC = () => (
   <Global

@@ -1,6 +1,6 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
-import { jsx, ClassNames } from "@emotion/core";
+import { jsx, ClassNames } from "@emotion/react";
 import React, { CSSProperties, Fragment, useMemo } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";

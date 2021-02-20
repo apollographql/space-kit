@@ -10,7 +10,7 @@ import { ListHeading } from "../ListHeading";
 import { ListDivider } from "../ListDivider";
 import { Popover } from "../Popover";
 import { useSelect, UseSelectPropGetters } from "downshift";
-import { ClassNames, jsx } from "@emotion/core";
+import { ClassNames, jsx } from "@emotion/react";
 import {
   reactNodeToDownshiftItems,
   isHTMLOptionElement,
@@ -37,7 +37,7 @@ interface RenderListItemProps {
    * Custom function to render each `ListItem`
    *
    * This is provided so you can render the `ListItem` on your own, with an `as`
-   * prop, for example, so you can render a `Link`. 
+   * prop, for example, so you can render a `Link`.
    *
    * The function will be called and it's return value rendered; this does not
    * use `React.createElement`, so an inline function is totally acceptable with

@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import React, { useMemo } from "react";
 import { colors } from "../colors";
-import { ClassNames, jsx } from "@emotion/core";
+import { ClassNames, jsx } from "@emotion/react";
 import { As, createElementFromAs } from "../shared/createElementFromAs";
 import {
   FeatureIntroControlContextProvider,

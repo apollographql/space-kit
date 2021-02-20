@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import React from "react";
-import { css, jsx } from "@emotion/core";
+import { css, jsx } from "@emotion/react";
 import { ListConfigProvider, useListConfig } from "../ListConfig";
 import { verticalListMarginFromPadding } from "../shared/verticalListMarginFromPadding";
 import { assertUnreachable } from "../shared/assertUnreachable";

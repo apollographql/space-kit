@@ -2,7 +2,7 @@ import React from "react";
 import { cleanup, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { Table } from "./Table";
-import { ClassNames } from "@emotion/core";
+import { ClassNames } from "@emotion/react";
 import { matchers } from "jest-emotion";
 import { colors } from "../colors";
 
