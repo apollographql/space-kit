@@ -104,6 +104,7 @@ const ListItemWrapper: React.FC<ListItemWrapperProps> = ({
   const downshiftItemProps = getItemProps({
     item: element.props,
     index: downshiftItems.indexOf(element.props),
+    disabled: element.props.disabled,
   });
 
   return (

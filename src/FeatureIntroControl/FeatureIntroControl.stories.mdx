@@ -1,0 +1,129 @@
+import { Meta, Story, Canvas } from "@storybook/addon-docs/blocks";
+import { ClassNames } from "@emotion/core";
+import { FeatureIntroControl } from "../FeatureIntroControl";
+import { FeatureIntroContent } from "../FeatureIntroContent";
+import { FeatureIntroHeading } from "../FeatureIntroHeading";
+import { FeatureIntroImage } from "../FeatureIntroImage";
+import { FeatureIntroLearnMoreLink } from "../FeatureIntroLearnMoreLink";
+import { FeatureIntroDismissButton } from "../FeatureIntroDismissButton";
+import { Develop } from "../pictograms/Develop";
+
+<Meta title="Components/FeatureIntroControl" component={FeatureIntroControl} />
+
+# FeatureIntro
+
+FeatureIntro is a set of components that are used as an introduction to a new component for a user.
+FeatureIntroControl is a layout component that is a wrapper for FeatureIntroHeading, FeatureIntroContent, FeatureIntroImage, FeatureIntroLearnMoreLink and FeatureIntroDismissButton.
+
+## Shortcut
+
+All FeatureIntro components are exported from `FeatureIntro` with the preceeding `FeatureIntro` removed:
+
+- `FeatureIntro.Control`
+- `FeatureIntro.Heading`
+- `FeatureIntro.Content`
+- `FeatureIntro.Image`
+- `FeatureIntro.LearnMoreLink`
+- `FeatureIntro.DismissButton`
+
+## Default Layout
+
+<Canvas>
+  <Story name="Default">
+    <FeatureIntroControl id="default">
+      <FeatureIntroHeading>Welcome to your Dev Graph</FeatureIntroHeading>
+      <FeatureIntroContent>
+        <div>
+          Development graphs connect to your local server. The circle indicator
+          shows the current state of your connection.
+        </div>
+      </FeatureIntroContent>
+      <FeatureIntroLearnMoreLink as={<a href="https://apollographql.com" />} />
+      <FeatureIntroDismissButton>Got it 👍</FeatureIntroDismissButton>
+    </FeatureIntroControl>
+  </Story>
+</Canvas>
+
+## Default Layout with Image
+
+<Canvas>
+  <Story name="Default with Image">
+    <FeatureIntroControl id="default">
+      <FeatureIntroHeading>Welcome to your Dev Graph</FeatureIntroHeading>
+      <FeatureIntroContent>
+        <div>
+          Development graphs connect to your local server. The circle indicator
+          shows the current state of your connection.
+        </div>
+      </FeatureIntroContent>
+      <FeatureIntroImage>
+        <Develop width={248} height={186} />
+      </FeatureIntroImage>
+      <FeatureIntroLearnMoreLink as={<a href="https://apollographql.com" />} />
+      <FeatureIntroDismissButton>Got it 👍</FeatureIntroDismissButton>
+    </FeatureIntroControl>
+  </Story>
+</Canvas>
+
+## Layout with image to the right
+
+<Canvas>
+  <Story name="Image Layout Right">
+    <FeatureIntroControl id="image-layout-right" imagePlacement="right">
+      <FeatureIntroHeading>Welcome to your Dev Graph</FeatureIntroHeading>
+      <FeatureIntroContent>
+        <div>
+          Development graphs connect to your local server. The circle indicator
+          shows the current state of your connection.
+        </div>
+      </FeatureIntroContent>
+      <FeatureIntroImage>
+        <Develop width={248} height={186} />
+      </FeatureIntroImage>
+      <FeatureIntroLearnMoreLink as={<a href="https://apollographql.com" />} />
+      <FeatureIntroDismissButton>Got it 👍</FeatureIntroDismissButton>
+    </FeatureIntroControl>
+  </Story>
+</Canvas>
+
+## Layout with image to the top
+
+<Canvas>
+  <Story name="Image Layout Top">
+    <FeatureIntroControl id="image-layout-top" imagePlacement="top">
+      <FeatureIntroHeading>Welcome to your Dev Graph</FeatureIntroHeading>
+      <FeatureIntroContent>
+        <div>
+          Development graphs connect to your local server. The circle indicator
+          shows the current state of your connection.
+        </div>
+      </FeatureIntroContent>
+      <FeatureIntroImage>
+        <Develop width={248} height={186} />
+      </FeatureIntroImage>
+      <FeatureIntroLearnMoreLink as={<a href="https://apollographql.com" />} />
+      <FeatureIntroDismissButton>Got it 👍</FeatureIntroDismissButton>
+    </FeatureIntroControl>
+  </Story>
+</Canvas>
+
+## Layout with image to the bottom
+
+<Canvas>
+  <Story name="Image Layout Bottom">
+    <FeatureIntroControl id="image-layout-bottom" imagePlacement="bottom">
+      <FeatureIntroHeading>Welcome to your Dev Graph</FeatureIntroHeading>
+      <FeatureIntroContent>
+        <div>
+          Development graphs connect to your local server. The circle indicator
+          shows the current state of your connection.
+        </div>
+      </FeatureIntroContent>
+      <FeatureIntroImage aria-label="FIND ME">
+        <Develop width={248} height={186} />
+      </FeatureIntroImage>
+      <FeatureIntroLearnMoreLink as={<a href="https://apollographql.com" />} />
+      <FeatureIntroDismissButton>Got it 👍</FeatureIntroDismissButton>
+    </FeatureIntroControl>
+  </Story>
+</Canvas>

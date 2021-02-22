@@ -90,6 +90,19 @@ You must use the same `<option>` and `<optgroup>` elements you would use for a n
       <option value="value b">b</option>
     </Select>
   </Story>
+  <Story name="disabled option">
+    <Select
+      renderTriggerNode={(selectedItem) => (
+        <>{selectedItem?.children ?? "select an item"}</>
+      )}
+    >
+      <option value="value a" disabled>
+        a
+      </option>
+      <option value="value b">b</option>
+      <option value="value c">c</option>
+    </Select>
+  </Story>
 </Canvas>
 
 ## Custom content

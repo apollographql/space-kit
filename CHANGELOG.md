@@ -1,3 +1,27 @@
+# v8.16.1 (Tue Feb 16 2021)
+
+#### 🐛  Bug Fix
+
+- Pass `disabled` prop from options to downshift in `Select` [#315](https://github.com/apollographql/space-kit/pull/315) ([@Jephuff](https://github.com/Jephuff))
+
+#### Authors: 1
+
+- Jeffrey Burt ([@Jephuff](https://github.com/Jephuff))
+
+---
+
+# v8.16.0 (Mon Feb 15 2021)
+
+#### 🚀 Enhancement
+
+- [minor] Feature Intro Component [#310](https://github.com/apollographql/space-kit/pull/310) ([@mayakoneval](https://github.com/mayakoneval))
+
+#### Authors: 1
+
+- [@mayakoneval](https://github.com/mayakoneval)
+
+---
+
 # v8.15.0 (Thu Feb 11 2021)
 
 #### 🚀 Enhancement
