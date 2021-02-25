@@ -162,7 +162,7 @@ interface Props {
  * Emulates an `<input>` with the automatic layout of a label, description, helper
  * text, and error text.
  *
- * @deprecated Use `<FormElement inputAs={<Input />} />` instead.
+ * @deprecated Use `<FormControl inputAs={<Input />} />` instead.
  */
 export const TextField: React.FC<Props> = ({
   autoFocus,
