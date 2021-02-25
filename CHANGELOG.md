@@ -1,3 +1,27 @@
+# v8.16.2 (Thu Feb 25 2021)
+
+#### 📝 Documentation
+
+- Remove `publishishOnly` only script and run `build` in `prepare` [#314](https://github.com/apollographql/space-kit/pull/314) ([@Jephuff](https://github.com/Jephuff) [@justinanastos](https://github.com/justinanastos))
+- FeatureIntro: add padding to increase click target [#316](https://github.com/apollographql/space-kit/pull/316) ([@mayakoneval](https://github.com/mayakoneval))
+
+#### 🐛  Bug Fix
+
+- fix docs referencing non-existent `FormElement` [#322](https://github.com/apollographql/space-kit/pull/322) ([@justinanastos](https://github.com/justinanastos))
+
+#### 🏠 Internal
+
+- [AR-2118](https://apollographql.atlassian.net/browse/AR-2118): add prestorybook script to build all svgs to tsx [#320](https://github.com/apollographql/space-kit/pull/320) ([@justinanastos](https://github.com/justinanastos))
+- add `FeatureIntro*` built folders to `.gitignore` [#321](https://github.com/apollographql/space-kit/pull/321) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 3
+
+- [@mayakoneval](https://github.com/mayakoneval)
+- Jeffrey Burt ([@Jephuff](https://github.com/Jephuff))
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v8.16.1 (Tue Feb 16 2021)
 
 #### 🐛  Bug Fix
