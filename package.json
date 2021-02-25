@@ -33,6 +33,7 @@
     "prepare": "npm run build",
     "release": "./scripts/release.sh",
     "start": "npm run storybook",
+    "prestorybook": "run-p icons:generate pictograms:generate illustrations:generate",
     "storybook": "start-storybook -p 6006 --static-dir .storybook/public",
     "test": "run-p test:*",
     "test:typescript": "tsc --noEmit",
