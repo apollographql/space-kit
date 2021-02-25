@@ -1,3 +1,16 @@
+# v8.17.0 (Thu Feb 25 2021)
+
+#### 🚀 Enhancement
+
+- Add missing icons (Person, Team, Error outline version) [#319](https://github.com/apollographql/space-kit/pull/319) ([@jglovier](https://github.com/jglovier) [@caydie-tran](https://github.com/caydie-tran))
+
+#### Authors: 2
+
+- Caydie Tran ([@caydie-tran](https://github.com/caydie-tran))
+- Joel Glovier ([@jglovier](https://github.com/jglovier))
+
+---
+
 # v8.16.2 (Thu Feb 25 2021)
 
 #### 📝 Documentation
