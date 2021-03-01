@@ -40,10 +40,20 @@ test("when the label is clicked it focuses the input", () => {
   expect(input).toHaveFocus();
 });
 
-test("when passed `HelperText`, helper text is rendered", () => {
-  const { container } = render(
+test("when rendering `FormHelperText`, helper text is rendered", () => {
+  const { container, rerender } = render(
     <FormControl id="test">
-      <FormHelperText>helper text</FormHelperText>
+      <FormHelperText showIcon={false}>helper text</FormHelperText>
+      <Input />
+    </FormControl>,
+  );
+
+  expect(screen.queryByText("helper text")).toBeInTheDocument();
+  expect(container.querySelectorAll("svg")).toHaveLength(0);
+
+  rerender(
+    <FormControl id="test">
+      <FormHelperText showIcon>helper text</FormHelperText>
       <Input />
     </FormControl>,
   );
@@ -66,7 +76,7 @@ test("when passed two `HelperText` and `FormErrorMessage`, only renders the `For
   expect(container.querySelectorAll("svg")).toHaveLength(1);
 });
 
-test("when passed `<FormControl error />`, renders error and svg", () => {
+test("when passed `<FormErrorMessage />`, renders error and svg", () => {
   const { container } = render(
     <FormControl id="test">
       <Input />
@@ -76,6 +86,24 @@ test("when passed `<FormControl error />`, renders error and svg", () => {
 
   expect(screen.getByText("error text")).toBeInTheDocument();
   expect(container.querySelector("svg")).toBeInTheDocument();
+});
+
+test("when passed `<FormErrorMessage />` that is removed, removes the error message", () => {
+  const Component: React.FC<{ errorText?: string }> = ({ errorText }) => (
+    <FormControl id="test">
+      <Input />
+      {errorText && <FormErrorMessage>{errorText}</FormErrorMessage>}
+    </FormControl>
+  );
+
+  const { container, rerender } = render(<Component errorText="error text" />);
+
+  expect(screen.getByText("error text")).toBeInTheDocument();
+  expect(container.querySelector("svg")).toBeInTheDocument();
+
+  rerender(<Component />);
+
+  expect(screen.queryByText("error text")).not.toBeInTheDocument();
 });
 
 test("when passed `<HelperText>` witout `showIcon` prop, renders no svg", () => {
@@ -90,7 +118,7 @@ test("when passed `<HelperText>` witout `showIcon` prop, renders no svg", () => 
   expect(container.querySelector("svg")).not.toBeInTheDocument();
 });
 
-test.only("when passed `<HelperText>` with `showIcon` prop, renders svg", () => {
+test("when passed `<HelperText>` with `showIcon` prop, renders svg", () => {
   const { container } = render(
     <FormControl id="test">
       <FormHelperText showIcon>helper text</FormHelperText>
