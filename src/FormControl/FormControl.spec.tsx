@@ -66,7 +66,7 @@ test("when passed two `HelperText` and `FormErrorMessage`, only renders the `For
   expect(container.querySelectorAll("svg")).toHaveLength(1);
 });
 
-test("when passed `<FormControl error />`, renders error and svg", () => {
+test("when passed `<FormErrorMessage />`, renders error and svg", () => {
   const { container } = render(
     <FormControl id="test">
       <Input />
