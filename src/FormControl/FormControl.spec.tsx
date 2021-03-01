@@ -90,7 +90,7 @@ test("when passed `<HelperText>` witout `showIcon` prop, renders no svg", () => 
   expect(container.querySelector("svg")).not.toBeInTheDocument();
 });
 
-test.only("when passed `<HelperText>` with `showIcon` prop, renders svg", () => {
+test("when passed `<HelperText>` with `showIcon` prop, renders svg", () => {
   const { container } = render(
     <FormControl id="test">
       <FormHelperText showIcon>helper text</FormHelperText>
