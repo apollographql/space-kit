@@ -1,3 +1,15 @@
+# v8.17.1 (Mon Mar 01 2021)
+
+#### 🐛  Bug Fix
+
+- [AR-2127](https://apollographql.atlassian.net/browse/AR-2127): fix `FormErrorMessage` not being removed when errors disappear [#324](https://github.com/apollographql/space-kit/pull/324) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v8.17.0 (Thu Feb 25 2021)
 
 #### 🚀 Enhancement
