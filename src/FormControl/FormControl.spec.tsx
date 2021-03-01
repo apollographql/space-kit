@@ -40,10 +40,20 @@ test("when the label is clicked it focuses the input", () => {
   expect(input).toHaveFocus();
 });
 
-test("when passed `HelperText`, helper text is rendered", () => {
-  const { container } = render(
+test("when rendering `FormHelperText`, helper text is rendered", () => {
+  const { container, rerender } = render(
     <FormControl id="test">
-      <FormHelperText>helper text</FormHelperText>
+      <FormHelperText showIcon={false}>helper text</FormHelperText>
+      <Input />
+    </FormControl>,
+  );
+
+  expect(screen.queryByText("helper text")).toBeInTheDocument();
+  expect(container.querySelectorAll("svg")).toHaveLength(0);
+
+  rerender(
+    <FormControl id="test">
+      <FormHelperText showIcon>helper text</FormHelperText>
       <Input />
     </FormControl>,
   );
