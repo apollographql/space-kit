@@ -52,8 +52,14 @@ export const FormErrorMessage: React.FC<Props> = ({ children, className }) => {
   }, [className, feedbackId, children]);
 
   React.useLayoutEffect(() => {
-    // This will cause a bug if you change the `error` prop
     setErrorMessageElement?.(element);
+
+    return () => {
+      // Clear the element to clean up after ourself. If we are merely changing,
+      // then another `set` will be called quickly enough where this won't
+      // flicker the content.
+      setErrorMessageElement?.(null);
+    };
   }, [setErrorMessageElement, element]);
 
   // If `setErrorMessageElement` exists then we're rendering this under the form control
