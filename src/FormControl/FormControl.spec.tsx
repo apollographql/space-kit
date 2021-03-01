@@ -78,6 +78,24 @@ test("when passed `<FormErrorMessage />`, renders error and svg", () => {
   expect(container.querySelector("svg")).toBeInTheDocument();
 });
 
+test("when passed `<FormErrorMessage />` that is removed, removes the error message", () => {
+  const Component: React.FC<{ errorText?: string }> = ({ errorText }) => (
+    <FormControl id="test">
+      <Input />
+      {errorText && <FormErrorMessage>{errorText}</FormErrorMessage>}
+    </FormControl>
+  );
+
+  const { container, rerender } = render(<Component errorText="error text" />);
+
+  expect(screen.getByText("error text")).toBeInTheDocument();
+  expect(container.querySelector("svg")).toBeInTheDocument();
+
+  rerender(<Component />);
+
+  expect(screen.queryByText("error text")).not.toBeInTheDocument();
+});
+
 test("when passed `<HelperText>` witout `showIcon` prop, renders no svg", () => {
   const { container } = render(
     <FormControl id="test">
