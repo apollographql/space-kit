@@ -8,6 +8,9 @@ import { FormLabel } from "../FormLabel";
 import { FormHelperText } from "../FormHelperText";
 import { Input } from "../Input";
 import { FormErrorMessage } from "../FormErrorMessage";
+import { FormEndAdornment } from "../FormEndAdornment";
+import { FormStartAdornment } from "../FormStartAdornment";
+import { FormDescription } from "../FormDescription";
 
 test("when passed a label, renders it", () => {
   render(
@@ -88,24 +91,6 @@ test("when passed `<FormErrorMessage />`, renders error and svg", () => {
   expect(container.querySelector("svg")).toBeInTheDocument();
 });
 
-test("when passed `<FormErrorMessage />` that is removed, removes the error message", () => {
-  const Component: React.FC<{ errorText?: string }> = ({ errorText }) => (
-    <FormControl id="test">
-      <Input />
-      {errorText && <FormErrorMessage>{errorText}</FormErrorMessage>}
-    </FormControl>
-  );
-
-  const { container, rerender } = render(<Component errorText="error text" />);
-
-  expect(screen.getByText("error text")).toBeInTheDocument();
-  expect(container.querySelector("svg")).toBeInTheDocument();
-
-  rerender(<Component />);
-
-  expect(screen.queryByText("error text")).not.toBeInTheDocument();
-});
-
 test("when passed `<HelperText>` witout `showIcon` prop, renders no svg", () => {
   const { container } = render(
     <FormControl id="test">
@@ -142,4 +127,30 @@ test("when not passed `autoFocus` prop, should not have focus after mounting", (
   const formField = screen.getByLabelText(labelText);
 
   expect(formField).not.toHaveFocus();
+});
+
+test.each([
+  ["FormDescription", FormDescription],
+  ["FormEndAdornment", FormEndAdornment],
+  ["FormErrorMessage", FormErrorMessage],
+  ["FormHelperText", FormHelperText],
+  ["FormLabel", FormLabel],
+  ["FormStartAdornment", FormStartAdornment],
+])("%s can be removed on subsequent renders", (_, Component) => {
+  const { rerender } = render(
+    <FormControl id="test">
+      <Component>text</Component>
+      <Input />
+    </FormControl>,
+  );
+
+  expect(screen.getByText("text")).toBeInTheDocument();
+
+  rerender(
+    <FormControl id="test">
+      <Input />
+    </FormControl>,
+  );
+
+  expect(screen.queryByText("text")).not.toBeInTheDocument();
 });
