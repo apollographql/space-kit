@@ -1,3 +1,15 @@
+# v8.17.2 (Tue Mar 02 2021)
+
+#### 🐛  Bug Fix
+
+- [AR-2129](https://apollographql.atlassian.net/browse/AR-2129): Allow all form control children to be removed on subsequent renders [#325](https://github.com/apollographql/space-kit/pull/325) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v8.17.1 (Mon Mar 01 2021)
 
 #### 🐛  Bug Fix
