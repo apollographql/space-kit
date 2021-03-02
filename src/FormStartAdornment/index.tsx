@@ -10,13 +10,10 @@ import { useFormControlInternalContext } from "../shared/FormControlContext";
  * This is intended to be rendered below `<FormControl>`. If this is rendered on
  * it's own; it will render `children` without any modification.
  */
-export function FormStartAdornment({
+export const FormStartAdornment: React.FC<{ className?: string }> = ({
   children,
   className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}): React.ReactNode {
+}) => {
   const { setStartAdornment } = useFormControlInternalContext();
 
   const element = React.useMemo(
@@ -39,7 +36,9 @@ export function FormStartAdornment({
 
   React.useLayoutEffect(() => {
     setStartAdornment?.(element);
+
+    return () => setStartAdornment?.(null);
   }, [element, setStartAdornment]);
 
   return setStartAdornment ? null : element;
-}
+};

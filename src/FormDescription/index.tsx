@@ -52,6 +52,8 @@ export const FormDescription: React.FC<Props> = ({
 
   React.useLayoutEffect(() => {
     setDescription?.(element);
+
+    return () => setDescription?.(null);
   }, [element, setDescription]);
 
   return setDescription ? null : element;

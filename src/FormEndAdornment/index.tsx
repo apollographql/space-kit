@@ -10,13 +10,10 @@ import { useFormControlInternalContext } from "../shared/FormControlContext";
  * This is intended to be rendered below `<FormControl>`. If this is rendered on
  * it's own; it will render `children` without any modification.
  */
-export function FormEndAdornment({
+export const FormEndAdornment: React.FC<{ className?: string }> = ({
   children,
   className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}): React.ReactNode {
+}) => {
   const { setEndAdornment } = useFormControlInternalContext();
 
   const element = React.useMemo(
@@ -40,7 +37,9 @@ export function FormEndAdornment({
 
   React.useLayoutEffect(() => {
     setEndAdornment?.(element);
+
+    return () => setEndAdornment?.(null);
   }, [element, setEndAdornment]);
 
   return setEndAdornment ? null : element;
-}
+};
