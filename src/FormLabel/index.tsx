@@ -73,6 +73,8 @@ export const FormLabel: React.FC<Props> = ({
 
   React.useLayoutEffect(() => {
     setLabel?.(element);
+
+    return () => setLabel?.(null);
   }, [element, setLabel]);
 
   return setLabel ? null : element;

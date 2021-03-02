@@ -59,6 +59,8 @@ export const FormHelperText: React.FC<Props> = ({
   React.useLayoutEffect(() => {
     // This will cause a bug if you change the `error` prop
     setHelper?.(element);
+
+    return () => setHelper?.(null);
   }, [element, setHelper]);
 
   // If `setHelper` exists then we're rendering this under the form control
