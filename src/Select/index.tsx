@@ -358,10 +358,40 @@ export const Select: React.FC<Props> = ({
     getToggleButtonProps,
     selectedItem,
   } = useSelect<OptionProps>({
+    stateReducer(state, actionAndChanges) {
+      switch (actionAndChanges.type) {
+        case useSelect.stateChangeTypes.MenuMouseLeave:
+        case useSelect.stateChangeTypes.MenuBlur: {
+          /**
+           * Indicates if the element that we "blur"'ed to is a descendent of
+           * the tooltip. If it is, then we should bypass the closing behavior.
+           */
+          const popperContainsActiveElement = !!instanceRef.current?.popper?.contains(
+            document.activeElement,
+          );
+
+          return {
+            ...actionAndChanges.changes,
+            isOpen: popperContainsActiveElement,
+          };
+        }
+        default:
+          return actionAndChanges.changes;
+      }
+    },
     onStateChange(changes) {
       switch (changes.type) {
+        case useSelect.stateChangeTypes.MenuMouseLeave:
         case useSelect.stateChangeTypes.MenuBlur: {
-          blur();
+          /**
+           * Indicates if the element that we "blur"'ed to is a descendent of
+           * the tooltip. If it is, then we should bypass the closing behavior.
+           */
+          const popperContainsActiveElement = !!instanceRef.current?.popper?.contains(
+            document.activeElement,
+          );
+
+          if (!popperContainsActiveElement) blur();
           break;
         }
         case useSelect.stateChangeTypes.ToggleButtonClick:
@@ -512,6 +542,7 @@ export const Select: React.FC<Props> = ({
                   return null;
                 }),
             )}
+            hideOnClick={false}
             placement={placement}
             triggerEvents="manual"
             matchTriggerWidth={matchTriggerWidth}
