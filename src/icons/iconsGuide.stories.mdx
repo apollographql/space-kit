@@ -1,0 +1,44 @@
+import { Meta } from "@storybook/addon-docs/blocks";
+
+<Meta title="Guides/Icons" />
+
+# Icons
+
+All our icons are displayed in the [icon gallery](/?path=/docs/components-icons--icon-add).
+
+Note that there are no styles or classes applied to the SVGs by default; you'll have to add a `width` and `height` to see the icons; and apply a text color to color them.
+
+All our icons are SVG files stored in [`./src/icons/svgs/`](https://github.com/apollographql/space-kit/tree/main/src/icons/svgs). There are scripts set up to convert these SVGs into React components, and then to transpile those files for consumption. These conversions and transpilations are `.gitignore`'ed, so they are not maintained in source control.
+
+### Adding new icons
+
+To add a new icon, add the SVG for your icon to the appropriately named folder for the icon category in [`./src/icons/svgs/`](https://github.com/apollographql/space-kit/tree/main/src/icons/svgs), and open a PR.
+
+Fill and stroke colors with values `#000` or `#000000` will be replace by `currentColor` to allow the consumer to change the colors; all other colors will be maintained and will not be configurable.
+
+All React components will be automatically generated and the TypeScript will be transpiled automatically after your branch is merged to `main`.
+
+The following scripts are available:
+
+- `icons:clean`: Clean all the React components and TypeScript generated files from the `icons/` directory. This will not touch the raw svg files in `icons/src`.
+- `icons:generate`: Generate TypeScript files for each icon. These will be immediately available in Storybook.
+- `icons`: Run `icons:clean` and `icons:genreate` in series
+- `build:typescript`: Transpile TypeScript files to be consumed externally.
+- `watch`: Watch TypeScript files and automatically update.
+  This is useful when you've `npm link`'ed this repository and are developing against another project.
+
+### Streamline vs custom icons
+
+Most of our icons are _not_ open source and are only licensed for use in this project. They are licensed from the commercial [Streamline library](https://app.streamlineicons.com/streamline-regular). See [license](https://github.com/apollographql/space-kit/blob/main/src/icons/LICENSE.md) for more details.
+
+Many of our newer icons have been custom created by the design team. Over time we may move more toward a fully custom set, so when possible please consult the design team about making a new custom icon vs adding another from the Streamline set. 
+
+You can tell which icons are from Streamline and which are our own by looking at the [SpaceKit-Icons frame](https://www.figma.com/file/0vwEKqkB3mxfsy4V6VwCUO/Space-Kit?node-id=0%3A4426) in Figma. Streamline icons have a `-sl` suffix on the icon name.
+
+### Illustrations
+
+Similar to icons, Space Kit illustrations are stored and generated from [`src/illustrations/svgs`](./src/illustrations/svgs). To build the stories for newly added illustrations, run `npm run illustrations:generate`.
+
+### Pictograms
+
+Similar to icons & illustrations, Space Kit pictograms are stored and generated from [`src/pictograms/svgs`](./src/pictograms/svgs). To build the stories for newly added pictograms, run `npm run pictograms:generate`.
