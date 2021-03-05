@@ -143,7 +143,7 @@ interface Props
     >,
     Pick<
       React.ComponentProps<typeof Button>,
-      "aria-labelledby" | "aria-describedby" | "feel" | "style"
+      "aria-labelledby" | "aria-describedby" | "feel" | "style" | "color"
     >,
     Pick<
       React.ComponentProps<typeof ListConfigProvider>,
@@ -265,6 +265,7 @@ export const Select: React.FC<Props> = ({
   defaultValue,
   disabled = false,
   feel,
+  color,
   labelPropsCallbackRef,
   listAs = <List startIconAs={<div css={{ alignSelf: "baseline" }} />} />,
   margin = "auto",
@@ -564,7 +565,7 @@ export const Select: React.FC<Props> = ({
                   React.isValidElement(triggerAs) &&
                     (triggerAs.props as any).className,
                 ),
-                color: colors.white,
+                color: color ?? colors.white,
                 feel,
                 onBlur() {
                   if (toggleButtonClickTimeout.current) {
