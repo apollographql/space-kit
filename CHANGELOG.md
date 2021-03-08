@@ -1,3 +1,15 @@
+# v8.17.3 (Mon Mar 08 2021)
+
+#### 🐛  Bug Fix
+
+- [AR-2135](https://apollographql.atlassian.net/browse/AR-2135): Fix `Select` closing when interactive children receive focus [#327](https://github.com/apollographql/space-kit/pull/327) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v8.17.2 (Tue Mar 02 2021)
 
 #### 🐛  Bug Fix
