@@ -109,10 +109,9 @@ const ListItemWrapper: React.FC<ListItemWrapperProps> = ({
 
   return (
     <ClassNames>
-      {({ css }) => {
-        return renderListItem(
+      {({ css, cx }) => {
+        const listItem = renderListItem(
           {
-            className: css({ alignItems: "baseline" }),
             key: element.props.value || element.props.children,
             ...downshiftItemProps,
             highlighted: downshiftItemProps["aria-selected"] === "true",
@@ -127,6 +126,15 @@ const ListItemWrapper: React.FC<ListItemWrapperProps> = ({
           },
           element,
         );
+
+        return React.cloneElement(listItem, {
+          className: cx(
+            listItem.props.className,
+            css`
+              align-items: baseline;
+            `,
+          ),
+        });
       }}
     </ClassNames>
   );
@@ -266,7 +274,7 @@ export const Select: React.FC<Props> = ({
   disabled = false,
   feel,
   labelPropsCallbackRef,
-  listAs = <List startIconAs={<div css={{ alignSelf: "baseline" }} />} />,
+  listAs = <List />,
   margin = "auto",
   matchTriggerWidth,
   onBlur,
@@ -469,6 +477,17 @@ export const Select: React.FC<Props> = ({
               listAs,
               {
                 margin,
+                startIconAs: React.cloneElement(
+                  listAs.props.startIconAs || <div />,
+                  {
+                    className: cx(
+                      css`
+                        align-self: baseline;
+                      `,
+                      listAs.props.startIconAs?.props?.className,
+                    ),
+                  },
+                ),
                 truncate,
                 ...getMenuProps(undefined, { suppressRefError: true }),
                 ...(id && { id: `${id}-menu` }),
