@@ -10,6 +10,7 @@ interface Props
     | "content"
     | "disabled"
     | "fallbackPlacements"
+    | "hideOnClick"
     | "matchTriggerWidth"
     | "maxWidth"
     | "onCreate"
@@ -44,6 +45,7 @@ interface Props
 export const Popover: React.FC<Props> = ({
   fallbackPlacements,
   content,
+  hideOnClick = true,
   popperOptions,
   trigger,
   triggerEvents = "mousedown",
@@ -86,7 +88,7 @@ export const Popover: React.FC<Props> = ({
           instanceRef.current = instance;
         }}
         content={<span onClick={handleClick}>{content}</span>}
-        hideOnClick
+        hideOnClick={hideOnClick}
         theme="space-kit-list"
         trigger={triggerEvents}
         popperOptions={{
