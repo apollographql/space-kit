@@ -1,0 +1,32 @@
+import { Tooltip } from "../Tooltip";
+import { Meta, ArgsTable } from "@storybook/addon-docs/blocks";
+
+<Meta title="Components/Tooltip" component={Tooltip} />
+
+# Tooltip
+
+Component emulating mouse hovering tooltips, similar to the `title` element. intended to display non-essential, non-interactive content.
+
+## Live Tooltip
+
+<Canvas>
+  <Story name="live">
+    <Tooltip content="default content">
+      <span>Hover over this to see an example of a live tooltip.</span>
+    </Tooltip>
+  </Story>
+</Canvas>
+
+## Interactive Tooltip
+
+<Canvas>
+  <Story name="interactive">
+    <Tooltip content="default content" interactive>
+      <span>Hover over this to see an example of an interactive tooltip.</span>
+    </Tooltip>
+  </Story>
+</Canvas>
+
+## Props
+
+<ArgsTable of={Tooltip} />
