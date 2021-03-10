@@ -1,3 +1,33 @@
+# v8.17.4 (Wed Mar 10 2021)
+
+### Release Notes
+
+_From #330_
+
+* Create an internal component called `SingletonComponent` (the name is poor and can be changed whenever we want because it's internal) that will take a string `identity` and only allow a single instance in the DOM regardless of how many times it's rendered. This requires us to use `SpaceKitProvider`. Tooltips can be used without `SpaceKitProvider` and will warn the user in the console.
+* Wrap the two `<Global>` styles with the `SingletonComponent` to remove all excess DOM `<style />`s
+
+---
+
+#### 📝 Documentation
+
+- Add guide for icon development [#328](https://github.com/apollographql/space-kit/pull/328) ([@jglovier](https://github.com/jglovier))
+
+#### 🐛  Bug Fix
+
+- [AR-2148](https://apollographql.atlassian.net/browse/AR-2148): Fix repeated rendering of global styles for tooltip-like components [#330](https://github.com/apollographql/space-kit/pull/330) ([@justinanastos](https://github.com/justinanastos))
+
+#### 🏠 Internal
+
+- remove debugging in Button test [#329](https://github.com/apollographql/space-kit/pull/329) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 2
+
+- Joel Glovier ([@jglovier](https://github.com/jglovier))
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v8.17.3 (Mon Mar 08 2021)
 
 #### 🐛  Bug Fix
