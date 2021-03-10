@@ -43,7 +43,7 @@ storiesOf("Tests/Select", module)
       </div>
     ),
     {
-      chromatic: { delay: 200 },
+      chromatic: { delay: 2000 },
     },
   )
   .add(
@@ -82,6 +82,6 @@ storiesOf("Tests/Select", module)
       </div>
     ),
     {
-      chromatic: { delay: 200 },
+      chromatic: { delay: 2000 },
     },
   );
