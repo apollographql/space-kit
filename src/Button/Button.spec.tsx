@@ -92,7 +92,6 @@ test("when wrapped in a Tooltip, disabled, hovered, disabled style is rendered",
     </Tooltip>,
   );
 
-  screen.debug(document);
   const button = screen.getByRole("button");
   expect(button).toHaveStyleRule("background-color", colors.silver.light);
 
