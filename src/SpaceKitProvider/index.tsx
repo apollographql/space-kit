@@ -10,11 +10,20 @@ interface State {
    */
   disableAnimations: boolean;
 
+  singletonComponents: Record<
+    string,
+    {
+      element: ReturnType<React.FC>;
+      instanceCount: React.MutableRefObject<number>;
+    }
+  >;
+
   theme: "light" | "dark";
 }
 
 const defaultState: State = {
   disableAnimations: false,
+  singletonComponents: {},
   theme: "light",
 };
 
@@ -48,11 +57,24 @@ export const SpaceKitProvider: React.FC<Partial<State>> = ({
   return (
     <SpaceKitStateContext.Provider value={state}>
       <SpaceKitSetContext.Provider value={setState}>
+        {Object.entries(state?.singletonComponents ?? {}).map(
+          ([identity, { element }]) => {
+            return <React.Fragment key={identity}>{element}</React.Fragment>;
+          },
+        )}
         {children}
       </SpaceKitSetContext.Provider>
     </SpaceKitStateContext.Provider>
   );
 };
+
+/**
+ * Hook to indicate if the current component is being rendered inside of a
+ * `SpaceKitProvider`
+ */
+export function useHasSpaceKitProvider(): boolean {
+  return !!React.useContext(SpaceKitStateContext);
+}
 
 /**
  * Hook to get the values from the Space Kit Provider with sensible defaults for
@@ -70,4 +92,88 @@ export function useSpaceKitProvider(): Readonly<State> {
   }
 
   return context;
+}
+
+/**
+ * Hook intended to be used internally to communicate with `SpaceKitProvider`
+ * indicating singleton components being mounted and unmounted.
+ *
+ * Use `show` to track when you show a component.
+ *
+ * Use `hide` to track when you remove a component.
+ */
+export function useSingletonComponent(): {
+  hide: ({ identity }: { identity: string }) => void;
+  show: ({
+    identity,
+    element,
+  }: {
+    identity: string;
+    element: ReturnType<React.FC>;
+  }) => void;
+} {
+  const setSpaceKitContext = React.useContext(SpaceKitSetContext);
+
+  const hide = React.useCallback(
+    ({ identity }: { identity: string }) => {
+      setSpaceKitContext?.((state = defaultState) => {
+        if (!state.singletonComponents[identity]) {
+          // This should never happen; we should never be trying to decrement
+          // something that isn't rendered.
+          return state;
+        }
+
+        if (state.singletonComponents[identity].instanceCount.current === 1) {
+          // This is the last instance; delete it from the component and return
+          // a new state to trigger a re-render.
+          const singletonComponentsCopy = { ...state.singletonComponents };
+          delete singletonComponentsCopy[identity];
+
+          return {
+            ...state,
+            singletonComponents: singletonComponentsCopy,
+          };
+        }
+
+        // Decrement the instance count and return the original `state` so this
+        // won't trigger a re-render.
+        state.singletonComponents[identity].instanceCount.current -= 1;
+        return state;
+      });
+    },
+    [setSpaceKitContext],
+  );
+
+  const show = React.useCallback(
+    ({
+      identity,
+      element,
+    }: {
+      identity: string;
+      element: ReturnType<React.FC>;
+    }) => {
+      setSpaceKitContext?.((previousState = defaultState) => {
+        if (!previousState.singletonComponents[identity]) {
+          // This is the first time ths identity is being rendered. Create the
+          // entry in `singletonComponents` and modify `state` to trigger a
+          // re-render.
+          return {
+            ...previousState,
+            singletonComponents: {
+              ...previousState.singletonComponents,
+              [identity]: { element, instanceCount: { current: 1 } },
+            },
+          };
+        }
+
+        // This identity exists. Increment the instanceCount and return the
+        // original state to avoid a re-render.
+        previousState.singletonComponents[identity].instanceCount.current += 1;
+        return previousState;
+      });
+    },
+    [setSpaceKitContext],
+  );
+
+  return { hide, show };
 }
