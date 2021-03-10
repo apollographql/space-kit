@@ -1,5 +1,5 @@
 import * as React from "react";
-import { CacheProvider } from "@emotion/core";
+import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
 
 /**

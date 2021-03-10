@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { ClassNames, jsx } from "@emotion/core";
+import { ClassNames, jsx } from "@emotion/react";
 import React from "react";
 import * as typography from "../typography";
 import { colors } from "../colors";

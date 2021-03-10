@@ -2,7 +2,7 @@
 /** @jsxFrag React.Fragment */
 import * as React from "react";
 import * as typography from "../typography";
-import { css, jsx } from "@emotion/core";
+import { css, jsx } from "@emotion/react";
 import { useFormControlInternalContext } from "../shared/FormControlContext";
 
 interface Props

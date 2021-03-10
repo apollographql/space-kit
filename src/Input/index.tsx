@@ -1,6 +1,6 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
-import { css, jsx } from "@emotion/core";
+import { css, jsx } from "@emotion/react";
 import React from "react";
 import * as typography from "../typography";
 import { colors } from "../colors";

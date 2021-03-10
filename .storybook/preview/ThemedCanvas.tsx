@@ -1,5 +1,5 @@
 import React from "react";
-import { ClassNames } from "@emotion/core";
+import { ClassNames } from "@emotion/react";
 import { colors } from "../../src/colors";
 import { assertUnreachable } from "../../src/shared/assertUnreachable";
 import { Canvas } from "@storybook/addon-docs/dist/blocks/Canvas";

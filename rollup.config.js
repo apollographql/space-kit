@@ -48,7 +48,7 @@ function CJS() {
       ),
     external: [
       "@emotion/cache",
-      "@emotion/core",
+      "@emotion/react",
       "@popperjs/core",
       "@popperjs/core/lib/utils/computeAutoPlacement",
       "@popperjs/core/lib/utils/detectOverflow",
@@ -100,7 +100,7 @@ function CJS() {
             "@babel/preset-react",
             {
               runtime: "classic",
-              importSource: "@emotion/core",
+              importSource: "@emotion/react",
             },
           ],
         ],

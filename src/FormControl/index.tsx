@@ -1,6 +1,6 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
-import { ClassNames, jsx } from "@emotion/core";
+import { ClassNames, jsx } from "@emotion/react";
 import React from "react";
 import { As, createElementFromAs } from "../shared/createElementFromAs";
 import {

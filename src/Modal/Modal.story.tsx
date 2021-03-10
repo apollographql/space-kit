@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { storiesOf } from "@storybook/react";
-import { css, jsx } from "@emotion/core";
+import { css, jsx } from "@emotion/react";
 import { Modal } from "../Modal";
 import React, { useState } from "react";
 import { colors } from "../colors";

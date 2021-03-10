@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { jsx, css, ClassNames } from "@emotion/core";
+import { jsx, css, ClassNames } from "@emotion/react";
 import React, { useEffect } from "react";
 import { motion, MotionProps } from "framer-motion";
 import * as typography from "../typography";

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
 /** @jsx jsx */
 import React from "react";
-import { css, jsx } from "@emotion/core";
+import { css, jsx } from "@emotion/react";
 import { colors } from "../colors";
 import { ListItem } from "../ListItem";
 

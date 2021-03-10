@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import "@testing-library/jest-dom";
 import { emotionCacheProviderFactory } from "./index";
-import { jsx } from "@emotion/core";
+import { jsx } from "@emotion/react";
 import { render } from "@testing-library/react";
 
 test("when given no element, emotion should render classes into head", () => {

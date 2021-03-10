@@ -215,8 +215,8 @@ function createCSSAttribute(css: string): types.JSXAttribute {
                   // manually when we write the file to disk.
                   return typeScriptTpl.ast`
                     ${imports}
-                    import { jsx, css } from '@emotion/core';
-                    
+                    import { jsx, css } from '@emotion/react';
+
                     interface Props extends Omit<React.SVGProps<SVGSVGElement>, "css"> {
                       /**
                        * Weight to render the SVG in. Defaults to "normal"

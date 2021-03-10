@@ -10,7 +10,7 @@ import { ListHeading } from "../ListHeading";
 import { ListDivider } from "../ListDivider";
 import { Popover } from "../Popover";
 import { useSelect, UseSelectPropGetters } from "downshift";
-import { ClassNames, jsx } from "@emotion/core";
+import { ClassNames, jsx } from "@emotion/react";
 import {
   reactNodeToDownshiftItems,
   isHTMLOptionElement,
@@ -37,7 +37,7 @@ interface RenderListItemProps {
    * Custom function to render each `ListItem`
    *
    * This is provided so you can render the `ListItem` on your own, with an `as`
-   * prop, for example, so you can render a `Link`. 
+   * prop, for example, so you can render a `Link`.
    *
    * The function will be called and it's return value rendered; this does not
    * use `React.createElement`, so an inline function is totally acceptable with
@@ -109,10 +109,9 @@ const ListItemWrapper: React.FC<ListItemWrapperProps> = ({
 
   return (
     <ClassNames>
-      {({ css }) => {
-        return renderListItem(
+      {({ css, cx }) => {
+        const listItem = renderListItem(
           {
-            className: css({ alignItems: "baseline" }),
             key: element.props.value || element.props.children,
             ...downshiftItemProps,
             highlighted: downshiftItemProps["aria-selected"] === "true",
@@ -127,6 +126,15 @@ const ListItemWrapper: React.FC<ListItemWrapperProps> = ({
           },
           element,
         );
+
+        return React.cloneElement(listItem, {
+          className: cx(
+            listItem.props.className,
+            css`
+              align-items: baseline;
+            `,
+          ),
+        });
       }}
     </ClassNames>
   );
@@ -266,7 +274,7 @@ export const Select: React.FC<Props> = ({
   disabled = false,
   feel,
   labelPropsCallbackRef,
-  listAs = <List startIconAs={<div css={{ alignSelf: "baseline" }} />} />,
+  listAs = <List />,
   margin = "auto",
   matchTriggerWidth,
   onBlur,
@@ -469,6 +477,17 @@ export const Select: React.FC<Props> = ({
               listAs,
               {
                 margin,
+                startIconAs: React.cloneElement(
+                  listAs.props.startIconAs || <div />,
+                  {
+                    className: cx(
+                      css`
+                        align-self: baseline;
+                      `,
+                      listAs.props.startIconAs?.props?.className,
+                    ),
+                  },
+                ),
                 truncate,
                 ...getMenuProps(undefined, { suppressRefError: true }),
                 ...(id && { id: `${id}-menu` }),

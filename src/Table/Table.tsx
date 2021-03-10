@@ -1,4 +1,4 @@
-import { ClassNames } from "@emotion/core";
+import { ClassNames } from "@emotion/react";
 import React from "react";
 import * as typography from "../typography";
 import { colors } from "../colors";

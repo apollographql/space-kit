@@ -1,7 +1,7 @@
 /** @jsx jsx */
 /** @jsxFrag React.Fragment */
 import * as React from "react";
-import { css, jsx } from "@emotion/core";
+import { css, jsx } from "@emotion/react";
 import { useFormControlInternalContext } from "../shared/FormControlContext";
 
 /**

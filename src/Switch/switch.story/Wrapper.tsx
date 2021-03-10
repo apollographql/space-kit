@@ -1,6 +1,6 @@
 import React from "react";
 import { Switch } from "../../Switch";
-import { ClassNames } from "@emotion/core";
+import { ClassNames } from "@emotion/react";
 import { colors } from "../../colors";
 import { mergeProps } from "@react-aria/utils";
 import { assertUnreachable } from "../../shared/assertUnreachable";

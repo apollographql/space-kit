@@ -3,7 +3,7 @@
 import * as React from "react";
 import * as typography from "../typography";
 import { colors } from "../colors";
-import { css, jsx } from "@emotion/core";
+import { css, jsx } from "@emotion/react";
 import { useFormControlInternalContext } from "../shared/FormControlContext";
 import { IconWarningSolid } from "../icons/IconWarningSolid";
 

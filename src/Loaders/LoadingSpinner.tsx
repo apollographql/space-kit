@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import React from "react";
 import type { Property } from "csstype";
-import { jsx, keyframes } from "@emotion/core";
+import { jsx, keyframes } from "@emotion/react";
 import { colors } from "../colors";
 import { useSpaceKitProvider } from "../SpaceKitProvider";
 

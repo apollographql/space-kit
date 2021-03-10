@@ -3,7 +3,7 @@
 import { colors, ShadedColor } from "../colors";
 import type { Property, SimplePseudos } from "csstype";
 import { base } from "../typography";
-import { ClassNames, jsx, ObjectInterpolation } from "@emotion/core";
+import { ClassNames, jsx, CSSObject } from "@emotion/react";
 import { getOffsetInPalette } from "../colors/utils/getOffsetInPalette";
 import tinycolor from "tinycolor2";
 import React, { useState } from "react";
@@ -353,7 +353,7 @@ export const Button = React.forwardRef<HTMLElement, Props>(
           : colors.grey.light,
     };
 
-    const focusedStyles: ObjectInterpolation<undefined> = {
+    const focusedStyles: CSSObject = {
       ...(feel === "flat" && {
         backgroundColor: theme === "light" ? colors.white : "#000",
         color: theme === "light" ? colors.blue.base : colors.blue.light,
