@@ -1,3 +1,15 @@
+# v8.18.0 (Tue Mar 16 2021)
+
+#### 🚀 Enhancement
+
+- [AR-2162](https://apollographql.atlassian.net/browse/AR-2162): Add `as` prop to `Table` component [#333](https://github.com/apollographql/space-kit/pull/333) ([@justinanastos](https://github.com/justinanastos))
+
+#### Authors: 1
+
+- Justin Anastos ([@justinanastos](https://github.com/justinanastos))
+
+---
+
 # v8.17.4 (Wed Mar 10 2021)
 
 ### Release Notes
