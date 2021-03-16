@@ -1,5 +1,5 @@
 import React from "react";
-import { cleanup, render } from "@testing-library/react";
+import { cleanup, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { Table } from "./Table";
 import { ClassNames } from "@emotion/core";
@@ -489,4 +489,26 @@ it("when passed `trAs` with a `body` and `head` with different additional classe
     expect(tr).not.toHaveClass("head-injected-class");
     expect(tr).toHaveStyleRule("color", "red");
   });
+});
+
+test("when passed an `as` prop, `className`s are merged", () => {
+  render(
+    <Table
+      as={<table className="test-class" data-testid="table" />}
+      data={[{ name: "Mason" }]}
+      keyOn="name"
+      columns={[
+        {
+          id: "name",
+          headerTitle: "Name",
+          render: ({ name }) => name,
+        },
+      ]}
+    />,
+  );
+
+  expect(screen.getByTestId("table")).toHaveClass("test-class");
+  expect(screen.getByTestId("table").classList.length).toBeGreaterThanOrEqual(
+    2,
+  );
 });
