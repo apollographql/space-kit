@@ -136,6 +136,12 @@ interface Props<RowShape> {
         head?: As;
         body?: As;
       };
+
+  /**
+   * Class name that will be applied to the content `div`, or the component
+   * passed as the `as` prop.
+   */
+  className?: string;
 }
 
 /**
@@ -151,6 +157,7 @@ export function Table<RowShape>({
   columns,
   keyOn,
   trAs = "tr",
+  className,
 }: Props<RowShape>): ReturnType<React.FC> {
   const padding = density === "standard" ? 8 : density === "condensed" ? 3 : 11;
   const getRowKey =
@@ -172,10 +179,10 @@ export function Table<RowShape>({
     <ClassNames>
       {({ css, cx }) => (
         <table
-          className={css({
+          className={cx(css({
             borderCollapse: "collapse",
             width: "100%",
-          })}
+          }), className,)}
         >
           <colgroup>
             {columns.map(({ colProps, id }) => (
