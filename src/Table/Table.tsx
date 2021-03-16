@@ -179,10 +179,13 @@ export function Table<RowShape>({
     <ClassNames>
       {({ css, cx }) => (
         <table
-          className={cx(css({
-            borderCollapse: "collapse",
-            width: "100%",
-          }), className,)}
+          className={cx(
+            css({
+              borderCollapse: "collapse",
+              width: "100%",
+            }),
+            className,
+          )}
         >
           <colgroup>
             {columns.map(({ colProps, id }) => (
