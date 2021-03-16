@@ -19,6 +19,16 @@ function createElementFromAs(as: As): React.ReactElement {
 
 interface Props<RowShape> {
   /**
+   * Override the the default element used to render the `table` element
+   *
+   * All props provided will be merged with props that this component adds,
+   * including `className`s being merged using emotion's `cx` function
+   *
+   * @default "<table />"
+   */
+  as?: React.ReactElement;
+
+  /**
    * Component data
    *
    * The shape of the data will be inferred from here
@@ -146,6 +156,7 @@ interface Props<RowShape> {
  * @see https://zpl.io/bAlrjJe
  */
 export function Table<RowShape>({
+  as = <table />,
   data,
   density = "standard",
   columns,
@@ -170,94 +181,105 @@ export function Table<RowShape>({
 
   return (
     <ClassNames>
-      {({ css, cx }) => (
-        <table
-          className={css({
-            borderCollapse: "collapse",
-            width: "100%",
-          })}
-        >
-          <colgroup>
-            {columns.map(({ colProps, id }) => (
-              <col key={id} {...colProps} />
-            ))}
-          </colgroup>
-
-          <thead>
-            {React.cloneElement(
-              headTrElement,
-              {
-                className: cx(
-                  css({
-                    ...typography.base.xsmall,
-                    borderBottom: `1px solid ${colors.silver.dark}`,
-                    color: colors.grey.darker,
-                    textAlign: "left",
-                    textTransform: "uppercase",
-                  }),
-                  headTrElement.props.className,
-                ),
-              },
-              ...columns.map(({ headerTitle, id, thAs = "th" }, colIndex) => {
-                const element = createElementFromAs(thAs);
-
-                return React.cloneElement(
-                  element,
-                  {
-                    className: css(
-                      css({
-                        fontWeight: 600,
-                        padding,
-                        paddingLeft: colIndex === 0 ? 0 : padding,
-                        paddingRight:
-                          colIndex === columns.length - 1 ? 0 : padding,
-                      }),
-                      element.props.className,
-                    ),
-                    key: id,
-                  },
-                  headerTitle,
-                );
+      {({ css, cx }) =>
+        React.cloneElement(
+          as,
+          {
+            className: cx(
+              css({
+                borderCollapse: "collapse",
+                width: "100%",
               }),
-            )}
-          </thead>
-          <tbody>
-            {data.map((item, index) =>
-              React.cloneElement(
-                bodyTrElement,
-                {
-                  key: getRowKey(item),
-                },
-                ...columns.map(({ as = "td", render, id }, colIndex) => {
-                  const element = createElementFromAs(as);
+              as.props.className,
+            ),
+          },
+          <>
+            <colgroup>
+              {columns.map(({ colProps, id }) => (
+                <col key={id} {...colProps} />
+              ))}
+            </colgroup>
 
-                  return React.cloneElement(
-                    element,
-                    {
-                      key: id,
-                      className: cx(
-                        css({
-                          // no border on the bottom row
-                          borderBottom:
-                            index === data.length - 1
-                              ? `none`
-                              : `1px solid ${colors.silver.dark}`,
-                          padding,
-                          paddingLeft: colIndex === 0 ? 0 : padding,
-                          paddingRight:
-                            colIndex === columns.length - 1 ? 0 : padding,
-                        }),
-                        element.props.className,
-                      ),
-                    },
-                    render(item, index, data),
-                  );
-                }),
-              ),
-            )}
-          </tbody>
-        </table>
-      )}
+            <thead>
+              {React.cloneElement(
+                headTrElement,
+                {
+                  className: cx(
+                    css({
+                      ...typography.base.xsmall,
+                      borderBottom: `1px solid ${colors.silver.dark}`,
+                      color: colors.grey.darker,
+                      textAlign: "left",
+                      textTransform: "uppercase",
+                    }),
+                    headTrElement.props.className,
+                  ),
+                },
+                <>
+                  {columns.map(({ headerTitle, id, thAs = "th" }, colIndex) => {
+                    const element = createElementFromAs(thAs);
+
+                    return React.cloneElement(
+                      element,
+                      {
+                        className: css(
+                          css({
+                            fontWeight: 600,
+                            padding,
+                            paddingLeft: colIndex === 0 ? 0 : padding,
+                            paddingRight:
+                              colIndex === columns.length - 1 ? 0 : padding,
+                          }),
+                          element.props.className,
+                        ),
+                        key: id,
+                      },
+                      headerTitle,
+                    );
+                  })}
+                </>,
+              )}
+            </thead>
+            <tbody>
+              {data.map((item, index) =>
+                React.cloneElement(
+                  bodyTrElement,
+                  {
+                    key: getRowKey(item),
+                  },
+                  <>
+                    {columns.map(({ as = "td", render, id }, colIndex) => {
+                      const element = createElementFromAs(as);
+
+                      return React.cloneElement(
+                        element,
+                        {
+                          key: id,
+                          className: cx(
+                            css({
+                              // no border on the bottom row
+                              borderBottom:
+                                index === data.length - 1
+                                  ? `none`
+                                  : `1px solid ${colors.silver.dark}`,
+                              padding,
+                              paddingLeft: colIndex === 0 ? 0 : padding,
+                              paddingRight:
+                                colIndex === columns.length - 1 ? 0 : padding,
+                            }),
+                            element.props.className,
+                          ),
+                        },
+                        render(item, index, data),
+                      );
+                    })}
+                  </>,
+                ),
+              )}
+            </tbody>
+          </>,
+        )
+      }
     </ClassNames>
   );
 }
