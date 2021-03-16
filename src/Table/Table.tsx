@@ -138,8 +138,7 @@ interface Props<RowShape> {
       };
 
   /**
-   * Class name that will be applied to the content `div`, or the component
-   * passed as the `as` prop.
+   * Class name that will be applied to the content `table`
    */
   className?: string;
 }
