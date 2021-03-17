@@ -565,7 +565,7 @@ export const Select: React.FC<Props> = ({
                   React.isValidElement(triggerAs) &&
                     (triggerAs.props as any).className,
                 ),
-                color: color ?? colors.white,
+                color,
                 feel,
                 onBlur() {
                   if (toggleButtonClickTimeout.current) {
