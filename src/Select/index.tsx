@@ -265,7 +265,7 @@ export const Select: React.FC<Props> = ({
   defaultValue,
   disabled = false,
   feel,
-  color,
+  color = colors.white,
   labelPropsCallbackRef,
   listAs = <List startIconAs={<div css={{ alignSelf: "baseline" }} />} />,
   margin = "auto",
