@@ -1,3 +1,15 @@
+# v8.19.0 (Wed Mar 17 2021)
+
+#### 🚀 Enhancement
+
+- Expose color prop for elect trigger [#326](https://github.com/apollographql/space-kit/pull/326) ([@jgzuke](https://github.com/jgzuke))
+
+#### Authors: 1
+
+- Jason Zukewich ([@jgzuke](https://github.com/jgzuke))
+
+---
+
 # v8.18.0 (Tue Mar 16 2021)
 
 #### 🚀 Enhancement
