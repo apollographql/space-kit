@@ -281,6 +281,7 @@ export const Select: React.FC<Props> = ({
   triggerAs = <Button />,
   truncate = true,
   value: valueProp,
+  maxWidth,
   ...props
 }) => {
   const {
@@ -597,6 +598,7 @@ export const Select: React.FC<Props> = ({
                 {renderTriggerNode(selectedItem)}
               </div>,
             )}
+            maxWidth={maxWidth}
           />
         )}
       </ClassNames>
