@@ -1,3 +1,15 @@
+# v8.19.1 (Tue Mar 23 2021)
+
+#### 🐛  Bug Fix
+
+- Pass maxWidth to Popover in Select [#334](https://github.com/apollographql/space-kit/pull/334) ([@Jephuff](https://github.com/Jephuff))
+
+#### Authors: 1
+
+- Jeffrey Burt ([@Jephuff](https://github.com/Jephuff))
+
+---
+
 # v8.19.0 (Wed Mar 17 2021)
 
 #### 🚀 Enhancement
