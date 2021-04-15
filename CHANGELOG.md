@@ -1,3 +1,15 @@
+# v8.20.0 (Thu Apr 15 2021)
+
+#### 🚀 Enhancement
+
+- Add streamline megaphone icon [#339](https://github.com/apollographql/space-kit/pull/339) ([@jgzuke](https://github.com/jgzuke))
+
+#### Authors: 1
+
+- Jason Zukewich ([@jgzuke](https://github.com/jgzuke))
+
+---
+
 # v8.19.1 (Tue Mar 23 2021)
 
 #### 🐛  Bug Fix
