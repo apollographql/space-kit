@@ -167,8 +167,8 @@
   "peerDependencies": {
     "@emotion/cache": ">10.0.29",
     "@emotion/core": ">10.1.0",
-    "react": ">16",
-    "react-dom": ">16",
-    "framer-motion": ">1.6"
+    "framer-motion": ">=1.6",
+    "react": ">=16",
+    "react-dom": ">=16"
   }
 }
