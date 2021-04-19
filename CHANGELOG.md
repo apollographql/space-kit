@@ -1,3 +1,15 @@
+# v8.20.1 (Mon Apr 19 2021)
+
+#### 🐛  Bug Fix
+
+- update peer dependencies versions [#340](https://github.com/apollographql/space-kit/pull/340) ([@Jephuff](https://github.com/Jephuff))
+
+#### Authors: 1
+
+- Jeffrey Burt ([@Jephuff](https://github.com/Jephuff))
+
+---
+
 # v8.20.0 (Thu Apr 15 2021)
 
 #### 🚀 Enhancement
