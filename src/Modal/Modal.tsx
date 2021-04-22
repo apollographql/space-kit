@@ -140,9 +140,9 @@ export const Modal: React.FC<Props> = ({
   primaryAction,
   secondaryAction,
 }) => {
-  const mouseDownTarget = useRef<EventTarget | null>(null);
+  const backdropMouseDownTargetRef = useRef<EventTarget | null>(null);
   const onMouseDown = useCallback((e: MouseEvent) => {
-    mouseDownTarget.current = e.target;
+    backdropMouseDownTargetRef.current = e.target;
   }, []);
 
   const { disableAnimations } = useSpaceKitProvider();
@@ -201,7 +201,7 @@ export const Modal: React.FC<Props> = ({
           {
             onMouseDown,
             onClick: (event: MouseEvent) => {
-              if (mouseDownTarget.current === event.target) {
+              if (backdropMouseDownTargetRef.current === event.target) {
                 onClose?.();
               }
             },
@@ -221,10 +221,6 @@ export const Modal: React.FC<Props> = ({
                 mass: 0.2,
                 velocity: 8,
               },
-            }}
-            onMouseDown={(event: React.MouseEvent<unknown>) => {
-              event.stopPropagation();
-              as.props.onMouseDown?.(event);
             }}
             onClick={(event: React.MouseEvent<any>) => {
               event.stopPropagation();
