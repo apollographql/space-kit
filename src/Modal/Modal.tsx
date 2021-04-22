@@ -194,7 +194,7 @@ export const Modal: React.FC<Props> = ({
         return React.cloneElement(
           containerAs,
           {
-            onClick: onClose,
+            onMouseDown: onClose,
             ...containerAs.props,
             className: cx(css(modalBackdrop), containerAs.props.className),
           },
@@ -211,6 +211,10 @@ export const Modal: React.FC<Props> = ({
                 mass: 0.2,
                 velocity: 8,
               },
+            }}
+            onMouseDown={(event: React.MouseEvent<unknown>) => {
+              event.stopPropagation();
+              as.props.onMouseDown?.(event);
             }}
             onClick={(event: React.MouseEvent<any>) => {
               event.stopPropagation();
