@@ -1,3 +1,15 @@
+# v8.20.2 (Fri Apr 23 2021)
+
+#### 🐛  Bug Fix
+
+- Use onMouseDown instead of onClick for auto closing modals [#342](https://github.com/apollographql/space-kit/pull/342) ([@Jephuff](https://github.com/Jephuff))
+
+#### Authors: 1
+
+- Jeffrey Burt ([@Jephuff](https://github.com/Jephuff))
+
+---
+
 # v8.20.1 (Mon Apr 19 2021)
 
 #### 🐛  Bug Fix
