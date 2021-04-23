@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, css, ClassNames } from "@emotion/core";
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import { motion, MotionProps } from "framer-motion";
 import * as typography from "../typography";
 import { colors } from "../colors";
@@ -140,6 +140,11 @@ export const Modal: React.FC<Props> = ({
   primaryAction,
   secondaryAction,
 }) => {
+  const backdropMouseDownTargetRef = useRef<EventTarget | null>(null);
+  const onMouseDown = useCallback((e: MouseEvent) => {
+    backdropMouseDownTargetRef.current = e.target;
+  }, []);
+
   const { disableAnimations } = useSpaceKitProvider();
 
   useEffect(() => {
@@ -194,7 +199,12 @@ export const Modal: React.FC<Props> = ({
         return React.cloneElement(
           containerAs,
           {
-            onClick: onClose,
+            onMouseDown,
+            onClick: (event: MouseEvent) => {
+              if (backdropMouseDownTargetRef.current === event.target) {
+                onClose?.();
+              }
+            },
             ...containerAs.props,
             className: cx(css(modalBackdrop), containerAs.props.className),
           },
