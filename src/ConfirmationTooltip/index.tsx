@@ -30,7 +30,7 @@ export const ConfirmationTooltip: React.FC<Props> = ({
         window.clearTimeout(timeoutRef.current);
       }
     };
-  });
+  }, []);
 
   return (
     <AbstractTooltip
