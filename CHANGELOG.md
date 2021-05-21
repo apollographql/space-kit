@@ -1,3 +1,15 @@
+# v8.21.0 (Fri May 21 2021)
+
+#### 🚀 Enhancement
+
+- Only remove ConfirmationTooltip timeout when unmounting [#348](https://github.com/apollographql/space-kit/pull/348) ([@jgzuke](https://github.com/jgzuke))
+
+#### Authors: 1
+
+- Jason Zukewich ([@jgzuke](https://github.com/jgzuke))
+
+---
+
 # v8.20.2 (Fri Apr 23 2021)
 
 #### 🐛  Bug Fix
