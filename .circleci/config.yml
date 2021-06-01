@@ -109,6 +109,7 @@ workflows:
             branches:
               ignore:
                 - master
+                - /^version-\d+$/
       - release:
           requires:
             - eslint
@@ -118,3 +119,4 @@ workflows:
             branches:
               only:
                 - master
+                - /^version-\d+$/

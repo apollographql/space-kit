@@ -41,5 +41,6 @@
       "description": "Automatic PR created by renovate for dependency upgrades",
       "color": "yellow"
     }
-  ]
+  ],
+  "versionBranches": true
 }
