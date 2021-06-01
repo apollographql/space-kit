@@ -131,7 +131,7 @@
     "typescript": "^3.9.2"
   },
   "peerDependencies": {
-    "react": ">16",
-    "framer-motion": ">1.6"
+    "react": ">=16",
+    "framer-motion": ">=1.6"
   }
 }
