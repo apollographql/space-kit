@@ -63,7 +63,7 @@ export const SpaceKitProvider: React.FC<Partial<Pick<State, "theme" | "disableAn
   useEffect(() => {
     setState((currState) => ({
       ...nextState,
-      singletonComponents: currState?.singletonComponents,
+      singletonComponents: currState.singletonComponents,
     }));
   }, [nextState]);
 
