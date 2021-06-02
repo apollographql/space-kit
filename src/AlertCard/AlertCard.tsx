@@ -14,6 +14,7 @@ import { IconWarningSolid } from "../icons/IconWarningSolid";
 import { IconErrorSolid } from "../icons/IconErrorSolid";
 import { IconSuccessSolid } from "../icons/IconSuccessSolid";
 import { Button } from "../Button";
+import { useSpaceKitProvider } from "../SpaceKitProvider";
 
 interface AlertCardProps {
   /**
@@ -83,11 +84,14 @@ export const AlertCard: React.FC<AlertCardProps> = ({
   actions,
   headingAs = "h2",
   children,
-  theme = "light",
+  theme: propTheme,
   extended = false,
   type,
   ...otherProps
 }) => {
+  const { theme: providerTheme } = useSpaceKitProvider();
+  const theme = propTheme || providerTheme;
+
   const { Icon, color } = useMemo(() => {
     switch (type) {
       case "info":
