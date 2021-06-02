@@ -1,3 +1,15 @@
+# v8.21.1 (Wed Jun 02 2021)
+
+#### 🐛 Bug Fix
+
+- Enable versionBranches, document backport releases [#351](https://github.com/apollographql/space-kit/pull/351) ([@glasser](https://github.com/glasser))
+
+#### Authors: 1
+
+- David Glasser ([@glasser](https://github.com/glasser))
+
+---
+
 # v8.21.0 (Fri May 21 2021)
 
 #### 🚀 Enhancement
