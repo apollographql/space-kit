@@ -15,6 +15,7 @@ import omit from "lodash/omit";
 import { ButtonIcon } from "./button/ButtonIcon";
 import { inputHeightDictionary } from "../shared/inputHeightDictionary";
 import { useTooltipContext } from "../shared/TooltipContext";
+import { useSpaceKitProvider } from "../SpaceKitProvider";
 type TLength = string | 0 | number;
 
 /**
@@ -227,7 +228,8 @@ interface Props
   size?: keyof typeof inputHeightDictionary | "default";
 
   /**
-   * Theme to display the button
+   * Theme to display the button. This can also be inferred from
+   * SpaceKitProvider.
    *
    * Different themes have different box-shadows. Right now we have these
    * options, but this may expand in the future:
@@ -284,7 +286,7 @@ export const Button = React.forwardRef<HTMLElement, Props>(
       icon: iconProp,
       loading,
       size = "standard",
-      theme = "light",
+      theme: propTheme,
       ...passthroughProps
     },
     ref,
@@ -293,6 +295,8 @@ export const Button = React.forwardRef<HTMLElement, Props>(
       size = "standard";
     }
     const { isFocusVisible, focusProps } = useFocusRing();
+    const { theme: providerTheme } = useSpaceKitProvider();
+    const theme = propTheme || providerTheme;
 
     // Capture if the mouse is over the button by using `onPointerEnter` and
     // `onPointerLeave`, which will still fire if the button is disabled. When

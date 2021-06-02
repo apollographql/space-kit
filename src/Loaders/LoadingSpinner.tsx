@@ -27,7 +27,10 @@ interface Props {
 }
 
 export const LoadingSpinner = React.forwardRef<SVGSVGElement, Props>(
-  ({ theme = "light", size = "medium", className, ...props }, ref) => {
+  ({ theme: propTheme, size = "medium", className, ...props }, ref) => {
+    const { theme: providerTheme } = useSpaceKitProvider();
+    const theme = propTheme || providerTheme;
+
     /* Length of animation */
     const DURATION = 1000;
 

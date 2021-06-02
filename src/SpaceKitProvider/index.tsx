@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useMemo } from "react";
 
 interface State {
   /**
@@ -33,7 +33,7 @@ const defaultState: State = {
 
 const SpaceKitStateContext = React.createContext<State | undefined>(undefined);
 const SpaceKitSetContext = React.createContext<
-  React.Dispatch<React.SetStateAction<State | undefined>> | undefined
+  React.Dispatch<React.SetStateAction<State>> | undefined
 >(undefined);
 
 /**
@@ -45,14 +45,25 @@ const SpaceKitSetContext = React.createContext<
  * A good place to use this would be in your storybook configuration as a
  * decorator applied to all components if we're running inside of chromatic.
  */
-export const SpaceKitProvider: React.FC<Partial<State>> = ({
-  children,
-  ...stateProps
-}) => {
-  const [state, setState] = React.useState<State | undefined>({
-    ...defaultState,
-    ...stateProps,
-  });
+export const SpaceKitProvider: React.FC<Partial<
+  Pick<State, "theme" | "disableAnimations">
+>> = ({ children, theme, disableAnimations }) => {
+  const nextState = useMemo(
+    () => ({
+      theme: theme ?? defaultState.theme,
+      disableAnimations: disableAnimations ?? defaultState.disableAnimations,
+      singletonComponents: {},
+    }),
+    [theme, disableAnimations],
+  );
+  const [state, setState] = React.useState<State>(nextState);
+
+  useEffect(() => {
+    setState((currState) => ({
+      ...nextState,
+      singletonComponents: currState.singletonComponents,
+    }));
+  }, [nextState]);
 
   return (
     <SpaceKitStateContext.Provider value={state}>
