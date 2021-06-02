@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo } from "react";
-import isEqual from "lodash/isEqual";
 
 interface State {
   /**
