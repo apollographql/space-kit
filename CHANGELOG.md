@@ -1,3 +1,15 @@
+# v8.22.0 (Wed Jun 02 2021)
+
+#### 🚀 Enhancement
+
+- Add solid time icon [#353](https://github.com/apollographql/space-kit/pull/353) ([@esilverm](https://github.com/esilverm))
+
+#### Authors: 1
+
+- Evan Silverman ([@esilverm](https://github.com/esilverm))
+
+---
+
 # v8.21.1 (Wed Jun 02 2021)
 
 #### 🐛 Bug Fix
