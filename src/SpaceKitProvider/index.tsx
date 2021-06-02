@@ -45,11 +45,9 @@ const SpaceKitSetContext = React.createContext<
  * A good place to use this would be in your storybook configuration as a
  * decorator applied to all components if we're running inside of chromatic.
  */
-export const SpaceKitProvider: React.FC<Partial<Pick<State, "theme" | "disableAnimations">>> = ({
-  children,
-  theme,
-  disableAnimations,
-}) => {
+export const SpaceKitProvider: React.FC<Partial<
+  Pick<State, "theme" | "disableAnimations">
+>> = ({ children, theme, disableAnimations }) => {
   const nextState = useMemo(
     () => ({
       theme: theme ?? defaultState.theme,
