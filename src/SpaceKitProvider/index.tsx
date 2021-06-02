@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useMemo } from "react";
+import isEqual from "lodash/isEqual";
 
 interface State {
   /**
@@ -33,7 +34,7 @@ const defaultState: State = {
 
 const SpaceKitStateContext = React.createContext<State | undefined>(undefined);
 const SpaceKitSetContext = React.createContext<
-  React.Dispatch<React.SetStateAction<State | undefined>> | undefined
+  React.Dispatch<React.SetStateAction<State>> | undefined
 >(undefined);
 
 /**
@@ -47,12 +48,25 @@ const SpaceKitSetContext = React.createContext<
  */
 export const SpaceKitProvider: React.FC<Partial<State>> = ({
   children,
-  ...stateProps
+  theme,
+  disableAnimations,
 }) => {
-  const [state, setState] = React.useState<State | undefined>({
-    ...defaultState,
-    ...stateProps,
-  });
+  const nextState = useMemo(
+    () => ({
+      theme: theme ?? defaultState.theme,
+      disableAnimations: disableAnimations ?? defaultState.disableAnimations,
+      singletonComponents: {},
+    }),
+    [theme, disableAnimations],
+  );
+  const [state, setState] = React.useState<State>(nextState);
+
+  useEffect(() => {
+    setState((currState) => ({
+      ...nextState,
+      singletonComponents: currState?.singletonComponents,
+    }));
+  }, [nextState]);
 
   return (
     <SpaceKitStateContext.Provider value={state}>
