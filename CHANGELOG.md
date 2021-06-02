@@ -1,3 +1,15 @@
+# v9.0.0 (Wed Jun 02 2021)
+
+#### 💥 Breaking Change
+
+- Update themed components to respect theme from `SpaceKitProvider` [#352](https://github.com/apollographql/space-kit/pull/352) ([@daniman](https://github.com/daniman))
+
+#### Authors: 1
+
+- Danielle Man ([@daniman](https://github.com/daniman))
+
+---
+
 # v8.22.0 (Wed Jun 02 2021)
 
 #### 🚀 Enhancement
