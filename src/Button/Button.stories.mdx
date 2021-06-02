@@ -1,5 +1,6 @@
 import { Button } from "./Button";
 import { Tooltip } from "../Tooltip";
+import { SpaceKitProvider } from "../SpaceKitProvider";
 import { Meta, Story, ArgsTable, Canvas } from "@storybook/addon-docs/blocks";
 import { IconExpandList } from "../icons/IconExpandList";
 import { IconShip2 } from "../icons/IconShip2";
@@ -78,137 +79,75 @@ Light themed buttons have a border. The hover state is a shade darker than the r
         justifyContent: "space-between",
       }}
     >
-      <ButtonLayout theme="light">
-        <Button theme="light">Rest</Button>
-        <Button theme="light" data-force-hover-state="true">
-          Hover
-        </Button>
-        <Button theme="light" data-force-active-state="true">
-          Active
-        </Button>
-        <Button theme="light" data-force-focus-state="true">
-          Focused
-        </Button>
-        <Button theme="light" disabled>
-          Disabled
-        </Button>
-      </ButtonLayout>
-      <ButtonLayout theme="light">
-        <Button color={colors.indigo.dark} theme="light">
-          Rest
-        </Button>
-        <Button
-          color={colors.indigo.dark}
-          theme="light"
-          data-force-hover-state="true"
-        >
-          Hover
-        </Button>
-        <Button
-          color={colors.indigo.dark}
-          theme="light"
-          data-force-active-state="true"
-        >
-          Active
-        </Button>
-        <Button
-          color={colors.indigo.dark}
-          theme="light"
-          data-force-focus-state="true"
-        >
-          Focused
-        </Button>
-        <Button color={colors.indigo.dark} theme="light" disabled>
-          Disabled
-        </Button>
-      </ButtonLayout>
-      <ButtonLayout theme="light">
-        <Button color={colors.green.base} theme="light">
-          Rest
-        </Button>
-        <Button
-          color={colors.green.base}
-          theme="light"
-          data-force-hover-state="true"
-        >
-          Hover
-        </Button>
-        <Button
-          color={colors.green.base}
-          theme="light"
-          data-force-active-state="true"
-        >
-          Active
-        </Button>
-        <Button
-          color={colors.green.base}
-          theme="light"
-          data-force-focus-state="true"
-        >
-          Focused
-        </Button>
-        <Button color={colors.green.base} theme="light" disabled>
-          Disabled
-        </Button>
-      </ButtonLayout>
-      <ButtonLayout theme="light">
-        <Button color={colors.red.base} theme="light">
-          Rest
-        </Button>
-        <Button
-          color={colors.red.base}
-          theme="light"
-          data-force-hover-state="true"
-        >
-          Hover
-        </Button>
-        <Button
-          color={colors.red.base}
-          theme="light"
-          data-force-active-state="true"
-        >
-          Active
-        </Button>
-        <Button
-          color={colors.red.base}
-          theme="light"
-          data-force-focus-state="true"
-        >
-          Focused
-        </Button>
-        <Button color={colors.red.base} theme="light" disabled>
-          Disabled
-        </Button>
-      </ButtonLayout>
-      <ButtonLayout theme="light">
-        <Button color={colors.blue.base} theme="light">
-          Rest
-        </Button>
-        <Button
-          color={colors.blue.base}
-          theme="light"
-          data-force-hover-state="true"
-        >
-          Hover
-        </Button>
-        <Button
-          color={colors.blue.base}
-          theme="light"
-          data-force-active-state="true"
-        >
-          Active
-        </Button>
-        <Button
-          color={colors.blue.base}
-          theme="light"
-          data-force-focus-state="true"
-        >
-          Focused
-        </Button>
-        <Button color={colors.blue.base} theme="light" disabled>
-          Disabled
-        </Button>
-      </ButtonLayout>
+      <SpaceKitProvider theme="light">
+        <ButtonLayout>
+          <Button>Rest</Button>
+          <Button data-force-hover-state="true">Hover</Button>
+          <Button data-force-active-state="true">Active</Button>
+          <Button data-force-focus-state="true">Focused</Button>
+          <Button disabled>Disabled</Button>
+        </ButtonLayout>
+        <ButtonLayout>
+          <Button color={colors.indigo.dark}>Rest</Button>
+          <Button color={colors.indigo.dark} data-force-hover-state="true">
+            Hover
+          </Button>
+          <Button color={colors.indigo.dark} data-force-active-state="true">
+            Active
+          </Button>
+          <Button color={colors.indigo.dark} data-force-focus-state="true">
+            Focused
+          </Button>
+          <Button color={colors.indigo.dark} disabled>
+            Disabled
+          </Button>
+        </ButtonLayout>
+        <ButtonLayout>
+          <Button color={colors.green.base}>Rest</Button>
+          <Button color={colors.green.base} data-force-hover-state="true">
+            Hover
+          </Button>
+          <Button color={colors.green.base} data-force-active-state="true">
+            Active
+          </Button>
+          <Button color={colors.green.base} data-force-focus-state="true">
+            Focused
+          </Button>
+          <Button color={colors.green.base} disabled>
+            Disabled
+          </Button>
+        </ButtonLayout>
+        <ButtonLayout>
+          <Button color={colors.red.base}>Rest</Button>
+          <Button color={colors.red.base} data-force-hover-state="true">
+            Hover
+          </Button>
+          <Button color={colors.red.base} data-force-active-state="true">
+            Active
+          </Button>
+          <Button color={colors.red.base} data-force-focus-state="true">
+            Focused
+          </Button>
+          <Button color={colors.red.base} disabled>
+            Disabled
+          </Button>
+        </ButtonLayout>
+        <ButtonLayout>
+          <Button color={colors.blue.base}>Rest</Button>
+          <Button color={colors.blue.base} data-force-hover-state="true">
+            Hover
+          </Button>
+          <Button color={colors.blue.base} data-force-active-state="true">
+            Active
+          </Button>
+          <Button color={colors.blue.base} data-force-focus-state="true">
+            Focused
+          </Button>
+          <Button color={colors.blue.base} disabled>
+            Disabled
+          </Button>
+        </ButtonLayout>
+      </SpaceKitProvider>
     </div>
   </Story>
 </Canvas>
@@ -225,137 +164,75 @@ For dark themed buttons, the borders are completely removed to make the colors l
         justifyContent: "space-between",
       }}
     >
-      <ButtonLayout theme="dark">
-        <Button theme="dark">Rest</Button>
-        <Button theme="dark" data-force-hover-state="true">
-          Hover
-        </Button>
-        <Button theme="dark" data-force-active-state="true">
-          Active
-        </Button>
-        <Button theme="dark" data-force-focus-state="true">
-          Focused
-        </Button>
-        <Button theme="dark" disabled>
-          Disabled
-        </Button>
-      </ButtonLayout>
-      <ButtonLayout theme="dark">
-        <Button color={colors.indigo.dark} theme="dark">
-          sweet
-        </Button>
-        <Button
-          color={colors.indigo.dark}
-          theme="dark"
-          data-force-hover-state="true"
-        >
-          Hover
-        </Button>
-        <Button
-          color={colors.indigo.dark}
-          theme="dark"
-          data-force-active-state="true"
-        >
-          Active
-        </Button>
-        <Button
-          color={colors.indigo.dark}
-          theme="dark"
-          data-force-focus-state="true"
-        >
-          Focused
-        </Button>
-        <Button color={colors.indigo.dark} theme="dark" disabled>
-          Disabled
-        </Button>
-      </ButtonLayout>
-      <ButtonLayout theme="dark">
-        <Button color={colors.green.base} theme="dark">
-          Rest
-        </Button>
-        <Button
-          color={colors.green.base}
-          theme="dark"
-          data-force-hover-state="true"
-        >
-          Hover
-        </Button>
-        <Button
-          color={colors.green.base}
-          theme="dark"
-          data-force-active-state="true"
-        >
-          Active
-        </Button>
-        <Button
-          color={colors.green.base}
-          theme="dark"
-          data-force-focus-state="true"
-        >
-          Focused
-        </Button>
-        <Button color={colors.green.base} theme="dark" disabled>
-          Disabled
-        </Button>
-      </ButtonLayout>
-      <ButtonLayout theme="dark">
-        <Button color={colors.red.base} theme="dark">
-          Rest
-        </Button>
-        <Button
-          color={colors.red.base}
-          theme="dark"
-          data-force-hover-state="true"
-        >
-          Hover
-        </Button>
-        <Button
-          color={colors.red.base}
-          theme="dark"
-          data-force-active-state="true"
-        >
-          Active
-        </Button>
-        <Button
-          color={colors.red.base}
-          theme="dark"
-          data-force-focus-state="true"
-        >
-          Focused
-        </Button>
-        <Button color={colors.red.base} theme="dark" disabled>
-          Disabled
-        </Button>
-      </ButtonLayout>
-      <ButtonLayout theme="dark">
-        <Button color={colors.blue.base} theme="dark">
-          Rest
-        </Button>
-        <Button
-          color={colors.blue.base}
-          theme="dark"
-          data-force-hover-state="true"
-        >
-          Hover
-        </Button>
-        <Button
-          color={colors.blue.base}
-          theme="dark"
-          data-force-active-state="true"
-        >
-          Active
-        </Button>
-        <Button
-          color={colors.blue.base}
-          theme="dark"
-          data-force-focus-state="true"
-        >
-          Focused
-        </Button>
-        <Button color={colors.blue.base} theme="dark" disabled>
-          Disabled
-        </Button>
-      </ButtonLayout>
+      <SpaceKitProvider theme="dark">
+        <ButtonLayout>
+          <Button>Rest</Button>
+          <Button data-force-hover-state="true">Hover</Button>
+          <Button data-force-active-state="true">Active</Button>
+          <Button data-force-focus-state="true">Focused</Button>
+          <Button disabled>Disabled</Button>
+        </ButtonLayout>
+        <ButtonLayout>
+          <Button color={colors.indigo.dark}>sweet</Button>
+          <Button color={colors.indigo.dark} data-force-hover-state="true">
+            Hover
+          </Button>
+          <Button color={colors.indigo.dark} data-force-active-state="true">
+            Active
+          </Button>
+          <Button color={colors.indigo.dark} data-force-focus-state="true">
+            Focused
+          </Button>
+          <Button color={colors.indigo.dark} disabled>
+            Disabled
+          </Button>
+        </ButtonLayout>
+        <ButtonLayout>
+          <Button color={colors.green.base}>Rest</Button>
+          <Button color={colors.green.base} data-force-hover-state="true">
+            Hover
+          </Button>
+          <Button color={colors.green.base} data-force-active-state="true">
+            Active
+          </Button>
+          <Button color={colors.green.base} data-force-focus-state="true">
+            Focused
+          </Button>
+          <Button color={colors.green.base} disabled>
+            Disabled
+          </Button>
+        </ButtonLayout>
+        <ButtonLayout>
+          <Button color={colors.red.base}>Rest</Button>
+          <Button color={colors.red.base} data-force-hover-state="true">
+            Hover
+          </Button>
+          <Button color={colors.red.base} data-force-active-state="true">
+            Active
+          </Button>
+          <Button color={colors.red.base} data-force-focus-state="true">
+            Focused
+          </Button>
+          <Button color={colors.red.base} disabled>
+            Disabled
+          </Button>
+        </ButtonLayout>
+        <ButtonLayout>
+          <Button color={colors.blue.base}>Rest</Button>
+          <Button color={colors.blue.base} data-force-hover-state="true">
+            Hover
+          </Button>
+          <Button color={colors.blue.base} data-force-active-state="true">
+            Active
+          </Button>
+          <Button color={colors.blue.base} data-force-focus-state="true">
+            Focused
+          </Button>
+          <Button color={colors.blue.base} disabled>
+            Disabled
+          </Button>
+        </ButtonLayout>
+      </SpaceKitProvider>
     </div>
   </Story>
 </Canvas>
