@@ -10,6 +10,7 @@ import { IconInfoSolid } from "../icons/IconInfoSolid";
 import { IconWarningSolid } from "../icons/IconWarningSolid";
 import { IconErrorSolid } from "../icons/IconErrorSolid";
 import { IconSuccessSolid } from "../icons/IconSuccessSolid";
+import { useSpaceKitProvider } from "../SpaceKitProvider";
 
 interface AlertBannerProps {
   /**
@@ -45,10 +46,13 @@ interface AlertBannerProps {
 export const AlertBanner: React.FC<AlertBannerProps> = ({
   children,
   childrenContainerAs = "div",
-  theme = "light",
+  theme: propTheme,
   type,
   ...otherProps
 }) => {
+  const { theme: providerTheme } = useSpaceKitProvider();
+  const theme = propTheme || providerTheme;
+
   const { Icon, color } = useMemo(() => {
     switch (type) {
       case "info":
