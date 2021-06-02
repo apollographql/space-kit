@@ -142,6 +142,7 @@ workflows:
             branches:
               ignore:
                 - main
+                - /^version-\d+$/
       - release:
           requires:
             - check-conflicting-icon-components
@@ -152,3 +153,4 @@ workflows:
             branches:
               only:
                 - main
+                - /^version-\d+$/

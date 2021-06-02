@@ -1166,6 +1166,23 @@ _From #182_
 
 ---
 
+# v5.6.2 (Tue Jun 01 2021)
+
+#### 🚀 Enhancement
+
+- Backport (for `gatsby-theme-apollo-core`) of: update peer dependencies versions [#340](https://github.com/apollographql/space-kit/pull/340) ([@Jephuff](https://github.com/Jephuff))
+
+
+---
+
+# v5.6.1 (Tue Jun 01 2021)
+
+#### 🚀 Enhancement
+
+Accidentaly release from trying to create 5.6.2.
+
+---
+
 # v5.6.0 (Fri Jun 12 2020)
 
 #### 🚀 Enhancement
