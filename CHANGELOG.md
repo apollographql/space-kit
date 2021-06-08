@@ -1,3 +1,15 @@
+# v9.1.0 (Tue Jun 08 2021)
+
+#### 🚀 Enhancement
+
+- Add icon for Sandbox [#356](https://github.com/apollographql/space-kit/pull/356) ([@jglovier](https://github.com/jglovier))
+
+#### Authors: 1
+
+- Joel Glovier ([@jglovier](https://github.com/jglovier))
+
+---
+
 # v9.0.0 (Wed Jun 02 2021)
 
 #### 💥 Breaking Change
