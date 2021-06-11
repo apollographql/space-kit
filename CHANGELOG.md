@@ -1,3 +1,15 @@
+# v9.2.0 (Fri Jun 11 2021)
+
+#### 🚀 Enhancement
+
+- Fix Popover component not being able to render >800 times without taking a dump on the main thread [#357](https://github.com/apollographql/space-kit/pull/357) ([@brainkim](https://github.com/brainkim))
+
+#### Authors: 1
+
+- Brian Kim ([@brainkim](https://github.com/brainkim))
+
+---
+
 # v9.1.0 (Tue Jun 08 2021)
 
 #### 🚀 Enhancement
