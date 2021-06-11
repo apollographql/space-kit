@@ -2,6 +2,7 @@ import React from "react";
 import { AbstractTooltip } from "../AbstractTooltip";
 import { TippyPopoverStyles } from "./popover/TippyPopoverStyles";
 import { sizeModifier } from "./popover/sizeModifier";
+import type { Modifier } from "@popperjs/core";
 
 interface Props
   extends Pick<
@@ -41,6 +42,48 @@ interface Props
    */
   interactive?: boolean;
 }
+
+// NOTE: Defining modifiers with callback functions inline will cause a memory
+// leak Tippy-react retains every modifier with a callback in an internal array!
+const findTippyBox: Modifier<"findTippyBox", any> = {
+  name: "findTippyBox",
+  phase: "read",
+  enabled: true,
+  fn({ name, state }) {
+    const element = state.elements.popper.querySelector<HTMLElement>(
+      ".tippy-box",
+    );
+
+    state.modifiersData[name].boxElement = element;
+  },
+};
+
+const applyMaxSize: Modifier<"applyMaxSize", any> = {
+  name: "applyMaxSize",
+  enabled: true,
+  phase: "beforeWrite",
+  requires: ["maxSize", "findTippyBox"],
+  fn({ state }) {
+    const maxHeight = state.modifiersData.maxSize.height;
+
+    /**
+     * We read this element in the `findTippyBox` phase. We need to
+     * use some custom logic here to apply the style to the tippy
+     * box because usually that's not made available. We _could_
+     * apply these styles directly to the `popper` element and, but
+     * then the border will be swallowed by the overflow. If we put
+     * the border on `popper`, then the border will not be animated
+     * because animations are applied to `.tippy-box`.
+     */
+    const element: HTMLElement | null =
+      state.modifiersData.findTippyBox.boxElement;
+
+    if (element) {
+      element.style.maxHeight = `${maxHeight}px`;
+      element.style.overflow = "auto";
+    }
+  },
+};
 
 export const Popover: React.FC<Props> = ({
   fallbackPlacements,
@@ -97,50 +140,14 @@ export const Popover: React.FC<Props> = ({
           modifiers: [
             // Disable `flip` because we're using our new version
             { name: "flip", enabled: false },
-            {
-              name: "findTippyBox",
-              phase: "read",
-              enabled: true,
-              fn({ name, state }) {
-                const element = state.elements.popper.querySelector<
-                  HTMLElement
-                >(".tippy-box");
-
-                state.modifiersData[name].boxElement = element;
-              },
-            },
+            findTippyBox,
             sizeModifier,
             {
               name: "maxSize",
               requires: ["findTippyBox"],
               options: { padding: 7, fallbackPlacements },
             },
-            {
-              name: "applyMaxSize",
-              enabled: true,
-              phase: "beforeWrite",
-              requires: ["maxSize", "findTippyBox"],
-              fn({ state }) {
-                const maxHeight = state.modifiersData.maxSize.height;
-
-                /**
-                 * We read this element in the `findTippyBox` phase. We need to
-                 * use some custom logic here to apply the style to the tippy
-                 * box because usually that's not made available. We _could_
-                 * apply these styles directly to the `popper` element and, but
-                 * then the border will be swallowed by the overflow. If we put
-                 * the border on `popper`, then the border will not be animated
-                 * because animations are applied to `.tippy-box`.
-                 */
-                const element: HTMLElement | null =
-                  state.modifiersData.findTippyBox.boxElement;
-
-                if (element) {
-                  element.style.maxHeight = `${maxHeight}px`;
-                  element.style.overflow = "auto";
-                }
-              },
-            },
+            applyMaxSize,
             // Modifiers later in the list override modifiers earlier in the
             // list, so we have to place this at the end so user-defined
             // modifiers can override space kit defined modifier configurations.
