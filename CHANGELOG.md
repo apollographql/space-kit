@@ -1,3 +1,15 @@
+# v9.3.0 (Tue Jun 15 2021)
+
+#### 🚀 Enhancement
+
+- make alert card x optional [#360](https://github.com/apollographql/space-kit/pull/360) ([@mayakoneval](https://github.com/mayakoneval))
+
+#### Authors: 1
+
+- [@mayakoneval](https://github.com/mayakoneval)
+
+---
+
 # v9.2.0 (Fri Jun 11 2021)
 
 #### 🚀 Enhancement
