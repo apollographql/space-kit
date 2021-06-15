@@ -1,3 +1,15 @@
+# v9.3.1 (Tue Jun 15 2021)
+
+#### 🐛  Bug Fix
+
+- make dismissable optional: [#361](https://github.com/apollographql/space-kit/pull/361) ([@mayakoneval](https://github.com/mayakoneval))
+
+#### Authors: 1
+
+- [@mayakoneval](https://github.com/mayakoneval)
+
+---
+
 # v9.3.0 (Tue Jun 15 2021)
 
 #### 🚀 Enhancement
