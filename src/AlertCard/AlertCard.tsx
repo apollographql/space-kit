@@ -65,7 +65,7 @@ interface AlertCardProps {
    * whether or not to include the 'x' button
    * which calls 'onClose'
    */
-  closeable: boolean;
+  dismissable: boolean;
 
   /**
    * layout for longer content
@@ -87,7 +87,7 @@ export const AlertCard: React.FC<AlertCardProps> = ({
   as = "section",
   heading,
   onClose,
-  closeable = true,
+  dismissable = true,
   actions,
   headingAs = "h2",
   children,
@@ -209,7 +209,7 @@ export const AlertCard: React.FC<AlertCardProps> = ({
                     : React.createElement(headingAs, headingProps);
                 }}
               </ClassNames>
-              {closeable && (
+              {dismissable && (
                 <Button
                   onClick={onClose}
                   size="small"
