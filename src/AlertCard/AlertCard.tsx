@@ -65,7 +65,7 @@ interface AlertCardProps {
    * whether or not to include the 'x' button
    * which calls 'onClose'
    */
-  dismissable: boolean;
+  dismissable?: boolean;
 
   /**
    * layout for longer content
