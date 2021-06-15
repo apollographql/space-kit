@@ -62,6 +62,12 @@ interface AlertCardProps {
   onClose: () => void;
 
   /**
+   * whether or not to include the 'x' button
+   * which calls 'onClose'
+   */
+  dismissable: boolean;
+
+  /**
    * layout for longer content
    *
    * @default false
@@ -81,6 +87,7 @@ export const AlertCard: React.FC<AlertCardProps> = ({
   as = "section",
   heading,
   onClose,
+  dismissable = true,
   actions,
   headingAs = "h2",
   children,
@@ -202,41 +209,43 @@ export const AlertCard: React.FC<AlertCardProps> = ({
                     : React.createElement(headingAs, headingProps);
                 }}
               </ClassNames>
-              <Button
-                onClick={onClose}
-                size="small"
-                feel="flat"
-                theme={theme}
-                css={{
-                  marginRight: -9,
-                  marginTop: -9,
-                  color:
-                    theme === "light"
-                      ? colors.grey.lighter
-                      : colors.midnight.lighter,
-                  ":hover": {
-                    backgroundColor: "transparent",
+              {dismissable && (
+                <Button
+                  onClick={onClose}
+                  size="small"
+                  feel="flat"
+                  theme={theme}
+                  css={{
+                    marginRight: -9,
+                    marginTop: -9,
                     color:
                       theme === "light"
-                        ? colors.grey.light
-                        : colors.midnight.lightest,
-                  },
-                }}
-                color={
-                  {
-                    light: colors.grey.lighter,
-                    dark: colors.midnight.lighter,
-                  }[theme]
-                }
-                icon={
-                  <IconClose
-                    css={{
-                      width: 10,
-                      height: 10,
-                    }}
-                  />
-                }
-              />
+                        ? colors.grey.lighter
+                        : colors.midnight.lighter,
+                    ":hover": {
+                      backgroundColor: "transparent",
+                      color:
+                        theme === "light"
+                          ? colors.grey.light
+                          : colors.midnight.lightest,
+                    },
+                  }}
+                  color={
+                    {
+                      light: colors.grey.lighter,
+                      dark: colors.midnight.lighter,
+                    }[theme]
+                  }
+                  icon={
+                    <IconClose
+                      css={{
+                        width: 10,
+                        height: 10,
+                      }}
+                    />
+                  }
+                />
+              )}
             </div>
 
             {extended && (

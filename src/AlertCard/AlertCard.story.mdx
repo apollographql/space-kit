@@ -172,6 +172,28 @@ Success alerts are confirmation that the action the user was trying to take has 
   </Story>
 </Canvas>
 
+## Without 'x'
+
+Success alerts are confirmation that the action the user was trying to take has succeeded.
+
+<Canvas>
+  <Story name="without x light">
+    <AlertCard dismissable={false} type="success" heading="Success alert">
+      A new schema registry has been created by timbotnik.
+    </AlertCard>
+  </Story>
+  <Story name="without x dark">
+    <AlertCard
+      dismissable={false}
+      type="success"
+      theme="dark"
+      heading="Success alert"
+    >
+      A new schema registry has been created by timbotnik.
+    </AlertCard>
+  </Story>
+</Canvas>
+
 ## Props
 
 ### `Alert`
