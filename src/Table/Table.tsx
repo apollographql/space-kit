@@ -225,52 +225,56 @@ export function Table<RowShape>({
               ))}
             </colgroup>
 
-            <thead>
-              {React.cloneElement(
-                headTrElement,
-                {
-                  className: cx(
-                    css({
-                      ...typography.base.xsmall,
-                      borderBottom: border,
-                      borderTop: border,
-                      color:
-                        theme === "light"
-                          ? colors.grey.base
-                          : theme === "dark"
-                          ? colors.midnight.lighter
-                          : assertUnreachable(theme),
-                      textAlign: "left",
-                      textTransform: "uppercase",
-                    }),
-                    headTrElement.props.className,
-                  ),
-                },
-                <>
-                  {columns.map(({ headerTitle, id, thAs = "th" }, colIndex) => {
-                    const element = createElementFromAs(thAs);
+            {columns.filter((c) => c.headerTitle).length > 0 && (
+              <thead>
+                {React.cloneElement(
+                  headTrElement,
+                  {
+                    className: cx(
+                      css({
+                        ...typography.base.xsmall,
+                        borderBottom: border,
+                        borderTop: border,
+                        color:
+                          theme === "light"
+                            ? colors.grey.base
+                            : theme === "dark"
+                            ? colors.midnight.lighter
+                            : assertUnreachable(theme),
+                        textAlign: "left",
+                        textTransform: "uppercase",
+                      }),
+                      headTrElement.props.className,
+                    ),
+                  },
+                  <>
+                    {columns.map(
+                      ({ headerTitle, id, thAs = "th" }, colIndex) => {
+                        const element = createElementFromAs(thAs);
 
-                    return React.cloneElement(
-                      element,
-                      {
-                        className: css(
-                          css({
-                            fontWeight: 600,
-                            padding,
-                            paddingLeft: colIndex === 0 ? 0 : padding,
-                            paddingRight:
-                              colIndex === columns.length - 1 ? 0 : padding,
-                          }),
-                          element.props.className,
-                        ),
-                        key: id,
+                        return React.cloneElement(
+                          element,
+                          {
+                            className: css(
+                              css({
+                                fontWeight: 600,
+                                padding,
+                                paddingLeft: colIndex === 0 ? 0 : padding,
+                                paddingRight:
+                                  colIndex === columns.length - 1 ? 0 : padding,
+                              }),
+                              element.props.className,
+                            ),
+                            key: id,
+                          },
+                          headerTitle,
+                        );
                       },
-                      headerTitle,
-                    );
-                  })}
-                </>,
-              )}
-            </thead>
+                    )}
+                  </>,
+                )}
+              </thead>
+            )}
             <tbody>
               {data.map((item, index) =>
                 React.cloneElement(
