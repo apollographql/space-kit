@@ -3,6 +3,7 @@ import React from "react";
 import * as typography from "../typography";
 import { colors } from "../colors";
 import { assertUnreachable } from "../shared/assertUnreachable";
+import { useSpaceKitProvider } from "../SpaceKitProvider";
 
 type As = React.ReactElement | keyof JSX.IntrinsicElements;
 
@@ -18,6 +19,12 @@ function createElementFromAs(as: As): React.ReactElement {
 }
 
 interface Props<RowShape> {
+  /**
+   * color theme for alert
+   * @default "light"
+   */
+  theme?: "light" | "dark";
+
   /**
    * Override the the default element used to render the `table` element
    *
@@ -162,7 +169,11 @@ export function Table<RowShape>({
   columns,
   keyOn,
   trAs = "tr",
+  theme: propTheme,
 }: Props<RowShape>): ReturnType<React.FC> {
+  const { theme: providerTheme } = useSpaceKitProvider();
+  const theme = propTheme || providerTheme;
+
   const padding = density === "standard" ? 8 : density === "condensed" ? 3 : 11;
   const getRowKey =
     typeof keyOn === "function" ? keyOn : (row: RowShape) => row[keyOn];
@@ -178,6 +189,14 @@ export function Table<RowShape>({
     : typeof trAs === "string"
     ? React.createElement(trAs)
     : createElementFromAs(trAs.body || "tr");
+
+  const border = `1px solid ${
+    theme === "light"
+      ? colors.silver.dark
+      : theme === "dark"
+      ? colors.midnight.dark
+      : assertUnreachable(theme)
+  }`;
 
   return (
     <ClassNames>
@@ -207,8 +226,14 @@ export function Table<RowShape>({
                   className: cx(
                     css({
                       ...typography.base.xsmall,
-                      borderBottom: `1px solid ${colors.silver.dark}`,
-                      color: colors.grey.darker,
+                      borderBottom: border,
+                      borderTop: border,
+                      color:
+                        theme === "light"
+                          ? colors.grey.base
+                          : theme === "dark"
+                          ? colors.midnight.lighter
+                          : assertUnreachable(theme),
                       textAlign: "left",
                       textTransform: "uppercase",
                     }),
@@ -259,9 +284,7 @@ export function Table<RowShape>({
                             css({
                               // no border on the bottom row
                               borderBottom:
-                                index === data.length - 1
-                                  ? `none`
-                                  : `1px solid ${colors.silver.dark}`,
+                                index === data.length - 1 ? `none` : border,
                               padding,
                               paddingLeft: colIndex === 0 ? 0 : padding,
                               paddingRight:

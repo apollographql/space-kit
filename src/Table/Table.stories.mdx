@@ -22,137 +22,305 @@ Table density is an important characteristic when considering how to present inf
 ### standard (default)
 
 <Canvas>
-  <Story name="standard density">
-    <Table
-      keyOn="name"
-      data={[
-        {
-          name: "Alice Howell",
-          image: require("./table.stories/alice-howell.png"),
-        },
-        {
-          name: "Benjamin Lawrence",
-          image: require("./table.stories/benjamin-lawrence.png"),
-        },
-        {
-          name: "Cynthia Bowman",
-          image: require("./table.stories/cynthia-bowman.png"),
-        },
-        {
-          name: "Jeremy Jacobs",
-          image: require("./table.stories/jeremy-jacobs.png"),
-        },
-        {
-          name: "Jeremy Griffin",
-          image: require("./table.stories/jeremy-griffin.png"),
-        },
-      ]}
-      columns={[
-        {
-          id: "image",
-          render: ({ image }) => (
-            <img style={{ width: 24, height: 24 }} src={image} />
-          ),
-        },
-        {
-          id: "name",
-          headerTitle: "name",
-          render: ({ name }) => <>{name}</>,
-        },
-      ]}
-    />
+  <Story name="standard density light">
+    <div style={{ padding: 16 }}>
+      <Table
+        keyOn="name"
+        data={[
+          {
+            name: "Alice Howell",
+            image: require("./table.stories/alice-howell.png"),
+          },
+          {
+            name: "Benjamin Lawrence",
+            image: require("./table.stories/benjamin-lawrence.png"),
+          },
+          {
+            name: "Cynthia Bowman",
+            image: require("./table.stories/cynthia-bowman.png"),
+          },
+          {
+            name: "Jeremy Jacobs",
+            image: require("./table.stories/jeremy-jacobs.png"),
+          },
+          {
+            name: "Jeremy Griffin",
+            image: require("./table.stories/jeremy-griffin.png"),
+          },
+        ]}
+        columns={[
+          {
+            id: "image",
+            render: ({ image }) => (
+              <img style={{ width: 24, height: 24 }} src={image} />
+            ),
+          },
+          {
+            id: "name",
+            headerTitle: "name",
+            render: ({ name }) => <>{name}</>,
+          },
+        ]}
+      />
+    </div>
+  </Story>
+  <Story name="standard density dark">
+    <div
+      style={{
+        background: colors.black.base,
+        borderRadius: 8,
+        padding: 16,
+        color: colors.white,
+      }}
+    >
+      <Table
+        theme="dark"
+        keyOn="name"
+        data={[
+          {
+            name: "Alice Howell",
+            image: require("./table.stories/alice-howell.png"),
+          },
+          {
+            name: "Benjamin Lawrence",
+            image: require("./table.stories/benjamin-lawrence.png"),
+          },
+          {
+            name: "Cynthia Bowman",
+            image: require("./table.stories/cynthia-bowman.png"),
+          },
+          {
+            name: "Jeremy Jacobs",
+            image: require("./table.stories/jeremy-jacobs.png"),
+          },
+          {
+            name: "Jeremy Griffin",
+            image: require("./table.stories/jeremy-griffin.png"),
+          },
+        ]}
+        columns={[
+          {
+            id: "image",
+            render: ({ image }) => (
+              <img style={{ width: 24, height: 24 }} src={image} />
+            ),
+          },
+          {
+            id: "name",
+            headerTitle: "name",
+            render: ({ name }) => <>{name}</>,
+          },
+        ]}
+      />
+    </div>
   </Story>
 </Canvas>
 
 ### relaxed
 
 <Canvas>
-  <Story name="relaxed density">
-    <Table
-      density="relaxed"
-      keyOn="name"
-      data={[
-        {
-          name: "Alice Howell",
-          image: require("./table.stories/alice-howell.png"),
-        },
-        {
-          name: "Benjamin Lawrence",
-          image: require("./table.stories/benjamin-lawrence.png"),
-        },
-        {
-          name: "Cynthia Bowman",
-          image: require("./table.stories/cynthia-bowman.png"),
-        },
-        {
-          name: "Jeremy Jacobs",
-          image: require("./table.stories/jeremy-jacobs.png"),
-        },
-        {
-          name: "Jeremy Griffin",
-          image: require("./table.stories/jeremy-griffin.png"),
-        },
-      ]}
-      columns={[
-        {
-          id: "image",
-          render: ({ image }) => (
-            <img style={{ width: 24, height: 24 }} src={image} />
-          ),
-        },
-        {
-          id: "name",
-          headerTitle: "name",
-          render: ({ name }) => <>{name}</>,
-        },
-      ]}
-    />
+  <Story name="relaxed density light">
+    <div
+      style={{
+        borderRadius: 8,
+        padding: 16,
+      }}
+    >
+      <Table
+        density="relaxed"
+        keyOn="name"
+        data={[
+          {
+            name: "Alice Howell",
+            image: require("./table.stories/alice-howell.png"),
+          },
+          {
+            name: "Benjamin Lawrence",
+            image: require("./table.stories/benjamin-lawrence.png"),
+          },
+          {
+            name: "Cynthia Bowman",
+            image: require("./table.stories/cynthia-bowman.png"),
+          },
+          {
+            name: "Jeremy Jacobs",
+            image: require("./table.stories/jeremy-jacobs.png"),
+          },
+          {
+            name: "Jeremy Griffin",
+            image: require("./table.stories/jeremy-griffin.png"),
+          },
+        ]}
+        columns={[
+          {
+            id: "image",
+            render: ({ image }) => (
+              <img style={{ width: 24, height: 24 }} src={image} />
+            ),
+          },
+          {
+            id: "name",
+            headerTitle: "name",
+            render: ({ name }) => <>{name}</>,
+          },
+        ]}
+      />
+    </div>
+  </Story>
+  <Story name="relaxed density dark">
+    <div
+      style={{
+        background: colors.black.base,
+        borderRadius: 8,
+        padding: 16,
+        color: colors.white,
+      }}
+    >
+      <Table
+        theme="dark"
+        density="relaxed"
+        keyOn="name"
+        data={[
+          {
+            name: "Alice Howell",
+            image: require("./table.stories/alice-howell.png"),
+          },
+          {
+            name: "Benjamin Lawrence",
+            image: require("./table.stories/benjamin-lawrence.png"),
+          },
+          {
+            name: "Cynthia Bowman",
+            image: require("./table.stories/cynthia-bowman.png"),
+          },
+          {
+            name: "Jeremy Jacobs",
+            image: require("./table.stories/jeremy-jacobs.png"),
+          },
+          {
+            name: "Jeremy Griffin",
+            image: require("./table.stories/jeremy-griffin.png"),
+          },
+        ]}
+        columns={[
+          {
+            id: "image",
+            render: ({ image }) => (
+              <img style={{ width: 24, height: 24 }} src={image} />
+            ),
+          },
+          {
+            id: "name",
+            headerTitle: "name",
+            render: ({ name }) => <>{name}</>,
+          },
+        ]}
+      />
+    </div>
   </Story>
 </Canvas>
 
 ### condensed
 
 <Canvas>
-  <Story name="condensed density">
-    <Table
-      density="condensed"
-      keyOn="name"
-      data={[
-        {
-          name: "Alice Howell",
-          image: require("./table.stories/alice-howell.png"),
-        },
-        {
-          name: "Benjamin Lawrence",
-          image: require("./table.stories/benjamin-lawrence.png"),
-        },
-        {
-          name: "Cynthia Bowman",
-          image: require("./table.stories/cynthia-bowman.png"),
-        },
-        {
-          name: "Jeremy Jacobs",
-          image: require("./table.stories/jeremy-jacobs.png"),
-        },
-        {
-          name: "Jeremy Griffin",
-          image: require("./table.stories/jeremy-griffin.png"),
-        },
-      ]}
-      columns={[
-        {
-          id: "image",
-          render: ({ image }) => (
-            <img style={{ width: 24, height: 24 }} src={image} />
-          ),
-        },
-        {
-          id: "name",
-          headerTitle: "name",
-          render: ({ name }) => <>{name}</>,
-        },
-      ]}
-    />
+  <Story name="condensed density light">
+    <div
+      style={{
+        borderRadius: 8,
+        padding: 16,
+      }}
+    >
+      <Table
+        density="condensed"
+        keyOn="name"
+        data={[
+          {
+            name: "Alice Howell",
+            image: require("./table.stories/alice-howell.png"),
+          },
+          {
+            name: "Benjamin Lawrence",
+            image: require("./table.stories/benjamin-lawrence.png"),
+          },
+          {
+            name: "Cynthia Bowman",
+            image: require("./table.stories/cynthia-bowman.png"),
+          },
+          {
+            name: "Jeremy Jacobs",
+            image: require("./table.stories/jeremy-jacobs.png"),
+          },
+          {
+            name: "Jeremy Griffin",
+            image: require("./table.stories/jeremy-griffin.png"),
+          },
+        ]}
+        columns={[
+          {
+            id: "image",
+            render: ({ image }) => (
+              <img style={{ width: 24, height: 24 }} src={image} />
+            ),
+          },
+          {
+            id: "name",
+            headerTitle: "name",
+            render: ({ name }) => <>{name}</>,
+          },
+        ]}
+      />
+    </div>
+  </Story>
+  <Story name="condensed density dark">
+    <div
+      style={{
+        background: colors.black.base,
+        borderRadius: 8,
+        padding: 16,
+        color: colors.white,
+      }}
+    >
+      <Table
+        theme="dark"
+        density="condensed"
+        keyOn="name"
+        data={[
+          {
+            name: "Alice Howell",
+            image: require("./table.stories/alice-howell.png"),
+          },
+          {
+            name: "Benjamin Lawrence",
+            image: require("./table.stories/benjamin-lawrence.png"),
+          },
+          {
+            name: "Cynthia Bowman",
+            image: require("./table.stories/cynthia-bowman.png"),
+          },
+          {
+            name: "Jeremy Jacobs",
+            image: require("./table.stories/jeremy-jacobs.png"),
+          },
+          {
+            name: "Jeremy Griffin",
+            image: require("./table.stories/jeremy-griffin.png"),
+          },
+        ]}
+        columns={[
+          {
+            id: "image",
+            render: ({ image }) => (
+              <img style={{ width: 24, height: 24 }} src={image} />
+            ),
+          },
+          {
+            id: "name",
+            headerTitle: "name",
+            render: ({ name }) => <>{name}</>,
+          },
+        ]}
+      />
+    </div>
   </Story>
 </Canvas>
 
