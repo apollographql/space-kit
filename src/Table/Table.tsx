@@ -50,6 +50,11 @@ interface Props<RowShape> {
   density?: "standard" | "condensed" | "relaxed";
 
   /**
+   * Function to run when a row is clicked
+   */
+  onRowClick?: (item: RowShape) => void;
+
+  /**
    * Definition of how each column will be rendered
    */
   columns: readonly {
@@ -164,6 +169,7 @@ interface Props<RowShape> {
  */
 export function Table<RowShape>({
   as = <table />,
+  onRowClick,
   data,
   density = "standard",
   columns,
@@ -271,6 +277,24 @@ export function Table<RowShape>({
                   bodyTrElement,
                   {
                     key: getRowKey(item),
+                    ...(onRowClick
+                      ? {
+                          onClick: () => {
+                            onRowClick(item);
+                          },
+                          className: css({
+                            cursor: "pointer",
+                            "&:hover": {
+                              background:
+                                theme === "light"
+                                  ? colors.silver.light
+                                  : theme === "dark"
+                                  ? colors.midnight.darkest
+                                  : assertUnreachable(theme),
+                            },
+                          }),
+                        }
+                      : {}),
                   },
                   <>
                     {columns.map(({ as = "td", render, id }, colIndex) => {
