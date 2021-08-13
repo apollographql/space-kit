@@ -1,3 +1,15 @@
+# v9.5.0 (Fri Aug 13 2021)
+
+#### 🚀 Enhancement
+
+- Handle no table header specified case [#371](https://github.com/apollographql/space-kit/pull/371) ([@daniman](https://github.com/daniman))
+
+#### Authors: 1
+
+- Danielle Man ([@daniman](https://github.com/daniman))
+
+---
+
 # v9.4.0 (Fri Aug 13 2021)
 
 #### 🚀 Enhancement
