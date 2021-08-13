@@ -5,6 +5,8 @@ import { jsx, ClassNames } from "@emotion/core";
 import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
+import { useSpaceKitProvider } from "../SpaceKitProvider";
+import { assertUnreachable } from "../shared/assertUnreachable";
 
 const descriptionMaxWidth = 760;
 
@@ -34,6 +36,12 @@ interface CardProps
    * large has bigger heading & smaller padding than standard
    */
   size?: "standard" | "large";
+
+  /**
+   * color theme for alert
+   * @default "light"
+   */
+  theme?: "light" | "dark";
 }
 
 export const Card: React.FC<CardProps> = ({
@@ -43,89 +51,120 @@ export const Card: React.FC<CardProps> = ({
   description,
   headingAs = "h2",
   size,
+  theme: propTheme,
   ...otherProps
-}) => (
-  <section
-    {...otherProps}
-    css={{
-      backgroundColor: colors.white,
-      color: colors.black.base,
-      boxShadow: `0 1px 3px 0 rgba(0,0,0,.06)`,
-      borderStyle: "solid",
-      borderRadius: 8,
-      borderWidth: 1,
-      borderColor: colors.silver.dark,
-      paddingLeft: 24,
-      paddingRight: 24,
-      paddingTop: size === "large" ? 16 : 28,
-      paddingBottom: size === "large" ? 16 : 28,
-    }}
-  >
-    <div
+}) => {
+  const { theme: providerTheme } = useSpaceKitProvider();
+  const theme = propTheme || providerTheme;
+
+  return (
+    <section
+      {...otherProps}
       css={{
-        display: "flex",
-        marginBottom:
-          (heading || description) &&
-          React.Children.toArray(children).some(Boolean)
-            ? 24
-            : 0,
+        backgroundColor:
+          theme === "light"
+            ? colors.white
+            : theme === "dark"
+            ? colors.midnight.darker
+            : assertUnreachable(theme),
+        color:
+          theme === "light"
+            ? colors.black.base
+            : theme === "dark"
+            ? colors.white
+            : assertUnreachable(theme),
+        boxShadow: `0 1px 3px 0 rgba(0,0,0,.06)`,
+        borderStyle: "solid",
+        borderRadius: 8,
+        borderWidth: 1,
+        borderColor:
+          theme === "light"
+            ? colors.silver.dark
+            : theme === "dark"
+            ? colors.midnight.dark
+            : assertUnreachable(theme),
+        paddingLeft: 24,
+        paddingRight: 24,
+        paddingTop: size === "large" ? 16 : 28,
+        paddingBottom: size === "large" ? 16 : 28,
       }}
     >
       <div
         css={{
-          flex: "1 1 0%",
-          marginRight: "auto",
-          overflow: "hidden",
+          display: "flex",
+          marginBottom:
+            (heading || description) &&
+            React.Children.toArray(children).some(Boolean)
+              ? 24
+              : 0,
         }}
       >
-        <div>
-          {heading && (
-            <ClassNames>
-              {({ css, cx }) => {
-                const headingProps = {
-                  className: cx(
-                    css({
-                      color: colors.black.base,
-                      display: "flex",
-                      fontWeight: 600,
-                      marginBottom: 0,
-                      marginTop: 0,
-                      ...(size === "large" ? base.xlarge : base.large),
-                    }),
-                  ),
-                  children: heading,
-                };
+        <div
+          css={{
+            flex: "1 1 0%",
+            marginRight: "auto",
+            overflow: "hidden",
+          }}
+        >
+          <div>
+            {heading && (
+              <ClassNames>
+                {({ css, cx }) => {
+                  const headingProps = {
+                    className: cx(
+                      css({
+                        color:
+                          theme === "light"
+                            ? colors.black.base
+                            : theme === "dark"
+                            ? colors.white
+                            : assertUnreachable(theme),
+                        display: "flex",
+                        fontWeight: 600,
+                        marginBottom: 0,
+                        marginTop: 0,
+                        ...(size === "large" ? base.xlarge : base.large),
+                      }),
+                    ),
+                    children: heading,
+                  };
 
-                return React.isValidElement(headingAs)
-                  ? React.cloneElement(headingAs, {
-                      ...headingProps,
-                      className: classnames(
-                        headingProps.className,
-                        headingAs.props.className,
-                      ),
-                    })
-                  : React.createElement(headingAs, headingProps);
-              }}
-            </ClassNames>
-          )}
-          {description && (
-            <div
-              css={{
-                ...base.base,
-                color: colors.grey.base,
-                maxWidth: actions ? descriptionMaxWidth : "",
-              }}
-            >
-              {description}
-            </div>
-          )}
+                  return React.isValidElement(headingAs)
+                    ? React.cloneElement(headingAs, {
+                        ...headingProps,
+                        className: classnames(
+                          headingProps.className,
+                          headingAs.props.className,
+                        ),
+                      })
+                    : React.createElement(headingAs, headingProps);
+                }}
+              </ClassNames>
+            )}
+            {description && (
+              <div
+                css={{
+                  ...base.base,
+                  color:
+                    theme === "light"
+                      ? colors.grey.base
+                      : theme === "dark"
+                      ? colors.midnight.lighter
+                      : assertUnreachable(theme),
+                  maxWidth: actions ? descriptionMaxWidth : "",
+                }}
+              >
+                {description}
+              </div>
+            )}
+          </div>
         </div>
+        {actions && <div css={{ marginLeft: 16 }}>{actions}</div>}
       </div>
-      {actions && <div css={{ marginLeft: 16 }}>{actions}</div>}
-    </div>
-    {children}
-  </section>
-);
+      {children}
+    </section>
+  );
+};
 
 Card.propTypes = {
   children: PropTypes.node,
@@ -150,59 +189,81 @@ interface CardSectionProps {
    * aligned with the title on the right
    */
   actions?: React.ReactNode;
+
+  /**
+   * color theme for alert
+   * @default "light"
+   */
+  theme?: "light" | "dark";
 }
 
 export const CardSection: React.FC<CardSectionProps> = ({
   heading,
   description,
   actions,
-}) => (
-  <section
-    css={{
-      display: "flex",
-      marginTop: 24,
-    }}
-  >
-    <div css={{ flex: "1 1 0%", marginRight: "auto" }}>
-      <div>
-        {heading && (
-          <div
-            css={{
-              display: "flex",
-              color: colors.black.base,
-              ...base.base,
-            }}
-          >
-            <span
+  theme: propTheme,
+}) => {
+  const { theme: providerTheme } = useSpaceKitProvider();
+  const theme = propTheme || providerTheme;
+
+  return (
+    <section
+      css={{
+        display: "flex",
+        marginTop: 24,
+      }}
+    >
+      <div css={{ flex: "1 1 0%", marginRight: "auto" }}>
+        <div>
+          {heading && (
+            <div
               css={{
-                fontWeight: 600,
-                flex: "1 1 0%",
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-                whiteSpace: "nowrap",
-                paddingRight: 24,
+                display: "flex",
+                color:
+                  theme === "light"
+                    ? colors.black.base
+                    : theme === "dark"
+                    ? colors.white
+                    : assertUnreachable(theme),
+                ...base.base,
               }}
             >
-              {heading}
-            </span>
-          </div>
-        )}
-        {description && (
-          <div
-            css={{
-              ...base.base,
-              color: colors.grey.base,
-              maxWidth: actions ? descriptionMaxWidth : "",
-            }}
-          >
-            {description}
-          </div>
-        )}
+              <span
+                css={{
+                  fontWeight: 600,
+                  flex: "1 1 0%",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  whiteSpace: "nowrap",
+                  paddingRight: 24,
+                }}
+              >
+                {heading}
+              </span>
+            </div>
+          )}
+          {description && (
+            <div
+              css={{
+                ...base.base,
+                color:
+                  theme === "light"
+                    ? colors.grey.base
+                    : theme === "dark"
+                    ? colors.midnight.lighter
+                    : assertUnreachable(theme),
+                maxWidth: actions ? descriptionMaxWidth : "",
+              }}
+            >
+              {description}
+            </div>
+          )}
+        </div>
       </div>
-    </div>
-    {actions && <div css={{ marginLeft: 16 }}>{actions}</div>}
-  </section>
-);
+      {actions && <div css={{ marginLeft: 16 }}>{actions}</div>}
+    </section>
+  );
+};
 
 CardSection.propTypes = {
   heading: PropTypes.node,
@@ -213,14 +274,31 @@ CardSection.propTypes = {
 /**
  * A border line that can go between two card sections, with appropriate margin applied
  */
-export const CardSeperator: React.FC = () => (
-  <hr
-    css={{
-      height: 1,
-      borderWidth: 0,
-      backgroundColor: colors.silver.dark,
-      marginTop: 24,
-      marginBottom: 24,
-    }}
-  />
-);
+export const CardSeperator: React.FC<{
+  /**
+   * color theme for alert
+   * @default "light"
+   */
+  theme?: "light" | "dark";
+}> = ({ theme: propTheme }) => {
+  const { theme: providerTheme } = useSpaceKitProvider();
+  const theme = propTheme || providerTheme;
+
+  return (
+    <hr
+      css={{
+        height: 1,
+        borderWidth: 0,
+        backgroundColor:
+          theme === "light"
+            ? colors.silver.dark
+            : theme === "dark"
+            ? colors.midnight.dark
+            : assertUnreachable(theme),
+
+        marginTop: 24,
+        marginBottom: 24,
+      }}
+    />
+  );
+};

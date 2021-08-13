@@ -1,0 +1,186 @@
+import { Meta, Story, ArgsTable, Canvas } from "@storybook/addon-docs/blocks";
+import { colors } from "../colors";
+import { Card, CardSection, CardSeperator } from "./Card";
+import { Button } from "../Button";
+
+<Meta title="Components/Card" component={Card} />
+
+# Card
+
+**Cards** are a building block of Studio and used in a variety of contexts.
+
+### Default
+
+Cards have a `heading`, `description`, and `actions` prop by default.
+
+<Canvas>
+  <Story name="card light">
+    <Card heading="Card heading" description="description goes here" />
+  </Story>
+  <Story name="card dark">
+    <Card
+      theme="dark"
+      heading="Card heading"
+      description="description goes here"
+    />
+  </Story>
+</Canvas>
+
+### Large
+
+<Canvas>
+  <Story name="large light">
+    <Card
+      size="large"
+      heading="Card heading"
+      description="description goes here"
+    />
+  </Story>
+  <Story name="large dark">
+    <Card
+      size="large"
+      theme="dark"
+      heading="Card heading"
+      description="description goes here"
+    />
+  </Story>
+</Canvas>
+
+### With actions
+
+<Canvas>
+  <Story name="actions light">
+    <Card
+      heading="Card heading"
+      description="description goes here. This could be a really long description like so. If its really long it should leave space for the title actions like this red button."
+      actions={<Button>Click</Button>}
+    />
+  </Story>
+  <Story name="actions dark">
+    <Card
+      theme="dark"
+      heading="Card heading"
+      description="description goes here. This could be a really long description like so. If its really long it should leave space for the title actions like this red button."
+      actions={<Button>Click</Button>}
+    />
+  </Story>
+</Canvas>
+
+### Multiple sections
+
+<Canvas>
+  <Story name="sections light">
+    <Card
+      heading="Card heading"
+      description="description goes here"
+      actions={<Button>Click</Button>}
+    >
+      <CardSection
+        heading="Members"
+        description="You have 7 members in your organization"
+      />
+      <CardSeperator />
+      <CardSection
+        heading="Members"
+        description="You have 7 members in your organization"
+        actions={
+          <Button color={colors.red.base}>
+            <div style={{ color: colors.white }}>Edit</div>
+          </Button>
+        }
+      />
+    </Card>
+  </Story>
+  <Story name="sections dark">
+    <Card
+      theme="dark"
+      heading="Card heading"
+      description="description goes here"
+      actions={<Button>Click</Button>}
+    >
+      <CardSection
+        theme="dark"
+        heading="Members"
+        description="You have 7 members in your organization"
+      />
+      <CardSeperator theme="dark" />
+      <CardSection
+        theme="dark"
+        heading="Members"
+        description="You have 7 members in your organization"
+        actions={
+          <Button color={colors.red.base}>
+            <div style={{ color: colors.white }}>Edit</div>
+          </Button>
+        }
+      />
+    </Card>
+  </Story>
+</Canvas>
+
+### Narrow card with wide nested content
+
+<Canvas>
+  <Story name="narrow light">
+    <Card
+      heading="Card heading"
+      description={
+        <div style={{ whiteSpace: "nowrap", display: "flex" }}>
+          <span>some short text&nbsp;</span>
+          <span
+            style={{
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
+            }}
+          >
+            https:engine-staging.apollographql.com/account/gh.mdg-private/invite/c7b3eec0-4eab-4c8d-80a7-ea22cae89de1
+          </span>
+        </div>
+      }
+      actions={
+        <Button color={colors.red.base}>
+          <div style={{ color: colors.white }}>Click</div>
+        </Button>
+      }
+    />
+  </Story>
+  <Story name="narrow dark">
+    <Card
+      theme="dark"
+      heading="Card heading"
+      description={
+        <div style={{ whiteSpace: "nowrap", display: "flex" }}>
+          <span>some short text&nbsp;</span>
+          <span
+            style={{
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
+            }}
+          >
+            https:engine-staging.apollographql.com/account/gh.mdg-private/invite/c7b3eec0-4eab-4c8d-80a7-ea22cae89de1
+          </span>
+        </div>
+      }
+      actions={
+        <Button color={colors.red.base}>
+          <div style={{ color: colors.white }}>Click</div>
+        </Button>
+      }
+    />
+  </Story>
+</Canvas>
+
+### Content with no
+
+<Canvas>
+  <Story name="no heading light">
+    <Card>child</Card>
+  </Story>
+  <Story name="no heading dark">
+    <Card theme="dark">child</Card>
+  </Story>
+</Canvas>
+
+<ArgsTable of={Card} />

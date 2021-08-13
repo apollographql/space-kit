@@ -142,12 +142,7 @@ export const AlertCard: React.FC<AlertCardProps> = ({
                 boxShadow: `0 4px 8px 0 rgba(0, 0, 0, .04)`,
                 borderStyle: "solid",
                 borderRadius: 4,
-                borderWidth:
-                  theme === "light"
-                    ? 1
-                    : theme === "dark"
-                    ? 0
-                    : assertUnreachable(theme),
+                borderWidth: 1,
                 borderColor: colors.silver.dark,
                 padding: 15,
               }),
