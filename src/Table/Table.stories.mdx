@@ -51,6 +51,7 @@ Table density is an important characteristic when considering how to present inf
         columns={[
           {
             id: "image",
+            headerTitle: "img",
             render: ({ image }) => (
               <img style={{ width: 24, height: 24 }} src={image} />
             ),
@@ -316,6 +317,101 @@ Table density is an important characteristic when considering how to present inf
           {
             id: "name",
             headerTitle: "name",
+            render: ({ name }) => <>{name}</>,
+          },
+        ]}
+      />
+    </div>
+  </Story>
+</Canvas>
+
+### no table headers
+
+<Canvas>
+  <Story name="no headers light">
+    <div style={{ padding: 16 }}>
+      <Table
+        keyOn="name"
+        data={[
+          {
+            name: "Alice Howell",
+            image: require("./table.stories/alice-howell.png"),
+          },
+          {
+            name: "Benjamin Lawrence",
+            image: require("./table.stories/benjamin-lawrence.png"),
+          },
+          {
+            name: "Cynthia Bowman",
+            image: require("./table.stories/cynthia-bowman.png"),
+          },
+          {
+            name: "Jeremy Jacobs",
+            image: require("./table.stories/jeremy-jacobs.png"),
+          },
+          {
+            name: "Jeremy Griffin",
+            image: require("./table.stories/jeremy-griffin.png"),
+          },
+        ]}
+        columns={[
+          {
+            id: "image",
+            render: ({ image }) => (
+              <img style={{ width: 24, height: 24 }} src={image} />
+            ),
+          },
+          {
+            id: "name",
+            render: ({ name }) => <>{name}</>,
+          },
+        ]}
+      />
+    </div>
+  </Story>
+  <Story name="no headers dark">
+    <div
+      style={{
+        background: colors.black.base,
+        borderRadius: 8,
+        padding: 16,
+        color: colors.white,
+      }}
+    >
+      <Table
+        theme="dark"
+        keyOn="name"
+        data={[
+          {
+            name: "Alice Howell",
+            image: require("./table.stories/alice-howell.png"),
+          },
+          {
+            name: "Benjamin Lawrence",
+            image: require("./table.stories/benjamin-lawrence.png"),
+          },
+          {
+            name: "Cynthia Bowman",
+            image: require("./table.stories/cynthia-bowman.png"),
+          },
+          {
+            name: "Jeremy Jacobs",
+            image: require("./table.stories/jeremy-jacobs.png"),
+          },
+          {
+            name: "Jeremy Griffin",
+            image: require("./table.stories/jeremy-griffin.png"),
+          },
+        ]}
+        columns={[
+          {
+            id: "image",
+            render: ({ image }) => (
+              <img style={{ width: 24, height: 24 }} src={image} />
+            ),
+          },
+          {
+            id: "name",
             render: ({ name }) => <>{name}</>,
           },
         ]}
