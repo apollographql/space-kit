@@ -1,3 +1,15 @@
+# v9.6.0 (Mon Aug 16 2021)
+
+#### 🚀 Enhancement
+
+- Fix border color in dark mode for AlertCard [#372](https://github.com/apollographql/space-kit/pull/372) ([@daniman](https://github.com/daniman))
+
+#### Authors: 1
+
+- Danielle Man ([@daniman](https://github.com/daniman))
+
+---
+
 # v9.5.0 (Fri Aug 13 2021)
 
 #### 🚀 Enhancement
