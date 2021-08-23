@@ -82,7 +82,7 @@ interface Props {
   /**
    * Title of the modal
    */
-  title: React.ReactNode;
+  title?: React.ReactNode;
 }
 
 const modalBackdrop = css`
@@ -285,10 +285,11 @@ export const Modal: React.FC<Props> = ({
             </div>
             <div
               css={css(
-                {
-                  marginTop:
-                    size === "large" ? 24 : size === "medium" ? 16 : 12,
-                },
+                title &&
+                  description && {
+                    marginTop:
+                      size === "large" ? 24 : size === "medium" ? 16 : 12,
+                  },
                 verticalScrollMode === "children" && {
                   overflowY: "auto",
                 },

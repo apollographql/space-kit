@@ -302,4 +302,27 @@ storiesOf("Modal", module)
           .join(" ")}
       </div>
     </Modal>
+  ))
+  .add("No title and no description", () => (
+    <Modal
+      size="medium"
+      verticalScrollMode="children"
+      primaryAction={
+        <Button color={colors.green.base} style={{ color: colors.white }}>
+          Buy 1 Seat
+        </Button>
+      }
+      secondaryAction={<Button color={colors.white}>Cancel</Button>}
+      bottomLeftText={
+        <span style={{ color: colors.blue.base }}>
+          Update Billing Information
+        </span>
+      }
+    >
+      <div>
+        {Array.from(Array(500))
+          .map(() => "lorem ipsum dolor")
+          .join(" ")}
+      </div>
+    </Modal>
   ));
