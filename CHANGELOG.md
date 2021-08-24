@@ -1,3 +1,15 @@
+# v9.6.1 (Tue Aug 24 2021)
+
+#### 🐛 Bug Fix
+
+- Modal: no title, no description dont render extra margin-top [#373](https://github.com/apollographql/space-kit/pull/373) ([@cy](https://github.com/cy))
+
+#### Authors: 1
+
+- Christine ([@cy](https://github.com/cy))
+
+---
+
 # v9.6.0 (Mon Aug 16 2021)
 
 #### 🚀 Enhancement
