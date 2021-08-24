@@ -285,11 +285,10 @@ export const Modal: React.FC<Props> = ({
             </div>
             <div
               css={css(
-                title &&
-                  description && {
-                    marginTop:
-                      size === "large" ? 24 : size === "medium" ? 16 : 12,
-                  },
+                (title || description) && {
+                  marginTop:
+                    size === "large" ? 24 : size === "medium" ? 16 : 12,
+                },
                 verticalScrollMode === "children" && {
                   overflowY: "auto",
                 },
