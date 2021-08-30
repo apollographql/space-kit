@@ -6,7 +6,9 @@ type Props = Pick<
   React.ComponentProps<typeof AbstractTooltip>,
   "children" | "content" | "disabled"
 > &
-  AbstractTooltipProps;
+  AbstractTooltipProps & {
+    initalContent?: string;
+  };
 
 /**
  * Display a non-interactive tooltip after an element is clicked on and then
@@ -14,6 +16,8 @@ type Props = Pick<
  */
 export const ConfirmationTooltip: React.FC<Props> = ({
   children,
+  initalContent,
+  content,
   ...props
 }) => {
   /**
@@ -32,28 +36,39 @@ export const ConfirmationTooltip: React.FC<Props> = ({
     };
   }, []);
 
+  const [displayedContent, setDisplayedContent] = React.useState(
+    initalContent ?? content,
+  );
+
   return (
-    <AbstractTooltip
-      trigger="click"
-      {...props}
-      onShow={(instance) => {
-        if (timeoutRef.current) {
-          window.clearTimeout(timeoutRef.current);
-        }
-
-        timeoutRef.current = window.setTimeout(() => {
-          instance.hide();
-        }, 3000);
-      }}
-      onHide={() => {
-        if (timeoutRef.current) {
-          window.clearTimeout(timeoutRef.current);
-        }
-
-        timeoutRef.current = null;
+    <div
+      onClick={() => {
+        setDisplayedContent(content);
       }}
     >
-      {children}
-    </AbstractTooltip>
+      <AbstractTooltip
+        trigger={displayedContent === initalContent ? "mouseenter" : "click"}
+        {...props}
+        content={displayedContent}
+        onShow={(instance) => {
+          if (timeoutRef.current) {
+            window.clearTimeout(timeoutRef.current);
+          }
+
+          timeoutRef.current = window.setTimeout(() => {
+            instance.hide();
+          }, 3000);
+        }}
+        onHide={() => {
+          if (timeoutRef.current) {
+            window.clearTimeout(timeoutRef.current);
+          }
+          setDisplayedContent(initalContent);
+          timeoutRef.current = null;
+        }}
+      >
+        {children}
+      </AbstractTooltip>
+    </div>
   );
 };

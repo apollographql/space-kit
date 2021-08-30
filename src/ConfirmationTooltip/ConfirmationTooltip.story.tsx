@@ -50,10 +50,10 @@ storiesOf("ConfirmationTooltip", module)
       chromatic: { delay: 500 },
     },
   )
-  .add("interactive", () => {
+  .add("interactive, with inital content on hover before click", () => {
     return (
       <div style={{ padding: 50 }}>
-        <ConfirmationTooltip content="default content">
+        <ConfirmationTooltip content="default content" initalContent="hello">
           <Button>click</Button>
         </ConfirmationTooltip>
       </div>
