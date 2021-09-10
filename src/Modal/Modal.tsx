@@ -77,7 +77,7 @@ interface Props {
   /**
    * Size to show the modal at
    */
-  size: "small" | "medium" | "large";
+  size: "small" | "medium" | "large" | "xlarge";
 
   /**
    * Title of the modal
@@ -120,6 +120,8 @@ function getModalWidth(size: Props["size"]): Property.Width<TLength> {
       return 600;
     case "large":
       return 800;
+    case "xlarge":
+      return 1048;
     /* istanbul ignore next */
     default:
       throw assertUnreachable(size);
@@ -237,7 +239,8 @@ export const Modal: React.FC<Props> = ({
                   minWidth: 400,
                   opacity: 1,
                   overflowY: verticalScrollMode === "modal" ? "auto" : "hidden",
-                  padding: size === "large" ? "40px" : "32px",
+                  padding:
+                    size === "large" || size === "xlarge" ? "40px" : "32px",
                   position: "absolute",
                   width: getModalWidth(size),
                   zIndex: 11,
@@ -287,7 +290,11 @@ export const Modal: React.FC<Props> = ({
               css={css(
                 (title || description) && {
                   marginTop:
-                    size === "large" ? 24 : size === "medium" ? 16 : 12,
+                    size === "large" || size === "xlarge"
+                      ? 24
+                      : size === "medium"
+                      ? 16
+                      : 12,
                 },
                 verticalScrollMode === "children" && {
                   overflowY: "auto",
