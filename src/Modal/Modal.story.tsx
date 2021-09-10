@@ -9,7 +9,7 @@ import { Button } from "../Button";
 interface Props {
   title: string;
   description: string;
-  size: "small" | "medium" | "large";
+  size: "small" | "medium" | "large" | "xlarge";
 }
 
 const CustomComponent = React.forwardRef<HTMLDivElement, { an?: undefined }>(
@@ -83,6 +83,11 @@ storiesOf("Modal", module)
         title="Modal Title"
         description="modal description"
         size={"large"}
+      />
+      <ModalStory
+        title="Modal Title"
+        description="modal description"
+        size={"xlarge"}
       />
     </div>
   ))
@@ -279,7 +284,7 @@ storiesOf("Modal", module)
       </div>
     </Modal>
   ))
-  .add("using verticalScrollMode 'children'", () => (
+  .add("using verticalScrollMode 'children' (medium)", () => (
     <Modal
       size="medium"
       title="Modal Title"
