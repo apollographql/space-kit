@@ -1,3 +1,15 @@
+# v9.7.0 (Fri Sep 10 2021)
+
+#### 🚀 Enhancement
+
+- Modal: add xlarge size [#376](https://github.com/apollographql/space-kit/pull/376) ([@cy](https://github.com/cy))
+
+#### Authors: 1
+
+- Christine ([@cy](https://github.com/cy))
+
+---
+
 # v9.6.2 (Tue Aug 24 2021)
 
 #### 🐛 Bug Fix
