@@ -4,6 +4,7 @@ import * as React from "react";
 import * as typography from "../typography";
 import { css, jsx } from "@emotion/core";
 import { useFormControlInternalContext } from "../shared/FormControlContext";
+import { colors } from "../colors";
 
 interface Props
   extends Pick<
@@ -14,6 +15,7 @@ interface Props
     "aria-invalid" | "className" | "style" | "id" | "htmlFor"
   > {
   children: React.ReactNode;
+  required?: boolean;
 }
 
 /**
@@ -26,6 +28,7 @@ interface Props
 export const FormLabel: React.FC<Props> = ({
   "aria-invalid": ariaInvalid,
   children,
+  required,
   className,
   htmlFor,
   id,
@@ -55,6 +58,7 @@ export const FormLabel: React.FC<Props> = ({
         })}
       >
         {children}
+        {required && <span css={{ color: colors.red.base }}>*</span>}
       </label>
     ),
     [
@@ -64,6 +68,7 @@ export const FormLabel: React.FC<Props> = ({
       description,
       errorMessageElement,
       htmlFor,
+      required,
       id,
       inputId,
       labelId,

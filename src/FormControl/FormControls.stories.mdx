@@ -199,6 +199,20 @@ If you render a `FormErrorMessage` then any `FormHelperText` will not be rendere
   </Story>
 </Canvas>
 
+## Required labels
+
+You can pass `required={true}` to your `FormLabel` to add a red asterisk.
+
+<Canvas>
+  <Story name="Required labels">
+    <FormControl id="required-labels">
+      <FormLabel required={true}>Input Label</FormLabel>
+      <FormDescription>This component has helper text.</FormDescription>
+      <Input placeholder="Input Label" />
+    </FormControl>
+  </Story>
+</Canvas>
+
 ## Adornments
 
 You can use `FormStartAdornment` and/or `FormEndAdornment` components to add content to the beginning or end of the element
