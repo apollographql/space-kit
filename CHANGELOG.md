@@ -1,3 +1,15 @@
+# v9.8.0 (Wed Sep 15 2021)
+
+#### 🚀 Enhancement
+
+- Add a red asterisk to required FormLabels [#377](https://github.com/apollographql/space-kit/pull/377) ([@mayakoneval](https://github.com/mayakoneval))
+
+#### Authors: 1
+
+- [@mayakoneval](https://github.com/mayakoneval)
+
+---
+
 # v9.7.0 (Fri Sep 10 2021)
 
 #### 🚀 Enhancement
