@@ -23,6 +23,17 @@ test("when passed a label, renders it", () => {
   expect(screen.getByText("label text")).toBeInTheDocument();
 });
 
+test("when passed a required label, renders the red asterisk", () => {
+  render(
+    <FormControl id="test">
+      <FormLabel required={true}>label text</FormLabel>
+      <Input />
+    </FormControl>,
+  );
+
+  expect(screen.getByText("*")).toBeInTheDocument();
+});
+
 test("when the label is clicked it focuses the input", () => {
   const labelText = "label text";
   const { container } = render(
