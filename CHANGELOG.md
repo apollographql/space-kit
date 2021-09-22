@@ -1,3 +1,15 @@
+# v9.9.0 (Wed Sep 22 2021)
+
+#### 🚀 Enhancement
+
+- Update tooltips to support controlled visibility [#379](https://github.com/apollographql/space-kit/pull/379) ([@Jephuff](https://github.com/Jephuff))
+
+#### Authors: 1
+
+- Jeffrey Burt ([@Jephuff](https://github.com/Jephuff))
+
+---
+
 # v9.8.0 (Wed Sep 15 2021)
 
 #### 🚀 Enhancement
