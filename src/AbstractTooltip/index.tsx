@@ -38,7 +38,9 @@ export interface AbstractTooltipProps {
   matchTriggerWidth?: boolean;
 }
 
-type Props = TippyProps & AbstractTooltipProps;
+type Props = TippyProps &
+  AbstractTooltipProps &
+  ({ visible?: undefined } | { visible: boolean; trigger?: undefined });
 
 export const AbstractTooltip: React.FC<Props> = ({
   animation = "shift-away",
@@ -51,6 +53,7 @@ export const AbstractTooltip: React.FC<Props> = ({
   hideOnClick,
   matchTriggerWidth = false,
   popperOptions = {},
+  visible,
   ...props
 }) => {
   const {
@@ -67,7 +70,7 @@ export const AbstractTooltip: React.FC<Props> = ({
         arrow={false}
         hideOnClick={forceVisibleForTestingOnly ? false : hideOnClick}
         trigger={forceVisibleForTestingOnly ? "manual" : trigger}
-        visible={forceVisibleForTestingOnly ? true : undefined}
+        visible={forceVisibleForTestingOnly ? true : visible}
         theme="space-kit"
         popperOptions={{
           ...popperOptions,

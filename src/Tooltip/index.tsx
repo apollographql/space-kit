@@ -11,6 +11,7 @@ type Props = Pick<
   | "disabled"
   | "interactive"
   | "placement"
+  | "visible"
 > &
   AbstractTooltipProps;
 
@@ -21,13 +22,15 @@ type Props = Pick<
  * delay when hovering on an element. We also wait for the user's cursor to rest
  * on the element; meaning we won't show a Tooltip while the cursor is moving
  */
-export const Tooltip: React.FC<Props> = ({ children, ...props }) => {
+export const Tooltip: React.FC<Props> = ({ children, visible, ...props }) => {
   return (
     <TooltipContextProvider descendsFromTooltip>
       <AbstractTooltip
         delay={150}
-        trigger="mouseenter"
         plugins={[mouseRest]}
+        {...(typeof visible === "boolean"
+          ? { visible }
+          : { trigger: "mouseenter" })}
         {...props}
       >
         {children}
