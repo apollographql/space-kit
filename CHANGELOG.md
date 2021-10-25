@@ -1,3 +1,15 @@
+# v9.10.0 (Mon Oct 25 2021)
+
+#### 🚀 Enhancement
+
+- Source code icon [#380](https://github.com/apollographql/space-kit/pull/380) ([@jglovier](https://github.com/jglovier))
+
+#### Authors: 1
+
+- Joel Glovier ([@jglovier](https://github.com/jglovier))
+
+---
+
 # v9.9.0 (Wed Sep 22 2021)
 
 #### 🚀 Enhancement
