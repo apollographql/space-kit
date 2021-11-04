@@ -1,3 +1,15 @@
+# v9.11.0 (Thu Nov 04 2021)
+
+#### 🚀 Enhancement
+
+- Pass through `className` on `option` element as child of select [#381](https://github.com/apollographql/space-kit/pull/381) ([@mayakoneval](https://github.com/mayakoneval))
+
+#### Authors: 1
+
+- [@mayakoneval](https://github.com/mayakoneval)
+
+---
+
 # v9.10.0 (Mon Oct 25 2021)
 
 #### 🚀 Enhancement
