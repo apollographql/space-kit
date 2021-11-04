@@ -465,7 +465,6 @@ export const Select: React.FC<Props> = ({
       <ClassNames>
         {({ css, cx }) => (
           <Popover
-            className={className}
             popperOptions={popperOptions}
             onCreate={(instance) => {
               instanceRef.current = instance;
