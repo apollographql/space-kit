@@ -493,7 +493,7 @@ export const Select: React.FC<Props> = ({
                   if (isHTMLOptionElement(child)) {
                     return (
                       <ListItemWrapper
-                        className={className}
+                        className={child.props.className}
                         data-top-level-index={topLevelIndex}
                         downshiftItems={items}
                         element={child}
