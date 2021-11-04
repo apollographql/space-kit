@@ -80,6 +80,7 @@ interface ListItemWrapperProps
   /** Passthrough downshift function to get the props for an item */
   getItemProps: UseSelectPropGetters<OptionProps>["getItemProps"];
   selected: boolean;
+  className?: string;
 }
 
 /**
@@ -92,6 +93,7 @@ const ListItemWrapper: React.FC<ListItemWrapperProps> = ({
   renderListItem,
   selected,
   selectionIndicator,
+  className,
 }) => {
   const index = downshiftItems.indexOf(element.props);
 
@@ -109,10 +111,10 @@ const ListItemWrapper: React.FC<ListItemWrapperProps> = ({
 
   return (
     <ClassNames>
-      {({ css }) => {
+      {({ css, cx }) => {
         return renderListItem(
           {
-            className: css({ alignItems: "baseline" }),
+            className: cx(css({ alignItems: "baseline" }), className),
             key: element.props.value || element.props.children,
             ...downshiftItemProps,
             highlighted: downshiftItemProps["aria-selected"] === "true",
@@ -463,6 +465,7 @@ export const Select: React.FC<Props> = ({
       <ClassNames>
         {({ css, cx }) => (
           <Popover
+            className={className}
             popperOptions={popperOptions}
             onCreate={(instance) => {
               instanceRef.current = instance;
@@ -490,6 +493,7 @@ export const Select: React.FC<Props> = ({
                   if (isHTMLOptionElement(child)) {
                     return (
                       <ListItemWrapper
+                        className={className}
                         data-top-level-index={topLevelIndex}
                         downshiftItems={items}
                         element={child}
