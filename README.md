@@ -1,3 +1,6 @@
+# Deprecated
+The space kit code has moved to an internal repository, and this repository will no longer be maintained
+
 <div align="center">
   <img height="100" src="https://i.imgur.com/YPhoQOA.png">
   <h1 align="center">Space Kit</h1>
